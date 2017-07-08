@@ -1,7 +1,7 @@
 #include "Plotter.cc"
 #include <fstream>
 
-void Draw_CR(bool ScaleMC=true){
+void Draw_CR(bool ScaleMC=true, int XXX=0){
   
   //==============
   //==== get env
@@ -37,11 +37,11 @@ void Draw_CR(bool ScaleMC=true){
   m.map_sample_string_to_list["DY"] = {"DYJets_10to50", "DYJets"};
   m.map_sample_string_to_list["WJets"] = {"WJets"};
   m.map_sample_string_to_list["VV_excl"] = {
-    "WZTo3LNu_powheg",
-    "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau",
+    "WZTo3LNu_powheg", "WZto2L2Q_amcatnlo",
+    "ZZTo4L_powheg", "ZZTo2L2Nu_Powheg", "ZZTo2L2Q_Powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau",
     "WWTo2L2Nu", "ggWWto2L2Nu",
   };
-  m.map_sample_string_to_list["VV_incl"] = {"WZ", "ZZ"};
+  m.map_sample_string_to_list["VV_incl"] = {"WZ", "ZZ", "WW"};
   m.map_sample_string_to_list["WZ_excl"] = {"WZTo3LNu_powheg"};
   m.map_sample_string_to_list["ZZ_excl"] = {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"};
   m.map_sample_string_to_list["VVV"] = {"WWW", "WWZ", "WZZ", "ZZZ"};
@@ -49,7 +49,7 @@ void Draw_CR(bool ScaleMC=true){
   m.map_sample_string_to_list["ttbar_ll"] = {"TTLL_powheg"};
   m.map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
-  m.map_sample_string_to_list["top"] = {"TTJets_aMC", "ttW", "ttZ", "ttH_nonbb"};
+  m.map_sample_string_to_list["top"] = {"TTLL_powheg", "ttW", "ttZ", "ttH_nonbb"};
   m.map_sample_string_to_list["Wgamma"] = {"WGtoLNuG"};
   m.map_sample_string_to_list["Zgamma"] = {"ZGto2LG"};
   m.map_sample_string_to_list["Vgamma"] = {"WGtoLNuG", "ZGto2LG"};
@@ -60,8 +60,9 @@ void Draw_CR(bool ScaleMC=true){
   m.map_sample_string_to_list["fake_sfed_HighdXY_UsePtCone"] = {"fake_sfed_HighdXY_UsePtCone"};
   m.map_sample_string_to_list["fake_DiMuon_HighdXY"] = {"fake_HighdXY"};
   m.map_sample_string_to_list["fake_Dijet"] = {"fake_Dijet"};
+  m.map_sample_string_to_list["chargeflip"] = {"chargeflip"};
   
-  m.map_sample_string_to_legendinfo["DY"] = make_pair("DY", kYellow+2);
+  m.map_sample_string_to_legendinfo["DY"] = make_pair("DY", kYellow);
   m.map_sample_string_to_legendinfo["WJets"] = make_pair("WJets", kGreen);
   m.map_sample_string_to_legendinfo["VV_excl"] = make_pair("VV", kSpring-1);
   m.map_sample_string_to_legendinfo["VV_incl"] = make_pair("VV", kSpring-1);
@@ -72,91 +73,166 @@ void Draw_CR(bool ScaleMC=true){
   m.map_sample_string_to_legendinfo["ttbar_ll"] = make_pair("ttbar", kRed);
   m.map_sample_string_to_legendinfo["ttV"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["ttH"] = make_pair("ttH", kOrange);
-  m.map_sample_string_to_legendinfo["top"] = make_pair("top", kOrange);
+  m.map_sample_string_to_legendinfo["top"] = make_pair("top", kRed);
   m.map_sample_string_to_legendinfo["Wgamma"] = make_pair("W#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["Zgamma"] = make_pair("Z#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["Vgamma"] = make_pair("V#gamma", kSpring-7);
-  m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", kGreen);
+  m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
-  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misd", kAzure+10);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misd", kAzure+10);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misd", kAzure+10);
-  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misd", kAzure+10);
-  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misd", kAzure+10);
+  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Non-prompt", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Non-prompt", 870);
+  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Non-prompt", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Non-prompt", 870);
+  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Charge-flip", kYellow);
   
   //===============================
   //==== set and make sample list
   //===============================
 
-  //==== trilep CR
   //==== _Di<Lepton>_<JetSel>_<ifOffZ>_<charge>
-	m.histname_suffix = {
-    // dimu
-    "_DiMuon_SS",
-    "_DiMuon_Inclusive1bjets_SS", "_DiMuon_Inclusive1bjets_OS",
-    "_DiMuon_Inclusive1bjets_OffZ_SS", "_DiMuon_Inclusive1bjets_OffZ_OS",
-    "_DiMuon_OffZ_AllCharge", "_DiMuon_OffZ_SS", "_DiMuon_OffZ_OS",
-    "_DiMuon_0jets_OS",
-    // diel
-    "_DiElectron_SS", "_DiElectron_OS",
-    "_DiElectron_Inclusive1bjets_SS", "_DiElectron_Inclusive1bjets_OS",
-    "_DiElectron_OffZ_AllCharge", "_DiElectron_OffZ_SS", "_DiElectron_OffZ_OS",
-    "_DiElectron_0jets_OS",
-	};
-  m.PrimaryDataset = {
-    // dimu
-    "DoubleMuon",
-    "DoubleMuon", "DoubleMuon",
-    "DoubleMuon", "DoubleMuon",
-    "DoubleMuon", "DoubleMuon", "DoubleMuon",
-    "DoubleMuon",
-    // diel
-    "DoubleEG", "DoubleEG",
-    "DoubleEG", "DoubleEG",
-    "DoubleEG", "DoubleEG", "DoubleEG",
-    "DoubleEG",
-  };
-	m.drawdata = {
-    // dimu
-    true,
-    true, true,
-    true, true,
-    true, true, true,
-    true,
-    // diel
-    true, true,
-    true, true,
-    true, true, true,
-    true,
-	};
-  m.UseLogy = {
-    // dimu
-    -1,
-    -1, 100,
-    -1, 100,
-    -1, -1, -1,
-    100,
-    // diel
-    -1, 100,
-    -1, 100,
-    -1, -1, -1,
-    100,
-  };
+
+  //==== SS
+  if(XXX==0){
+    m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Vgamma", "VVV", "top", "WW_double"};
+    m.histname_suffix = {
+      // dimu
+      "_DiMuon_SS",
+      "_DiMuon_0jets_OnZ_SS",
+      "_DiMuon_1jets_OnZ_SS",
+      "_DiMuon_Inclusive1bjets_SS",
+      "_DiMuon_Inclusive1bjets_OffZ_SS",
+      "_DiMuon_OffZ_SS",
+      // diel
+      "_DiElectron_SS",
+      "_DiElectron_0jets_SS",
+      "_DiElectron_1jets_SS",
+      "_DiElectron_Inclusive1bjets_SS",
+      "_DiElectron_OffZ_SS",
+      "_DiElectron_0jets_OnZ_SS",
+      "_DiElectron_1jets_OnZ_SS",
+    };
+    m.PrimaryDataset = {
+      // dimu
+      "DoubleMuon",
+      "DoubleMuon",
+      "DoubleMuon",
+      "DoubleMuon",
+      "DoubleMuon",
+      "DoubleMuon",
+      // diel
+      "DoubleEG",
+      "DoubleEG",
+      "DoubleEG",
+      "DoubleEG",
+      "DoubleEG",
+      "DoubleEG",
+      "DoubleEG",
+    };
+    m.drawdata = {
+      // dimu
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      // diel
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+    };
+    m.UseLogy = {
+      // dimu
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      // diel
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+    };
+  }
+  //==== OS
+  if(XXX==1){
+    m.samples_to_use = {"VV_excl", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
+    m.histname_suffix = {
+      // dimu
+      "_DiMuon_OS",
+      "_DiMuon_Inclusive1bjets_OS",
+      "_DiMuon_Inclusive1bjets_OffZ_OS",
+      "_DiMuon_OffZ_OS",
+      "_DiMuon_0jets_OS",
+      // diel
+      "_DiElectron_OS",
+      "_DiElectron_Inclusive1bjets_OS",
+      "_DiElectron_OffZ_OS",
+      "_DiElectron_0jets_OS",
+    };
+    m.PrimaryDataset = {
+      // dimu
+      "DoubleMuon",
+      "DoubleMuon",
+      "DoubleMuon",
+      "DoubleMuon",
+      "DoubleMuon",
+      // diel
+      "DoubleEG",
+      "DoubleEG",
+      "DoubleEG",
+      "DoubleEG",
+    };
+    m.drawdata = {
+      // dimu
+      true,
+      true,
+      true,
+      true,
+      true,
+      // diel
+      true,
+      true,
+      true,
+      true,
+    };
+    m.UseLogy = {
+      // dimu
+      100,
+      100,
+      100,
+      100,
+      100,
+      // diel
+      100,
+      100,
+      100,
+      100,
+    };
+  }
 
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
     if(ScaleMC) m.ApplyMCNormSF.push_back(true);
     else m.ApplyMCNormSF.push_back(false);
   }
 
-	m.samples_to_use = {"fake_sfed_HighdXY", "VV_excl", "Vgamma", "VVV", "ttV_lep", "ttbar_ll", "DY", "WW_double"};
-  
   //============================
   //==== set variables to draw
   //============================
   
   m.histname = {
     "m_ll",
-    "Njets", "Nfwdjets", "Nbjets", "Nbfwdjets",
+    "Njets", "Njets_nolepveto", "Nfwdjets", "Nbjets", "Nbjets_nolepveto", "Nbfwdjets",
     "leadingLepton_Pt", "leadingLepton_Eta",
     "secondLepton_Pt", "secondLepton_Eta",
     "leadingJet_Pt", "leadingJet_Eta", 
@@ -171,22 +247,22 @@ void Draw_CR(bool ScaleMC=true){
 
   m.x_title = {
     "m(ll) [GeV]",
-    "# of jets", "# of forward jets", "# of b-jets", "# of forward b-jets",
+    "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
     "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta",
     "Second Lepton p_{T} [GeV]", "Second Lepton #eta",
     "Leading Jet p_{T} [GeV]", "Leading Jet #eta",
     "Second Jet p_{T} [GeV]", "Second Jet #eta",
     "Leading Forward Jet p_{T} [GeV]", "Leading Forward Jet #eta",
     "Second Forward Jet p_{T} [GeV]", "Second Forward Jet #eta",
-    "Leading No Lepton Veto Jet p_{T} [GeV]", "Leading No Lepton Veto Jet #eta",
-    "Second No Lepton Veto Jet p_{T} [GeV]", "Second No Lepton Veto Jet #eta",
+    "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
+    "Second No-LeptonVeto Jet p_{T} [GeV]", "Second No-LeptonVeto Jet #eta",
     "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]",
     "# of vertices",
   };
 
   m.units = {
     "GeV",
-    "int", "int", "int", "int",
+    "int", "int", "int", "int", "int", "int",
     "GeV", "",
     "GeV", "",
     "GeV", "",

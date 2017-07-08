@@ -27,10 +27,11 @@ public:
     no_class = 0,
     class1 = 1,
     class2 = 2,
-    lowmass = 12,
+    lowmass = 1,
     class3 = 3,
     class4 = 4,
-    highmass = 34,
+    highmass = 4,
+    mediummass = 23,
   };
   
   //==== functions for setting

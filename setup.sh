@@ -10,3 +10,4 @@ export CATANVERSION="v8-0-7.15"
 export LIMIT_PATH=$PLOTTER_WORKING_DIR/LimitCode/CMS-StatisticalTools/RooStatsRoutines/Macros_trimuon_13TeV/
 
 alias run="bash "$SCRIPT_DIR"/run.sh"
+alias lqout='cd '$PLOT_PATH

@@ -59,7 +59,7 @@ void Plotter::draw_hist(){
         //==== bkg
         if( i_file < bkglist.size() ){
           TString tmp = bkglist[i_file];
-          if(bkglist[i_file].Contains("fake")) tmp += "_"+PrimaryDataset[i_cut];
+          if(bkglist[i_file].Contains("fake") || bkglist[i_file].Contains("chargeflip")) tmp += "_"+PrimaryDataset[i_cut];
           filepath = "./rootfiles/"+data_class+"/"+filename_prefix+"_SK"+tmp+"_dilep"+filename_suffix;
           current_sample = bkglist[i_file];
         }
@@ -84,9 +84,14 @@ void Plotter::draw_hist(){
           }
 
           //cout << "signal_index = " << signal_index << " => mass = " << signal_mass[signal_index] << endl;
-          TString WhichChannel = "MuMuMu";
-          if(histname_suffix[i_cut].Contains("MuMuE")) WhichChannel = "SSSF_MuMuE";
-          TString string_signal_mass = "HN_"+WhichChannel+"_"+TString::Itoa(signal_mass[signal_index],10);
+          TString WhichChannel = "MuMu";
+          if(histname_suffix[i_cut].Contains("DiElectron")) WhichChannel = "ElEl";
+          //==== TChannel
+          if( signal_mass[signal_index] < 0 ){
+            WhichChannel = "_Tchannel_"+WhichChannel;
+          }
+          TString string_signal_mass = "HNMoriondLL"+WhichChannel+"_"+TString::Itoa(abs(signal_mass[signal_index]),10);
+
           filepath = "./rootfiles/"+data_class+"/"+filename_prefix+"_SK"+string_signal_mass+filename_suffix;
           current_sample = string_signal_mass;
         }
@@ -118,16 +123,21 @@ void Plotter::draw_hist(){
         hist_temp->SetName(fullhistname+"_"+current_sample);
 
         //==== set error separately for fake
+
+        //if( current_sample.Contains("fake") || current_sample.Contains("chargeflip") ){ //FIXME
         if( current_sample.Contains("fake") ){
           TH1D* hist_temp_up = (TH1D*)file->Get(fullhistname+"_up");
           TH1D* hist_temp_down = (TH1D*)file->Get(fullhistname+"_down");
           int n_bins = hist_temp->GetXaxis()->GetNbins();
           for(int i=1; i<=n_bins; i++){
-            double error_propagated = hist_temp_up->GetBinContent(i)-hist_temp->GetBinContent(i); // FIXME central-down should be same as up-central
+            double error_propagated = hist_temp_up->GetBinContent(i)-hist_temp->GetBinContent(i);
             double error_sumw2 = hist_temp->GetBinError(i);
             double error_combined = sqrt( error_propagated*error_propagated + error_sumw2*error_sumw2 );
 
-            double error_syst = CalculatedSysts["FakeLooseID"]*(hist_temp->GetBinContent(i));
+            TString WhichSystHere = "FakeLooseID";
+            if(current_sample.Contains("chargeflip")) WhichSystHere = "ChrageFlipSyst";
+            if(current_sample.Contains("chargeflip")) error_combined=0.; //FIXME
+            double error_syst = CalculatedSysts[WhichSystHere]*(hist_temp->GetBinContent(i));
 
             error_combined = sqrt(error_combined*error_combined + error_syst*error_syst);
 
@@ -189,6 +199,7 @@ void Plotter::draw_hist(){
           //cout << "signal index = " << signal_index << ", mass = " << signal_mass[signal_index] << endl;
           hist_final->SetLineColor(signal_color[signal_index]);
           hist_final->SetLineWidth(3);
+          if( signal_mass[signal_index] < 0 ) hist_final->SetLineStyle(3);
           TString temp_hist_name(hist_final->GetName());
           hist_final->SetName(temp_hist_name+"_signal_"+TString::Itoa(signal_mass[signal_index], 10));
           //==== scaling signal
@@ -516,12 +527,14 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   //==== cutdR_cutW is only applied for low mass yet
   if( histname_suffix[i_cut] == "_cut_MuMuMu_low" ) this_sc = lowmass;
   if( histname_suffix[i_cut] == "_cut_MuMuMu_high" ) this_sc = highmass;
+  //==== Inclusive
   if( histname[i_var].Contains("class1") ) this_sc = class1;
   else if( histname[i_var].Contains("class2") ) this_sc = class2;
   else if( histname[i_var].Contains("class3") ) this_sc = class3;
   else if( histname[i_var].Contains("class4") ) this_sc = class4;
-  else if( histname[i_var].Contains("lowmass") ) this_sc = lowmass;
-  else if( histname[i_var].Contains("highmass") ) this_sc = highmass;
+  else if( histname[i_var].Contains("Low") ) this_sc = lowmass;
+  else if( histname[i_var].Contains("Medium") ) this_sc = mediummass;
+  else if( histname[i_var].Contains("High") ) this_sc = highmass;
   
   //==== y=0 line
   double x_0[2], y_0[2];
@@ -636,6 +649,14 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
     for(unsigned int i=0; i<signal_survive_mass.size(); i++){
       int this_mass = signal_survive_mass.at(i);
       if( find(map_class_to_signal_mass[class4].begin(), map_class_to_signal_mass[class4].end(), this_mass) != map_class_to_signal_mass[class4].end()){
+        hist_signal[i]->Draw("histsame");
+      }
+    }
+  }
+  else if(this_sc == mediummass){
+    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
+      int this_mass = signal_survive_mass.at(i);
+      if( find(map_class_to_signal_mass[mediummass].begin(), map_class_to_signal_mass[mediummass].end(), this_mass) != map_class_to_signal_mass[mediummass].end()){
         hist_signal[i]->Draw("histsame");
       }
     }
@@ -874,9 +895,14 @@ TString Plotter::legend_coupling_label(int mass){
   double log_scale = TMath::Log10(coupling_constant(mass)/(1.*TMath::Power(10,log_of_generation_mixing)));
   double log_coupling = TMath::Log10(coupling_constant(mass));
   //cout << " log coupling = " << log_scale << endl;
-  
-  if(log_coupling == 0) return "HN"+TString::Itoa(mass, 10)+", |V_{N#mu}|^{2}=1";
-  else return "HN"+TString::Itoa(mass, 10)+", |V_{N#mu}|^{2}=10^{"+TString::Itoa(log_coupling, 10)+"}";
+
+  TString channel = "Sch";
+  if(mass<0) channel = "Tch";
+
+  mass = abs(mass);
+
+  if(log_coupling == 0) return channel+" HN"+TString::Itoa(mass, 10)+", |V_{N#mu}|^{2}=1";
+  else return channel+" HN"+TString::Itoa(mass, 10)+", |V_{N#mu}|^{2}=10^{"+TString::Itoa(log_coupling, 10)+"}";
 
   //if(log_scale == 0) return "m(HN) = "+TString::Itoa(mass, 10)+" GeV/c^{2}, |V_{N#mu}|^{2}=0.01";
   //return "10^{"+TString::Itoa(log_scale, 10)+"} #times m(HN) = "+TString::Itoa(mass, 10)+" GeV/c^{2}, |V_{N#mu}|^{2}=0.01";

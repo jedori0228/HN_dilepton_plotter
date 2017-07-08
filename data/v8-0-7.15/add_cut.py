@@ -1,10 +1,10 @@
 import os
 
-#filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
-filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
+filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
+#filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
 
-From = "_DiElectron_0jets_OS"
-To = "_DiElectron_OS"
+From = "_DiElectron_2jets_OffZ_SS"
+To = "_DiElectron_Preselection_SS"
 
 for filename in filenames:
 

@@ -1,14 +1,14 @@
 import os
 
-#filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
-filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt']
+filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
+#filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt']
 
 cust_rebin = 1
 cust_xaxis_min = 0
-cust_xaxis_max = 50
+cust_xaxis_max = 6
 
-var_last = 'PFMET_phi'
-NewVars = ['Nvtx']
+var_last = 'Nvtx'
+NewVars = ['DeltaRl1l2']
 
 for filename in filenames:
 
