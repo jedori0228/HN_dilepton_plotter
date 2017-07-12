@@ -1,8 +1,8 @@
 #include "Plotter.cc"
 #include <fstream>
 
-void Draw_CR(bool ScaleMC=true, int XXX=0){
-
+void Draw_SR(bool ScaleMC=true, int XXX=0){
+  
   //==============
   //==== get env
   //==============
@@ -16,7 +16,6 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   //====================
   
   Plotter m;
-  m.DoDebug = false;
   
   //=====================
   //==== set data class
@@ -93,49 +92,32 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
 
   //==== _Di<Lepton>_<JetSel>_<ifOffZ>_<charge>
 
-  //==== Linear
-  //==== No DY (so, use VGamma)
+  //==== SS
   if(XXX==0){
-    m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Vgamma", "VVV", "top", "WW_double"};
+    m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "Vgamma"};
+
     m.histname_suffix = {
       // dimu
-      "_DiMuon_0jets_SS", // SS 0jet CR
-      "_DiMuon_1jets_SS", // SS 1jet CR
-      "_DiMuon_0jets_OnZ_SS", // SS-0jet+OnZ CR (CF)
-      "_DiMuon_1jets_OnZ_SS", // SS-1jet+OnZ CR (CF)
-      "_DiMuon_Inclusive1nlbjets_SS", // (TTBar Fake))
       // diel
-      "_DiElectron_0jets_SS", // SS 0jet CR
-      "_DiElectron_1jets_SS", // SS 1jet CR
-      "_DiElectron_0jets_OnZ_SS", // SS-0jet+OnZ CR (CF)
-      "_DiElectron_1jets_OnZ_SS", // SS-1jet+OnZ CR (CF)
-      "_DiElectron_Inclusive1nlbjets_SS", // (TTBar Fake))
+      "_DiElectron_Preselection_SS",
+      //"_DiElectron_Low_SS",
+      //"_DiElectron_Medium_SS",
+      //"_DiElectron_High_SS",
     };
   }
-  //==== Log
-  //==== Use DY
+  //==== OS
   if(XXX==1){
     m.samples_to_use = {"VV_excl", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
     m.histname_suffix = {
       // dimu
-      "_DiMuon_OnZ_OS", // OS OnZ CR (DY Prompt)
-      "_DiMuon_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
-      "_DiMuon_Inclusive1nlbjets_OS", // (TTBar Prompt)
-      "_DiMuon_Inclusive1nlbjets_METgt50_OS", // (TTBar Prompt)
+      //"_DiMuon_Low_OS",
+      //"_DiMuon_Medium_OS",
+      //"_DiMuon_High_OS",
       // diel
-      "_DiElectron_OnZ_OS", // OS OnZ CR (DY Prompt)
-      "_DiElectron_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
-      "_DiElectron_Inclusive1nlbjets_OS", // (TTBar Prompt)
-      "_DiElectron_Inclusive1nlbjets_METgt50_OS", // (TTBar Prompt)
-    };
-  }
-  if(XXX==2){
-    m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "DY", "VVV", "top", "WW_double"};
-    m.histname_suffix = {
-      // dimu
-      "_DiMuon_Inclusive1nlbjets_METgt50_OffZ_OS", // (TTBar Prompt)
-      // diel
-      "_DiElectron_Inclusive1nlbjets_METgt50_OffZ_OS", // (TTBar Prompt)
+      "_DiElectron_Preselection_OS",
+      "_DiElectron_Low_OS",
+      "_DiElectron_Medium_OS",
+      "_DiElectron_High_OS",
     };
   }
 
@@ -145,6 +127,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   
   m.histname = {
     "m_ll",
+    "m_jj_wclosest", "m_lljj_wclosest", "m_Leadljj_wclosest", "m_SubLeadljj_wclosest",
+    "m_jjptorder", "m_lljjptorder", "m_Leadljjptorder", "m_SubLeadljjptorder",
     "Njets", "Njets_nolepveto", "Nfwdjets", "Nbjets", "Nbjets_nolepveto", "Nbfwdjets",
     "leadingLepton_Pt", "leadingLepton_Eta",
     "secondLepton_Pt", "secondLepton_Eta",
@@ -154,12 +138,14 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "secondForwardJet_Pt", "secondForwardJet_Eta",
     "leadingNoLepVetoJet_Pt", "leadingNoLepVetoJet_Eta", 
     "secondNoLepVetoJet_Pt", "secondNoLepVetoJet_Eta",
-    "PFMET", "PFMET_phi", "HT", "ST",
-    "Nvtx",
+    "PFMET", "PFMET_phi", "HT", "ST", "MET2overST", "MCT",
+    "Nvtx", "DeltaRl1l2",
   };
 
   m.x_title = {
     "m(ll) [GeV]",
+    "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Second Lepton+jj_{W}) [GeV]",
+    "m(j_{1}j_{2}) [GeV]",  "m(llj_{1}j_{2}) [GeV]", "m(Leading Lepton+j_{1}j_{2}) [GeV]", "m(Second Lepton+j_{1}j_{2}) [GeV]",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
     "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta",
     "Second Lepton p_{T} [GeV]", "Second Lepton #eta",
@@ -169,12 +155,14 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "Second Forward Jet p_{T} [GeV]", "Second Forward Jet #eta",
     "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
     "Second No-LeptonVeto Jet p_{T} [GeV]", "Second No-LeptonVeto Jet #eta",
-    "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]",
-    "# of vertices",
+    "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]", "#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]", "m_{CT}(j_{1},j_{2}) [GeV]",
+    "# of vertices", "#DeltaR(l_{1},l_{2})",
   };
 
   m.units = {
     "GeV",
+    "GeV", "GeV", "GeV", "GeV",
+    "GeV", "GeV", "GeV", "GeV",
     "int", "int", "int", "int", "int", "int",
     "GeV", "",
     "GeV", "",
@@ -184,9 +172,22 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "GeV", "",
     "GeV", "",
     "GeV", "",
-    "GeV", "", "GeV", "GeV",
-    "int",
+    "GeV", "", "GeV", "GeV", "GeV", "GeV",
+    "int", "",
   };
+
+  //==== TEST
+  if(XXX==-1){
+    m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "Vgamma"};
+
+    m.histname_suffix = {"_DiElectron_2jets_OffZ_SS"};
+    m.PrimaryDataset = {"DoubleEG"};
+    m.UseLogy = {-1};
+    m.histname = {"m_ll"};
+    m.x_title = {"m(ll) [GeV]"};
+    m.units = {"GeV"};
+
+  }
 
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
 
@@ -202,24 +203,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
 
     if(ScaleMC) m.ApplyMCNormSF.push_back(true);
     else m.ApplyMCNormSF.push_back(false);
-
-    m.drawdata.push_back(true);
-
-  }
-
-  //==== For Quick Test
-  //==== Ignore all, and reset all here
-  if(XXX==-1){
-    m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Vgamma", "VVV", "top", "WW_double"};
-    m.histname_suffix = {"_DiElectron_SS"};
-    m.PrimaryDataset = {"DoubleEG"};
-    m.drawdata = {true};
-    m.UseLogy = {-1};
-    m.histname = {"m_ll"};
-    m.x_title = {"m(ll) [GeV]"};
-    m.units = {"GeV"};
-    if(ScaleMC) m.ApplyMCNormSF = {true};
-    else m.ApplyMCNormSF = {false};
+    m.drawdata.push_back(false);
   }
 
   //====================
@@ -244,46 +228,50 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
 
   m.SetCalculatedSysts(WORKING_DIR+"/data/"+dataset+"/Syst.txt");
 
-  /*
   //=============================
   //==== set signal mass points
   //=============================
   
-  m.signal_mass = {40, 60, 150, 700};
-  m.signal_color = {kRed, kBlue, kMagenta-7, kBlack};
-  
+  m.signal_mass = {40, 60, 200, 500, 1000, -200, -500, -1000};
+  m.signal_color = {kRed, kMagenta, kBlue, kGray, kBlack, kBlue, kGray, kBlack};
+  m.signal_draw = {true, true, true, true, true, true};
+
   //====================================
   //==== set signal coupling constants
   //====================================
-  
-  m.coupling_constants[make_pair("_WZ", 40)] = 0.01;
-  m.coupling_constants[make_pair("_WZ", 60)] = 0.01;
-  m.coupling_constants[make_pair("_WZ", 150)] = 1;
-  m.coupling_constants[make_pair("_WZ", 700)] = 0.01;
-  m.coupling_constants[make_pair("_ZJets", 40)] = 0.001;
-  m.coupling_constants[make_pair("_ZJets", 60)] = 0.001;
-  m.coupling_constants[make_pair("_ZJets", 150)] = 0.001;
-  m.coupling_constants[make_pair("_ZJets", 700)] = 0.001;
-  
+
+  for(unsigned int i=0; i<m.histname_suffix.size(); i++){
+    m.coupling_constants[make_pair(m.histname_suffix.at(i), 40)] = 0.0001;
+    m.coupling_constants[make_pair(m.histname_suffix.at(i), 60)] = 0.0001;
+    m.coupling_constants[make_pair(m.histname_suffix.at(i), 200)] = 0.1;
+    m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 1;
+    m.coupling_constants[make_pair(m.histname_suffix.at(i), 1000)] = 10;
+    m.coupling_constants[make_pair(m.histname_suffix.at(i), -200)] = 0.1;
+    m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 1.;
+    m.coupling_constants[make_pair(m.histname_suffix.at(i), -1000)] = 10.;
+
+
+  }
+
+
   //=====================================
   //==== set signal mass for each class
   //=====================================
-  
-  m.map_class_to_signal_mass[Plotter::class1] = {40};
-  m.map_class_to_signal_mass[Plotter::class2] = {60};
-  m.map_class_to_signal_mass[Plotter::lowmass] = {40, 60};
-  m.map_class_to_signal_mass[Plotter::class3] = {150};
-  m.map_class_to_signal_mass[Plotter::class4] = {700};
-  m.map_class_to_signal_mass[Plotter::highmass] = {150, 700};
-  */
+
+  m.map_class_to_signal_mass[Plotter::class1] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
+  m.map_class_to_signal_mass[Plotter::class2] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
+  m.map_class_to_signal_mass[Plotter::lowmass] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
+  m.map_class_to_signal_mass[Plotter::class3] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
+  m.map_class_to_signal_mass[Plotter::class4] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
+  m.map_class_to_signal_mass[Plotter::mediummass] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
+  m.map_class_to_signal_mass[Plotter::highmass] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
 
   //=============
   //==== rebins
   //=============
   
-
   //==== script to generate rebins
-  ofstream skeleton_rebins("./data/CR_rebins.txt", ios::trunc);
+  ofstream skeleton_rebins("./data/SR_rebins.txt", ios::trunc);
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
     for(unsigned int j=0; j<m.histname.size(); j++){
       skeleton_rebins
@@ -294,7 +282,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   skeleton_rebins.close();
 
 
-  m.SetRebins(WORKING_DIR+"/data/"+dataset+"/CR_rebins.txt");
+  m.SetRebins(WORKING_DIR+"/data/"+dataset+"/SR_rebins.txt");
 
   //=============
   //==== y_maxs
@@ -302,7 +290,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   
 
   //==== script to generate rebins
-  ofstream skeleton_y_maxs("./data/CR_yaxis.txt", ios::trunc);
+  ofstream skeleton_y_maxs("./data/SR_yaxis.txt", ios::trunc);
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
     for(unsigned int j=0; j<m.histname.size(); j++){
       skeleton_y_maxs
@@ -317,7 +305,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.default_y_max = 2000.;
   m.default_y_min = 0.;
 
-  m.SetYAxis(WORKING_DIR+"/data/"+dataset+"/CR_yaxis.txt"); 
+  m.SetYAxis(WORKING_DIR+"/data/"+dataset+"/SR_yaxis.txt"); 
 
   //=============
   //==== x_mins
@@ -325,7 +313,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
 
 
   //==== script to generate rebins
-  ofstream skeleton_x_mins("./data/CR_xaxis.txt", ios::trunc);
+  ofstream skeleton_x_mins("./data/SR_xaxis.txt", ios::trunc);
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
   for(unsigned int j=0; j<m.histname.size(); j++){
       skeleton_x_mins
@@ -337,7 +325,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
 
 
 
-  m.SetXAxis(WORKING_DIR+"/data/"+dataset+"/CR_xaxis.txt");
+  m.SetXAxis(WORKING_DIR+"/data/"+dataset+"/SR_xaxis.txt");
 
   //===============
   //==== k-factor

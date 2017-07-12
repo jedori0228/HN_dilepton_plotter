@@ -5,6 +5,7 @@ Plotter::Plotter(){
   TH1::SetDefaultSumw2(true);
   TH1::AddDirectory(kFALSE);
   gStyle->SetOptStat(0);
+  DoDebug = false;
   
 }
 
@@ -17,8 +18,14 @@ Plotter::~Plotter(){
 void Plotter::draw_hist(){
   
   for(i_cut = 0; i_cut < histname_suffix.size(); i_cut++){
-    
-    outputfile->mkdir(histname_suffix[i_cut]);
+
+    //==== This step, 
+    //==== plotpath = ~~~/plots/v8-0-7.15/Regions/use_FR_method/fake_Dijet/
+    if(DoDebug) cout << "[draw_hist] plotpath = " << plotpath << endl;
+    thiscut_plotpath = plotpath+"/"+histname_suffix[i_cut];
+    if(ApplyMCNormSF.at(i_cut)) thiscut_plotpath = plotpath+"/MCNormSFed"+histname_suffix[i_cut];
+
+    TFile *outputfile = new TFile(thiscut_plotpath+"/hists.root", "RECREATE");
     
     cout
     << endl
@@ -83,22 +90,24 @@ void Plotter::draw_hist(){
             if(!signal_draw[signal_index]) continue;
           }
 
-          //cout << "signal_index = " << signal_index << " => mass = " << signal_mass[signal_index] << endl;
+          if(DoDebug) cout << "signal_index = " << signal_index << " => mass = " << signal_mass[signal_index] << endl;
           TString WhichChannel = "MuMu";
           if(histname_suffix[i_cut].Contains("DiElectron")) WhichChannel = "ElEl";
           //==== TChannel
           if( signal_mass[signal_index] < 0 ){
-            WhichChannel = "_Tchannel_"+WhichChannel;
+            WhichChannel = WhichChannel+"_Tchannel";
           }
-          TString string_signal_mass = "HNMoriondLL"+WhichChannel+"_"+TString::Itoa(abs(signal_mass[signal_index]),10);
+          TString string_signal_mass = "HN"+WhichChannel+"_"+TString::Itoa(abs(signal_mass[signal_index]),10);
 
           filepath = "./rootfiles/"+data_class+"/"+filename_prefix+"_SK"+string_signal_mass+filename_suffix;
           current_sample = string_signal_mass;
         }
-         
-        //cout
-        //<< "filepath = " << filepath << endl
-        //<< "hisname = " << histname[i_var]+histname_suffix[i_cut] << endl;
+
+        if(DoDebug){
+          cout
+          << "filepath = " << filepath << endl
+          << "hisname = " << histname[i_var]+histname_suffix[i_cut] << endl;
+        }
         
         //==== get root file
         TFile* file = new TFile(filepath);
@@ -196,7 +205,7 @@ void Plotter::draw_hist(){
         //==== signal starting from i_file = bkglist.size()+1
         else if( i_file > bkglist.size() ){
           int signal_index = i_file-bkglist.size()-1;
-          //cout << "signal index = " << signal_index << ", mass = " << signal_mass[signal_index] << endl;
+          if(DoDebug) cout << "signal index = " << signal_index << ", mass = " << signal_mass[signal_index] << endl;
           hist_final->SetLineColor(signal_color[signal_index]);
           hist_final->SetLineWidth(3);
           if( signal_mass[signal_index] < 0 ) hist_final->SetLineStyle(3);
@@ -217,32 +226,31 @@ void Plotter::draw_hist(){
         file->Close();
         delete file;
         
-        //cout << "end of this sample" << endl;
+        if(DoDebug) cout << "end of this sample" << endl;
         
       } // END loop over samples
     
-      //cout << "[Draw Canvas]" << endl;
+      if(DoDebug) cout << "[Draw Canvas]" << endl;
     
-      draw_canvas(MC_stacked, MC_stacked_err, hist_data, hist_signal, lg, drawdata.at(i_cut));
+      draw_canvas(MC_stacked, MC_stacked_err, hist_data, hist_signal, lg, drawdata.at(i_cut), outputfile);
 
       //==== legend is already deleted in draw_canvas()
       //delete lg; 
       
     } // END loop over variables
-    
 
-    
+    outputfile->Close();
+
+
   } // END loop over cuts
   
-  
-  outputfile->Close();
   
 }
 
 void Plotter::make_bkglist(){
   for(unsigned int i=0; i<samples_to_use.size(); i++){
     MCsector_first_index.push_back( bkglist.size() );
-    //cout << "[make_bkglist] " << "MCsector_first_index.push_back(" <<  bkglist.size() << ")" << endl;
+    if(DoDebug) cout << "[make_bkglist] " << "MCsector_first_index.push_back(" <<  bkglist.size() << ")" << endl;
     bkglist.insert(bkglist.end(),
                    map_sample_string_to_list[samples_to_use.at(i)].begin(),
                    map_sample_string_to_list[samples_to_use.at(i)].end()
@@ -368,11 +376,11 @@ void Plotter::SetCalculatedSysts(TString filepath){
 TString Plotter::find_MCsector(){
   for(unsigned int i=0; i<MCsector_first_index.size()-1; i++){
     if(MCsector_first_index.at(i) <= i_file && i_file < MCsector_first_index.at(i+1)){
-      //cout << "[find_MCsector] " << "("<<MCsector_first_index.at(i)<<","<<MCsector_first_index.at(i+1)<<") => index " << index << ", returned MCsector is " << samples_to_use.at(i) << endl;
+      if(DoDebug) cout << "[find_MCsector] returned MCsector is " << samples_to_use.at(i) << endl;
       return samples_to_use.at(i);
     }
   }
-  //cout << "[find_MCsector] " << "index " << index << ", returned MCsector is " << *samples_to_use.end() << endl;
+  if(DoDebug) cout << "[find_MCsector] returned MCsector is " << samples_to_use.back() << endl;
   return samples_to_use.back();
 }
 
@@ -391,7 +399,7 @@ double Plotter::coupling_constant(int mass){
   TString cut = histname_suffix[i_cut];
   
   if( coupling_constants.find( make_pair(cut, mass) ) != coupling_constants.end() ){
-    //cout << "cut = " << cut << ", mass = " << mass << " => coupling constant = " << coupling_consts[make_pair(cut, mass)] << endl;
+    if(DoDebug) cout << "cut = " << cut << ", mass = " << mass << " => coupling constant = " << coupling_constants[make_pair(cut, mass)] << endl;
     return coupling_constants[make_pair(cut, mass)];
   }
   else return 1.;
@@ -406,9 +414,9 @@ void Plotter::fill_legend(TLegend* lg, TH1D* hist){
   //==== bkg
   if( i_file < bkglist.size() ){
     TString current_MCsector = find_MCsector();
-    //cout << "[fill_legend] " << "index " << index << ", current_MCsector is " << current_MCsector << endl;
+    if(DoDebug) cout << "[fill_legend] current_MCsector is " << current_MCsector << endl;
     if( !MCsector_survive[current_MCsector] ){
-      //cout << "[fill_legend] " << bkglist[index] << " is saved" << endl;
+      if(DoDebug) cout << "[fill_legend] => is saved" << endl;
       hist_for_legend_bkg.push_back((TH1D*)hist->Clone());
       MCsector_survive[current_MCsector] = true;
     }
@@ -416,12 +424,12 @@ void Plotter::fill_legend(TLegend* lg, TH1D* hist){
   //==== data
   else if( i_file == (int)bkglist.size() ){
     hist_for_legend_data = (TH1D*)hist->Clone();
-    //cout << "Data added in hist_for_legend" << endl;
+    if(DoDebug) cout << "Data added in hist_for_legend" << endl;
   }
   //==== signals
   else if( i_file > (int)bkglist.size() ){
     hist_for_legend_signal.push_back((TH1D*)hist->Clone());
-    //cout << "Signal added in hist_for_legend" << endl;
+    if(DoDebug) cout << "Signal added in hist_for_legend" << endl;
   }
   else{
     cout << "[Warning] fill_legend, i_file > total sample size? This should not happen!" << endl;
@@ -443,13 +451,13 @@ void Plotter::draw_legend(TLegend* lg, signal_class sc, bool DrawData){
   if(DrawData && hist_for_legend_data){
     lg->AddEntry(hist_for_legend_data, "data", "p");
   }
-  //cout << "[draw_legend] printing MCsector_survive" << endl;
+  if(DoDebug) cout << "[draw_legend] printing MCsector_survive" << endl;
   for(auto it = MCsector_survive.begin(); it != MCsector_survive.end(); ++it){
-    //cout << "[draw_legend] " << it->first << " is " << it->second << endl;
+    if(DoDebug) cout << "[draw_legend] " << it->first << " is " << it->second << endl;
   }
   for(int i=samples_to_use.size()-1, j=hist_for_legend_bkg.size()-1; i>=0; i--){
     if(MCsector_survive[samples_to_use.at(i)]){
-      //cout << "[draw_legend] " << samples_to_use.at(i) << " is added in legend" << endl;
+      if(DoDebug) cout << "[draw_legend] " << samples_to_use.at(i) << " is added in legend" << endl;
       lg->AddEntry(hist_for_legend_bkg.at(j), map_sample_string_to_legendinfo[samples_to_use.at(i)].first, "f");
       j--;
     }
@@ -518,7 +526,7 @@ void Plotter::draw_legend(TLegend* lg, signal_class sc, bool DrawData){
   lg->Draw();
 }
 
-void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, vector<TH1D*> hist_signal, TLegend* legend, bool DrawData){
+void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, vector<TH1D*> hist_signal, TLegend* legend, bool DrawData, TFile *outputf){
 
   if(!hist_data) return;
 
@@ -576,6 +584,7 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
 
   //==== empty histogram for axis
   TH1D *hist_empty = (TH1D*)mc_stack->GetHists()->At(0)->Clone();
+  hist_empty->SetName("DUMMY_FOR_AXIS");
   hist_empty->GetYaxis()->SetRangeUser( default_y_min, y_max() );
   //=== get dX
   double dx = (hist_empty->GetXaxis()->GetXmax() - hist_empty->GetXaxis()->GetXmin())/hist_empty->GetXaxis()->GetNbins();
@@ -723,11 +732,9 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
     latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
   }
 
-  TString this_plotpath = plotpath+"/"+histname_suffix[i_cut];
-  if(ApplyMCNormSF.at(i_cut)) this_plotpath = plotpath+"/MCNormSFed"+histname_suffix[i_cut];
-  mkdir(this_plotpath);
-  c1->SaveAs(this_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".pdf");
-  outputfile->cd(histname_suffix[i_cut]);
+  mkdir(thiscut_plotpath);
+  c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".pdf");
+  outputf->cd();
   c1->Write();
   
   delete legend;
@@ -740,7 +747,7 @@ int Plotter::n_rebin(){
   TString var = histname[i_var];
     
   if( rebins.find( make_pair(cut, var) ) != rebins.end() ){
-    //cout << "cut = " << cut << ", var = " << var << " => rebins = " << rebins[make_pair(cut, var)] << endl;
+    if(DoDebug) cout << "cut = " << cut << ", var = " << var << " => rebins = " << rebins[make_pair(cut, var)] << endl;
     return rebins[make_pair(cut, var)];
   }
   else return 1;
@@ -822,26 +829,59 @@ void Plotter::SetXaxisRangeBoth(THStack* mc_stack, TH1D* hist){
 }
 
 TH1D* Plotter::MakeOverflowBin(TH1D* hist){
-  
+
+  //==== 0    1                                    n_bin_origin
+  //====      |---------------------------------------|
+  //====             bin_first      bin_last
+  //====                |-------------|  
+  //==== |   |                                        |   |
+  //==== under                                         over
+  //==== flow                                          flow
+  //==== |<------------>|             |<----------------->|
+  //====  all underflow                   all overflow
+
+  //==== Original NBins
+  int n_bin_origin = hist->GetXaxis()->GetNbins();
+  //==== Changed NBins
   int bin_first = hist->GetXaxis()->GetFirst();
   int bin_last = hist->GetXaxis()->GetLast();
   int n_bin_inrange = bin_last-bin_first+1;
-  int n_bin_origin = hist->GetXaxis()->GetNbins();
   
   double x_first_lowedge = hist->GetXaxis()->GetBinLowEdge(bin_first);
   double x_last_upedge = hist->GetXaxis()->GetBinUpEdge(bin_last);
-  
-  double overflows = hist->Integral(bin_last+1, n_bin_origin+1);
-  
+
+  double Allunderflows = hist->Integral(0, bin_first-1);
+  double Allunderflows_error = hist->GetBinError(0);
+  Allunderflows_error = Allunderflows_error*Allunderflows_error;
+  for(unsigned int i=1; i<=bin_first-1; i++){
+    Allunderflows_error += (hist->GetBinError(i))*(hist->GetBinError(i));
+  }
+  Allunderflows_error = sqrt(Allunderflows_error);
+
+  double Alloverflows = hist->Integral(bin_last+1, n_bin_origin+1);
+  double Alloverflows_error = hist->GetBinError(n_bin_origin+1);
+  Alloverflows_error = Alloverflows_error*Alloverflows_error;
+  for(unsigned int i=bin_last+1; i<=n_bin_origin; i++){
+    Alloverflows_error += (hist->GetBinError(i))*(hist->GetBinError(i));
+  }
+  Alloverflows_error = sqrt(Alloverflows_error);
+
   TH1D *hist_out = new TH1D(hist->GetName(), hist->GetTitle(), n_bin_inrange, x_first_lowedge, x_last_upedge);
   for(unsigned int i=1; i<=n_bin_inrange; i++){
     double this_content = hist->GetBinContent(bin_first-1+i);
     double this_error = hist->GetBinError(bin_first-1+i);
     //cout << "["<<hist_out->GetXaxis()->GetBinLowEdge(i)<<", "<<hist_out->GetXaxis()->GetBinUpEdge(i)<<"] : "<<this_content<<endl;
+
+    //==== underflows
+    if(i==1){
+      this_content += Allunderflows;
+      this_error = TMath::Sqrt( this_error*this_error + Allunderflows_error*Allunderflows_error );
+    }
+
+    //==== overflows
     if(i==n_bin_inrange){
-      this_content += overflows;
-      double overflowerror = hist->GetBinError(n_bin_origin+1);
-      this_error = TMath::Sqrt( this_error*this_error + overflowerror*overflowerror );
+      this_content += Alloverflows;
+      this_error = TMath::Sqrt( this_error*this_error + Alloverflows_error*Alloverflows_error );
     }
     
     hist_out->SetBinContent(i, this_content);
@@ -933,32 +973,9 @@ void Plotter::make_plot_directory(){
   plotpath = ENV_PLOT_PATH+"/"+data_class;
 
   for(unsigned int i=0; i<samples_to_use.size(); i++){
-
     if(samples_to_use.at(i).Contains("fake")) plotpath = plotpath+"/use_FR_method/"+samples_to_use.at(i);
   }
-/*
-  if( find(samples_to_use.begin(), samples_to_use.end(), "fake_Dijet") != samples_to_use.end() ){
-    plotpath = plotpath+"/use_FR_method/Dijet";
-  }
 
-  if( find(samples_to_use.begin(), samples_to_use.end(), "fake_HighdXY") != samples_to_use.end() ){
-    plotpath = plotpath+"/use_FR_method/HighdXY";
-  }
-  if( find(samples_to_use.begin(), samples_to_use.end(), "fake_DiMuon_HighdXY") != samples_to_use.end() ){
-    plotpath = plotpath+"/use_FR_method/DiMuon_HighdXY";
-  }
-
-  if( find(samples_to_use.begin(), samples_to_use.end(), "fake_sfed_HighdXY") != samples_to_use.end() ){
-    plotpath = plotpath+"/use_FR_method/SFed_HighdXY";
-  }
-  if( find(samples_to_use.begin(), samples_to_use.end(), "fake_sfed_DiMuon_HighdXY") != samples_to_use.end() ){
-    plotpath = plotpath+"/use_FR_method/SFed_DiMuon_HighdXY";
-  }
-
-  if( find(samples_to_use.begin(), samples_to_use.end(), "fake_sfed_HighdXY_UsePtCone") != samples_to_use.end() ){
-    plotpath = plotpath+"/use_FR_method/SFed_HighdXY_UsePtCone";
-  }
-*/
   cout
   << endl
   << "###################################################" << endl

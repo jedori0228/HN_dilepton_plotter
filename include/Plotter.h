@@ -49,7 +49,7 @@ public:
   double coupling_constant(int mass);
   void fill_legend(TLegend* lg, TH1D* hist);
   void draw_legend(TLegend* lg, signal_class sc, bool DrawData);
-  void draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, vector<TH1D*> hist_signal, TLegend* legend, bool DrawData);
+  void draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, vector<TH1D*> hist_signal, TLegend* legend, bool DrawData, TFile *outputf);
 
   int n_rebin();
   double y_max();
@@ -64,8 +64,9 @@ public:
   TString legend_coupling_label(int mass);
   
   //==== variables
+  bool DoDebug;
   unsigned int i_cut, i_var, i_file;
-  TString filename_prefix, filename_suffix, data_class, plotpath;
+  TString filename_prefix, filename_suffix, data_class, plotpath, thiscut_plotpath;
   vector<TString> histname_suffix, bkglist, samples_to_use, histname, x_title, units, PrimaryDataset;
   vector<bool> drawdata, ApplyMCNormSF;
   vector<double> UseLogy;
@@ -81,7 +82,6 @@ public:
   vector<Color_t> signal_color;
   map< pair<TString, int>, double > coupling_constants;
   map<TString, bool> MCsector_survive;
-  TFile *outputfile;
   TH1D *hist_for_legend_data;
   vector<TH1D*> hist_for_legend_bkg;
   vector<TH1D*> hist_for_legend_signal;
