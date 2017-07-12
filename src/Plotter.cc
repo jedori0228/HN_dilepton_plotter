@@ -210,7 +210,8 @@ void Plotter::draw_hist(){
           hist_final->SetLineWidth(3);
           if( signal_mass[signal_index] < 0 ) hist_final->SetLineStyle(3);
           TString temp_hist_name(hist_final->GetName());
-          hist_final->SetName(temp_hist_name+"_signal_"+TString::Itoa(signal_mass[signal_index], 10));
+          //hist_final->SetName(temp_hist_name+"_signal_"+TString::Itoa(signal_mass[signal_index], 10));
+          //hist_final->SetName(temp_hist_name+"_signal_"+TString::Itoa(signal_mass[signal_index], 10));
           //==== scaling signal
           double this_coupling_constant = coupling_constant(signal_mass[signal_index]);
           hist_final->Scale( k_factor*this_coupling_constant/(1.*TMath::Power(10,log_of_generation_mixing)) );
