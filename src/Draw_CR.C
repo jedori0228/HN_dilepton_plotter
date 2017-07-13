@@ -99,17 +99,17 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Vgamma", "VVV", "top", "WW_double"};
     m.histname_suffix = {
       // dimu
-      "_DiMuon_0jets_SS", // SS 0jet CR
-      "_DiMuon_1jets_SS", // SS 1jet CR
-      "_DiMuon_0jets_OnZ_SS", // SS-0jet+OnZ CR (CF)
-      "_DiMuon_1jets_OnZ_SS", // SS-1jet+OnZ CR (CF)
-      "_DiMuon_Inclusive1nlbjets_SS", // (TTBar Fake))
+      //"_DiMuon_0jets_SS", // SS 0jet CR
+      //"_DiMuon_1jets_SS", // SS 1jet CR
+      //"_DiMuon_0jets_OnZ_SS", // SS-0jet+OnZ CR (CF)
+      //"_DiMuon_1jets_OnZ_SS", // SS-1jet+OnZ CR (CF)
+      //"_DiMuon_Inclusive1nlbjets_SS", // (TTBar Fake))
       // diel
       "_DiElectron_0jets_SS", // SS 0jet CR
       "_DiElectron_1jets_SS", // SS 1jet CR
-      "_DiElectron_0jets_OnZ_SS", // SS-0jet+OnZ CR (CF)
-      "_DiElectron_1jets_OnZ_SS", // SS-1jet+OnZ CR (CF)
-      "_DiElectron_Inclusive1nlbjets_SS", // (TTBar Fake))
+      "_DiElectron_0jets_OnZ_SS", // SS 0jet+OnZ CR (CF)
+      "_DiElectron_1jets_OnZ_SS", // SS 1jet+OnZ CR (CF)
+      "_DiElectron_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt)
     };
   }
   //==== Log
@@ -118,22 +118,22 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     m.samples_to_use = {"VV_excl", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
     m.histname_suffix = {
       // dimu
-      "_DiMuon_OnZ_OS", // OS OnZ CR (DY Prompt)
-      "_DiMuon_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
-      "_DiMuon_Inclusive1nlbjets_OS", // (TTBar Prompt)
-      "_DiMuon_Inclusive1nlbjets_METgt50_OS", // (TTBar Prompt)
+      //"_DiMuon_OnZ_OS", // OS OnZ CR (DY Prompt)
+      //"_DiMuon_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
+      //"_DiMuon_Inclusive1nlbjets_OS", // (TTBar Prompt)
+      //"_DiMuon_Inclusive1nlbjets_METgt50_OS", // (TTBar Prompt)
       // diel
       "_DiElectron_OnZ_OS", // OS OnZ CR (DY Prompt)
       "_DiElectron_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
-      "_DiElectron_Inclusive1nlbjets_OS", // (TTBar Prompt)
-      "_DiElectron_Inclusive1nlbjets_METgt50_OS", // (TTBar Prompt)
+      "_DiElectron_1jets_OnZ_OS", // OS 1jet OnZ CR (DY+jet)
+      "_DiElectron_Inclusive1nlbjets_OS", // OS bjet>=1 (Prompt+NonPrompt)
     };
   }
   if(XXX==2){
     m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "DY", "VVV", "top", "WW_double"};
     m.histname_suffix = {
       // dimu
-      "_DiMuon_Inclusive1nlbjets_METgt50_OffZ_OS", // (TTBar Prompt)
+      //"_DiMuon_Inclusive1nlbjets_METgt50_OffZ_OS", // (TTBar Prompt)
       // diel
       "_DiElectron_Inclusive1nlbjets_METgt50_OffZ_OS", // (TTBar Prompt)
     };

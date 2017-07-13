@@ -25,6 +25,7 @@ ToKeeps = [
 
       "_DiElectron_OnZ_OS", # OS OnZ CR (DY Prompt)
       "_DiElectron_0jets_OnZ_OS", # OS 0jet OnZ CR (DY Prompt)
+      "_DiElectron_1jets_OnZ_OS", # OS 1jet OnZ CR (DY+jet)
       "_DiElectron_Inclusive1nlbjets_OS", # (TTBar Prompt)
       "_DiElectron_Inclusive1nlbjets_METgt50_OS", # (TTBar Prompt)
 ]

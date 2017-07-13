@@ -94,7 +94,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
   //==== SS
   if(XXX==0){
-    m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "Vgamma"};
+    //m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "Vgamma"};
+    m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "Zgamma"};
 
     m.histname_suffix = {
       // dimu
@@ -115,11 +116,24 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       //"_DiMuon_High_OS",
       // diel
       "_DiElectron_Preselection_OS",
-      "_DiElectron_Low_OS",
-      "_DiElectron_Medium_OS",
-      "_DiElectron_High_OS",
+      //"_DiElectron_Low_OS",
+      //"_DiElectron_Medium_OS",
+      //"_DiElectron_High_OS",
     };
   }
+  if(XXX==2){
+    m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "DY"};
+
+    m.histname_suffix = {
+      // dimu
+      // diel
+      "_DiElectron_Preselection_OS",
+      //"_DiElectron_Low_SS",
+      //"_DiElectron_Medium_SS",
+      //"_DiElectron_High_SS",
+    };
+  }
+
 
   //============================
   //==== set variables to draw
@@ -241,16 +255,26 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //====================================
 
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
-    m.coupling_constants[make_pair(m.histname_suffix.at(i), 40)] = 0.0001;
-    m.coupling_constants[make_pair(m.histname_suffix.at(i), 60)] = 0.0001;
-    m.coupling_constants[make_pair(m.histname_suffix.at(i), 200)] = 0.1;
-    m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 1;
-    m.coupling_constants[make_pair(m.histname_suffix.at(i), 1000)] = 10;
-    m.coupling_constants[make_pair(m.histname_suffix.at(i), -200)] = 0.1;
-    m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 1.;
-    m.coupling_constants[make_pair(m.histname_suffix.at(i), -1000)] = 10.;
-
-
+    if(XXX!=2){
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 40)] = 0.0001;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 60)] = 0.0001;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 200)] = 0.1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 1000)] = 10;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -200)] = 0.1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 1.;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -1000)] = 10.;
+    }
+    else{
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 40)] = 10;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 60)] = 10;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 200)] = 100;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 100;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 1000)] = 100;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -200)] = 100;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 100;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -1000)] = 100;
+    }
   }
 
 

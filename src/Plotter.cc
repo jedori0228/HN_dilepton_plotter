@@ -25,6 +25,7 @@ void Plotter::draw_hist(){
     thiscut_plotpath = plotpath+"/"+histname_suffix[i_cut];
     if(ApplyMCNormSF.at(i_cut)) thiscut_plotpath = plotpath+"/MCNormSFed"+histname_suffix[i_cut];
 
+    mkdir(thiscut_plotpath);
     TFile *outputfile = new TFile(thiscut_plotpath+"/hists.root", "RECREATE");
     
     cout
@@ -133,7 +134,6 @@ void Plotter::draw_hist(){
 
         //==== set error separately for fake
 
-        //if( current_sample.Contains("fake") || current_sample.Contains("chargeflip") ){ //FIXME
         if( current_sample.Contains("fake") ){
           TH1D* hist_temp_up = (TH1D*)file->Get(fullhistname+"_up");
           TH1D* hist_temp_down = (TH1D*)file->Get(fullhistname+"_down");
@@ -144,11 +144,22 @@ void Plotter::draw_hist(){
             double error_combined = sqrt( error_propagated*error_propagated + error_sumw2*error_sumw2 );
 
             TString WhichSystHere = "FakeLooseID";
-            if(current_sample.Contains("chargeflip")) WhichSystHere = "ChrageFlipSyst";
-            if(current_sample.Contains("chargeflip")) error_combined=0.; //FIXME
             double error_syst = CalculatedSysts[WhichSystHere]*(hist_temp->GetBinContent(i));
 
             error_combined = sqrt(error_combined*error_combined + error_syst*error_syst);
+
+            hist_temp->SetBinError(i, error_combined);
+          }
+        }
+        if( current_sample.Contains("chargeflip") ){
+          int n_bins = hist_temp->GetXaxis()->GetNbins();
+          for(int i=1; i<=n_bins; i++){
+            double error_sumw2 = hist_temp->GetBinError(i);
+
+            TString WhichSystHere = "ChrageFlipSyst";
+            double error_syst = CalculatedSysts[WhichSystHere]*(hist_temp->GetBinContent(i));
+
+            double error_combined = sqrt(error_sumw2*error_sumw2 + error_syst*error_syst);
 
             hist_temp->SetBinError(i, error_combined);
           }
@@ -196,10 +207,9 @@ void Plotter::draw_hist(){
         }
         //==== data for i_file = bkglist.size()
         else if( i_file == bkglist.size() ){
-          hist_final->SetMarkerStyle(3);
+          hist_final->SetMarkerStyle(2);
           hist_final->SetMarkerSize(1);
           TString temp_hist_name(hist_final->GetName());
-          hist_final->SetName(temp_hist_name+"_data");
           hist_data = (TH1D*)hist_final->Clone();
         }
         //==== signal starting from i_file = bkglist.size()+1
@@ -232,7 +242,16 @@ void Plotter::draw_hist(){
       } // END loop over samples
     
       if(DoDebug) cout << "[Draw Canvas]" << endl;
-    
+
+      if(!drawdata.at(i_cut)){
+        TString tmpname = hist_data->GetName();
+        hist_data = (TH1D*)MC_stacked_err->Clone();
+        hist_data->SetName(tmpname);
+        hist_data->SetMarkerStyle(2);
+        hist_data->SetMarkerSize(2);
+        hist_data->SetMarkerColor(kBlack);
+        hist_data->SetLineColor(kBlack);
+      }
       draw_canvas(MC_stacked, MC_stacked_err, hist_data, hist_signal, lg, drawdata.at(i_cut), outputfile);
 
       //==== legend is already deleted in draw_canvas()
@@ -403,7 +422,7 @@ double Plotter::coupling_constant(int mass){
     if(DoDebug) cout << "cut = " << cut << ", mass = " << mass << " => coupling constant = " << coupling_constants[make_pair(cut, mass)] << endl;
     return coupling_constants[make_pair(cut, mass)];
   }
-  else return 1.;
+  else return TMath::Power(10,log_of_generation_mixing);
 
 }
 
@@ -451,6 +470,9 @@ void Plotter::draw_legend(TLegend* lg, signal_class sc, bool DrawData){
   
   if(DrawData && hist_for_legend_data){
     lg->AddEntry(hist_for_legend_data, "data", "p");
+  }
+  else{
+    lg->AddEntry(hist_for_legend_data, "Total Background", "p");
   }
   if(DoDebug) cout << "[draw_legend] printing MCsector_survive" << endl;
   for(auto it = MCsector_survive.begin(); it != MCsector_survive.end(); ++it){
@@ -561,27 +583,19 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   c1->Draw();
   TPad *c1_up;
   TPad *c1_down;
-  if(DrawData){
-    c1_up = new TPad("c1", "", 0, 0.25, 1, 1);
-    c1_down = new TPad("c1_down", "", 0, 0, 1, 0.25);
+  c1_up = new TPad("c1", "", 0, 0.25, 1, 1);
+  c1_down = new TPad("c1_down", "", 0, 0, 1, 0.25);
 
-    canvas_margin(c1, c1_up, c1_down);
-    
-    c1_up->SetGridx();
-    c1_up->SetGridy();
-    c1_down->SetGridx();
-    c1_down->SetGridy();
-    
-    c1_up->Draw();
-    c1_down->Draw();
-    c1_up->cd();
-  }
-  else{
-    canvas_margin(c1);
-    c1->SetGridx();
-    c1->SetGridy();
-    c1->cd();
-  }
+  canvas_margin(c1, c1_up, c1_down);
+  
+  c1_up->SetGridx();
+  c1_up->SetGridy();
+  c1_down->SetGridx();
+  c1_down->SetGridy();
+  
+  c1_up->Draw();
+  c1_down->Draw();
+  c1_up->cd();
 
   //==== empty histogram for axis
   TH1D *hist_empty = (TH1D*)mc_stack->GetHists()->At(0)->Clone();
@@ -609,18 +623,11 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   }
   mc_stack->Draw("histsame");
 
-  if(DrawData){
-    //==== hide X Label for top plot
-    //==== axis setting will be done after we get bottom plot
-    hist_empty->GetXaxis()->SetLabelSize(0);
-    //==== draw data
-    hist_data->Draw("PE1same");
-  }
-  else{
-    //==== set X axis title
-    hist_empty->GetXaxis()->SetTitle(x_title[i_var]);
-    hist_axis(hist_empty);
-  }
+  //==== hide X Label for top plot
+  //==== axis setting will be done after we get bottom plot
+  hist_empty->GetXaxis()->SetLabelSize(0);
+  //==== draw data
+  hist_data->Draw("PE1same");
   
   //==== signal
   if(this_sc == class1){
@@ -701,7 +708,6 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   draw_legend(legend, this_sc, DrawData);
   
   //==== MC-DATA
-  if(DrawData){
     c1_down->cd();
     TH1D* hist_compare = (TH1D*)hist_data->Clone();
     hist_compare->Divide(mc_error);
@@ -713,25 +719,16 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
     hist_axis(hist_empty, hist_compare);
     //==== y=1 line
     g1->Draw("same");
-  }
   
   //==== write lumi on the top
   c1->cd();
   TLatex latex_CMSPriliminary, latex_Lumi;
   latex_CMSPriliminary.SetNDC();
   latex_Lumi.SetNDC();
-  if(DrawData){
     latex_CMSPriliminary.SetTextSize(0.035);
     latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
     latex_Lumi.SetTextSize(0.035);
     latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
-  }
-  else{
-    latex_CMSPriliminary.SetTextSize(0.035);
-    latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} Simulation");
-    latex_Lumi.SetTextSize(0.035);
-    latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
-  }
 
   mkdir(thiscut_plotpath);
   c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".pdf");
