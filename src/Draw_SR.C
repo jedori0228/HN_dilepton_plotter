@@ -16,6 +16,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //====================
   
   Plotter m;
+  m.DoDebug = false;
   
   //=====================
   //==== set data class
@@ -141,7 +142,13 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   
   m.histname = {
     "m_ll",
-    "m_jj_wclosest", "m_lljj_wclosest", "m_Leadljj_wclosest", "m_SubLeadljj_wclosest",
+    //==== Jets for High Mass
+    "m_jj_jjWclosest", "m_lljj_jjWclosest", "m_Leadljj_jjWclosest", "m_SubLeadljj_jjWclosest",
+    "DeltaRjjWclosest", "DeltaRLeadl_jjWclosest", "DeltaRSubLeadl_jjWclosest",
+    //==== Jets for Low Mass
+    "m_jj_lljjWclosest", "m_lljj_lljjWclosest", "m_Leadljj_lljjWclosest", "m_SubLeadljj_lljjWclosest",
+    "DeltaRLeadl_lljjWclosest", "DeltaRSubLeadl_lljjWclosest", "DeltaRLeadl_SubLeadllljjWclosest", "DeltaRSubLeadl_LeadllljjWclosest",
+    //==== Laeding dijet
     "m_jjptorder", "m_lljjptorder", "m_Leadljjptorder", "m_SubLeadljjptorder",
     "Njets", "Njets_nolepveto", "Nfwdjets", "Nbjets", "Nbjets_nolepveto", "Nbfwdjets",
     "leadingLepton_Pt", "leadingLepton_Eta",
@@ -158,7 +165,13 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
   m.x_title = {
     "m(ll) [GeV]",
+    //==== Jets for High Mass
     "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Second Lepton+jj_{W}) [GeV]",
+    "#DeltaR(jj_{W})", "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Second Lepton,jj_{W})",
+    //==== Jets for Low Mass
+    "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Second Lepton+jj_{W}) [GeV]",
+    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Second Lepton,jj_{W})", "#DeltaR(Leading Lepton,Second Lepton+jj_{W})", "#DeltaR(Second Lepton,Leading Lepton+jj_{W})",
+    //==== Laeding dijet
     "m(j_{1}j_{2}) [GeV]",  "m(llj_{1}j_{2}) [GeV]", "m(Leading Lepton+j_{1}j_{2}) [GeV]", "m(Second Lepton+j_{1}j_{2}) [GeV]",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
     "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta",
@@ -176,6 +189,9 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.units = {
     "GeV",
     "GeV", "GeV", "GeV", "GeV",
+    "", "", "",
+    "GeV", "GeV", "GeV", "GeV",
+    "", "", "", "",
     "GeV", "GeV", "GeV", "GeV",
     "int", "int", "int", "int", "int", "int",
     "GeV", "",
@@ -255,6 +271,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //====================================
 
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
+
+    //==== SS
     if(XXX!=2){
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 40)] = 0.0001;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 60)] = 0.0001;
@@ -265,6 +283,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 1.;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -1000)] = 10.;
     }
+
+    //==== OS
     else{
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 40)] = 10;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 60)] = 10;
