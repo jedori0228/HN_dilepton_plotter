@@ -54,7 +54,7 @@ void Plotter::draw_hist(){
         //==== without signal (CR)
         else lg = new TLegend(0.69, 0.20, 0.96, 0.92);
       }
-      else lg = new TLegend(0.65, 0.40, 0.93, 0.92);
+      else lg = new TLegend(0.65, 0.20, 0.93, 0.92);
       clear_legend_info();
       
       signal_survive_mass.clear();
@@ -705,6 +705,7 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   mc_error->Draw("sameE2");
   //==== legend
   legend->AddEntry(mc_error, "Stat.+Syst. Uncert.", "f");
+  c1_up->cd();
   draw_legend(legend, this_sc, DrawData);
   
   //==== MC-DATA
