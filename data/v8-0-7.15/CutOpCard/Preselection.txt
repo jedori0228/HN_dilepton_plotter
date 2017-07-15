@@ -1,0 +1,5 @@
+njets	>=	2	2	1
+m_ll	>	20	20	1
+isSS	==	1	1	1
+isOffZ	==	1	1	1
+nbjets_nolepveto	==	0	0	1
