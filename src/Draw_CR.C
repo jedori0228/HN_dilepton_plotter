@@ -51,9 +51,11 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
   m.map_sample_string_to_list["top"] = {"TTLL_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  m.map_sample_string_to_list["Wgamma"] = {"WGtoLNuG"};
+  m.map_sample_string_to_list["Wgamma"] = {"WgstarToLNuEE", "WgstarToLNuMuMu"};
   m.map_sample_string_to_list["Zgamma"] = {"ZGto2LG"};
-  m.map_sample_string_to_list["Vgamma"] = {"WGtoLNuG", "ZGto2LG"};
+  m.map_sample_string_to_list["Vgamma"] = {"WgstarToLNuEE", "WgstarToLNuMuMu", "ZGto2LG"};
+  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "WgstarToLNuEE", "WgstarToLNuMuMu", "ZGto2LG"};
+  m.map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WgstarToLNuEE", "WgstarToLNuMuMu"};
   m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
   m.map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
@@ -78,6 +80,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["Wgamma"] = make_pair("W#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["Zgamma"] = make_pair("Z#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["Vgamma"] = make_pair("V#gamma", kSpring-7);
+  m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X#gamma", kSpring-7);
+  m.map_sample_string_to_legendinfo["Xgamma_noDY"] = make_pair("X#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
@@ -94,9 +98,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   //==== _Di<Lepton>_<JetSel>_<ifOffZ>_<charge>
 
   //==== Linear
-  //==== No DY (so, use VGamma)
   if(XXX==0){
-    m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Vgamma", "VVV", "top", "WW_double"};
+    m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
     m.histname_suffix = {
       // dimu
       //"_DiMuon_0jets_SS", // SS 0jet CR
@@ -115,7 +118,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   //==== Log
   //==== Use DY
   if(XXX==1){
-    m.samples_to_use = {"VV_excl", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
+    m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
     m.histname_suffix = {
       // dimu
       //"_DiMuon_OnZ_OS", // OS OnZ CR (DY Prompt)
@@ -130,7 +133,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     };
   }
   if(XXX==2){
-    m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "DY", "VVV", "top", "WW_double"};
+    m.samples_to_use = {"fake_Dijet", "Xgamma_noDY", "chargeflip", "VV_excl", "DY", "VVV", "top", "WW_double"};
     m.histname_suffix = {
       // dimu
       //"_DiMuon_Inclusive1nlbjets_METgt50_OffZ_OS", // (TTBar Prompt)

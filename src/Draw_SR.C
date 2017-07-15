@@ -51,9 +51,11 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
   m.map_sample_string_to_list["top"] = {"TTLL_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  m.map_sample_string_to_list["Wgamma"] = {"WGtoLNuG"};
+  m.map_sample_string_to_list["Wgamma"] = {"WgstarToLNuEE", "WgstarToLNuMuMu"};
   m.map_sample_string_to_list["Zgamma"] = {"ZGto2LG"};
-  m.map_sample_string_to_list["Vgamma"] = {"WGtoLNuG", "ZGto2LG"};
+  m.map_sample_string_to_list["Vgamma"] = {"WgstarToLNuEE", "WgstarToLNuMuMu", "ZGto2LG"};
+  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "WgstarToLNuEE", "WgstarToLNuMuMu", "ZGto2LG"};
+  m.map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WgstarToLNuEE", "WgstarToLNuMuMu"};
   m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
   m.map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
@@ -78,6 +80,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["Wgamma"] = make_pair("W#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["Zgamma"] = make_pair("Z#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["Vgamma"] = make_pair("V#gamma", kSpring-7);
+  m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X#gamma", kSpring-7);
+  m.map_sample_string_to_legendinfo["Xgamma_noDY"] = make_pair("X#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
@@ -95,8 +99,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
   //==== SS
   if(XXX==0){
-    //m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "Vgamma"};
-    m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "Zgamma"};
+    m.samples_to_use = {"chargeflip", "fake_Dijet", "Xgamma", "VV_excl", "VVV", "top", "WW_double"};
 
     m.histname_suffix = {
       // dimu
@@ -109,7 +112,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   }
   //==== OS
   if(XXX==1){
-    m.samples_to_use = {"VV_excl", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
+    m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
     m.histname_suffix = {
       // dimu
       //"_DiMuon_Low_OS",
@@ -144,10 +147,14 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "m_ll",
     //==== Jets for High Mass
     "m_jj_jjWclosest", "m_lljj_jjWclosest", "m_Leadljj_jjWclosest", "m_SubLeadljj_jjWclosest",
-    "DeltaRjjWclosest", "DeltaRLeadl_jjWclosest", "DeltaRSubLeadl_jjWclosest",
+    "DeltaRjjWclosest",
+    "DeltaRLeadl_jjWclosest", "DeltaRSubLeadl_jjWclosest",
+    "DeltaRLeadl_SubLeadljjWclosest", "DeltaRSubLeadl_LeadljjWclosest",
     //==== Jets for Low Mass
     "m_jj_lljjWclosest", "m_lljj_lljjWclosest", "m_Leadljj_lljjWclosest", "m_SubLeadljj_lljjWclosest",
-    "DeltaRLeadl_lljjWclosest", "DeltaRSubLeadl_lljjWclosest", "DeltaRLeadl_SubLeadllljjWclosest", "DeltaRSubLeadl_LeadllljjWclosest",
+    "DeltaRlljjWclosest",
+    "DeltaRLeadl_lljjWclosest", "DeltaRSubLeadl_lljjWclosest",
+    "DeltaRLeadl_SubLeadllljjWclosest", "DeltaRSubLeadl_LeadllljjWclosest",
     //==== Laeding dijet
     "m_jjptorder", "m_lljjptorder", "m_Leadljjptorder", "m_SubLeadljjptorder",
     "Njets", "Njets_nolepveto", "Nfwdjets", "Nbjets", "Nbjets_nolepveto", "Nbfwdjets",
@@ -167,10 +174,14 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "m(ll) [GeV]",
     //==== Jets for High Mass
     "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Second Lepton+jj_{W}) [GeV]",
-    "#DeltaR(jj_{W})", "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Second Lepton,jj_{W})",
+    "#DeltaR(jj_{W})",
+    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Second Lepton,jj_{W})", 
+    "#DeltaR(Leading Lepton,Second Lepton+jj_{W})", "#DeltaR(Second Lepton,Leading Lepton+jj_{W})",
     //==== Jets for Low Mass
     "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Second Lepton+jj_{W}) [GeV]",
-    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Second Lepton,jj_{W})", "#DeltaR(Leading Lepton,Second Lepton+jj_{W})", "#DeltaR(Second Lepton,Leading Lepton+jj_{W})",
+    "#DeltaR(jj_{W})",
+    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Second Lepton,jj_{W})",
+    "#DeltaR(Leading Lepton,Second Lepton+jj_{W})", "#DeltaR(Second Lepton,Leading Lepton+jj_{W})",
     //==== Laeding dijet
     "m(j_{1}j_{2}) [GeV]",  "m(llj_{1}j_{2}) [GeV]", "m(Leading Lepton+j_{1}j_{2}) [GeV]", "m(Second Lepton+j_{1}j_{2}) [GeV]",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
@@ -188,10 +199,17 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
   m.units = {
     "GeV",
+    //==== Jets for High Mass
     "GeV", "GeV", "GeV", "GeV",
-    "", "", "",
+    "",
+    "", "",
+    "", "",
+    //==== Jets for Low Mass
     "GeV", "GeV", "GeV", "GeV",
-    "", "", "", "",
+    "",
+    "", "",
+    "", "",
+    //==== Laeding dijet
     "GeV", "GeV", "GeV", "GeV",
     "int", "int", "int", "int", "int", "int",
     "GeV", "",
@@ -262,9 +280,13 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== set signal mass points
   //=============================
   
-  m.signal_mass = {40, 60, 200, 500, 1000, -200, -500, -1000};
-  m.signal_color = {kRed, kMagenta, kBlue, kGray, kBlack, kBlue, kGray, kBlack};
-  m.signal_draw = {true, true, true, true, true, true};
+  //m.signal_mass = {40, 60, 200, 500, 1000, -200, -500, -1000};
+  //m.signal_color = {kRed, kMagenta, kBlue, kGray, kBlack, kBlue, kGray, kBlack};
+
+  m.signal_mass =  {40,   60,      70,      100,     200,    500,     700,   1000,   -200,  -500,     -1000};
+  m.signal_color = {kRed, kOrange, kYellow, kGreen,  kBlue,  kViolet, kGray, kBlack, kBlue, kViolet,  kBlack};
+
+  m.signal_draw = {true, true, true, true, true, true, true, true, true, true, true};
 
   //====================================
   //==== set signal coupling constants
@@ -276,8 +298,11 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     if(XXX!=2){
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 40)] = 0.0001;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 60)] = 0.0001;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 70)] = 0.001;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 100)] = 0.01;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 200)] = 0.1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 700)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 1000)] = 10;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -200)] = 0.1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 1.;

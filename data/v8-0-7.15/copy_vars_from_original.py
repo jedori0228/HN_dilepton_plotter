@@ -3,8 +3,8 @@ import os
 filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
 #filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
 
-From = 'm_ll'
-Tos = ['m_jj', 'm_lljj', 'm_Leadljj', 'm_SubLeadljj']
+From = 'DeltaRl1l2'
+Tos = ["DeltaRjjWclosest", "DeltaRLeadl_jjWclosest", "DeltaRSubLeadl_jjWclosest", "DeltaRLeadl_lljjWclosest", "DeltaRSubLeadl_lljjWclosest", "DeltaRLeadl_SubLeadllljjWclosest", "DeltaRSubLeadl_LeadllljjWclosest"]
 
 for filename in filenames:
 
