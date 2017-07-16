@@ -15,6 +15,7 @@ public :
   void Print();
   void PrintCurrent();
   void FillCurrentCutInfoVector(vector<cutinfo>& vec);
+  vector<cutinfo> GetCurrentCutInfo();
   void Next();
 
   inline bool isEnd() { return k_end; };
@@ -64,7 +65,8 @@ void cutrangeinfo::MakeCutInfo(TString var, TString cutdir, double start, double
   map_varANDdir_to_cutinfo[var+"_"+cutdir].clear();
   map_varANDdir_to_iterator[var+"_"+cutdir] = 0;
 
-  double dx = fabs(start-end)/nx;
+  if(nx==0) nx = 1;
+  double dx = (end-start)/nx;
 
   for(int i=0; i<=nx; i++){
 
@@ -151,12 +153,25 @@ void cutrangeinfo::Print(){
 
 }
 
+vector<cutinfo> cutrangeinfo::GetCurrentCutInfo(){
+
+  vector<cutinfo> out;
+
+  for(map< TString, vector<cutinfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
+
+    out.push_back( it->second.at( map_varANDdir_to_iterator[it->first] ) );
+
+  }
+
+  return out;
+
+}
+
 void cutrangeinfo::PrintCurrent(){
 
   for(map< TString, vector<cutinfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
 
     it->second.at( map_varANDdir_to_iterator[it->first] ).Print();
-
 
   }
 

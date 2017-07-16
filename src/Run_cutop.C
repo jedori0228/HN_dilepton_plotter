@@ -2,6 +2,7 @@
 #include "cutrangeinfo.h"
 
 double PunziFunction(double eff_sig, double bkg_tot, double bkg_err2);
+void printcurrunttime();
 
 void Run_cutop(){
 
@@ -19,9 +20,9 @@ void Run_cutop(){
   //=====================
 
   bool DoDebug = false;
+  bool PrintYield = false;
   bool ShowData = false;
-  bool PrintYield = true;
-  Long64_t LogEvery = 1;
+  Long64_t LogEvery = 100;
 
   //=====================
   //==== set data class
@@ -29,6 +30,7 @@ void Run_cutop(){
 
   TString DataPD = "DoubleEG";
   TString channel = "DiElectron";
+  TString preselection = "Preselection_SS";
   TString data_class = dataset+"/Ntuple/";
   TString filename_prefix = "DiLeptonAnalyzer";
   TString filename_suffix = "_cat_"+catversion+".root";
@@ -48,67 +50,71 @@ void Run_cutop(){
     << endl;
   }
 
+  //=====================
+  //==== Signals To Use
+  //=====================
+
+  vector<TString> samples;
+
+  vector<double> MaxPunzis;
+  double MinEffPresel = 0.90;
+
+  vector<TString> signals = {
+    "HNElEl_40",
+    "HNElEl_60",
+    "HNElEl_70",
+  };
+
+/*
+  vector<TString> signals = {
+    "HNElEl_40",
+    "HNElEl_60",
+    "HNElEl_70",
+    "HNElEl_100",
+    "HNElEl_200",
+    "HNElEl_500",
+    "HNElEl_700",
+    "HNElEl_1000",
+    "HNElEl_Tchannel_200",
+    "HNElEl_Tchannel_500",
+    "HNElEl_Tchannel_1000",
+  };
+*/
+
+  //==== Get NoCut/Preselection Entry
+  vector<double> signal_nocut, signal_preselection;
+  for(unsigned int i=0; i<signals.size(); i++){
+    TString filename = "DiLeptonAnalyzer_SK"+signals.at(i)+"_cat_v8-0-7.root";
+    TFile *file = new TFile(filepath+filename);
+    TH1D *hist_nocut = (TH1D*)file->Get("Cutflow_DiElectron_NoCut");
+    TH1D *hist_preselection = (TH1D*)file->Get("Cutflow_DiElectron_"+preselection);
+
+    signal_nocut.push_back( hist_nocut->GetBinContent(1) );
+    signal_preselection.push_back( hist_preselection->GetBinContent(1) );
+
+    //==== and add to samples
+    samples.push_back(signals.at(i));
+    //==== initialize MaxPunzis
+    MaxPunzis.push_back(-1);
+  }
+
   //=============================
   //===== Set Up Samples to Use
   //=============================
-/*
-  map< TString, vector<TString> > map_sample_string_to_list;
-
-  map_sample_string_to_list["DY"] = {"DYJets_10to50", "DYJets"};
-  map_sample_string_to_list["WJets"] = {"WJets"};
-  map_sample_string_to_list["VV_excl"] = {
-    "WZTo3LNu_powheg", "WZto2L2Q_amcatnlo",
-    "ZZTo4L_powheg", "ZZTo2L2Nu_Powheg", "ZZTo2L2Q_Powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau",
-    "WWTo2L2Nu", "ggWWto2L2Nu",
-  };
-  map_sample_string_to_list["VV_incl"] = {"WZ", "ZZ", "WW"};
-  map_sample_string_to_list["WZ_excl"] = {"WZTo3LNu_powheg"};
-  map_sample_string_to_list["ZZ_excl"] = {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"};
-  map_sample_string_to_list["VVV"] = {"WWW", "WWZ", "WZZ", "ZZZ"};
-  map_sample_string_to_list["ttbar"] = {"TTJets_aMC"};
-  map_sample_string_to_list["ttbar_ll"] = {"TTLL_powheg"};
-  map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
-  map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
-  map_sample_string_to_list["top"] = {"TTLL_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  map_sample_string_to_list["Wgamma"] = {"WgstarToLNuEE", "WgstarToLNuMuMu"};
-  map_sample_string_to_list["Zgamma"] = {"ZGto2LG"};
-  map_sample_string_to_list["Vgamma"] = {"WgstarToLNuEE", "WgstarToLNuMuMu", "ZGto2LG"};
-  map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "WgstarToLNuEE", "WgstarToLNuMuMu", "ZGto2LG"};
-  map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WgstarToLNuEE", "WgstarToLNuMuMu"};
-  map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS"};
-  map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
-  map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
-  map_sample_string_to_list["fake_sfed_HighdXY"] = {"fake_sfed_HighdXY"};
-  map_sample_string_to_list["fake_sfed_HighdXY_UsePtCone"] = {"fake_sfed_HighdXY_UsePtCone"};
-  map_sample_string_to_list["fake_DiMuon_HighdXY"] = {"fake_HighdXY"};
-  map_sample_string_to_list["fake_Dijet"] = {"fake_Dijet"};
-  map_sample_string_to_list["chargeflip"] = {"chargeflip"};
-  vector<TString> samples_to_use = {"chargeflip", "fake_Dijet", "Xgamma", "VV_excl", "VVV", "top", "WW_double"};
-  vector<TString> samples;
-  //==== push_back data
-  samples.push_back("data");
-  //==== push_back backgroud
-  for(unsigned int i=0; i<samples_to_use.size(); i++){
-    samples.insert(samples.end(),
-                   map_sample_string_to_list[samples_to_use.at(i)].begin(),
-                   map_sample_string_to_list[samples_to_use.at(i)].end()
-                   );
-  }
-*/
 
   //samples = {"chargeflip"}; //FOR DEBUG
+
   //==== Samples has > 1% contribution @ preselection
-  samples = {"data", "fake_Dijet", "WZTo3LNu_powheg", "WgstarToLNuEE", "chargeflip", "ZGto2LG", "ZZTo4L_powheg", "ttW", "WWW"};
+  vector<TString> bkgs = {"fake_Dijet", "WZTo3LNu_powheg", "WgstarToLNuEE", "chargeflip", "ZGto2LG", "ZZTo4L_powheg", "ttW", "WWW"};
+
+  for(unsigned int i=0; i<bkgs.size(); i++) samples.push_back( bkgs.at(i) );
+  //samples.push_back("data"); // no need data yet
 
   //==== Check samples
   cout << "################" << endl;
   cout << "We will use :" << endl;
   for(unsigned int i=0; i<samples.size(); i++) cout << " " << samples[i] << endl;
   cout << "################" << endl << endl;
-
-  //=====================
-  //==== Signals To Use
-  //=====================
 
   //=====================================
   //==== Setting calculated systematics
@@ -169,14 +175,17 @@ void Run_cutop(){
   //==== Read Cut Card
   //====================
 
-  TString cutfilename = "test.txt";
+  TString cutfilename = "LowMass_test.txt";
   cutrangeinfo CutRangeInfo(WORKING_DIR+"/data/"+dataset+"/CutOpCard/"+cutfilename);
   CutRangeInfo.DoDebug = DoDebug;
   cout
   << "##################################################" << endl
   << "####TOTAL # of Loop = " << CutRangeInfo.TotalIteration << endl
   << "##################################################" << endl << endl;
-  if(DoDebug) CutRangeInfo.Print();
+  CutRangeInfo.Print();
+
+
+
 
   //========================
   //==== CutRangeInfo Loop
@@ -186,8 +195,26 @@ void Run_cutop(){
   cout << "#### OPTIMIZATION STARTED ####" << endl;
   cout << "##############################" << endl << endl;
 
+  vector<cutinfo> OptimizedCutInfo;
+  double final_cf(0.), final_cf_err(0.);
+  double final_fake(0.), final_fake_err(0.);
+  double final_prompt(0.), final_prompt_err(0.);
+  vector<double> final_signal, final_signal_eff, final_signal_eff_preselection;
+  for(unsigned int i=0; i<signals.size(); i++){
+    final_signal.push_back(0.);
+    final_signal_eff.push_back(0.);
+    final_signal_eff_preselection.push_back(0.);
+  }
 
   while( !CutRangeInfo.isEnd() ){
+
+    if(CutRangeInfo.CurrentIteration%LogEvery==0){
+      cout << "["; printcurrunttime(); cout <<"] ";
+      cout << CutRangeInfo.CurrentIteration << " / " << CutRangeInfo.TotalIteration << " ("<<100.*CutRangeInfo.CurrentIteration/CutRangeInfo.TotalIteration<<" %)"<<endl;
+      for(unsigned int i=0; i<OptimizedCutInfo.size(); i++){
+        OptimizedCutInfo.at(i).Print();
+      }
+    }
 
     //==================
     //==== Sample Loop
@@ -196,35 +223,48 @@ void Run_cutop(){
     double data_unweighted_yield(0.), data_weighted_yield(0.);
     double chargeflip_unweighted_yield(0.), chargeflip_weighted_yield(0.), chargeflip_weighted_yield_stat(0.);
     double fake_unweighted_yield(0.), fake_weighted_yield(0.), fake_weighted_yield_stat(0.);
-
     double prompt_unweighted_yield(0.), prompt_weighted_yield(0.);
+
     TH1D *hist_prompt_total = new TH1D("hist_prompt_total", "", 1, 0., 1.); // Use TH1D::Add, to use GetBinError
     TH1D *hist_prompt_total_up = new TH1D("hist_prompt_total_up", "", 1, 0., 1.); // Just fill content, and only use GetBinContent
 
-    for(unsigned int i=0; i<samples.size(); i++){
+    vector<double> signal_unweighted_yield, signal_weighted_yield, signal_weighted_yield_stat;
+    bool SignalEffLow = false;
+    for(unsigned int ii=0; ii<samples.size(); ii++){
 
-      TString sample = samples.at(i);
+      TString sample = samples.at(ii);
 
       TString filename = filename_prefix+"_SK"+sample+"_dilep"+filename_suffix;
       if(sample=="data") filename = "DiLeptonAnalyzer_data_"+DataPD+"_cat_"+catversion+".root";
       if(sample=="chargeflip") filename = "DiLeptonAnalyzer_SKchargeflip_"+DataPD+"_dilep_cat_"+catversion+".root";
       if(sample.Contains("fake")) filename = "DiLeptonAnalyzer_SK"+sample+"_"+DataPD+"_dilep_cat_"+catversion+".root";
+      if(sample.Contains("HN")) filename = "DiLeptonAnalyzer_SK"+sample+"_cat_v8-0-7.root";
 
-      cutop m(filepath+filename, "Ntp_"+channel);
+      cutop m(filepath+filename, "Ntp_"+channel+"_"+preselection);
       m.DoDebug = DoDebug;
 
       //==== Fill cutinfo
       vector<cutinfo> cis;
       CutRangeInfo.FillCurrentCutInfoVector(cis);
-      for(unsigned int ii=0;ii<cis.size();ii++) m.SetCutVariablesToUse(cis.at(ii));
+      for(unsigned int iii=0;iii<cis.size();iii++) m.SetCutVariablesToUse(cis.at(iii));
 
       //==== Run
       m.Loop();
 
       //==== Sum yield
-      if(sample=="data"){
-        data_unweighted_yield = m.unweighted_yield;
-        data_weighted_yield = m.weighted_yield;
+      if(sample.Contains("HN")){
+        signal_unweighted_yield.push_back( m.unweighted_yield );
+        signal_weighted_yield.push_back( m.weighted_yield );
+        signal_weighted_yield_stat.push_back( m.hist_for_error->GetBinError(1) );
+
+        double eff_preselection = m.weighted_yield/signal_preselection.at(ii);
+        if(PrintYield) cout << "SignalEff@Preselection : " << sample << "\t" << eff_preselection << "\t" << m.unweighted_yield << endl;
+
+        //==== If signal efficiency is lower than targer, finish the sample loop
+        if(eff_preselection < MinEffPresel){
+          SignalEffLow = true;
+          break;
+        }
       }
       else if(sample=="chargeflip"){
         chargeflip_unweighted_yield = m.unweighted_yield;
@@ -242,6 +282,10 @@ void Run_cutop(){
         double fr_propagation = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
         fake_weighted_yield_stat = sqrt( fake_weighted_yield_stat*fake_weighted_yield_stat + fr_propagation*fr_propagation );
       }
+      else if(sample=="data"){
+        data_unweighted_yield = m.unweighted_yield;
+        data_weighted_yield = m.weighted_yield;
+      }
       else{
         prompt_unweighted_yield += m.unweighted_yield;
 
@@ -253,15 +297,24 @@ void Run_cutop(){
 
       //==== Print this samples yield for Debugging
       if(PrintYield){
-				if(sample=="data"){
-					if(!ShowData) cout << sample << "\t" << "BLIND" << endl;
-				}
-				else{
-					cout << sample << "\t" << m.weighted_yield << "\t" << m.hist_for_error->GetBinContent(1) << "\t" << m.hist_for_error->GetBinError(1) << "\t" << m.unweighted_yield << endl;
-				}
+        if(sample=="data"){
+          if(!ShowData) cout << sample << "\t" << "BLIND" << endl;
+        }
+        else{
+          cout << sample << "\t" << m.weighted_yield << "\t" << m.hist_for_error->GetBinContent(1) << "\t" << m.hist_for_error->GetBinError(1) << "\t" << m.unweighted_yield << endl;
+        }
       }
 
     } // END sample loop
+
+    //==== If SignalEffLow, go to next CutInfo.
+    //==== XXX DON'T FORGET TO RESET MEMORY XXX
+    if(SignalEffLow){
+      CutRangeInfo.Next();
+      delete hist_prompt_total;
+      delete hist_prompt_total_up;
+      continue;
+    }
 
     //==== Stat. + Syst.
     double chargeflip_weighted_yield_syst = chargeflip_weighted_yield * uncert_cf;
@@ -294,35 +347,82 @@ void Run_cutop(){
       cout << "  => prompt_weighted_yield_err = " << prompt_weighted_yield_err << endl;
     }
 
+    double total_bkg = prompt_weighted_yield+chargeflip_weighted_yield+fake_weighted_yield;
     double total_bkg_err_2 = chargeflip_weighted_yield_err*chargeflip_weighted_yield_err+fake_weighted_yield_err*fake_weighted_yield_err+prompt_weighted_yield_err*prompt_weighted_yield_err;
 
-    //==== Print
+    delete hist_prompt_total;
+    delete hist_prompt_total_up;
 
-    if(CutRangeInfo.CurrentIteration%LogEvery==0){
+    //==== Signals
+    bool ToUpdate = true;
+    vector<double> sig_eff, punzis;
+    for(unsigned int ii=0; ii<signals.size(); ii++){
+      double eff_nocut = signal_weighted_yield.at(ii)/signal_nocut.at(ii);
+      double this_punzi = PunziFunction(eff_nocut, total_bkg, total_bkg_err_2);
+      if(DoDebug) cout << signals.at(ii) << "\t" << signal_weighted_yield.at(ii) << "\t" << this_punzi << "\t" << signal_unweighted_yield.at(ii) << endl;
 
-      double bkg_weighted_yield = prompt_weighted_yield+chargeflip_weighted_yield+fake_weighted_yield;
+      sig_eff.push_back( eff_nocut );
+      punzis.push_back( this_punzi );
+
+      if(this_punzi < MaxPunzis.at(ii)){
+        ToUpdate = false;
+      }
+
+    }
+
+    if(ToUpdate){
+
+      OptimizedCutInfo = CutRangeInfo.GetCurrentCutInfo();
+
       cout << endl;
-      cout << "Current Iteration = " << CutRangeInfo.CurrentIteration << " ("<<100.*CutRangeInfo.CurrentIteration/CutRangeInfo.TotalIteration<<" %)"<<endl;
+      cout << "!!!!!!!!!!!!!!!!!" << endl;
+      cout << "!!!! UPDATED !!!!" << endl;
+      cout << "!!!!!!!!!!!!!!!!!" << endl;
+      cout << endl;
       CutRangeInfo.PrintCurrent();
       cout << "CF" << "\t" << chargeflip_weighted_yield << " +- " << chargeflip_weighted_yield_err << endl;
       cout << "Fake" << "\t" << fake_weighted_yield << " +- " << fake_weighted_yield_err << endl;
       cout << "Prompt" << "\t" << prompt_weighted_yield << " +- " << prompt_weighted_yield_err << endl;
-
-      cout << "prompt_weighted_yield = " << prompt_weighted_yield << endl;
-      cout << "chargeflip_weighted_yield = " << chargeflip_weighted_yield << endl;
-      cout << "fake_weighted_yield = " << fake_weighted_yield << endl;
-      cout << "=> total bkg = " << bkg_weighted_yield << endl;
+      cout << "=> total bkg = " << total_bkg << endl;
+      cout << "Signal\tYield\tEfficiency\tEfficiency@Presel\tPunzi" << endl;
+      for(unsigned int iii=0; iii<signals.size(); iii++){
+        final_signal.at(iii) = signal_weighted_yield.at(iii);
+        final_signal_eff.at(iii) = signal_weighted_yield.at(iii)/signal_nocut.at(iii);
+        final_signal_eff_preselection.at(iii) = signal_weighted_yield.at(iii)/signal_preselection.at(iii);
+        MaxPunzis.at(iii) = punzis.at(iii);
+        cout << signals.at(iii) << "\t" << signal_weighted_yield.at(iii) << "\t" << signal_weighted_yield.at(iii)/signal_nocut.at(iii) << "\t" << signal_weighted_yield.at(iii)/signal_preselection.at(iii) << "\t" << punzis.at(iii) << endl;
+      }
       cout << "=====================================================================" << endl << endl;
+      final_cf = chargeflip_weighted_yield;
+      final_cf_err = chargeflip_weighted_yield_err;
+      final_fake = fake_weighted_yield;
+      final_fake_err = fake_weighted_yield_err;
+      final_prompt = prompt_weighted_yield;
+      final_prompt_err = prompt_weighted_yield_err;
 
     }
-    
-
 
     CutRangeInfo.Next();
 
   } //END CutRangeInfo loop
 
 
+  cout << endl;
+  cout << "##################" << endl;
+  cout << "#### FINISHED ####" << endl;
+  cout << "##################" << endl << endl;
+
+  for(unsigned int i=0; i<OptimizedCutInfo.size(); i++){
+    OptimizedCutInfo.at(i).Print();
+  }
+  cout << "CF" << "\t" << final_cf << " +- " << final_cf_err << endl;
+  cout << "Fake" << "\t" << final_fake << " +- " << final_fake_err << endl;
+  cout << "Prompt" << "\t" << final_prompt << " +- " << final_prompt_err << endl;
+  cout << "=> total bkg = " << final_cf+final_fake+final_prompt << endl;
+  cout << "Signal\tYield\tEfficiency\tEfficiency@Presel\tPunzi" << endl;
+  for(unsigned int i=0; i<signals.size(); i++){
+    cout << signals.at(i) << "\t" << final_signal.at(i) << "\t" << final_signal_eff.at(i) << "\t" << final_signal_eff_preselection.at(i) << "\t" << MaxPunzis.at(i) << endl;
+  }
 
 }
 
@@ -337,7 +437,12 @@ double PunziFunction(double eff_sig, double bkg_tot, double bkg_err2){
 }
 
 
+void printcurrunttime(){
 
+  TDatime datime;
+  cout << datime.GetYear()<<"/"<<datime.GetMonth()<<"/"<<datime.GetDay()<<" "<<datime.GetHour()<<":"<<datime.GetMinute()<<":"<<datime.GetSecond();
+
+}
 
 
 
