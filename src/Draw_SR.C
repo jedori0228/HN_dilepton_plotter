@@ -283,8 +283,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //m.signal_mass = {40, 60, 200, 500, 1000, -200, -500, -1000};
   //m.signal_color = {kRed, kMagenta, kBlue, kGray, kBlack, kBlue, kGray, kBlack};
 
-  m.signal_mass =  {40,   60,      70,      100,     200,    500,     700,   1000,   -200,  -500,     -1000};
-  m.signal_color = {kRed, kOrange, kYellow, kGreen,  kBlue,  kViolet, kGray, kBlack, kBlue, kViolet,  kBlack};
+  m.signal_mass =  {40,   60,      70,        100,     200,    500,     700,   1000,   -200,  -500,     -1000};
+  m.signal_color = {kRed, kOrange, kYellow+2, kGreen,  kBlue,  kViolet, kGray, kBlack, kBlue, kViolet,  kBlack};
 
   m.signal_draw = {true, true, true, true, true, true, true, true, true, true, true};
 
@@ -400,7 +400,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== k-factor
   //===============
   
-  m.k_factor = 1.34;
+  m.k_factor = 1;
   
   //=================================
   //==== mixing at generation level
