@@ -57,19 +57,15 @@ void Run_cutop(){
   vector<TString> samples;
 
   vector<double> MaxPunzis;
-  double MinEffPresel = 0.90;
-
-  vector<TString> signals = {
-    "HNElEl_40",
-    "HNElEl_60",
-    "HNElEl_70",
-  };
+  double MinEffPresel = 0.;
 
 /*
   vector<TString> signals = {
-    "HNElEl_40",
-    "HNElEl_60",
-    "HNElEl_70",
+    "HNElEl_1000",
+  };
+*/
+/*
+  vector<TString> signals = {
     "HNElEl_100",
     "HNElEl_200",
     "HNElEl_500",
@@ -80,6 +76,34 @@ void Run_cutop(){
     "HNElEl_Tchannel_1000",
   };
 */
+
+  vector<TString> signals = {
+    "HNElEl_40",
+    "HNElEl_50",
+    "HNElEl_60",
+    "HNElEl_70",
+    "HNElEl_80",
+    "HNElEl_90",
+    "HNElEl_100",
+    "HNElEl_125",
+    "HNElEl_150",
+    "HNElEl_200",
+    "HNElEl_250",
+    "HNElEl_300",
+    "HNElEl_400",
+    "HNElEl_500",
+    "HNElEl_600",
+    "HNElEl_700",
+    "HNElEl_800",
+    "HNElEl_900",
+    "HNElEl_1000",
+    "HNElEl_1100",
+    "HNElEl_1200",
+    "HNElEl_1300",
+    "HNElEl_1400",
+    "HNElEl_1500",
+  };
+
 
   //==== Get NoCut/Preselection Entry
   vector<double> signal_nocut, signal_preselection;
