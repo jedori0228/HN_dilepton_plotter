@@ -48,6 +48,11 @@ k_end(false), DoDebug(false)
     is >> end;
     is >> nx;
 
+    if(var.Contains("#")){
+      cout << "# in it" << endl;
+      continue;
+    }
+
     MakeCutInfo(var, cutdir, start, end, nx);
 
   }

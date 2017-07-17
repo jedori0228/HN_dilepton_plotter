@@ -104,7 +104,9 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     m.histname_suffix = {
       // dimu
       // diel
-      "_DiElectron_Preselection_SS",
+      //"_DiElectron_Preselection_SS",
+      //"_DiElectron_Preselection_Njetsge2_SS",
+      "_DiElectron_Preselection_Nfatjetsge1_SS",
       //"_DiElectron_Low_SS",
       //"_DiElectron_Medium_SS",
       //"_DiElectron_High_SS",
@@ -168,33 +170,49 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "secondNoLepVetoJet_Pt", "secondNoLepVetoJet_Eta",
     "PFMET", "PFMET_phi", "HT", "ST", "MET2overST", "MCT",
     "Nvtx", "DeltaRl1l2",
+    //==== FatJet Leading
+    "FatJet_Pt", "FatJet_Eta", "FatJet_PrunedMass", "FatJet_SoftDropMass", "FatJet_Tau21", "FatJet_Tau32",
+    "m_fatjet", "m_llfatjet", "m_Leadlfatjet", "m_SubLeadlfatjet",
+    "DeltaRLeadl_fatjet", "DeltaRSubLeadl_fatjet", "DeltaRLeadl_SubLeadlfatjet", "DeltaRSubLeadl_Leadlfatjet",
+    //==== FatJet Closeset to W
+    "FatJet_Wclosest_Pt", "FatJet_Wclosest_Eta", "FatJet_Wclosest_PrunedMass", "FatJet_Wclosest_SoftDropMass", "FatJet_Wclosest_Tau21", "FatJet_Wclosest_Tau32", 
+    "m_fatjet_Wclosest", "m_llfatjet_Wclosest", "m_Leadlfatjet_Wclosest", "m_SubLeadlfatjet_Wclosest",
+    "DeltaRLeadl_fatjet_Wclosest", "DeltaRSubLeadl_fatjet_Wclosest", "DeltaRLeadl_SubLeadlfatjet_Wclosest", "DeltaRSubLeadl_Leadlfatjet_Wclosest",
   };
 
   m.x_title = {
     "m(ll) [GeV]",
     //==== Jets for High Mass
-    "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Second Lepton+jj_{W}) [GeV]",
+    "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Sub-Leading Lepton+jj_{W}) [GeV]",
     "#DeltaR(jj_{W})",
-    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Second Lepton,jj_{W})", 
-    "#DeltaR(Leading Lepton,Second Lepton+jj_{W})", "#DeltaR(Second Lepton,Leading Lepton+jj_{W})",
+    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Sub-Leading Lepton,jj_{W})", 
+    "#DeltaR(Leading Lepton,Sub-Leading Lepton+jj_{W})", "#DeltaR(Sub-Leading Lepton,Leading Lepton+jj_{W})",
     //==== Jets for Low Mass
-    "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Second Lepton+jj_{W}) [GeV]",
+    "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Sub-Leading Lepton+jj_{W}) [GeV]",
     "#DeltaR(jj_{W})",
-    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Second Lepton,jj_{W})",
-    "#DeltaR(Leading Lepton,Second Lepton+jj_{W})", "#DeltaR(Second Lepton,Leading Lepton+jj_{W})",
+    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Sub-Leading Lepton,jj_{W})",
+    "#DeltaR(Leading Lepton,Sub-Leading Lepton+jj_{W})", "#DeltaR(Sub-Leading Lepton,Leading Lepton+jj_{W})",
     //==== Laeding dijet
-    "m(j_{1}j_{2}) [GeV]",  "m(llj_{1}j_{2}) [GeV]", "m(Leading Lepton+j_{1}j_{2}) [GeV]", "m(Second Lepton+j_{1}j_{2}) [GeV]",
+    "m(j_{1}j_{2}) [GeV]",  "m(llj_{1}j_{2}) [GeV]", "m(Leading Lepton+j_{1}j_{2}) [GeV]", "m(Sub-Leading Lepton+j_{1}j_{2}) [GeV]",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
     "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta",
-    "Second Lepton p_{T} [GeV]", "Second Lepton #eta",
+    "Sub-Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton #eta",
     "Leading Jet p_{T} [GeV]", "Leading Jet #eta",
-    "Second Jet p_{T} [GeV]", "Second Jet #eta",
+    "Sub-Leading Jet p_{T} [GeV]", "Sub-Leading Jet #eta",
     "Leading Forward Jet p_{T} [GeV]", "Leading Forward Jet #eta",
-    "Second Forward Jet p_{T} [GeV]", "Second Forward Jet #eta",
+    "Sub-Leading Forward Jet p_{T} [GeV]", "Sub-Leading Forward Jet #eta",
     "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
-    "Second No-LeptonVeto Jet p_{T} [GeV]", "Second No-LeptonVeto Jet #eta",
+    "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
     "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]", "#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]", "m_{CT}(j_{1},j_{2}) [GeV]",
     "# of vertices", "#DeltaR(l_{1},l_{2})",
+    //==== FatJet Leading
+    "Leading Fat Jet p_{T} [GeV]", "Leading Fat Jet #eta", "Leading Fat Jet Pruned Mass [GeV]", "Leading Fat Jet Soft Drop Mass [GeV]", "Leading Fat Jet #tau_{2}/#tau_{1}", "Leading Fat Jet #tau_{3}/#tau_{2}",
+    "m(Leading Fat Jet) [GeV]", "m(ll+Fat Jet) [GeV]", "m(Leading Lepton+Fat Jet) [GeV]", "m(Sub-Leading Lepton+Fat Jet) [GeV]",
+    "DeltaR(Leading Lepton,Fat Jet)", "DeltaR(Sub-Leading Lepton,Fat Jet)", "DeltaR(Leading Lepton,Sub-Leading Lepton+FatJet)", "DeltaR(Sub-Leading Lepton,Leading Lepton+FatJet)",
+    //==== FatJet Closeset to W
+    "Leading Fat Jet p_{T} [GeV]", "Leading Fat Jet #eta", "Leading Fat Jet Pruned Mass [GeV]", "Leading Fat Jet Soft Drop Mass [GeV]", "Leading Fat Jet #tau_{2}/#tau_{1}", "Leading Fat Jet #tau_{3}/#tau_{2}",
+    "m(Leading Fat Jet) [GeV]", "m(ll+Fat Jet) [GeV]", "m(Leading Lepton+Fat Jet) [GeV]", "m(Sub-Leading Lepton+Fat Jet) [GeV]",        
+    "DeltaR(Leading Lepton,Fat Jet)", "DeltaR(Sub-Leading Lepton,Fat Jet)", "DeltaR(Leading Lepton,Sub-Leading Lepton+FatJet)", "DeltaR(Sub-Leading Lepton,Leading Lepton+FatJet)",
   };
 
   m.units = {
@@ -222,6 +240,14 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "GeV", "",
     "GeV", "", "GeV", "GeV", "GeV", "GeV",
     "int", "",
+    //==== Laeding dijet
+    "GeV", "", "GeV", "GeV", "", "",
+    "GeV", "GeV", "GeV", "GeV",
+    "", "", "", "",
+    //==== FatJet Leading
+    "GeV", "", "GeV", "GeV", "", "",
+    "GeV", "GeV", "GeV", "GeV",
+    "", "", "", "",
   };
 
   //==== TEST
@@ -371,7 +397,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
 
   //==== default max
-  m.default_y_max = 2000.;
+  m.default_y_max = 20.;
   m.default_y_min = 0.;
 
   m.SetYAxis(WORKING_DIR+"/data/"+dataset+"/SR_yaxis.txt"); 

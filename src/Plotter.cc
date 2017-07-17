@@ -919,7 +919,10 @@ TString Plotter::DoubleToString(double dx){
         return "Events / "+TString::Itoa(dx_int,10)+"."+TString::Itoa(dx_first_two_digits,10)+" "+units[i_var];
       }
     }
-
+    //=== no integer
+    else{
+      return "Events / 0."+TString::Itoa(dx_first_two_digits,10)+" "+units[i_var];
+    }
   }
 
   return "Events";
