@@ -1,10 +1,10 @@
-#define cutop_cxx
-#include "cutop.h"
+#define DileptonNtuple_cxx
+#include "DileptonNtuple.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 
-void cutop::Loop(){
+void DileptonNtuple::Loop(){
 
   Long64_t nentries = fChain->GetEntriesFast();
   //nentries = 1;

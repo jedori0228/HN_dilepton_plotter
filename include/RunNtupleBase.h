@@ -1,7 +1,7 @@
 #ifndef RunNtupleBase_h
 #define RunNtupleBase_h
 
-#include "cutop.C"
+#include "DileptonNtuple.C"
 #include "cutrangeinfo.h"
 #include "AnalysisInputs.h"
 

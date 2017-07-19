@@ -55,7 +55,7 @@ void RunNtupleBase::Run(){
       if(sample.Contains("fake")) filename = filename_prefix+"_SK"+sample+"_"+DataPD+"_dilep_"+filename_suffix;
       if(sample.Contains("HN"))   filename = filename_prefix+"_SK"      +sample           +"_"+filename_suffix;
 
-      cutop m(filepath+filename, "Ntp_"+channel+"_"+treeskim);
+      DileptonNtuple m(filepath+filename, "Ntp_"+channel+"_"+treeskim);
       m.DoDebug = DoDebug;
 
       //==== Fill cutinfo

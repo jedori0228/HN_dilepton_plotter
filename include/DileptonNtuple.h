@@ -5,8 +5,8 @@
 // found on file: DiLeptonAnalyzer_data_DoubleEG_cat_v8-0-7.root
 //////////////////////////////////////////////////////////
 
-#ifndef cutop_h
-#define cutop_h
+#ifndef DileptonNtuple_h
+#define DileptonNtuple_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -15,7 +15,7 @@
 
 // Header file for the classes stored in the TTree if any.
 
-class cutop {
+class DileptonNtuple {
 public :
   TTree       *fChain;  //!pointer to the analyzed TTree or TChain
   Int_t        fCurrent; //!current Tree number in a TChain
@@ -178,8 +178,8 @@ public :
   TBranch      *b_DeltaRLeadl_SubLeadlfatjet_Wclosest;  //!
   TBranch      *b_DeltaRSubLeadl_Leadlfatjet_Wclosest;  //!
 
-  cutop(TString filename, TString treename);
-  virtual ~cutop();
+  DileptonNtuple(TString filename, TString treename);
+  virtual ~DileptonNtuple();
   virtual Int_t   GetEntry(Long64_t entry);
   virtual Long64_t LoadTree(Long64_t entry);
   virtual void    Init(TTree *tree);
@@ -206,8 +206,8 @@ public :
 
 #endif
 
-#ifdef cutop_cxx
-cutop::cutop(TString filename, TString treename) :
+#ifdef DileptonNtuple_cxx
+DileptonNtuple::DileptonNtuple(TString filename, TString treename) :
 fChain(0),
 DoDebug(false),
 unweighted_yield(0.), weighted_yield(0.)
@@ -227,19 +227,19 @@ unweighted_yield(0.), weighted_yield(0.)
 
 }
 
-cutop::~cutop()
+DileptonNtuple::~DileptonNtuple()
 {
   if (!fChain) return;
   delete fChain->GetCurrentFile();
 }
 
-Int_t cutop::GetEntry(Long64_t entry)
+Int_t DileptonNtuple::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
   if (!fChain) return 0;
   return fChain->GetEntry(entry);
 }
-Long64_t cutop::LoadTree(Long64_t entry)
+Long64_t DileptonNtuple::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
   if (!fChain) return -5;
@@ -251,7 +251,7 @@ Long64_t cutop::LoadTree(Long64_t entry)
   return centry;
 }
 
-void cutop::Init(TTree *tree)
+void DileptonNtuple::Init(TTree *tree)
 {
   // The Init() function is called when the selector needs to initialize
   // a new tree or chain. Typically here the branch addresses and branch
@@ -345,7 +345,7 @@ void cutop::Init(TTree *tree)
 
 }
 
-double cutop::GetVar(TString var){
+double DileptonNtuple::GetVar(TString var){
 
   if(var=="leadingLepton_Pt") return leadingLepton_Pt;
   else if(var=="secondLepton_Pt") return secondLepton_Pt;
@@ -426,16 +426,16 @@ double cutop::GetVar(TString var){
   //==== function
   else if(var=="MET2ST") return MET2ST();
   else{
-    cout << "[cutop::GetVar] "<<var<<": Wrong Variable Name" << endl;
+    cout << "[DileptonNtuple::GetVar] "<<var<<": Wrong Variable Name" << endl;
     return -999;
   }
 
 }
 
-void cutop::SetCutVariablesToUse(TString var, TString cutdir, double cutvalue){
+void DileptonNtuple::SetCutVariablesToUse(TString var, TString cutdir, double cutvalue){
 
   if(DoDebug){
-    cout << "[cutop::SetCutVariablesToUse] "<<var<<" "<<cutdir<<" "<<cutvalue << endl;
+    cout << "[DileptonNtuple::SetCutVariablesToUse] "<<var<<" "<<cutdir<<" "<<cutvalue << endl;
   }
   CutVariables.push_back( var );
   CutDirections.push_back( cutdir );
@@ -443,16 +443,16 @@ void cutop::SetCutVariablesToUse(TString var, TString cutdir, double cutvalue){
 
 }
 
-void cutop::SetCutVariablesToUse(cutinfo ci){
+void DileptonNtuple::SetCutVariablesToUse(cutinfo ci){
 
   if(DoDebug){
-    cout << "[cutop::SetCutVariablesToUse] "<<ci.var<<" "<<ci.cutdir<<" "<<ci.cutvalue << endl;
+    cout << "[DileptonNtuple::SetCutVariablesToUse] "<<ci.var<<" "<<ci.cutdir<<" "<<ci.cutvalue << endl;
   }
   CutInfos.push_back( ci );
 
 }
 
-bool cutop::Pass(){
+bool DileptonNtuple::Pass(){
 
   bool outpass = true;
 
@@ -473,7 +473,7 @@ bool cutop::Pass(){
     double value = GetVar(var);
 
     if(DoDebug){
-      cout << "[cutop::Pass] "<<var<<" "<<value<<" "<<cutdir<<" "<<cutvalue << endl;
+      cout << "[DileptonNtuple::Pass] "<<var<<" "<<value<<" "<<cutdir<<" "<<cutvalue << endl;
     }
 
 		if(cutdir==">"){
@@ -495,7 +495,7 @@ bool cutop::Pass(){
       if( !(value!=cutvalue) ) return PrintBool(false);
     }
 		else{
-			cout << "[cutop::Cut] cutdir should be >/>=/</<=/==/!=" << endl;
+			cout << "[DileptonNtuple::Cut] cutdir should be >/>=/</<=/==/!=" << endl;
 			return PrintBool(false);
 		}
 
@@ -505,11 +505,11 @@ bool cutop::Pass(){
 
 }
 
-bool cutop::PrintBool(bool b){
+bool DileptonNtuple::PrintBool(bool b){
 
   if(DoDebug){
-    if(b) cout << "[cutop::PrintBool] returning True" << endl;
-    else cout << "[cutop::PrintBool] returning False" << endl;
+    if(b) cout << "[DileptonNtuple::PrintBool] returning True" << endl;
+    else cout << "[DileptonNtuple::PrintBool] returning False" << endl;
   }
   return b;
 
@@ -517,7 +517,7 @@ bool cutop::PrintBool(bool b){
 
 
 
-#endif // #ifdef cutop_cxx
+#endif // #ifdef DileptonNtuple_cxx
 
 
 
