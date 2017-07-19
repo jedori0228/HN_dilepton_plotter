@@ -10,7 +10,7 @@ void RunNtupleBase::Run(){
   cout << "#### OPTIMIZATION STARTED ####" << endl;
   cout << "##############################" << endl << endl;
 
-  vector<cutinfo> OptimizedCutInfo;
+  vector<CutInfo> OptimizedCutInfo;
   double final_cf(0.), final_cf_err(0.);
   double final_fake(0.), final_fake_err(0.);
   double final_prompt(0.), final_prompt_err(0.);
@@ -21,11 +21,11 @@ void RunNtupleBase::Run(){
     final_signal_eff_preselection.push_back(0.);
   }
 
-  while( !CutRangeInfo.isEnd() ){
+  while( !cutrangeinfo.isEnd() ){
 
-    if(CutRangeInfo.CurrentIteration%LogEvery==0){
+    if(cutrangeinfo.CurrentIteration%LogEvery==0){
       cout << "["; printcurrunttime(); cout <<"] ";
-      cout << CutRangeInfo.CurrentIteration << " / " << CutRangeInfo.TotalIteration << " ("<<100.*CutRangeInfo.CurrentIteration/CutRangeInfo.TotalIteration<<" %)"<<endl;
+      cout << cutrangeinfo.CurrentIteration << " / " << cutrangeinfo.TotalIteration << " ("<<100.*cutrangeinfo.CurrentIteration/cutrangeinfo.TotalIteration<<" %)"<<endl;
       for(unsigned int i=0; i<OptimizedCutInfo.size(); i++){
         OptimizedCutInfo.at(i).Print();
       }
@@ -58,9 +58,9 @@ void RunNtupleBase::Run(){
       DileptonNtuple m(filepath+filename, "Ntp_"+channel+"_"+treeskim);
       m.DoDebug = DoDebug;
 
-      //==== Fill cutinfo
-      vector<cutinfo> cis;
-      CutRangeInfo.FillCurrentCutInfoVector(cis);
+      //==== Fill CutInfo
+      vector<CutInfo> cis;
+      cutrangeinfo.FillCurrentCutInfoVector(cis);
       for(unsigned int iii=0;iii<cis.size();iii++) m.SetCutVariablesToUse(cis.at(iii));
 
       //==== Run
@@ -125,7 +125,7 @@ void RunNtupleBase::Run(){
     //==== If SignalEffLow, go to next CutInfo.
     //==== XXX DON'T FORGET TO RESET MEMORY XXX
     if(SignalEffLow){
-      CutRangeInfo.Next();
+      cutrangeinfo.Next();
       delete hist_prompt_total;
       delete hist_prompt_total_up;
       continue;
@@ -187,14 +187,14 @@ void RunNtupleBase::Run(){
 
     if(ToUpdate){
 
-      OptimizedCutInfo = CutRangeInfo.GetCurrentCutInfo();
+      OptimizedCutInfo = cutrangeinfo.GetCurrentCutInfo();
 
       cout << endl;
       cout << "!!!!!!!!!!!!!!!!!" << endl;
       cout << "!!!! UPDATED !!!!" << endl;
       cout << "!!!!!!!!!!!!!!!!!" << endl;
       cout << endl;
-      CutRangeInfo.PrintCurrent();
+      cutrangeinfo.PrintCurrent();
       cout << "CF" << "\t" << chargeflip_weighted_yield << " +- " << chargeflip_weighted_yield_err << endl;
       cout << "Fake" << "\t" << fake_weighted_yield << " +- " << fake_weighted_yield_err << endl;
       cout << "Prompt" << "\t" << prompt_weighted_yield << " +- " << prompt_weighted_yield_err << endl;
@@ -217,7 +217,7 @@ void RunNtupleBase::Run(){
 
     }
 
-    CutRangeInfo.Next();
+    cutrangeinfo.Next();
 
   } //END CutRangeInfo loop
 

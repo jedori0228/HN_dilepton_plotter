@@ -11,7 +11,7 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
-#include "cutinfo.h"
+#include "CutInfo.h"
 
 // Header file for the classes stored in the TTree if any.
 
@@ -191,8 +191,8 @@ public :
   void SetCutVariablesToUse(TString var, TString cutdir, double cutvalue);
   TH1D *hist_for_error, *hist_for_error_up;
 
-  vector<cutinfo> CutInfos;
-  void SetCutVariablesToUse(cutinfo ci);
+  vector<CutInfo> cutinfos;
+  void SetCutVariablesToUse(CutInfo ci);
 
   bool Pass();
 
@@ -443,12 +443,12 @@ void DileptonNtuple::SetCutVariablesToUse(TString var, TString cutdir, double cu
 
 }
 
-void DileptonNtuple::SetCutVariablesToUse(cutinfo ci){
+void DileptonNtuple::SetCutVariablesToUse(CutInfo ci){
 
   if(DoDebug){
     cout << "[DileptonNtuple::SetCutVariablesToUse] "<<ci.var<<" "<<ci.cutdir<<" "<<ci.cutvalue << endl;
   }
-  CutInfos.push_back( ci );
+  cutinfos.push_back( ci );
 
 }
 
@@ -464,11 +464,11 @@ bool DileptonNtuple::Pass(){
     double cutvalue = CutValues.at(i);
 */
 
-  for(unsigned int i=0; i<CutInfos.size(); i++){
+  for(unsigned int i=0; i<cutinfos.size(); i++){
 
-    TString var    = CutInfos.at(i).var;
-    TString cutdir = CutInfos.at(i).cutdir;
-    double cutvalue = CutInfos.at(i).cutvalue;
+    TString var    = cutinfos.at(i).var;
+    TString cutdir = cutinfos.at(i).cutdir;
+    double cutvalue = cutinfos.at(i).cutvalue;
 
     double value = GetVar(var);
 

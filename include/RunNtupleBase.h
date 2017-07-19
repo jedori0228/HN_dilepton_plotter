@@ -2,7 +2,7 @@
 #define RunNtupleBase_h
 
 #include "DileptonNtuple.C"
-#include "cutrangeinfo.h"
+#include "CutRangeInfo.h"
 #include "AnalysisInputs.h"
 
 class RunNtupleBase{
@@ -28,7 +28,7 @@ public:
   vector<double> signal_yield_nocut, signal_yield_preselection;
 
   //==== Cut
-  cutrangeinfo CutRangeInfo;
+  CutRangeInfo cutrangeinfo;
 
   //==== functions
   RunNtupleBase();
@@ -137,14 +137,14 @@ void RunNtupleBase::SetSourceSystematics(){
 
 void RunNtupleBase::SetCutCard(TString path){
 
-  CutRangeInfo.ReadCutCard(path);
+  cutrangeinfo.ReadCutCard(path);
   cout
   << endl
   << "##################################################" << endl
-  << "#### TOTAL # of Loop = " << CutRangeInfo.TotalIteration << endl
+  << "#### TOTAL # of Loop = " << cutrangeinfo.TotalIteration << endl
   << "##################################################" << endl
   << endl;
-  CutRangeInfo.Print();
+  cutrangeinfo.Print();
   cout << endl;
 
 }

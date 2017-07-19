@@ -1,23 +1,23 @@
-#ifndef cutrangeinfo_h
-#define cutrangeinfo_h
+#ifndef CutRangeInfo_h
+#define CutRangeInfo_h
 
-#include "cutinfo.h"
+#include "CutInfo.h"
 
-class cutrangeinfo{
+class CutRangeInfo{
 public :
 
-  map< TString, vector<cutinfo> > map_varANDdir_to_cutinfo;
+  map< TString, vector<CutInfo> > map_varANDdir_to_cutinfo;
   map< TString, int >             map_varANDdir_to_iterator;
   bool k_end, DoDebug;
 
-  cutrangeinfo();
-  cutrangeinfo(TString filepath);
+  CutRangeInfo();
+  CutRangeInfo(TString filepath);
   void MakeCutInfo(TString var, TString cutdir, double start, double end, double nx);
   void Print();
   void PrintCurrent();
   void ReadCutCard(TString filepath);
-  void FillCurrentCutInfoVector(vector<cutinfo>& vec);
-  vector<cutinfo> GetCurrentCutInfo();
+  void FillCurrentCutInfoVector(vector<CutInfo>& vec);
+  vector<CutInfo> GetCurrentCutInfo();
   void Next();
 
   inline bool isEnd() { return k_end; };
@@ -27,7 +27,7 @@ public :
 
 };
 
-cutrangeinfo::cutrangeinfo() :
+CutRangeInfo::CutRangeInfo() :
 k_end(false), DoDebug(false)
 {
 
@@ -35,7 +35,7 @@ k_end(false), DoDebug(false)
 
 }
 
-cutrangeinfo::cutrangeinfo(TString filepath) : 
+CutRangeInfo::CutRangeInfo(TString filepath) : 
 k_end(false), DoDebug(false)
 {
 
@@ -68,13 +68,13 @@ k_end(false), DoDebug(false)
 
   CurrentIteration = 1;
   TotalIteration = 1;
-  for(map< TString, vector<cutinfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
+  for(map< TString, vector<CutInfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
     TotalIteration *= (it->second).size();
   }
 
 }
 
-void cutrangeinfo::MakeCutInfo(TString var, TString cutdir, double start, double end, double nx){
+void CutRangeInfo::MakeCutInfo(TString var, TString cutdir, double start, double end, double nx){
 
   map_varANDdir_to_cutinfo[var+"_"+cutdir].clear();
   map_varANDdir_to_iterator[var+"_"+cutdir] = 0;
@@ -86,7 +86,7 @@ void cutrangeinfo::MakeCutInfo(TString var, TString cutdir, double start, double
 
     double this_cutvalue = start+i*dx;
 
-    cutinfo tmp_cutinfo(var, cutdir, this_cutvalue);
+    CutInfo tmp_cutinfo(var, cutdir, this_cutvalue);
     map_varANDdir_to_cutinfo[var+"_"+cutdir].push_back( tmp_cutinfo );
 
     if(start==end) break;
@@ -96,11 +96,11 @@ void cutrangeinfo::MakeCutInfo(TString var, TString cutdir, double start, double
 
 }
 
-void cutrangeinfo::FillCurrentCutInfoVector(vector<cutinfo>& vec){
+void CutRangeInfo::FillCurrentCutInfoVector(vector<CutInfo>& vec){
 
   vec.clear();
 
-  for(map< TString, vector<cutinfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
+  for(map< TString, vector<CutInfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
 
     vec.push_back( (it->second).at( map_varANDdir_to_iterator[it->first] ) );
 
@@ -108,13 +108,13 @@ void cutrangeinfo::FillCurrentCutInfoVector(vector<cutinfo>& vec){
 
 }
 
-void cutrangeinfo::Next(){
+void CutRangeInfo::Next(){
 
   CurrentIteration++;
 
-  if(DoDebug) cout << "[cutrangeinfo::Next] called" << endl; 
+  if(DoDebug) cout << "[CutRangeInfo::Next] called" << endl; 
 
-  map< TString, vector<cutinfo> >::iterator it = map_varANDdir_to_cutinfo.begin();
+  map< TString, vector<CutInfo> >::iterator it = map_varANDdir_to_cutinfo.begin();
 
   if(it == map_varANDdir_to_cutinfo.end()){
     k_end = true;
@@ -126,30 +126,30 @@ void cutrangeinfo::Next(){
   while( !DONE ){
 
     TString this_varANDdir = it->first;
-    vector<cutinfo> this_cutinfo = it->second;
+    vector<CutInfo> this_cutinfo = it->second;
     int this_iterator = map_varANDdir_to_iterator[this_varANDdir];
 
     if(DoDebug){
-      cout << "[cutrangeinfo::Next] "<<this_varANDdir<<"\t"<<this_iterator<<"\t"<<this_cutinfo.size()<<endl;
+      cout << "[CutRangeInfo::Next] "<<this_varANDdir<<"\t"<<this_iterator<<"\t"<<this_cutinfo.size()<<endl;
     }
 
     //==== Last iterator of this cut
     if( this_iterator == this_cutinfo.size()-1 ){
-      if(DoDebug) cout << "[cutrangeinfo::Next] This cutinfo is finished its loop. Going back to fisrt value" << endl;
+      if(DoDebug) cout << "[CutRangeInfo::Next] This cutinfo is finished its loop. Going back to fisrt value" << endl;
       map_varANDdir_to_iterator[this_varANDdir] = 0;
       it++;
 
       //==== If this was the last cut, this is the end of all loop
       if(it==map_varANDdir_to_cutinfo.end()){
         k_end = true;
-        if(DoDebug) cout << "[cutrangeinfo::Next] Loop ENDED" << endl;
+        if(DoDebug) cout << "[CutRangeInfo::Next] Loop ENDED" << endl;
         break;
       }
 
     }
     //==== If not, just increase iterator by 1
     else{
-      if(DoDebug) cout << "[cutrangeinfo::Next] Okay, increasing this varialbe. DONE=true" << endl;
+      if(DoDebug) cout << "[CutRangeInfo::Next] Okay, increasing this varialbe. DONE=true" << endl;
       map_varANDdir_to_iterator[this_varANDdir]++;
       DONE = true;
     }
@@ -158,11 +158,11 @@ void cutrangeinfo::Next(){
 
 }
 
-void cutrangeinfo::Print(){
+void CutRangeInfo::Print(){
 
-  for(map< TString, vector<cutinfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
+  for(map< TString, vector<CutInfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
 
-    cout << "[cutrangeinfo::PrintCutRangeInfo] "<<it->first<<endl;
+    cout << "[CutRangeInfo::PrintCutRangeInfo] "<<it->first<<endl;
     for(unsigned int i=0; i<(it->second).size(); i++){
       it->second.at(i).Print();
     }
@@ -172,11 +172,11 @@ void cutrangeinfo::Print(){
 
 }
 
-vector<cutinfo> cutrangeinfo::GetCurrentCutInfo(){
+vector<CutInfo> CutRangeInfo::GetCurrentCutInfo(){
 
-  vector<cutinfo> out;
+  vector<CutInfo> out;
 
-  for(map< TString, vector<cutinfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
+  for(map< TString, vector<CutInfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
 
     out.push_back( it->second.at( map_varANDdir_to_iterator[it->first] ) );
 
@@ -186,9 +186,9 @@ vector<cutinfo> cutrangeinfo::GetCurrentCutInfo(){
 
 }
 
-void cutrangeinfo::PrintCurrent(){
+void CutRangeInfo::PrintCurrent(){
 
-  for(map< TString, vector<cutinfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
+  for(map< TString, vector<CutInfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
 
     it->second.at( map_varANDdir_to_iterator[it->first] ).Print();
 
@@ -196,7 +196,7 @@ void cutrangeinfo::PrintCurrent(){
 
 }
 
-void cutrangeinfo::ReadCutCard(TString filepath){
+void CutRangeInfo::ReadCutCard(TString filepath){
 
   string elline;
   ifstream in(filepath);
@@ -226,7 +226,7 @@ void cutrangeinfo::ReadCutCard(TString filepath){
   //==== Then, set iteration info based on cutcard
   CurrentIteration = 1;
   TotalIteration = 1;
-  for(map< TString, vector<cutinfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
+  for(map< TString, vector<CutInfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
     TotalIteration *= (it->second).size();
   }
 
