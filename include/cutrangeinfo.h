@@ -49,7 +49,6 @@ k_end(false), DoDebug(false)
     is >> nx;
 
     if(var.Contains("#")){
-      cout << "# in it" << endl;
       continue;
     }
 
@@ -106,6 +105,11 @@ void cutrangeinfo::Next(){
   if(DoDebug) cout << "[cutrangeinfo::Next] called" << endl; 
 
   map< TString, vector<cutinfo> >::iterator it = map_varANDdir_to_cutinfo.begin();
+
+  if(it == map_varANDdir_to_cutinfo.end()){
+    k_end = true;
+    return;
+  }
 
   bool DONE = false;  
 
