@@ -10,10 +10,12 @@ public :
   map< TString, int >             map_varANDdir_to_iterator;
   bool k_end, DoDebug;
 
+  cutrangeinfo();
   cutrangeinfo(TString filepath);
   void MakeCutInfo(TString var, TString cutdir, double start, double end, double nx);
   void Print();
   void PrintCurrent();
+  void ReadCutCard(TString filepath);
   void FillCurrentCutInfoVector(vector<cutinfo>& vec);
   vector<cutinfo> GetCurrentCutInfo();
   void Next();
@@ -24,6 +26,14 @@ public :
 
 
 };
+
+cutrangeinfo::cutrangeinfo() :
+k_end(false), DoDebug(false)
+{
+
+  map_varANDdir_to_cutinfo.clear();
+
+}
 
 cutrangeinfo::cutrangeinfo(TString filepath) : 
 k_end(false), DoDebug(false)
@@ -186,5 +196,67 @@ void cutrangeinfo::PrintCurrent(){
 
 }
 
+void cutrangeinfo::ReadCutCard(TString filepath){
+
+  string elline;
+  ifstream in(filepath);
+  while(getline(in,elline)){
+    std::istringstream is( elline );
+
+    TString var;
+    TString cutdir;
+    double start;
+    double end;
+    double nx;
+
+    is >> var;
+    is >> cutdir;
+    is >> start;
+    is >> end;
+    is >> nx;
+
+    if(var.Contains("#")){
+      continue;
+    }
+
+    MakeCutInfo(var, cutdir, start, end, nx);
+
+  }
+
+  //==== Then, set iteration info based on cutcard
+  CurrentIteration = 1;
+  TotalIteration = 1;
+  for(map< TString, vector<cutinfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
+    TotalIteration *= (it->second).size();
+  }
+
+
+
+}
+
+
+
+
+
+
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

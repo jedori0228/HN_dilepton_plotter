@@ -14,6 +14,7 @@
 #include <vector>
 #include <map>
 #include "canvas_margin.h"
+#include "AnalysisInputs.h"
 
 using namespace std;
 
@@ -39,8 +40,9 @@ public:
   void SetRebins(TString filepath);
   void SetYAxis(TString filepath);
   void SetXAxis(TString filepath);
-  void SetMCSF(TString filepath);
-  void SetCalculatedSysts(TString filepath);
+  AnalysisInputs analysisInputs;
+  //void SetMCSF(TString filepath);
+  //void SetCalculatedSysts(TString filepath);
 
   //==== functions for drawing
   void draw_hist();
@@ -70,7 +72,7 @@ public:
   vector<TString> histname_suffix, bkglist, samples_to_use, histname, x_title, units, PrimaryDataset;
   vector<bool> drawdata, ApplyMCNormSF;
   vector<double> UseLogy;
-  map<TString, double> MCNormSF, MCNormSF_uncert, CalculatedSysts;
+  //map<TString, double> MCNormSF, MCNormSF_uncert, CalculatedSysts;
   vector< pair<TString, TString> > CutVarSkips;
   map< TString, vector<TString> > map_sample_string_to_list;
   map< TString, pair<TString, Color_t> > map_sample_string_to_legendinfo;

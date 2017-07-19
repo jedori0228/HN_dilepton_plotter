@@ -144,7 +144,7 @@ void Plotter::draw_hist(){
             double error_combined = sqrt( error_propagated*error_propagated + error_sumw2*error_sumw2 );
 
             TString WhichSystHere = "FakeLooseID";
-            double error_syst = CalculatedSysts[WhichSystHere]*(hist_temp->GetBinContent(i));
+            double error_syst = analysisInputs.CalculatedSysts[WhichSystHere]*(hist_temp->GetBinContent(i));
 
             error_combined = sqrt(error_combined*error_combined + error_syst*error_syst);
 
@@ -157,7 +157,7 @@ void Plotter::draw_hist(){
             double error_sumw2 = hist_temp->GetBinError(i);
 
             TString WhichSystHere = "ChrageFlipSyst";
-            double error_syst = CalculatedSysts[WhichSystHere]*(hist_temp->GetBinContent(i));
+            double error_syst = analysisInputs.CalculatedSysts[WhichSystHere]*(hist_temp->GetBinContent(i));
 
             double error_combined = sqrt(error_sumw2*error_sumw2 + error_syst*error_syst);
 
@@ -191,10 +191,10 @@ void Plotter::draw_hist(){
 
           //==== MC Norm Scaling
           if(ApplyMCNormSF.at(i_cut)){
-            hist_final->Scale(MCNormSF[current_sample]);
+            hist_final->Scale(analysisInputs.MCNormSF[current_sample]);
             //==== Set MC Norm uncertainty
             for(int i=1; i<=n_bins; i++){
-              double error_syst = MCNormSF_uncert[current_sample]*(hist_final->GetBinContent(i));
+              double error_syst = analysisInputs.MCNormSF_uncert[current_sample]*(hist_final->GetBinContent(i));
               double error_sumw2 = hist_final->GetBinError(i);
               double error_combined = sqrt( error_syst*error_syst + error_sumw2*error_sumw2 );
 
@@ -348,6 +348,7 @@ void Plotter::SetXAxis(TString filepath){
   }
 }
 
+/*
 void Plotter::SetMCSF(TString filepath){
 
   cout << "[Plotter::SetMCSF] Get MC SF from " << filepath << endl;
@@ -392,6 +393,7 @@ void Plotter::SetCalculatedSysts(TString filepath){
   double uncert_fake = CalculatedSysts["FakeLooseID"];
 
 }
+*/
 
 TString Plotter::find_MCsector(){
   for(unsigned int i=0; i<MCsector_first_index.size()-1; i++){

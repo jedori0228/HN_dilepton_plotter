@@ -104,9 +104,9 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     m.histname_suffix = {
       // dimu
       // diel
-      //"_DiElectron_Preselection_SS",
-      //"_DiElectron_Preselection_Njetsge2_SS",
-      "_DiElectron_Preselection_Nfatjetsge1_SS",
+      "_DiElectron_Preselection_SS",
+      "_DiElectron_Preselection_Inclusive2jets_SS",
+      "_DiElectron_Preselection_Inclusive1fatjets_SS",
       //"_DiElectron_Low_SS",
       //"_DiElectron_Medium_SS",
       //"_DiElectron_High_SS",
@@ -290,17 +290,13 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== Fill MCNorm SF
   //=====================
 
-  for(unsigned int i=0; i<m.bkglist.size(); i++){
-    m.MCNormSF[m.bkglist.at(i)] = 1.;
-    m.MCNormSF_uncert[m.bkglist.at(i)] = 0.;
-  }
-  m.SetMCSF(WORKING_DIR+"/data/"+dataset+"/MCSF.txt");
+  m.analysisInputs.SetMCSF(WORKING_DIR+"/data/"+dataset+"/MCSF.txt", m.bkglist);
 
   //======================
   //==== Get Systematics
   //======================
 
-  m.SetCalculatedSysts(WORKING_DIR+"/data/"+dataset+"/Syst.txt");
+  m.analysisInputs.SetCalculatedSysts(WORKING_DIR+"/data/"+dataset+"/Syst.txt");
 
   //=============================
   //==== set signal mass points

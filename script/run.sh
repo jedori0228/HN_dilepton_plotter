@@ -4,11 +4,9 @@ whichRun=$1
 if [ $whichRun = "SR" ]; then
   if [ -z "$2" ]; then
     root -l -b -q "src/Draw_SR.C(true,0)"
-    root -l -b -q "src/Draw_SR.C(true,1)"
   else
     applySF=$2
     root -l -b -q "src/Draw_SR.C($applySF,0)"
-    root -l -b -q "src/Draw_SR.C($applySF,1)"
   fi
 fi
 
@@ -17,11 +15,13 @@ if [ $whichRun = "CR" ]; then
     root -l -b -q "src/Draw_CR.C(true,0)"
     root -l -b -q "src/Draw_CR.C(true,1)"
     root -l -b -q "src/Draw_CR.C(true,2)"
+    root -l -b -q "src/Draw_CR.C(true,3)"
   else
     applySF=$2
     root -l -b -q "src/Draw_CR.C($applySF,0)"
     root -l -b -q "src/Draw_CR.C($applySF,1)"
     root -l -b -q "src/Draw_CR.C($applySF,2)"
+    root -l -b -q "src/Draw_CR.C($applySF,3)"
   fi
 fi
 

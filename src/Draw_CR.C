@@ -260,8 +260,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   //==== For Quick Test
   //==== Ignore all, and reset all here
   if(XXX==-1){
-    m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Vgamma", "VVV", "top", "WW_double"};
-    m.histname_suffix = {"_DiElectron_SS"};
+    m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
+    m.histname_suffix = {"_DiElectron_0jets_SS"};
     m.PrimaryDataset = {"DoubleEG"};
     m.drawdata = {true};
     m.UseLogy = {-1};
@@ -282,50 +282,13 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   //==== Fill MCNorm SF
   //=====================
 
-  for(unsigned int i=0; i<m.bkglist.size(); i++){
-    m.MCNormSF[m.bkglist.at(i)] = 1.;
-    m.MCNormSF_uncert[m.bkglist.at(i)] = 0.;
-  }
-  m.SetMCSF(WORKING_DIR+"/data/"+dataset+"/MCSF.txt");
+  m.analysisInputs.SetMCSF(WORKING_DIR+"/data/"+dataset+"/MCSF.txt", m.bkglist);
 
   //======================
   //==== Get Systematics
   //======================
 
-  m.SetCalculatedSysts(WORKING_DIR+"/data/"+dataset+"/Syst.txt");
-
-  /*
-  //=============================
-  //==== set signal mass points
-  //=============================
-  
-  m.signal_mass = {40, 60, 150, 700};
-  m.signal_color = {kRed, kBlue, kMagenta-7, kBlack};
-  
-  //====================================
-  //==== set signal coupling constants
-  //====================================
-  
-  m.coupling_constants[make_pair("_WZ", 40)] = 0.01;
-  m.coupling_constants[make_pair("_WZ", 60)] = 0.01;
-  m.coupling_constants[make_pair("_WZ", 150)] = 1;
-  m.coupling_constants[make_pair("_WZ", 700)] = 0.01;
-  m.coupling_constants[make_pair("_ZJets", 40)] = 0.001;
-  m.coupling_constants[make_pair("_ZJets", 60)] = 0.001;
-  m.coupling_constants[make_pair("_ZJets", 150)] = 0.001;
-  m.coupling_constants[make_pair("_ZJets", 700)] = 0.001;
-  
-  //=====================================
-  //==== set signal mass for each class
-  //=====================================
-  
-  m.map_class_to_signal_mass[Plotter::class1] = {40};
-  m.map_class_to_signal_mass[Plotter::class2] = {60};
-  m.map_class_to_signal_mass[Plotter::lowmass] = {40, 60};
-  m.map_class_to_signal_mass[Plotter::class3] = {150};
-  m.map_class_to_signal_mass[Plotter::class4] = {700};
-  m.map_class_to_signal_mass[Plotter::highmass] = {150, 700};
-  */
+  m.analysisInputs.SetCalculatedSysts(WORKING_DIR+"/data/"+dataset+"/Syst.txt");
 
   //=============
   //==== rebins
