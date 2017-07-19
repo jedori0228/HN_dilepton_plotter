@@ -356,7 +356,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   //==== k-factor
   //===============
   
-  m.k_factor = 1.34;
+  m.k_factor = 1.;
   
   //=================================
   //==== mixing at generation level
