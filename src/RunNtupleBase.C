@@ -24,8 +24,10 @@ void RunNtupleBase::Run(){
   while( !cutrangeinfo.isEnd() ){
 
     if(cutrangeinfo.CurrentIteration%LogEvery==0){
-      cout << "["; printcurrunttime(); cout <<"] ";
+      cout << "####################################################" << endl;
+      cout << "TIME STAMP : ["; printcurrunttime(); cout <<"] ";
       cout << cutrangeinfo.CurrentIteration << " / " << cutrangeinfo.TotalIteration << " ("<<100.*cutrangeinfo.CurrentIteration/cutrangeinfo.TotalIteration<<" %)"<<endl;
+      cout << "####################################################" << endl;
       for(unsigned int i=0; i<OptimizedCutInfo.size(); i++){
         OptimizedCutInfo.at(i).Print();
       }
