@@ -56,6 +56,35 @@ void RunNtupleBase::Run(){
       if(sample.Contains("HN"))   filename = filename_prefix+"_SK"      +sample           +"_"+filename_suffix;
 
       DileptonNtuple m(filepath+filename, "Ntp_"+channel+"_"+treeskim);
+
+      if(! (m.TreeExist) ){
+
+        if(sample.Contains("HN")){
+          signal_unweighted_yield.push_back(0.);
+          signal_weighted_yield.push_back(0.);
+          signal_weighted_yield_stat.push_back(0.);
+
+          SignalEffLow = true;
+        }
+/*
+        else if(sample=="chargeflip"){
+         chargeflip_unweighted_yield = 0.;
+         chargeflip_weighted_yield = 0.;
+         chargeflip_weighted_yield_stat = 0.;
+        }
+        else if(sample.Contains("fake")){
+
+        }
+        else if(sample=="data"){
+
+        }
+        else{
+
+        }
+*/
+
+        continue;
+      }
       m.DoDebug = DoDebug;
 
       //==== Fill CutInfo
@@ -203,9 +232,14 @@ void RunNtupleBase::Run(){
       for(unsigned int iii=0; iii<signals.size(); iii++){
         final_signal.at(iii) = signal_weighted_yield.at(iii);
         final_signal_eff.at(iii) = signal_weighted_yield.at(iii)/signal_yield_nocut.at(iii);
-        final_signal_eff_preselection.at(iii) = signal_weighted_yield.at(iii)/signal_yield_preselection.at(iii);
+
+        double eff_presel;
+        if(signal_yield_preselection.at(iii)==0) eff_presel = 0;
+        else eff_presel = signal_weighted_yield.at(iii)/signal_yield_preselection.at(iii);
+        final_signal_eff_preselection.at(iii) = eff_presel;
         MaxPunzis.at(iii) = punzis.at(iii);
-        cout << signals.at(iii) << "\t" << signal_weighted_yield.at(iii) << "\t" << signal_weighted_yield.at(iii)/signal_yield_nocut.at(iii) << "\t" << signal_weighted_yield.at(iii)/signal_yield_preselection.at(iii) << "\t" << punzis.at(iii) << endl;
+
+        cout << signals.at(iii) << "\t" << signal_weighted_yield.at(iii) << "\t" << signal_weighted_yield.at(iii)/signal_yield_nocut.at(iii) << "\t" << eff_presel << "\t" << punzis.at(iii) << endl;
       }
       cout << "=====================================================================" << endl << endl;
       final_cf = chargeflip_weighted_yield;

@@ -198,6 +198,7 @@ public :
 
   bool DoDebug;
   bool PrintBool(bool b);
+  bool TreeExist;
 
   //==== Variables To Save
   double unweighted_yield, weighted_yield;
@@ -262,7 +263,11 @@ void DileptonNtuple::Init(TTree *tree)
   // (once per file to be processed).
 
   // Set branch addresses and branch pointers
-  if (!tree) return;
+  if (!tree){
+    TreeExist = false;
+    return;
+  }
+  TreeExist = true;
   fChain = tree;
   fCurrent = -1;
   fChain->SetMakeClass(1);

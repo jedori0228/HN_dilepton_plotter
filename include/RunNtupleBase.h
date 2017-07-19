@@ -101,8 +101,10 @@ void RunNtupleBase::FillSignalInfo(){
     TH1D *hist_nocut = (TH1D*)file->Get("Cutflow_"+channel+"_NoCut");
     TH1D *hist_preselection = (TH1D*)file->Get("Nevents_"+channel+"_"+preselection);
 
-    signal_yield_nocut.push_back( hist_nocut->GetBinContent(1) );
-    signal_yield_preselection.push_back( hist_preselection->GetBinContent(1) );
+    if(hist_nocut) signal_yield_nocut.push_back( hist_nocut->GetBinContent(1) );
+    else           signal_yield_nocut.push_back( 0. );
+    if(hist_preselection) signal_yield_preselection.push_back( hist_preselection->GetBinContent(1) );
+    else                  signal_yield_preselection.push_back( 0. );
 
     //==== initialize MaxPunzis
     MaxPunzis.push_back(-1);

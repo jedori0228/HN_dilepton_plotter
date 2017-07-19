@@ -11,7 +11,6 @@ public :
   bool k_end, DoDebug;
 
   CutRangeInfo();
-  CutRangeInfo(TString filepath);
   void MakeCutInfo(TString var, TString cutdir, double start, double end, double nx);
   void Print();
   void PrintCurrent();
@@ -32,45 +31,6 @@ k_end(false), DoDebug(false)
 {
 
   map_varANDdir_to_cutinfo.clear();
-
-}
-
-CutRangeInfo::CutRangeInfo(TString filepath) : 
-k_end(false), DoDebug(false)
-{
-
-  map_varANDdir_to_cutinfo.clear();
-
-  string elline;
-  ifstream in(filepath);
-  while(getline(in,elline)){
-    std::istringstream is( elline );
-
-    TString var;
-    TString cutdir;
-    double start;
-    double end;
-    double nx;
-
-    is >> var;
-    is >> cutdir;
-    is >> start;
-    is >> end;
-    is >> nx;
-
-    if(var.Contains("#")){
-      continue;
-    }
-
-    MakeCutInfo(var, cutdir, start, end, nx);
-
-  }
-
-  CurrentIteration = 1;
-  TotalIteration = 1;
-  for(map< TString, vector<CutInfo> >::iterator it=map_varANDdir_to_cutinfo.begin(); it!=map_varANDdir_to_cutinfo.end(); it++){
-    TotalIteration *= (it->second).size();
-  }
 
 }
 
