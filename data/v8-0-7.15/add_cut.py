@@ -3,8 +3,8 @@ import os
 #filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
 filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
 
-From = "_DiElectron_0jets_OnZ_OS"
-To   = "_DiElectron_1jets_OnZ_OS"
+From = "_DiElectron_Inclusive1nlbjets_METge50_OS"
+To   = "_DiElectron_Inclusive1fatjets_OnZ_OS"
 
 for filename in filenames:
 
