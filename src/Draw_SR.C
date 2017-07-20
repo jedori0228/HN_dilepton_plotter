@@ -105,11 +105,10 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       // dimu
       // diel
       "_DiElectron_Preselection_SS",
+      "_DiElectron_Preselection_1jets_SS",
       "_DiElectron_Preselection_Inclusive2jets_SS",
+      "_DiElectron_Preselection_Inclusive2jets_mjj50to110_SS",
       "_DiElectron_Preselection_Inclusive1fatjets_SS",
-      //"_DiElectron_Low_SS",
-      //"_DiElectron_Medium_SS",
-      //"_DiElectron_High_SS",
     };
   }
   //==== OS

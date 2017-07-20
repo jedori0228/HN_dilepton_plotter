@@ -59,6 +59,7 @@ void Plotter::draw_hist(){
       
       signal_survive_mass.clear();
 
+      bool AnyEntry = false;
       for(i_file = 0; i_file < bkglist.size()+1+signal_mass.size(); i_file++){ // +1 for data
       
         TString filepath, current_sample;
@@ -128,6 +129,7 @@ void Plotter::draw_hist(){
           delete file;
           continue;
         }
+        AnyEntry = true;
 
         //==== set histogram name, including sample name
         hist_temp->SetName(fullhistname+"_"+current_sample);
@@ -240,7 +242,8 @@ void Plotter::draw_hist(){
         if(DoDebug) cout << "end of this sample" << endl;
         
       } // END loop over samples
-    
+
+      if(!AnyEntry) continue;
       if(DoDebug) cout << "[Draw Canvas]" << endl;
 
       if(!drawdata.at(i_cut)){
