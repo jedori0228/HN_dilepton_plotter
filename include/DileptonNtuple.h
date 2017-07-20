@@ -97,6 +97,8 @@ public :
   Double_t      DeltaRLeadl_SubLeadlfatjet_Wclosest;
   Double_t      DeltaRSubLeadl_Leadlfatjet_Wclosest;
   inline Double_t MET2ST() { return PFMET*PFMET/ST; }
+  inline Double_t STmine() { return HT+LT+PFMET; }
+  inline Double_t MET2STmine() { return PFMET*PFMET/STmine(); }
 
   //==== Function to call above varialbes
   double GetVar(TString var);
@@ -430,6 +432,8 @@ double DileptonNtuple::GetVar(TString var){
 
   //==== function
   else if(var=="MET2ST") return MET2ST();
+  else if(var=="STmine") return STmine();
+  else if(var=="MET2STmine") return MET2STmine();
   else{
     cout << "[DileptonNtuple::GetVar] "<<var<<": Wrong Variable Name" << endl;
     return -999;
