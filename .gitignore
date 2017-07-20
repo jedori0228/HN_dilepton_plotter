@@ -31,3 +31,6 @@ ompiled Object files
 *.root
 .DS_Store
 .AppleDouble
+test/
+data/v8-0-7.15
+data/*.txt
