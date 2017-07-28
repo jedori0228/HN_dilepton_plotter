@@ -1,6 +1,6 @@
 #include "canvas_margin.h"
 
-void TnP_Trigger(int period){
+void Draw_TnP_Trigger(int period){
   
   TH1::SetDefaultSumw2(true);
   TH2::SetDefaultSumw2(true);
@@ -16,15 +16,20 @@ void TnP_Trigger(int period){
     return;
   }
 
-  TString CutsOnDen = "combRelIsoPF04dBeta_bin0__dB_bin0__dzPV_bin0__pair_dPhiPrimeDeg_bin0__pair_deltaR_bin0";
-  if(DataPeriod=="GH") CutsOnDen = "combRelIsoPF04dBeta_bin0__dB_bin0__dzPV_bin0__pair_deltaR_bin0";
+  TString CutsOnDen_front = "combRelIsoPF04dBeta_bin0__dB_bin0__dzPV_bin0__pair_dPhiPrimeDeg_bin0__pair_deltaR_bin0__pair_probeMultiplicity_bin0";
+  TString CutsOnDen_back = "tag_combRelIsoPF04dBeta_bin0__tag_pt_bin0";
+  if(DataPeriod=="GH"){
+    TString CutsOnDen_front = "combRelIsoPF04dBeta_bin0__dB_bin0__dzPV_bin0__pair_deltaR_bin0__pair_probeMultiplicity_bin0";
+  }
+
+  TString syst = "Central";
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString dataset = getenv("CATANVERSION");
-  TString filepath = WORKING_DIR+"/rootfiles/TnP_Results/Run"+DataPeriod+"/";
+  TString filepath = WORKING_DIR+"/rootfiles/TnP_Results/TriggerSF/"+syst+"/";
 
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
-  TString base_plotpath = ENV_PLOT_PATH+"/TnP_Results/Run"+DataPeriod+"/Trigger/";
+  TString base_plotpath = ENV_PLOT_PATH+"/TnP_Results/TriggerSF/"+syst+"/";
   
   if( !gSystem->mkdir(base_plotpath, kTRUE) ){
     cout
@@ -36,11 +41,10 @@ void TnP_Trigger(int period){
   
   vector<double> abseta = {0., 0.9, 1.2, 2.1, 2.4};
   
-  vector<TString> fitftns = {"vpvPlusExpo", "vpvPlusCheb", "vpvPlusCheb_4th", "gaussPlusExpo", "vpvPlusCMSbeta0p2", "vpvPlusExpo3", "vpvPlusCheb_3rd"};
+  vector<TString> fitftns = {"vpvPlusExpo", "vpvPlusExpoPassFail", "voigtPlusExpo", "voigtPlusExpoPassFail", "vpvPlusCheb_3rd", "vpvPlusCheb_4th"};
   
-  //vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "DoubleIsoMu17Mu8_IsoMu8leg", "DoubleIsoMu17TkMu8_IsoMu17leg", "DoubleIsoMu17TkMu8_IsoMu8leg", "Mu8_OR_TkMu8", "test1"};
   vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8"};
-  
+
   for(unsigned it_trigger=0; it_trigger<triggers.size(); it_trigger++){
     
     TString trigger = triggers.at(it_trigger);
@@ -56,7 +60,7 @@ void TnP_Trigger(int period){
 
     TFile *file_Trigger_Data = new TFile(filepath+trigger+"_Data_"+DataPeriod+".root");
     TFile *file_Trigger_MC = new TFile(filepath+trigger+"_MC_"+DataPeriod+".root");
-    
+
     TString dirname = "tpTree/HN_TRI_TIGHT_Trigger_pt_eta/";
     
     //==== FitResult
@@ -64,7 +68,7 @@ void TnP_Trigger(int period){
       for(unsigned int i_eta = 0; i_eta<abseta.size()-1; i_eta++){
         for(unsigned int i_pt = 0; i_pt<pt.size()-1; i_pt++){
           
-          TString dirname_fit_result = "abseta_bin"+TString::Itoa(i_eta,10)+"__"+CutsOnDen+"__pt_bin"+TString::Itoa(i_pt,10)+"__";
+          TString dirname_fit_result = "abseta_bin"+TString::Itoa(i_eta,10)+"__"+CutsOnDen_front+"__pt_bin"+TString::Itoa(i_pt,10)+"__"+CutsOnDen_back+"__";
           
           for(unsigned int i_fn = 0; i_fn<fitftns.size(); i_fn++){
             TCanvas *c_data = (TCanvas*)file_Trigger_Data->Get(dirname+dirname_fit_result+fitftns.at(i_fn)+"/fit_canvas");
@@ -275,8 +279,8 @@ void TnP_Trigger(int period){
     TString outputTriggerEffname = "MuonTriggerEfficiency_HNDILEP_"+trigger+"_Run"+DataPeriod+".root";
     TFile *file_TriggerEff = new TFile(plotpath+outputTriggerEffname, "RECREATE");
 
-    TString CutsOnDen2 = "combRelIsoPF04dBeta_bin0_&_dB_bin0_&_dzPV_bin0_&_pair_dPhiPrimeDeg_bin0_&_pair_deltaR_bin0";
-    if(DataPeriod=="GH") CutsOnDen2 = "combRelIsoPF04dBeta_bin0_&_dB_bin0_&_dzPV_bin0_&_pair_deltaR_bin0";
+    TString              CutsOnDen2 = "combRelIsoPF04dBeta_bin0_&_dB_bin0_&_dzPV_bin0_&_pair_dPhiPrimeDeg_bin0_&_pair_deltaR_bin0_&_pair_probeMultiplicity_bin0_&_tag_combRelIsoPF04dBeta_bin0_&_tag_pt_bin0";
+    if(DataPeriod=="GH") CutsOnDen2 = "combRelIsoPF04dBeta_bin0_&_dB_bin0_&_dzPV_bin0_&_pair_deltaR_bin0_&_pair_probeMultiplicity_bin0_&_tag_combRelIsoPF04dBeta_bin0_&_tag_pt_bin0";
 
     TCanvas *c_TriggerEff_Data = (TCanvas*)file_Trigger_Data->Get(dirname+"fit_eff_plots/abseta_pt_PLOT_"+CutsOnDen2);
     TCanvas *c_TriggerEff_MC = (TCanvas*)file_Trigger_MC->Get(dirname+"fit_eff_plots/abseta_pt_PLOT_"+CutsOnDen2);
