@@ -38,9 +38,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["DY"] = {"DYJets_10to50", "DYJets"};
   m.map_sample_string_to_list["WJets"] = {"WJets"};
   m.map_sample_string_to_list["VV_excl"] = {
-    "WZTo3LNu_powheg", "WZto2L2Q_amcatnlo",
-    "ZZTo4L_powheg", "ZZTo2L2Nu_Powheg", "ZZTo2L2Q_Powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau",
-    "WWTo2L2Nu", "ggWWto2L2Nu",
+    "WZTo3LNu_powheg",
+    "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau",
   };
   m.map_sample_string_to_list["VV_incl"] = {"WZ", "ZZ", "WW"};
   m.map_sample_string_to_list["WZ_excl"] = {"WZTo3LNu_powheg"};
@@ -51,11 +50,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
   m.map_sample_string_to_list["top"] = {"TTLL_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  m.map_sample_string_to_list["Wgamma"] = {"WgstarToLNuEE", "WgstarToLNuMuMu"};
-  m.map_sample_string_to_list["Zgamma"] = {"ZGto2LG"};
-  m.map_sample_string_to_list["Vgamma"] = {"WgstarToLNuEE", "WgstarToLNuMuMu", "ZGto2LG"};
-  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "WgstarToLNuEE", "WgstarToLNuMuMu", "ZGto2LG"};
-  m.map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WgstarToLNuEE", "WgstarToLNuMuMu"};
+  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "WGtoLNuG", "ZGto2LG"};
+  m.map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WGtoLNuG"};
   m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
   m.map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
@@ -77,9 +73,6 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["ttV"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["ttH"] = make_pair("ttH", kOrange);
   m.map_sample_string_to_legendinfo["top"] = make_pair("top", kRed);
-  m.map_sample_string_to_legendinfo["Wgamma"] = make_pair("W#gamma", kSpring-7);
-  m.map_sample_string_to_legendinfo["Zgamma"] = make_pair("Z#gamma", kSpring-7);
-  m.map_sample_string_to_legendinfo["Vgamma"] = make_pair("V#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["Xgamma_noDY"] = make_pair("X#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
@@ -101,19 +94,16 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   if(XXX==0){
     m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
     m.histname_suffix = {
-      // dimu
-      //"_DiMuon_0jets_SS", // SS 0jet CR
-      //"_DiMuon_1jets_SS", // SS 1jet CR
-      //"_DiMuon_0jets_OnZ_SS", // SS-0jet+OnZ CR (CF)
-      //"_DiMuon_1jets_OnZ_SS", // SS-1jet+OnZ CR (CF)
-      //"_DiMuon_Inclusive1nlbjets_SS", // (TTBar Fake))
-      // diel
+      //==== DiMuon
+      "_DiMuon_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
+      //=== DiElectron
       "_DiElectron_0jets_SS", // SS 0jet CR
       "_DiElectron_1jets_SS", // SS 1jet CR
       "_DiElectron_0jets_OnZ_SS", // SS 0jet+OnZ CR (CF)
       "_DiElectron_1jets_OnZ_SS", // SS 1jet+OnZ CR (CF)
-      "_DiElectron_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt)
-      "_DiElectron_OffZ_SS",
+      "_DiElectron_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
+      "_DiElectron_0jets_OffZ_SS",
+      "_DiElectron_1jets_OffZ_SS",
     };
   }
   //==== Log
@@ -121,12 +111,6 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   if(XXX==1){
     m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
     m.histname_suffix = {
-      // dimu
-      //"_DiMuon_OnZ_OS", // OS OnZ CR (DY Prompt)
-      //"_DiMuon_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
-      //"_DiMuon_Inclusive1nlbjets_OS", // (TTBar Prompt)
-      //"_DiMuon_Inclusive1nlbjets_METge50_OS", // (TTBar Prompt)
-      // diel
       "_DiElectron_OnZ_OS", // OS OnZ CR (DY Prompt)
       "_DiElectron_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
       "_DiElectron_1jets_OnZ_OS", // OS 1jet OnZ CR (DY+jet)
@@ -136,12 +120,10 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   if(XXX==2){
     m.samples_to_use = {"fake_Dijet", "Xgamma_noDY", "chargeflip", "VV_excl", "DY", "VVV", "top", "WW_double"};
     m.histname_suffix = {
-      // dimu
-      //"_DiMuon_Inclusive1nlbjets_METge50_OffZ_OS", // (TTBar Prompt)
-      // diel
       "_DiElectron_Inclusive1nlbjets_METge50_OffZ_OS", // (TTBar Prompt)
+      "_DiElectron_0nlbjets_OffZ_OS", // Low Mass mll region..
     };
-  }
+  } 
 
   //============================
   //==== set variables to draw
@@ -159,7 +141,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "leadingNoLepVetoJet_Pt", "leadingNoLepVetoJet_Eta", 
     "secondNoLepVetoJet_Pt", "secondNoLepVetoJet_Eta",
     "PFMET", "PFMET_phi", "HT", "ST",
-    "Nvtx",
+    "Nvtx", "DeltaRl1l2",
   };
 
   m.x_title = {
@@ -174,7 +156,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
     "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
     "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]",
-    "# of vertices",
+    "# of vertices", "#DeltaR(l_{1},l_{2})",
   };
 
   m.units = {
@@ -189,55 +171,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "GeV", "",
     "GeV", "",
     "GeV", "", "GeV", "GeV",
-    "int",
+    "int", "",
   };
-
-  //==== FatJet varialbes
-  if(XXX==3){
-    m.samples_to_use = {"fake_Dijet", "Xgamma_noDY", "chargeflip", "VV_excl", "DY", "VVV", "top", "WW_double"};
-    m.histname_suffix = {
-      // dimu
-      //"_DiMuon_Inclusive1nlbjets_METge50_OffZ_OS", // (TTBar Prompt)
-      // diel
-      "_DiElectron_Inclusive1fatjets_OnZ_OS", // (W->(fatjet)Z->(dilep))
-    };
-
-    vector<TString> TOADD_histname = {
-    //==== FatJet Leading
-    "FatJet_Pt", "FatJet_Eta", "FatJet_PrunedMass", "FatJet_SoftDropMass", "FatJet_Tau21", "FatJet_Tau32",
-    "m_fatjet", "m_llfatjet", "m_Leadlfatjet", "m_SubLeadlfatjet",
-    "DeltaRLeadl_fatjet", "DeltaRSubLeadl_fatjet", "DeltaRLeadl_SubLeadlfatjet", "DeltaRSubLeadl_Leadlfatjet",
-    //==== FatJet Closeset to W
-    "FatJet_Wclosest_Pt", "FatJet_Wclosest_Eta", "FatJet_Wclosest_PrunedMass", "FatJet_Wclosest_SoftDropMass", "FatJet_Wclosest_Tau21", "FatJet_Wclosest_Tau32",
-    "m_fatjet_Wclosest", "m_llfatjet_Wclosest", "m_Leadlfatjet_Wclosest", "m_SubLeadlfatjet_Wclosest",
-    "DeltaRLeadl_fatjet_Wclosest", "DeltaRSubLeadl_fatjet_Wclosest", "DeltaRLeadl_SubLeadlfatjet_Wclosest", "DeltaRSubLeadl_Leadlfatjet_Wclosest",
-    };
-    vector<TString> TOADD_x_title = {
-    //==== FatJet Leading
-    "Leading Fat Jet p_{T} [GeV]", "Leading Fat Jet #eta", "Leading Fat Jet Pruned Mass [GeV]", "Leading Fat Jet Soft Drop Mass [GeV]", "Leading Fat Jet #tau_{2}/#tau_{1}", "Leading Fat Jet #tau_{3}/#tau_{2}",
-    "m(Leading Fat Jet) [GeV]", "m(ll+Fat Jet) [GeV]", "m(Leading Lepton+Fat Jet) [GeV]", "m(Sub-Leading Lepton+Fat Jet) [GeV]",
-    "DeltaR(Leading Lepton,Fat Jet)", "DeltaR(Sub-Leading Lepton,Fat Jet)", "DeltaR(Leading Lepton,Sub-Leading Lepton+FatJet)", "DeltaR(Sub-Leading Lepton,Leading Lepton+FatJet)",
-    //==== FatJet Closeset to W
-    "Leading Fat Jet p_{T} [GeV]", "Leading Fat Jet #eta", "Leading Fat Jet Pruned Mass [GeV]", "Leading Fat Jet Soft Drop Mass [GeV]", "Leading Fat Jet #tau_{2}/#tau_{1}", "Leading Fat Jet #tau_{3}/#tau_{2}",
-    "m(Leading Fat Jet) [GeV]", "m(ll+Fat Jet) [GeV]", "m(Leading Lepton+Fat Jet) [GeV]", "m(Sub-Leading Lepton+Fat Jet) [GeV]",
-    "DeltaR(Leading Lepton,Fat Jet)", "DeltaR(Sub-Leading Lepton,Fat Jet)", "DeltaR(Leading Lepton,Sub-Leading Lepton+FatJet)", "DeltaR(Sub-Leading Lepton,Leading Lepton+FatJet)",
-    };
-    vector<TString> TOADD_units = {
-    //==== Laeding dijet
-    "GeV", "", "GeV", "GeV", "", "",
-    "GeV", "GeV", "GeV", "GeV",
-    "", "", "", "",
-    //==== FatJet Leading
-    "GeV", "", "GeV", "GeV", "", "",
-    "GeV", "GeV", "GeV", "GeV",
-    "", "", "", "",
-    };
-
-    m.histname.insert( m.histname.end(), TOADD_histname.begin(), TOADD_histname.end() );
-    m.x_title.insert( m.x_title.end(), TOADD_x_title.begin(), TOADD_x_title.end() );
-    m.units.insert( m.units.end(), TOADD_units.begin(), TOADD_units.end() );
-
-  }
 
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
 

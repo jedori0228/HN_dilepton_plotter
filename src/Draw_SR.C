@@ -51,11 +51,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
   m.map_sample_string_to_list["top"] = {"TTLL_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  m.map_sample_string_to_list["Wgamma"] = {"WgstarToLNuEE", "WgstarToLNuMuMu"};
-  m.map_sample_string_to_list["Zgamma"] = {"ZGto2LG"};
-  m.map_sample_string_to_list["Vgamma"] = {"WgstarToLNuEE", "WgstarToLNuMuMu", "ZGto2LG"};
-  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "WgstarToLNuEE", "WgstarToLNuMuMu", "ZGto2LG"};
-  m.map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WgstarToLNuEE", "WgstarToLNuMuMu"};
+  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "WGtoLNuG", "ZGto2LG"};
   m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
   m.map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
@@ -77,11 +73,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["ttV"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["ttH"] = make_pair("ttH", kOrange);
   m.map_sample_string_to_legendinfo["top"] = make_pair("top", kRed);
-  m.map_sample_string_to_legendinfo["Wgamma"] = make_pair("W#gamma", kSpring-7);
-  m.map_sample_string_to_legendinfo["Zgamma"] = make_pair("Z#gamma", kSpring-7);
-  m.map_sample_string_to_legendinfo["Vgamma"] = make_pair("V#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X#gamma", kSpring-7);
-  m.map_sample_string_to_legendinfo["Xgamma_noDY"] = make_pair("X#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
@@ -99,43 +91,28 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
   //==== SS
   if(XXX==0){
-    m.samples_to_use = {"chargeflip", "fake_Dijet", "Xgamma", "VV_excl", "VVV", "top", "WW_double"};
+    m.samples_to_use = {"chargeflip", "Xgamma", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double"};
 
     m.histname_suffix = {
-      // dimu
-      // diel
-      "_DiElectron_Preselection_SS",
-      "_DiElectron_Preselection_1jets_SS",
-      "_DiElectron_Preselection_Inclusive2jets_SS",
-      "_DiElectron_Preselection_Inclusive2jets_mjj50to110_SS",
-      "_DiElectron_Preselection_Inclusive1fatjets_SS",
+      //==== DiMuon
+      "_DiMuon_Preselection_SS", // nobjet, jet>=2;
+      //==== DiElectron
+      "_DiElectron_Preselection_SS", // OffZ, nobjet, jet>=2;
     };
   }
   //==== OS
   if(XXX==1){
     m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
     m.histname_suffix = {
-      // dimu
-      //"_DiMuon_Low_OS",
-      //"_DiMuon_Medium_OS",
-      //"_DiMuon_High_OS",
-      // diel
       "_DiElectron_Preselection_OS",
-      //"_DiElectron_Low_OS",
-      //"_DiElectron_Medium_OS",
-      //"_DiElectron_High_OS",
     };
   }
   if(XXX==2){
     m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "DY"};
 
     m.histname_suffix = {
-      // dimu
       // diel
       "_DiElectron_Preselection_OS",
-      //"_DiElectron_Low_SS",
-      //"_DiElectron_Medium_SS",
-      //"_DiElectron_High_SS",
     };
   }
 
@@ -169,14 +146,6 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "secondNoLepVetoJet_Pt", "secondNoLepVetoJet_Eta",
     "PFMET", "PFMET_phi", "HT", "ST", "MET2overST", "MCT",
     "Nvtx", "DeltaRl1l2",
-    //==== FatJet Leading
-    "FatJet_Pt", "FatJet_Eta", "FatJet_PrunedMass", "FatJet_SoftDropMass", "FatJet_Tau21", "FatJet_Tau32",
-    "m_fatjet", "m_llfatjet", "m_Leadlfatjet", "m_SubLeadlfatjet",
-    "DeltaRLeadl_fatjet", "DeltaRSubLeadl_fatjet", "DeltaRLeadl_SubLeadlfatjet", "DeltaRSubLeadl_Leadlfatjet",
-    //==== FatJet Closeset to W
-    "FatJet_Wclosest_Pt", "FatJet_Wclosest_Eta", "FatJet_Wclosest_PrunedMass", "FatJet_Wclosest_SoftDropMass", "FatJet_Wclosest_Tau21", "FatJet_Wclosest_Tau32", 
-    "m_fatjet_Wclosest", "m_llfatjet_Wclosest", "m_Leadlfatjet_Wclosest", "m_SubLeadlfatjet_Wclosest",
-    "DeltaRLeadl_fatjet_Wclosest", "DeltaRSubLeadl_fatjet_Wclosest", "DeltaRLeadl_SubLeadlfatjet_Wclosest", "DeltaRSubLeadl_Leadlfatjet_Wclosest",
   };
 
   m.x_title = {
@@ -204,14 +173,6 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
     "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]", "#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]", "m_{CT}(j_{1},j_{2}) [GeV]",
     "# of vertices", "#DeltaR(l_{1},l_{2})",
-    //==== FatJet Leading
-    "Leading Fat Jet p_{T} [GeV]", "Leading Fat Jet #eta", "Leading Fat Jet Pruned Mass [GeV]", "Leading Fat Jet Soft Drop Mass [GeV]", "Leading Fat Jet #tau_{2}/#tau_{1}", "Leading Fat Jet #tau_{3}/#tau_{2}",
-    "m(Leading Fat Jet) [GeV]", "m(ll+Fat Jet) [GeV]", "m(Leading Lepton+Fat Jet) [GeV]", "m(Sub-Leading Lepton+Fat Jet) [GeV]",
-    "DeltaR(Leading Lepton,Fat Jet)", "DeltaR(Sub-Leading Lepton,Fat Jet)", "DeltaR(Leading Lepton,Sub-Leading Lepton+FatJet)", "DeltaR(Sub-Leading Lepton,Leading Lepton+FatJet)",
-    //==== FatJet Closeset to W
-    "Leading Fat Jet p_{T} [GeV]", "Leading Fat Jet #eta", "Leading Fat Jet Pruned Mass [GeV]", "Leading Fat Jet Soft Drop Mass [GeV]", "Leading Fat Jet #tau_{2}/#tau_{1}", "Leading Fat Jet #tau_{3}/#tau_{2}",
-    "m(Leading Fat Jet) [GeV]", "m(ll+Fat Jet) [GeV]", "m(Leading Lepton+Fat Jet) [GeV]", "m(Sub-Leading Lepton+Fat Jet) [GeV]",        
-    "DeltaR(Leading Lepton,Fat Jet)", "DeltaR(Sub-Leading Lepton,Fat Jet)", "DeltaR(Leading Lepton,Sub-Leading Lepton+FatJet)", "DeltaR(Sub-Leading Lepton,Leading Lepton+FatJet)",
   };
 
   m.units = {

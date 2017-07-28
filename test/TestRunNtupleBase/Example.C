@@ -75,7 +75,7 @@ void Example(){
 
   //==== Backgrounds
 
-  vector<TString> bkgs = {"fake_Dijet", "WZTo3LNu_powheg", "WgstarToLNuEE", "chargeflip", "ZGto2LG", "ZZTo4L_powheg", "ttW", "WWW"};
+  vector<TString> bkgs = {"fake_Dijet", "WZTo3LNu_powheg", "WGtoLNuG", "chargeflip", "ZGto2LG", "ZZTo4L_powheg", "ttW", "WWW"};
   m.AddSamplesToList( bkgs );
 
   if(DoDebug) m.PrintSampleList();

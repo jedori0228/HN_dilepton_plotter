@@ -15,13 +15,11 @@ if [ $whichRun = "CR" ]; then
     root -l -b -q "src/Draw_CR.C(true,0)"
     root -l -b -q "src/Draw_CR.C(true,1)"
     root -l -b -q "src/Draw_CR.C(true,2)"
-    root -l -b -q "src/Draw_CR.C(true,3)"
   else
     applySF=$2
     root -l -b -q "src/Draw_CR.C($applySF,0)"
     root -l -b -q "src/Draw_CR.C($applySF,1)"
     root -l -b -q "src/Draw_CR.C($applySF,2)"
-    root -l -b -q "src/Draw_CR.C($applySF,3)"
   fi
 fi
 

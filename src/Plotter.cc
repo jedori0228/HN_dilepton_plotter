@@ -714,17 +714,17 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   draw_legend(legend, this_sc, DrawData);
   
   //==== MC-DATA
-    c1_down->cd();
-    TH1D* hist_compare = (TH1D*)hist_data->Clone();
-    hist_compare->Divide(mc_error);
-    hist_compare->SetMaximum(1.5);
-    hist_compare->SetMinimum(0.5);
-    hist_compare->GetXaxis()->SetTitle(x_title[i_var]);
-    hist_compare->SetYTitle("#frac{DATA}{MC}");
-    hist_compare->Draw("PE1same");
-    hist_axis(hist_empty, hist_compare);
-    //==== y=1 line
-    g1->Draw("same");
+  c1_down->cd();
+  TH1D* hist_compare = (TH1D*)hist_data->Clone();
+  hist_compare->Divide(mc_error);
+  hist_compare->SetMaximum(1.5);
+  hist_compare->SetMinimum(0.5);
+  hist_compare->GetXaxis()->SetTitle(x_title[i_var]);
+  hist_compare->SetYTitle("#frac{DATA}{MC}");
+  hist_compare->Draw("PE1same");
+  hist_axis(hist_empty, hist_compare);
+  //==== y=1 line
+  g1->Draw("same");
   
   //==== write lumi on the top
   c1->cd();

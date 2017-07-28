@@ -69,36 +69,7 @@ public :
   Double_t      LT;
   Double_t      weight;
   Double_t      weight_err;
-  Double_t      Nfatjets;
-  Double_t      FatJet_Pt;
-  Double_t      m_fatjet;
-  Double_t      FatJet_PrunedMass;
-  Double_t      FatJet_SoftDropMass;
-  Double_t      FatJet_Tau21;
-  Double_t      FatJet_Tau32;
-  Double_t      m_Leadlfatjet;
-  Double_t      m_SubLeadlfatjet;
-  Double_t      m_llfatjet;
-  Double_t      DeltaRLeadl_fatjet;
-  Double_t      DeltaRSubLeadl_fatjet;
-  Double_t      DeltaRLeadl_SubLeadlfatjet;
-  Double_t      DeltaRSubLeadl_Leadlfatjet;
-  Double_t      FatJet_Wclosest_Pt;
-  Double_t      m_fatjet_Wclosest;
-  Double_t      FatJet_Wclosest_PrunedMass;
-  Double_t      FatJet_Wclosest_SoftDropMass;
-  Double_t      FatJet_Wclosest_Tau21;
-  Double_t      FatJet_Wclosest_Tau32;
-  Double_t      m_Leadlfatjet_Wclosest;
-  Double_t      m_SubLeadlfatjet_Wclosest;
-  Double_t      m_llfatjet_Wclosest;
-  Double_t      DeltaRLeadl_fatjet_Wclosest;
-  Double_t      DeltaRSubLeadl_fatjet_Wclosest;
-  Double_t      DeltaRLeadl_SubLeadlfatjet_Wclosest;
-  Double_t      DeltaRSubLeadl_Leadlfatjet_Wclosest;
   inline Double_t MET2ST() { return PFMET*PFMET/ST; }
-  inline Double_t STmine() { return HT+LT+PFMET; }
-  inline Double_t MET2STmine() { return PFMET*PFMET/STmine(); }
 
   //==== Function to call above varialbes
   double GetVar(TString var);
@@ -152,33 +123,6 @@ public :
   TBranch      *b_LT;  //!
   TBranch      *b_weight;  //!
   TBranch      *b_weight_err;  //!
-  TBranch      *b_Nfatjets;  //!
-  TBranch      *b_FatJet_Pt;  //!
-  TBranch      *b_m_fatjet;  //!
-  TBranch      *b_FatJet_PrunedMass;  //!
-  TBranch      *b_FatJet_SoftDropMass;  //!
-  TBranch      *b_FatJet_Tau21;  //!
-  TBranch      *b_FatJet_Tau32;  //!
-  TBranch      *b_m_Leadlfatjet;  //!
-  TBranch      *b_m_SubLeadlfatjet;  //!
-  TBranch      *b_m_llfatjet;  //!
-  TBranch      *b_DeltaRLeadl_fatjet;  //!
-  TBranch      *b_DeltaRSubLeadl_fatjet;  //!
-  TBranch      *b_DeltaRLeadl_SubLeadlfatjet;  //!
-  TBranch      *b_DeltaRSubLeadl_Leadlfatjet;  //!
-  TBranch      *b_FatJet_Wclosest_Pt;  //!
-  TBranch      *b_m_fatjet_Wclosest;  //!
-  TBranch      *b_FatJet_Wclosest_PrunedMass;  //!
-  TBranch      *b_FatJet_Wclosest_SoftDropMass;  //!
-  TBranch      *b_FatJet_Wclosest_Tau21;  //!
-  TBranch      *b_FatJet_Wclosest_Tau32;  //!
-  TBranch      *b_m_Leadlfatjet_Wclosest;  //!
-  TBranch      *b_m_SubLeadlfatjet_Wclosest;  //!
-  TBranch      *b_m_llfatjet_Wclosest;  //!
-  TBranch      *b_DeltaRLeadl_fatjet_Wclosest;  //!
-  TBranch      *b_DeltaRSubLeadl_fatjet_Wclosest;  //!
-  TBranch      *b_DeltaRLeadl_SubLeadlfatjet_Wclosest;  //!
-  TBranch      *b_DeltaRSubLeadl_Leadlfatjet_Wclosest;  //!
 
   DileptonNtuple(TString filename, TString treename);
   virtual ~DileptonNtuple();
@@ -322,33 +266,6 @@ void DileptonNtuple::Init(TTree *tree)
    fChain->SetBranchAddress("LT", &LT, &b_LT);
    fChain->SetBranchAddress("weight", &weight, &b_weight);
    fChain->SetBranchAddress("weight_err", &weight_err, &b_weight_err);
-   fChain->SetBranchAddress("Nfatjets", &Nfatjets, &b_Nfatjets);
-   fChain->SetBranchAddress("FatJet_Pt", &FatJet_Pt, &b_FatJet_Pt);
-   fChain->SetBranchAddress("m_fatjet", &m_fatjet, &b_m_fatjet);
-   fChain->SetBranchAddress("FatJet_PrunedMass", &FatJet_PrunedMass, &b_FatJet_PrunedMass);
-   fChain->SetBranchAddress("FatJet_SoftDropMass", &FatJet_SoftDropMass, &b_FatJet_SoftDropMass);
-   fChain->SetBranchAddress("FatJet_Tau21", &FatJet_Tau21, &b_FatJet_Tau21);
-   fChain->SetBranchAddress("FatJet_Tau32", &FatJet_Tau32, &b_FatJet_Tau32);
-   fChain->SetBranchAddress("m_Leadlfatjet", &m_Leadlfatjet, &b_m_Leadlfatjet);
-   fChain->SetBranchAddress("m_SubLeadlfatjet", &m_SubLeadlfatjet, &b_m_SubLeadlfatjet);
-   fChain->SetBranchAddress("m_llfatjet", &m_llfatjet, &b_m_llfatjet);
-   fChain->SetBranchAddress("DeltaRLeadl_fatjet", &DeltaRLeadl_fatjet, &b_DeltaRLeadl_fatjet);
-   fChain->SetBranchAddress("DeltaRSubLeadl_fatjet", &DeltaRSubLeadl_fatjet, &b_DeltaRSubLeadl_fatjet);
-   fChain->SetBranchAddress("DeltaRLeadl_SubLeadlfatjet", &DeltaRLeadl_SubLeadlfatjet, &b_DeltaRLeadl_SubLeadlfatjet);
-   fChain->SetBranchAddress("DeltaRSubLeadl_Leadlfatjet", &DeltaRSubLeadl_Leadlfatjet, &b_DeltaRSubLeadl_Leadlfatjet);
-   fChain->SetBranchAddress("FatJet_Wclosest_Pt", &FatJet_Wclosest_Pt, &b_FatJet_Wclosest_Pt);
-   fChain->SetBranchAddress("m_fatjet_Wclosest", &m_fatjet_Wclosest, &b_m_fatjet_Wclosest);
-   fChain->SetBranchAddress("FatJet_Wclosest_PrunedMass", &FatJet_Wclosest_PrunedMass, &b_FatJet_Wclosest_PrunedMass);
-   fChain->SetBranchAddress("FatJet_Wclosest_SoftDropMass", &FatJet_Wclosest_SoftDropMass, &b_FatJet_Wclosest_SoftDropMass);
-   fChain->SetBranchAddress("FatJet_Wclosest_Tau21", &FatJet_Wclosest_Tau21, &b_FatJet_Wclosest_Tau21);
-   fChain->SetBranchAddress("FatJet_Wclosest_Tau32", &FatJet_Wclosest_Tau32, &b_FatJet_Wclosest_Tau32);
-   fChain->SetBranchAddress("m_Leadlfatjet_Wclosest", &m_Leadlfatjet_Wclosest, &b_m_Leadlfatjet_Wclosest);
-   fChain->SetBranchAddress("m_SubLeadlfatjet_Wclosest", &m_SubLeadlfatjet_Wclosest, &b_m_SubLeadlfatjet_Wclosest);
-   fChain->SetBranchAddress("m_llfatjet_Wclosest", &m_llfatjet_Wclosest, &b_m_llfatjet_Wclosest);
-   fChain->SetBranchAddress("DeltaRLeadl_fatjet_Wclosest", &DeltaRLeadl_fatjet_Wclosest, &b_DeltaRLeadl_fatjet_Wclosest);
-   fChain->SetBranchAddress("DeltaRSubLeadl_fatjet_Wclosest", &DeltaRSubLeadl_fatjet_Wclosest, &b_DeltaRSubLeadl_fatjet_Wclosest);
-   fChain->SetBranchAddress("DeltaRLeadl_SubLeadlfatjet_Wclosest", &DeltaRLeadl_SubLeadlfatjet_Wclosest, &b_DeltaRLeadl_SubLeadlfatjet_Wclosest);
-   fChain->SetBranchAddress("DeltaRSubLeadl_Leadlfatjet_Wclosest", &DeltaRSubLeadl_Leadlfatjet_Wclosest, &b_DeltaRSubLeadl_Leadlfatjet_Wclosest);
 
 }
 
@@ -402,38 +319,9 @@ double DileptonNtuple::GetVar(TString var){
   else if(var=="LT") return LT;
   else if(var=="weight") return weight;
   else if(var=="weight_err") return weight_err;
-  else if(var=="Nfatjets") return Nfatjets;
-  else if(var=="FatJet_Pt") return FatJet_Pt;
-  else if(var=="m_fatjet") return m_fatjet;
-  else if(var=="FatJet_PrunedMass") return FatJet_PrunedMass;
-  else if(var=="FatJet_SoftDropMass") return FatJet_SoftDropMass;
-  else if(var=="FatJet_Tau21") return FatJet_Tau21;
-  else if(var=="FatJet_Tau32") return FatJet_Tau32;
-  else if(var=="m_Leadlfatjet") return m_Leadlfatjet;
-  else if(var=="m_SubLeadlfatjet") return m_SubLeadlfatjet;
-  else if(var=="m_llfatjet") return m_llfatjet;
-  else if(var=="DeltaRLeadl_fatjet") return DeltaRLeadl_fatjet;
-  else if(var=="DeltaRSubLeadl_fatjet") return DeltaRSubLeadl_fatjet;
-  else if(var=="DeltaRLeadl_SubLeadlfatjet") return DeltaRLeadl_SubLeadlfatjet;
-  else if(var=="DeltaRSubLeadl_Leadlfatjet") return DeltaRSubLeadl_Leadlfatjet;
-  else if(var=="FatJet_Wclosest_Pt") return FatJet_Wclosest_Pt;
-  else if(var=="m_fatjet_Wclosest") return m_fatjet_Wclosest;
-  else if(var=="FatJet_Wclosest_PrunedMass") return FatJet_Wclosest_PrunedMass;
-  else if(var=="FatJet_Wclosest_SoftDropMass") return FatJet_Wclosest_SoftDropMass;
-  else if(var=="FatJet_Wclosest_Tau21") return FatJet_Wclosest_Tau21;
-  else if(var=="FatJet_Wclosest_Tau32") return FatJet_Wclosest_Tau32;
-  else if(var=="m_Leadlfatjet_Wclosest") return m_Leadlfatjet_Wclosest;
-  else if(var=="m_SubLeadlfatjet_Wclosest") return m_SubLeadlfatjet_Wclosest;
-  else if(var=="m_llfatjet_Wclosest") return m_llfatjet_Wclosest;
-  else if(var=="DeltaRLeadl_fatjet_Wclosest") return DeltaRLeadl_fatjet_Wclosest;
-  else if(var=="DeltaRSubLeadl_fatjet_Wclosest") return DeltaRSubLeadl_fatjet_Wclosest;
-  else if(var=="DeltaRLeadl_SubLeadlfatjet_Wclosest") return DeltaRLeadl_SubLeadlfatjet_Wclosest;
-  else if(var=="DeltaRSubLeadl_Leadlfatjet_Wclosest") return DeltaRSubLeadl_Leadlfatjet_Wclosest;
 
   //==== function
   else if(var=="MET2ST") return MET2ST();
-  else if(var=="STmine") return STmine();
-  else if(var=="MET2STmine") return MET2STmine();
   else{
     cout << "[DileptonNtuple::GetVar] "<<var<<": Wrong Variable Name" << endl;
     return -999;

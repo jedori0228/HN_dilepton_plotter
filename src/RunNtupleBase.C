@@ -68,24 +68,8 @@ void RunNtupleBase::Run(){
 
           SignalEffLow = true;
         }
-/*
-        else if(sample=="chargeflip"){
-         chargeflip_unweighted_yield = 0.;
-         chargeflip_weighted_yield = 0.;
-         chargeflip_weighted_yield_stat = 0.;
-        }
-        else if(sample.Contains("fake")){
-
-        }
-        else if(sample=="data"){
-
-        }
-        else{
-
-        }
-*/
-
         continue;
+
       }
       m.DoDebug = DoDebug;
 
@@ -96,6 +80,17 @@ void RunNtupleBase::Run(){
 
       //==== Run
       m.Loop();
+
+      //==== If negative weighted yield, return.. Cut Too Tight
+      if( m.weighted_yield < 0 ){
+        if(sample.Contains("HN")){
+          signal_unweighted_yield.push_back(0.);
+          signal_weighted_yield.push_back(0.);
+          signal_weighted_yield_stat.push_back(0.);
+          SignalEffLow = true;
+        }
+        continue;
+      }
 
       //==== Sum yield
       if(sample.Contains("HN")){
