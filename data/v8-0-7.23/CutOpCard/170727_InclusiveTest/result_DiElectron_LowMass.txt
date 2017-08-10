@@ -1,0 +1,149 @@
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] Nbjets_nolepveto	==	0
+[CutInfo::PrintCutInfo] PFMET	<	35
+CF	21.6527 +- 4.33317
+Fake	62.4866 +- 19.0167
+Prompt	130.566 +- 20.4029
+=> total bkg = 214.705
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	4123.23	0.00577366	0.653298	0.000176013
+HNElEl_50	2724.52	0.00544152	0.619702	0.000165888
+HNElEl_60	1214.16	0.0044753	0.642007	0.000136432
+HNElEl_70	264.253	0.00339455	0.635422	0.000103485
+HNElEl_80	521.325	0.0114732	0.661583	0.000349766
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] MET2ST	<	8
+[CutInfo::PrintCutInfo] Nbjets_nolepveto	==	0
+CF	27.1206 +- 5.42698
+Fake	85.4033 +- 25.8929
+Prompt	186.067 +- 25.0101
+=> total bkg = 298.591
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	4522.77	0.00633313	0.716602	0.000153349
+HNElEl_50	2968.55	0.00592891	0.675207	0.000143562
+HNElEl_60	1338.72	0.00493441	0.707868	0.000119481
+HNElEl_70	290.013	0.00372545	0.697364	9.02074e-05
+HNElEl_80	593.722	0.0130664	0.753457	0.000316388
+
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] Nbjets_nolepveto	==	0
+[CutInfo::PrintCutInfo] m_lljj_lljjWclosest	<	129
+CF	1.05416 +- 0.211364
+Fake	14.3305 +- 4.59058
+Prompt	11.977 +- 2.0625
+=> total bkg = 27.3616
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	1755.45	0.00245812	0.278139	0.000297529
+HNElEl_50	1377.13	0.00275046	0.313233	0.000332914
+HNElEl_60	702.702	0.0025901	0.371565	0.000313504
+HNElEl_70	104.886	0.00134734	0.252208	0.000163081
+HNElEl_80	154.457	0.00339925	0.196013	0.000411442
+
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] Nbjets_nolepveto	==	0
+[CutInfo::PrintCutInfo] m_jj_lljjWclosest	<	123
+CF	25.1332 +- 5.02922
+Fake	131.926 +- 39.8589
+Prompt	229.786 +- 27.6995
+=> total bkg = 386.845
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	5048.2	0.00706888	0.799853	0.00013185
+HNElEl_50	3366.1	0.00672292	0.765632	0.000125397
+HNElEl_60	1549.59	0.00571166	0.819369	0.000106535
+HNElEl_70	327.239	0.00420366	0.786878	7.84074e-05
+HNElEl_80	643.233	0.0141561	0.816288	0.000264041
+
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] MET2ST  < 9.5
+[CutInfo::PrintCutInfo] Nbjets_nolepveto  ==  0
+[CutInfo::PrintCutInfo] PFMET < 35
+CF  21.6519 +- 4.333
+Fake  62.4866 +- 19.0167
+Prompt  130.566 +- 20.4029
+=> total bkg = 214.704
+Signal  Yield Efficiency  Efficiency@Presel Punzi
+HNElEl_40 4123.23 0.00577366  0.653298  0.000176013
+HNElEl_50 2724.52 0.00544152  0.619702  0.000165888
+HNElEl_60 1214.16 0.0044753 0.642007  0.000136432
+HNElEl_70 264.253 0.00339455  0.635422  0.000103485
+HNElEl_80 521.325 0.0114732 0.661583  0.000349766
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] Nbjets_nolepveto  ==  0
+[CutInfo::PrintCutInfo] m_jj_lljjWclosest < 75
+[CutInfo::PrintCutInfo] m_lljj_lljjWclosest < 131
+CF  1.17141 +- 0.234827
+Fake  14.5986 +- 4.67254
+Prompt  11.3678 +- 2.16336
+=> total bkg = 27.1379
+Signal  Yield Efficiency  Efficiency@Presel Punzi
+HNElEl_40 1815.77 0.00254258  0.287696  0.000305289
+HNElEl_50 1404.96 0.00280604  0.319562  0.000336923
+HNElEl_60 715.169 0.00263606  0.378157  0.000316513
+HNElEl_70 107.033 0.00137493  0.257371  0.000165088
+HNElEl_80 168.506 0.00370842  0.213841  0.000445273
+
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] MET2ST  < 12
+[CutInfo::PrintCutInfo] Nbjets_nolepveto  ==  0
+[CutInfo::PrintCutInfo] PFMET < 40
+[CutInfo::PrintCutInfo] m_jj_lljjWclosest < 82
+[CutInfo::PrintCutInfo] m_lljj_lljjWclosest < 131
+CF  0.901561 +- 0.180843
+Fake  6.70105 +- 2.30953
+Prompt  6.13585 +- 1.69749
+=> total bkg = 13.7385
+Signal  Yield Efficiency  Efficiency@Presel Punzi
+HNElEl_40 1415.33 0.00198185  0.224249  0.000348366
+HNElEl_50 1142.35 0.00228155  0.259831  0.000401046
+HNElEl_60 515.749 0.00190101  0.27271 0.000334156
+HNElEl_70 83.3975 0.00107131  0.200537  0.000188313
+HNElEl_80 140.569 0.0030936 0.178388  0.000543787
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

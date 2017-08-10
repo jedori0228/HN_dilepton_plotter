@@ -1,0 +1,6 @@
+Njets	>=	2	2	1
+#m_ll  > 10  30  20
+#DeltaRl1l2  > 0.0 1.0 20
+#m_lljj_lljjWclosest < 400 300 20
+#MET2STmine	<	50	0	100
+MET2ST < 50  0 100
