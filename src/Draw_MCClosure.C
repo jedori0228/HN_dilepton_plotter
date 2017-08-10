@@ -1,4 +1,5 @@
 #include "canvas_margin.h"
+#include "mylib.h"
 
 void Draw_MCClosure(){
 
@@ -10,10 +11,10 @@ void Draw_MCClosure(){
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  TString channel = "DiMuon";
+  TString channel = "EMu";
 
-  TString filepath = ENV_FILE_PATH+"/"+dataset+"/MCClosure/"+channel+"/";
-  TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/MCClosure/"+channel+"/";
+  TString filepath = ENV_FILE_PATH+"/"+dataset+"/MCClosure/";
+  TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/MCClosure/";
 
   if( !gSystem->mkdir(plotpath, kTRUE) ){
     cout
@@ -26,25 +27,24 @@ void Draw_MCClosure(){
   vector<TString> regions = {
     "Preselection_SS",
     "Preselection_AllCharge",
-    "0nlbjets_SS",
   };
   TString region = "Preselection_SS";
 
   vector<TString> samples = {
-    "TT_powheg", "WJets", "DYJets", "WJets_MG", "DYtoEE", "DYJets_MG",
+    "TT_powheg", "DYJets_MG", "WJets_MG", "WJets",
   };
 
   vector<TString> vars = {
-    "leadingLepton_Pt", "secondLepton_Pt", "Nevents", "Nbjets_nolepveto", "PFMET", "Njets", "secondJet_Pt",
+    "leadingLepton_Pt", "secondLepton_Pt", "Nevents", "Nbjets_nolepveto", "PFMET", "Njets", "secondJet_Pt", "leadingLepton_Type", "secondLepton_Type", "secondLepton_Eta", "leadingLepton_Eta", "secondLepton_mva"
   };
   vector<TString> xtitle = {
-    "Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton p_{T} [GeV]", "onebin", "# of b-jets", "E_{T}^{miss} [GeV]", "# of jets", "Leading Jet p_{T} [GeV]", 
+    "Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton p_{T} [GeV]", "onebin", "# of b-jets", "E_{T}^{miss} [GeV]", "# of jets", "Leading Jet p_{T} [GeV]", "Leading Lepton Type", "Sub-Leading Lepton Type", "Sub-Leading Lepton #eta", "Leading Lepton #eta", "Sub-Leading Lepton MVA"
   };
   vector<double> ymaxs = {
-    50, 100, 400, 100, 50, 50, 50,
+    50, 100, 400, 100, 50, 50, 50, 50, 50, 300, 300, 300,
   };
   vector<int> rebins = {
-    5, 5, 1, 1, 10, 1, 10
+    5, 5, 1, 1, 10, 1, 10, 1, 1, 5, 5, 5
   };
 
   for(unsigned int i=0; i<samples.size(); i++){
@@ -68,6 +68,7 @@ void Draw_MCClosure(){
         TH1D *hist_Measured = (TH1D*)file_Measured->Get(histname);
         TH1D *hist_Predicted = (TH1D*)file_Predicted->Get(histname);
         TH1D *hist_Predicted_up = (TH1D*)file_Predicted->Get(histname+"_up");
+        TH1D *hist_Predicted_down = (TH1D*)file_Predicted->Get(histname+"_down");
 
         if(!hist_Measured || !hist_Predicted) continue;
 
@@ -84,6 +85,9 @@ void Draw_MCClosure(){
           cout << "Measured = " << hist_Measured->GetBinContent(1) << " +- " << hist_Measured->GetBinError(1) << " ("<<hist_Measured->GetEntries() << ")" << endl;
           cout << "Predicted = " << hist_Predicted->GetBinContent(1) << " +- " << hist_Predicted->GetBinError(1) << " ("<<hist_Predicted->GetEntries() << ")" << endl;
           cout << "=> (Measured-Predicted)/Predicted = " << (hist_Measured->GetBinContent(1)-hist_Predicted->GetBinContent(1))/hist_Predicted->GetBinContent(1) << endl;
+          TH1D *temp_measured = (TH1D*)hist_Measured->Clone();
+          temp_measured->Divide(hist_Predicted);
+          cout << "=> Measured/Predicted = " << temp_measured->GetBinContent(1) << " +- " << temp_measured->GetBinError(1) << endl;
         }
 
         hist_Measured->Rebin(rebins.at(j));
@@ -108,7 +112,9 @@ void Draw_MCClosure(){
         if(var.Contains("Pt")) hist_Predicted->GetXaxis()->SetRangeUser(0, 200);
         if(var.Contains("PFMET")) hist_Predicted->GetXaxis()->SetRangeUser(0, 200);
 
-        double hist_ymax = max( hist_Measured->GetMaximum(), hist_Predicted->GetMaximum() );
+        
+        //double hist_ymax = max( hist_Measured->GetMaximum(), hist_Predicted->GetMaximum() );
+        double hist_ymax = max( GetMaximum(hist_Measured), GetMaximum(hist_Predicted) );
         hist_Predicted->GetYaxis()->SetRangeUser(0., hist_ymax*1.5);
 
         TLegend *lg = new TLegend(0.7, 0.7, 0.93, 0.93);
@@ -122,7 +128,8 @@ void Draw_MCClosure(){
         hist_Predicted->GetXaxis()->SetTitle(xtitle.at(j));
         hist_Predicted->GetYaxis()->SetTitle("Events");
 
-        c1->SaveAs(plotpath+"/"+channel+"_"+region+"_"+sample+"_"+var+".pdf");
+        gSystem->mkdir(plotpath+"/"+channel+"/"+region, kTRUE);
+        c1->SaveAs(plotpath+"/"+channel+"/"+region+"/"+sample+"_"+var+".pdf");
         c1->Close();
 
       }
@@ -137,3 +144,19 @@ void Draw_MCClosure(){
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

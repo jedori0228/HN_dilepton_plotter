@@ -33,7 +33,7 @@ void Draw_TnP_Trigger(int period){
   TString base_plotpath = ENV_PLOT_PATH+"/TnP_Results/TriggerSF/"+DataPeriod+"/";
   
   vector<double> abseta = {0., 0.9, 1.2, 2.1, 2.4};
-  vector<TString> fitftns = {"vpvPlusExpo", "vpvPlusExpoPassFail", "voigtPlusExpo", "voigtPlusExpoPassFail", "vpvPlusCheb_3rd", "vpvPlusCheb_4th"};
+  vector<TString> fitftns = {"vpvPlusExpo", "vpvPlusExpoPassFail", "voigtPlusExpo", "voigtPlusExpoPassFail", "vpvPlusCheb_2nd", "vpvPlusCheb_3rd", "vpvPlusCheb_4th"};
   vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8"};
 
   for(unsigned int it_syst=0; it_syst<systs.size(); it_syst++){
@@ -116,10 +116,13 @@ void Draw_TnP_Trigger(int period){
         c1_up->cd();
         
         eff_Data->SetLineColor(kBlack);
-        eff_MC->SetLineColor(kBlue);
         eff_Data->SetMarkerColor(kBlack);
+        eff_Data->SetMarkerStyle(21);
+        eff_Data->SetMarkerSize(1);
+        eff_MC->SetLineColor(kBlue);
         eff_MC->SetMarkerColor(kBlue);
         eff_MC->SetMarkerStyle(21);
+        eff_MC->SetMarkerSize(1);
         
         eff_Data->Draw("ap");
         eff_MC->Draw("psame");
@@ -224,11 +227,14 @@ void Draw_TnP_Trigger(int period){
         c1_up->cd();
         
         eff_Data->SetLineColor(kBlack);
-        eff_MC->SetLineColor(kBlue);
         eff_Data->SetMarkerColor(kBlack);
+        eff_Data->SetMarkerStyle(21);
+        eff_Data->SetMarkerSize(1);
+        eff_MC->SetLineColor(kBlue);
         eff_MC->SetMarkerColor(kBlue);
         eff_MC->SetMarkerStyle(21);
-        
+        eff_MC->SetMarkerSize(1);
+
         eff_Data->Draw("ap");
         eff_MC->Draw("psame");
         

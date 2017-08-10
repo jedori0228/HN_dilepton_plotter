@@ -10,6 +10,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString catversion = getenv("CATVERSION");
   TString dataset = getenv("CATANVERSION");
+  TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
   //====================
   //==== decalre class
@@ -93,8 +94,11 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   //==== Linear
   if(XXX==0){
     m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
+    //m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "VVV", "top", "WW_double"};
     m.histname_suffix = {
       //==== DiMuon
+      "_DiMuon_0jets_SS", // SS 0jet CR
+      "_DiMuon_1jets_SS", // SS 1jet CR
       "_DiMuon_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
       //=== DiElectron
       "_DiElectron_0jets_SS", // SS 0jet CR
@@ -104,6 +108,10 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiElectron_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
       "_DiElectron_0jets_OffZ_SS",
       "_DiElectron_1jets_OffZ_SS",
+      //==== EMu
+      "_EMu_0jets_SS", // SS 0jet CR
+      "_EMu_1jets_SS", // SS 1jet CR
+      "_EMu_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
     };
   }
   //==== Log
@@ -132,8 +140,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.histname = {
     "m_ll",
     "Njets", "Njets_nolepveto", "Nfwdjets", "Nbjets", "Nbjets_nolepveto", "Nbfwdjets",
-    "leadingLepton_Pt", "leadingLepton_Eta",
-    "secondLepton_Pt", "secondLepton_Eta",
+    "leadingLepton_Pt", "leadingLepton_Eta", "leadingLepton_Type",
+    "secondLepton_Pt", "secondLepton_Eta", "secondLepton_Type",
     "leadingJet_Pt", "leadingJet_Eta", 
     "secondJet_Pt", "secondJet_Eta",
     "leadingForwardJet_Pt", "leadingForwardJet_Eta", 
@@ -141,14 +149,14 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "leadingNoLepVetoJet_Pt", "leadingNoLepVetoJet_Eta", 
     "secondNoLepVetoJet_Pt", "secondNoLepVetoJet_Eta",
     "PFMET", "PFMET_phi", "HT", "ST",
-    "Nvtx", "DeltaRl1l2",
+    "Nvtx", "DeltaRl1l2", "Nevents",
   };
 
   m.x_title = {
     "m(ll) [GeV]",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
-    "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta",
-    "Sub-Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton #eta",
+    "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta", "Leading Lepton Type",
+    "Sub-Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton #eta", "Sub-Leading Lepton Type",
     "Leading Jet p_{T} [GeV]", "Leading Jet #eta",
     "Sub-Leading Jet p_{T} [GeV]", "Sub-Leading Jet #eta",
     "Leading Forward Jet p_{T} [GeV]", "Leading Forward Jet #eta",
@@ -156,14 +164,14 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
     "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
     "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]",
-    "# of vertices", "#DeltaR(l_{1},l_{2})",
+    "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin",
   };
 
   m.units = {
     "GeV",
     "int", "int", "int", "int", "int", "int",
-    "GeV", "",
-    "GeV", "",
+    "GeV", "", "int",
+    "GeV", "", "int",
     "GeV", "",
     "GeV", "",
     "GeV", "",
@@ -171,7 +179,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "GeV", "",
     "GeV", "",
     "GeV", "", "GeV", "GeV",
-    "int", "",
+    "int", "", "int",
   };
 
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
@@ -179,6 +187,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //==== PD
     if(m.histname_suffix.at(i).Contains("DiMuon")) m.PrimaryDataset.push_back("DoubleMuon");
     if(m.histname_suffix.at(i).Contains("DiElectron")) m.PrimaryDataset.push_back("DoubleEG");
+    if(m.histname_suffix.at(i).Contains("EMu")) m.PrimaryDataset.push_back("MuonEG");
 
     //==== Log plot boolean
     if(XXX==0) m.UseLogy.push_back(-1);
@@ -304,6 +313,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   //==== prepare plot directories
   //===============================
   
+  m.plotpath = ENV_PLOT_PATH+"/"+m.data_class+"/CR/";
   m.make_plot_directory();
   
   //==========================

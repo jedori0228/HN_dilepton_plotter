@@ -15,6 +15,7 @@
 #include <map>
 #include "canvas_margin.h"
 #include "AnalysisInputs.h"
+#include "mylib.h"
 
 using namespace std;
 

@@ -95,6 +95,7 @@ void Plotter::draw_hist(){
           if(DoDebug) cout << "signal_index = " << signal_index << " => mass = " << signal_mass[signal_index] << endl;
           TString WhichChannel = "MuMu";
           if(histname_suffix[i_cut].Contains("DiElectron")) WhichChannel = "ElEl";
+          if(histname_suffix[i_cut].Contains("EMu")) WhichChannel = "MuEl";
           //==== TChannel
           if( signal_mass[signal_index] < 0 ){
             WhichChannel = WhichChannel+"_Tchannel";
@@ -561,16 +562,8 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   //==== signal_class
   signal_class this_sc = no_class;
   //==== cutdR_cutW is only applied for low mass yet
-  if( histname_suffix[i_cut] == "_cut_MuMuMu_low" ) this_sc = lowmass;
-  if( histname_suffix[i_cut] == "_cut_MuMuMu_high" ) this_sc = highmass;
-  //==== Inclusive
-  if( histname[i_var].Contains("class1") ) this_sc = class1;
-  else if( histname[i_var].Contains("class2") ) this_sc = class2;
-  else if( histname[i_var].Contains("class3") ) this_sc = class3;
-  else if( histname[i_var].Contains("class4") ) this_sc = class4;
-  else if( histname[i_var].Contains("Low") ) this_sc = lowmass;
-  else if( histname[i_var].Contains("Medium") ) this_sc = mediummass;
-  else if( histname[i_var].Contains("High") ) this_sc = highmass;
+  if( histname[i_var].Contains("Low") ) this_sc = lowmass;
+  if( histname[i_var].Contains("High") ) this_sc = highmass;
   
   //==== y=0 line
   double x_0[2], y_0[2];
@@ -605,7 +598,6 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   //==== empty histogram for axis
   TH1D *hist_empty = (TH1D*)mc_stack->GetHists()->At(0)->Clone();
   hist_empty->SetName("DUMMY_FOR_AXIS");
-  hist_empty->GetYaxis()->SetRangeUser( default_y_min, y_max() );
   //=== get dX
   double dx = (hist_empty->GetXaxis()->GetXmax() - hist_empty->GetXaxis()->GetXmin())/hist_empty->GetXaxis()->GetNbins();
   TString YTitle = DoubleToString(dx);
@@ -629,7 +621,6 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   mc_stack->Draw("histsame");
 
   //==== hide X Label for top plot
-  //==== axis setting will be done after we get bottom plot
   hist_empty->GetXaxis()->SetLabelSize(0);
   //==== draw data
   hist_data->Draw("PE1same");
@@ -710,6 +701,10 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   mc_error->Draw("sameE2");
   //==== legend
   legend->AddEntry(mc_error, "Stat.+Syst. Uncert.", "f");
+  //==== ymax
+  double AutoYmax = max( GetMaximum(hist_data), GetMaximum(mc_error) );
+  //hist_empty->GetYaxis()->SetRangeUser( default_y_min, y_max() );
+  hist_empty->GetYaxis()->SetRangeUser( default_y_min, 1.2*AutoYmax );
   c1_up->cd();
   draw_legend(legend, this_sc, DrawData);
   
@@ -976,8 +971,8 @@ void Plotter::mkdir(TString path){
 
 void Plotter::make_plot_directory(){
 
-  TString ENV_PLOT_PATH = getenv("PLOT_PATH");
-  plotpath = ENV_PLOT_PATH+"/"+data_class;
+  //TString ENV_PLOT_PATH = getenv("PLOT_PATH");
+  //plotpath = ENV_PLOT_PATH+"/"+data_class;
 
   for(unsigned int i=0; i<samples_to_use.size(); i++){
     if(samples_to_use.at(i).Contains("fake")) plotpath = plotpath+"/use_FR_method/"+samples_to_use.at(i);

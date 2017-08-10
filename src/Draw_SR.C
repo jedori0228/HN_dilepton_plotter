@@ -10,6 +10,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString catversion = getenv("CATVERSION");
   TString dataset = getenv("CATANVERSION");
+  TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
   //====================
   //==== decalre class
@@ -92,12 +93,21 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== SS
   if(XXX==0){
     m.samples_to_use = {"chargeflip", "Xgamma", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double"};
+    //m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double"};
 
     m.histname_suffix = {
       //==== DiMuon
       "_DiMuon_Preselection_SS", // nobjet, jet>=2;
+      "_DiMuon_Low_SS",
+      "_DiMuon_High_SS",
       //==== DiElectron
       "_DiElectron_Preselection_SS", // OffZ, nobjet, jet>=2;
+      "_DiElectron_Low_SS",
+      "_DiElectron_High_SS",
+      //==== EMu
+      "_EMu_Preselection_SS", // nobjet, jet>=2;
+      "_EMu_Low_SS",
+      "_EMu_High_SS",
     };
   }
   //==== OS
@@ -136,8 +146,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //==== Laeding dijet
     "m_jjptorder", "m_lljjptorder", "m_Leadljjptorder", "m_SubLeadljjptorder",
     "Njets", "Njets_nolepveto", "Nfwdjets", "Nbjets", "Nbjets_nolepveto", "Nbfwdjets",
-    "leadingLepton_Pt", "leadingLepton_Eta",
-    "secondLepton_Pt", "secondLepton_Eta",
+    "leadingLepton_Pt", "leadingLepton_Eta", "leadingLepton_Type",
+    "secondLepton_Pt", "secondLepton_Eta", "secondLepton_Type",
     "leadingJet_Pt", "leadingJet_Eta", 
     "secondJet_Pt", "secondJet_Eta",
     "leadingForwardJet_Pt", "leadingForwardJet_Eta", 
@@ -163,8 +173,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //==== Laeding dijet
     "m(j_{1}j_{2}) [GeV]",  "m(llj_{1}j_{2}) [GeV]", "m(Leading Lepton+j_{1}j_{2}) [GeV]", "m(Sub-Leading Lepton+j_{1}j_{2}) [GeV]",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
-    "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta",
-    "Sub-Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton #eta",
+    "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta", "Leading Lepton Type",
+    "Sub-Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton #eta", "Sub-Leading Lepton Type",
     "Leading Jet p_{T} [GeV]", "Leading Jet #eta",
     "Sub-Leading Jet p_{T} [GeV]", "Sub-Leading Jet #eta",
     "Leading Forward Jet p_{T} [GeV]", "Leading Forward Jet #eta",
@@ -190,8 +200,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //==== Laeding dijet
     "GeV", "GeV", "GeV", "GeV",
     "int", "int", "int", "int", "int", "int",
-    "GeV", "",
-    "GeV", "",
+    "GeV", "", "int",
+    "GeV", "", "int",
     "GeV", "",
     "GeV", "",
     "GeV", "",
@@ -228,6 +238,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //==== PD
     if(m.histname_suffix.at(i).Contains("DiMuon")) m.PrimaryDataset.push_back("DoubleMuon");
     if(m.histname_suffix.at(i).Contains("DiElectron")) m.PrimaryDataset.push_back("DoubleEG");
+    if(m.histname_suffix.at(i).Contains("EMu")) m.PrimaryDataset.push_back("MuonEG");
 
     //==== Log plot boolean
     if(XXX==0) m.UseLogy.push_back(-1);
@@ -238,6 +249,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     if(ScaleMC) m.ApplyMCNormSF.push_back(true);
     else m.ApplyMCNormSF.push_back(false);
     m.drawdata.push_back(false);
+    //m.drawdata.push_back(true);
   }
 
   //====================
@@ -309,13 +321,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== set signal mass for each class
   //=====================================
 
-  m.map_class_to_signal_mass[Plotter::class1] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
-  m.map_class_to_signal_mass[Plotter::class2] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
-  m.map_class_to_signal_mass[Plotter::lowmass] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
-  m.map_class_to_signal_mass[Plotter::class3] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
-  m.map_class_to_signal_mass[Plotter::class4] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
-  m.map_class_to_signal_mass[Plotter::mediummass] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
-  m.map_class_to_signal_mass[Plotter::highmass] = {5, 10, 20, 30, 40, 50, 60, 70, 90, 100, 150, 200, 300, 400, 500, 700, 1000};
+  m.map_class_to_signal_mass[Plotter::lowmass] = {40, 60, 70};
+  m.map_class_to_signal_mass[Plotter::highmass] = {100, 200, 500, 700, 1000, -200, -500, -1000};
 
   //=============
   //==== rebins
@@ -394,6 +401,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== prepare plot directories
   //===============================
   
+  m.plotpath = ENV_PLOT_PATH+"/"+m.data_class+"/SR/";
   m.make_plot_directory();
   
   //==========================

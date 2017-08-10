@@ -89,3 +89,20 @@ void ScaleGraph(TGraphAsymmErrors *a, double c){
   }
 
 }
+
+
+
+double GetMaximum(TH1D* hist){
+
+  TAxis *xaxis = hist->GetXaxis();
+
+  double maxval(-1.);
+  for(int i=1; i<=xaxis->GetNbins(); i++){
+    if( hist->GetBinContent(i) + hist->GetBinError(i) > maxval ){
+      maxval = hist->GetBinContent(i) + hist->GetBinError(i);
+    }
+  }
+
+  return maxval;
+
+}
