@@ -41,7 +41,8 @@ void Plotter::draw_hist(){
       
       cout << "[Drawing " << histname[i_var] << "]" << endl;
       
-      TH1D* MC_stacked_err = NULL;
+      TH1D* MC_stacked_staterr = NULL;
+      TH1D* MC_stacked_allerr = NULL;
       THStack* MC_stacked = new THStack("MC_stacked", "");
       TH1D* hist_data = NULL;
       vector<TH1D*> hist_signal;
@@ -135,7 +136,7 @@ void Plotter::draw_hist(){
         //==== set histogram name, including sample name
         hist_temp->SetName(fullhistname+"_"+current_sample);
 
-        //==== set error separately for fake
+        //==== Stat Error Propations for Fake
 
         if( current_sample.Contains("fake") ){
           TH1D* hist_temp_up = (TH1D*)file->Get(fullhistname+"_up");
@@ -144,25 +145,8 @@ void Plotter::draw_hist(){
           for(int i=1; i<=n_bins; i++){
             double error_propagated = hist_temp_up->GetBinContent(i)-hist_temp->GetBinContent(i);
             double error_sumw2 = hist_temp->GetBinError(i);
+
             double error_combined = sqrt( error_propagated*error_propagated + error_sumw2*error_sumw2 );
-
-            TString WhichSystHere = "FakeLooseID";
-            double error_syst = analysisInputs.CalculatedSysts[WhichSystHere]*(hist_temp->GetBinContent(i));
-
-            error_combined = sqrt(error_combined*error_combined + error_syst*error_syst);
-
-            hist_temp->SetBinError(i, error_combined);
-          }
-        }
-        if( current_sample.Contains("chargeflip") ){
-          int n_bins = hist_temp->GetXaxis()->GetNbins();
-          for(int i=1; i<=n_bins; i++){
-            double error_sumw2 = hist_temp->GetBinError(i);
-
-            TString WhichSystHere = "ChrageFlipSyst";
-            double error_syst = analysisInputs.CalculatedSysts[WhichSystHere]*(hist_temp->GetBinContent(i));
-
-            double error_combined = sqrt(error_sumw2*error_sumw2 + error_syst*error_syst);
 
             hist_temp->SetBinError(i, error_combined);
           }
@@ -183,8 +167,13 @@ void Plotter::draw_hist(){
           //==== get which MC sector
           TString current_MCsector = find_MCsector();
           int n_bins = hist_final->GetXaxis()->GetNbins();
-          if(!MC_stacked_err){
-            MC_stacked_err = new TH1D("MC_stacked_err", "",
+          if(!MC_stacked_allerr){
+            MC_stacked_allerr = new TH1D("MC_stacked_allerr", "",
+                                      n_bins,
+                                      hist_final->GetXaxis()->GetBinLowEdge(1),
+                                      hist_final->GetXaxis()->GetBinUpEdge(n_bins));
+
+            MC_stacked_staterr = new TH1D("MC_stacked_staterr", "",
                                       n_bins,
                                       hist_final->GetXaxis()->GetBinLowEdge(1),
                                       hist_final->GetXaxis()->GetBinUpEdge(n_bins));
@@ -195,23 +184,34 @@ void Plotter::draw_hist(){
           //==== MC Norm Scaling
           if(ApplyMCNormSF.at(i_cut)){
             hist_final->Scale(analysisInputs.MCNormSF[current_sample]);
-            //==== Set MC Norm uncertainty
-            for(int i=1; i<=n_bins; i++){
-              double error_syst = analysisInputs.MCNormSF_uncert[current_sample]*(hist_final->GetBinContent(i));
-              double error_sumw2 = hist_final->GetBinError(i);
-              double error_combined = sqrt( error_syst*error_syst + error_sumw2*error_sumw2 );
+          }
 
-              hist_final->SetBinError(i, error_combined);
-            }
+          //==== Add star error histogram now, just before adding systematic
+          MC_stacked_staterr->Add(hist_final);
+
+          //==== Now Add systematic to histograms
+
+          for(int i=1; i<=n_bins; i++){
+
+            double ThisSyst = 0.;
+            if( current_sample.Contains("fake") ) ThisSyst = analysisInputs.CalculatedSysts["FakeLooseID"];
+            else if( current_sample.Contains("chargeflip") ) ThisSyst = analysisInputs.CalculatedSysts["ChrageFlipSyst"];
+            else ThisSyst = analysisInputs.MCNormSF_uncert[current_sample];
+
+            double error_syst = ThisSyst*(hist_final->GetBinContent(i));
+            double error_sumw2 = hist_final->GetBinError(i);
+            double error_combined = sqrt( error_syst*error_syst + error_sumw2*error_sumw2 );
+
+            hist_final->SetBinError(i, error_combined);
           }
 
           MC_stacked->Add(hist_final);
-          MC_stacked_err->Add(hist_final);
+          MC_stacked_allerr->Add(hist_final);
         }
         //==== data for i_file = bkglist.size()
         else if( i_file == bkglist.size() ){
-          hist_final->SetMarkerStyle(2);
-          hist_final->SetMarkerSize(1);
+          hist_final->SetMarkerStyle(20);
+          hist_final->SetMarkerSize(1.6);
           TString temp_hist_name(hist_final->GetName());
           hist_data = (TH1D*)hist_final->Clone();
         }
@@ -249,14 +249,14 @@ void Plotter::draw_hist(){
 
       if(!drawdata.at(i_cut)){
         TString tmpname = hist_data->GetName();
-        hist_data = (TH1D*)MC_stacked_err->Clone();
+        hist_data = (TH1D*)MC_stacked_allerr->Clone();
         hist_data->SetName(tmpname);
-        hist_data->SetMarkerStyle(2);
-        hist_data->SetMarkerSize(2);
+        hist_data->SetMarkerStyle(20);
+        hist_data->SetMarkerSize(1.6);
         hist_data->SetMarkerColor(kBlack);
         hist_data->SetLineColor(kBlack);
       }
-      draw_canvas(MC_stacked, MC_stacked_err, hist_data, hist_signal, lg, drawdata.at(i_cut), outputfile);
+      draw_canvas(MC_stacked, MC_stacked_staterr, MC_stacked_allerr, hist_data, hist_signal, lg, drawdata.at(i_cut), outputfile);
 
       //==== legend is already deleted in draw_canvas()
       //delete lg; 
@@ -555,7 +555,7 @@ void Plotter::draw_legend(TLegend* lg, signal_class sc, bool DrawData){
   lg->Draw();
 }
 
-void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, vector<TH1D*> hist_signal, TLegend* legend, bool DrawData, TFile *outputf){
+void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerror, TH1D *hist_data, vector<TH1D *> hist_signal, TLegend *legend, bool DrawData, TFile *outputf){
 
   if(!hist_data) return;
 
@@ -586,10 +586,10 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
 
   canvas_margin(c1, c1_up, c1_down);
   
-  c1_up->SetGridx();
-  c1_up->SetGridy();
-  c1_down->SetGridx();
-  c1_down->SetGridy();
+  //c1_up->SetGridx();
+  //c1_up->SetGridy();
+  //c1_down->SetGridx();
+  //c1_down->SetGridy();
   
   c1_up->Draw();
   c1_down->Draw();
@@ -694,15 +694,15 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
     cout << "[Warning] This should not happen!" << endl;
   }
   //==== err
-  mc_error->SetMarkerColorAlpha(kAzure-9, 0);
-  mc_error->SetFillStyle(3013);
-  mc_error->SetFillColor(kBlack);
-  mc_error->SetLineColor(0);
-  mc_error->Draw("sameE2");
+  mc_allerror->SetMarkerColorAlpha(kAzure-9, 0);
+  mc_allerror->SetFillStyle(3013);
+  mc_allerror->SetFillColor(kBlack);
+  mc_allerror->SetLineColor(0);
+  mc_allerror->Draw("sameE2");
   //==== legend
-  legend->AddEntry(mc_error, "Stat.+Syst. Uncert.", "f");
+  legend->AddEntry(mc_allerror, "Stat.+Syst. Uncert.", "f");
   //==== ymax
-  double AutoYmax = max( GetMaximum(hist_data), GetMaximum(mc_error) );
+  double AutoYmax = max( GetMaximum(hist_data), GetMaximum(mc_allerror) );
   //hist_empty->GetYaxis()->SetRangeUser( default_y_min, y_max() );
   hist_empty->GetYaxis()->SetRangeUser( default_y_min, 1.2*AutoYmax );
   c1_up->cd();
@@ -710,14 +710,51 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   
   //==== MC-DATA
   c1_down->cd();
-  TH1D* hist_compare = (TH1D*)hist_data->Clone();
-  hist_compare->Divide(mc_error);
-  hist_compare->SetMaximum(1.5);
-  hist_compare->SetMinimum(0.5);
-  hist_compare->GetXaxis()->SetTitle(x_title[i_var]);
-  hist_compare->SetYTitle("#frac{DATA}{MC}");
-  hist_compare->Draw("PE1same");
-  hist_axis(hist_empty, hist_compare);
+  TH1D* ratio_point = (TH1D*)hist_data->Clone();
+  TH1D* ratio_staterr = (TH1D*)hist_data->Clone();
+  TH1D* ratio_allerr = (TH1D*)hist_data->Clone();
+  for(int i=1; i<=ratio_point->GetXaxis()->GetNbins(); i++){
+    //==== FIXME for zero? how?
+    if(mc_allerror->GetBinContent(i)!=0){
+    //==== ratio point
+    ratio_point->SetBinContent( i, ratio_point->GetBinContent(i) / mc_allerror->GetBinContent(i) );
+    ratio_point->SetBinError  ( i, ratio_point->GetBinError(i)   / mc_allerror->GetBinContent(i) );
+    //==== ratio staterr
+    ratio_staterr->SetBinContent( i, 1. );
+    ratio_staterr->SetBinError( i, mc_staterror->GetBinError(i)/ mc_staterror->GetBinContent(i) );
+    //==== ratio allerr
+    ratio_allerr->SetBinContent( i, 1. );
+    ratio_allerr->SetBinError( i, mc_allerror->GetBinError(i)/ mc_allerror->GetBinContent(i) );
+    }
+  }
+  ratio_allerr->SetMaximum(2.0);
+  ratio_allerr->SetMinimum(0.0);
+  ratio_allerr->GetXaxis()->SetTitle(x_title[i_var]);
+  ratio_allerr->SetYTitle("#frac{Obs.}{Pred.}");
+  ratio_allerr->SetFillColor(kOrange);
+  ratio_allerr->SetMarkerSize(0);
+  ratio_allerr->SetMarkerStyle(0);
+  ratio_allerr->SetLineColor(kWhite);
+  ratio_allerr->Draw("E2same");
+  hist_axis(hist_empty, ratio_allerr);
+
+  ratio_staterr->SetFillColor(kCyan);
+  ratio_staterr->SetMarkerSize(0);
+  ratio_staterr->SetMarkerStyle(0);
+  ratio_staterr->SetLineColor(kWhite);
+  ratio_staterr->Draw("E2same");
+
+  ratio_point->Draw("PE1same");
+
+  TLegend *lg_ratio = new TLegend(0.2, 0.8, 0.6, 0.9);
+  lg_ratio->SetFillStyle(0);
+  lg_ratio->SetBorderSize(0);
+  lg_ratio->SetNColumns(3);
+  lg_ratio->AddEntry(ratio_staterr, "Stat.", "f");
+  lg_ratio->AddEntry(ratio_allerr, "Stat.+Syst.", "f");
+  lg_ratio->AddEntry(ratio_point, "Obs./Pred.", "p");
+  lg_ratio->Draw();
+
   //==== y=1 line
   g1->Draw("same");
   

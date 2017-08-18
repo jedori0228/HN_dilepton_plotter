@@ -50,9 +50,9 @@ public:
   TString find_MCsector();
   void clear_legend_info();
   double coupling_constant(int mass);
-  void fill_legend(TLegend* lg, TH1D* hist);
-  void draw_legend(TLegend* lg, signal_class sc, bool DrawData);
-  void draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, vector<TH1D*> hist_signal, TLegend* legend, bool DrawData, TFile *outputf);
+  void fill_legend(TLegend *lg, TH1D *hist);
+  void draw_legend(TLegend *lg, signal_class sc, bool DrawData);
+  void draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerror, TH1D *hist_data, vector<TH1D *> hist_signal, TLegend *legend, bool DrawData, TFile *outputf);
 
   int n_rebin();
   double y_max();
