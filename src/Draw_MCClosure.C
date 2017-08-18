@@ -11,7 +11,7 @@ void Draw_MCClosure(){
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  TString channel = "EMu";
+  TString channel = "DiMuon";
 
   TString filepath = ENV_FILE_PATH+"/"+dataset+"/MCClosure/";
   TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/MCClosure/";
@@ -26,25 +26,27 @@ void Draw_MCClosure(){
 
   vector<TString> regions = {
     "Preselection_SS",
-    "Preselection_AllCharge",
+    //"Preselection_AllCharge",
   };
   TString region = "Preselection_SS";
 
   vector<TString> samples = {
-    "TT_powheg", "DYJets_MG", "WJets_MG", "WJets",
+    "TT_powheg",
+    "DYJets_MG", "DYJets", "DYJets_positive",
+    "WJets_MG", "WJets", "WJets_positive",
   };
 
   vector<TString> vars = {
-    "leadingLepton_Pt", "secondLepton_Pt", "Nevents", "Nbjets_nolepveto", "PFMET", "Njets", "secondJet_Pt", "leadingLepton_Type", "secondLepton_Type", "secondLepton_Eta", "leadingLepton_Eta", "secondLepton_mva"
+    "leadingLepton_Pt", "secondLepton_Pt", "Nevents", "Nbjets_nolepveto", "PFMET", "Njets", "secondJet_Pt", "leadingLepton_Type", "secondLepton_Type", "secondLepton_Eta", "leadingLepton_Eta", "secondLepton_mva", "secondLepton_RelIso",
   };
   vector<TString> xtitle = {
-    "Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton p_{T} [GeV]", "onebin", "# of b-jets", "E_{T}^{miss} [GeV]", "# of jets", "Leading Jet p_{T} [GeV]", "Leading Lepton Type", "Sub-Leading Lepton Type", "Sub-Leading Lepton #eta", "Leading Lepton #eta", "Sub-Leading Lepton MVA"
+    "Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton p_{T} [GeV]", "onebin", "# of b-jets", "E_{T}^{miss} [GeV]", "# of jets", "Leading Jet p_{T} [GeV]", "Leading Lepton Type", "Sub-Leading Lepton Type", "Sub-Leading Lepton #eta", "Leading Lepton #eta", "Sub-Leading Lepton MVA", "Sub-Leading Lepton RelIso",
   };
   vector<double> ymaxs = {
-    50, 100, 400, 100, 50, 50, 50, 50, 50, 300, 300, 300,
+    50, 100, 400, 100, 50, 50, 50, 50, 50, 300, 300, 300, 300,
   };
   vector<int> rebins = {
-    5, 5, 1, 1, 10, 1, 10, 1, 1, 5, 5, 5
+    5, 5, 1, 1, 10, 1, 10, 1, 1, 5, 5, 5, 1,
   };
 
   for(unsigned int i=0; i<samples.size(); i++){
@@ -88,6 +90,13 @@ void Draw_MCClosure(){
           TH1D *temp_measured = (TH1D*)hist_Measured->Clone();
           temp_measured->Divide(hist_Predicted);
           cout << "=> Measured/Predicted = " << temp_measured->GetBinContent(1) << " +- " << temp_measured->GetBinError(1) << endl;
+          double SystExtra = 0.;
+          double Deviation = fabs(1.-temp_measured->GetBinContent(1));
+          double StatError = temp_measured->GetBinError(1);
+          if(Deviation>StatError){
+            SystExtra = sqrt(Deviation*Deviation-StatError*StatError);
+          }
+          cout << "=> Systematic Extra = " << SystExtra << endl;
         }
 
         hist_Measured->Rebin(rebins.at(j));
