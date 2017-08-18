@@ -224,8 +224,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   if(XXX==-1){
     m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "Vgamma"};
 
-    m.histname_suffix = {"_DiElectron_2jets_OffZ_SS"};
-    m.PrimaryDataset = {"DoubleEG"};
+    m.histname_suffix = {"_DiMuon_Low_SS"};
+    m.PrimaryDataset = {"DoubleMuon"};
     m.UseLogy = {-1};
     m.histname = {"m_ll"};
     m.x_title = {"m(ll) [GeV]"};
@@ -274,13 +274,11 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== set signal mass points
   //=============================
   
-  //m.signal_mass = {40, 60, 200, 500, 1000, -200, -500, -1000};
-  //m.signal_color = {kRed, kMagenta, kBlue, kGray, kBlack, kBlue, kGray, kBlack};
-
-  m.signal_mass =  {40,   60,      70,        100,     200,    500,     700,   1000,   -200,  -500,     -1000};
+  m.signal_mass =  {40,   60,      70,        100,     200,    500,     700,   1000,   -500,  -700,     -1000};
   m.signal_color = {kRed, kOrange, kYellow+2, kGreen,  kBlue,  kViolet, kGray, kBlack, kBlue, kViolet,  kBlack};
 
   m.signal_draw = {true, true, true, true, true, true, true, true, true, true, true};
+  //m.signal_draw = {false, false, false, false, false, true, true, true, true, true, true};
 
   //====================================
   //==== set signal coupling constants
@@ -296,11 +294,11 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 100)] = 0.01;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 200)] = 0.1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 1;
-      m.coupling_constants[make_pair(m.histname_suffix.at(i), 700)] = 1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 700)] = 10;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 1000)] = 10;
-      m.coupling_constants[make_pair(m.histname_suffix.at(i), -200)] = 0.1;
-      m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 1.;
-      m.coupling_constants[make_pair(m.histname_suffix.at(i), -1000)] = 10.;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 10;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -700)] = 100.;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -1000)] = 100.;
     }
 
     //==== OS
@@ -310,8 +308,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 200)] = 100;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 100;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 1000)] = 100;
-      m.coupling_constants[make_pair(m.histname_suffix.at(i), -200)] = 100;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 100;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -700)] = 100;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -1000)] = 100;
     }
   }

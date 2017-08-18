@@ -100,6 +100,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiMuon_0jets_SS", // SS 0jet CR
       "_DiMuon_1jets_SS", // SS 1jet CR
       "_DiMuon_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
+      "_DiMuon_LowCR_SS",
+      "_DiMuon_HighCR_SS",
       //=== DiElectron
       "_DiElectron_0jets_SS", // SS 0jet CR
       "_DiElectron_1jets_SS", // SS 1jet CR
@@ -108,10 +110,14 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiElectron_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
       "_DiElectron_0jets_OffZ_SS",
       "_DiElectron_1jets_OffZ_SS",
+      "_DiElectron_LowCR_SS",
+      "_DiElectron_HighCR_SS",
       //==== EMu
       "_EMu_0jets_SS", // SS 0jet CR
       "_EMu_1jets_SS", // SS 1jet CR
       "_EMu_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
+      "_EMu_LowCR_SS",
+      "_EMu_HighCR_SS",
     };
   }
   //==== Log
@@ -149,6 +155,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "leadingNoLepVetoJet_Pt", "leadingNoLepVetoJet_Eta", 
     "secondNoLepVetoJet_Pt", "secondNoLepVetoJet_Eta",
     "PFMET", "PFMET_phi", "HT", "ST",
+    "MET2overST",
     "Nvtx", "DeltaRl1l2", "Nevents",
   };
 
@@ -164,6 +171,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
     "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
     "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]",
+    "#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]",
     "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin",
   };
 

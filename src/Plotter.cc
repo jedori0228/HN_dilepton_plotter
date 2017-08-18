@@ -562,8 +562,8 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   //==== signal_class
   signal_class this_sc = no_class;
   //==== cutdR_cutW is only applied for low mass yet
-  if( histname[i_var].Contains("Low") ) this_sc = lowmass;
-  if( histname[i_var].Contains("High") ) this_sc = highmass;
+  if( histname_suffix[i_cut].Contains("Low") ) this_sc = lowmass;
+  if( histname_suffix[i_cut].Contains("High") ) this_sc = highmass;
   
   //==== y=0 line
   double x_0[2], y_0[2];
@@ -624,7 +624,7 @@ void Plotter::draw_canvas(THStack* mc_stack, TH1D* mc_error, TH1D* hist_data, ve
   hist_empty->GetXaxis()->SetLabelSize(0);
   //==== draw data
   hist_data->Draw("PE1same");
-  
+
   //==== signal
   if(this_sc == class1){
     for(unsigned int i=0; i<signal_survive_mass.size(); i++){
