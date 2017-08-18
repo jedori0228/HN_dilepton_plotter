@@ -191,12 +191,12 @@ void Plotter::draw_hist(){
 
           //==== Now Add systematic to histograms
 
-          for(int i=1; i<=n_bins; i++){
+          double ThisSyst = 0.;
+          if( current_sample.Contains("fake") ) ThisSyst = analysisInputs.CalculatedSysts["FakeLooseID"];
+          else if( current_sample.Contains("chargeflip") ) ThisSyst = analysisInputs.CalculatedSysts["ChrageFlipSyst"];
+          else ThisSyst = analysisInputs.MCNormSF_uncert[current_sample];
 
-            double ThisSyst = 0.;
-            if( current_sample.Contains("fake") ) ThisSyst = analysisInputs.CalculatedSysts["FakeLooseID"];
-            else if( current_sample.Contains("chargeflip") ) ThisSyst = analysisInputs.CalculatedSysts["ChrageFlipSyst"];
-            else ThisSyst = analysisInputs.MCNormSF_uncert[current_sample];
+          for(int i=1; i<=n_bins; i++){
 
             double error_syst = ThisSyst*(hist_final->GetBinContent(i));
             double error_sumw2 = hist_final->GetBinError(i);
