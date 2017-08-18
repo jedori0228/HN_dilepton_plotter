@@ -1,0 +1,4 @@
+Njets >=  2 2 1
+m_jj_jjWclosest > 50  50  1
+m_jj_jjWclosest < 110 110 1
+#leadingLepton_Pt	<	300	0	60

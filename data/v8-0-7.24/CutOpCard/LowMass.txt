@@ -1,0 +1,3 @@
+Nbjets_nolepveto	==	0	0	1
+PFMET < 80 80	1
+m_lljj_lljjWclosest < 300 300 1
