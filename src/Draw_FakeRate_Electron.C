@@ -5,7 +5,7 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Electron(){
 
-  TString Sample = "QCD";
+  TString Sample = "QCD_newhist";
   TString Lepton = "Electron";
 
   gStyle->SetOptStat(0);
@@ -18,7 +18,7 @@ void Draw_FakeRate_Electron(){
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
   TString filepath = ENV_FILE_PATH+"/"+dataset+"/FakeRateRootfiles/";
-  TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/FakeRateRootfiles/";
+  TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/FakeRateRootfiles/"+Lepton+"_"+Sample+"/";
 
   if( !gSystem->mkdir(plotpath, kTRUE) ){
     cout
@@ -34,14 +34,9 @@ void Draw_FakeRate_Electron(){
   vector<double> ptinit = {10., 15., 20., 25.};
   vector<Color_t> colors = {kRed, kBlack, kBlue, kGreen};
 
-  float etaarray[4] = {0., 0.8, 1.479, 2.5}; 
-  //==== output binning
-  const int N_pt_out = 5;
-  //float ptarray[N_pt_out+1] = {10., 15., 20., 30., 40., 50., 60., 70.};
-  float ptarray[N_pt_out+1] = {10., 15., 20., 35., 45., 60.};
-  //==== rebinnibn original histogram
-  //Double_t xbins[N_pt_out+2] = {0., 10., 15., 20., 30., 40., 50., 60., 70.};
-  Double_t xbins[N_pt_out+2] = {0., 10., 15., 20., 35., 45., 60.};
+  const int N_pt_out = 6;
+  float ptarray[N_pt_out+1] = {10., 15., 20., 35., 45., 60., 70.};
+  float etaarray[4] = {0., 0.8, 1.479, 2.5};
 
   TFile *outroot = new TFile(plotpath+Lepton+"_"+Sample+"_FR.root", "RECREATE");
   TH1D *dummy = new TH1D("dummy", "", 14, 0., 70.);
@@ -58,13 +53,13 @@ void Draw_FakeRate_Electron(){
       TCanvas *c_all = new TCanvas("c_all", "", 800, 800);
       canvas_margin(c_all);
       c_all->cd();
-      TH1D *dummy2 = new TH1D("dummy2", "", N_pt_out, ptarray);
-      hist_axis(dummy2);
-      dummy2->Draw("hist");
-      dummy2->GetYaxis()->SetRangeUser(0., 0.60);
-      dummy2->GetYaxis()->SetTitle("Fake Rate");
-      dummy2->GetXaxis()->SetTitle("p_{T}^{cone} [GeV]");
-
+      TH1D *dummy_merged = new TH1D("dummy_merged", "", N_pt_out, ptarray);
+      hist_axis(dummy_merged);
+      dummy_merged->Draw("hist");
+      dummy_merged->GetYaxis()->SetRangeUser(0., 0.60);
+      dummy_merged->GetYaxis()->SetTitle("Fake Rate");
+      dummy_merged->GetXaxis()->SetTitle("p_{T}^{cone} [GeV]");
+      dummy_merged->GetXaxis()->SetRangeUser(10., 60.);
       //==== Eta Regions
       TLegend *lg2 = new TLegend(0.5, 0.5, 0.93, 0.93);
       lg2->SetFillStyle(0);
@@ -72,10 +67,9 @@ void Draw_FakeRate_Electron(){
 
       TH2D *histout = new TH2D(Lepton+"_"+Sample+"_FR_Awayjet"+jetpt[a]+bjetconfig[b], "", N_pt_out, ptarray, 3, etaarray);
 
-      //==== Trigger
-      TLegend *lg = new TLegend(0.5, 0.5, 0.93, 0.93);
-      lg->SetFillStyle(0);
-      lg->SetBorderSize(0);
+      TH2D *hist_FR2D_F0 = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
+      TH2D *hist_FR2D_F = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
+      hist_FR2D_F->Divide(hist_FR2D_F0);
 
       //==== Eta Loop
       for(int j=0; j<3; j++){
@@ -90,28 +84,28 @@ void Draw_FakeRate_Electron(){
 
         TH1D *merge = new TH1D("merge", "", N_pt_out, ptarray);
 
+        //==== Trigger
+        TLegend *lg = new TLegend(0.5, 0.5, 0.93, 0.93);
+        lg->SetFillStyle(0);
+        lg->SetBorderSize(0);
+
         for(unsigned int i=0; i<triggers.size(); i++){
 
           TString trigger = triggers.at(i);
           TH2D *hist2d_F0 = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
           TH2D *hist2d_F = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
 
-          TH1D *hist_F0 = new TH1D("hist_F0", "", 14, 0., 70.);
-          TH1D *hist_F = new TH1D("hist_F", "", 14, 0., 70.);
-          for(int k=1; k<=14; k++){
+          TH1D *hist_F0 = new TH1D("hist_F0", "", N_pt_out, ptarray);
+          TH1D *hist_F = new TH1D("hist_F", "", N_pt_out, ptarray);
+          for(int k=1; k<=N_pt_out; k++){
             hist_F0->SetBinContent(k, hist2d_F0->GetBinContent(k, j+1));
             hist_F0->SetBinError(k, hist2d_F0->GetBinError(k, j+1));
             hist_F->SetBinContent(k, hist2d_F->GetBinContent(k, j+1));
             hist_F->SetBinError(k, hist2d_F->GetBinError(k, j+1));
           }
 
-          //==== make them {0., 10., 15., 20., 30., 40., 50., 60., 70.};
-          //==== make them {0., 10., 15., 20., 35., 45., 60.};
-          hist_F0 = (TH1D*)hist_F0->Rebin(N_pt_out+1, "hnew1",xbins);
-          hist_F = (TH1D*)hist_F->Rebin(N_pt_out+1, "hnew1",xbins);
-
           hist_F->Divide(hist_F0);
-          for(int k=1; k<=14; k++){
+          for(int k=1; k<=N_pt_out; k++){
             if( hist_F->GetXaxis()->GetBinUpEdge(k)-0.1 < ptinit.at(i) ){
               //hist_F->SetBinContent(k, 0.);
               //hist_F->SetBinError(k, 0.);
@@ -119,47 +113,57 @@ void Draw_FakeRate_Electron(){
           }
 
           //====            1    2    3    4    5    6    7    8
-          //==== hist_F : 0., 10., 15., 20., 35., 45., 60.
+          //==== hist_F : 10., 15., 20., 35., 45., 60., 70.
           //====                 1    2    3    4    5    6    7
-          //==== merge :      10., 15., 20., 35., 45., 60.
+          //==== merge :  10., 15., 20., 35., 45., 60., 70.
           //==== i=0 (ele8)  -> 10-15, 15-20
           //==== i=1 (ele12) -> 20-35
           //==== i=2 (ele17) -> 35~45
           //==== i=3 (ele23) -> 45~
 
           if(i==0){
-            histout->SetBinContent(1, j+1, hist_F->GetBinContent(1+1));
-            histout->SetBinError(1, j+1, hist_F->GetBinError(1+1));
-            histout->SetBinContent(2, j+1,  hist_F->GetBinContent(2+1));
-            histout->SetBinError(2, j+1,  hist_F->GetBinError(2+1));
 
-            merge->SetBinContent(1, hist_F->GetBinContent(1+1));
-            merge->SetBinError(1, hist_F->GetBinError(1+1));
-            merge->SetBinContent(2, hist_F->GetBinContent(2+1));
-            merge->SetBinError(2, hist_F->GetBinError(2+1));
+            for(int k=1; k<=2; k++){
+              histout->SetBinContent(k, j+1, hist_F->GetBinContent(k));
+              histout->SetBinError(k, j+1, hist_F->GetBinError(k));
+
+              merge->SetBinContent(k, hist_F->GetBinContent(k));
+              merge->SetBinError(k, hist_F->GetBinError(k));
+            }
+
           }
           if(i==1){
-            histout->SetBinContent(3, j+1,  hist_F->GetBinContent(3+1));
-            histout->SetBinError(3, j+1,  hist_F->GetBinError(3+1));
 
-            merge->SetBinContent(3, hist_F->GetBinContent(3+1));
-            merge->SetBinError(3, hist_F->GetBinError(3+1));
+            for(int k=3; k<=3; k++){
+              histout->SetBinContent(k, j+1, hist_F->GetBinContent(k));
+              histout->SetBinError(k, j+1, hist_F->GetBinError(k));
+
+              merge->SetBinContent(k, hist_F->GetBinContent(k));
+              merge->SetBinError(k, hist_F->GetBinError(k));
+            }
+
           }
           if(i==2){
-            histout->SetBinContent(4, j+1,  hist_F->GetBinContent(4+1));
-            histout->SetBinError(4, j+1,  hist_F->GetBinError(4+1));
 
-            merge->SetBinContent(4, hist_F->GetBinContent(4+1));
-            merge->SetBinError(4, hist_F->GetBinError(4+1));
+            for(int k=4; k<=4; k++){
+              histout->SetBinContent(k, j+1, hist_F->GetBinContent(k));
+              histout->SetBinError(k, j+1, hist_F->GetBinError(k));
+
+              merge->SetBinContent(k, hist_F->GetBinContent(k));
+              merge->SetBinError(k, hist_F->GetBinError(k));
+            }
+
           }
           if(i==3){
-            for(int k=5; k<=N_pt_out; k++){
-              histout->SetBinContent(k, j+1, hist_F->GetBinContent(k+1));
-              histout->SetBinError(k, j+1, hist_F->GetBinError(k+1));
 
-              merge->SetBinContent(k, hist_F->GetBinContent(k+1));
-              merge->SetBinError(k, hist_F->GetBinError(k+1));
+            for(int k=5; k<=N_pt_out; k++){
+              histout->SetBinContent(k, j+1, hist_F->GetBinContent(k));
+              histout->SetBinError(k, j+1, hist_F->GetBinError(k));
+
+              merge->SetBinContent(k, hist_F->GetBinContent(k));
+              merge->SetBinError(k, hist_F->GetBinError(k));
             }
+
           }
 
           TGraphAsymmErrors *gr = hist_to_graph(hist_F);
@@ -191,6 +195,7 @@ void Draw_FakeRate_Electron(){
 
       outroot->cd();
       histout->Write();
+      hist_FR2D_F->Write();
 
       c_all->cd();
       lg2->Draw();
