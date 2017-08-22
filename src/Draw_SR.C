@@ -222,13 +222,13 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
   //==== TEST
   if(XXX==-1){
-    m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "Vgamma"};
+    m.samples_to_use = {"chargeflip", "Xgamma", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double"};
 
-    m.histname_suffix = {"_DiMuon_Low_SS"};
+    m.histname_suffix = {"_DiMuon_Preselection_SS"};
     m.PrimaryDataset = {"DoubleMuon"};
     m.UseLogy = {-1};
-    m.histname = {"m_ll"};
-    m.x_title = {"m(ll) [GeV]"};
+    m.histname = {"m_lljj_lljjWclosest"};
+    m.x_title = {"m(lljj_{W}) [GeV]"};
     m.units = {"GeV"};
 
   }
@@ -251,6 +251,11 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     m.drawdata.push_back(false);
     //m.drawdata.push_back(true);
   }
+
+  //==== FIXME test
+  //m.histname = {"m_jj_jjWclosest"};
+  //m.x_title = {"m(jj_{W}) [GeV]"};
+  //m.units = {"GeV"};
 
   //====================
   //==== make bkg list
