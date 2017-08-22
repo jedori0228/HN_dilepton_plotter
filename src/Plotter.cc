@@ -137,7 +137,6 @@ void Plotter::draw_hist(){
         hist_temp->SetName(fullhistname+"_"+current_sample);
 
         //==== Stat Error Propations for Fake
-
         if( current_sample.Contains("fake") ){
           TH1D* hist_temp_up = (TH1D*)file->Get(fullhistname+"_up");
           TH1D* hist_temp_down = (TH1D*)file->Get(fullhistname+"_down");
@@ -194,7 +193,11 @@ void Plotter::draw_hist(){
           double ThisSyst = 0.;
           if( current_sample.Contains("fake") ) ThisSyst = analysisInputs.CalculatedSysts["FakeLooseID"];
           else if( current_sample.Contains("chargeflip") ) ThisSyst = analysisInputs.CalculatedSysts["ChrageFlipSyst"];
-          else ThisSyst = analysisInputs.MCNormSF_uncert[current_sample];
+          else{
+            double mcnorm = analysisInputs.MCNormSF_uncert[current_sample];
+            double lumi = analysisInputs.CalculatedSysts["Luminosity"];
+            ThisSyst = sqrt( mcnorm*mcnorm + lumi*lumi );
+          }
 
           for(int i=1; i<=n_bins; i++){
 
@@ -564,6 +567,11 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   //==== cutdR_cutW is only applied for low mass yet
   if( histname_suffix[i_cut].Contains("Low") ) this_sc = lowmass;
   if( histname_suffix[i_cut].Contains("High") ) this_sc = highmass;
+  //==== Special Lines
+  if( histname[i_var].Contains("jjWclosest") ){
+    if( histname[i_var].Contains("lljjWclosest") ) this_sc = lowmass;
+    else this_sc = highmass;
+  }
   
   //==== y=0 line
   double x_0[2], y_0[2];
