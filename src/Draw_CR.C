@@ -39,19 +39,23 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["DY"] = {"DYJets_10to50", "DYJets"};
   m.map_sample_string_to_list["WJets"] = {"WJets"};
   m.map_sample_string_to_list["VV_excl"] = {
+    //"WZTo3LNu_mllmin01",
     "WZTo3LNu_powheg",
-    "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau",
+    "WZto2L2Q_amcatnlo",
+    "ZZTo4L_powheg", "ZZTo2L2Nu_Powheg", "ZZTo2L2Q_Powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",
+    "WWTo2L2Nu", "ggWWto2L2Nu",
   };
   m.map_sample_string_to_list["VV_incl"] = {"WZ", "ZZ", "WW"};
   m.map_sample_string_to_list["WZ_excl"] = {"WZTo3LNu_powheg"};
   m.map_sample_string_to_list["ZZ_excl"] = {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"};
   m.map_sample_string_to_list["VVV"] = {"WWW", "WWZ", "WZZ", "ZZZ"};
-  m.map_sample_string_to_list["ttbar"] = {"TTJets_aMC"};
+  m.map_sample_string_to_list["ttbar"] = {"TT_powheg"};
   m.map_sample_string_to_list["ttbar_ll"] = {"TTLL_powheg"};
   m.map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
-  m.map_sample_string_to_list["top"] = {"TTLL_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "WGtoLNuG", "ZGto2LG"};
+  m.map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
+  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"};
+  //m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
   m.map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WGtoLNuG"};
   m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
@@ -96,12 +100,17 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
     //m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "VVV", "top", "WW_double"};
     m.histname_suffix = {
+
       //==== DiMuon
       "_DiMuon_0jets_SS", // SS 0jet CR
       "_DiMuon_1jets_SS", // SS 1jet CR
+      "_DiMuon_1jets_0nlbjets_SS",
+      "_DiMuon_1jets_0nlbjets_mllge100_SS",
+      "_DiMuon_0nlbjets_SS",
       "_DiMuon_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
       "_DiMuon_LowCR_SS",
       "_DiMuon_HighCR_SS",
+
       //=== DiElectron
       "_DiElectron_0jets_SS", // SS 0jet CR
       "_DiElectron_1jets_SS", // SS 1jet CR
@@ -112,23 +121,41 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiElectron_1jets_OffZ_SS",
       "_DiElectron_LowCR_SS",
       "_DiElectron_HighCR_SS",
+      "_DiElectron_1jets_0nlbjets_OffZ_SS",
+      "_DiElectron_1jets_0nlbjets_mllge100_OffZ_SS",
+      "_DiElectron_0nlbjets_OffZ_SS",
+
       //==== EMu
       "_EMu_0jets_SS", // SS 0jet CR
       "_EMu_1jets_SS", // SS 1jet CR
       "_EMu_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
       "_EMu_LowCR_SS",
       "_EMu_HighCR_SS",
+      "_EMu_1jets_0nlbjets_SS",
+      "_EMu_1jets_0nlbjets_mllge100_SS",
+      "_EMu_0nlbjets_SS",
+
+
     };
   }
   //==== Log
   //==== Use DY
   if(XXX==1){
-    m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
+    //m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
+    m.samples_to_use = {"VV_excl", "Xgamma_noDY", "VVV", "top", "DY", "WW_double"};
     m.histname_suffix = {
+/*
       "_DiElectron_OnZ_OS", // OS OnZ CR (DY Prompt)
       "_DiElectron_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
       "_DiElectron_1jets_OnZ_OS", // OS 1jet OnZ CR (DY+jet)
       "_DiElectron_Inclusive1nlbjets_OS", // OS bjet>=1 (Prompt+NonPrompt)
+      "_DiMuon_OnZ_OS", // OS OnZ CR (DY Prompt)
+      "_DiMuon_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
+      "_DiMuon_1jets_OnZ_OS", // OS 1jet OnZ CR (DY+jet)
+      "_DiMuon_Inclusive1nlbjets_OS", // OS bjet>=1 (Prompt+NonPrompt)
+*/
+      "_DiMuon_0jets_OnZ_OS",
+      "_DiElectron_0jets_OnZ_OS",
     };
   }
   if(XXX==2){
@@ -200,7 +227,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
 
     //==== Log plot boolean
     if(XXX==0) m.UseLogy.push_back(-1);
-    else if(XXX==1) m.UseLogy.push_back(100);
+    else if(XXX==1) m.UseLogy.push_back(-1);
     else if(XXX==2) m.UseLogy.push_back(-1);
     else m.UseLogy.push_back(-1);
 
@@ -225,12 +252,12 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     if(ScaleMC) m.ApplyMCNormSF = {true};
     else m.ApplyMCNormSF = {false};
   }
-
+/*
   //==== FIXME test
-  //m.histname = {"MET2overST"};
-  //m.x_title = {"#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]"};
-  //m.units = {"GeV"};
-
+  m.histname = {"leadingLepton_Pt"};
+  m.x_title = {"#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]"};
+  m.units = {"GeV"};
+*/
   //====================
   //==== make bkg list
   //====================

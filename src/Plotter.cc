@@ -103,7 +103,7 @@ void Plotter::draw_hist(){
           }
           TString string_signal_mass = "HN"+WhichChannel+"_"+TString::Itoa(abs(signal_mass[signal_index]),10);
 
-          filepath = "./rootfiles/"+data_class+"/"+filename_prefix+"_SK"+string_signal_mass+filename_suffix;
+          filepath = "./rootfiles/"+data_class+"/Signal/"+filename_prefix+"_SK"+string_signal_mass+filename_suffix;
           current_sample = string_signal_mass;
         }
 
@@ -159,6 +159,16 @@ void Plotter::draw_hist(){
         
         //==== make overflows bins
         TH1D *hist_final = MakeOverflowBin(hist_temp);
+
+        //==== Remove Negative bins
+        TAxis *xaxis = hist_final->GetXaxis();
+        for(int ccc=1; ccc<=xaxis->GetNbins(); ccc++){
+          if(DoDebug) cout << current_sample << "\t["<<xaxis->GetBinLowEdge(ccc) <<", "<<xaxis->GetBinUpEdge(ccc) << "] : " << hist_final->GetBinContent(ccc) << endl;
+          if(hist_final->GetBinContent(ccc)<0){
+            hist_final->SetBinContent(ccc, 0.);
+            hist_final->SetBinError(ccc, 0.);
+          }
+        }
         
         //==== Set Attributes here
         //==== bkg
@@ -615,9 +625,13 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   hist_empty->SetLineColor(0);
   hist_empty->SetMarkerSize(0);
   hist_empty->SetMarkerColor(0);
+  double Ymin = default_y_min;
+  double YmaxScale = 1.2;
   if(UseLogy.at(i_cut)>0){
-    gPad->SetLogy();
+    Ymin = UseLogy.at(i_cut);
+    YmaxScale = 10;
     hist_empty->SetMinimum(UseLogy.at(i_cut));
+    c1_up->SetLogy();
   }
   hist_empty->Draw("histsame");
   
@@ -712,7 +726,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   //==== ymax
   double AutoYmax = max( GetMaximum(hist_data), GetMaximum(mc_allerror) );
   //hist_empty->GetYaxis()->SetRangeUser( default_y_min, y_max() );
-  hist_empty->GetYaxis()->SetRangeUser( default_y_min, 1.2*AutoYmax );
+  hist_empty->GetYaxis()->SetRangeUser( Ymin, YmaxScale*AutoYmax );
   c1_up->cd();
   draw_legend(legend, this_sc, DrawData);
   
@@ -771,10 +785,10 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   TLatex latex_CMSPriliminary, latex_Lumi;
   latex_CMSPriliminary.SetNDC();
   latex_Lumi.SetNDC();
-    latex_CMSPriliminary.SetTextSize(0.035);
-    latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
-    latex_Lumi.SetTextSize(0.035);
-    latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+  latex_CMSPriliminary.SetTextSize(0.035);
+  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+  latex_Lumi.SetTextSize(0.035);
+  latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
   mkdir(thiscut_plotpath);
   c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".pdf");

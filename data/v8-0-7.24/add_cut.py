@@ -1,17 +1,23 @@
 import os
 
-#filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
-filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
+filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
+#filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
 
-From = "_DiElectron_0jets_SS"
+From = "_DiMuon_Preselection_SS"
 Tos   = [
+
       ##==== DiMuon
       #"_DiMuon_0jets_SS", ## SS 0jet CR
       #"_DiMuon_1jets_SS", ## SS 1jet CR
+      #"_DiMuon_1jets_0nlbjets_SS",
+      #"_DiMuon_1jets_0nlbjets_mllge100_SS",
+      #"_DiMuon_0nlbjets_SS",
       #"_DiMuon_Inclusive1nlbjets_SS", ## SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
-      "_DiMuon_LowCR_SS",
-      "_DiMuon_HighCR_SS",
-      ##==== DiElectron
+      #"_DiMuon_LowCR_SS",
+      #"_DiMuon_HighCR_SS",
+
+
+      ##=== DiElectron
       #"_DiElectron_0jets_SS", ## SS 0jet CR
       #"_DiElectron_1jets_SS", ## SS 1jet CR
       #"_DiElectron_0jets_OnZ_SS", ## SS 0jet+OnZ CR (CF)
@@ -19,14 +25,25 @@ Tos   = [
       #"_DiElectron_Inclusive1nlbjets_SS", ## SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
       #"_DiElectron_0jets_OffZ_SS",
       #"_DiElectron_1jets_OffZ_SS",
-      "_DiElectron_LowCR_SS",
-      "_DiElectron_HighCR_SS",
+      #"_DiElectron_LowCR_SS",
+      #"_DiElectron_HighCR_SS",
+      #"_DiElectron_1jets_0nlbjets_OffZ_SS",
+      #"_DiElectron_1jets_0nlbjets_mllge100_OffZ_SS",
+      #"_DiElectron_0nlbjets_OffZ_SS",
+
       ##==== EMu
       #"_EMu_0jets_SS", ## SS 0jet CR
       #"_EMu_1jets_SS", ## SS 1jet CR
       #"_EMu_Inclusive1nlbjets_SS", ## SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
-      "_EMu_LowCR_SS",
-      "_EMu_HighCR_SS",
+      #"_EMu_LowCR_SS",
+      #"_EMu_HighCR_SS",
+      #"_EMu_1jets_0nlbjets_SS",
+      #"_EMu_1jets_0nlbjets_mllge100_SS",
+      #"_EMu_0nlbjets_SS",
+
+      "_DiMuon_Preselection_secondptge20_SS",
+
+
 ]
 
 for filename in filenames:

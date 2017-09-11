@@ -39,20 +39,24 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["DY"] = {"DYJets_10to50", "DYJets"};
   m.map_sample_string_to_list["WJets"] = {"WJets"};
   m.map_sample_string_to_list["VV_excl"] = {
-    "WZTo3LNu_powheg", "WZto2L2Q_amcatnlo",
-    "ZZTo4L_powheg", "ZZTo2L2Nu_Powheg", "ZZTo2L2Q_Powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau",
+    //"WZTo3LNu_mllmin01",
+    "WZTo3LNu_powheg",
+    "WZto2L2Q_amcatnlo",
+    "ZZTo4L_powheg", "ZZTo2L2Nu_Powheg", "ZZTo2L2Q_Powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",
     "WWTo2L2Nu", "ggWWto2L2Nu",
   };
   m.map_sample_string_to_list["VV_incl"] = {"WZ", "ZZ", "WW"};
   m.map_sample_string_to_list["WZ_excl"] = {"WZTo3LNu_powheg"};
   m.map_sample_string_to_list["ZZ_excl"] = {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"};
   m.map_sample_string_to_list["VVV"] = {"WWW", "WWZ", "WZZ", "ZZZ"};
-  m.map_sample_string_to_list["ttbar"] = {"TTJets_aMC"};
+  m.map_sample_string_to_list["ttbar"] = {"TT_powheg"};
   m.map_sample_string_to_list["ttbar_ll"] = {"TTLL_powheg"};
   m.map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
-  m.map_sample_string_to_list["top"] = {"TTLL_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "WGtoLNuG", "ZGto2LG"};
+  m.map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
+  m.map_sample_string_to_list["top_tt"] = {"TT_powheg", "ttW", "ttZ", "ttH_nonbb"};
+  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"}; //, "WgstarToLNuMuMu", "WgstarToLNuEE"};
+  //m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
   m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
   m.map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
@@ -74,6 +78,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["ttV"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["ttH"] = make_pair("ttH", kOrange);
   m.map_sample_string_to_legendinfo["top"] = make_pair("top", kRed);
+  m.map_sample_string_to_legendinfo["top_tt"] = make_pair("top", kRed);
   m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X#gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
@@ -96,24 +101,31 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double"};
 
     m.histname_suffix = {
+
       //==== DiMuon
       "_DiMuon_Preselection_SS", // nobjet, jet>=2;
       "_DiMuon_Low_SS",
       "_DiMuon_High_SS",
+      "_DiMuon_Preselection_secondptge20_SS",
+
       //==== DiElectron
       "_DiElectron_Preselection_SS", // OffZ, nobjet, jet>=2;
       "_DiElectron_Low_SS",
       "_DiElectron_High_SS",
+
       //==== EMu
       "_EMu_Preselection_SS", // nobjet, jet>=2;
       "_EMu_Low_SS",
       "_EMu_High_SS",
+
     };
   }
   //==== OS
   if(XXX==1){
-    m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
+    //m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
+    m.samples_to_use = {"VV_excl", "Xgamma_noDY", "VVV", "top_tt", "DY", "WW_double"};
     m.histname_suffix = {
+      "_DiMuon_Preselection_AboveZ_AllCharge",
       "_DiElectron_Preselection_OS",
     };
   }
@@ -248,15 +260,19 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
     if(ScaleMC) m.ApplyMCNormSF.push_back(true);
     else m.ApplyMCNormSF.push_back(false);
-    m.drawdata.push_back(false);
+
+    if(m.histname_suffix.at(i).Contains("Preselection")) m.drawdata.push_back(true);
+    else m.drawdata.push_back(false);
+
+    //m.drawdata.push_back(false);
     //m.drawdata.push_back(true);
   }
-
+/*
   //==== FIXME test
-  //m.histname = {"m_jj_jjWclosest"};
-  //m.x_title = {"m(jj_{W}) [GeV]"};
-  //m.units = {"GeV"};
-
+  m.histname = {"secondLepton_Pt"};
+  m.x_title = {"Sub-Leading Lepton p_{T} [GeV]"};
+  m.units = {"GeV"};
+*/
   //====================
   //==== make bkg list
   //====================

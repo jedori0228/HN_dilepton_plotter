@@ -1,12 +1,9 @@
 #include "canvas_margin.h"
 #include "mylib.h"
 
-TString DoubleToString(double a);
-
 void Draw_FakeSampleDistribution(){
 
-  TString Sample = "QCD";
-  TString Lepton = "Muon";
+  vector<TString> Leptons = {"Muon_v7_SIP3p5"};
 
   gStyle->SetOptStat(0);
   TH1::AddDirectory(kFALSE);
@@ -17,8 +14,8 @@ void Draw_FakeSampleDistribution(){
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  TString filepath = ENV_FILE_PATH+"/"+dataset+"/FakeRateRootfiles/";
-  TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/FakeRateRootfiles/";
+  TString filepath = ENV_FILE_PATH+"/"+dataset+"/FakeRateRootfiles_Norm/";
+  TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/FakeSampleDistribution/";
 
   if( !gSystem->mkdir(plotpath, kTRUE) ){
     cout
@@ -28,98 +25,182 @@ void Draw_FakeSampleDistribution(){
     << endl;
   }
 
-  TFile *file = new TFile(filepath+"LQOUT_"+Lepton+"_"+Sample+".root");
+  vector<TString> samples = {
+    "DY", "WJets", "top", "VV", "VGamma",
+  };
+  vector<TString> alias = {
+    "DY", "W + Jets", "top", "VV", "V#gamma",
+  };
+  vector<Color_t> colors = {
+    kYellow, kGreen, kRed, kOrange, kSpring-7,
+  };
 
-  vector<TString> triggers = {"HLT_Mu3_PFJet40_v", "HLT_Mu8_v" ,"HLT_Mu17_v"};
-  if(Lepton=="Electron") triggers = {"HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_v" ,"HLT_Ele17_CaloIdL_TrackIdL_IsoVL_v", "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_v"};
+  vector<TString> vars_tmp = {
+    "pt_cone" ,"MT", "PFMET"
+  };
+  vector<int> rebins_tmp = {
+    10, 10, 10
+  };
+  if(vars_tmp.size()!=rebins_tmp.size()){
+    cout << "vars_tmp.size()!=rebins_tmp.size()" << endl;
+    return;
+  }
 
-  vector<TString> vars = {"RelIso", "dXY", "dZ"};
-  vector<TString> xtitle = {"RelIso", "dXY [cm]", "dZ [cm]"};
+  vector<TString> vars;
+  vector<int> rebins;
+  for(unsigned int i=0; i<vars_tmp.size(); i++){
+    vars.push_back(vars_tmp.at(i)+"_F0");
+    vars.push_back(vars_tmp.at(i)+"_F");
+    rebins.push_back(rebins_tmp.at(i));
+    rebins.push_back(rebins_tmp.at(i));
+  }
 
-  const int N_pt_out = 5;
-  float ptarray[N_pt_out+1] = {10., 20., 30., 40., 50., 60.};
-  float etaarray[4] = {0., 0.8, 1.479, 2.5};
+  //==== y=1 line
+  double x_1[2], y_1[2];
+  x_1[0] = 1000;  y_1[0] = 1;
+  x_1[1] = -1000;  y_1[1] = 1;
+  TGraph *g1 = new TGraph(2, x_1, y_1);
 
-  TFile *outroot = new TFile(plotpath+Lepton+"_"+Sample+"_FR.root", "RECREATE");
-  TH1D *dummy = new TH1D("dummy", "", 14, 0., 70.);
+  for(unsigned int i=0; i<Leptons.size(); i++){
 
-  TString jetpt[4] = {"20", "30", "40", "60"};
-  TString bjetconfig[5] = {"", "_withbjet_Medium", "_withoutbjet_Medium", "_withbjet_Loose", "_withoutbjet_Loose"};
+    TString Lepton = Leptons.at(i);
 
-  //==== AwayJet Pt Loop
-  for(int a=0; a<4; a++){
+    gSystem->mkdir(plotpath+Lepton, kTRUE);
 
-    //==== bjet config
-    for(int b=0; b<5; b++){
+    TString Lep = "El";
+    if(Lepton.Contains("Muon")) Lep = "Mu";
 
-      //==== variables
-      for(unsigned int c=0; c<vars.size(); c++){
+    TString PD = "DoubleEG";
+    if(Lepton.Contains("Muon")) PD = "DoubleMuon";
 
-        for(unsigned int i=0; i<triggers.size(); i++){
+    TString lepflavour = "Electron";
+    if(Lepton.Contains("Muon")) lepflavour = "Muon";
 
-        TString var = vars.at(c);
+    TString data_filename = "FRCalculator_"+Lep+"_dxysig_DILEP_data_"+PD+"_cat_v8-0-7.root";
+    TFile *file_data = new TFile(filepath+Lepton+"/"+data_filename);
 
-        TCanvas *c_all = new TCanvas("c_all", "", 800, 800);
-        canvas_margin(c_all);
-        c_all->cd();
-        TH1D *dummy2 = new TH1D("dummy2", "", N_pt_out, ptarray);
-        hist_axis(dummy2);
-        dummy2->Draw("hist");
-        dummy2->GetYaxis()->SetRangeUser(0., 0.25);
-        dummy2->GetYaxis()->SetTitle("Fake Rate");
-        dummy2->GetXaxis()->SetTitle("p_{T}^{cone} [GeV]");
-        TLegend *lg2 = new TLegend(0.5, 0.5, 0.93, 0.93);
-        lg2->SetFillStyle(0);
-        lg2->SetBorderSize(0);
+    for(unsigned int k=0; k<vars.size(); k++){
 
-        TH2D *histout = new TH2D(Lepton+"_"+Sample+"_FR_Awayjet"+jetpt[a]+bjetconfig[b], "", N_pt_out, ptarray, 3, etaarray);
+      TString var = vars.at(k);
+      TString histname = "Single"+lepflavour+"Trigger_Dijet_Awayjet_40_"+var;
 
-        TString trigger = triggers.at(i);
+      TH1D *hist_data = (TH1D *)file_data->Get(histname);
+      hist_data->Rebin(rebins.at(k));
+      hist_data->SetMarkerStyle(20);
+      hist_data->SetMarkerSize(1.6);
 
-        TH1D *hist2d_F0 = (TH1D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_"+var+"_F0");
-        TH1D *hist2d_F = (TH1D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_"+var+"_F");
+      THStack *mc_stack = new THStack("mc_stack", "");
+      TH1D* MC_stacked_allerr = NULL;
+      for(unsigned int l=0; l<samples.size(); l++){
+        TString sample = samples.at(l);
+        TFile *file_tmp = new TFile(filepath+Lepton+"/FRCalculator_"+Lep+"_dxysig_DILEP_SK"+sample+"_cat_v8-0-7.root");
+        TH1D *hist_tmp = (TH1D *)file_tmp->Get(histname);
+        if(!hist_tmp) continue;
 
-        double AutoYmax = max( GetMaximum(hist2d_F0), GetMaximum(hist2d_F) );
-        dummy->GetYaxis()->SetRangeUser(0., 1.2*AutoYmax);
+        hist_tmp->Rebin(rebins.at(k));
+        hist_tmp->SetFillColor(colors.at(l));
+        mc_stack->Add(hist_tmp);
 
-        hist2d_F0->Draw("hist");
-        hist2d_F0->GetXaxis()->SetTitle(xtitle.at(c));
-        if(var=="dXY") hist2d_F0->GetXaxis()->SetRangeUser(0., 0.2);
-        hist2d_F0->SetTitle("");
-        hist2d_F0->SetLineColor(kBlack);
-        hist2d_F->SetLineColor(kRed);
-
-        hist2d_F0->Draw("hist");
-        hist2d_F->Draw("histsame");
-
-        TString thisplotpath = plotpath+"Variables/"+trigger+"/";
-        gSystem->mkdir(thisplotpath, kTRUE);
-        c_all->SaveAs(thisplotpath+Lepton+"_"+jetpt[a]+bjetconfig[b]+"_"+Sample+"_"+var+".pdf");
-        c_all->Close();
-
-
+        int n_bins = hist_tmp->GetXaxis()->GetNbins();
+        if(!MC_stacked_allerr){
+          MC_stacked_allerr = new TH1D("MC_stacked_allerr", "",
+                                    n_bins,
+                                    hist_tmp->GetXaxis()->GetBinLowEdge(1),
+                                    hist_tmp->GetXaxis()->GetBinUpEdge(n_bins));
         }
+        MC_stacked_allerr->Add(hist_tmp);
+
       }
 
-    } // END b-jet config loop
+      //==== Draw
 
-  } // END Awayjet pt loop
+      TCanvas *c1 = new TCanvas("c1", "", 800, 800);
+      TPad *c1_up;
+      TPad *c1_down;
+      c1_up = new TPad("c1", "", 0, 0.25, 1, 1);
+      c1_down = new TPad("c1_down", "", 0, 0, 1, 0.25);
+
+      canvas_margin(c1, c1_up, c1_down);
+
+      c1_up->Draw();
+      c1_down->Draw();
+      c1_up->cd();
+
+      TH1D *hist_empty = (TH1D*)mc_stack->GetHists()->At(0)->Clone();
+      hist_empty->SetName("DUMMY_FOR_AXIS");
+      hist_empty->SetLineWidth(0);
+      hist_empty->SetLineColor(0);
+      hist_empty->SetMarkerSize(0);
+      hist_empty->SetMarkerColor(0);
+      hist_empty->Draw("histsame");
+
+      double x_min = hist_empty->GetXaxis()->GetXmin();
+      double x_max = hist_empty->GetXaxis()->GetXmax();
+      if(var.Contains("MT")){
+        x_min = 0.;
+        x_max = 200.;
+      }
+      if(var.Contains("PFMET")){
+        x_min = 0.;
+        x_max = 200.;
+      }
+      hist_empty->GetXaxis()->SetRangeUser(x_min, x_max);
+
+      double ymax = max( GetMaximum(hist_data), GetMaximum(MC_stacked_allerr) );
+      hist_empty->GetYaxis()->SetRangeUser(0.,1.2*ymax);
+
+      mc_stack->Draw("histsame");
+      hist_data->Draw("psame");
+
+      c1_down->cd();
+      TH1D* ratio_point = (TH1D*)hist_data->Clone();
+      TH1D* ratio_allerr = (TH1D*)hist_data->Clone();
+      for(int i=1; i<=ratio_point->GetXaxis()->GetNbins(); i++){
+        //==== FIXME for zero? how?
+        if(MC_stacked_allerr->GetBinContent(i)!=0){
+        //==== ratio point
+        ratio_point->SetBinContent( i, ratio_point->GetBinContent(i) / MC_stacked_allerr->GetBinContent(i) );
+        ratio_point->SetBinError  ( i, ratio_point->GetBinError(i)   / MC_stacked_allerr->GetBinContent(i) );
+        //==== ratio allerr
+        ratio_allerr->SetBinContent( i, 1. );
+        ratio_allerr->SetBinError( i, MC_stacked_allerr->GetBinError(i)/ MC_stacked_allerr->GetBinContent(i) );
+        }
+      }
+      ratio_allerr->SetMaximum(2.0);
+      ratio_allerr->SetMinimum(0.0);
+      //ratio_allerr->GetXaxis()->SetTitle(x_title[i_var]);
+      ratio_allerr->SetYTitle("#frac{Obs.}{Pred.}");
+      ratio_allerr->SetFillColor(kOrange);
+      ratio_allerr->SetMarkerSize(0);
+      ratio_allerr->SetMarkerStyle(0);
+      ratio_allerr->SetLineColor(kWhite);
+      ratio_allerr->GetXaxis()->SetRangeUser(x_min, x_max);
+      ratio_allerr->Draw("E2same");
+      hist_axis(hist_empty, ratio_allerr);
+
+      ratio_point->Draw("PE1same");
+
+      //==== y=1 line
+      g1->Draw("same");
+
+      //==== write lumi on the top
+      c1->cd();
+      TLatex latex_CMSPriliminary, latex_Lumi;
+      latex_CMSPriliminary.SetNDC();
+      latex_Lumi.SetNDC();
+      latex_CMSPriliminary.SetTextSize(0.035);
+      latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+      latex_Lumi.SetTextSize(0.035);
+      latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+
+      c1->SaveAs(plotpath+Lepton+"/"+histname+".pdf");
+      c1->Close();
+
+    } // Variables
 
 
-  outroot->Close();
 
-}
-
-
-
-
-TString DoubleToString(double a){
-
-  if(a==0) return "0";
-
-  int Digit1 = int(a);
-  int Digit0p1 = 10*a-10*Digit1;
-
-  return TString::Itoa(Digit1,10)+"."+TString::Itoa(Digit0p1,10);
+  } // Lepton loop
+  
 
 }

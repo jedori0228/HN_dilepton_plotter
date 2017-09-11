@@ -5,7 +5,7 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Electron(){
 
-  TString Sample = "QCD_newhist";
+  TString Sample = "WJets_v7";
   TString Lepton = "Electron";
 
   gStyle->SetOptStat(0);
@@ -30,29 +30,38 @@ void Draw_FakeRate_Electron(){
 
   TFile *file = new TFile(filepath+"LQOUT_"+Lepton+"_"+Sample+".root");
 
-  vector<TString> triggers = {"HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_v" ,"HLT_Ele17_CaloIdL_TrackIdL_IsoVL_v", "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_v"};
+  //vector<TString> triggers = {"HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_v" ,"HLT_Ele17_CaloIdL_TrackIdL_IsoVL_v", "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_v"};
+  vector<TString> triggers = {"HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30_v" ,"HLT_Ele17_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30_v"};
   vector<double> ptinit = {10., 15., 20., 25.};
   vector<Color_t> colors = {kRed, kBlack, kBlue, kGreen};
 
   const int N_pt_out = 6;
-  float ptarray[N_pt_out+1] = {10., 15., 20., 35., 45., 60., 70.};
+  float ptarray[N_pt_out+1] = {10., 15., 23., 35., 45., 60., 70.};
   float etaarray[4] = {0., 0.8, 1.479, 2.5};
 
   TFile *outroot = new TFile(plotpath+Lepton+"_"+Sample+"_FR.root", "RECREATE");
   TH1D *dummy = new TH1D("dummy", "", 14, 0., 70.);
 
-  TString jetpt[4] = {"20", "30", "40", "60"};
+  vector<TString> jetpt = {"20", "30", "40", "60"};
+  if(!Sample.Contains("Data")){
+    jetpt.clear();
+    jetpt = {"40"};
+  }
   TString bjetconfig[5] = {"", "_withbjet_Medium", "_withoutbjet_Medium", "_withbjet_Loose", "_withoutbjet_Loose"};
 
   //==== AwayJet Pt Loop
-  for(int a=0; a<4; a++){
+  for(int a=0; a<jetpt.size(); a++){
 
     //==== bjet config loop
     for(int b=0; b<5; b++){
 
-      TCanvas *c_all = new TCanvas("c_all", "", 800, 800);
-      canvas_margin(c_all);
-      c_all->cd();
+      //======================
+      //==== Fake Rate plots
+      //======================
+
+      TCanvas *c_alleta = new TCanvas("c_alleta", "", 800, 800);
+      canvas_margin(c_alleta);
+      c_alleta->cd();
       TH1D *dummy_merged = new TH1D("dummy_merged", "", N_pt_out, ptarray);
       hist_axis(dummy_merged);
       dummy_merged->Draw("hist");
@@ -65,10 +74,10 @@ void Draw_FakeRate_Electron(){
       lg2->SetFillStyle(0);
       lg2->SetBorderSize(0);
 
-      TH2D *histout = new TH2D(Lepton+"_"+Sample+"_FR_Awayjet"+jetpt[a]+bjetconfig[b], "", N_pt_out, ptarray, 3, etaarray);
+      TH2D *histout = new TH2D(Lepton+"_"+Sample+"_FR_Awayjet"+jetpt.at(a)+bjetconfig[b], "", N_pt_out, ptarray, 3, etaarray);
 
-      TH2D *hist_FR2D_F0 = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
-      TH2D *hist_FR2D_F = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
+      TH2D *hist_FR2D_F0 = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
+      TH2D *hist_FR2D_F = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
       hist_FR2D_F->Divide(hist_FR2D_F0);
 
       //==== Eta Loop
@@ -92,8 +101,8 @@ void Draw_FakeRate_Electron(){
         for(unsigned int i=0; i<triggers.size(); i++){
 
           TString trigger = triggers.at(i);
-          TH2D *hist2d_F0 = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
-          TH2D *hist2d_F = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
+          TH2D *hist2d_F0 = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
+          TH2D *hist2d_F = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
 
           TH1D *hist_F0 = new TH1D("hist_F0", "", N_pt_out, ptarray);
           TH1D *hist_F = new TH1D("hist_F", "", N_pt_out, ptarray);
@@ -113,11 +122,11 @@ void Draw_FakeRate_Electron(){
           }
 
           //====            1    2    3    4    5    6    7    8
-          //==== hist_F : 10., 15., 20., 35., 45., 60., 70.
+          //==== hist_F : 10., 15., 23., 35., 45., 60., 70.
           //====                 1    2    3    4    5    6    7
-          //==== merge :  10., 15., 20., 35., 45., 60., 70.
-          //==== i=0 (ele8)  -> 10-15, 15-20
-          //==== i=1 (ele12) -> 20-35
+          //==== merge :  10., 15., 23., 35., 45., 60., 70.
+          //==== i=0 (ele8)  -> 10-15, 15-23
+          //==== i=1 (ele12) -> 23-35
           //==== i=2 (ele17) -> 35~45
           //==== i=3 (ele23) -> 45~
 
@@ -177,11 +186,11 @@ void Draw_FakeRate_Electron(){
         }
 
         lg->Draw();
-        c1->SaveAs(plotpath+Lepton+"_"+jetpt[a]+bjetconfig[b]+"_"+Sample+"_Eta_bin"+TString::Itoa(j,10)+".pdf");
+        c1->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_Eta_bin"+TString::Itoa(j,10)+".pdf");
         c1->Close();
         delete c1;
 
-        c_all->cd();
+        c_alleta->cd();
         if(j==0) dummy->Draw("histsame");
         TGraphAsymmErrors *gr_merge = hist_to_graph(merge);
         gr_merge->SetLineColor(colors.at(j));
@@ -194,13 +203,14 @@ void Draw_FakeRate_Electron(){
       } // END Eta Loop
 
       outroot->cd();
-      histout->Write();
+      //histout->Write();
+      hist_FR2D_F->SetName( histout->GetName() );
       hist_FR2D_F->Write();
 
-      c_all->cd();
+      c_alleta->cd();
       lg2->Draw();
-      c_all->SaveAs(plotpath+Lepton+"_"+jetpt[a]+bjetconfig[b]+"_"+Sample+"_alleta.pdf");
-      c_all->Close();
+      c_alleta->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_alleta.pdf");
+      c_alleta->Close();
 
     } // END b-jet config loop
 

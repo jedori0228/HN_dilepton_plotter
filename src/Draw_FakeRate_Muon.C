@@ -5,7 +5,7 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Muon(){
 
-  TString Sample = "Data_v4_newhist";
+  TString Sample = "Data_v7_SIP3";
   TString Lepton = "Muon";
 
   gStyle->SetOptStat(0);
@@ -30,7 +30,6 @@ void Draw_FakeRate_Muon(){
 
   TFile *file = new TFile(filepath+"LQOUT_"+Lepton+"_"+Sample+".root");
 
-  //vector<TString> triggers = {"HLT_Mu3_PFJet40_v", "HLT_Mu8_v" ,"HLT_Mu17_v"};
   vector<TString> triggers = {"HLT_Mu3_PFJet40_v", "HLT_Mu8_TrkIsoVVL_v" ,"HLT_Mu17_TrkIsoVVL_v"};
   vector<double> ptinit = {5., 10., 20.};
   vector<Color_t> colors = {kRed, kBlack, kBlue};
@@ -42,18 +41,26 @@ void Draw_FakeRate_Muon(){
   TFile *outroot = new TFile(plotpath+Lepton+"_"+Sample+"_FR.root", "RECREATE");
   TH1D *dummy = new TH1D("dummy", "", N_pt_out, ptarray);
 
-  TString jetpt[4] = {"20", "30", "40", "60"};
+  vector<TString> jetpt = {"20", "30", "40", "60"};
+  if(!Sample.Contains("Data")){
+    jetpt.clear();
+    jetpt = {"40"};
+  }
   TString bjetconfig[5] = {"", "_withbjet_Medium", "_withoutbjet_Medium", "_withbjet_Loose", "_withoutbjet_Loose"};
 
   //==== AwayJet Pt Loop
-  for(int a=0; a<4; a++){
+  for(int a=0; a<jetpt.size(); a++){
 
     //==== bjet config loop
     for(int b=0; b<5; b++){
 
-      TCanvas *c_all = new TCanvas("c_all", "", 800, 800);
-      canvas_margin(c_all);
-      c_all->cd();
+      //======================
+      //==== Fake Rate plots
+      //======================
+
+      TCanvas *c_alleta = new TCanvas("c_alleta", "", 800, 800);
+      canvas_margin(c_alleta);
+      c_alleta->cd();
       TH1D *dummy_merged = new TH1D("dummy_merged", "", N_pt_out, ptarray);
       hist_axis(dummy_merged);
       dummy_merged->Draw("hist");
@@ -66,10 +73,10 @@ void Draw_FakeRate_Muon(){
       lg2->SetFillStyle(0);
       lg2->SetBorderSize(0);
 
-      TH2D *histout = new TH2D(Lepton+"_"+Sample+"_FR_Awayjet"+jetpt[a]+bjetconfig[b], "", N_pt_out, ptarray, 3, etaarray);
+      TH2D *histout = new TH2D(Lepton+"_"+Sample+"_FR_Awayjet"+jetpt.at(a)+bjetconfig[b], "", N_pt_out, ptarray, 3, etaarray);
 
-      TH2D *hist_FR2D_F0 = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
-      TH2D *hist_FR2D_F = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
+      TH2D *hist_FR2D_F0 = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
+      TH2D *hist_FR2D_F = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
       hist_FR2D_F->Divide(hist_FR2D_F0);
 
       //==== Eta Loop
@@ -93,8 +100,8 @@ void Draw_FakeRate_Muon(){
         for(unsigned int i=0; i<triggers.size(); i++){
 
           TString trigger = triggers.at(i);
-          TH2D *hist2d_F0 = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
-          TH2D *hist2d_F = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt[a]+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
+          TH2D *hist2d_F0 = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
+          TH2D *hist2d_F = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
 
           TH1D *hist_F0 = new TH1D("hist_F0", "", N_pt_out, ptarray);
           TH1D *hist_F = new TH1D("hist_F", "", N_pt_out, ptarray);
@@ -159,19 +166,17 @@ void Draw_FakeRate_Muon(){
           gr->SetLineWidth(3);
           gr->Draw("lpsame");
 
-          if(j==0){
-            lg->AddEntry(gr, trigger, "l");
-          }
+          lg->AddEntry(gr, trigger, "l");
         }
 
         lg->Draw();
-        c1->SaveAs(plotpath+Lepton+"_"+jetpt[a]+bjetconfig[b]+"_"+Sample+"_Eta_bin"+TString::Itoa(j,10)+".pdf");
+        c1->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_Eta_bin"+TString::Itoa(j,10)+".pdf");
         c1->Close();
         delete c1;
 
-        c_all->cd();
+        c_alleta->cd();
         if(j==0) dummy->Draw("histsame");
-        TGraphAsymmErrors *gr_merge = hist_to_graph(merge);
+        TGraphAsymmErrors *gr_merge = hist_to_graph(merge,1);
         gr_merge->SetLineColor(colors.at(j));
         gr_merge->SetLineWidth(3);
         gr_merge->Draw("lsame");
@@ -182,13 +187,14 @@ void Draw_FakeRate_Muon(){
       } // END Eta Loop
 
       outroot->cd();
-      histout->Write();
+      //histout->Write();
+      hist_FR2D_F->SetName( histout->GetName() );
       hist_FR2D_F->Write();
 
-      c_all->cd();
+      c_alleta->cd();
       lg2->Draw();
-      c_all->SaveAs(plotpath+Lepton+"_"+jetpt[a]+bjetconfig[b]+"_"+Sample+"_alleta.pdf");
-      c_all->Close();
+      c_alleta->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_alleta.pdf");
+      c_alleta->Close();
 
     } // END b-jet config loop
 
