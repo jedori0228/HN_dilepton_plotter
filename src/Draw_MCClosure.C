@@ -89,10 +89,10 @@ void Draw_MCClosure(){
           TString histname = var+"_"+channel+"_"+region;
 
           //cout << histname << endl;
-          TH1D *hist_Measured = (TH1D*)file_Measured->Get(histname);
-          TH1D *hist_Predicted = (TH1D*)file_Predicted->Get(histname);
-          TH1D *hist_Predicted_up = (TH1D*)file_Predicted->Get(histname+"_up");
-          TH1D *hist_Predicted_down = (TH1D*)file_Predicted->Get(histname+"_down");
+          TH1D *hist_Measured = (TH1D*)file_Measured->Get("Hists/"+histname);
+          TH1D *hist_Predicted = (TH1D*)file_Predicted->Get("Hists/"+histname);
+          TH1D *hist_Predicted_up = (TH1D*)file_Predicted->Get("Hists/"+histname+"_up");
+          TH1D *hist_Predicted_down = (TH1D*)file_Predicted->Get("Hists/"+histname+"_down");
 
           if(!hist_Measured || !hist_Predicted) continue;
 
