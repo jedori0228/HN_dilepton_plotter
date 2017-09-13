@@ -41,6 +41,9 @@ public:
   void SetRebins(TString filepath);
   void SetYAxis(TString filepath);
   void SetXAxis(TString filepath);
+  void MakeRebins();
+  void MakeYAxis();
+  void MakeXAxis();
   AnalysisInputs analysisInputs;
   //void SetMCSF(TString filepath);
   //void SetCalculatedSysts(TString filepath);
@@ -88,9 +91,12 @@ public:
   TH1D *hist_for_legend_data;
   vector<TH1D*> hist_for_legend_bkg;
   vector<TH1D*> hist_for_legend_signal;
-  map< pair<TString, TString>, int > rebins;
-  map< pair<TString, TString>, double > y_maxs;
-  map< pair<TString, TString>, double > x_mins, x_maxs;
+
+  TString path_rebins, path_y_axis, path_x_axis;
+
+  map< TString, int > temp_rebins;
+  map< TString, double > temp_y_maxs, temp_x_mins, temp_x_maxs;
+
   double default_y_max = 1000, default_y_min = 0.;
   double k_factor;
   double log_of_generation_mixing;

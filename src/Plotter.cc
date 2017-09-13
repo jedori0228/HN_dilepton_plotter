@@ -10,8 +10,10 @@ Plotter::Plotter(){
 }
 
 Plotter::~Plotter(){
-  
-  
+
+  system("rm -rf "+path_rebins);
+  system("rm -rf "+path_y_axis);
+  system("rm -rf "+path_x_axis);
   
 }
 
@@ -32,6 +34,11 @@ void Plotter::draw_hist(){
     << endl
     << "################### Writing in Directory " << histname_suffix[i_cut] << " ###################" << endl
     << endl;
+
+    //==== Make rebin/y_axis/x_axis file for this cut here
+    MakeRebins();
+    MakeYAxis();
+    MakeXAxis();
     
     for(i_var = 0; i_var < histname.size(); i_var++){
 
@@ -301,6 +308,8 @@ void Plotter::SetRebins(TString filepath){
 
   cout << "[Plotter::SetRebins] Get rebins from " << filepath << endl;
 
+  map< TString, map<TString, int> > ALL_rebins;
+
   string elline;
   ifstream in(filepath);
   while(getline(in,elline)){
@@ -311,11 +320,19 @@ void Plotter::SetRebins(TString filepath){
     is >> cut;
     is >> histname;
     is >> value;
-    //==== if -999, don't set
-    if(value!=-999){
-      rebins[make_pair(cut, histname)] = value;
-    }
+    (ALL_rebins[cut])[histname] = value;
   }
+
+  path_rebins = filepath+"tmp/";
+  gSystem->mkdir(path_rebins, kTRUE);
+  for(map< TString, map<TString, int> >::iterator thiscut=ALL_rebins.begin(); thiscut!=ALL_rebins.end(); thiscut++){
+    ofstream skeleton_rebins(path_rebins+thiscut->first, ios::trunc);
+    for(map<TString, int>::iterator thishistname=(thiscut->second).begin(); thishistname!=(thiscut->second).end(); thishistname++){
+      skeleton_rebins<<(thishistname->first)<<"\t"<<(thishistname->second)<<endl;
+    }
+    skeleton_rebins.close();
+  }
+
 }
 
 
@@ -323,6 +340,8 @@ void Plotter::SetYAxis(TString filepath){
 
   cout << "[Plotter::SetYAxis] Get Yaxis from " << filepath << endl;
 
+  map< TString, map<TString, double> > ALL_y_maxs;
+
   string elline;
   ifstream in(filepath);
   while(getline(in,elline)){
@@ -333,16 +352,26 @@ void Plotter::SetYAxis(TString filepath){
     is >> cut;
     is >> histname;
     is >> value;
-    //==== if -999, don't set
-    if(value!=-999){
-      y_maxs[make_pair(cut, histname)] = value;
-    }
+    (ALL_y_maxs[cut])[histname] = value;
   }
+
+  path_y_axis = filepath+"tmp/";
+  gSystem->mkdir(path_y_axis, kTRUE);
+  for(map< TString, map<TString, double> >::iterator thiscut=ALL_y_maxs.begin(); thiscut!=ALL_y_maxs.end(); thiscut++){
+    ofstream skeleton_y_maxs(path_y_axis+thiscut->first, ios::trunc);
+    for(map<TString, double>::iterator thishistname=(thiscut->second).begin(); thishistname!=(thiscut->second).end(); thishistname++){
+      skeleton_y_maxs<<(thishistname->first)<<"\t"<<(thishistname->second)<<endl;
+    }
+    skeleton_y_maxs.close();
+  }
+  
 }
 
 void Plotter::SetXAxis(TString filepath){
 
   cout << "[Plotter::SetXAxis] Get Xaxis from " << filepath << endl;
+
+  map< TString, map<TString, vector<double>> > ALL_x_axis;
 
   string elline;
   ifstream in(filepath);
@@ -355,14 +384,86 @@ void Plotter::SetXAxis(TString filepath){
     is >> histname;
     is >> value_min;
     is >> value_max;
-    //==== if -999, don't set
-    if(value_min!=-999){
-      x_mins[make_pair(cut, histname)] = value_min;
+    (ALL_x_axis[cut])[histname].push_back(value_min);
+    (ALL_x_axis[cut])[histname].push_back(value_max);
+  }
+
+  path_x_axis = filepath+"tmp/";
+
+  gSystem->mkdir(path_x_axis, kTRUE);
+  for(map< TString, map<TString, vector<double>> >::iterator thiscut=ALL_x_axis.begin(); thiscut!=ALL_x_axis.end(); thiscut++){
+    ofstream skeleton_x_axis(path_x_axis+thiscut->first, ios::trunc);
+    for(map<TString, vector<double>>::iterator thishistname=(thiscut->second).begin(); thishistname!=(thiscut->second).end(); thishistname++){
+      skeleton_x_axis<<(thishistname->first)<<"\t"<<(thishistname->second).at(0)<<"\t"<<(thishistname->second).at(1)<<endl;
     }
-    if(value_max!=-999){
-      x_maxs[make_pair(cut, histname)] = value_max;
+    skeleton_x_axis.close();
+  }
+
+}
+
+void Plotter::MakeRebins(){
+
+  temp_rebins.clear();
+
+  string elline;
+  ifstream in(path_rebins+histname_suffix[i_cut]);
+  while(getline(in,elline)){
+    std::istringstream is( elline );
+    TString histname;
+    double value;
+    is >> histname;
+    is >> value;
+    //==== if -999, don't set
+    if(value!=-999){
+      temp_rebins[histname] = value;
     }
   }
+
+}
+
+void Plotter::MakeYAxis(){
+
+  temp_y_maxs.clear();
+
+  string elline;
+  ifstream in(path_y_axis+histname_suffix[i_cut]);
+  while(getline(in,elline)){
+    std::istringstream is( elline );
+    TString histname;
+    double value;
+    is >> histname;
+    is >> value;
+    //==== if -999, don't set
+    if(value!=-999){
+      temp_y_maxs[histname] = value;
+    }
+  }
+
+}
+
+void Plotter::MakeXAxis(){
+
+  temp_x_mins.clear();
+  temp_x_maxs.clear();
+
+  string elline;
+  ifstream in(path_x_axis+histname_suffix[i_cut]);
+  while(getline(in,elline)){
+    std::istringstream is( elline );
+    TString histname;
+    double value_min, value_max;
+    is >> histname;
+    is >> value_min;
+    is >> value_max;
+    //==== if -999, don't set
+    if(value_min!=-999){
+      temp_x_mins[histname] = value_min;
+    }
+    if(value_max!=-999){
+      temp_x_maxs[histname] = value_max;
+    }
+  }
+
 }
 
 /*
@@ -804,9 +905,9 @@ int Plotter::n_rebin(){
   TString cut = histname_suffix[i_cut];
   TString var = histname[i_var];
     
-  if( rebins.find( make_pair(cut, var) ) != rebins.end() ){
-    if(DoDebug) cout << "cut = " << cut << ", var = " << var << " => rebins = " << rebins[make_pair(cut, var)] << endl;
-    return rebins[make_pair(cut, var)];
+  if( temp_rebins.find( var ) != temp_rebins.end() ){
+    if(DoDebug) cout << "cut = " << cut << ", var = " << var << " => rebins = " << temp_rebins[var] << endl;
+    return temp_rebins[var];
   }
   else return 1;
   
@@ -817,9 +918,9 @@ double Plotter::y_max(){
   TString cut = histname_suffix[i_cut];
   TString var = histname[i_var];
   
-  if( y_maxs.find( make_pair(cut, var) ) != y_maxs.end() ){
-    //cout << "cut = " << cut << ", var = " << var << " => rebins = " << rebins[make_pair(cut, var)] << endl;
-    return y_maxs[make_pair(cut, var)];
+  if( temp_y_maxs.find( var ) != temp_y_maxs.end() ){
+    //cout << "cut = " << cut << ", var = " << var << " => rebins = " << temp_rebins[cut] << endl;
+    return temp_y_maxs[var];
   }
   else return default_y_max;
 
@@ -833,13 +934,13 @@ void Plotter::SetXaxisRange(TH1D* hist){
   double this_x_min = hist->GetXaxis()->GetBinLowEdge(1);
   double this_x_max = hist->GetXaxis()->GetBinUpEdge( hist->GetXaxis()->GetNbins() );
   
-  if( x_mins.find( make_pair(cut, var) ) != x_mins.end() ){
-    //cout << "cut = " << cut << ", var = " << var << " => x_min = " << x_mins[make_pair(cut, var)] << endl;
-    this_x_min = x_mins[make_pair(cut, var)];
+  if( temp_x_mins.find( var ) != temp_x_mins.end() ){
+    //cout << "cut = " << cut << ", var = " << var << " => x_min = " << temp_x_mins[var] << endl;
+    this_x_min = temp_x_mins[var];
   }
-  if( x_maxs.find( make_pair(cut, var) ) != x_maxs.end() ){
-    //cout << "cut = " << cut << ", var = " << var << " => x_max = " << x_maxs[make_pair(cut, var)] << endl;
-    this_x_max = x_maxs[make_pair(cut, var)];
+  if( temp_x_maxs.find( var ) != temp_x_maxs.end() ){
+    //cout << "cut = " << cut << ", var = " << var << " => x_max = " << temp_x_maxs[var] << endl;
+    this_x_max = temp_x_maxs[var];
   }
   
   hist->GetXaxis()->SetRangeUser(this_x_min, this_x_max);
@@ -853,15 +954,15 @@ void Plotter::SetXaxisRange(THStack* mc_stack){
   double this_x_min = mc_stack->GetXaxis()->GetBinLowEdge(1);
   double this_x_max = mc_stack->GetXaxis()->GetBinUpEdge( mc_stack->GetXaxis()->GetNbins() );
   
-  if( x_mins.find( make_pair(cut, var) ) != x_mins.end() ){
-    //cout << "cut = " << cut << ", var = " << var << " => rebins = " << rebins[make_pair(cut, var)] << endl;
-    this_x_min = x_mins[make_pair(cut, var)];
+  if( temp_x_mins.find( var ) != temp_x_mins.end() ){
+    //cout << "cut = " << cut << ", var = " << var << " => x_min = " << temp_x_mins[var] << endl;
+    this_x_min = temp_x_mins[var];
   }
-  if( x_maxs.find( make_pair(cut, var) ) != x_maxs.end() ){
-    //cout << "cut = " << cut << ", var = " << var << " => rebins = " << rebins[make_pair(cut, var)] << endl;
-    this_x_max = x_maxs[make_pair(cut, var)];
+  if( temp_x_maxs.find( var ) != temp_x_maxs.end() ){
+    //cout << "cut = " << cut << ", var = " << var << " => x_max = " << temp_x_maxs[var] << endl;
+    this_x_max = temp_x_maxs[var];
   }
-  
+ 
   mc_stack->GetXaxis()->SetRangeUser(this_x_min, this_x_max);
 }
 
@@ -873,13 +974,13 @@ void Plotter::SetXaxisRangeBoth(THStack* mc_stack, TH1D* hist){
   double this_x_min = mc_stack->GetXaxis()->GetBinLowEdge(1);
   double this_x_max = mc_stack->GetXaxis()->GetBinUpEdge( mc_stack->GetXaxis()->GetNbins() );
   
-  if( x_mins.find( make_pair(cut, var) ) != x_mins.end() ){
-    //cout << "cut = " << cut << ", var = " << var << " => rebins = " << rebins[make_pair(cut, var)] << endl;
-    this_x_min = x_mins[make_pair(cut, var)];
+  if( temp_x_mins.find( var ) != temp_x_mins.end() ){
+    //cout << "cut = " << cut << ", var = " << var << " => x_min = " << temp_x_mins[var] << endl;
+    this_x_min = temp_x_mins[var];
   }
-  if( x_maxs.find( make_pair(cut, var) ) != x_maxs.end() ){
-    //cout << "cut = " << cut << ", var = " << var << " => rebins = " << rebins[make_pair(cut, var)] << endl;
-    this_x_max = x_maxs[make_pair(cut, var)];
+  if( temp_x_maxs.find( var ) != temp_x_maxs.end() ){
+    //cout << "cut = " << cut << ", var = " << var << " => x_max = " << temp_x_maxs[var] << endl;
+    this_x_max = temp_x_maxs[var];
   }
 
   mc_stack->GetXaxis()->SetRangeUser(this_x_min, this_x_max);
