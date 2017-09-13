@@ -124,7 +124,7 @@ void Plotter::draw_hist(){
         TString fullhistname = histname[i_var]+histname_suffix[i_cut];
         
         //==== get histogram
-        TH1D* hist_temp = (TH1D*)file->Get(fullhistname);
+        TH1D* hist_temp = (TH1D*)file->Get("Hists/"+fullhistname);
         if(!hist_temp || hist_temp->GetEntries() == 0){
           cout << "No histogram : " << current_sample << endl;
           file->Close();
@@ -138,8 +138,8 @@ void Plotter::draw_hist(){
 
         //==== Stat Error Propations for Fake
         if( current_sample.Contains("fake") ){
-          TH1D* hist_temp_up = (TH1D*)file->Get(fullhistname+"_up");
-          TH1D* hist_temp_down = (TH1D*)file->Get(fullhistname+"_down");
+          TH1D* hist_temp_up = (TH1D*)file->Get("Hists/"+fullhistname+"_up");
+          TH1D* hist_temp_down = (TH1D*)file->Get("Hists/"+fullhistname+"_down");
           int n_bins = hist_temp->GetXaxis()->GetNbins();
           for(int i=1; i<=n_bins; i++){
             double error_propagated = hist_temp_up->GetBinContent(i)-hist_temp->GetBinContent(i);
