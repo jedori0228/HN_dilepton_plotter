@@ -39,6 +39,9 @@ void Plotter::draw_hist(){
     MakeRebins();
     MakeYAxis();
     MakeXAxis();
+
+    TString temp_suffix = histname_suffix[i_cut];
+    TString DirName = temp_suffix.Remove(0,1);
     
     for(i_var = 0; i_var < histname.size(); i_var++){
 
@@ -123,15 +126,29 @@ void Plotter::draw_hist(){
         //==== get root file
         TFile* file = new TFile(filepath);
         if( !file ){
-          cout << "No file : " << filepath << endl;
+          if(DoDebug){
+            cout << "No file : " << filepath << endl;
+          }
           continue;
         }
+
+        TDirectory *dir = (TDirectory *)file->Get(DirName);
+        if(!dir){
+          if(DoDebug){
+            cout << "No Directory : " << file->GetName() << "\t" << DirName << endl;
+            file->ls();
+          }
+          file->Close();
+          delete file;
+          continue;
+        }
+        file->cd(DirName);
 
         //==== full histogram name
         TString fullhistname = histname[i_var]+histname_suffix[i_cut];
         
         //==== get histogram
-        TH1D* hist_temp = (TH1D*)file->Get("Hists/"+fullhistname);
+        TH1D* hist_temp = (TH1D*)dir->Get(fullhistname);
         if(!hist_temp || hist_temp->GetEntries() == 0){
           cout << "No histogram : " << current_sample << endl;
           file->Close();
@@ -145,8 +162,10 @@ void Plotter::draw_hist(){
 
         //==== Stat Error Propations for Fake
         if( current_sample.Contains("fake") ){
-          TH1D* hist_temp_up = (TH1D*)file->Get("Hists/"+fullhistname+"_up");
-          TH1D* hist_temp_down = (TH1D*)file->Get("Hists/"+fullhistname+"_down");
+          TDirectory *dir_up = (TDirectory *)file->Get(DirName+"_up");
+          TDirectory *dir_down = (TDirectory *)file->Get(DirName+"_down");
+          TH1D* hist_temp_up = (TH1D*)dir_up->Get(fullhistname+"_up");
+          TH1D* hist_temp_down = (TH1D*)dir_down->Get(fullhistname+"_down");
           int n_bins = hist_temp->GetXaxis()->GetNbins();
           for(int i=1; i<=n_bins; i++){
             double error_propagated = hist_temp_up->GetBinContent(i)-hist_temp->GetBinContent(i);
