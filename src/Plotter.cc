@@ -904,10 +904,13 @@ int Plotter::n_rebin(){
   
   TString cut = histname_suffix[i_cut];
   TString var = histname[i_var];
-    
-  if( temp_rebins.find( var ) != temp_rebins.end() ){
-    if(DoDebug) cout << "cut = " << cut << ", var = " << var << " => rebins = " << temp_rebins[var] << endl;
-    return temp_rebins[var];
+  
+  map< TString, int >::iterator it = temp_rebins.find( var );
+  if( it != temp_rebins.end() ){
+    int TORETURN = it->second;
+    //temp_rebins.erase( it );
+    if(DoDebug) cout << "cut = " << cut << ", var = " << var << " => rebins = " << TORETURN << endl;
+    return TORETURN;
   }
   else return 1;
   
@@ -917,10 +920,13 @@ double Plotter::y_max(){
   
   TString cut = histname_suffix[i_cut];
   TString var = histname[i_var];
-  
-  if( temp_y_maxs.find( var ) != temp_y_maxs.end() ){
+
+  map< TString, double >::iterator it = temp_y_maxs.find( var );
+  if( it != temp_y_maxs.end() ){
     //cout << "cut = " << cut << ", var = " << var << " => rebins = " << temp_rebins[cut] << endl;
-    return temp_y_maxs[var];
+    double TORETURN = it->second;
+    //temp_y_maxs.erase( it );
+    return TORETURN;
   }
   else return default_y_max;
 
@@ -933,14 +939,18 @@ void Plotter::SetXaxisRange(TH1D* hist){
   
   double this_x_min = hist->GetXaxis()->GetBinLowEdge(1);
   double this_x_max = hist->GetXaxis()->GetBinUpEdge( hist->GetXaxis()->GetNbins() );
-  
-  if( temp_x_mins.find( var ) != temp_x_mins.end() ){
+
+  map< TString, double >::iterator it = temp_x_mins.find( var );
+  if( it != temp_x_mins.end() ){
     //cout << "cut = " << cut << ", var = " << var << " => x_min = " << temp_x_mins[var] << endl;
-    this_x_min = temp_x_mins[var];
+    this_x_min = it->second;
+    //temp_x_mins.erase( it );
   }
-  if( temp_x_maxs.find( var ) != temp_x_maxs.end() ){
+  it = temp_x_maxs.find( var );
+  if( it != temp_x_maxs.end() ){
     //cout << "cut = " << cut << ", var = " << var << " => x_max = " << temp_x_maxs[var] << endl;
-    this_x_max = temp_x_maxs[var];
+    this_x_max = it->second;
+    //temp_x_maxs.erase( it );
   }
   
   hist->GetXaxis()->SetRangeUser(this_x_min, this_x_max);
@@ -954,13 +964,17 @@ void Plotter::SetXaxisRange(THStack* mc_stack){
   double this_x_min = mc_stack->GetXaxis()->GetBinLowEdge(1);
   double this_x_max = mc_stack->GetXaxis()->GetBinUpEdge( mc_stack->GetXaxis()->GetNbins() );
   
-  if( temp_x_mins.find( var ) != temp_x_mins.end() ){
+  map< TString, double >::iterator it = temp_x_mins.find( var );
+  if( it != temp_x_mins.end() ){
     //cout << "cut = " << cut << ", var = " << var << " => x_min = " << temp_x_mins[var] << endl;
-    this_x_min = temp_x_mins[var];
+    this_x_min = it->second;
+    //temp_x_mins.erase( it );
   }
-  if( temp_x_maxs.find( var ) != temp_x_maxs.end() ){
+  it = temp_x_maxs.find( var );
+  if( it != temp_x_maxs.end() ){
     //cout << "cut = " << cut << ", var = " << var << " => x_max = " << temp_x_maxs[var] << endl;
-    this_x_max = temp_x_maxs[var];
+    this_x_max = it->second;
+    //temp_x_maxs.erase( it );
   }
  
   mc_stack->GetXaxis()->SetRangeUser(this_x_min, this_x_max);
@@ -974,13 +988,17 @@ void Plotter::SetXaxisRangeBoth(THStack* mc_stack, TH1D* hist){
   double this_x_min = mc_stack->GetXaxis()->GetBinLowEdge(1);
   double this_x_max = mc_stack->GetXaxis()->GetBinUpEdge( mc_stack->GetXaxis()->GetNbins() );
   
-  if( temp_x_mins.find( var ) != temp_x_mins.end() ){
+  map< TString, double >::iterator it = temp_x_mins.find( var );
+  if( it != temp_x_mins.end() ){
     //cout << "cut = " << cut << ", var = " << var << " => x_min = " << temp_x_mins[var] << endl;
-    this_x_min = temp_x_mins[var];
+    this_x_min = it->second;
+    //temp_x_mins.erase( it );
   }
-  if( temp_x_maxs.find( var ) != temp_x_maxs.end() ){
+  it = temp_x_maxs.find( var );
+  if( it != temp_x_maxs.end() ){
     //cout << "cut = " << cut << ", var = " << var << " => x_max = " << temp_x_maxs[var] << endl;
-    this_x_max = temp_x_maxs[var];
+    this_x_max = it->second;
+    //temp_x_maxs.erase( it );
   }
 
   mc_stack->GetXaxis()->SetRangeUser(this_x_min, this_x_max);
