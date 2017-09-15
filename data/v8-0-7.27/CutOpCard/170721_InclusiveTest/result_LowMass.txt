@@ -1,0 +1,211 @@
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] PFMET	<	35
+CF	21.6527 +- 4.33317
+Fake	62.4866 +- 21.1422
+Prompt	129.79 +- 20.3886
+=> total bkg = 213.93
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	4098.24	0.00573867	0.695666	0.000168306
+HNElEl_50	2716.4	0.0054253	0.686903	0.000159115
+HNElEl_60	1190.36	0.00438757	0.684413	0.00012868
+HNElEl_70	264.343	0.0033957	0.690699	9.95904e-05
+HNElEl_80	519.807	0.0114397	0.722766	0.000335509
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] ST	<	172
+CF	5.10839 +- 1.02233
+Fake	36.6598 +- 12.1223
+Prompt	41.5139 +- 9.5113
+=> total bkg = 83.282
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	2837.22	0.0039729	0.481611	0.000209794
+HNElEl_50	1982.28	0.0039591	0.501265	0.000209065
+HNElEl_60	785.457	0.00289513	0.451609	0.000152881
+HNElEl_70	151.207	0.00194238	0.395087	0.00010257
+HNElEl_80	254.116	0.00559251	0.353336	0.000295319
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] MET2ST	<	8
+CF	27.1206 +- 5.42698
+Fake	85.4033 +- 28.7737
+Prompt	185.017 +- 24.9945
+=> total bkg = 297.541
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	4513.85	0.00632064	0.766214	0.000146359
+HNElEl_50	2960.43	0.00591269	0.748612	0.000136913
+HNElEl_60	1314.92	0.00484668	0.756029	0.000112228
+HNElEl_70	289.024	0.00371275	0.755187	8.59714e-05
+HNElEl_80	593.062	0.0130519	0.824623	0.000302227
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] m_lljj_lljjWclosest	<	129
+CF	1.05416 +- 0.211364
+Fake	14.3305 +- 4.88094
+Prompt	11.9283 +- 2.06049
+=> total bkg = 27.3129
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	1743.2	0.00244096	0.295904	0.000289045
+HNElEl_50	1365.87	0.00272798	0.345392	0.000323032
+HNElEl_60	697.064	0.00256932	0.400786	0.000304245
+HNElEl_70	104.998	0.00134879	0.274348	0.000159716
+HNElEl_80	154.984	0.00341084	0.215498	0.000403892
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] MET2ST	<	12.5
+[CutInfo::PrintCutInfo] PFMET	<	40
+CF	24.2205 +- 4.84671
+Fake	74.9075 +- 25.2166
+Prompt	141.864 +- 22.0089
+=> total bkg = 240.992
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	4576.93	0.00640897	0.776922	0.00016772
+HNElEl_50	3014.88	0.00602145	0.762382	0.000157579
+HNElEl_60	1328.89	0.00489819	0.764064	0.000128184
+HNElEl_70	288.01	0.00369972	0.752537	9.68203e-05
+HNElEl_80	579.915	0.0127626	0.806343	0.000333992
+
+
+
+
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] MET2ST	<	11.5
+[CutInfo::PrintCutInfo] PFMET	<	41
+[CutInfo::PrintCutInfo] m_lljj_lljjWclosest	<	130
+CF	0.96247 +- 0.193018
+Fake	9.65866 +- 3.42504
+Prompt	6.65146 +- 1.71079
+=> total bkg = 17.2726
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	1545.62	0.0021643	0.244893	0.000325263
+HNElEl_50	1257.26	0.00251106	0.285969	0.000377376
+HNElEl_60	531.653	0.00195963	0.28112	0.000294505
+HNElEl_70	91.9693	0.00118142	0.221149	0.000177551
+HNElEl_80	146.918	0.00323333	0.186445	0.000485923
+
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] MET2ST	<	13
+[CutInfo::PrintCutInfo] PFMET	<	40
+[CutInfo::PrintCutInfo] m_lljj_lljjWclosest	<	200
+CF	6.92429 +- 1.38581
+Fake	55.8565 +- 18.4129
+Prompt	51.7809 +- 10.7158
+=> total bkg = 114.562
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	3567.96	0.00499613	0.565319	0.000200794
+HNElEl_50	2542.96	0.0050789	0.578405	0.00020412
+HNElEl_60	1168.55	0.00430718	0.617889	0.000173105
+HNElEl_70	220.146	0.00282795	0.529361	0.000113655
+HNElEl_80	388.935	0.00855957	0.493575	0.000344008
+
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] m_jj_lljjWclosest	<	116
+CF	33.38 +- 6.67862
+Fake	213.748 +- 70.6308
+Prompt	255.701 +- 33.7585
+=> total bkg = 502.829
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	5252.62	0.00735512	0.832241	8.89315e-05
+HNElEl_50	3706.9	0.00740357	0.843147	8.95174e-05
+HNElEl_60	1621.33	0.00597609	0.857303	7.22575e-05
+HNElEl_70	349.611	0.00449104	0.840673	5.43017e-05
+HNElEl_80	697.066	0.0153408	0.884605	0.000185487
+
+
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] MET2ST	<	13
+[CutInfo::PrintCutInfo] PFMET	<	40
+[CutInfo::PrintCutInfo] m_jj_lljjWclosest	<	120
+[CutInfo::PrintCutInfo] m_lljj_lljjWclosest	<	200
+CF	6.87002 +- 1.37496
+Fake	55.5303 +- 18.2949
+Prompt	51.4979 +- 10.7128
+=> total bkg = 113.898
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_40	3543.53	0.00496193	0.561449	0.000200279
+HNElEl_50	2477.39	0.00494793	0.56349	0.000199714
+HNElEl_60	1128.1	0.00415808	0.5965	0.000167833
+HNElEl_70	218.479	0.00280655	0.525355	0.000113281
+HNElEl_80	388.251	0.00854451	0.492706	0.000344883
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] MET2ST  < 9.5
+[CutInfo::PrintCutInfo] PFMET < 36
+[CutInfo::PrintCutInfo] m_jj_lljjWclosest < 146
+[CutInfo::PrintCutInfo] m_lljj_lljjWclosest < 200
+CF  6.33671 +- 1.2683
+Fake  48.3857 +- 16.022
+Prompt  50.5032 +- 10.6392
+=> total bkg = 105.226
+Signal  Yield Efficiency  Efficiency@Presel Punzi
+HNElEl_40 3307.28 0.00463111  0.524016  0.000202815
+HNElEl_50 2360.48 0.00471445  0.536899  0.000206464
+HNElEl_60 1103.57 0.00406768  0.583532  0.00017814
+HNElEl_70 204.843 0.00263138  0.492566  0.000115239
+HNElEl_80 358.523 0.00789026  0.45498 0.000345546
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
