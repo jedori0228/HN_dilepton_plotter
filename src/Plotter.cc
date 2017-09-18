@@ -6,6 +6,7 @@ Plotter::Plotter(){
   TH1::AddDirectory(kFALSE);
   gStyle->SetOptStat(0);
   DoDebug = false;
+  gErrorIgnoreLevel = kError;
   
 }
 
@@ -124,6 +125,7 @@ void Plotter::draw_hist(){
         }
         
         //==== get root file
+        if(gSystem->AccessPathName(filepath)) continue;
         TFile* file = new TFile(filepath);
         if( !file ){
           if(DoDebug){
@@ -150,7 +152,9 @@ void Plotter::draw_hist(){
         //==== get histogram
         TH1D* hist_temp = (TH1D*)dir->Get(fullhistname);
         if(!hist_temp || hist_temp->GetEntries() == 0){
-          cout << "No histogram : " << current_sample << endl;
+          if(DoDebug){
+            cout << "No histogram : " << current_sample << endl;
+          }
           file->Close();
           delete file;
           continue;
@@ -852,9 +856,13 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   
   //==== MC-DATA
   c1_down->cd();
-  TH1D* ratio_point = (TH1D*)hist_data->Clone();
-  TH1D* ratio_staterr = (TH1D*)hist_data->Clone();
-  TH1D* ratio_allerr = (TH1D*)hist_data->Clone();
+  TString name_suffix = hist_data->GetName();
+  TH1D *ratio_point = (TH1D *)hist_data->Clone();
+  ratio_point->SetName(name_suffix+"_central");
+  TH1D *ratio_staterr = (TH1D *)hist_data->Clone();
+  ratio_staterr->SetName(name_suffix+"_staterr");
+  TH1D *ratio_allerr = (TH1D *)hist_data->Clone();
+  ratio_allerr->SetName(name_suffix+"_allerr");
   for(int i=1; i<=ratio_point->GetXaxis()->GetNbins(); i++){
     //==== FIXME for zero? how?
     if(mc_allerror->GetBinContent(i)!=0){
