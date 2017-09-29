@@ -867,12 +867,18 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     //==== FIXME for zero? how?
     if(mc_allerror->GetBinContent(i)!=0){
     //==== ratio point
+    //==== BinContent = Data/Bkgd
+    //==== BinError = DataError/Bkgd
     ratio_point->SetBinContent( i, ratio_point->GetBinContent(i) / mc_allerror->GetBinContent(i) );
     ratio_point->SetBinError  ( i, ratio_point->GetBinError(i)   / mc_allerror->GetBinContent(i) );
     //==== ratio staterr
+    //==== BinContent = 1
+    //==== BinError = Bkgd(Stat)Error/Bkgd
     ratio_staterr->SetBinContent( i, 1. );
     ratio_staterr->SetBinError( i, mc_staterror->GetBinError(i)/ mc_staterror->GetBinContent(i) );
     //==== ratio allerr
+    //==== BinContent = 1
+    //==== BinError = Bkgd(Stat+Syst)Error/Bkgd
     ratio_allerr->SetBinContent( i, 1. );
     ratio_allerr->SetBinError( i, mc_allerror->GetBinError(i)/ mc_allerror->GetBinContent(i) );
     }

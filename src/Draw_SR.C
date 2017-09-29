@@ -55,7 +55,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
   m.map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
   m.map_sample_string_to_list["top_tt"] = {"TT_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"}; //, "WgstarToLNuMuMu", "WgstarToLNuEE"};
+  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"};
   //m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
   m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
@@ -64,6 +64,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["fake_sfed_HighdXY_UsePtCone"] = {"fake_sfed_HighdXY_UsePtCone"};
   m.map_sample_string_to_list["fake_DiMuon_HighdXY"] = {"fake_HighdXY"};
   m.map_sample_string_to_list["fake_Dijet"] = {"fake_Dijet"};
+  m.map_sample_string_to_list["fake_Dijet_LooseBJet"] = {"fake_Dijet_LooseBJet"};
   m.map_sample_string_to_list["chargeflip"] = {"chargeflip"};
   
   m.map_sample_string_to_legendinfo["DY"] = make_pair("DY", kYellow);
@@ -87,6 +88,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Non-prompt", 870);
   m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Non-prompt", 870);
   m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Non-prompt", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Non-prompt", 870);
   m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Charge-flip", kYellow);
   
   //===============================
@@ -98,9 +100,11 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== SS
   if(XXX==0){
     m.samples_to_use = {"chargeflip", "Xgamma", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double"};
+    //m.samples_to_use = {"chargeflip", "Xgamma", "fake_Dijet_LooseBJet", "VV_excl", "VVV", "top", "WW_double"};
     //m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double"};
 
     m.histname_suffix = {
+
 
       //==== DiMuon
       "_DiMuon_Preselection_SS", // nobjet, jet>=2;
@@ -117,7 +121,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       "_EMu_Preselection_SS", // nobjet, jet>=2;
       "_EMu_Low_SS",
       "_EMu_High_SS",
-
+      "_EMu_Preselection_ElectronSubLead_SS",
+      "_EMu_Preselection_MuonSubLead_SS",
     };
   }
   //==== OS
@@ -125,8 +130,9 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
     m.samples_to_use = {"VV_excl", "Xgamma_noDY", "VVV", "top_tt", "DY", "WW_double"};
     m.histname_suffix = {
-      "_DiMuon_Preselection_AboveZ_AllCharge",
-      "_DiElectron_Preselection_OS",
+      //"_DiMuon_Preselection_AboveZ_AllCharge",
+      "_DiMuon_Preselection_OS",
+      //"_DiElectron_Preselection_OS",
     };
   }
   if(XXX==2){

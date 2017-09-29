@@ -73,10 +73,10 @@ void Draw_MCClosure(){
       TFile *file_Measured = new TFile(filepath+"Measured/DiLeptonAnalyzer_SK"+sample+"_dilep_cat_v8-0-7.root");
       TFile *file_Predicted = new TFile(filepath+"Predicted/DiLeptonAnalyzer_SK"+sample+"_dilep_cat_v8-0-7.root");
 
-      TString ChageSign = "SS";
-      if(sample.Contains("WJets")) ChageSign = "AllCharge";
+      TString ChargeSign = "SS";
+      if(sample.Contains("WJets")) ChargeSign = "AllCharge";
 
-      region = regions.at(k)+"_"+ChageSign;
+      region = regions.at(k)+"_"+ChargeSign;
 
       for(unsigned int j=0; j<vars.size(); j++){
 
@@ -86,13 +86,14 @@ void Draw_MCClosure(){
 
           TString channel = channels.at(l);
 
+          TString dirname = channel+"_"+region;
           TString histname = var+"_"+channel+"_"+region;
 
           //cout << histname << endl;
-          TH1D *hist_Measured = (TH1D*)file_Measured->Get("Hists/"+histname);
-          TH1D *hist_Predicted = (TH1D*)file_Predicted->Get("Hists/"+histname);
-          TH1D *hist_Predicted_up = (TH1D*)file_Predicted->Get("Hists/"+histname+"_up");
-          TH1D *hist_Predicted_down = (TH1D*)file_Predicted->Get("Hists/"+histname+"_down");
+          TH1D *hist_Measured = (TH1D*)file_Measured->Get(dirname+"/"+histname);
+          TH1D *hist_Predicted = (TH1D*)file_Predicted->Get(dirname+"/"+histname);
+          TH1D *hist_Predicted_up = (TH1D*)file_Predicted->Get(dirname+"_up/"+histname+"_up");
+          TH1D *hist_Predicted_down = (TH1D*)file_Predicted->Get(dirname+"_down/"+histname+"_down");
 
           if(!hist_Measured || !hist_Predicted) continue;
 

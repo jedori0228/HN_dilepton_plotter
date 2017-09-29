@@ -3,13 +3,14 @@
 
 void LooseMuon_Optimization(){
 
-  bool DrawPlots = false;
+  bool DrawPlots = true;
 
   gStyle->SetOptStat(0);
   gErrorIgnoreLevel = kError;
   TH1::AddDirectory(kFALSE);
 
-  TString sample = "QCD";
+  TString dirname  = "MUON_HN_NOCUT_IPsame":
+  TString sample = "WJets";
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString catversion = getenv("CATVERSION");
@@ -17,13 +18,12 @@ void LooseMuon_Optimization(){
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  TString filepath = ENV_FILE_PATH+"/"+dataset+"/LooseMuonOptimization/";
-  TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/LooseMuonOptimization/"+sample+"/";
+  TString filepath = ENV_FILE_PATH+"/"+dataset+"/LooseMuonOptimization/"+dirname+"/";
+  TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/LooseMuonOptimization/"+dirname+"/"+sample+"/";
 
   TFile *output = new TFile(plotpath+"FRs.root", "RECREATE");
 
-  if( !gSystem->mkdir(plotpath, kTRUE) ){
-    gSystem->mkdir(plotpath+"/Diff/", kTRUE);
+  if( !gSystem->mkdir(plotpath, kTRUE) || !gSystem->mkdir(plotpath+"/Diff/", kTRUE) ){
     cout
     << "###################################################" << endl
     << "Directoy " << plotpath << " is created" << endl
@@ -41,7 +41,7 @@ void LooseMuon_Optimization(){
   double YMAX = 999999999;
 
   double MaxSIP = 3, dMaxSIP = 0.5;
-  for(int a=0; a<30; a++){
+  for(int a=0; a<60; a++){
 
     double MaxChi2 = 10., dMaxChi2 = 10.;
     for(int b=0; b<15; b++){

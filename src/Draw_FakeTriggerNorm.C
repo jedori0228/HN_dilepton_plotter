@@ -3,7 +3,7 @@
 
 void Draw_FakeTriggerNorm(){
 
-  vector<TString> Leptons = {"Muon_v7_SIP3"};
+  vector<TString> Leptons = {"Electron_v7"};
 
   gStyle->SetOptStat(0);
   gErrorIgnoreLevel = kError;

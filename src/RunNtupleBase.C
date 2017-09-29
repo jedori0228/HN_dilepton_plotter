@@ -6,14 +6,16 @@ void RunNtupleBase::Run(){
   //==== CutRangeInfo Loop
   //========================
 
-  cout << "##############################" << endl;
-  cout << "#### OPTIMIZATION STARTED ####" << endl;
-  cout << "##############################" << endl << endl;
+  if(!RunSystematic){
+    cout << "##############################" << endl;
+    cout << "#### OPTIMIZATION STARTED ####" << endl;
+    cout << "##############################" << endl << endl;
+  }
 
   vector<CutInfo> OptimizedCutInfo;
-  double final_cf(0.), final_cf_err(0.);
-  double final_fake(0.), final_fake_err(0.);
-  double final_prompt(0.), final_prompt_err(0.);
+  double final_cf(0.), final_cf_err(0.), final_cf_syst(0.);
+  double final_fake(0.), final_fake_err(0.), final_fake_syst(0.);
+  double final_prompt(0.), final_prompt_err(0.), final_prompt_syst(0.);
   vector<double> final_signal, final_signal_eff, final_signal_eff_preselection;
   for(unsigned int i=0; i<signals.size(); i++){
     final_signal.push_back(0.);
@@ -23,7 +25,7 @@ void RunNtupleBase::Run(){
 
   while( !cutrangeinfo.isEnd() ){
 
-    if(cutrangeinfo.CurrentIteration%LogEvery==0){
+    if(!RunSystematic && cutrangeinfo.CurrentIteration%LogEvery==0){
       cout << "####################################################" << endl;
       cout << "TIME STAMP : ["; printcurrunttime(); cout <<"] ";
       cout << cutrangeinfo.CurrentIteration << " / " << cutrangeinfo.TotalIteration << " ("<<100.*cutrangeinfo.CurrentIteration/cutrangeinfo.TotalIteration<<" %)"<<endl;
@@ -57,10 +59,17 @@ void RunNtupleBase::Run(){
       if(sample.Contains("fake")) filename = filename_prefix+"_SK"+sample+"_"+DataPD+"_dilep_"+filename_suffix;
       if(sample.Contains("HN"))   filename = filename_prefix+"_SK"      +sample           +"_"+filename_suffix;
 
-      DileptonNtuple m(filepath+filename, "Ntp_"+channel+"_"+treeskim);
+      TString this_treename = "Ntp_"+channel+"_"+treeskim;
+      if(sample.Contains("data") || sample.Contains("fake") || sample.Contains("chargeflip") ){
+        //if(channel.Contains("JetRes") || channel.Contains("JetRes") ){
+        this_treename = "Ntp_"+channel_for_jetres+"_"+treeskim;
+        //}
+      }
+      DileptonNtuple m(filepath+filename, this_treename);
 
       if(! (m.TreeExist) ){
 
+        //cout << sample << "\t" << "No Tree : " << "Ntp_"+channel+"_"+treeskim << endl;
         if(sample.Contains("HN")){
           signal_unweighted_yield.push_back(0.);
           signal_weighted_yield.push_back(0.);
@@ -215,17 +224,19 @@ void RunNtupleBase::Run(){
 
       OptimizedCutInfo = cutrangeinfo.GetCurrentCutInfo();
 
-      cout << endl;
-      cout << "!!!!!!!!!!!!!!!!!" << endl;
-      cout << "!!!! UPDATED !!!!" << endl;
-      cout << "!!!!!!!!!!!!!!!!!" << endl;
-      cout << endl;
-      cutrangeinfo.PrintCurrent();
-      cout << "CF" << "\t" << chargeflip_weighted_yield << " +- " << chargeflip_weighted_yield_err << endl;
-      cout << "Fake" << "\t" << fake_weighted_yield << " +- " << fake_weighted_yield_err << endl;
-      cout << "Prompt" << "\t" << prompt_weighted_yield << " +- " << prompt_weighted_yield_err << endl;
-      cout << "=> total bkg = " << total_bkg << endl;
-      cout << "Signal\tYield\tEfficiency\tEfficiency@Presel\tPunzi" << endl;
+      if(!RunSystematic){
+        cout << endl;
+        cout << "!!!!!!!!!!!!!!!!!" << endl;
+        cout << "!!!! UPDATED !!!!" << endl;
+        cout << "!!!!!!!!!!!!!!!!!" << endl;
+        cout << endl;
+        cutrangeinfo.PrintCurrent();
+        cout << "CF" << "\t" << chargeflip_weighted_yield << " +- " << chargeflip_weighted_yield_err << endl;
+        cout << "Fake" << "\t" << fake_weighted_yield << " +- " << fake_weighted_yield_err << endl;
+        cout << "Prompt" << "\t" << prompt_weighted_yield << " +- " << prompt_weighted_yield_err << endl;
+        cout << "=> total bkg = " << total_bkg << endl;
+        cout << "Signal\tYield\tEfficiency\tEfficiency@Presel\tPunzi" << endl;
+      }
       for(unsigned int iii=0; iii<signals.size(); iii++){
         final_signal.at(iii) = signal_weighted_yield.at(iii);
         final_signal_eff.at(iii) = signal_weighted_yield.at(iii)/signal_yield_nocut.at(iii);
@@ -236,15 +247,25 @@ void RunNtupleBase::Run(){
         final_signal_eff_preselection.at(iii) = eff_presel;
         MaxPunzis.at(iii) = punzis.at(iii);
 
-        cout << signals.at(iii) << "\t" << signal_weighted_yield.at(iii) << "\t" << signal_weighted_yield.at(iii)/signal_yield_nocut.at(iii) << "\t" << eff_presel << "\t" << punzis.at(iii) << endl;
+        if(!RunSystematic){
+          cout << signals.at(iii) << "\t" << signal_weighted_yield.at(iii) << "\t" << signal_weighted_yield.at(iii)/signal_yield_nocut.at(iii) << "\t" << eff_presel << "\t" << punzis.at(iii) << endl;
+        }
       }
-      cout << "=====================================================================" << endl << endl;
+
+      if(!RunSystematic){
+        cout << "=====================================================================" << endl << endl;
+      }
       final_cf = chargeflip_weighted_yield;
       final_cf_err = chargeflip_weighted_yield_err;
+      final_cf_syst = chargeflip_weighted_yield_syst;
+
       final_fake = fake_weighted_yield;
       final_fake_err = fake_weighted_yield_err;
+      final_fake_syst = fake_weighted_yield_syst;
+
       final_prompt = prompt_weighted_yield;
       final_prompt_err = prompt_weighted_yield_err;
+      final_prompt_syst = prompt_weighted_yield_syst_MCSF;
 
     }
 
@@ -253,21 +274,46 @@ void RunNtupleBase::Run(){
   } //END CutRangeInfo loop
 
 
-  cout << endl;
-  cout << "##################" << endl;
-  cout << "#### FINISHED ####" << endl;
-  cout << "##################" << endl << endl;
+  if(!RunSystematic){
+    cout << endl;
+    cout << "##################" << endl;
+    cout << "#### FINISHED ####" << endl;
+    cout << "##################" << endl << endl;
 
-  for(unsigned int i=0; i<OptimizedCutInfo.size(); i++){
-    OptimizedCutInfo.at(i).Print();
+    for(unsigned int i=0; i<OptimizedCutInfo.size(); i++){
+      OptimizedCutInfo.at(i).Print();
+    }
+    cout << "CF" << "\t" << final_cf << " +- " << final_cf_err << endl;
+    cout << "Fake" << "\t" << final_fake << " +- " << final_fake_err << endl;
+    cout << "Prompt" << "\t" << final_prompt << " +- " << final_prompt_err << endl;
+    cout << "=> total bkg = " << final_cf+final_fake+final_prompt << endl;
+    cout << "Signal\tYield\tEfficiency\tEfficiency@Presel\tPunzi" << endl;
+    for(unsigned int i=0; i<signals.size(); i++){
+      cout << signals.at(i) << "\t" << final_signal.at(i) << "\t" << final_signal_eff.at(i) << "\t" << final_signal_eff_preselection.at(i) << "\t" << MaxPunzis.at(i) << endl;
+    }
   }
-  cout << "CF" << "\t" << final_cf << " +- " << final_cf_err << endl;
-  cout << "Fake" << "\t" << final_fake << " +- " << final_fake_err << endl;
-  cout << "Prompt" << "\t" << final_prompt << " +- " << final_prompt_err << endl;
-  cout << "=> total bkg = " << final_cf+final_fake+final_prompt << endl;
-  cout << "Signal\tYield\tEfficiency\tEfficiency@Presel\tPunzi" << endl;
-  for(unsigned int i=0; i<signals.size(); i++){
-    cout << signals.at(i) << "\t" << final_signal.at(i) << "\t" << final_signal_eff.at(i) << "\t" << final_signal_eff_preselection.at(i) << "\t" << MaxPunzis.at(i) << endl;
+
+  if(RunSystematic){
+    fake_bkgs = final_fake;
+    fake_bkgs_err = final_fake_err;
+    fake_bkgs_syst = final_fake_syst;
+
+    prompt_bkgs = final_prompt;
+    prompt_bkgs_err = final_prompt_err;
+    prompt_bkgs_syst = final_prompt_syst;
+
+    cf_bkgs = final_cf;
+    cf_bkgs_err = final_cf_err;
+    cf_bkgs_syst = final_cf_syst;
+
+    total_bkgs = final_cf+final_fake+final_prompt;
+    total_bkgs_err = sqrt(final_fake_err*final_fake_err+final_prompt_err*final_prompt_err+final_cf_err*final_cf_err);
+
+
+    signal_rate.clear();
+    for(unsigned int i=0; i<signals.size(); i++){
+      signal_rate.push_back( final_signal.at(i) );
+    }
   }
 
 }

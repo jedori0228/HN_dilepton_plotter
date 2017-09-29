@@ -16,8 +16,8 @@ void canvas_margin(TCanvas *c1, TPad *c1_up, TPad *c1_down){
   c1_down->SetBottomMargin( 0.4 );
   c1_down->SetLeftMargin( 0.15 );
   c1_down->SetRightMargin( 0.03 );
-  c1_down->SetGridx();
-  c1_down->SetGridy();
+  //c1_down->SetGridx();
+  //c1_down->SetGridy();
   
   c1->SetTopMargin( 0.05 );
   c1->SetBottomMargin( 0.13 );

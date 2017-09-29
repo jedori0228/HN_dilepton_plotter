@@ -3,6 +3,7 @@
 
 TGraphAsymmErrors* ValuesToError(TGraphAsymmErrors* a);
 void AddSystematic(TGraphAsymmErrors* target, TGraphAsymmErrors* a, TGraphAsymmErrors* b);
+void AddSystematic(TH2D *central, TH2D *a);
 void EmptyGraph(TGraphAsymmErrors* a);
 
 void GetTnPTriggerSystematic(){
@@ -25,7 +26,6 @@ void GetTnPTriggerSystematic(){
   vector<TString> fitftns = {"vpvPlusExpo", "vpvPlusExpoPassFail", "voigtPlusExpo", "voigtPlusExpoPassFail", "vpvPlusCheb_3rd", "vpvPlusCheb_4th"};
   vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8"};
 
-
   for(unsigned int it_DataPeriod=0; it_DataPeriod<DataPeriods.size(); it_DataPeriod++){
 
     TString DataPeriod = DataPeriods.at(it_DataPeriod);
@@ -33,6 +33,9 @@ void GetTnPTriggerSystematic(){
     for(unsigned int it_trigger=0; it_trigger<triggers.size(); it_trigger++){
 
       TString trigger = triggers.at(it_trigger);
+
+      //==== output rootfile
+      TFile *output = new TFile(base_plotpath+DataPeriod+"/MuonTriggerEfficiency_HNDILEP_"+trigger+"_Run"+DataPeriod+".root", "RECREATE");
 
       //==== Let's loop Eta Region, and get Eff vs pT
       //==== pt_PLOT_abseta_bin0_Data
@@ -71,6 +74,9 @@ void GetTnPTriggerSystematic(){
         TGraphAsymmErrors *gr_Data_TotSyst;
         TGraphAsymmErrors *gr_MC_Central;
         TGraphAsymmErrors *gr_MC_TotSyst;
+
+        TGraphAsymmErrors *gr_error_Data;
+        TGraphAsymmErrors *gr_error_MC;
 
         //==== Legend
         TLegend *lg = new TLegend(0.6, 0.1, 0.93, 0.5);
@@ -120,6 +126,7 @@ void GetTnPTriggerSystematic(){
           c_Data->cd();
           c_Data_down->cd();
           TGraphAsymmErrors *gr_diff_Data = GraphSubtract( gr_Data, gr_Data_Central, true );
+          ScaleGraph(gr_diff_Data, 100.);
           hist_axis( gr_Data, gr_diff_Data );
           gr_diff_Data->Draw(DrawOption);
           gr_diff_Data->SetLineColor(colors.at(it_syst));
@@ -127,22 +134,23 @@ void GetTnPTriggerSystematic(){
           gr_diff_Data->SetMarkerStyle(21);
           if(it_syst==0){
             gr_diff_Data->GetXaxis()->SetTitle("p_{T} [GeV]");
-            gr_diff_Data->GetYaxis()->SetRangeUser(-0.01, 0.01);
-            gr_diff_Data->GetYaxis()->SetTitle("Rel. Diff.");
+            gr_diff_Data->GetYaxis()->SetRangeUser(-1, 1);
+            gr_diff_Data->GetYaxis()->SetTitle("Rel. Diff. [%]");
           }
           //==== Error
           //==== If Central, Draw Fit Uncertainty
           if(syst=="Central"){
             c_Data_err->cd();
-            TGraphAsymmErrors *gr_error_Data = ValuesToError(gr_Data);
+            gr_error_Data = ValuesToError(gr_Data);
             ScaleGraph(gr_error_Data, 100.);
-            gr_error_Data->SetLineColor(kBlack);
-            gr_error_Data->SetLineStyle(2);
-            gr_error_Data->Draw("al");
+            gr_error_Data->SetLineColor(kBlue);
+            gr_error_Data->SetMarkerColor(kBlue);
+            gr_error_Data->SetLineWidth(2);
+            gr_error_Data->Draw("ap");
             hist_axis(gr_error_Data);
             gr_error_Data->GetXaxis()->SetTitle("p_{T} [GeV]");
             if(trigger=="DoubleIsoMu17Mu8_IsoMu17leg") gr_error_Data->GetXaxis()->SetRangeUser(19., 100.);
-            gr_error_Data->GetYaxis()->SetTitle("Rel. Diff.");
+            gr_error_Data->GetYaxis()->SetTitle("Rel. Diff. [%]");
             gr_error_Data->GetYaxis()->SetRangeUser(0., 4.);
 
             gr_Data_TotSyst = (TGraphAsymmErrors*)gr_Data->Clone();
@@ -163,6 +171,7 @@ void GetTnPTriggerSystematic(){
           c_MC->cd();
           c_MC_down->cd();
           TGraphAsymmErrors *gr_diff_MC = GraphSubtract( gr_MC, gr_MC_Central, true );
+          ScaleGraph(gr_diff_MC, 100.);
           hist_axis( gr_MC, gr_diff_MC );
           gr_diff_MC->Draw(DrawOption);
           gr_diff_MC->SetLineColor(colors.at(it_syst));
@@ -170,22 +179,23 @@ void GetTnPTriggerSystematic(){
           gr_diff_MC->SetMarkerStyle(21);
           if(it_syst==0){
             gr_diff_MC->GetXaxis()->SetTitle("p_{T} [GeV]");
-            gr_diff_MC->GetYaxis()->SetRangeUser(-0.01, 0.01);
-            gr_diff_MC->GetYaxis()->SetTitle("Rel. Diff.");
+            gr_diff_MC->GetYaxis()->SetRangeUser(-1, 1);
+            gr_diff_MC->GetYaxis()->SetTitle("Rel. Diff. [%]");
           }
           //==== Error
           //==== If Central, Draw Fit Uncertainty
           if(syst=="Central"){
             c_MC_err->cd();
-            TGraphAsymmErrors *gr_error_MC = ValuesToError(gr_MC);
+            gr_error_MC = ValuesToError(gr_MC);
             ScaleGraph(gr_error_MC, 100.);
-            gr_error_MC->SetLineColor(kBlack);
-            gr_error_MC->SetLineStyle(2);
-            gr_error_MC->Draw("al");
+            gr_error_MC->SetLineColor(kBlue);
+            gr_error_MC->SetMarkerColor(kBlue);
+            gr_error_MC->SetLineWidth(2);
+            gr_error_MC->Draw("ap");
             hist_axis(gr_error_MC);
             gr_error_MC->GetXaxis()->SetTitle("p_{T} [GeV]");
             if(trigger=="DoubleIsoMu17Mu8_IsoMu17leg") gr_error_MC->GetXaxis()->SetRangeUser(19., 100.);
-            gr_error_MC->GetYaxis()->SetTitle("Rel. Diff.");
+            gr_error_MC->GetYaxis()->SetTitle("Rel. Diff. [%]");
             gr_error_MC->GetYaxis()->SetRangeUser(0., 4.);
 
             gr_MC_TotSyst = (TGraphAsymmErrors*)gr_MC->Clone();
@@ -209,8 +219,38 @@ void GetTnPTriggerSystematic(){
         c_Data_err->cd();
         ScaleGraph(gr_Data_TotSyst, 100.);
         gr_Data_TotSyst->SetLineColor(kRed);
+        gr_Data_TotSyst->SetMarkerColor(kRed);
         gr_Data_TotSyst->SetLineWidth(2);
-        gr_Data_TotSyst->Draw("lsame");
+        gr_Data_TotSyst->Draw("psame");
+        double y_error_max_Data = 1.2;
+        gr_error_Data->GetYaxis()->SetRangeUser(0., y_error_max_Data);
+        //==== Sum
+        TGraphAsymmErrors *gr_Data_AllError = (TGraphAsymmErrors *)gr_error_Data->Clone();
+        for(int aaa=0; aaa<gr_Data_AllError->GetN(); aaa++){
+
+          double x_fit, y_fit;
+          double x_syst, y_syst;
+
+          gr_Data_AllError->GetPoint(aaa, x_fit, y_fit);
+          gr_Data_TotSyst->GetPoint(aaa, x_syst, y_syst);
+
+          double err = sqrt(y_fit*y_fit+y_syst*y_syst);
+
+          gr_Data_AllError->SetPoint(aaa, x_fit, err);
+        }
+        gr_Data_AllError->SetLineColor(kBlack);
+        gr_Data_AllError->SetMarkerColor(kBlack);
+        gr_Data_AllError->SetLineWidth(2);
+        gr_Data_AllError->Draw("psame");
+
+        TLegend *lg_error = new TLegend(0.6, 0.7, 0.93, 0.9);
+        lg_error->SetFillStyle(0);
+        lg_error->SetBorderSize(0);
+        lg_error->AddEntry(gr_Data_AllError, "Total Uncert.", "lp");
+        lg_error->AddEntry(gr_Data_TotSyst, "Syst. Uncert.", "lp");
+        lg_error->AddEntry(gr_error_Data, "Fit Uncert.", "lp");
+        lg_error->Draw();
+
         c_Data_err->SaveAs(base_plotpath+DataPeriod+"/"+trigger+"_"+eff_name+"_Data_Diff.pdf");
         c_Data_err->Close();
 
@@ -222,8 +262,30 @@ void GetTnPTriggerSystematic(){
         c_MC_err->cd();
         ScaleGraph(gr_MC_TotSyst, 100.);
         gr_MC_TotSyst->SetLineColor(kRed);
+        gr_MC_TotSyst->SetMarkerColor(kRed);
         gr_MC_TotSyst->SetLineWidth(2);
-        gr_MC_TotSyst->Draw("lsame");
+        gr_MC_TotSyst->Draw("psame");
+        double y_error_max_MC = 1.2;
+        gr_error_MC->GetYaxis()->SetRangeUser(0., y_error_max_MC);
+        //==== Sum
+        TGraphAsymmErrors *gr_MC_AllError = (TGraphAsymmErrors *)gr_error_MC->Clone();
+        for(int aaa=0; aaa<gr_MC_AllError->GetN(); aaa++){
+
+          double x_fit, y_fit;
+          double x_syst, y_syst;
+
+          gr_MC_AllError->GetPoint(aaa, x_fit, y_fit);
+          gr_MC_TotSyst->GetPoint(aaa, x_syst, y_syst);
+
+          double err = sqrt(y_fit*y_fit+y_syst*y_syst);
+
+          gr_MC_AllError->SetPoint(aaa, x_fit, err);
+        }
+        gr_MC_AllError->SetLineColor(kBlack);
+        gr_MC_AllError->SetMarkerColor(kBlack);
+        gr_MC_AllError->SetLineWidth(2);
+        gr_MC_AllError->Draw("psame");
+        lg_error->Draw();
         c_MC_err->SaveAs(base_plotpath+DataPeriod+"/"+trigger+"_"+eff_name+"_MC_Diff.pdf");
         c_MC_err->Close();
 
@@ -232,6 +294,39 @@ void GetTnPTriggerSystematic(){
 
       } // END Eta region Loop
 
+      //======================
+      //==== Get 2D directly
+      //======================
+
+      TH2D *hist_2D_Data_Central = NULL;
+      TH2D *hist_2D_MC_Central = NULL;
+
+      for(unsigned int it_syst=0; it_syst<systs.size(); it_syst++){
+
+        TString syst = systs.at(it_syst);
+        TString filepath = base_filepath+DataPeriod+"/"+syst+"/"+trigger+"/";
+
+        TFile *file = new TFile(filepath+"MuonTriggerEfficiency_HNDILEP_"+trigger+"_Run"+DataPeriod+".root");
+
+        TH2D *hist_2D_Data = (TH2D *)file->Get("TriggerEff_HNDilepton_"+DataPeriod+"_Data");
+        TH2D *hist_2D_MC = (TH2D *)file->Get("TriggerEff_HNDilepton_"+DataPeriod+"_MC");
+        if(syst=="Central"){
+          hist_2D_Data_Central = (TH2D *)hist_2D_Data->Clone();
+          hist_2D_MC_Central = (TH2D *)hist_2D_MC->Clone();
+        }
+        else{
+          AddSystematic(hist_2D_Data_Central, hist_2D_Data);
+          AddSystematic(hist_2D_MC_Central, hist_2D_MC);
+        }
+        
+
+      } // END Syst loop
+
+      output->cd();
+      hist_2D_Data_Central->Write();
+      hist_2D_MC_Central->Write();
+      output->Close();
+      
     } // END Trigger Loop
 
 
@@ -248,14 +343,16 @@ TGraphAsymmErrors* ValuesToError(TGraphAsymmErrors* a){
 
   for(int i=0; i<NX; i++){
 
-    double x, y, yerr_low, yerr_high;
+    double x, y, xerr_low, xerr_high, yerr_low, yerr_high;
 
     a->GetPoint(i, x, y);
+    xerr_low  = a->GetErrorXlow(i);
+    xerr_high = a->GetErrorXhigh(i);
     yerr_low  = a->GetErrorYlow(i);
     yerr_high = a->GetErrorYhigh(i);
 
     out->SetPoint(i, x, sqrt((yerr_low*yerr_low+yerr_high*yerr_high)/2.));
-    out->SetPointError(i, 0., 0., 0., 0.);
+    out->SetPointError(i, xerr_low, xerr_high, 0., 0.);
 
   }
 
@@ -274,6 +371,10 @@ void AddSystematic(TGraphAsymmErrors* target, TGraphAsymmErrors* a, TGraphAsymmE
 
     double a_x, a_y, a_yerr_low, a_yerr_high, b_x, b_y, b_yerr_low, b_yerr_high;
 
+    double xerr_low, xerr_high;
+    xerr_low  = a->GetErrorXlow(i);
+    xerr_high = a->GetErrorXhigh(i);
+
     a->GetPoint(i, a_x, a_y);
     a_yerr_low  = a->GetErrorYlow(i);
     a_yerr_high = a->GetErrorYhigh(i);
@@ -286,8 +387,28 @@ void AddSystematic(TGraphAsymmErrors* target, TGraphAsymmErrors* a, TGraphAsymmE
 
     double newerror = sqrt(a_yerr*a_yerr+b_yerr*b_yerr);
     target->SetPoint(i, a_x, newerror/b_y);
-    target->SetPointError(i, 0., 0., 0., 0.);
+    target->SetPointError(i, xerr_low, xerr_high, 0., 0.);
     
+  }
+
+}
+
+void AddSystematic(TH2D *central, TH2D *a){
+
+  for(int i=1; i<=central->GetXaxis()->GetNbins(); i++){
+
+    for(int j=1; j<=central->GetYaxis()->GetNbins(); j++){
+
+      double value_central = central->GetBinContent(i,j);
+      double value_syst = a->GetBinContent(i,j);
+
+      double err_original = central->GetBinError(i,j);
+      double this_syst = fabs(value_central-value_syst);
+
+      double new_err = sqrt(err_original*err_original+this_syst*this_syst);
+      central->SetBinError(i,j, new_err);
+    }
+
   }
 
 }
@@ -298,11 +419,13 @@ void EmptyGraph(TGraphAsymmErrors* a){
 
   for(int i=0; i<NX; i++){
 
-    double x, y;
+    double x, y, xerr_low, xerr_high;
 
     a->GetPoint(i, x, y);
+    xerr_low  = a->GetErrorXlow(i);
+    xerr_high = a->GetErrorXhigh(i);
     a->SetPoint(i, x, 0.);
-    a->SetPointError(i, 0., 0., 0., 0.);
+    a->SetPointError(i, xerr_low, xerr_high, 0., 0.);
 
   }  
 

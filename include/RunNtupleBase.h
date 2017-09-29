@@ -9,12 +9,13 @@ class RunNtupleBase{
 public:
 
   bool DoDebug, PrintYield, ShowData;
+  bool RunSystematic;
   Long64_t LogEvery;
 
   TString treeskim;
   TString preselection; // To Get Relative Efficiency, we need to call Nevents_<preselection>
 
-  TString DataPD, channel;
+  TString DataPD, channel, channel_for_jetres;
   TString filepath, plotpath, filename_prefix, filename_suffix;
   vector<TString> samples;
   AnalysisInputs analysisInputs;
@@ -37,15 +38,24 @@ public:
   void mkdir(TString path);
 
   void FillSignalInfo();
+  void ClearSignalInfo();
   void AddSamplesToList(vector<TString> bkgs);
   void PrintSampleList();
   void SetCutCard(TString path);
   void Run();
 
+  //=== Final Results
+  double total_bkgs, fake_bkgs, prompt_bkgs, cf_bkgs;
+  double total_bkgs_err, fake_bkgs_err, prompt_bkgs_err, cf_bkgs_err;
+  double fake_bkgs_syst; // 31%
+  double prompt_bkgs_syst; // MCSF uncert
+  double cf_bkgs_syst; // 21%
+  vector<double> signal_rate;
+
 };
 
 RunNtupleBase::RunNtupleBase() : 
-DoDebug(false), PrintYield(false), ShowData(false), LogEvery(100),
+DoDebug(false), PrintYield(false), ShowData(false), RunSystematic(false), LogEvery(100),
 plotpath("")
 {
 
@@ -112,6 +122,14 @@ void RunNtupleBase::FillSignalInfo(){
 
 }
 
+void RunNtupleBase::ClearSignalInfo(){
+
+  signal_yield_nocut.clear();
+  signal_yield_preselection.clear();
+  MaxPunzis.clear();
+
+}
+
 void RunNtupleBase::AddSamplesToList(vector<TString> v){
 
   for(unsigned int i=0; i<v.size(); i++){
@@ -140,14 +158,17 @@ void RunNtupleBase::SetSourceSystematics(){
 void RunNtupleBase::SetCutCard(TString path){
 
   cutrangeinfo.ReadCutCard(path);
-  cout
-  << endl
-  << "##################################################" << endl
-  << "#### TOTAL # of Loop = " << cutrangeinfo.TotalIteration << endl
-  << "##################################################" << endl
-  << endl;
-  cutrangeinfo.Print();
-  cout << endl;
+
+  if(!RunSystematic){
+    cout
+    << endl
+    << "##################################################" << endl
+    << "#### TOTAL # of Loop = " << cutrangeinfo.TotalIteration << endl
+    << "##################################################" << endl
+    << endl;
+    cutrangeinfo.Print();
+    cout << endl;
+  }
 
 }
 

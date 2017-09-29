@@ -23,7 +23,7 @@ void Draw_TnP_Trigger(int period){
   }
 
   vector<TString> systs = {"Central", "NMassBins30", "NMassBins50", "MassRange_60_130", "MassRange_70_120", "SignalShapeSingleV", "TagPt30Iso0p08", "TagPt30Iso0p08", "ProbeMult99"};
-  systs = {"Central"};
+  //systs = {"Central"};
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString dataset = getenv("CATANVERSION");
@@ -33,7 +33,10 @@ void Draw_TnP_Trigger(int period){
   TString base_plotpath = ENV_PLOT_PATH+"/TnP_Results/TriggerSF/"+DataPeriod+"/";
   
   vector<double> abseta = {0., 0.9, 1.2, 2.1, 2.4};
-  vector<TString> fitftns = {"vpvPlusExpo", "vpvPlusExpoPassFail", "voigtPlusExpo", "voigtPlusExpoPassFail", "vpvPlusCheb_2nd", "vpvPlusCheb_3rd", "vpvPlusCheb_4th"};
+  vector<TString> fitftns = {
+    "vpvPlusExpo", "vpvPlusExpoPassFail", "vpvPlusCheb_2nd", "vpvPlusCheb_3rd", "vpvPlusCheb_4th", "vpvPlusExpoClosePeakNarrow", "vpvPlusExpoClosePeak", "vpvPlusExpoPassFail2", "vpvPlusExpoPassFail3", "vpvPlusExpoPassFail4", "vpvPlusExpoPassFail5", "vpvPlusCMS",
+    "voigtPlusExpo", "voigtPlusExpoPassFail", "voigtPlusCheb_2nd", "voigtPlusCheb_3rd", "voigtPlusCheb_4th", "voigtPlusExpoClosePeakNarrow", "voigtPlusExpoClosePeak", "voigtPlusExpoPassFail2", "voigtPlusExpoPassFail3", "voigtPlusExpoPassFail4", "voigtPlusExpoPassFail5", "voigtPlusCMS",
+  };
   vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8"};
 
   for(unsigned int it_syst=0; it_syst<systs.size(); it_syst++){

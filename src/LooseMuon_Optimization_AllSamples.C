@@ -35,13 +35,13 @@ void LooseMuon_Optimization_AllSamples(){
   float ptarray[n_pt+1] = {5., 10., 20., 30., 40., 50., 60., 70.};
 
   double MaxSIP = 3, dMaxSIP = 0.5;
-  for(int a=0; a<30; a++){
+  for(int a=0; a<60; a++){
 
     double MaxChi2 = 10., dMaxChi2 = 10.;
     for(int b=0; b<15; b++){
 
       TString SIP_Chi2 = TString::Itoa(MaxSIP*10,10)+"_"+TString::Itoa(MaxChi2,10);
-      //cout << MaxSIP<<"\t"<<MaxChi2<<" ==> " << SIP_Chi2 << endl;
+      cout << MaxSIP<<"\t"<<MaxChi2<<" ==> " << SIP_Chi2 << endl;
 
       TCanvas* c1 = new TCanvas("c1", "", 800, 800);
       c1->Draw();

@@ -13,7 +13,7 @@ void HiggsCombindedLimit(){
   TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
   TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  TString WhichDirectoryInCutop = "TEST";
+  TString WhichDirectoryInCutop = "170921_ElEl_MCSF_applied_OPTIMIZEDCARD_OF_170904_second_quick_CorrectSyst";
 
   filepath = filepath+WhichDirectoryInCutop+"/";
   plotpath = plotpath+WhichDirectoryInCutop+"/";
@@ -112,13 +112,17 @@ void HiggsCombindedLimit(){
 
   vector<double> MixingValues8TeV = {
 /*
+    //==== MuMu
     2.82635E-05, 3.69206E-05, 8.52678E-05, 0.000618594, 0.00148793,
     0.00583953, 0.00257802, 0.00290533, 0.00449771, 0.00722055,
     0.0108741, 0.0194395, 0.0400305, 0.0708397, 0.149737, 0.497138
 */
+
+    //==== ElEl
     0.000117471, 0.000119376, 0.00025116, 0.00185047, 0.00558829,
     0.0164049, 0.00765044, 0.0076666, 0.0100238, 0.0143538,
     0.0202162, 0.0414845, 0.0692952, 0.111788, 0.192697, 0.58519,
+
   };
   for(unsigned int j=0; j<MixingValues8TeV.size(); j++) exp[j] = MixingValues8TeV.at(j);
 
@@ -126,28 +130,50 @@ void HiggsCombindedLimit(){
   gr_8TeV_exp->SetLineColor(kRed);
   gr_8TeV_exp->SetLineWidth(3);
 
+
+  const int nm2 = 13;
+  double mass_13TeV_2[nm2] = {
+    40, 50, 60, 70, 80,
+    90, 100, 150,
+    200, 250, 300, 400, 500
+  };
+  double exp2[nm2];
+
+  vector<double> MixingValues13TeV_2 = {
+    //==== ElEl
+    0.00013271, 0.00016568, 0.00034674, 0.002342, 0.0016074,
+    0.0215585, 0.0102926, 0.015655,
+    0.021067, 0.026317, 0.041888, 0.08738, 0.19364
+  };
+  for(unsigned int j=0; j<MixingValues13TeV_2.size(); j++) exp2[j] = MixingValues13TeV_2.at(j);
+
+  TGraph *gr_13TeV_exp2 = new TGraph(nm2, mass_13TeV_2, exp2);
+  gr_13TeV_exp2->SetLineColor(kBlue);
+  gr_13TeV_exp2->SetLineWidth(3);
+
+
   TCanvas *c_out = new TCanvas("c_out", "", 800, 800);
   canvas_margin(c_out);
   c_out->cd();
   c_out->Draw();
-  //c_out->SetLogx();
   c_out->SetLogy();
   c_out->SetGridx();
   c_out->SetGridy();
 
   gr_band_2sigma->Draw("A3");
   hist_axis(gr_band_2sigma);
-  gr_band_2sigma->GetYaxis()->SetTitle("|V_{eN}^{2}|");
+  gr_band_2sigma->GetYaxis()->SetTitle("|V_{eN}|^{2}");
   gr_band_2sigma->GetXaxis()->SetTitle("m(HN) [GeV]");
   gr_band_2sigma->GetYaxis()->SetTitleSize(0.06); 
-  gr_band_2sigma->GetYaxis()->SetRangeUser(0.000002, 10.);
+  gr_band_2sigma->GetYaxis()->SetRangeUser(0.00002, 2.);
   gr_band_2sigma->SetTitle("");
   gr_band_1sigma->Draw("3same");
   gr_13TeV_exp->Draw("lsame");
-  //gr_8TeV_exp->Draw("lsame");
+  gr_8TeV_exp->Draw("lsame");
+  //gr_13TeV_exp2->Draw("lsame");
   gr_13TeV_obs->Draw("lsame");
 
-  //lg->AddEntry(gr_8TeV_exp, "8 TeV DiMuon Ch. Expected", "l");
+  lg->AddEntry(gr_8TeV_exp, "8 TeV DiElectron Ch. Expected", "l");
   lg->SetX2NDC(0.90);
   lg->SetY2NDC(0.67);
   lg->SetBorderSize(0);
@@ -177,14 +203,15 @@ void HiggsCombindedLimit(){
   gr_band_2sigma->GetYaxis()->SetTitle("|V_{eN}^{2}|");
   gr_band_2sigma->GetXaxis()->SetTitle("m(HN) [GeV]");
   gr_band_2sigma->GetYaxis()->SetTitleSize(0.06);
-  gr_band_2sigma->GetYaxis()->SetRangeUser(0.000002, 10.);
+  gr_band_2sigma->GetYaxis()->SetRangeUser(0.00002, 2.);
   gr_band_2sigma->SetTitle("");
   gr_band_1sigma->Draw("3same");
   gr_13TeV_exp->Draw("lsame");
-  //gr_8TeV_exp->Draw("lsame");
+  gr_8TeV_exp->Draw("lsame");
+  //gr_13TeV_exp2->Draw("lsame");
   gr_13TeV_obs->Draw("lsame");
 
-  //lg_log->AddEntry(gr_8TeV_exp, "8 TeV DiMuon Ch. Expected", "l");
+  lg_log->AddEntry(gr_8TeV_exp, "8 TeV DiMuon Ch. Expected", "l");
   lg_log->SetX2NDC(0.90);
   lg_log->SetY2NDC(0.67);
   lg_log->SetBorderSize(0);

@@ -40,14 +40,16 @@ void GetMCNormSF(){
 
   vector< vector<TString> > signals = {
     {"WZTo3LNu_powheg"},
-    {"ZGto2LG", "WGtoLNuG"},
+    {"ZGto2LG"},//, "WGtoLNuG"},
+    //{"WZTo3LNu_mllmin01"},
+    //{"ZGto2LG"},
     {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"},
   };
 
   vector< double > SFs = {
-    0.9924,
-    0.8265,
-    0.9211,
+    0.9744,
+    0.823,
+    0.9221,
   };
 
   TCanvas* c1 = new TCanvas("c1", "", 800, 800);
