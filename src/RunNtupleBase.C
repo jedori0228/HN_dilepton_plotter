@@ -60,10 +60,10 @@ void RunNtupleBase::Run(){
       if(sample.Contains("HN"))   filename = filename_prefix+"_SK"      +sample           +"_"+filename_suffix;
 
       TString this_treename = "Ntp_"+channel+"_"+treeskim;
-      if(sample.Contains("data") || sample.Contains("fake") || sample.Contains("chargeflip") ){
-        //if(channel.Contains("JetRes") || channel.Contains("JetRes") ){
-        this_treename = "Ntp_"+channel_for_jetres+"_"+treeskim;
-        //}
+      if(RunSystematic){
+        if(sample.Contains("data") || sample.Contains("fake") || sample.Contains("chargeflip") ){
+          this_treename = "Ntp_"+channel_for_jetres+"_"+treeskim;
+        }
       }
       DileptonNtuple m(filepath+filename, this_treename);
 

@@ -167,6 +167,10 @@ unweighted_yield(0.), weighted_yield(0.)
   tree = (TTree*)f->Get(treename);
 
   Init(tree);
+  if(!TreeExist){
+    f->Close();
+    delete f;
+  }
 
   CutVariables.clear();
   CutDirections.clear();
