@@ -1,0 +1,10 @@
+Nbjets_nolepveto == 0 0 1
+m_ll > 15 15  1
+PFMET < 35 35 1
+m_ll > 50 50  1
+m_ll < 110 110  1
+m_lljj_jjWclosest > 120 120 1
+leadingLepton_Pt > 20 20 1
+secondLepton_Pt > 15 15 1
+SubLeadljj_jjWclosest > 80 80 1
+SubLeadljj_jjWclosest < 120 120 1

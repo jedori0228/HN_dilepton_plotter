@@ -1,0 +1,6 @@
+secondLepton_Pt > 102.0 102.0 1
+m_lljj_jjWclosest > 600.0 600.0 1
+m_jj_jjWclosest > 60.0 60.0 1
+m_jj_jjWclosest < 105.0 105.0 1
+leadingLepton_Pt > 158.0 158.0 1
+MET2ST < 8.5 8.5 1
