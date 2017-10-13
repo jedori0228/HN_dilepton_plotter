@@ -2,6 +2,8 @@
 
 void HiggsCombindedLimit(){
 
+  TString channel = "MuMu";
+
   gStyle->SetOptTitle(0);
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
@@ -13,7 +15,7 @@ void HiggsCombindedLimit(){
   TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
   TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  TString WhichDirectoryInCutop = "170921_ElEl_MCSF_applied_OPTIMIZEDCARD_OF_170904_second_quick_CorrectSyst";
+  TString WhichDirectoryInCutop = "171010_MuMu";
 
   filepath = filepath+WhichDirectoryInCutop+"/";
   plotpath = plotpath+WhichDirectoryInCutop+"/";
@@ -32,7 +34,7 @@ void HiggsCombindedLimit(){
 
   //==== read result file
   string elline;
-  ifstream in(filepath+"/result.txt");
+  ifstream in(filepath+"/result_"+channel+".txt");
 
   double mass[24], obs[24], limit[24], onesig_left[24], onesig_right[24], twosig_left[24], twosig_right[24];
 
@@ -110,20 +112,24 @@ void HiggsCombindedLimit(){
   };
   double exp[nm];
 
-  vector<double> MixingValues8TeV = {
-/*
-    //==== MuMu
-    2.82635E-05, 3.69206E-05, 8.52678E-05, 0.000618594, 0.00148793,
-    0.00583953, 0.00257802, 0.00290533, 0.00449771, 0.00722055,
-    0.0108741, 0.0194395, 0.0400305, 0.0708397, 0.149737, 0.497138
-*/
+  vector<double> MixingValues8TeV;
+  if(channel=="ElEl"){
+    MixingValues8TeV = {
+      //==== ElEl
+      0.000117471, 0.000119376, 0.00025116, 0.00185047, 0.00558829,
+      0.0164049, 0.00765044, 0.0076666, 0.0100238, 0.0143538,
+      0.0202162, 0.0414845, 0.0692952, 0.111788, 0.192697, 0.58519,
+    };
+  }
+  if(channel=="MuMu"){
+    MixingValues8TeV = {
+      //==== MuMu
+      2.82635E-05, 3.69206E-05, 8.52678E-05, 0.000618594, 0.00148793,
+      0.00583953, 0.00257802, 0.00290533, 0.00449771, 0.00722055,
+      0.0108741, 0.0194395, 0.0400305, 0.0708397, 0.149737, 0.497138
+    };
+  }
 
-    //==== ElEl
-    0.000117471, 0.000119376, 0.00025116, 0.00185047, 0.00558829,
-    0.0164049, 0.00765044, 0.0076666, 0.0100238, 0.0143538,
-    0.0202162, 0.0414845, 0.0692952, 0.111788, 0.192697, 0.58519,
-
-  };
   for(unsigned int j=0; j<MixingValues8TeV.size(); j++) exp[j] = MixingValues8TeV.at(j);
 
   TGraph *gr_8TeV_exp = new TGraph(nm, mass_8TeV, exp);
@@ -162,7 +168,8 @@ void HiggsCombindedLimit(){
 
   gr_band_2sigma->Draw("A3");
   hist_axis(gr_band_2sigma);
-  gr_band_2sigma->GetYaxis()->SetTitle("|V_{eN}|^{2}");
+  if(channel=="ElEl") gr_band_2sigma->GetYaxis()->SetTitle("|V_{eN}|^{2}");
+  if(channel=="MuMu") gr_band_2sigma->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
   gr_band_2sigma->GetXaxis()->SetTitle("m(HN) [GeV]");
   gr_band_2sigma->GetYaxis()->SetTitleSize(0.06); 
   gr_band_2sigma->GetYaxis()->SetRangeUser(0.00002, 2.);
@@ -185,7 +192,7 @@ void HiggsCombindedLimit(){
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
-  c_out->SaveAs(plotpath+"/13TeV_mixing.pdf");
+  c_out->SaveAs(plotpath+"/"+channel+"_13TeV_mixing.pdf");
   c_out->Close();
 
   //==== logX
@@ -200,7 +207,8 @@ void HiggsCombindedLimit(){
 
   gr_band_2sigma->Draw("A3");
   hist_axis(gr_band_2sigma);
-  gr_band_2sigma->GetYaxis()->SetTitle("|V_{eN}^{2}|");
+  if(channel=="ElEl") gr_band_2sigma->GetYaxis()->SetTitle("|V_{eN}|^{2}");
+  if(channel=="MuMu") gr_band_2sigma->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
   gr_band_2sigma->GetXaxis()->SetTitle("m(HN) [GeV]");
   gr_band_2sigma->GetYaxis()->SetTitleSize(0.06);
   gr_band_2sigma->GetYaxis()->SetRangeUser(0.00002, 2.);
@@ -224,7 +232,7 @@ void HiggsCombindedLimit(){
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
-  c_out_logx->SaveAs(plotpath+"/13TeV_mixing_logx.pdf");
+  c_out_logx->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.pdf");
 
   c_out_logx->Close();
 
