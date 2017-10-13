@@ -1,8 +1,9 @@
 #include "canvas_margin.h"
+#include "AnalysisInputs.h"
 
 void GetMCNormSF(){
 
-  bool DoNorm = true;
+  bool DoNorm = false;
 
   gStyle->SetOptStat(0);
   TH1::AddDirectory(kFALSE);
@@ -23,6 +24,11 @@ void GetMCNormSF(){
     << "###################################################" << endl
     << endl;
   }
+
+  AnalysisInputs analysisInputs;
+  analysisInputs.SetCalculatedSysts(WORKING_DIR+"/data/"+dataset+"/Syst.txt");
+  double FakeSyst = analysisInputs.CalculatedSysts["FakeLooseID"];
+  cout << "FakeSyst = " << FakeSyst << endl;
 
   vector<TString> regions = {
     "WZ",
@@ -47,9 +53,9 @@ void GetMCNormSF(){
   };
 
   vector< double > SFs = {
-    0.9744,
-    0.823,
-    0.9221,
+    0.9761,
+    0.8256,
+    0.9225,
   };
 
   TCanvas* c1 = new TCanvas("c1", "", 800, 800);
@@ -98,6 +104,8 @@ void GetMCNormSF(){
 
   TMatrix matrixA(3, 3);
   TMatrix matrixA_err(3, 3);
+  TMatrix matrixD(3, 1);
+  TMatrix matrixD_nonsig(3, 1);
   TMatrix matrixC(3, 1);
   TMatrix matrixC_err(3, 1);
 
@@ -181,6 +189,14 @@ void GetMCNormSF(){
         TH1D *original_hist = (TH1D*)bkgdlist->At(k);
 
         TString this_name = original_hist->GetName();
+        if(this_name.Contains("fake")){
+          cout << "FAKE : " << this_name << endl;
+          for(int zzz=1; zzz<=original_hist->GetXaxis()->GetNbins(); zzz++){
+            double sumw2 = original_hist->GetBinError(zzz);
+            double fakesyst = FakeSyst*(original_hist->GetBinContent(zzz));
+            original_hist->SetBinError(zzz, sqrt(sumw2*sumw2+fakesyst*fakesyst));
+          }
+        }
         TString sample = this_name;
         TString suffix = "Nevents_"+subregion.at(j)+"_";
         sample.Remove(0, suffix.Length());
@@ -255,6 +271,7 @@ void GetMCNormSF(){
     }
     matrixC(i, 0) = y_non_signal;
     matrixC_err(i, 0) = e_non_signal;
+    matrixD(i, 0) = y_total_data;
 
   } // END Loop regions
 
@@ -338,6 +355,10 @@ void GetMCNormSF(){
   cout << "## Matrix A_err ##" << endl;
   cout << "##################" << endl;
   matrixA_err.Print();
+  cout << "##############" << endl;
+  cout << "## Matrix D ##" << endl;
+  cout << "##############" << endl;
+  matrixD.Print();
   cout << "##############" << endl;
   cout << "## Matrix C ##" << endl;
   cout << "##############" << endl;
