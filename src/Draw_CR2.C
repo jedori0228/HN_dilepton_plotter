@@ -115,7 +115,10 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
       "_DiElectron_FourLepton_ZZ_NotAllSameFlavour",
       "_DiElectron_FourLepton_ZZ_AllSameFlavour",
 
-      //"_DiMuon_ThreeLepton_WZ",
+      "_DiLepton_ThreeLepton_WZ",
+      "_DiLepton_ThreeLepton_ZGamma",
+      "_DiLepton_FourLepton_ZZ",
+
     };
   }
   //==== Log
@@ -155,6 +158,8 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
     "Njets", "Njets_nolepveto", "Nfwdjets", "Nbjets", "Nbjets_nolepveto", "Nbfwdjets",
     "leadingLepton_Pt", "leadingLepton_Eta", "leadingLepton_Type",
     "secondLepton_Pt", "secondLepton_Eta", "secondLepton_Type",
+    "thirdLepton_Pt", "thirdLepton_Eta", "thirdLepton_Type",
+    "fourthLepton_Pt", "fourthLepton_Eta", "fourthLepton_Type",
     "leadingJet_Pt", "leadingJet_Eta", 
     "secondJet_Pt", "secondJet_Eta",
     "leadingForwardJet_Pt", "leadingForwardJet_Eta", 
@@ -163,7 +168,8 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
     "secondNoLepVetoJet_Pt", "secondNoLepVetoJet_Eta",
     "PFMET", "PFMET_phi", "HT", "ST",
     "MET2overST",
-    "Nvtx", "DeltaRl1l2", "Nevents", "MT",
+    "Nvtx", "DeltaRl1l2", "Nevents", "MT", "MZcand",
+    "Z_leadingLepton_Pt", "Z_secondLepton_Pt", "ExtraLepton_Pt",
   };
 
   m.x_title = {
@@ -171,6 +177,8 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
     "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta", "Leading Lepton Type",
     "Sub-Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton #eta", "Sub-Leading Lepton Type",
+    "Trailing Lepton p_{T} [GeV]", "Trailing Lepton #eta", "Trailing Lepton Type",
+    "Fourth Lepton p_{T} [GeV]", "Fourth Lepton #eta", "Fourth Lepton Type",
     "Leading Jet p_{T} [GeV]", "Leading Jet #eta",
     "Sub-Leading Jet p_{T} [GeV]", "Sub-Leading Jet #eta",
     "Leading Forward Jet p_{T} [GeV]", "Leading Forward Jet #eta",
@@ -179,12 +187,15 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
     "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
     "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]",
     "#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]",
-    "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin", "M_{T}(#el_{extra}, MET) [GeV]",
+    "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin", "M_{T}(W-tagged Lepton, #slash{E}_{T}^{miss}) [GeV]", "m(Z-candidate) [GeV]",
+    "Leading Z-tagged Lepton p_{T} [GeV]", "Sub-Leading Z-tagged Lepton p_{T} [GeV]", "W-tagged Lepton p_{T} [GeV]"
   };
 
   m.units = {
     "GeV", "GeV",
     "int", "int", "int", "int", "int", "int",
+    "GeV", "", "int",
+    "GeV", "", "int",
     "GeV", "", "int",
     "GeV", "", "int",
     "GeV", "",
@@ -195,7 +206,8 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
     "GeV", "",
     "GeV", "", "GeV", "GeV",
     "GeV",
-    "int", "", "int", "GeV",
+    "int", "", "int", "GeV", "GeV",
+    "GeV", "GeV", "GeV",
   };
 
   if(!( m.histname.size()==m.x_title.size() && m.x_title.size() == m.units.size()) ){
@@ -211,6 +223,7 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
     if(m.histname_suffix.at(i).Contains("DiMuon")) m.PrimaryDataset.push_back("DoubleMuon");
     if(m.histname_suffix.at(i).Contains("DiElectron")) m.PrimaryDataset.push_back("DoubleEG");
     if(m.histname_suffix.at(i).Contains("EMu")) m.PrimaryDataset.push_back("MuonEG");
+    if(m.histname_suffix.at(i).Contains("DiLepton")) m.PrimaryDataset.push_back("DiLepton");
 
     //==== Log plot boolean
     if(XXX==0) m.UseLogy.push_back(-1);
