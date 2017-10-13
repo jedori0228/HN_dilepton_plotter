@@ -926,6 +926,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
 
   mkdir(thiscut_plotpath);
   c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".pdf");
+  c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".png");
   outputf->cd();
   c1->Write();
   
