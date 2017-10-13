@@ -1,10 +1,10 @@
 import os
 
-filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
+#filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
 #filenames = ['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
-#filenames = ['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
+filenames = ['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
 
-From = "_EMu_Preselection_SS"
+From = "_DiMuon_FourLepton_ZZ"
 Tos   = [
 
       ##==== DiMuon
@@ -42,13 +42,13 @@ Tos   = [
       #"_EMu_1jets_0nlbjets_mllge100_SS",
       #"_EMu_0nlbjets_SS",
 
-      "_EMu_Preselection_ElectronSubLead_SS",
-      "_EMu_Preselection_MuonSubLead_SS",
+      #"_EMu_Preselection_ElectronSubLead_SS",
+      #"_EMu_Preselection_MuonSubLead_SS",
 
       #"_DiMuon_ThreeLepton_WZ",
       #"_DiMuon_ThreeLepton_WZ_NotAllSameFlavour",
       #"_DiMuon_ThreeLepton_ZGamma",
-      #"_DiMuon_ThreeLepton_ZZ",
+      #"_DiMuon_FourLepton_ZZ",
       #"_DiMuon_FourLepton_ZZ_NotAllSameFlavour",
       #"_DiMuon_FourLepton_ZZ_AllSameFlavour",
 
@@ -58,6 +58,10 @@ Tos   = [
       #"_DiElectron_FourLepton_ZZ",
       #"_DiElectron_FourLepton_ZZ_NotAllSameFlavour",
       #"_DiElectron_FourLepton_ZZ_AllSameFlavour",
+
+      #"_DiLepton_ThreeLepton_WZ",
+      #"_DiLepton_ThreeLepton_ZGamma",
+      "_DiLepton_FourLepton_ZZ",
 
 ]
 

@@ -8,8 +8,11 @@ cust_rebin = 1
 cust_xaxis_min = -999
 cust_xaxis_max = 50
 
-var_last = 'PFMET'
-NewVars = ['MT']
+    #"secondLepton_Pt", "secondLepton_Eta", "secondLepton_Type",
+    #"thirdLepton_Pt", "thirdLepton_Eta", "thirdLepton_Type",
+
+var_last = "thirdLepton_Type"
+NewVars = ["fourthLepton_Type"]
 
 for filename in filenames:
 
