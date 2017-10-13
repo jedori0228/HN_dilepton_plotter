@@ -39,9 +39,11 @@ void Draw_FakeTriggerNorm(){
   vector<TString> vars = {
     "ZPeak_mll", "ZPeak_leadpt", "ZPeak_subleadpt",
     "W_PFMET", "W_MT", "W_leadpt",
+    "W_John_PFMET", "W_John_MT", "W_John_leadpt",
   };
   vector<int> rebins = {
     1, 10, 10,
+    5, 10, 10,
     5, 10, 10,
   };
 
