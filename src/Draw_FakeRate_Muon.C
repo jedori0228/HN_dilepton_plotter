@@ -5,7 +5,7 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Muon(){
 
-  TString Sample = "QCD_v11";
+  TString Sample = "QCD_HighdXY_Small";
   TString Lepton = "Muon";
 
   gStyle->SetOptStat(0);
@@ -42,7 +42,7 @@ void Draw_FakeRate_Muon(){
   TH1D *dummy = new TH1D("dummy", "", N_pt_out, ptarray);
 
   vector<TString> jetpt = {"20", "30", "40", "60"};
-  if(!Sample.Contains("Data")){
+  if(!Sample.Contains("Data") || Sample.Contains("HighdXY")){
     jetpt.clear();
     jetpt = {"40"};
   }
@@ -64,7 +64,7 @@ void Draw_FakeRate_Muon(){
       TH1D *dummy_merged = new TH1D("dummy_merged", "", N_pt_out, ptarray);
       hist_axis(dummy_merged);
       dummy_merged->Draw("hist");
-      dummy_merged->GetYaxis()->SetRangeUser(0., 0.25);
+      dummy_merged->GetYaxis()->SetRangeUser(0., 0.40);
       dummy_merged->GetYaxis()->SetTitle("Fake Rate");
       dummy_merged->GetXaxis()->SetTitle("p_{T}^{cone} [GeV]");
       dummy_merged->GetXaxis()->SetRangeUser(10., 60.);
@@ -75,8 +75,11 @@ void Draw_FakeRate_Muon(){
 
       TH2D *histout = new TH2D(Lepton+"_"+Sample+"_FR_Awayjet"+jetpt.at(a)+bjetconfig[b], "", N_pt_out, ptarray, 3, etaarray);
 
-      TH2D *hist_FR2D_F0 = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
-      TH2D *hist_FR2D_F = (TH2D *)file->Get("Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
+      TString histname = "Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta";
+      if(Sample.Contains("HighdXY")) histname = "Single"+Lepton+"Trigger_HighdXY_events_pt_cone_vs_eta";
+
+      TH2D *hist_FR2D_F0 = (TH2D *)file->Get(histname+"_F0");
+      TH2D *hist_FR2D_F = (TH2D *)file->Get(histname+"_F");
       hist_FR2D_F->Divide(hist_FR2D_F0);
 
       //==== Eta Loop
@@ -100,8 +103,12 @@ void Draw_FakeRate_Muon(){
         for(unsigned int i=0; i<triggers.size(); i++){
 
           TString trigger = triggers.at(i);
-          TH2D *hist2d_F0 = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F0");
-          TH2D *hist2d_F = (TH2D*)file->Get(trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta_F");
+
+          TString histname_trigger = trigger+"_Single"+Lepton+"Trigger_Dijet_Awayjet_"+jetpt.at(a)+bjetconfig[b]+"_events_pt_cone_vs_eta";
+          if(Sample.Contains("HighdXY")) histname_trigger = trigger+"_Single"+Lepton+"Trigger_HighdXY_events_pt_cone_vs_eta";
+
+          TH2D *hist2d_F0 = (TH2D*)file->Get(histname_trigger+"_F0");
+          TH2D *hist2d_F = (TH2D*)file->Get(histname_trigger+"_F");
 
           TH1D *hist_F0 = new TH1D("hist_F0", "", N_pt_out, ptarray);
           TH1D *hist_F = new TH1D("hist_F", "", N_pt_out, ptarray);
