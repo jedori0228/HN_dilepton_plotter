@@ -68,6 +68,8 @@ public:
   void mkdir(TString path);
   void make_plot_directory();
   TString legend_coupling_label(int mass);
+
+  void MakeTexFile(map< TString, TH1D * > hs);
   
   //==== variables
   bool DoDebug;

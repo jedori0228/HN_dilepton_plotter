@@ -72,6 +72,8 @@ void Plotter::draw_hist(){
       signal_survive_mass.clear();
 
       bool AnyEntry = false;
+      map< TString, TH1D * > map_hist_y;
+
       for(i_file = 0; i_file < bkglist.size()+1+signal_mass.size(); i_file++){ // +1 for data
       
         TString filepath, current_sample;
@@ -199,12 +201,13 @@ void Plotter::draw_hist(){
             hist_final->SetBinError(ccc, 0.);
           }
         }
-        
+
+        TString current_MCsector = "";
         //==== Set Attributes here
         //==== bkg
         if( i_file < bkglist.size() ){
           //==== get which MC sector
-          TString current_MCsector = find_MCsector();
+          current_MCsector = find_MCsector();
           int n_bins = hist_final->GetXaxis()->GetNbins();
           if(!MC_stacked_allerr){
             MC_stacked_allerr = new TH1D("MC_stacked_allerr", "",
@@ -279,6 +282,21 @@ void Plotter::draw_hist(){
         }
 
         fill_legend(lg, hist_final);
+
+        if(histname[i_var]=="Nevents"){
+          TString alias = "";
+          if(current_sample.Contains("data")) alias = "data";
+          else if(current_sample.Contains("HN")) alias = "Signal";
+          else{
+            alias = map_sample_string_to_legendinfo[current_MCsector].first;
+          }
+
+          if( map_hist_y.find(alias) == map_hist_y.end() ){
+            map_hist_y[alias] = new TH1D(alias, "", 1, 0., 1);
+          }
+
+          map_hist_y[alias]->Add(hist_final);
+        }
         
         file->Close();
         delete file;
@@ -286,6 +304,10 @@ void Plotter::draw_hist(){
         if(DoDebug) cout << "end of this sample" << endl;
         
       } // END loop over samples
+
+      if(histname[i_var]=="Nevents"){
+        MakeTexFile(map_hist_y);
+      }
 
       if(!AnyEntry) continue;
       if(DoDebug) cout << "[Draw Canvas]" << endl;
@@ -1199,6 +1221,68 @@ void Plotter::make_plot_directory(){
   
   mkdir(plotpath);
   
+}
+
+void Plotter::MakeTexFile(map< TString, TH1D * > hs){
+
+  TString texfilepath = thiscut_plotpath+"/tex/";
+  mkdir(texfilepath);
+
+  ofstream ofile_tex(texfilepath+"/Yields.tex",ios::trunc);
+  ofile_tex.setf(ios::fixed,ios::floatfield);
+  ofile_tex << "\\documentclass[10pt]{article}" << endl;
+  ofile_tex << "\\usepackage{epsfig,subfigure,setspace,xtab,xcolor,array,colortbl}" << endl;
+  ofile_tex << "\\begin{document}" << endl;
+  ofile_tex << "\\input{"+texfilepath+"/Table.txt}" << endl;
+  ofile_tex << "\\end{document}" << endl;
+
+  ofstream ofile(texfilepath+"/Table.txt",ios::trunc);
+  ofile.precision(2);
+  ofile.setf(ios::fixed,ios::floatfield); 
+  ofile << "\\begin{table}[!tbh]" << endl;
+  ofile << "  \\caption{" << endl;
+  ofile << "    Yields" << endl;
+  ofile << "  }" << endl;
+  ofile << "  \\begin{center}" << endl;
+  ofile << "    \\begin{tabular}{c|c}" << endl;
+  ofile << "\\hline" << endl;
+  ofile << " & Yields \\\\" << endl;
+  ofile << "\\hline" << endl;
+
+  TH1D *hist_bkgd = new TH1D("hist_bkgd", "", 1., 0., 1.);
+  for(map< TString, TH1D * >::iterator it = hs.begin(); it != hs.end(); it++){
+    TString name = it->first;
+
+    if(name == "X + #gamma") name = "$X + \\gamma$";
+    if(name.Contains("data") || name.Contains("Signal")) continue;
+    TH1D *h_bkgd = it->second;
+    ofile << name << " & $"<<h_bkgd->GetBinContent(1)<<" \\pm "<<h_bkgd->GetBinError(1)<<"$ \\\\" << endl;
+    hist_bkgd->Add(h_bkgd);
+  }
+  ofile << "\\hline" << endl;
+  ofile << "Total & $" << hist_bkgd->GetBinContent(1) << " \\pm " << hist_bkgd->GetBinError(1) << "$ \\\\" << endl;
+  ofile << "\\hline" << endl;
+
+  TH1D *hist_data = hs["data"];
+  ofile << "Data & $" << hist_data->GetBinContent(1) << " \\pm " << hist_data->GetBinError(1) << "$ \\\\" << endl;
+  ofile << "\\hline" << endl;
+
+  double signif = (hist_data->GetBinContent(1) - hist_bkgd->GetBinContent(1)) / sqrt( (hist_bkgd->GetBinError(1))*(hist_bkgd->GetBinError(1)) + (hist_data->GetBinError(1))*(hist_data->GetBinError(1)) );
+
+  ofile << "Significance & $" <<signif<<" \\sigma$ \\\\" << endl;
+  ofile << "\\hline" << endl;
+  ofile << "\\hline" << endl;
+  ofile << "    \\end{tabular}" << endl;
+  ofile << "  \\end{center}" << endl;
+  ofile << "\\end{table}" << endl;
+
+  system("latex "+texfilepath+"/Yields.tex");
+  system("dvipdf Yields.dvi");
+  system("rm *aux");
+  system("rm *log");
+  system("rm *dvi");
+  system("mv Yields.pdf "+texfilepath);
+
 }
 
 
