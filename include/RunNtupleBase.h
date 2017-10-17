@@ -4,12 +4,14 @@
 #include "DileptonNtuple.C"
 #include "CutRangeInfo.h"
 #include "AnalysisInputs.h"
+#include "PdfSystematics.h"
 
 class RunNtupleBase{
 public:
 
   bool DoDebug, PrintYield, ShowData;
   bool RunSystematic;
+  PdfSystematics pdfsyst;
   Long64_t LogEvery;
 
   TString treeskim;
@@ -47,10 +49,13 @@ public:
   //=== Final Results
   double total_bkgs, fake_bkgs, prompt_bkgs, cf_bkgs;
   double total_bkgs_err, fake_bkgs_err, prompt_bkgs_err, cf_bkgs_err;
+  vector<double> signal_rate, signal_err;
+
   double fake_bkgs_syst; // 31%
   double prompt_bkgs_syst; // MCSF uncert
   double cf_bkgs_syst; // 21%
-  vector<double> signal_rate;
+
+
 
 };
 
@@ -58,6 +63,7 @@ RunNtupleBase::RunNtupleBase() :
 DoDebug(false), PrintYield(false), ShowData(false), RunSystematic(false), LogEvery(100),
 plotpath("")
 {
+
 
 }
 
@@ -171,7 +177,6 @@ void RunNtupleBase::SetCutCard(TString path){
   }
 
 }
-
 
 
 

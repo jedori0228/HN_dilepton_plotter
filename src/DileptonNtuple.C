@@ -23,6 +23,36 @@ void DileptonNtuple::Loop(){
     hist_for_error->Fill(0. ,weight);
     hist_for_error_up->Fill(0., weight+weight_err);
 
+    if(ReadPdfSystematic){
+
+      //vector<float>   *PdfWeights;
+      //vector<float>   *ScaleWeights;
+
+      //hist_Pdf_Replica = NULL;
+      //hist_Pdf_Alpha = NULL;
+      //hist_Pdf_Scale = NULL;
+
+      //cout << "PdfWeights->size() = " <<  PdfWeights->size() << endl;
+      //cout << "ScaleWeights->size() = " << ScaleWeights->size() << endl;
+
+
+      //==== Replica
+      for(unsigned int i=0; i<100; i++){
+        hist_Pdf_Replica->Fill(i, weight*(fabs(PdfWeights->at(i))));
+      }
+
+      //==== AlphaS
+      for(unsigned int i=0; i<2; i++){
+        hist_Pdf_Alpha->Fill(i, weight*(fabs(PdfWeights->at(100+i))));
+      }
+
+      //==== Scale
+      for(unsigned int i=0; i<6; i++){
+        hist_Pdf_Scale->Fill(i, weight*(fabs(ScaleWeights->at(i))));
+      }
+
+    }
+
   }
 
 }

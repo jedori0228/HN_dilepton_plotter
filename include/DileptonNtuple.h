@@ -70,6 +70,11 @@ public :
   Double_t      weight;
   Double_t      weight_err;
   inline Double_t MET2ST() { return PFMET*PFMET/ST; }
+  vector<float>   *PdfWeights;
+  vector<float>   *ScaleWeights;
+  TH1D *hist_Pdf_Replica;
+  TH1D *hist_Pdf_Alpha;
+  TH1D *hist_Pdf_Scale;
 
   //==== Function to call above varialbes
   double GetVar(TString var);
@@ -123,8 +128,10 @@ public :
   TBranch      *b_LT;  //!
   TBranch      *b_weight;  //!
   TBranch      *b_weight_err;  //!
+  TBranch      *b_PdfWeights;   //!
+  TBranch      *b_ScaleWeights;   //!
 
-  DileptonNtuple(TString filename, TString treename);
+  DileptonNtuple(TString filename, TString treename, bool pdfSyst=false);
   virtual ~DileptonNtuple();
   virtual Int_t   GetEntry(Long64_t entry);
   virtual Long64_t LoadTree(Long64_t entry);
@@ -145,6 +152,7 @@ public :
   bool DoDebug;
   bool PrintBool(bool b);
   bool TreeExist;
+  bool ReadPdfSystematic;
 
   //==== Variables To Save
   double unweighted_yield, weighted_yield;
@@ -154,7 +162,7 @@ public :
 #endif
 
 #ifdef DileptonNtuple_cxx
-DileptonNtuple::DileptonNtuple(TString filename, TString treename) :
+DileptonNtuple::DileptonNtuple(TString filename, TString treename, bool pdfSyst) :
 fChain(0),
 DoDebug(false),
 unweighted_yield(0.), weighted_yield(0.)
@@ -166,6 +174,8 @@ unweighted_yield(0.), weighted_yield(0.)
   TFile *f = new TFile(filename);
   tree = (TTree*)f->Get(treename);
 
+  ReadPdfSystematic = pdfSyst;
+
   Init(tree);
   if(!TreeExist){
     f->Close();
@@ -175,6 +185,18 @@ unweighted_yield(0.), weighted_yield(0.)
   CutVariables.clear();
   CutDirections.clear();
   CutValues.clear();
+
+  hist_Pdf_Replica = NULL;
+  hist_Pdf_Alpha = NULL;
+  hist_Pdf_Scale = NULL;
+
+  //cout << "filename = " << filename << endl;
+  //cout << "-> ReadPdfSystematic = " << ReadPdfSystematic << endl;
+  if(ReadPdfSystematic){
+    hist_Pdf_Replica = new TH1D("hist_Pdf_Replica", "", 100, 0., 100.);
+    hist_Pdf_Alpha = new TH1D("hist_Pdf_Alpha", "", 2, 0., 2.);
+    hist_Pdf_Scale = new TH1D("hist_Pdf_Scale", "", 6, 0., 6.);
+  }
 
 }
 
@@ -211,6 +233,9 @@ void DileptonNtuple::Init(TTree *tree)
   // code, but the routine can be extended by the user if needed.
   // Init() will be called many times when running on PROOF
   // (once per file to be processed).
+
+  PdfWeights = 0;
+  ScaleWeights = 0;
 
   // Set branch addresses and branch pointers
   if (!tree){
@@ -270,6 +295,11 @@ void DileptonNtuple::Init(TTree *tree)
    fChain->SetBranchAddress("LT", &LT, &b_LT);
    fChain->SetBranchAddress("weight", &weight, &b_weight);
    fChain->SetBranchAddress("weight_err", &weight_err, &b_weight_err);
+
+   if(ReadPdfSystematic){
+     fChain->SetBranchAddress("PdfWeights", &PdfWeights, &b_PdfWeights);
+     fChain->SetBranchAddress("ScaleWeights", &ScaleWeights, &b_ScaleWeights);
+   }
 
 }
 

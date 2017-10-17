@@ -16,11 +16,12 @@ void RunNtupleBase::Run(){
   double final_cf(0.), final_cf_err(0.), final_cf_syst(0.);
   double final_fake(0.), final_fake_err(0.), final_fake_syst(0.);
   double final_prompt(0.), final_prompt_err(0.), final_prompt_syst(0.);
-  vector<double> final_signal, final_signal_eff, final_signal_eff_preselection;
+  vector<double> final_signal, final_signal_eff, final_signal_eff_preselection, final_signal_err(0.);
   for(unsigned int i=0; i<signals.size(); i++){
     final_signal.push_back(0.);
     final_signal_eff.push_back(0.);
     final_signal_eff_preselection.push_back(0.);
+    final_signal_err.push_back(0.);
   }
 
   while( !cutrangeinfo.isEnd() ){
@@ -53,19 +54,30 @@ void RunNtupleBase::Run(){
 
       TString sample = samples.at(ii);
 
+      bool ImRunningMCBkgd = false;
+
       TString                     filename = filename_prefix+"_SK"+     sample      +"_dilep_"+filename_suffix;
       if(sample=="data")          filename = filename_prefix+"_data_"+DataPD+"_"              +filename_suffix;
-      if(sample=="chargeflip")    filename = filename_prefix+"_SKchargeflip_"+DataPD+"_dilep_"+filename_suffix;
-      if(sample.Contains("fake")) filename = filename_prefix+"_SK"+sample+"_"+DataPD+"_dilep_"+filename_suffix;
-      if(sample.Contains("HN"))   filename = filename_prefix+"_SK"      +sample           +"_"+filename_suffix;
+      else if(sample=="chargeflip")    filename = filename_prefix+"_SKchargeflip_"+DataPD+"_dilep_"+filename_suffix;
+      else if(sample.Contains("fake")) filename = filename_prefix+"_SK"+sample+"_"+DataPD+"_dilep_"+filename_suffix;
+      else if(sample.Contains("HN"))   filename = filename_prefix+"_SK"      +sample           +"_"+filename_suffix;
+      else ImRunningMCBkgd = true;
 
       TString this_treename = "Ntp_"+channel+"_"+treeskim;
+      bool DoPdfSystematic = false;
       if(RunSystematic){
+
+        //==== If data or data-driven, use central ntuple
         if(sample.Contains("data") || sample.Contains("fake") || sample.Contains("chargeflip") ){
           this_treename = "Ntp_"+channel_for_jetres+"_"+treeskim;
         }
+
+        //==== If Signal, read PdfWeights
+        if(sample.Contains("HN") && sample.Contains("Moriond")){
+          DoPdfSystematic = true;
+        }
       }
-      DileptonNtuple m(filepath+filename, this_treename);
+      DileptonNtuple m(filepath+filename, this_treename, DoPdfSystematic);
 
       if(! (m.TreeExist) ){
 
@@ -89,6 +101,19 @@ void RunNtupleBase::Run(){
 
       //==== Run
       m.Loop();
+
+      if(DoPdfSystematic){
+        TDirectory *origDir = gDirectory;
+
+        TDirectory *tempDir1 = pdfsyst.MakeTempDir();
+        tempDir1->cd();
+        pdfsyst.hist_Pdf_Replica = (TH1D *)m.hist_Pdf_Replica->Clone();
+        pdfsyst.hist_Pdf_Alpha = (TH1D *)m.hist_Pdf_Alpha->Clone();
+        pdfsyst.hist_Pdf_Scale = (TH1D *)m.hist_Pdf_Scale->Clone();
+
+        origDir->cd();
+
+      }
 
       //==== If negative weighted yield, return.. Cut Too Tight
       if( m.weighted_yield < 0 ){
@@ -241,6 +266,10 @@ void RunNtupleBase::Run(){
         final_signal.at(iii) = signal_weighted_yield.at(iii);
         final_signal_eff.at(iii) = signal_weighted_yield.at(iii)/signal_yield_nocut.at(iii);
 
+        double signal_lumi = signal_weighted_yield.at(iii)*uncert_lumi;
+        double signal_stat = signal_weighted_yield_stat.at(iii);
+        final_signal_err.at(iii) = sqrt(signal_lumi*signal_lumi+signal_stat*signal_stat);
+
         double eff_presel;
         if(signal_yield_preselection.at(iii)==0) eff_presel = 0;
         else eff_presel = signal_weighted_yield.at(iii)/signal_yield_preselection.at(iii);
@@ -313,6 +342,7 @@ void RunNtupleBase::Run(){
     signal_rate.clear();
     for(unsigned int i=0; i<signals.size(); i++){
       signal_rate.push_back( final_signal.at(i) );
+      signal_err.push_back( final_signal_err.at(i) );
     }
   }
 
