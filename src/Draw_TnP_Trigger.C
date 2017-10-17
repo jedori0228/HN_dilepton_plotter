@@ -22,7 +22,7 @@ void Draw_TnP_Trigger(int period){
     CutsOnDen_front = "combRelIsoPF04dBeta_bin0__dB_bin0__dzPV_bin0__pair_deltaR_bin0__pair_probeMultiplicity_bin0";
   }
 
-  vector<TString> systs = {"Central", "NMassBins30", "NMassBins50", "MassRange_60_130", "MassRange_70_120", "SignalShapeSingleV", "TagPt30Iso0p08", "TagPt30Iso0p08", "ProbeMult99"};
+  vector<TString> systs = {"Central", "NMassBins30", "NMassBins50", "MassRange_60_130", "MassRange_70_120", "SignalShapeSingleV", "TagPt20IsoInf", "TagPt30Iso0p08", "ProbeMult99"};
   //systs = {"Central"};
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");

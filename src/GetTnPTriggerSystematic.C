@@ -11,7 +11,7 @@ void GetTnPTriggerSystematic(){
   gStyle->SetOptStat(0);
   TH1::AddDirectory(kFALSE);
 
-  vector<TString> systs = {"Central", "NMassBins30", "NMassBins50", "MassRange_60_130", "MassRange_70_120", "SignalShapeSingleV", "TagPt30Iso0p08", "TagPt30Iso0p08", "ProbeMult99"};
+  vector<TString> systs = {"Central", "NMassBins30", "NMassBins50", "MassRange_60_130", "MassRange_70_120", "SignalShapeSingleV", "TagPt20IsoInf", "TagPt30Iso0p08", "ProbeMult99"};
   vector<Color_t> colors = {kBlack,     kRed,           kOrange,          kYellow,        kGreen,           kBlue,                kViolet,            kGray,          kCyan};
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
