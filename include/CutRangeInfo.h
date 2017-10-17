@@ -39,6 +39,33 @@ void CutRangeInfo::MakeCutInfo(TString var, TString cutdir, double start, double
   map_varANDdir_to_cutinfo[var+"_"+cutdir].clear();
   map_varANDdir_to_iterator[var+"_"+cutdir] = 0;
 
+  if(cutdir.Contains("<")){
+
+    //==== pt < 10, 20, 30, 40
+    //==== this case, we should start from right
+    //==== start should be larger then end
+    //==== if not, change
+    if(start<end){
+      double tmp = start;
+      start = end;
+      end = start;
+    }
+
+  }
+  if(cutdir.Contains(">")){
+
+    //==== pt > 10, 20, 30, 40
+    //==== this case, we should start from left
+    //==== start should be smaller then end
+    //==== if not, change
+    if(start>end){
+      double tmp = start;
+      start = end;
+      end = start;
+    }
+
+  }
+
   if(nx==0) nx = 1;
   double dx = (end-start)/nx;
 
