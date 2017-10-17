@@ -48,7 +48,7 @@ void CutRangeInfo::MakeCutInfo(TString var, TString cutdir, double start, double
     if(start<end){
       double tmp = start;
       start = end;
-      end = start;
+      end = tmp;
     }
 
   }
@@ -61,7 +61,7 @@ void CutRangeInfo::MakeCutInfo(TString var, TString cutdir, double start, double
     if(start>end){
       double tmp = start;
       start = end;
-      end = start;
+      end = tmp;
     }
 
   }
