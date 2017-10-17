@@ -69,18 +69,18 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   
   m.map_sample_string_to_legendinfo["DY"] = make_pair("DY", kYellow);
   m.map_sample_string_to_legendinfo["WJets"] = make_pair("WJets", kGreen);
-  m.map_sample_string_to_legendinfo["VV_excl"] = make_pair("VV", kSpring-1);
-  m.map_sample_string_to_legendinfo["VV_incl"] = make_pair("VV", kSpring-1);
+  m.map_sample_string_to_legendinfo["VV_excl"] = make_pair("diboson", kSpring-1);
+  m.map_sample_string_to_legendinfo["VV_incl"] = make_pair("diboson", kSpring-1);
   m.map_sample_string_to_legendinfo["WZ_excl"] = make_pair("WZ", kGreen);
   m.map_sample_string_to_legendinfo["ZZ_excl"] = make_pair("ZZ", kRed-7);
-  m.map_sample_string_to_legendinfo["VVV"] = make_pair("VVV", kSpring+10);
+  m.map_sample_string_to_legendinfo["VVV"] = make_pair("triboson", kSpring+10);
   m.map_sample_string_to_legendinfo["ttbar"] = make_pair("ttbar", kRed);
   m.map_sample_string_to_legendinfo["ttbar_ll"] = make_pair("ttbar", kRed);
   m.map_sample_string_to_legendinfo["ttV"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["ttH"] = make_pair("ttH", kOrange);
   m.map_sample_string_to_legendinfo["top"] = make_pair("top", kRed);
   m.map_sample_string_to_legendinfo["top_tt"] = make_pair("top", kRed);
-  m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X#gamma", kSpring-7);
+  m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X + #gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
@@ -177,7 +177,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "leadingNoLepVetoJet_Pt", "leadingNoLepVetoJet_Eta", 
     "secondNoLepVetoJet_Pt", "secondNoLepVetoJet_Eta",
     "PFMET", "PFMET_phi", "HT", "ST", "MET2overST", "MCT",
-    "Nvtx", "DeltaRl1l2",
+    "Nvtx", "DeltaRl1l2", "Nevents",
   };
 
   m.x_title = {
@@ -204,7 +204,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
     "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
     "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]", "#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]", "m_{CT}(j_{1},j_{2}) [GeV]",
-    "# of vertices", "#DeltaR(l_{1},l_{2})",
+    "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin",
   };
 
   m.units = {
@@ -239,7 +239,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //==== FatJet Leading
     "GeV", "", "GeV", "GeV", "", "",
     "GeV", "GeV", "GeV", "GeV",
-    "", "", "", "",
+    "", "", "", "", "int",
   };
 
   //==== TEST
@@ -279,9 +279,9 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   }
 /*
   //==== FIXME test
-  m.histname = {"secondLepton_Pt"};
-  m.x_title = {"Sub-Leading Lepton p_{T} [GeV]"};
-  m.units = {"GeV"};
+  m.histname = {"Nevents"};
+  m.x_title = {"onebin"};
+  m.units = {"int"};
 */
   //====================
   //==== make bkg list

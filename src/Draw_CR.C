@@ -68,18 +68,18 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   
   m.map_sample_string_to_legendinfo["DY"] = make_pair("DY", kYellow);
   m.map_sample_string_to_legendinfo["WJets"] = make_pair("WJets", kGreen);
-  m.map_sample_string_to_legendinfo["VV_excl"] = make_pair("VV", kSpring-1);
-  m.map_sample_string_to_legendinfo["VV_incl"] = make_pair("VV", kSpring-1);
+  m.map_sample_string_to_legendinfo["VV_excl"] = make_pair("diboson", kSpring-1);
+  m.map_sample_string_to_legendinfo["VV_incl"] = make_pair("diboson", kSpring-1);
   m.map_sample_string_to_legendinfo["WZ_excl"] = make_pair("WZ", kGreen);
   m.map_sample_string_to_legendinfo["ZZ_excl"] = make_pair("ZZ", kRed-7);
-  m.map_sample_string_to_legendinfo["VVV"] = make_pair("VVV", kSpring+10);
+  m.map_sample_string_to_legendinfo["VVV"] = make_pair("triboson", kSpring+10);
   m.map_sample_string_to_legendinfo["ttbar"] = make_pair("ttbar", kRed);
   m.map_sample_string_to_legendinfo["ttbar_ll"] = make_pair("ttbar", kRed);
   m.map_sample_string_to_legendinfo["ttV"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["ttH"] = make_pair("ttH", kOrange);
   m.map_sample_string_to_legendinfo["top"] = make_pair("top", kRed);
-  m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X#gamma", kSpring-7);
-  m.map_sample_string_to_legendinfo["Xgamma_noDY"] = make_pair("X#gamma", kSpring-7);
+  m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X + #gamma", kSpring-7);
+  m.map_sample_string_to_legendinfo["Xgamma_noDY"] = make_pair("X + #gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
