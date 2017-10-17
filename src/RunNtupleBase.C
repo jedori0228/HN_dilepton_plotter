@@ -225,6 +225,10 @@ void RunNtupleBase::Run(){
     double total_bkg = prompt_weighted_yield+chargeflip_weighted_yield+fake_weighted_yield;
     double total_bkg_err_2 = chargeflip_weighted_yield_err*chargeflip_weighted_yield_err+fake_weighted_yield_err*fake_weighted_yield_err+prompt_weighted_yield_err*prompt_weighted_yield_err;
 
+    //==== Force Punzi to require
+    //==== 1) Minimum Total Bkgd
+    if( total_bkg < 0.5 ) continue;
+
     delete hist_prompt_total;
     delete hist_prompt_total_up;
 
