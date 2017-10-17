@@ -158,6 +158,8 @@ void CutRangeInfo::PrintCurrent(){
 
 void CutRangeInfo::ReadCutCard(TString filepath){
 
+  cout << "[CutRangeInfo::ReadCutCard] Get Cutcard from " << filepath << endl;
+
   string elline;
   ifstream in(filepath);
   while(getline(in,elline)){
