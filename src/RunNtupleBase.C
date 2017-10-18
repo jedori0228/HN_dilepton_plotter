@@ -230,7 +230,10 @@ void RunNtupleBase::Run(){
 
     //==== Force Punzi to require
     //==== 1) Minimum Total Bkgd
-    if( total_bkg < 0.5 ) continue;
+    if( total_bkg < 0.5 ){
+      cutrangeinfo.Next();
+      continue;
+    }
 
     //==== Signals
     bool ToUpdate = true;
