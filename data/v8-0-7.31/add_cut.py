@@ -1,11 +1,18 @@
 import os
 
-#filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
+filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
 #filenames = ['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
-filenames = ['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
+#filenames = ['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
 
-From = "_DiMuon_FourLepton_ZZ"
+From = "_DiMuon_High_SS"
 Tos   = [
+
+      "_DiMuon_High_TwoJet_NoFatJet_SS",
+      "_DiMuon_High_OneFatJet_SS",
+      "_DiElectron_High_TwoJet_NoFatJet_SS",
+      "_DiElectron_High_OneFatJet_SS",
+      "_EMu_High_TwoJet_NoFatJet_SS",
+      "_EMu_High_OneFatJet_SS",
 
       ##==== DiMuon
       #"_DiMuon_0jets_SS", ## SS 0jet CR
@@ -61,7 +68,7 @@ Tos   = [
 
       #"_DiLepton_ThreeLepton_WZ",
       #"_DiLepton_ThreeLepton_ZGamma",
-      "_DiLepton_FourLepton_ZZ",
+      #"_DiLepton_FourLepton_ZZ",
 
 ]
 

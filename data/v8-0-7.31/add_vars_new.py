@@ -1,18 +1,20 @@
 import os
 
-filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
-#filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt']
+#filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
+filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt']
 #filenames=['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
 
 cust_rebin = 1
 cust_xaxis_min = -999
 cust_xaxis_max = 50
 
-    #"secondLepton_Pt", "secondLepton_Eta", "secondLepton_Type",
-    #"thirdLepton_Pt", "thirdLepton_Eta", "thirdLepton_Type",
 
-var_last = "secondLepton_Type"
-NewVars = ["Nevents"]
+    #"Nfatjets",
+    #"leadingFatJet_Pt", "leadingFatJet_Eta", "leadingFatJet_Mass", "leadingFatJet_Tau21",
+    #"m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
+
+var_last = "leadingFatJet_Tau21"
+NewVars = ["m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest"]
 
 for filename in filenames:
 
@@ -31,8 +33,12 @@ for filename in filenames:
       for NewVar in NewVars:
         newline = line.replace(var_last, NewVar)
 
+        if "rebins" in filename:
+          newline = words[0]+'\t'+NewVar+'\t20\n'
         if "xaxis" in filename:
-          newline = words[0]+'\t'+NewVar+'\t0\t1\n'
+          newline = words[0]+'\t'+NewVar+'\t-999\t-999\n'
+        if "yaxis" in filename:
+          newline = words[0]+'\t'+NewVar+'\t1000\n'
 
         tempfile.write(newline)
 
