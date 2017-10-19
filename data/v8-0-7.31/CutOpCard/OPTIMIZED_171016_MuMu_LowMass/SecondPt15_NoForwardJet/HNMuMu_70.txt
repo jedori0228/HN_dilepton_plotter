@@ -1,0 +1,12 @@
+secondLepton_Pt < 120.0 120.0 1
+m_lljj_lljjWclosest < 120.0 120.0 1
+m_ll > 10.0 10.0 1
+m_ll < 40.0 40.0 1
+m_SubLeadljj_lljjWclosest < 80.0 80.0 1
+m_Leadljj_lljjWclosest < 210.0 210.0 1
+leadingLepton_Pt < 170.0 170.0 1
+PFMET < 40.0 40.0 1
+##punzi	0.000307785
+##bkgd	15.9044
+secondLepton_Pt > 15 15 1
+Nfwdjets == 0 0 1
