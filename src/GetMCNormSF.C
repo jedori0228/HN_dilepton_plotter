@@ -3,7 +3,7 @@
 
 void GetMCNormSF(){
 
-  bool DoNorm = false;
+  bool DoNorm = true;
 
   gStyle->SetOptStat(0);
   TH1::AddDirectory(kFALSE);
@@ -40,7 +40,7 @@ void GetMCNormSF(){
 
     {"DiElectron_ThreeLepton_WZ", "DiMuon_ThreeLepton_WZ"},
     {"DiElectron_ThreeLepton_ZGamma", "DiMuon_ThreeLepton_ZGamma"},
-    {"DiElectron_FourLepton_ZZ_NotAllSameFlavour", "DiElectron_FourLepton_ZZ_AllSameFlavour", "DiMuon_FourLepton_ZZ_AllSameFlavour"},
+    {"DiElectron_FourLepton_ZZ_NotAllSameFlavour", "DiElectron_FourLepton_ZZ_AllSameFlavour", "DiMuon_FourLepton_ZZ"},
 
   };
 
@@ -53,9 +53,9 @@ void GetMCNormSF(){
   };
 
   vector< double > SFs = {
-    0.9761,
-    0.8256,
-    0.9225,
+   0.9763,
+   0.8245,
+   0.9268,
   };
 
   TCanvas* c1 = new TCanvas("c1", "", 800, 800);

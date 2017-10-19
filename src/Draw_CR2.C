@@ -58,7 +58,7 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"};
   //m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
   m.map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WGtoLNuG"};
-  m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS"};
+  m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
   m.map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
   m.map_sample_string_to_list["fake_sfed_HighdXY"] = {"fake_sfed_HighdXY"};
