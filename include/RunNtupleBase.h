@@ -51,6 +51,11 @@ public:
   double total_bkgs_err, fake_bkgs_err, prompt_bkgs_err, cf_bkgs_err;
   vector<double> signal_rate, signal_err;
 
+  double fake_bkgs_stat; // sumw2+FR-propagation
+  double prompt_bkgs_stat; // sumw2
+  double cf_bkgs_stat; // sumw2
+  vector<double> signal_stat;
+
   double fake_bkgs_syst; // 31%
   double prompt_bkgs_syst; // MCSF uncert
   double cf_bkgs_syst; // 21%

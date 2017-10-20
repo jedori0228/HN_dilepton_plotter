@@ -14,14 +14,15 @@ void RunNtupleBase::Run(){
 
   vector<CutInfo> OptimizedCutInfo;
   double final_cf(0.), final_cf_err(0.), final_cf_syst(0.);
-  double final_fake(0.), final_fake_err(0.), final_fake_syst(0.);
-  double final_prompt(0.), final_prompt_err(0.), final_prompt_syst(0.);
-  vector<double> final_signal, final_signal_eff, final_signal_eff_preselection, final_signal_err(0.);
+  double final_fake(0.), final_fake_err(0.), final_fake_syst(0.), final_fake_stat(0.);
+  double final_prompt(0.), final_prompt_err(0.), final_prompt_syst(0.), final_prompt_stat(0.);
+  vector<double> final_signal, final_signal_eff, final_signal_eff_preselection, final_signal_err, final_signal_stat;
   for(unsigned int i=0; i<signals.size(); i++){
     final_signal.push_back(0.);
     final_signal_eff.push_back(0.);
     final_signal_eff_preselection.push_back(0.);
     final_signal_err.push_back(0.);
+    final_signal_stat.push_back(0.);
   }
 
   while( !cutrangeinfo.isEnd() ){
@@ -276,6 +277,7 @@ void RunNtupleBase::Run(){
         double signal_lumi = signal_weighted_yield.at(iii)*uncert_lumi;
         double signal_stat = signal_weighted_yield_stat.at(iii);
         final_signal_err.at(iii) = sqrt(signal_lumi*signal_lumi+signal_stat*signal_stat);
+        final_signal_stat.at(iii) = signal_stat;
 
         double eff_presel;
         if(signal_yield_preselection.at(iii)==0) eff_presel = 0;
@@ -294,14 +296,17 @@ void RunNtupleBase::Run(){
       final_cf = chargeflip_weighted_yield;
       final_cf_err = chargeflip_weighted_yield_err;
       final_cf_syst = chargeflip_weighted_yield_syst;
+      final_cf_stat = chargeflip_weighted_yield_stat;
 
       final_fake = fake_weighted_yield;
       final_fake_err = fake_weighted_yield_err;
       final_fake_syst = fake_weighted_yield_syst;
+      final_fake_stat = fake_weighted_yield_stat;
 
       final_prompt = prompt_weighted_yield;
       final_prompt_err = prompt_weighted_yield_err;
       final_prompt_syst = prompt_weighted_yield_syst_MCSF;
+      final_prompt_stat = prompt_weighted_yield_stat;
 
     }
 
@@ -333,14 +338,17 @@ void RunNtupleBase::Run(){
     fake_bkgs = final_fake;
     fake_bkgs_err = final_fake_err;
     fake_bkgs_syst = final_fake_syst;
+    fake_bkgs_stat = final_fake_stat;
 
     prompt_bkgs = final_prompt;
     prompt_bkgs_err = final_prompt_err;
     prompt_bkgs_syst = final_prompt_syst;
+    prompt_bkgs_stat = final_prompt_stat;
 
     cf_bkgs = final_cf;
     cf_bkgs_err = final_cf_err;
     cf_bkgs_syst = final_cf_syst;
+    cf_bkgs_syst = final_cf_stat;
 
     total_bkgs = final_cf+final_fake+final_prompt;
     total_bkgs_err = sqrt(final_fake_err*final_fake_err+final_prompt_err*final_prompt_err+final_cf_err*final_cf_err);
@@ -350,6 +358,7 @@ void RunNtupleBase::Run(){
     for(unsigned int i=0; i<signals.size(); i++){
       signal_rate.push_back( final_signal.at(i) );
       signal_err.push_back( final_signal_err.at(i) );
+      signal_stat.push_back( final_signal_stat.at(i) );
     }
   }
 
