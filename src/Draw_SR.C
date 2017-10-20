@@ -57,7 +57,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["top_tt"] = {"TT_powheg", "ttW", "ttZ", "ttH_nonbb"};
   m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"};
   //m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
-  m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS"};
+  m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
   m.map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
   m.map_sample_string_to_list["fake_sfed_HighdXY"] = {"fake_sfed_HighdXY"};
@@ -106,26 +106,38 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
     m.histname_suffix = {
 
-
       //==== DiMuon
       "_DiMuon_Preselection_SS", // nobjet, jet>=2;
       "_DiMuon_Low_SS",
+      "_DiMuon_Low_TwoJet_NoFatJet_SS",
+      "_DiMuon_Low_OneJet_NoFatJet_SS",
       "_DiMuon_High_SS",
+      "_DiMuon_High_TwoJet_NoFatJet_SS",
+      "_DiMuon_High_OneFatJet_SS",
       "_DiMuon_Preselection_secondptge20_SS",
 
       //==== DiElectron
       "_DiElectron_Preselection_SS", // OffZ, nobjet, jet>=2;
       "_DiElectron_Low_SS",
+      "_DiElectron_Low_TwoJet_NoFatJet_SS",
+      "_DiElectron_Low_OneJet_NoFatJet_SS",
       "_DiElectron_High_SS",
+      "_DiElectron_High_TwoJet_NoFatJet_SS",
+      "_DiElectron_High_OneFatJet_SS",
 
       //==== EMu
       "_EMu_Preselection_SS", // nobjet, jet>=2;
       "_EMu_Low_SS",
+      "_EMu_Low_TwoJet_NoFatJet_SS",
+      "_EMu_Low_OneJet_NoFatJet_SS",
       "_EMu_High_SS",
+      "_EMu_High_TwoJet_NoFatJet_SS",
+      "_EMu_High_OneFatJet_SS",
       "_EMu_Preselection_ElectronSubLead_SS",
       "_EMu_Preselection_MuonSubLead_SS",
 
-      //"_DiMuon_Preselection_SS",
+
+      //"_EMu_Low_OneJet_NoFatJet_SS",
 
     };
   }
@@ -176,8 +188,16 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "secondForwardJet_Pt", "secondForwardJet_Eta",
     "leadingNoLepVetoJet_Pt", "leadingNoLepVetoJet_Eta", 
     "secondNoLepVetoJet_Pt", "secondNoLepVetoJet_Eta",
+    //==== SumPt
     "PFMET", "PFMET_phi", "HT", "ST", "MET2overST", "MCT",
     "Nvtx", "DeltaRl1l2", "Nevents",
+    //==== Fatjet
+    "Nfatjets",
+    "WClosest_FatJet_Pt", "WClosest_FatJet_Eta", "WClosest_FatJet_Mass", "WClosest_FatJet_Tau21", "WClosest_FatJet_PrunedMass",
+    "m_Leadlfj_ptorder", "m_SubLeadlfj_ptorder", "m_llfj_ptorder",
+    "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
+    //==== OneJet_NoFatJet
+    "m_Leadlj", "m_SubLeadlj", "m_llj",
   };
 
   m.x_title = {
@@ -203,8 +223,16 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "Sub-Leading Forward Jet p_{T} [GeV]", "Sub-Leading Forward Jet #eta",
     "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
     "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
+    //==== SumPt
     "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]", "#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]", "m_{CT}(j_{1},j_{2}) [GeV]",
     "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin",
+    //==== Fatjet
+    "# of Fatjet",
+    "Fatjet p_{T} [GeV]", "Fatjet #eta", "Fatjet Mass [GeV]", "Fatjet #tau_{21}", "Fatjet Pruned Mass [GeV]",
+    "m(Leading Lepton+Fatjet) [GeV]", "Sub-Leading Lepton+Fatjet [GeV]", "m(ll+Fatjet) [GeV]",
+    "m(Leading Lepton+Fatjet) [GeV]", "Sub-Leading Lepton+Fatjet [GeV]", "m(ll+Fatjet) [GeV]",
+    //==== OneJet_NoFatJet
+    "m(Leading Lepton+j) [GeV]", "m(Sub-Leading Lepton+j) [GeV]", "m(llj) [GeV]",
   };
 
   m.units = {
@@ -230,16 +258,16 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "GeV", "",
     "GeV", "",
     "GeV", "",
+    //==== SumPt
     "GeV", "", "GeV", "GeV", "GeV", "GeV",
-    "int", "",
-    //==== Laeding dijet
-    "GeV", "", "GeV", "GeV", "", "",
-    "GeV", "GeV", "GeV", "GeV",
-    "", "", "", "",
-    //==== FatJet Leading
-    "GeV", "", "GeV", "GeV", "", "",
-    "GeV", "GeV", "GeV", "GeV",
-    "", "", "", "", "int",
+    "int", "", "int",
+    //==== Fatjet
+    "int",
+    "GeV", "", "GeV", "", "GeV",
+    "GeV", "GeV", "GeV",
+    "GeV", "GeV", "GeV",
+    //==== OneJet_NoFatJet
+    "GeV", "GeV", "GeV",
   };
 
   //==== TEST
@@ -277,11 +305,27 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //m.drawdata.push_back(false);
     //m.drawdata.push_back(true);
   }
+
 /*
   //==== FIXME test
   m.histname = {"Nevents"};
-  m.x_title = {"onebin"};
-  m.units = {"int"};
+  m.x_title = {"#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]"};
+  m.units = {"GeV"};
+*/
+/*
+  //==== FIXME test
+  m.histname = {    "Nfatjets",
+    "WClosest_FatJet_Pt", "WClosest_FatJet_Eta", "WClosest_FatJet_Mass", "WClosest_FatJet_Tau21", "WClosest_FatJet_PrunedMass",
+    "m_Leadlfj_ptorder", "m_SubLeadlfj_ptorder", "m_llfj_ptorder",
+    "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",};
+  m.x_title = {    "# of Fatjet",
+    "Fatjet p_{T} [GeV]", "Fatjet #eta", "Fatjet Mass [GeV]", "Fatjet #tau_{21}", "Fatjet Pruned Mass [GeV]",
+    "m(Leading Lepton+Fatjet) [GeV]", "Sub-Leading Lepton+Fatjet [GeV]", "m(ll+Fatjet) [GeV]",
+    "m(Leading Lepton+Fatjet) [GeV]", "Sub-Leading Lepton+Fatjet [GeV]", "m(ll+Fatjet) [GeV]",};
+  m.units = {    "int",
+    "GeV", "", "GeV", "", "GeV",
+    "GeV", "GeV", "GeV",
+    "GeV", "GeV", "GeV",};
 */
   //====================
   //==== make bkg list

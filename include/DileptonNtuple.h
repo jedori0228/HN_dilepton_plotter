@@ -75,6 +75,7 @@ public :
   TH1D *hist_Pdf_Replica;
   TH1D *hist_Pdf_Alpha;
   TH1D *hist_Pdf_Scale;
+  Double_t      Nfatjets;
 
   //==== Function to call above varialbes
   double GetVar(TString var);
@@ -130,6 +131,7 @@ public :
   TBranch      *b_weight_err;  //!
   TBranch      *b_PdfWeights;   //!
   TBranch      *b_ScaleWeights;   //!
+  TBranch      *b_Nfatjets;
 
   DileptonNtuple(TString filename, TString treename, bool pdfSyst=false);
   virtual ~DileptonNtuple();
@@ -295,6 +297,7 @@ void DileptonNtuple::Init(TTree *tree)
    fChain->SetBranchAddress("LT", &LT, &b_LT);
    fChain->SetBranchAddress("weight", &weight, &b_weight);
    fChain->SetBranchAddress("weight_err", &weight_err, &b_weight_err);
+   fChain->SetBranchAddress("Nfatjets", &Nfatjets, &b_Nfatjets);
 
    if(ReadPdfSystematic){
      fChain->SetBranchAddress("PdfWeights", &PdfWeights, &b_PdfWeights);
@@ -353,6 +356,7 @@ double DileptonNtuple::GetVar(TString var){
   else if(var=="LT") return LT;
   else if(var=="weight") return weight;
   else if(var=="weight_err") return weight_err;
+  else if(var=="Nfatjets") return Nfatjets;
 
   //==== function
   else if(var=="MET2ST") return MET2ST();
