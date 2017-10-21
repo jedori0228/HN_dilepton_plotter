@@ -292,6 +292,7 @@ void GetTnPIDSystematic(){
 
     TH2D *hist_2D_Data_Central = NULL;
     TH2D *hist_2D_MC_Central = NULL;
+    TH2D *hist_2D_SF_Central = NULL;
 
     for(unsigned int it_syst=0; it_syst<systs.size(); it_syst++){
 
@@ -314,9 +315,14 @@ void GetTnPIDSystematic(){
 
     } // END Syst loop
 
+    hist_2D_SF_Central = (TH2D *)hist_2D_Data_Central->Clone();
+    hist_2D_SF_Central->Divide(hist_2D_MC_Central);
+    hist_2D_SF_Central->SetName("abseta_pt_PLOT");
+
     output->cd();
     hist_2D_Data_Central->Write();
     hist_2D_MC_Central->Write();
+    hist_2D_SF_Central->Write();
     output->Close();
       
 
