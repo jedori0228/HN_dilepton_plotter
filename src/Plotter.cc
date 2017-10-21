@@ -76,7 +76,7 @@ void Plotter::draw_hist(){
 
       for(i_file = 0; i_file < bkglist.size()+1+signal_mass.size(); i_file++){ // +1 for data
       
-        TString filepath, current_sample;
+        TString filepath, current_sample, signal_name_for_tex;
         
         //==== root file path name
         //==== bkg
@@ -110,11 +110,15 @@ void Plotter::draw_hist(){
           TString WhichChannel = "MuMu";
           if(histname_suffix[i_cut].Contains("DiElectron")) WhichChannel = "ElEl";
           if(histname_suffix[i_cut].Contains("EMu")) WhichChannel = "MuEl";
+          TString WhichChannel_for_tex = WhichChannel;
           //==== TChannel
           if( signal_mass[signal_index] < 0 ){
             WhichChannel = WhichChannel+"_Tchannel";
           }
           TString string_signal_mass = "HN"+WhichChannel+"_"+TString::Itoa(abs(signal_mass[signal_index]),10);
+
+          signal_name_for_tex = "SchHN"+WhichChannel_for_tex+TString::Itoa(abs(signal_mass[signal_index]),10);
+          if(signal_mass[signal_index] < 0 ) signal_name_for_tex = "TchHN"+WhichChannel_for_tex+TString::Itoa(abs(signal_mass[signal_index]),10);
 
           filepath = "./rootfiles/"+data_class+"/Signal/"+filename_prefix+"_SK"+string_signal_mass+filename_suffix;
           current_sample = string_signal_mass;
@@ -127,7 +131,12 @@ void Plotter::draw_hist(){
         }
         
         //==== get root file
-        if(gSystem->AccessPathName(filepath)) continue;
+        if(gSystem->AccessPathName(filepath)){
+          if(DoDebug){
+            cout << "No file : " << filepath << endl;
+          }
+          continue;
+        }
         TFile* file = new TFile(filepath);
         if( !file ){
           if(DoDebug){
@@ -284,12 +293,14 @@ void Plotter::draw_hist(){
         fill_legend(lg, hist_final);
 
         if(histname[i_var]=="Nevents"){
+          cout << "current_sample = " << current_sample << endl;
           TString alias = "";
           if(current_sample.Contains("data")) alias = "data";
-          else if(current_sample.Contains("HN")) alias = "Signal";
+          else if(current_sample.Contains("HN")) alias = signal_name_for_tex;
           else{
             alias = map_sample_string_to_legendinfo[current_MCsector].first;
           }
+          cout << "==> alias = " << alias << endl;
 
           if( map_hist_y.find(alias) == map_hist_y.end() ){
             map_hist_y[alias] = new TH1D(alias, "", 1, 0., 1);
@@ -312,7 +323,7 @@ void Plotter::draw_hist(){
       if(!AnyEntry) continue;
       if(DoDebug) cout << "[Draw Canvas]" << endl;
 
-      if(!drawdata.at(i_cut)){
+      if(!drawdata.at(i_cut) && hist_data){
         TString tmpname = hist_data->GetName();
         hist_data = (TH1D*)MC_stacked_allerr->Clone();
         hist_data->SetName(tmpname);
@@ -1248,13 +1259,19 @@ void Plotter::MakeTexFile(map< TString, TH1D * > hs){
   ofile << "\\hline" << endl;
   ofile << " & Yields \\\\" << endl;
   ofile << "\\hline" << endl;
+  ofile << "\\hline" << endl;
 
   TH1D *hist_bkgd = new TH1D("hist_bkgd", "", 1., 0., 1.);
+  bool HasSignal = false;
   for(map< TString, TH1D * >::iterator it = hs.begin(); it != hs.end(); it++){
     TString name = it->first;
 
     if(name == "X + #gamma") name = "$X + \\gamma$";
-    if(name.Contains("data") || name.Contains("Signal")) continue;
+    if(name.Contains("data")) continue;
+    if(name.Contains("HN")){
+      HasSignal = true;
+      continue;
+    }
     TH1D *h_bkgd = it->second;
     ofile << name << " & $"<<h_bkgd->GetBinContent(1)<<" \\pm "<<h_bkgd->GetBinError(1)<<"$ \\\\" << endl;
     hist_bkgd->Add(h_bkgd);
@@ -1264,12 +1281,32 @@ void Plotter::MakeTexFile(map< TString, TH1D * > hs){
   ofile << "\\hline" << endl;
 
   TH1D *hist_data = hs["data"];
-  ofile << "Data & $" << hist_data->GetBinContent(1) << " \\pm " << hist_data->GetBinError(1) << "$ \\\\" << endl;
-  ofile << "\\hline" << endl;
+  if(hist_data){
+   ofile << "Data & $" << hist_data->GetBinContent(1) << " \\pm " << hist_data->GetBinError(1) << "$ \\\\" << endl;
+   ofile << "\\hline" << endl;
+  }
+  else{
+   TH1D *hist_empty = new TH1D("hist_data", "", 1, 0., 1.);
+   hist_data = (TH1D*)hist_empty->Clone();
+   ofile << "Data & $" << 0 << " \\pm " << 0 << "$ \\\\" << endl;
+   ofile << "\\hline" << endl;
+  }
 
   double signif = (hist_data->GetBinContent(1) - hist_bkgd->GetBinContent(1)) / sqrt( (hist_bkgd->GetBinError(1))*(hist_bkgd->GetBinError(1)) + (hist_data->GetBinError(1))*(hist_data->GetBinError(1)) );
 
   ofile << "Significance & $" <<signif<<" \\sigma$ \\\\" << endl;
+
+  if(HasSignal){
+    ofile << "\\hline" << endl;
+    for(map< TString, TH1D * >::iterator it = hs.begin(); it != hs.end(); it++){
+    TString name = it->first;
+    if(name.Contains("HN")){
+      TH1D *h_bkgd = it->second;
+      ofile << name+" & $" << h_bkgd->GetBinContent(1) << " \\pm " << h_bkgd->GetBinError(1) << "$ \\\\" << endl;
+      }
+    }
+  }
+
   ofile << "\\hline" << endl;
   ofile << "\\hline" << endl;
   ofile << "    \\end{tabular}" << endl;
