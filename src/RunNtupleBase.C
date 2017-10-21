@@ -13,7 +13,7 @@ void RunNtupleBase::Run(){
   }
 
   vector<CutInfo> OptimizedCutInfo;
-  double final_cf(0.), final_cf_err(0.), final_cf_syst(0.);
+  double final_cf(0.), final_cf_err(0.), final_cf_syst(0.), final_cf_stat(0.);
   double final_fake(0.), final_fake_err(0.), final_fake_syst(0.), final_fake_stat(0.);
   double final_prompt(0.), final_prompt_err(0.), final_prompt_syst(0.), final_prompt_stat(0.);
   vector<double> final_signal, final_signal_eff, final_signal_eff_preselection, final_signal_err, final_signal_stat;
@@ -348,7 +348,7 @@ void RunNtupleBase::Run(){
     cf_bkgs = final_cf;
     cf_bkgs_err = final_cf_err;
     cf_bkgs_syst = final_cf_syst;
-    cf_bkgs_syst = final_cf_stat;
+    cf_bkgs_stat = final_cf_stat;
 
     total_bkgs = final_cf+final_fake+final_prompt;
     total_bkgs_err = sqrt(final_fake_err*final_fake_err+final_prompt_err*final_prompt_err+final_cf_err*final_cf_err);
