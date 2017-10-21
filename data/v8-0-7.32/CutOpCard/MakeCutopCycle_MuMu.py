@@ -3,6 +3,8 @@ import os
 dirname = "Cycles"
 os.system("mkdir -p "+dirname)
 
+DoBin1 = True
+
 card_dirname = ""
 
 masses = [40, 50, 60, 70, 80, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
@@ -11,23 +13,36 @@ masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 
 
 for mass in masses:
 
-  out = open(dirname+"/HNMuMu_"+str(mass)+".C","w")
-
   TreeSkim = ""
   SkimmedTreeDir = ""
   if mass <= 80:
-    TreeSkim = "Low_SS"
-    SkimmedTreeDir = "Skimmed_LowMass"
+    if DoBin1:
+      TreeSkim = "Low_TwoJet_NoFatjet_SS"
+      SkimmedTreeDir = "Skimmed_Low_TwoJet_NoFatjet"
+    else:
+      TreeSkim = "Low_OneJet_NoFatjet_SS"
+      SkimmedTreeDir = "Skimmed_Low_OneJet_NoFatjet"
+
   else:
-    TreeSkim = "High_SS"
-    SkimmedTreeDir = "Skimmed_HighMass"
+    if DoBin1:
+      TreeSkim = "High_TwoJet_NoFatjet_SS"
+      SkimmedTreeDir = "Skimmed_High_TwoJet_NoFatjet"
+    else:
+      TreeSkim = "High_OneFatJet_SS"
+      SkimmedTreeDir = "Skimmed_High_OneFatJet"
 
   SignalSampleName = "HNMuMu_"+str(mass)
   CutCardName = "HNMuMu_"+str(mass)+".txt"
 
+  filename = SignalSampleName
+  if not DoBin1:
+    filename = "Bin2_"+filename
+
+  out = open(dirname+"/"+filename+".C","w")
+
   print>>out,"""#include "RunNtupleBase.C"
 
-void {2}(){{
+void {5}(){{
 
   bool DoDebug = false;
 
@@ -100,6 +115,6 @@ void {2}(){{
 
 
 
-}}""".format(TreeSkim, SkimmedTreeDir, SignalSampleName, CutCardName, card_dirname)
+}}""".format(TreeSkim, SkimmedTreeDir, SignalSampleName, CutCardName, card_dirname, filename)
 
   out.close()
