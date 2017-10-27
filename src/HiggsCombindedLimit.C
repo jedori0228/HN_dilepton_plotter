@@ -1,10 +1,10 @@
 #include "canvas_margin.h"
 
-void HiggsCombindedLimit(){
+void HiggsCombindedLimit(int i=0){
 
-  TString channel = "MuMu";
+  bool DrawObserved = false;
 
-  gStyle->SetOptTitle(0);
+  gStyle->SetOptStat(0);
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString catversion = getenv("CATVERSION");
@@ -15,7 +15,16 @@ void HiggsCombindedLimit(){
   TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
   TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  TString WhichDirectoryInCutop = "171010_MuMu";
+  TString WhichDirectoryInCutop = "OPTIMIZED_171021_ElEl_Combined";
+  if(i==1) WhichDirectoryInCutop = "OPTIMIZED_171021_MuMu";
+  if(i==2) WhichDirectoryInCutop = "OPTIMIZED_171021_MuMu_Bin2";
+  if(i==3) WhichDirectoryInCutop = "OPTIMIZED_171021_MuMu_Combined";
+  if(i==4) WhichDirectoryInCutop = "OPTIMIZED_171021_ElEl";
+  if(i==5) WhichDirectoryInCutop = "OPTIMIZED_171021_ElEl_Bin2";
+  if(i==6) WhichDirectoryInCutop = "OPTIMIZED_171021_ElEl_Combined";
+
+  TString channel = "MuMu";
+  if(WhichDirectoryInCutop.Contains("ElEl")) channel = "ElEl";
 
   filepath = filepath+WhichDirectoryInCutop+"/";
   plotpath = plotpath+WhichDirectoryInCutop+"/";
@@ -32,10 +41,10 @@ void HiggsCombindedLimit(){
   latex_CMSPriliminary.SetNDC();
   latex_Lumi.SetNDC();
 
-  //==== read result file
+  //=== 13 TeV S channel
+
   string elline;
   ifstream in(filepath+"/result_"+channel+".txt");
-
   double mass[24], obs[24], limit[24], onesig_left[24], onesig_right[24], twosig_left[24], twosig_right[24];
 
   int dummyint=0;
@@ -91,18 +100,75 @@ void HiggsCombindedLimit(){
   gr_band_2sigma->SetLineColor(kYellow);
   gr_band_2sigma->SetMarkerColor(kYellow);
 
+
+  //==== 13 TeV S+T channel
+
+  string elline_SandT;
+  ifstream in_SandT(filepath+"/result_"+channel+"_VBF.txt");
+
+  double mass_SandT[5], obs_SandT[5], limit_SandT[5], onesig_left_SandT[5], onesig_right_SandT[5], twosig_left_SandT[5], twosig_right_SandT[5];
+  dummyint=0;
+
+  while(getline(in_SandT,elline_SandT)){
+    std::istringstream is( elline_SandT );
+
+    is >> mass_SandT[dummyint];
+    is >> obs_SandT[dummyint];
+    is >> limit_SandT[dummyint];
+    is >> onesig_left_SandT[dummyint];
+    is >> onesig_right_SandT[dummyint];
+    is >> twosig_left_SandT[dummyint];
+    is >> twosig_right_SandT[dummyint];
+
+    double scale=0.01; //mixing squared is 0.01 now
+    if(mass_SandT[dummyint]<=60) scale *= 0.01;
+    else if(mass_SandT[dummyint]<=100) scale *= 0.1;
+    else if(mass_SandT[dummyint]<=300) scale *= 1.;
+    else if(mass_SandT[dummyint]<=700) scale *= 10.;
+    else scale *= 100.;
+
+    obs_SandT[dummyint] *= scale;
+    limit_SandT[dummyint] *= scale;
+    onesig_left_SandT[dummyint] *= scale;
+    onesig_right_SandT[dummyint] *= scale;
+    twosig_left_SandT[dummyint] *= scale;
+    twosig_right_SandT[dummyint] *= scale;
+
+    onesig_left_SandT[dummyint] = limit_SandT[dummyint]-onesig_left_SandT[dummyint];
+    onesig_right_SandT[dummyint] = onesig_right_SandT[dummyint] - limit_SandT[dummyint];
+    twosig_left_SandT[dummyint] = limit_SandT[dummyint]-twosig_left_SandT[dummyint];
+    twosig_right_SandT[dummyint] = twosig_right_SandT[dummyint] - limit_SandT[dummyint];
+
+    dummyint++;
+  }
+
+  TGraph *gr_13TeV_obs_SandT = new TGraph(5,mass_SandT,obs_SandT);
+  gr_13TeV_obs_SandT->SetLineWidth(3);
+  gr_13TeV_obs_SandT->SetLineColor(kBlack);
+
+  TGraph *gr_13TeV_exp_SandT = new TGraph(5,mass_SandT,limit_SandT);
+  gr_13TeV_exp_SandT->SetLineWidth(5);
+  gr_13TeV_exp_SandT->SetLineStyle(1);
+  gr_13TeV_exp_SandT->SetLineColor(kViolet);
+
+
+
+
+
   TLegend *lg = new TLegend(0.50, 0.15, 0.90, 0.50);
   TLegend *lg_log = new TLegend(0.20, 0.55, 0.60, 0.90);
 
-  lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
+  if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
   lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected", "l");
   lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 #sigma", "f");
   lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 #sigma", "f");
 
-  lg_log->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
+  if(DrawObserved) lg_log->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
   lg_log->AddEntry(gr_13TeV_exp,"CL_{s} Expected", "l");
   lg_log->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 #sigma", "f");
   lg_log->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 #sigma", "f");
+
+  //==== 8 TeV overlay
 
   const int nm = 16;
   double mass_8TeV[nm] = {
@@ -136,28 +202,6 @@ void HiggsCombindedLimit(){
   gr_8TeV_exp->SetLineColor(kRed);
   gr_8TeV_exp->SetLineWidth(3);
 
-
-  const int nm2 = 13;
-  double mass_13TeV_2[nm2] = {
-    40, 50, 60, 70, 80,
-    90, 100, 150,
-    200, 250, 300, 400, 500
-  };
-  double exp2[nm2];
-
-  vector<double> MixingValues13TeV_2 = {
-    //==== ElEl
-    0.00013271, 0.00016568, 0.00034674, 0.002342, 0.0016074,
-    0.0215585, 0.0102926, 0.015655,
-    0.021067, 0.026317, 0.041888, 0.08738, 0.19364
-  };
-  for(unsigned int j=0; j<MixingValues13TeV_2.size(); j++) exp2[j] = MixingValues13TeV_2.at(j);
-
-  TGraph *gr_13TeV_exp2 = new TGraph(nm2, mass_13TeV_2, exp2);
-  gr_13TeV_exp2->SetLineColor(kBlue);
-  gr_13TeV_exp2->SetLineWidth(3);
-
-
   TCanvas *c_out = new TCanvas("c_out", "", 800, 800);
   canvas_margin(c_out);
   c_out->cd();
@@ -166,21 +210,25 @@ void HiggsCombindedLimit(){
   c_out->SetGridx();
   c_out->SetGridy();
 
-  gr_band_2sigma->Draw("A3");
-  hist_axis(gr_band_2sigma);
-  if(channel=="ElEl") gr_band_2sigma->GetYaxis()->SetTitle("|V_{eN}|^{2}");
-  if(channel=="MuMu") gr_band_2sigma->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
-  gr_band_2sigma->GetXaxis()->SetTitle("m(HN) [GeV]");
-  gr_band_2sigma->GetYaxis()->SetTitleSize(0.06); 
-  gr_band_2sigma->GetYaxis()->SetRangeUser(0.00002, 2.);
-  gr_band_2sigma->SetTitle("");
+  TH1D *dummy = new TH1D("hist", "", 10000, 0., 10000.);
+  dummy->Draw("hist");
+  hist_axis(dummy);
+  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("|V_{eN}|^{2}");
+  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
+  dummy->GetXaxis()->SetTitle("m(HN) [GeV]");
+  dummy->GetXaxis()->SetRangeUser(10., 2000);
+  dummy->GetYaxis()->SetTitleSize(0.06); 
+  dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
+  dummy->SetTitle("");
+
+  gr_band_2sigma->Draw("3same");
   gr_band_1sigma->Draw("3same");
   gr_13TeV_exp->Draw("lsame");
   gr_8TeV_exp->Draw("lsame");
-  //gr_13TeV_exp2->Draw("lsame");
-  gr_13TeV_obs->Draw("lsame");
+  if(DrawObserved) gr_13TeV_obs->Draw("lsame");
+  //gr_13TeV_exp_SandT->Draw("lsame");
 
-  lg->AddEntry(gr_8TeV_exp, "8 TeV DiElectron Ch. Expected", "l");
+  lg->AddEntry(gr_8TeV_exp, "CMS 8 TeV Expected", "l");
   lg->SetX2NDC(0.90);
   lg->SetY2NDC(0.67);
   lg->SetBorderSize(0);
@@ -193,6 +241,7 @@ void HiggsCombindedLimit(){
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
   c_out->SaveAs(plotpath+"/"+channel+"_13TeV_mixing.pdf");
+  c_out->SaveAs(plotpath+"/"+channel+"_13TeV_mixing.png");
   c_out->Close();
 
   //==== logX
@@ -200,26 +249,28 @@ void HiggsCombindedLimit(){
   canvas_margin(c_out_logx);
   c_out_logx->cd();
   c_out_logx->Draw();
-  c_out_logx->SetLogx();
   c_out_logx->SetLogy();
   c_out_logx->SetGridx();
   c_out_logx->SetGridy();
 
-  gr_band_2sigma->Draw("A3");
-  hist_axis(gr_band_2sigma);
-  if(channel=="ElEl") gr_band_2sigma->GetYaxis()->SetTitle("|V_{eN}|^{2}");
-  if(channel=="MuMu") gr_band_2sigma->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
-  gr_band_2sigma->GetXaxis()->SetTitle("m(HN) [GeV]");
-  gr_band_2sigma->GetYaxis()->SetTitleSize(0.06);
-  gr_band_2sigma->GetYaxis()->SetRangeUser(0.00002, 2.);
-  gr_band_2sigma->SetTitle("");
+  dummy->Draw("hist");
+  hist_axis(dummy);
+  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("|V_{eN}|^{2}");
+  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
+  dummy->GetXaxis()->SetTitle("m(HN) [GeV]");
+  dummy->GetXaxis()->SetRangeUser(20., 2500);
+  dummy->GetYaxis()->SetTitleSize(0.06);
+  dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
+  dummy->SetTitle("");
+
+  gr_band_2sigma->Draw("3same");
   gr_band_1sigma->Draw("3same");
   gr_13TeV_exp->Draw("lsame");
   gr_8TeV_exp->Draw("lsame");
-  //gr_13TeV_exp2->Draw("lsame");
-  gr_13TeV_obs->Draw("lsame");
+  //gr_13TeV_exp_SandT->Draw("lsame");
+  if(DrawObserved) gr_13TeV_obs->Draw("lsame");
 
-  lg_log->AddEntry(gr_8TeV_exp, "8 TeV DiMuon Ch. Expected", "l");
+  lg_log->AddEntry(gr_8TeV_exp, "CMS 8 TeV Expected", "l");
   lg_log->SetX2NDC(0.90);
   lg_log->SetY2NDC(0.67);
   lg_log->SetBorderSize(0);
@@ -232,7 +283,9 @@ void HiggsCombindedLimit(){
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
+  c_out_logx->SetLogx();
   c_out_logx->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.pdf");
+  c_out_logx->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.png");
 
   c_out_logx->Close();
 

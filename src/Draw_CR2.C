@@ -104,6 +104,7 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
       "_DiMuon_ThreeLepton_WZ",
       "_DiMuon_ThreeLepton_WZ_NotAllSameFlavour",
       "_DiMuon_ThreeLepton_ZGamma",
+      "_DiMuon_ThreeLepton_WGamma",
       "_DiMuon_FourLepton_ZZ",
       "_DiMuon_FourLepton_ZZ_NotAllSameFlavour",
       "_DiMuon_FourLepton_ZZ_AllSameFlavour",
@@ -111,12 +112,14 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
       "_DiElectron_ThreeLepton_WZ",
       "_DiElectron_ThreeLepton_WZ_NotAllSameFlavour",
       "_DiElectron_ThreeLepton_ZGamma",
+      "_DiElectron_ThreeLepton_WGamma",
       "_DiElectron_FourLepton_ZZ",
       "_DiElectron_FourLepton_ZZ_NotAllSameFlavour",
       "_DiElectron_FourLepton_ZZ_AllSameFlavour",
 
       "_DiLepton_ThreeLepton_WZ",
       "_DiLepton_ThreeLepton_ZGamma",
+      "_DiLepton_ThreeLepton_WGamma",
       "_DiLepton_FourLepton_ZZ",
 
     };

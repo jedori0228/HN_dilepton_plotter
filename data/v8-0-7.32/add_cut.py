@@ -1,10 +1,10 @@
 import os
 
-filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
+#filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
 #filenames = ['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
-#filenames = ['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
+filenames = ['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
 
-From = "_DiMuon_Low_SS"
+From = "_DiMuon_ThreeLepton_ZGamma"
 Tos   = [
 
       #//==== DiMuon
@@ -20,8 +20,8 @@ Tos   = [
       #//==== DiElectron
       #"_DiElectron_Preselection_SS", // OffZ, nobjet, jet>=2;
       #"_DiElectron_Low_SS",
-      "_DiElectron_Low_TwoJet_NoFatjet_SS",
-      "_DiElectron_Low_OneJet_SS",
+      #"_DiElectron_Low_TwoJet_NoFatjet_SS",
+      #"_DiElectron_Low_OneJet_SS",
       #"_DiElectron_High_SS",
       #"_DiElectron_High_TwoJet_NoFatJet_SS",
       #"_DiElectron_High_OneFatJet_SS",
@@ -29,13 +29,39 @@ Tos   = [
       #//==== EMu
       #"_EMu_Preselection_SS", // nobjet, jet>=2;
       #"_EMu_Low_SS",
-      "_EMu_Low_TwoJet_NoFatjet_SS",
-      "_EMu_Low_OneJet_SS",
+      #"_EMu_Low_TwoJet_NoFatjet_SS",
+      #"_EMu_Low_OneJet_SS",
       #"_EMu_High_SS",
       #"_EMu_High_TwoJet_NoFatJet_SS",
       #"_EMu_High_OneFatJet_SS",
       #"_EMu_Preselection_ElectronSubLead_SS",
       #"_EMu_Preselection_MuonSubLead_SS",
+
+
+
+
+      #"_DiMuon_ThreeLepton_WZ",
+      #"_DiMuon_ThreeLepton_WZ_NotAllSameFlavour",
+      #"_DiMuon_ThreeLepton_ZGamma",
+      "_DiMuon_ThreeLepton_WGamma",
+      #"_DiMuon_FourLepton_ZZ",
+      #"_DiMuon_FourLepton_ZZ_NotAllSameFlavour",
+      #"_DiMuon_FourLepton_ZZ_AllSameFlavour",
+
+      #"_DiElectron_ThreeLepton_WZ",
+      #"_DiElectron_ThreeLepton_WZ_NotAllSameFlavour",
+      #"_DiElectron_ThreeLepton_ZGamma",
+      "_DiElectron_ThreeLepton_WGamma",
+      #"_DiElectron_FourLepton_ZZ",
+      #"_DiElectron_FourLepton_ZZ_NotAllSameFlavour",
+      #"_DiElectron_FourLepton_ZZ_AllSameFlavour",
+
+      #"_DiLepton_ThreeLepton_WZ",
+      #"_DiLepton_ThreeLepton_ZGamma",
+      "_DiLepton_ThreeLepton_WGamma",
+      #"_DiLepton_FourLepton_ZZ",
+
+
 
 ]
 

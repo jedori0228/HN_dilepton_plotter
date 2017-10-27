@@ -13,8 +13,8 @@ cust_xaxis_max = 50
     #//==== Onejet
     #"m_Leadlj", "m_SubLeadlj", "m_llj",
 
-var_last = "m_llfj_fjWclosest"
-NewVars = ["m_Leadlj", "m_SubLeadlj", "m_llj"]
+var_last = "WClosest_FatJet_Mass"
+NewVars = ["WClosest_FatJet_PrunedMass"]
 
 for filename in filenames:
 
@@ -36,7 +36,7 @@ for filename in filenames:
         if "rebins" in filename:
           newline = words[0]+'\t'+NewVar+'\t5\n'
         if "xaxis" in filename:
-          newline = words[0]+'\t'+NewVar+'\t0\t300\n'
+          newline = words[0]+'\t'+NewVar+'\t30\t150\n'
         if "yaxis" in filename:
           newline = words[0]+'\t'+NewVar+'\t1000\n'
 

@@ -107,15 +107,21 @@ void Plotter::draw_hist(){
           }
 
           if(DoDebug) cout << "signal_index = " << signal_index << " => mass = " << signal_mass[signal_index] << endl;
+
           TString WhichChannel = "MuMu";
           if(histname_suffix[i_cut].Contains("DiElectron")) WhichChannel = "ElEl";
           if(histname_suffix[i_cut].Contains("EMu")) WhichChannel = "MuEl";
+
           TString WhichChannel_for_tex = WhichChannel;
+
           //==== TChannel
           if( signal_mass[signal_index] < 0 ){
-            WhichChannel = WhichChannel+"_Tchannel";
+            WhichChannel = "Dilepton_"+WhichChannel+"_Tchannel_M";
           }
-          TString string_signal_mass = "HN"+WhichChannel+"_"+TString::Itoa(abs(signal_mass[signal_index]),10);
+          else{
+            WhichChannel = WhichChannel+"_";
+          }
+          TString string_signal_mass = "HN"+WhichChannel+TString::Itoa(abs(signal_mass[signal_index]),10);
 
           signal_name_for_tex = "SchHN"+WhichChannel_for_tex+TString::Itoa(abs(signal_mass[signal_index]),10);
           if(signal_mass[signal_index] < 0 ) signal_name_for_tex = "TchHN"+WhichChannel_for_tex+TString::Itoa(abs(signal_mass[signal_index]),10);
@@ -742,13 +748,13 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   
   //==== y=0 line
   double x_0[2], y_0[2];
-  x_0[0] = -1000;  y_0[0] = 0;
-  x_0[1] = 1000;  y_0[1] = 0;
+  x_0[0] = -5000;  y_0[0] = 0;
+  x_0[1] = 5000;  y_0[1] = 0;
   TGraph *g0 = new TGraph(2, x_0, y_0);
   //==== y=1 line
   double x_1[2], y_1[2];
-  x_1[0] = 1000;  y_1[0] = 1;
-  x_1[1] = -1000;  y_1[1] = 1;
+  x_1[0] = 5000;  y_1[0] = 1;
+  x_1[1] = -5000;  y_1[1] = 1;
   TGraph *g1 = new TGraph(2, x_1, y_1);
   
   //==== If we draw data, prepare top/bottom pads
