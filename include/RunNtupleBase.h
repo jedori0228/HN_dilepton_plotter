@@ -49,12 +49,15 @@ public:
   //=== Final Results
   double total_bkgs, fake_bkgs, prompt_bkgs, cf_bkgs;
   double total_bkgs_err, fake_bkgs_err, prompt_bkgs_err, cf_bkgs_err;
-  vector<double> signal_rate, signal_err;
+  vector<double> signal_rate, signal_err, signal_eff;
 
   double fake_bkgs_stat; // sumw2+FR-propagation
   double prompt_bkgs_stat; // sumw2
   double cf_bkgs_stat; // sumw2
   vector<double> signal_stat;
+
+  double prompt_bkgs_tau21_syst; // tau21 sf up yield
+  vector<double> signal_tau21_syst; //tau21 sf up yield
 
   double fake_bkgs_syst; // 31%
   double prompt_bkgs_syst; // MCSF uncert
@@ -115,6 +118,9 @@ void RunNtupleBase::FillSignalInfo(){
 
   }
 
+  TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
+  TString this_filepath = WORKING_DIR+"/data/SignalN_MC.txt";
+
   //==== Get NoCut/Preselection Entry
   for(unsigned int i=0; i<signals.size(); i++){
     TString filename = "DiLeptonAnalyzer_SK"+signals.at(i)+"_cat_v8-0-7.root";
@@ -122,9 +128,28 @@ void RunNtupleBase::FillSignalInfo(){
     TH1D *hist_nocut = (TH1D*)file->Get("Cutflow_"+channel+"_NoCut");
     TH1D *hist_preselection = (TH1D*)file->Get("Nevents_"+channel+"_"+preselection);
 
-    if(hist_nocut) signal_yield_nocut.push_back( hist_nocut->GetBinContent(1) );
+    string elline;
+    ifstream in(this_filepath);
+    int N_MC = -999;
+    while(getline(in,elline)){
+      std::istringstream is( elline );
+      TString samplename;
+      is >> samplename;
+      is >> N_MC;
+      if(samplename==signals.at(i)){
+        break;
+      }
+    }
+
+    if(N_MC==-999) signal_yield_nocut.push_back( 0. );
+    else           signal_yield_nocut.push_back( N_MC );
+
+/*
+    if(hist_nocut) signal_yield_nocut.push_back( hist_nocut->GetEntries() );
     else           signal_yield_nocut.push_back( 0. );
-    if(hist_preselection) signal_yield_preselection.push_back( hist_preselection->GetBinContent(1) );
+*/
+
+    if(hist_preselection) signal_yield_preselection.push_back( hist_preselection->GetEntries() );
     else                  signal_yield_preselection.push_back( 0. );
 
     //==== initialize MaxPunzis

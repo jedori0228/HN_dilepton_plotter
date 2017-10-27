@@ -145,6 +145,7 @@ public :
   vector<double> CutValues;
   void SetCutVariablesToUse(TString var, TString cutdir, double cutvalue);
   TH1D *hist_for_error, *hist_for_error_up;
+  TH1D *hist_for_tau21_up;
 
   vector<CutInfo> cutinfos;
   void SetCutVariablesToUse(CutInfo ci);
