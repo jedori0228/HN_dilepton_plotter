@@ -1,0 +1,12 @@
+secondLepton_Pt > 60.0 60.0 1
+m_lljj_jjWclosest > 370.0 370.0 1
+m_jj_jjWclosest > 30.0 30.0 1
+m_jj_jjWclosest < 150.0 150.0 1
+leadingLepton_Pt > 80.0 80.0 1
+MET2ST < 6.0 6.0 1
+##punzi	0.0291293
+##sigeff	0.123705
+##bkgd	8.47089
+Njets >= 2 2 1
+Nfatjets == 0 0 1
+Nbjets_nolepveto == 0 0 1
