@@ -3,7 +3,6 @@
 void Draw_TnP_Trigger(int period){
   
   TH1::SetDefaultSumw2(true);
-  TH2::SetDefaultSumw2(true);
   TH1::AddDirectory(kFALSE);
   
   bool DrawFitResult = true;
@@ -14,12 +13,6 @@ void Draw_TnP_Trigger(int period){
   else{
     cout << "period wrong" << endl;
     return;
-  }
-
-  TString CutsOnDen_front = "combRelIsoPF04dBeta_bin0__dB_bin0__dzPV_bin0__pair_dPhiPrimeDeg_bin0__pair_deltaR_bin0__pair_probeMultiplicity_bin0";
-  TString CutsOnDen_back = "tag_combRelIsoPF04dBeta_bin0__tag_pt_bin0";
-  if(DataPeriod=="GH"){
-    CutsOnDen_front = "combRelIsoPF04dBeta_bin0__dB_bin0__dzPV_bin0__pair_deltaR_bin0__pair_probeMultiplicity_bin0";
   }
 
   vector<TString> systs = {"Central", "NMassBins30", "NMassBins50", "MassRange_60_130", "MassRange_70_120", "SignalShapeSingleV", "TagPt20IsoInf", "TagPt30Iso0p08", "ProbeMult99"};
@@ -33,10 +26,6 @@ void Draw_TnP_Trigger(int period){
   TString base_plotpath = ENV_PLOT_PATH+"/TnP_Results/TriggerSF/"+DataPeriod+"/";
   
   vector<double> abseta = {0., 0.9, 1.2, 2.1, 2.4};
-  vector<TString> fitftns = {
-    "vpvPlusExpo", "vpvPlusExpoPassFail", "vpvPlusCheb_2nd", "vpvPlusCheb_3rd", "vpvPlusCheb_4th", "vpvPlusExpoClosePeakNarrow", "vpvPlusExpoClosePeak", "vpvPlusExpoPassFail2", "vpvPlusExpoPassFail3", "vpvPlusExpoPassFail4", "vpvPlusExpoPassFail5", "vpvPlusCMS",
-    "voigtPlusExpo", "voigtPlusExpoPassFail", "voigtPlusCheb_2nd", "voigtPlusCheb_3rd", "voigtPlusCheb_4th", "voigtPlusExpoClosePeakNarrow", "voigtPlusExpoClosePeak", "voigtPlusExpoPassFail2", "voigtPlusExpoPassFail3", "voigtPlusExpoPassFail4", "voigtPlusExpoPassFail5", "voigtPlusCMS",
-  };
   vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8"};
 
   for(unsigned int it_syst=0; it_syst<systs.size(); it_syst++){
@@ -69,24 +58,42 @@ void Draw_TnP_Trigger(int period){
       TFile *file_Trigger_Data = new TFile(filepath+trigger+"_Data_"+DataPeriod+".root");
       TFile *file_Trigger_MC = new TFile(filepath+trigger+"_MC_"+DataPeriod+".root");
 
-      TString dirname = "tpTree/HN_TRI_TIGHT_Trigger_pt_eta/";
-      
+      TString dirname = "tpTree/HN_TRI_TIGHT_Trigger_pt_eta";
+
+      //==== Dir with fitcanvas + effplots
+      TDirectory *dir_Data = (TDirectory *)file_Trigger_Data->Get(dirname);
+      TDirectory *dir_MC = (TDirectory *)file_Trigger_MC->Get(dirname);
+
+      //==== Dir with effplots only
+      TDirectory *dir_eff_Data = (TDirectory *)dir_Data->Get("fit_eff_plots");
+      TDirectory *dir_eff_MC = (TDirectory *)dir_MC->Get("fit_eff_plots");
+
       //==== FitResult
       if(DrawFitResult){
-        for(unsigned int i_eta = 0; i_eta<abseta.size()-1; i_eta++){
-          for(unsigned int i_pt = 0; i_pt<pt.size()-1; i_pt++){
-            
-            TString dirname_fit_result = "abseta_bin"+TString::Itoa(i_eta,10)+"__"+CutsOnDen_front+"__pt_bin"+TString::Itoa(i_pt,10)+"__"+CutsOnDen_back+"__";
-            
-            for(unsigned int i_fn = 0; i_fn<fitftns.size(); i_fn++){
-              TCanvas *c_data = (TCanvas*)file_Trigger_Data->Get(dirname+dirname_fit_result+fitftns.at(i_fn)+"/fit_canvas");
-              if(c_data) c_data->SaveAs(plotpath+"/fitresult/Data/"+dirname_fit_result+fitftns.at(i_fn)+".pdf");
-              
-              TCanvas *c_MC = (TCanvas*)file_Trigger_MC->Get(dirname+dirname_fit_result+fitftns.at(i_fn)+"/fit_canvas");
-              if(c_MC) c_MC->SaveAs(plotpath+"/fitresult/MC/"+dirname_fit_result+fitftns.at(i_fn)+".pdf");
-              
-            }
-            
+        //==== Data
+        for(int i=0; i<dir_Data->GetListOfKeys()->Capacity(); i++){
+
+          TKey *this_key = (TKey *)dir_Data->GetListOfKeys()->At(i);
+          TString this_name = dir_Data->GetListOfKeys()->At(i)->GetName();
+          TString this_classname = this_key->GetClassName();
+          if( (this_classname=="TDirectoryFile") && (this_name.Contains("abseta")) ){
+
+            TCanvas *c_Data = (TCanvas *)dir_Data->Get(this_name+"/fit_canvas");
+            c_Data->SaveAs(plotpath+"/fitresult/Data/"+this_name+".pdf");
+
+          }
+        }
+        //==== MC
+        for(int i=0; i<dir_MC->GetListOfKeys()->Capacity(); i++){
+
+          TKey *this_key = (TKey *)dir_MC->GetListOfKeys()->At(i);
+          TString this_name = dir_MC->GetListOfKeys()->At(i)->GetName();
+          TString this_classname = this_key->GetClassName();
+          if( (this_classname=="TDirectoryFile") && (this_name.Contains("abseta")) ){
+
+            TCanvas *c_MC = (TCanvas *)dir_MC->Get(this_name+"/fit_canvas");
+            c_MC->SaveAs(plotpath+"/fitresult/MC/"+this_name+".pdf");
+
           }
         }
       }
@@ -96,9 +103,9 @@ void Draw_TnP_Trigger(int period){
       
       //==== Eff vs pt for each eta region
       for(unsigned int i_eta = 0; i_eta<abseta.size()-1; i_eta++){
-        
-        TGraphAsymmErrors *eff_Data = (TGraphAsymmErrors*)file_Trigger_Data->Get(dirname+"fit_eff_plots/pt_PLOT_abseta_bin"+TString::Itoa(i_eta,10))->FindObject("hxy_fit_eff");
-        TGraphAsymmErrors *eff_MC = (TGraphAsymmErrors*)file_Trigger_MC->Get(dirname+"fit_eff_plots/pt_PLOT_abseta_bin"+TString::Itoa(i_eta,10))->FindObject("hxy_fit_eff");
+
+        TGraphAsymmErrors *eff_Data = (TGraphAsymmErrors*)dir_eff_Data->Get("pt_PLOT_abseta_bin"+TString::Itoa(i_eta,10))->FindObject("hxy_fit_eff");
+        TGraphAsymmErrors *eff_MC = (TGraphAsymmErrors*)dir_eff_MC->Get("pt_PLOT_abseta_bin"+TString::Itoa(i_eta,10))->FindObject("hxy_fit_eff");
 
         eff_Data->SetName("pt_PLOT_abseta_bin"+TString::Itoa(i_eta,10)+"_Data");
         eff_MC->SetName("pt_PLOT_abseta_bin"+TString::Itoa(i_eta,10)+"_MC");
@@ -207,9 +214,9 @@ void Draw_TnP_Trigger(int period){
       
       //==== Eff vs abseta for each pt region
       for(unsigned int i_pt = 0; i_pt<pt.size()-1; i_pt++){
-        
-        TGraphAsymmErrors *eff_Data = (TGraphAsymmErrors*)file_Trigger_Data->Get(dirname+"fit_eff_plots/abseta_PLOT_pt_bin"+TString::Itoa(i_pt,10))->FindObject("hxy_fit_eff");
-        TGraphAsymmErrors *eff_MC = (TGraphAsymmErrors*)file_Trigger_MC->Get(dirname+"fit_eff_plots/abseta_PLOT_pt_bin"+TString::Itoa(i_pt,10))->FindObject("hxy_fit_eff");
+
+        TGraphAsymmErrors *eff_Data = (TGraphAsymmErrors*)dir_eff_Data->Get("abseta_PLOT_pt_bin"+TString::Itoa(i_pt,10))->FindObject("hxy_fit_eff");
+        TGraphAsymmErrors *eff_MC = (TGraphAsymmErrors*)dir_eff_MC->Get("abseta_PLOT_pt_bin"+TString::Itoa(i_pt,10))->FindObject("hxy_fit_eff");
 
         eff_Data->SetName("abseta_PLOT_pt_bin"+TString::Itoa(i_pt,10)+"_Data");
         eff_MC->SetName("abseta_PLOT_pt_bin"+TString::Itoa(i_pt,10)+"_MC");
@@ -306,15 +313,21 @@ void Draw_TnP_Trigger(int period){
       }
       
       //==== make SF root file
-      
-      TString              CutsOnDen2 = "combRelIsoPF04dBeta_bin0_&_dB_bin0_&_dzPV_bin0_&_pair_dPhiPrimeDeg_bin0_&_pair_deltaR_bin0_&_pair_probeMultiplicity_bin0_&_tag_combRelIsoPF04dBeta_bin0_&_tag_pt_bin0";
-      if(DataPeriod=="GH") CutsOnDen2 = "combRelIsoPF04dBeta_bin0_&_dB_bin0_&_dzPV_bin0_&_pair_deltaR_bin0_&_pair_probeMultiplicity_bin0_&_tag_combRelIsoPF04dBeta_bin0_&_tag_pt_bin0";
 
-      TCanvas *c_TriggerEff_Data = (TCanvas*)file_Trigger_Data->Get(dirname+"fit_eff_plots/abseta_pt_PLOT_"+CutsOnDen2);
-      TCanvas *c_TriggerEff_MC = (TCanvas*)file_Trigger_MC->Get(dirname+"fit_eff_plots/abseta_pt_PLOT_"+CutsOnDen2);
+      TString name_2D_Data = "";
+      for(int i=0; i<dir_eff_Data->GetListOfKeys()->Capacity(); i++){
+        TString this_name = dir_eff_Data->GetListOfKeys()->At(i)->GetName();
+        if(this_name.Contains("abseta_pt_PLOT")){
+          name_2D_Data = this_name;
+          break;
+        }
+      }
 
-      TH2F *hist_TriggerEff_Data = (TH2F*)c_TriggerEff_Data->GetPrimitive("abseta_pt_PLOT_"+CutsOnDen2)->Clone();
-      TH2F *hist_TriggerEff_MC = (TH2F*)c_TriggerEff_MC->GetPrimitive("abseta_pt_PLOT_"+CutsOnDen2)->Clone();
+      TCanvas *c_TriggerEff_Data = (TCanvas*)dir_eff_Data->Get(name_2D_Data);
+      TCanvas *c_TriggerEff_MC = (TCanvas*)dir_eff_MC->Get(name_2D_Data);
+
+      TH2F *hist_TriggerEff_Data = (TH2F*)c_TriggerEff_Data->GetPrimitive(name_2D_Data)->Clone();
+      TH2F *hist_TriggerEff_MC = (TH2F*)c_TriggerEff_MC->GetPrimitive(name_2D_Data)->Clone();
 
       c_TriggerEff_Data->Close();
       c_TriggerEff_MC->Close();
