@@ -14,6 +14,8 @@ void GetTnPIDSystematic(){
   gStyle->SetOptStat(0);
   TH1::AddDirectory(kFALSE);
 
+  double YErrorMax = 20;
+
   //==== Central in the first element
   vector< vector<TString> > vsysts  = { {"Central"}, {"NMassBins30", "NMassBins50"}, {"MassRange_60_130", "MassRange_70_120"}, {"SignalShapeCB"}, {"TagPt20IsoInf", "TagPt30Iso0p08"}, {"ProbeMult99"} };
   vector< vector<Color_t> > vcolors = { {kBlack},    {kRed,          kOrange      }, {kYellow,            kGreen,           }, {kBlue,         }, {kViolet,         kGray           }, {kCyan        } };
@@ -148,7 +150,7 @@ void GetTnPIDSystematic(){
           gr_diff_Data->SetMarkerStyle(21);
           if(it_vsyst==0&&it_syst==0){
             gr_diff_Data->GetXaxis()->SetTitle("p_{T} [GeV]");
-            gr_diff_Data->GetYaxis()->SetRangeUser(-1, 1);
+            gr_diff_Data->GetYaxis()->SetRangeUser(-YErrorMax, YErrorMax);
             gr_diff_Data->GetYaxis()->SetTitle("Rel. Diff. [%]");
           }
           //==== Error
@@ -165,7 +167,7 @@ void GetTnPIDSystematic(){
             hist_axis(gr_error_Data);
             gr_error_Data->GetXaxis()->SetTitle("p_{T} [GeV]");
             gr_error_Data->GetYaxis()->SetTitle("Rel. Diff. [%]");
-            gr_error_Data->GetYaxis()->SetRangeUser(0., 4.);
+            gr_error_Data->GetYaxis()->SetRangeUser(0., YErrorMax);
 
             gr_Data_TotSyst = (TGraphAsymmErrors*)gr_Data->Clone();
             EmptyGraph(gr_Data_TotSyst);
@@ -201,7 +203,7 @@ void GetTnPIDSystematic(){
           gr_diff_MC->SetMarkerStyle(21);
           if(it_vsyst==0&&it_syst==0){
             gr_diff_MC->GetXaxis()->SetTitle("p_{T} [GeV]");
-            gr_diff_MC->GetYaxis()->SetRangeUser(-1, 1);
+            gr_diff_MC->GetYaxis()->SetRangeUser(-YErrorMax, YErrorMax);
             gr_diff_MC->GetYaxis()->SetTitle("Rel. Diff. [%]");
           }
           //==== Error
@@ -218,7 +220,7 @@ void GetTnPIDSystematic(){
             hist_axis(gr_error_MC);
             gr_error_MC->GetXaxis()->SetTitle("p_{T} [GeV]");
             gr_error_MC->GetYaxis()->SetTitle("Rel. Diff. [%]");
-            gr_error_MC->GetYaxis()->SetRangeUser(0., 4.);
+            gr_error_MC->GetYaxis()->SetRangeUser(0., YErrorMax);
 
             gr_MC_TotSyst = (TGraphAsymmErrors*)gr_MC->Clone();
             EmptyGraph(gr_MC_TotSyst);
@@ -257,8 +259,7 @@ void GetTnPIDSystematic(){
       gr_Data_TotSyst->SetMarkerColor(kRed);
       gr_Data_TotSyst->SetLineWidth(2);
       gr_Data_TotSyst->Draw("psame");
-      double y_error_max_Data = 1.2;
-      gr_error_Data->GetYaxis()->SetRangeUser(0., y_error_max_Data);
+      gr_error_Data->GetYaxis()->SetRangeUser(0., YErrorMax);
       //==== Sum
       TGraphAsymmErrors *gr_Data_AllError = (TGraphAsymmErrors *)gr_error_Data->Clone();
       for(int aaa=0; aaa<gr_Data_AllError->GetN(); aaa++){
@@ -300,8 +301,7 @@ void GetTnPIDSystematic(){
       gr_MC_TotSyst->SetMarkerColor(kRed);
       gr_MC_TotSyst->SetLineWidth(2);
       gr_MC_TotSyst->Draw("psame");
-      double y_error_max_MC = 1.2;
-      gr_error_MC->GetYaxis()->SetRangeUser(0., y_error_max_MC);
+      gr_error_MC->GetYaxis()->SetRangeUser(0., YErrorMax);
       //==== Sum
       TGraphAsymmErrors *gr_MC_AllError = (TGraphAsymmErrors *)gr_error_MC->Clone();
       for(int aaa=0; aaa<gr_MC_AllError->GetN(); aaa++){
