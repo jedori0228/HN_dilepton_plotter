@@ -412,15 +412,15 @@ bool DileptonNtuple::Pass(){
       cout << "[DileptonNtuple::Pass] "<<var<<" "<<value<<" "<<cutdir<<" "<<cutvalue << endl;
     }
 
-		if(cutdir==">"){
-			if( !(value>cutvalue) ) return PrintBool(false);
-		}
+    if(cutdir==">"){
+      if( !(value>cutvalue) ) return PrintBool(false);
+    }
     else if(cutdir==">="){
       if( !(value>=cutvalue) ) return PrintBool(false);
     }
-		else if(cutdir=="<"){
-			if( !(value<cutvalue) ) return PrintBool(false);
-		}
+    else if(cutdir=="<"){
+      if( !(value<cutvalue) ) return PrintBool(false);
+    }
     else if(cutdir=="<="){
       if( !(value<=cutvalue) ) return PrintBool(false);
     }
@@ -430,10 +430,10 @@ bool DileptonNtuple::Pass(){
     else if(cutdir=="!="){
       if( !(value!=cutvalue) ) return PrintBool(false);
     }
-		else{
-			cout << "[DileptonNtuple::Cut] cutdir should be >/>=/</<=/==/!=" << endl;
-			return PrintBool(false);
-		}
+    else{
+      cout << "[DileptonNtuple::Cut] cutdir should be >/>=/</<=/==/!=" << endl;
+      return PrintBool(false);
+    }
 
   }
 
