@@ -400,6 +400,11 @@ bool DileptonNtuple::Pass(){
     double cutvalue = CutValues.at(i);
 */
 
+  //==== HOTFIX
+  int counter = 0;
+  bool bool_ml1jj = true;
+  bool bool_ml2jj = true;
+
   for(unsigned int i=0; i<cutinfos.size(); i++){
 
     TString var    = cutinfos.at(i).var;
@@ -430,8 +435,36 @@ bool DileptonNtuple::Pass(){
     else if(cutdir=="!="){
       if( !(value!=cutvalue) ) return PrintBool(false);
     }
+
+    //==== HOTFIX
+    else if(cutdir=="|>"){
+
+      bool_ml1jj &= (cutvalue < m_Leadljj_jjWclosest);
+      bool_ml2jj &= (cutvalue < m_SubLeadljj_jjWclosest);
+
+      counter++;
+
+      if(counter==2){
+        if(!bool_ml1jj && !bool_ml2jj) return PrintBool(false);
+      }
+
+
+    }
+    else if(cutdir=="|<"){
+
+      bool_ml1jj &= (m_Leadljj_jjWclosest < cutvalue);
+      bool_ml2jj &= (m_SubLeadljj_jjWclosest < cutvalue);
+
+      counter++;
+
+      if(counter==2){
+        if(!bool_ml1jj && !bool_ml2jj) return PrintBool(false);
+      }
+
+    }
+
     else{
-      cout << "[DileptonNtuple::Cut] cutdir should be >/>=/</<=/==/!=" << endl;
+      cout << "[DileptonNtuple::Cut] cutdir should be >/>=/</<=/==/!= : " << cutdir << endl;
       return PrintBool(false);
     }
 
