@@ -361,6 +361,10 @@ double DileptonNtuple::GetVar(TString var){
 
   //==== function
   else if(var=="MET2ST") return MET2ST();
+
+  //=== HOTFIT
+  else if(var=="ljj") return 1.;
+
   else{
     cout << "[DileptonNtuple::GetVar] "<<var<<": Wrong Variable Name" << endl;
     return -999;
