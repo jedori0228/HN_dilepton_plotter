@@ -53,7 +53,9 @@ for mass in masses:
   for var in varorder:
 
     if mass in highermasses:
-      if "m_SubLeadljj_jjWclosest" in var:
+      if "m_SubLeadljj_jjWclosest >" in var:
+        continue
+      if "m_SubLeadljj_jjWclosest <" in var:
         print "\t",
         continue
 

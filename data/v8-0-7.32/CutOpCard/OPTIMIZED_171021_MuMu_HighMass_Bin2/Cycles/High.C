@@ -17,8 +17,7 @@ void High(){
 
   RunNtupleBase m;
   m.DoDebug = DoDebug;
-  m.RunSystematic = false;
-  m.PrintYield = true;
+  m.RunSystematic = true;
 
   //==== Skim selection for tree (tree name : Ntp_<skim>)
 
@@ -42,7 +41,7 @@ void High(){
 
   m.preselection = "Preselection_SS";
   m.signals = {
-    "HNMoriondLLMuMu_1100",
+    "HNMoriondLLMuMu_500",
   };
   m.MinEffPresel = 0.;
   m.AddSamplesToList( m.signals );
@@ -123,6 +122,10 @@ void High(){
   double cf_calculated_syst(0.); // CF Syst
   double signal_calculated_syst(0.); // Pdf Syst
 
+  double signal_calculated_syst_pdf_error(0.);
+  double signal_calculated_syst_pdf_alphaS(0.);
+  double signal_calculated_syst_pdf_scale(0.);
+
   double prompt_tau21_syst(0.);
   double signal_tau21_syst(0.);
 
@@ -176,7 +179,7 @@ void High(){
       syst_sig += (m.signal_err.at(0)/m.signal_rate.at(0))*(m.signal_err.at(0)/m.signal_rate.at(0));
 
       m.pdfsyst.Yield_Central = y_signal_central;
-      //m.pdfsyst.CalculatePdfSystematic();
+      m.pdfsyst.CalculatePdfSystematic();
 
       prompt_stat = m.prompt_bkgs_stat;
       fake_stat = m.fake_bkgs_stat;
@@ -186,8 +189,12 @@ void High(){
       prompt_calculated_syst = m.prompt_bkgs_syst;
       fake_calculated_syst = m.fake_bkgs_syst;
       cf_calculated_syst = m.cf_bkgs_syst;
-      //signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
-      signal_calculated_syst = (2.5*0.01)*y_signal_central;
+      signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
+      //signal_calculated_syst = (2.5*0.01)*y_signal_central;
+
+      signal_calculated_syst_pdf_error = fabs(m.pdfsyst.Syst_Pdf_Replica)*y_signal_central;
+      signal_calculated_syst_pdf_alphaS = fabs(m.pdfsyst.Syst_Pdf_Alpha)*y_signal_central;
+      signal_calculated_syst_pdf_scale = fabs(m.pdfsyst.Syst_Pdf_Scale)*y_signal_central;
 
       //==== tau21
       prompt_tau21_syst = m.prompt_bkgs_tau21_syst-y_prompt_central;
@@ -302,6 +309,7 @@ void High(){
   ONLYSYST_prompt += syst_lumi*syst_lumi;
   ONLYSYST_sig += syst_lumi*syst_lumi;
 
+/*
   cout << "PDF" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
@@ -310,6 +318,35 @@ void High(){
   cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst/y_signal_central << endl;
   ONLYSYST_sig += (signal_calculated_syst/y_signal_central)*(signal_calculated_syst/y_signal_central);
   syst_sig += (signal_calculated_syst/y_signal_central)*(signal_calculated_syst/y_signal_central);
+*/
+
+  cout << "PDF Error" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_error/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_error/y_signal_central)*(signal_calculated_syst_pdf_error/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_error/y_signal_central)*(signal_calculated_syst_pdf_error/y_signal_central);
+
+  cout << "PDF AlphaS" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_alphaS/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_alphaS/y_signal_central)*(signal_calculated_syst_pdf_alphaS/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_alphaS/y_signal_central)*(signal_calculated_syst_pdf_alphaS/y_signal_central);
+
+  cout << "PDF Scale" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_scale/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_scale/y_signal_central)*(signal_calculated_syst_pdf_scale/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_scale/y_signal_central)*(signal_calculated_syst_pdf_scale/y_signal_central);
+
 
   for(unsigned int i=0; i<reldiff_means.size(); i++){
 

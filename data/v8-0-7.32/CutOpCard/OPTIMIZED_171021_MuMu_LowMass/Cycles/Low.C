@@ -18,6 +18,7 @@ void Low(){
   RunNtupleBase m;
   m.DoDebug = DoDebug;
   m.RunSystematic = true;
+  m.PrintYield = true;
 
   //==== Skim selection for tree (tree name : Ntp_<skim>)
 
@@ -64,6 +65,7 @@ void Low(){
 
   //==== Fill MCNorm SF
 
+  m.analysisInputs.DoPrint = false;
   m.analysisInputs.SetMCSF(WORKING_DIR+"/data/"+dataset+"/MCSF.txt", m.samples);
 
   //==== Get Systematics
@@ -121,6 +123,10 @@ void Low(){
   double fake_calculated_syst(0.); // Fake Syst
   double cf_calculated_syst(0.); // CF Syst
   double signal_calculated_syst(0.); // Pdf Syst
+
+  double signal_calculated_syst_pdf_error(0.);
+  double signal_calculated_syst_pdf_alphaS(0.);
+  double signal_calculated_syst_pdf_scale(0.);
 
   double prompt_tau21_syst(0.);
   double signal_tau21_syst(0.);
@@ -188,12 +194,16 @@ void Low(){
       signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
       //signal_calculated_syst = (8.53*0.01)*y_signal_central;
 
+      signal_calculated_syst_pdf_error = fabs(m.pdfsyst.Syst_Pdf_Replica)*y_signal_central;
+      signal_calculated_syst_pdf_alphaS = fabs(m.pdfsyst.Syst_Pdf_Alpha)*y_signal_central;
+      signal_calculated_syst_pdf_scale = fabs(m.pdfsyst.Syst_Pdf_Scale)*y_signal_central;
+
       //==== tau21
       prompt_tau21_syst = m.prompt_bkgs_tau21_syst-y_prompt_central;
       signal_tau21_syst = m.signal_tau21_syst.at(0)-y_signal_central;
 
-      cout << "prompt_tau21_syst = " << prompt_tau21_syst << endl;
-      cout << "signal_tau21_syst = " << signal_tau21_syst << endl;
+      //cout << "prompt_tau21_syst = " << prompt_tau21_syst << endl;
+      //cout << "signal_tau21_syst = " << signal_tau21_syst << endl;
 
     }
 
@@ -239,7 +249,7 @@ void Low(){
     } // Not Central, add systematics
 
     //==== Print
-    cout << this_syst << "	" << m.prompt_bkgs << "	" << m.fake_bkgs << "	" << m.cf_bkgs << endl;
+    //cout << this_syst << "	" << m.prompt_bkgs << "	" << m.fake_bkgs << "	" << m.cf_bkgs << endl;
 
   }
 
@@ -297,18 +307,38 @@ void Low(){
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << 100.*syst_lumi << endl;
+
   ONLYSYST_bkg += (syst_lumi*y_prompt_central/y_bkg_central)*(syst_lumi*y_prompt_central/y_bkg_central);
   ONLYSYST_prompt += syst_lumi*syst_lumi;
   ONLYSYST_sig += syst_lumi*syst_lumi;
 
-  cout << "PDF" << "\t";
+  cout << "PDF Error" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
-  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst/y_signal_central << endl;
-  ONLYSYST_sig += (signal_calculated_syst/y_signal_central)*(signal_calculated_syst/y_signal_central);
-  syst_sig += (signal_calculated_syst/y_signal_central)*(signal_calculated_syst/y_signal_central);
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_error/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_error/y_signal_central)*(signal_calculated_syst_pdf_error/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_error/y_signal_central)*(signal_calculated_syst_pdf_error/y_signal_central);
+
+  cout << "PDF AlphaS" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_alphaS/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_alphaS/y_signal_central)*(signal_calculated_syst_pdf_alphaS/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_alphaS/y_signal_central)*(signal_calculated_syst_pdf_alphaS/y_signal_central);
+
+  cout << "PDF Scale" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_scale/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_scale/y_signal_central)*(signal_calculated_syst_pdf_scale/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_scale/y_signal_central)*(signal_calculated_syst_pdf_scale/y_signal_central);
+
 
   for(unsigned int i=0; i<reldiff_means.size(); i++){
 
@@ -384,23 +414,6 @@ void Low(){
   cout << "- Prompt" << "	" << std::fixed<<std::setprecision(3) << y_prompt_central << endl;
   cout << "- Fake" << "	" << std::fixed<<std::setprecision(3) << y_fake_central << endl;
   cout << "- CF" << "	" << std::fixed<<std::setprecision(3) << y_cf_central << endl;
-
-
-
-
-  //===============
-  //==== Finalize
-  //===============
-
-  cout << endl;
-  cout << "####### Result #######" << endl;
-
-  syst_total_bkg = sqrt(syst_total_bkg);
-  syst_sig = sqrt(syst_sig);
-
-  cout << "Signal Eff	"<<std::fixed<<std::setprecision(6)<<eff_signal_central<<endl;
-  cout << y_bkg_central << "\t" << std::fixed<<std::setprecision(3) << 1.+syst_total_bkg << endl;
-  cout << y_signal_central << "\t" << std::fixed<<std::setprecision(3) << 1.+syst_sig << endl;
 
 
 

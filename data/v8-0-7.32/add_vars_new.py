@@ -1,8 +1,8 @@
 import os
 
 #filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
-filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt']
-#filenames=['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
+#filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt']
+filenames=['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
 
 cust_rebin = 1
 cust_xaxis_min = -999
@@ -13,8 +13,8 @@ cust_xaxis_max = 50
     #//==== Onejet
     #"m_Leadlj", "m_SubLeadlj", "m_llj",
 
-var_last = "WClosest_FatJet_Mass"
-NewVars = ["WClosest_FatJet_PrunedMass"]
+var_last = "m_ll"
+NewVars = ["m_OSSF_smallest"]
 
 for filename in filenames:
 
@@ -34,9 +34,9 @@ for filename in filenames:
         newline = line.replace(var_last, NewVar)
 
         if "rebins" in filename:
-          newline = words[0]+'\t'+NewVar+'\t5\n'
+          newline = words[0]+'\t'+NewVar+'\t1\n'
         if "xaxis" in filename:
-          newline = words[0]+'\t'+NewVar+'\t30\t150\n'
+          newline = words[0]+'\t'+NewVar+'\t0\t20\n'
         if "yaxis" in filename:
           newline = words[0]+'\t'+NewVar+'\t1000\n'
 

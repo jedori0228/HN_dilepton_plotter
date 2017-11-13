@@ -1,4 +1,5 @@
 _DiMuon_ThreeLepton_WZ	m_ll	150
+_DiMuon_ThreeLepton_WZ	m_OSSF_smallest	1000
 _DiMuon_ThreeLepton_WZ	MZcand	150
 _DiMuon_ThreeLepton_WZ	m_lll	150
 _DiMuon_ThreeLepton_WZ	Njets	2000
@@ -44,6 +45,7 @@ _DiMuon_ThreeLepton_WZ	secondLepton_Type	2000
 _DiMuon_ThreeLepton_WZ	thirdLepton_Type	2000
 _DiMuon_ThreeLepton_WZ	fourthLepton_Type	2000
 _DiMuon_ThreeLepton_ZGamma	m_ll	150
+_DiMuon_ThreeLepton_ZGamma	m_OSSF_smallest	1000
 _DiMuon_ThreeLepton_ZGamma	MZcand	150
 _DiMuon_ThreeLepton_ZGamma	m_lll	150
 _DiMuon_ThreeLepton_ZGamma	Njets	2000
@@ -89,6 +91,7 @@ _DiMuon_ThreeLepton_ZGamma	secondLepton_Type	2000
 _DiMuon_ThreeLepton_ZGamma	thirdLepton_Type	2000
 _DiMuon_ThreeLepton_ZGamma	fourthLepton_Type	2000
 _DiMuon_ThreeLepton_WZ_NotAllSameFlavour	m_ll	150
+_DiMuon_ThreeLepton_WZ_NotAllSameFlavour	m_OSSF_smallest	1000
 _DiMuon_ThreeLepton_WZ_NotAllSameFlavour	MZcand	150
 _DiMuon_ThreeLepton_WZ_NotAllSameFlavour	m_lll	150
 _DiMuon_ThreeLepton_WZ_NotAllSameFlavour	Njets	2000
@@ -134,6 +137,7 @@ _DiMuon_ThreeLepton_WZ_NotAllSameFlavour	secondLepton_Type	2000
 _DiMuon_ThreeLepton_WZ_NotAllSameFlavour	thirdLepton_Type	2000
 _DiMuon_ThreeLepton_WZ_NotAllSameFlavour	fourthLepton_Type	2000
 _DiMuon_FourLepton_ZZ	m_ll	150
+_DiMuon_FourLepton_ZZ	m_OSSF_smallest	1000
 _DiMuon_FourLepton_ZZ	MZcand	150
 _DiMuon_FourLepton_ZZ	m_lll	150
 _DiMuon_FourLepton_ZZ	Njets	2000
@@ -179,6 +183,7 @@ _DiMuon_FourLepton_ZZ	secondLepton_Type	2000
 _DiMuon_FourLepton_ZZ	thirdLepton_Type	2000
 _DiMuon_FourLepton_ZZ	fourthLepton_Type	2000
 _DiElectron_ThreeLepton_WZ	m_ll	150
+_DiElectron_ThreeLepton_WZ	m_OSSF_smallest	1000
 _DiElectron_ThreeLepton_WZ	MZcand	150
 _DiElectron_ThreeLepton_WZ	m_lll	150
 _DiElectron_ThreeLepton_WZ	Njets	2000
@@ -224,6 +229,7 @@ _DiElectron_ThreeLepton_WZ	secondLepton_Type	2000
 _DiElectron_ThreeLepton_WZ	thirdLepton_Type	2000
 _DiElectron_ThreeLepton_WZ	fourthLepton_Type	2000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	m_ll	150
+_DiElectron_ThreeLepton_WZ_NotAllSameFlavour	m_OSSF_smallest	1000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	MZcand	150
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	m_lll	150
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	Njets	2000
@@ -269,6 +275,7 @@ _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	secondLepton_Type	2000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	thirdLepton_Type	2000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	fourthLepton_Type	2000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	m_ll	150
+_DiElectron_ThreeLepton_WZ_NotAllSameFlavour	m_OSSF_smallest	1000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	MZcand	150
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	m_lll	150
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	Njets	2000
@@ -314,6 +321,7 @@ _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	secondLepton_Type	2000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	thirdLepton_Type	2000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour	fourthLepton_Type	2000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour_NotAllSameFlavour	m_ll	150
+_DiElectron_ThreeLepton_WZ_NotAllSameFlavour_NotAllSameFlavour	m_OSSF_smallest	1000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour_NotAllSameFlavour	MZcand	150
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour_NotAllSameFlavour	m_lll	150
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour_NotAllSameFlavour	Njets	2000
@@ -359,6 +367,7 @@ _DiElectron_ThreeLepton_WZ_NotAllSameFlavour_NotAllSameFlavour	secondLepton_Type
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour_NotAllSameFlavour	thirdLepton_Type	2000
 _DiElectron_ThreeLepton_WZ_NotAllSameFlavour_NotAllSameFlavour	fourthLepton_Type	2000
 _DiElectron_ThreeLepton_ZGamma	m_ll	150
+_DiElectron_ThreeLepton_ZGamma	m_OSSF_smallest	1000
 _DiElectron_ThreeLepton_ZGamma	MZcand	150
 _DiElectron_ThreeLepton_ZGamma	m_lll	150
 _DiElectron_ThreeLepton_ZGamma	Njets	2000
@@ -404,6 +413,7 @@ _DiElectron_ThreeLepton_ZGamma	secondLepton_Type	2000
 _DiElectron_ThreeLepton_ZGamma	thirdLepton_Type	2000
 _DiElectron_ThreeLepton_ZGamma	fourthLepton_Type	2000
 _DiElectron_ThreeLepton_ZGamma_NotAllSameFlavour	m_ll	150
+_DiElectron_ThreeLepton_ZGamma_NotAllSameFlavour	m_OSSF_smallest	1000
 _DiElectron_ThreeLepton_ZGamma_NotAllSameFlavour	MZcand	150
 _DiElectron_ThreeLepton_ZGamma_NotAllSameFlavour	m_lll	150
 _DiElectron_ThreeLepton_ZGamma_NotAllSameFlavour	Njets	2000
@@ -449,6 +459,7 @@ _DiElectron_ThreeLepton_ZGamma_NotAllSameFlavour	secondLepton_Type	2000
 _DiElectron_ThreeLepton_ZGamma_NotAllSameFlavour	thirdLepton_Type	2000
 _DiElectron_ThreeLepton_ZGamma_NotAllSameFlavour	fourthLepton_Type	2000
 _DiElectron_FourLepton_ZZ	m_ll	150
+_DiElectron_FourLepton_ZZ	m_OSSF_smallest	1000
 _DiElectron_FourLepton_ZZ	MZcand	150
 _DiElectron_FourLepton_ZZ	m_lll	150
 _DiElectron_FourLepton_ZZ	Njets	2000
@@ -494,6 +505,7 @@ _DiElectron_FourLepton_ZZ	secondLepton_Type	2000
 _DiElectron_FourLepton_ZZ	thirdLepton_Type	2000
 _DiElectron_FourLepton_ZZ	fourthLepton_Type	2000
 _DiElectron_FourLepton_ZZ_NotAllSameFlavour	m_ll	150
+_DiElectron_FourLepton_ZZ_NotAllSameFlavour	m_OSSF_smallest	1000
 _DiElectron_FourLepton_ZZ_NotAllSameFlavour	MZcand	150
 _DiElectron_FourLepton_ZZ_NotAllSameFlavour	m_lll	150
 _DiElectron_FourLepton_ZZ_NotAllSameFlavour	Njets	2000
@@ -539,6 +551,7 @@ _DiElectron_FourLepton_ZZ_NotAllSameFlavour	secondLepton_Type	2000
 _DiElectron_FourLepton_ZZ_NotAllSameFlavour	thirdLepton_Type	2000
 _DiElectron_FourLepton_ZZ_NotAllSameFlavour	fourthLepton_Type	2000
 _DiLepton_ThreeLepton_WZ	m_ll	150
+_DiLepton_ThreeLepton_WZ	m_OSSF_smallest	1000
 _DiLepton_ThreeLepton_WZ	MZcand	150
 _DiLepton_ThreeLepton_WZ	m_lll	150
 _DiLepton_ThreeLepton_WZ	Njets	2000
@@ -584,6 +597,7 @@ _DiLepton_ThreeLepton_WZ	secondLepton_Type	2000
 _DiLepton_ThreeLepton_WZ	thirdLepton_Type	2000
 _DiLepton_ThreeLepton_WZ	fourthLepton_Type	2000
 _DiLepton_ThreeLepton_WZ_NotAllSameFlavour	m_ll	150
+_DiLepton_ThreeLepton_WZ_NotAllSameFlavour	m_OSSF_smallest	1000
 _DiLepton_ThreeLepton_WZ_NotAllSameFlavour	MZcand	150
 _DiLepton_ThreeLepton_WZ_NotAllSameFlavour	m_lll	150
 _DiLepton_ThreeLepton_WZ_NotAllSameFlavour	Njets	2000
@@ -629,6 +643,7 @@ _DiLepton_ThreeLepton_WZ_NotAllSameFlavour	secondLepton_Type	2000
 _DiLepton_ThreeLepton_WZ_NotAllSameFlavour	thirdLepton_Type	2000
 _DiLepton_ThreeLepton_WZ_NotAllSameFlavour	fourthLepton_Type	2000
 _DiLepton_ThreeLepton_ZGamma	m_ll	150
+_DiLepton_ThreeLepton_ZGamma	m_OSSF_smallest	1000
 _DiLepton_ThreeLepton_ZGamma	MZcand	150
 _DiLepton_ThreeLepton_ZGamma	m_lll	150
 _DiLepton_ThreeLepton_ZGamma	Njets	2000
@@ -674,6 +689,7 @@ _DiLepton_ThreeLepton_ZGamma	secondLepton_Type	2000
 _DiLepton_ThreeLepton_ZGamma	thirdLepton_Type	2000
 _DiLepton_ThreeLepton_ZGamma	fourthLepton_Type	2000
 _DiLepton_FourLepton_ZZ	m_ll	150
+_DiLepton_FourLepton_ZZ	m_OSSF_smallest	1000
 _DiLepton_FourLepton_ZZ	MZcand	150
 _DiLepton_FourLepton_ZZ	m_lll	150
 _DiLepton_FourLepton_ZZ	Njets	2000
@@ -719,6 +735,7 @@ _DiLepton_FourLepton_ZZ	secondLepton_Type	2000
 _DiLepton_FourLepton_ZZ	thirdLepton_Type	2000
 _DiLepton_FourLepton_ZZ	fourthLepton_Type	2000
 _DiMuon_ThreeLepton_WGamma	m_ll	150
+_DiMuon_ThreeLepton_WGamma	m_OSSF_smallest	1000
 _DiMuon_ThreeLepton_WGamma	MZcand	150
 _DiMuon_ThreeLepton_WGamma	m_lll	150
 _DiMuon_ThreeLepton_WGamma	Njets	2000
@@ -764,6 +781,7 @@ _DiMuon_ThreeLepton_WGamma	secondLepton_Type	2000
 _DiMuon_ThreeLepton_WGamma	thirdLepton_Type	2000
 _DiMuon_ThreeLepton_WGamma	fourthLepton_Type	2000
 _DiElectron_ThreeLepton_WGamma	m_ll	150
+_DiElectron_ThreeLepton_WGamma	m_OSSF_smallest	1000
 _DiElectron_ThreeLepton_WGamma	MZcand	150
 _DiElectron_ThreeLepton_WGamma	m_lll	150
 _DiElectron_ThreeLepton_WGamma	Njets	2000
@@ -809,6 +827,7 @@ _DiElectron_ThreeLepton_WGamma	secondLepton_Type	2000
 _DiElectron_ThreeLepton_WGamma	thirdLepton_Type	2000
 _DiElectron_ThreeLepton_WGamma	fourthLepton_Type	2000
 _DiLepton_ThreeLepton_WGamma	m_ll	150
+_DiLepton_ThreeLepton_WGamma	m_OSSF_smallest	1000
 _DiLepton_ThreeLepton_WGamma	MZcand	150
 _DiLepton_ThreeLepton_WGamma	m_lll	150
 _DiLepton_ThreeLepton_WGamma	Njets	2000

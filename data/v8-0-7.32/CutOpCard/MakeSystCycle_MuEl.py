@@ -15,7 +15,7 @@ masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 
 
 for mass in masses:
 
-  filename = "HNElEl_"+str(mass)
+  filename = "HNMuEl_"+str(mass)
 
   if not DoBin1:
     filename = "Bin2_"+filename
@@ -40,7 +40,7 @@ for mass in masses:
       TreeSkim = "High_OneFatJet_SS"
       SkimmedTreeDir = "Skimmed_High_OneFatJet"
 
-  SignalSampleName = "HNElEl_"+str(mass)
+  SignalSampleName = "HNMuEl_"+str(mass)
 
   print>>out,'''#include "RunNtupleBase.C"
 
@@ -69,7 +69,7 @@ void {4}(){{
 
   //==== Dataset/channel
 
-  m.DataPD = "DoubleEG";
+  m.DataPD = "MuonEG";
 
   //==== Filename info
 
@@ -85,7 +85,7 @@ void {4}(){{
 
   m.preselection = "Preselection_SS";
   m.signals = {{
-    "HNElEl_{2}",
+    "HNMuEl_{2}",
   }};
   m.MinEffPresel = 0.;
   m.AddSamplesToList( m.signals );
@@ -94,7 +94,6 @@ void {4}(){{
 
   vector<TString> bkgs = {{
     "fake_Dijet",
-    "chargeflip",
     "TG", "TTG",
     "ZGto2LG", "WGtoLNuG",
     "WZTo3LNu_powheg",
@@ -118,7 +117,7 @@ void {4}(){{
 
   //==== Set CutCard
 
-  TString cutfilename = "HNElEl_{2}.txt";
+  TString cutfilename = "HNMuEl_{2}.txt";
   m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/"+CutOpCardDir+"/"+cutfilename);
 
   vector<TString> systs = {{
@@ -174,8 +173,8 @@ void {4}(){{
 
     TString this_syst = systs.at(i);
 
-    m.channel = "DiElectron"+this_syst;
-    m.channel_for_jetres = "DiElectron";
+    m.channel = "EMu"+this_syst;
+    m.channel_for_jetres = "EMu";
     m.ClearSignalInfo();
     m.FillSignalInfo();
     m.cutrangeinfo.k_end = false;

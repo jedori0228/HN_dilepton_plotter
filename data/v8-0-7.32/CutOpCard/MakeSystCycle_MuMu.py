@@ -443,8 +443,8 @@ void {4}(){{
   syst_sig = sqrt(syst_sig);
 
   cout << "Signal Eff\t"<<std::fixed<<std::setprecision(6)<<eff_signal_central<<endl;
-  cout << y_bkg_central << " " << std::fixed<<std::setprecision(3) << 1.+syst_total_bkg << endl;
-  cout << y_signal_central << " " << std::fixed<<std::setprecision(3) << 1.+syst_sig << endl;
+  cout << y_bkg_central << " " << std::fixed<<std::setprecision(6) << 1.+syst_total_bkg << endl;
+  cout << y_signal_central << " " << std::fixed<<std::setprecision(6) << 1.+syst_sig << endl;
 
 
 

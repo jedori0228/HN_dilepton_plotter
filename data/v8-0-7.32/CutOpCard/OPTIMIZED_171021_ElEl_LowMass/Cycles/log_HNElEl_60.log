@@ -22,27 +22,27 @@ Processing HNElEl_60.C...
 [AnalysisInputs::SetMCSF] sample : top
 [AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
 [AnalysisInputs::SetMCSF] sample : WZTo3LNu_powheg
-[AnalysisInputs::SetMCSF] => MCSF = 0.988021, MCSF_err = 0.0652167
+[AnalysisInputs::SetMCSF] => MCSF = 0.990529, MCSF_err = 0.0659614
 [AnalysisInputs::SetMCSF] sample : ZGto2LG
-[AnalysisInputs::SetMCSF] => MCSF = 0.83069, MCSF_err = 0.174719
+[AnalysisInputs::SetMCSF] => MCSF = 0.779045, MCSF_err = 0.182441
 [AnalysisInputs::SetMCSF] sample : ZZTo4L_powheg
-[AnalysisInputs::SetMCSF] => MCSF = 0.94117, MCSF_err = 0.105665
+[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
 [AnalysisInputs::SetMCSF] sample : ggZZto2e2mu
-[AnalysisInputs::SetMCSF] => MCSF = 0.94117, MCSF_err = 0.105665
+[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
 [AnalysisInputs::SetMCSF] sample : ggZZto2e2nu
-[AnalysisInputs::SetMCSF] => MCSF = 0.94117, MCSF_err = 0.105665
+[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
 [AnalysisInputs::SetMCSF] sample : ggZZto2e2tau
-[AnalysisInputs::SetMCSF] => MCSF = 0.94117, MCSF_err = 0.105665
+[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
 [AnalysisInputs::SetMCSF] sample : ggZZto2mu2nu
-[AnalysisInputs::SetMCSF] => MCSF = 0.94117, MCSF_err = 0.105665
+[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
 [AnalysisInputs::SetMCSF] sample : ggZZto2mu2tau
-[AnalysisInputs::SetMCSF] => MCSF = 0.94117, MCSF_err = 0.105665
+[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
 [AnalysisInputs::SetMCSF] sample : ggZZto4e
-[AnalysisInputs::SetMCSF] => MCSF = 0.94117, MCSF_err = 0.105665
+[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
 [AnalysisInputs::SetMCSF] sample : ggZZto4mu
-[AnalysisInputs::SetMCSF] => MCSF = 0.94117, MCSF_err = 0.105665
+[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
 [AnalysisInputs::SetMCSF] sample : ggZZto4tau
-[AnalysisInputs::SetMCSF] => MCSF = 0.94117, MCSF_err = 0.105665
+[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
 [AnalysisInputs::SetCalculatedSysts] Get Systematics from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.32/Syst.txt
 [AnalysisInputs::SetCalculatedSysts] source : Luminosity
 [AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
@@ -53,64 +53,64 @@ Processing HNElEl_60.C...
 [CutRangeInfo::ReadCutCard] Get Cutcard from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.32/CutOpCard/OPTIMIZED_171021_ElEl_LowMass/HNElEl_60.txt
 prompt_tau21_syst = 0
 signal_tau21_syst = 0
-Central	16.6002	18.6221	1.64828
-_MuonEn_up	16.3462	18.6221	1.64828
-_MuonEn_down	16.3098	18.6221	1.64828
-_MuonIDSF_up	16.3357	18.6221	1.64828
-_MuonIDSF_down	16.2648	18.6221	1.64828
-_ElectronEn_up	16.133	18.6221	1.64828
-_ElectronEn_down	16.4603	18.6221	1.64828
-_ElectronIDSF_up	17.0153	18.6221	1.64828
-_ElectronIDSF_down	15.8877	18.6221	1.64828
-_TriggerSF_up	15.4834	18.6221	1.64828
-_TriggerSF_down	16.2671	18.6221	1.64828
-_PU_up	15.719	18.6221	1.64828
-_PU_down	17.0494	18.6221	1.64828
-_JetEn_up	17.2621	18.6221	1.64828
-_JetEn_down	17.8488	18.6221	1.64828
-_JetRes_up	16.3453	18.6221	1.64828
-_JetRes_down	16.6744	18.6221	1.64828
-_Unclustered_up	17.4752	18.6221	1.64828
-_Unclustered_down	19.1708	18.6221	1.64828
-_BTagSFEff_up	16.338	18.6221	1.64828
-_BTagSFEff_down	16.465	18.6221	1.64828
-_BTagSFMiss_up	15.936	18.6221	1.64828
-_BTagSFMiss_down	16.3987	18.6221	1.64828
-_JetMass_up	16.3184	18.6221	1.64828
-_JetMass_down	16.2979	18.6221	1.64828
-_JetMassRes_up	16.3157	18.6221	1.64828
-_JetMassRes_down	16.0236	18.6221	1.64828
+Central	16.0536	18.6221	1.64828
+_MuonEn_up	16.044	18.6221	1.64828
+_MuonEn_down	16.349	18.6221	1.64828
+_MuonIDSF_up	16.3495	18.6221	1.64828
+_MuonIDSF_down	16.36	18.6221	1.64828
+_ElectronEn_up	15.921	18.6221	1.64828
+_ElectronEn_down	16.4628	18.6221	1.64828
+_ElectronIDSF_up	16.5395	18.6221	1.64828
+_ElectronIDSF_down	15.2845	18.6221	1.64828
+_TriggerSF_up	16.2309	18.6221	1.64828
+_TriggerSF_down	16.0002	18.6221	1.64828
+_PU_up	15.512	18.6221	1.64828
+_PU_down	16.7183	18.6221	1.64828
+_JetEn_up	17.407	18.6221	1.64828
+_JetEn_down	17.4925	18.6221	1.64828
+_JetRes_up	16.4665	18.6221	1.64828
+_JetRes_down	16.4832	18.6221	1.64828
+_Unclustered_up	17.1108	18.6221	1.64828
+_Unclustered_down	18.8295	18.6221	1.64828
+_BTagSFEff_up	16.0441	18.6221	1.64828
+_BTagSFEff_down	15.7683	18.6221	1.64828
+_BTagSFMiss_up	16.2887	18.6221	1.64828
+_BTagSFMiss_down	16.0541	18.6221	1.64828
+_JetMass_up	16.0961	18.6221	1.64828
+_JetMass_down	15.9205	18.6221	1.64828
+_JetMassRes_up	15.8161	18.6221	1.64828
+_JetMassRes_down	16.0074	18.6221	1.64828
 
 ################ Sources ################
 Source	SystTotal	SystPrompt	SystFake	Signal
-Stat 11.63 24.32  7.79  1.00  7.55
-Lumi 1.13  2.50 -  -  2.50
+Stat 11.78 25.08  7.79  1.00  7.55
+Lumi 1.10  2.50 -  -  2.50
 PDF  -  -  -  -  8.96
-MuonPt  0.74 1.64  -  -  0.75
-MuonID  0.82 1.82  -  -  0.28
-ElectronE  0.94 2.08  -  -  1.27
-ElectronID  1.58 3.51  -  -  4.05
-Trigger  2.24 4.96  -  -  0.70
-PU  1.90 4.21  -  -  3.43
-JES  2.71 6.02  -  -  4.03
-JER  0.51 1.13  -  -  1.94
-Uncl  5.21 11.57  -  -  2.77
-BEff  0.57 1.26  -  -  0.51
-BMiss  1.33 2.96  -  -  0.25
-JMS  0.79 1.76  -  -  0.46
-JMR  1.23 2.74  -  -  0.88
+MuonPt  0.58 1.30  -  -  0.38
+MuonID  0.83 1.88  -  -  0.79
+ElectronE  0.84 1.89  -  -  2.04
+ElectronID  1.77 4.01  -  -  4.26
+Trigger  0.36 0.82  -  -  0.91
+PU  1.67 3.78  -  -  4.03
+JES  3.85 8.70  -  -  4.14
+JER  1.16 2.62  -  -  1.42
+Uncl  5.78 13.08  -  -  2.79
+BEff  0.56 1.26  -  -  0.39
+BMiss  0.46 1.04  -  -  0.39
+JMS  0.27 0.62  -  -  0.47
+JMR  0.47 1.07  -  -  1.29
 Tau21 0.00  0.00 -  -  0.00
-MCNorm 1.43  3.17 -  -  -
-Fake 15.15  -  30.00 - -
-CF 0.94  -  -  21.00 -
-Total Systematic 16.88 16.54  30.00  21.00  12.10
+MCNorm 0.92  2.07 -  -  -
+Fake 15.38  -  30.00 - -
+CF 0.95  -  -  21.00 -
+Total Systematic 17.23 17.56  30.00  21.00  12.48
 
-Total Background	36.871
-- Prompt	16.600
+Total Background	36.324
+- Prompt	16.054
 - Fake	18.622
 - CF	1.648
 
 ####### Result #######
-Signal Eff	0.003078
-36.870628 1.205253
-741.205965 1.142657
+Signal Eff	0.002020
+36.324041 1.208923
+741.205965 1.145911

@@ -34,12 +34,6 @@ for mass in masses:
   counter = 0
   for var in varorder:
 
-    if "secondLepton_Pt" in var:
-      print "40 - 150\t",
-    if "m_lljj_jjWclosest" in var:
-      print "\t15\t",
-      continue
-
     for line in lines:
       words = line.split()
       this_var = words[0]+" "+words[1]
@@ -52,6 +46,12 @@ for mass in masses:
         print value+" -",
       else:
         print value+'\t',
+
+    if "secondLepton_Pt" in var:
+      print "40 - 150\t",
+
+    if "m_lljj_jjWclosest" in var:
+      print "\t15\t",
 
     counter = counter+1
 

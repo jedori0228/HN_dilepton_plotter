@@ -64,7 +64,10 @@ for mass in masses:
 
   runlog = open(logname).readlines()
   bkgd = runlog[len(runlog)-2].split()[0]
-  eff = runlog[len(runlog)-3].split()[2]
+ 
+  float_eff = float(runlog[len(runlog)-3].split()[2])
+  eff = str(float_eff*100.)
+
   print bkgd+'\t'+eff
 
 

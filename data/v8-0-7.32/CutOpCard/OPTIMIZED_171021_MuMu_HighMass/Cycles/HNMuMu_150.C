@@ -74,6 +74,7 @@ void HNMuMu_150(){
   //==== Set CutCard
 
   TString cutfilename = "HNMuMu_150.txt";
+  cutfilename = "TEST.txt";
   m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/"+CutOpCardDir+"/"+cutfilename);
 
   vector<TString> systs = {
