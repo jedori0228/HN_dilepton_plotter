@@ -53,7 +53,7 @@ TDirectory *PdfSystematics::MakeTempDir(){
 
 void PdfSystematics::CalculatePdfSystematic(){
 
-  cout << "Yield_Central = " << Yield_Central << endl;
+  //cout << "Yield_Central = " << Yield_Central << endl;
   Syst_Pdf_Replica = 0.;
   for(unsigned int i=1; i<=hist_Pdf_Replica->GetXaxis()->GetNbins(); i++){
     double diff = hist_Pdf_Replica->GetBinContent(i)-Yield_Central;

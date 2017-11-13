@@ -1,16 +1,10 @@
-#include "RunNtupleBase.h"
+#include "RunNtupleForBinnedYieldPlot.h"
 
-void RunNtupleBase::Run(){
+void RunNtupleForBinnedYieldPlot::Run(){
 
   //========================
   //==== CutRangeInfo Loop
   //========================
-
-  if(!RunSystematic){
-    cout << "##############################" << endl;
-    cout << "#### OPTIMIZATION STARTED ####" << endl;
-    cout << "##############################" << endl << endl;
-  }
 
   vector<CutInfo> OptimizedCutInfo;
   double final_cf(0.), final_cf_err(0.), final_cf_syst(0.), final_cf_stat(0.);
@@ -27,16 +21,6 @@ void RunNtupleBase::Run(){
   }
 
   while( !cutrangeinfo.isEnd() ){
-
-    if(!RunSystematic && cutrangeinfo.CurrentIteration%LogEvery==0){
-      cout << "####################################################" << endl;
-      cout << "TIME STAMP : ["; printcurrunttime(); cout <<"] ";
-      cout << cutrangeinfo.CurrentIteration << " / " << cutrangeinfo.TotalIteration << " ("<<100.*cutrangeinfo.CurrentIteration/cutrangeinfo.TotalIteration<<" %)"<<endl;
-      cout << "####################################################" << endl;
-      for(unsigned int i=0; i<OptimizedCutInfo.size(); i++){
-        OptimizedCutInfo.at(i).Print();
-      }
-    }
 
     //==================
     //==== Sample Loop
@@ -57,9 +41,16 @@ void RunNtupleBase::Run(){
     vector<double> signal_tau21_up;
 
     bool SignalEffLow = false;
+
+    int ii_bkgd = -1;
     for(unsigned int ii=0; ii<samples.size(); ii++){
 
       TString sample = samples.at(ii);
+
+      if(!sample.Contains("HN") && !sample.Contains("data")) ii_bkgd++;
+
+      Color_t color = kBlack;
+      if(DrawBinnedYieldPlot) color = map_sample_string_to_legendinfo[find_MCsector(ii_bkgd)].second;
 
       bool ImRunningMCBkgd = false;
 
@@ -88,7 +79,7 @@ void RunNtupleBase::Run(){
 
       if(! (m.TreeExist) ){
 
-        //cout << sample << "\t" << "No Tree : " << "Ntp_"+channel+"_"+treeskim << endl;
+       //cout << sample << "\t" << "No Tree : " << "Ntp_"+channel+"_"+treeskim << endl;
         if(sample.Contains("HN")){
           signal_unweighted_yield.push_back(0.);
           signal_weighted_yield.push_back(0.);
@@ -109,6 +100,22 @@ void RunNtupleBase::Run(){
 
       //==== Run
       m.Loop();
+
+      if(DrawBinnedYieldPlot){
+        if(!sample.Contains("HN") && !sample.Contains("data")){
+          TDirectory *origDir = gDirectory;
+          TDirectory *tempDir1 = pdfsyst.MakeTempDir();
+          tempDir1->cd();
+
+          TH1D *histtmp = (TH1D *)m.hist_for_error->Clone();
+          //cout << sample << "\t" << color << endl;
+          histtmp->SetLineColor(color);
+          histtmp->SetFillColor(color);
+          histtmp->SetName(sample);
+          MC_stacked->Add(histtmp);
+          origDir->cd();
+        }
+      }
 
       if(DoPdfSystematic){
         TDirectory *origDir = gDirectory;
@@ -136,7 +143,16 @@ void RunNtupleBase::Run(){
       }
 
       //==== Sum yield
-      if(sample.Contains("HN")){
+      if(MakeYieldTable && (sample.Contains("HN"))){
+        prompt_unweighted_yield += m.unweighted_yield;
+        prompt_weighted_yield += m.weighted_yield;
+
+        hist_prompt_total->Add( m.hist_for_error );
+        hist_prompt_total_up->Fill(0., m.weighted_yield);
+        hist_prompt_tau21_up->Fill(0., m.hist_for_tau21_up->GetBinContent(1) );
+
+      }
+      else if(sample.Contains("HN")){
         signal_unweighted_yield.push_back( m.unweighted_yield );
         signal_weighted_yield.push_back( m.weighted_yield );
         signal_weighted_yield_stat.push_back( m.hist_for_error->GetBinError(1) );
@@ -245,10 +261,13 @@ void RunNtupleBase::Run(){
     //==== Force Punzi to require
     //==== 1) Minimum Total Bkgd
     //if( (total_bkg < 0.5) || (data_weighted_yield < 1) ){
+
+/*
     if( (total_bkg < 0.01) ){
       cutrangeinfo.Next();
       continue;
     }
+*/
 
     //==== Signals
     bool ToUpdate = true;
@@ -271,19 +290,6 @@ void RunNtupleBase::Run(){
 
       OptimizedCutInfo = cutrangeinfo.GetCurrentCutInfo();
 
-      if(!RunSystematic){
-        cout << endl;
-        cout << "!!!!!!!!!!!!!!!!!" << endl;
-        cout << "!!!! UPDATED !!!!" << endl;
-        cout << "!!!!!!!!!!!!!!!!!" << endl;
-        cout << endl;
-        cutrangeinfo.PrintCurrent();
-        cout << "CF" << "\t" << chargeflip_weighted_yield << " +- " << chargeflip_weighted_yield_err << endl;
-        cout << "Fake" << "\t" << fake_weighted_yield << " +- " << fake_weighted_yield_err << endl;
-        cout << "Prompt" << "\t" << prompt_weighted_yield << " +- " << prompt_weighted_yield_err << endl;
-        cout << "=> total bkg = " << total_bkg << endl;
-        cout << "Signal\tYield\tEfficiency\tEfficiency@Presel\tPunzi" << endl;
-      }
       for(unsigned int iii=0; iii<signals.size(); iii++){
         final_signal.at(iii) = signal_weighted_yield.at(iii);
         final_signal_eff.at(iii) = signal_unweighted_yield.at(iii)/signal_yield_nocut.at(iii);
@@ -300,14 +306,8 @@ void RunNtupleBase::Run(){
         final_signal_eff_preselection.at(iii) = eff_presel;
         MaxPunzis.at(iii) = punzis.at(iii);
 
-        if(!RunSystematic){
-          cout << signals.at(iii) << "\t" << signal_weighted_yield.at(iii) << "\t" << signal_unweighted_yield.at(iii)/signal_yield_nocut.at(iii) << "\t" << eff_presel << "\t" << punzis.at(iii) << endl;
-        }
       }
 
-      if(!RunSystematic){
-        cout << "=====================================================================" << endl << endl;
-      }
       final_cf = chargeflip_weighted_yield;
       final_cf_err = chargeflip_weighted_yield_err;
       final_cf_syst = chargeflip_weighted_yield_syst;
@@ -330,53 +330,32 @@ void RunNtupleBase::Run(){
   } //END CutRangeInfo loop
 
 
-  if(!RunSystematic){
-    cout << endl;
-    cout << "##################" << endl;
-    cout << "#### FINISHED ####" << endl;
-    cout << "##################" << endl << endl;
+  fake_bkgs = final_fake;
+  fake_bkgs_err = final_fake_err;
+  fake_bkgs_syst = final_fake_syst;
+  fake_bkgs_stat = final_fake_stat;
 
-    for(unsigned int i=0; i<OptimizedCutInfo.size(); i++){
-      OptimizedCutInfo.at(i).Print();
-    }
-    cout << "CF" << "\t" << final_cf << " +- " << final_cf_err << endl;
-    cout << "Fake" << "\t" << final_fake << " +- " << final_fake_err << endl;
-    cout << "Prompt" << "\t" << final_prompt << " +- " << final_prompt_err << endl;
-    cout << "=> total bkg = " << final_cf+final_fake+final_prompt << endl;
-    cout << "Signal\tYield\tEfficiency\tEfficiency@Presel\tPunzi" << endl;
-    for(unsigned int i=0; i<signals.size(); i++){
-      cout << signals.at(i) << "\t" << final_signal.at(i) << "\t" << final_signal_eff.at(i) << "\t" << final_signal_eff_preselection.at(i) << "\t" << MaxPunzis.at(i) << endl;
-    }
-  }
+  prompt_bkgs = final_prompt;
+  prompt_bkgs_err = final_prompt_err;
+  prompt_bkgs_syst = final_prompt_syst;
+  prompt_bkgs_stat = final_prompt_stat;
 
-  if(RunSystematic){
-    fake_bkgs = final_fake;
-    fake_bkgs_err = final_fake_err;
-    fake_bkgs_syst = final_fake_syst;
-    fake_bkgs_stat = final_fake_stat;
+  cf_bkgs = final_cf;
+  cf_bkgs_err = final_cf_err;
+  cf_bkgs_syst = final_cf_syst;
+  cf_bkgs_stat = final_cf_stat;
 
-    prompt_bkgs = final_prompt;
-    prompt_bkgs_err = final_prompt_err;
-    prompt_bkgs_syst = final_prompt_syst;
-    prompt_bkgs_stat = final_prompt_stat;
-
-    cf_bkgs = final_cf;
-    cf_bkgs_err = final_cf_err;
-    cf_bkgs_syst = final_cf_syst;
-    cf_bkgs_stat = final_cf_stat;
-
-    total_bkgs = final_cf+final_fake+final_prompt;
-    total_bkgs_err = sqrt(final_fake_err*final_fake_err+final_prompt_err*final_prompt_err+final_cf_err*final_cf_err);
+  total_bkgs = final_cf+final_fake+final_prompt;
+  total_bkgs_err = sqrt(final_fake_err*final_fake_err+final_prompt_err*final_prompt_err+final_cf_err*final_cf_err);
 
 
-    signal_rate.clear();
-    for(unsigned int i=0; i<signals.size(); i++){
-      signal_rate.push_back( final_signal.at(i) );
-      signal_err.push_back( final_signal_err.at(i) );
-      signal_stat.push_back( final_signal_stat.at(i) );
-      signal_eff.push_back( final_signal_eff.at(i) );
-      signal_tau21_syst.push_back( final_signal_tau21_up.at(i) );
-    }
+  signal_rate.clear();
+  for(unsigned int i=0; i<signals.size(); i++){
+    signal_rate.push_back( final_signal.at(i) );
+    signal_err.push_back( final_signal_err.at(i) );
+    signal_stat.push_back( final_signal_stat.at(i) );
+    signal_eff.push_back( final_signal_eff.at(i) );
+    signal_tau21_syst.push_back( final_signal_tau21_up.at(i) );
   }
 
 }

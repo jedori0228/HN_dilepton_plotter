@@ -77,6 +77,13 @@ public:
   TString filename_prefix, filename_suffix, data_class, plotpath, thiscut_plotpath;
   vector<TString> histname_suffix, bkglist, samples_to_use, histname, x_title, units, PrimaryDataset;
   vector<bool> drawdata, ApplyMCNormSF;
+
+  //==== channel type
+  vector<int> LeptonChannels, RegionType;
+  TString GetStringChannel(int A);
+  TString GetStringRegion(int B);
+  TString GetStringChannelRegion(int A, int B);
+
   vector<double> UseLogy;
   //map<TString, double> MCNormSF, MCNormSF_uncert, CalculatedSysts;
   vector< pair<TString, TString> > CutVarSkips;

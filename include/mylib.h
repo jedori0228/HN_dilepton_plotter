@@ -1,4 +1,4 @@
-TGraphAsymmErrors* hist_to_graph(TH1D* hist){
+TGraphAsymmErrors* hist_to_graph(TH1D* hist, bool YErrorZero=false){
 
   TH1::SetDefaultSumw2(true);
 
@@ -12,6 +12,10 @@ TGraphAsymmErrors* hist_to_graph(TH1D* hist){
     xup[i] = xaxis->GetBinUpEdge(i+1)-xaxis->GetBinCenter(i+1);
     ylow[i] = hist->GetBinError(i+1);
     yup[i] = hist->GetBinError(i+1);
+    if(YErrorZero){
+      ylow[i] = 0;
+      yup[i] = 0;
+    }
     //ylow[i] = 0;
     //yup[i] = 0;
     //cout << "x = " << x[i] << ", y = " << y[i] << ", x_low = " << xlow[i] << ", xup = " << xup[i] << ", ylow = " << ylow[i] << ", yup = " << yup[i] << endl;

@@ -8,7 +8,7 @@ public :
 
   map< TString, vector<CutInfo> > map_varANDdir_to_cutinfo;
   map< TString, int >             map_varANDdir_to_iterator;
-  bool k_end, DoDebug;
+  bool k_end, DoDebug, DoPrint;
 
   CutRangeInfo();
   void MakeCutInfo(TString var, TString cutdir, double start, double end, double nx);
@@ -27,7 +27,7 @@ public :
 };
 
 CutRangeInfo::CutRangeInfo() :
-k_end(false), DoDebug(false)
+k_end(false), DoDebug(false), DoPrint(true)
 {
 
   map_varANDdir_to_cutinfo.clear();
@@ -185,7 +185,7 @@ void CutRangeInfo::PrintCurrent(){
 
 void CutRangeInfo::ReadCutCard(TString filepath){
 
-  cout << "[CutRangeInfo::ReadCutCard] Get Cutcard from " << filepath << endl;
+  if(DoPrint) cout << "[CutRangeInfo::ReadCutCard] Get Cutcard from " << filepath << endl;
 
   string elline;
   ifstream in(filepath);

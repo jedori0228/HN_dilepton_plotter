@@ -4,6 +4,7 @@
 class AnalysisInputs{
 public:
   map<TString, double> MCNormSF, MCNormSF_uncert, CalculatedSysts;
+  bool DoPrint;
 
   AnalysisInputs();
   void SetMCSF(TString filepath, vector<TString> allbkgs);
@@ -13,6 +14,7 @@ public:
 
 AnalysisInputs::AnalysisInputs(){
 
+  DoPrint = true;
   MCNormSF.clear();
   MCNormSF_uncert.clear();
   CalculatedSysts.clear();
@@ -27,7 +29,7 @@ void AnalysisInputs::SetMCSF(TString filepath, vector<TString> allbkgs){
     MCNormSF_uncert[allbkgs.at(i)] = 0.;
   }
 
-  cout << "[AnalysisInputs::SetMCSF] Get MC SF from " << filepath << endl;
+  if(DoPrint) cout << "[AnalysisInputs::SetMCSF] Get MC SF from " << filepath << endl;
 
   string elline;
   ifstream in(filepath);
@@ -39,8 +41,8 @@ void AnalysisInputs::SetMCSF(TString filepath, vector<TString> allbkgs){
     is >> MCSF;
     is >> MCSF_err;
 
-    cout << "[AnalysisInputs::SetMCSF] sample : " << sample << endl;
-    cout << "[AnalysisInputs::SetMCSF] => MCSF = " << MCSF << ", MCSF_err = " << MCSF_err << endl;
+    if(DoPrint) cout << "[AnalysisInputs::SetMCSF] sample : " << sample << endl;
+    if(DoPrint) cout << "[AnalysisInputs::SetMCSF] => MCSF = " << MCSF << ", MCSF_err = " << MCSF_err << endl;
 
     MCNormSF[sample] = MCSF;
     MCNormSF_uncert[sample] = MCSF_err;
@@ -55,7 +57,7 @@ void AnalysisInputs::SetCalculatedSysts(TString filepath){
   string elline_syst;
   ifstream in_syst(filepath);
 
-  cout << "[AnalysisInputs::SetCalculatedSysts] Get Systematics from " << filepath << endl;
+  if(DoPrint)  cout << "[AnalysisInputs::SetCalculatedSysts] Get Systematics from " << filepath << endl;
 
   while(getline(in_syst,elline_syst)){
     std::istringstream is( elline_syst );
@@ -63,8 +65,8 @@ void AnalysisInputs::SetCalculatedSysts(TString filepath){
     double value;
     is >> source;
     is >> value;
-    cout << "[AnalysisInputs::SetCalculatedSysts] source : " << source << endl;
-    cout << "[AnalysisInputs::SetCalculatedSysts] => % sysematic = " << value << endl;
+    if(DoPrint) cout << "[AnalysisInputs::SetCalculatedSysts] source : " << source << endl;
+    if(DoPrint) cout << "[AnalysisInputs::SetCalculatedSysts] => % sysematic = " << value << endl;
     CalculatedSysts[source] = value;
   }
 

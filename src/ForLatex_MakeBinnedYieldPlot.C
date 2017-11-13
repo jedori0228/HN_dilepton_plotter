@@ -1,0 +1,387 @@
+#include "RunNtupleForBinnedYieldPlot.C"
+#include "canvas_margin.h"
+
+void ForLatex_MakeBinnedYieldPlot(int x=0){
+
+  TString channel = "MuMu";
+  if(x==1) channel = "ElEl";
+  if(x==2) channel = "MuEl";
+
+  TString V2 = "|V_{N#mu}|^{2}";
+  if(channel=="ElEl") V2 = "|V_{Ne}|^{2}";
+  if(channel=="MuEl") V2 = "|V_{Nl}|^{2}";
+
+  map< TString, vector<TString> > map_sample_string_to_list;
+  map< TString, pair<TString, Color_t> > map_sample_string_to_legendinfo;
+  vector<int> MCsector_first_index;
+
+  map_sample_string_to_list["DY"] = {"DYJets_10to50", "DYJets"};
+  map_sample_string_to_list["WJets"] = {"WJets"};
+  map_sample_string_to_list["VV_excl"] = {
+    "WZTo3LNu_powheg",
+    "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",
+  };
+  map_sample_string_to_list["VV_incl"] = {"WZ", "ZZ", "WW"};
+  map_sample_string_to_list["WZ_excl"] = {"WZTo3LNu_powheg"};
+  map_sample_string_to_list["ZZ_excl"] = {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"};
+  map_sample_string_to_list["VVV"] = {"WWW", "WWZ", "WZZ", "ZZZ"};
+  map_sample_string_to_list["ttbar"] = {"TT_powheg"};
+  map_sample_string_to_list["ttbar_ll"] = {"TTLL_powheg"};
+  map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
+  map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
+  map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
+  map_sample_string_to_list["top_tt"] = {"TT_powheg", "ttW", "ttZ", "ttH_nonbb"};
+  map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"};
+  //m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
+  map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
+  map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
+  map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
+  map_sample_string_to_list["fake_sfed_HighdXY"] = {"fake_sfed_HighdXY"};
+  map_sample_string_to_list["fake_sfed_HighdXY_UsePtCone"] = {"fake_sfed_HighdXY_UsePtCone"};
+  map_sample_string_to_list["fake_DiMuon_HighdXY"] = {"fake_HighdXY"};
+  map_sample_string_to_list["fake_Dijet"] = {"fake_Dijet"};
+  map_sample_string_to_list["fake_Dijet_LooseBJet"] = {"fake_Dijet_LooseBJet"};
+  map_sample_string_to_list["chargeflip"] = {"chargeflip"};
+
+  map_sample_string_to_legendinfo["DY"] = make_pair("DY", kYellow);
+  map_sample_string_to_legendinfo["WJets"] = make_pair("WJets", kGreen);
+  map_sample_string_to_legendinfo["VV_excl"] = make_pair("diboson", kSpring-1);
+  map_sample_string_to_legendinfo["VV_incl"] = make_pair("diboson", kSpring-1);
+  map_sample_string_to_legendinfo["WZ_excl"] = make_pair("WZ", kGreen);
+  map_sample_string_to_legendinfo["ZZ_excl"] = make_pair("ZZ", kRed-7);
+  map_sample_string_to_legendinfo["VVV"] = make_pair("triboson", kSpring+10);
+  map_sample_string_to_legendinfo["ttbar"] = make_pair("ttbar", kRed);
+  map_sample_string_to_legendinfo["ttbar_ll"] = make_pair("ttbar", kRed);
+  map_sample_string_to_legendinfo["ttV"] = make_pair("ttV", kOrange);
+  map_sample_string_to_legendinfo["ttH"] = make_pair("ttH", kOrange);
+  map_sample_string_to_legendinfo["top"] = make_pair("top", kRed);
+  map_sample_string_to_legendinfo["top_tt"] = make_pair("top", kRed);
+  map_sample_string_to_legendinfo["Xgamma"] = make_pair("X + #gamma", kSpring-7);
+  map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
+  map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
+  map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["chargeflip"] = make_pair("Charge-flip", kYellow);
+
+  vector<TString> samples_to_use = {"WW_double", "top", "VVV", "VV_excl", "fake_Dijet", "Xgamma"};
+  if(channel=="ElEl") samples_to_use = {"WW_double", "top", "VVV", "VV_excl", "fake_Dijet", "Xgamma", "chargeflip"};
+
+  TLegend *lg = new TLegend(0.60, 0.60, 0.93, 0.94);
+  lg->SetBorderSize(0);
+  lg->SetFillStyle(0);
+  TH1D *histtmpdata = new TH1D("histtmpdata", "", 1, 0., 1.);
+  histtmpdata->SetMarkerStyle(20);
+  histtmpdata->SetMarkerSize(1.6);
+  histtmpdata->SetMarkerColor(kBlack);
+  histtmpdata->SetLineColor(kBlack);
+  lg->AddEntry(histtmpdata, "Total Background", "ple");
+  
+  for(int i=samples_to_use.size()-1; i>=0; i--){
+    TH1D *histtmp = new TH1D(samples_to_use.at(i), "", 1, 0., 1.);
+    histtmp->SetLineColor(map_sample_string_to_legendinfo[samples_to_use.at(i)].second);
+    histtmp->SetFillColor(map_sample_string_to_legendinfo[samples_to_use.at(i)].second);
+    lg->AddEntry(histtmp, map_sample_string_to_legendinfo[samples_to_use.at(i)].first, "f");
+  }
+
+  vector<TString> bkglist;
+  for(unsigned int i=0; i<samples_to_use.size(); i++){
+    MCsector_first_index.push_back( bkglist.size() );
+    bkglist.insert(bkglist.end(),
+                   map_sample_string_to_list[samples_to_use.at(i)].begin(),
+                   map_sample_string_to_list[samples_to_use.at(i)].end()
+                   );
+  }
+  cout << "We will use :" << endl;
+  for(unsigned int i=0; i<bkglist.size(); i++) cout << " " << bkglist[i] << endl;
+
+  gStyle->SetOptStat(0);
+  //==== Get Envrionment Variables
+
+  TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
+  TString catversion = getenv("CATVERSION");
+  TString dataset = getenv("CATANVERSION");
+  TString ENV_PLOT_PATH = getenv("PLOT_PATH");
+
+  bool DoDebug = false;
+
+  vector<TString> WhichRegions = {
+    "Low_TwoJet_NoFatjet_SS",
+    "Low_OneJet_NoFatjet_SS",
+    "High_TwoJet_NoFatjet_SS",
+    "High_OneFatJet_SS",
+  };
+  vector<TString> TreeDirNames = {
+    "Skimmed_Low_TwoJet_NoFatjet",
+    "Skimmed_Low_OneJet_NoFatjet",
+    "Skimmed_High_TwoJet_NoFatjet",
+    "Skimmed_High_OneFatJet",
+  };
+  vector<TString> WhichRegionsForTex = {
+    "Low Mass Two Jets",
+    "Low Mass One Jet",
+    "High Mass Two Jets",
+    "High Mass Fat Jet",
+  };
+  
+  for(unsigned int it_region=0; it_region<WhichRegions.size(); it_region++){
+
+    TString WhichRegion = WhichRegions.at(it_region);
+    TString TreeDirName = TreeDirNames.at(it_region);
+    TString CutCarDirName = "";
+    TString DataPD = "";
+    TString ChannelName = "";
+
+    if(channel=="ElEl"){
+      DataPD = "DoubleEG";
+      ChannelName = "DiElectron";
+
+      if(WhichRegion.Contains("Low")){
+        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171021_ElEl_LowMass";
+        else CutCarDirName = "OPTIMIZED_171021_ElEl_LowMass_Bin2";
+      }
+      else if(WhichRegion.Contains("High")){
+        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171107_ElEl_HighMass";
+        else CutCarDirName = "OPTIMIZED_171108_ElEl_HighMass_Bin2";
+      }
+    }
+    else if(channel=="MuMu"){
+      DataPD = "DoubleMuon";
+      ChannelName = "DiMuon";
+
+      if(WhichRegion.Contains("Low")){
+        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171021_MuMu_LowMass";
+        else CutCarDirName = "OPTIMIZED_171021_MuMu_LowMass_Bin2";
+      }
+      else if(WhichRegion.Contains("High")){
+        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171107_MuMu_HighMass";
+        else CutCarDirName = "OPTIMIZED_171108_MuMu_HighMass_Bin2";
+      }
+    }
+    else if(channel=="MuEl"){
+      DataPD = "MuonEG";
+      ChannelName = "EMu";
+
+      if(WhichRegion.Contains("Low")){
+        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171030_MuEl";
+        else CutCarDirName = "OPTIMIZED_171030_MuEl_Bin2";
+      }
+      else if(WhichRegion.Contains("High")){
+        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171107_MuEl_HighMass";
+        else CutCarDirName = "OPTIMIZED_171108_MuEl_HighMass_Bin2";
+      }
+    }
+
+    cout << "#### " << WhichRegion << " ####" << endl;
+    cout << "#### " << TreeDirName << " ####" << endl;
+    cout << "#### " << CutCarDirName << " ####" << endl;
+    cout << "#### " << DataPD << " ####" << endl;
+    cout << "#### " << ChannelName << " ####" << endl;
+
+    TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/BinnedYieldPlot/";
+
+    vector<int> masses = {90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500};
+    vector<int> ref_sigs = {100, 500, 1000, 1500};
+    vector<Color_t> ref_sigs_style = {1,3,5,7};
+    vector<double> ref_scale = {0.01, 0.1, 1, 1};
+
+    if(WhichRegion.Contains("Low")){
+      masses = {40, 50, 60, 70, 80};
+      ref_sigs = {40, 60, 70};
+      ref_scale = {0.0001, 0.0001, 0.001};
+    }
+
+    const int N_mass = masses.size();
+    TH1D *hist_bkgd = new TH1D("hist_bkgd", "", N_mass, 0., 1.*N_mass);
+
+    THStack *stack_bkgd = new THStack("stack_bkgd", "");
+
+    vector<TH1D *> hist_sigs;
+    for(unsigned int i=0; i<ref_sigs.size(); i++){
+      TH1D *tmp = new TH1D("hist_sigs_"+TString::Itoa(ref_sigs.at(i),10), "", N_mass, 0., 1.*N_mass);
+      hist_sigs.push_back(tmp);
+    }
+
+    for(unsigned it_mass=0; it_mass<masses.size(); it_mass++){
+
+      TString mass = TString::Itoa(masses.at(it_mass),10);
+
+      //==== Declare Object
+
+      RunNtupleForBinnedYieldPlot m;
+      m.DoDebug = DoDebug;
+      m.DrawBinnedYieldPlot = true;
+
+      //==== Skim selection for tree (tree name : Ntp_<skim>)
+
+      m.treeskim = WhichRegion;
+
+      //==== Plotting
+
+      m.map_sample_string_to_list = map_sample_string_to_list;
+      m.map_sample_string_to_legendinfo = map_sample_string_to_legendinfo;
+      m.MCsector_first_index = MCsector_first_index;
+      m.onlybkgd = bkglist;
+      m.samples_to_use = samples_to_use;
+
+      //==== Dataset/channel
+
+      m.DataPD = DataPD;
+      m.channel = ChannelName;
+
+      //==== Filename info
+
+      m.filename_prefix = "DiLeptonAnalyzer";
+      m.filename_suffix = "cat_"+catversion+".root";
+
+      //==== Input/Output
+
+      m.filepath = WORKING_DIR+"/rootfiles/"+dataset+"/Ntuple/"+TreeDirName+"/";
+      m.plotpath = ENV_PLOT_PATH+"/"+dataset+"/cutop/";
+
+      //==== Signal Info
+
+      m.preselection = "Preselection_SS";
+      for(unsigned int i=0; i<ref_sigs.size(); i++){
+        m.signals.push_back("HN"+channel+"_"+TString::Itoa(ref_sigs.at(i),10));
+      }
+      m.MinEffPresel = 0.;
+      m.FillSignalInfo();
+      m.AddSamplesToList( m.signals );
+
+      //==== Backgrounds
+
+      m.AddSamplesToList( bkglist );
+
+      if(DoDebug) m.PrintSampleList();
+
+      //==== Fill MCNorm SF
+
+      m.analysisInputs.DoPrint = false;
+      m.analysisInputs.SetMCSF(WORKING_DIR+"/data/"+dataset+"/MCSF.txt", m.samples);
+
+      //==== Get Systematics
+
+      m.analysisInputs.SetCalculatedSysts(WORKING_DIR+"/data/"+dataset+"/Syst.txt");
+      m.SetSourceSystematics();
+
+      //==== Set CutCard
+
+      TString cutfilename = "HN"+channel+"_"+mass+".txt";
+      m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/"+CutCarDirName+"/"+cutfilename);
+
+      m.Run();
+
+      TList *bkgdlist = m.MC_stacked->GetHists();
+      for(int k=0; k<bkgdlist->Capacity(); k++){
+
+        TH1D *new_hist = new TH1D("new_hist", "", N_mass, 0., 1.*N_mass);
+        TH1D *original_hist = (TH1D*)bkgdlist->At(k);
+
+        TString this_name = original_hist->GetName();
+
+        new_hist->SetBinContent(it_mass+1, original_hist->GetBinContent(1));
+        new_hist->SetBinError(it_mass+1, original_hist->GetBinError(1));
+        new_hist->SetFillColor( original_hist->GetFillColor() );
+        new_hist->SetLineColor( original_hist->GetLineColor() );
+        new_hist->SetName(original_hist->GetName());
+        stack_bkgd->Add(new_hist);
+
+      }
+
+      hist_bkgd->SetBinContent(it_mass+1, m.total_bkgs);
+      hist_bkgd->SetBinError(it_mass+1, m.total_bkgs_err);
+
+      for(unsigned int i=0; i<ref_sigs.size(); i++){
+        hist_sigs.at(i)->SetBinContent(it_mass+1, m.signal_rate.at(i));
+      }
+
+    }
+
+    TCanvas *c_bkgd = new TCanvas("c_bkgd", "", 600, 600);
+    canvas_margin(c_bkgd);
+    c_bkgd->cd();
+
+    TH1D *hist_empty = (TH1D *)hist_bkgd->Clone();
+    hist_empty->SetLineWidth(0);
+    hist_empty->SetLineColor(0);
+    hist_empty->SetMarkerSize(0);
+    hist_empty->SetMarkerColor(0);
+    hist_empty->Draw("hist");
+    hist_axis(hist_empty);
+    hist_empty->GetYaxis()->SetTitle("Yields");
+    hist_empty->GetXaxis()->SetTitle("Signal Region (m_{N} in GeV)");
+    hist_empty->GetXaxis()->SetLabelSize(0.035);
+    hist_empty->SetFillColor(kCyan);
+
+    double y_max = 500;
+    double y_min = 0.02;
+
+    if(WhichRegion.Contains("Low")){
+      y_max = 500;
+      y_min = 5;
+    }
+    hist_empty->GetYaxis()->SetRangeUser(y_min, y_max);
+    for(int i=0; i<hist_empty->GetXaxis()->GetNbins(); i++){
+      TString mass = TString::Itoa(masses.at(i),10);
+      hist_empty->GetXaxis()->SetBinLabel(i+1, mass);
+    }
+
+    stack_bkgd->Draw("histsame");
+
+    hist_bkgd->SetMarkerColorAlpha(kAzure-9, 0);
+    hist_bkgd->SetFillStyle(3013);
+    hist_bkgd->SetFillColor(kBlack);
+    hist_bkgd->SetLineColor(0);
+    hist_bkgd->Draw("sameE2");
+
+    TLegend *lg_this = (TLegend *)lg->Clone();
+    for(unsigned int i=0; i<ref_sigs.size(); i++){
+      hist_sigs.at(i)->Draw("histsame");
+      hist_sigs.at(i)->SetLineColor(kBlack);
+      hist_sigs.at(i)->SetLineStyle(ref_sigs_style.at(i));
+      hist_sigs.at(i)->SetLineWidth(3);
+      hist_sigs.at(i)->Scale(ref_scale.at(i)/0.01);
+
+      TString signalname = "";
+      double log_coupling = TMath::Log10(ref_scale.at(i));
+
+      TString FDchannel = "Sch";
+
+      if(log_coupling == 0) signalname = FDchannel+" HN"+TString::Itoa(ref_sigs.at(i), 10)+", "+V2+"=1";
+      else signalname = FDchannel+" HN"+TString::Itoa(ref_sigs.at(i), 10)+", "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
+
+      lg_this->AddEntry(hist_sigs.at(i), signalname, "l");
+    }
+
+    lg_this->Draw();
+
+    TLatex channelname;
+    channelname.SetNDC();
+    channelname.SetTextSize(0.035);
+    TString channelForTex = "#mu#mu";
+    if(channel=="ElEl") channelForTex = "ee";
+    if(channel=="MuEl") channelForTex = "e#mu";
+
+    channelname.DrawLatex(0.2, 0.88, channelForTex+" "+WhichRegionsForTex.at(it_region));
+
+    c_bkgd->SetLogy();
+
+    gSystem->mkdir(plotpath+"/"+channel, kTRUE);
+    c_bkgd->SaveAs(plotpath+"/"+channel+"/"+channel+"_"+WhichRegion+".pdf");
+    c_bkgd->SaveAs(plotpath+"/"+channel+"/"+channel+"_"+WhichRegion+".png");
+    c_bkgd->Close();
+    delete c_bkgd;
+    delete hist_bkgd;
+    delete hist_empty;
+    for(unsigned int i=0; i<ref_sigs.size(); i++){
+      delete hist_sigs.at(i);
+    }
+
+  } // END Loop Region
+
+}
+
