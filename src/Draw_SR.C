@@ -137,6 +137,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       "_EMu_Preselection_MuonSubLead_SS",
 
 
+
 /*
       "_DiMuon_Low_OneJet_NoFatJet_SS",
       "_DiElectron_Low_OneJet_NoFatJet_SS",
@@ -208,38 +209,38 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   };
 
   m.x_title = {
-    "m(ll) [GeV]",
+    "m(ll) (GeV)",
     //==== Jets for High Mass
-    "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Sub-Leading Lepton+jj_{W}) [GeV]",
+    "m(jj_{W}) (GeV)",  "m(lljj_{W}) (GeV)", "m(Leading Lepton+jj_{W}) (GeV)", "m(Subleading Lepton+jj_{W}) (GeV)",
     "#DeltaR(jj_{W})",
-    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Sub-Leading Lepton,jj_{W})", 
-    "#DeltaR(Leading Lepton,Sub-Leading Lepton+jj_{W})", "#DeltaR(Sub-Leading Lepton,Leading Lepton+jj_{W})",
+    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Subleading Lepton,jj_{W})", 
+    "#DeltaR(Leading Lepton,Subleading Lepton+jj_{W})", "#DeltaR(Subleading Lepton,Leading Lepton+jj_{W})",
     //==== Jets for Low Mass
-    "m(jj_{W}) [GeV]",  "m(lljj_{W}) [GeV]", "m(Leading Lepton+jj_{W}) [GeV]", "m(Sub-Leading Lepton+jj_{W}) [GeV]",
+    "m(jj_{W}) (GeV)",  "m(lljj_{W}) (GeV)", "m(Leading Lepton+jj_{W}) (GeV)", "m(Subleading Lepton+jj_{W}) (GeV)",
     "#DeltaR(jj_{W})",
-    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Sub-Leading Lepton,jj_{W})",
-    "#DeltaR(Leading Lepton,Sub-Leading Lepton+jj_{W})", "#DeltaR(Sub-Leading Lepton,Leading Lepton+jj_{W})",
+    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Subleading Lepton,jj_{W})",
+    "#DeltaR(Leading Lepton,Subleading Lepton+jj_{W})", "#DeltaR(Subleading Lepton,Leading Lepton+jj_{W})",
     //==== Laeding dijet
-    "m(j_{1}j_{2}) [GeV]",  "m(llj_{1}j_{2}) [GeV]", "m(Leading Lepton+j_{1}j_{2}) [GeV]", "m(Sub-Leading Lepton+j_{1}j_{2}) [GeV]",
+    "m(j_{1}j_{2}) (GeV)",  "m(llj_{1}j_{2}) (GeV)", "m(Leading Lepton+j_{1}j_{2}) (GeV)", "m(Subleading Lepton+j_{1}j_{2}) (GeV)",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
-    "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta", "Leading Lepton Type",
-    "Sub-Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton #eta", "Sub-Leading Lepton Type",
-    "Leading Jet p_{T} [GeV]", "Leading Jet #eta",
-    "Sub-Leading Jet p_{T} [GeV]", "Sub-Leading Jet #eta",
-    "Leading Forward Jet p_{T} [GeV]", "Leading Forward Jet #eta",
-    "Sub-Leading Forward Jet p_{T} [GeV]", "Sub-Leading Forward Jet #eta",
-    "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
-    "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
+    "Leading Lepton p_{T} (GeV)", "Leading Lepton #eta", "Leading Lepton Type",
+    "Subleading Lepton p_{T} (GeV)", "Subleading Lepton #eta", "Subleading Lepton Type",
+    "Leading Jet p_{T} (GeV)", "Leading Jet #eta",
+    "Subleading Jet p_{T} (GeV)", "Subleading Jet #eta",
+    "Leading Forward Jet p_{T} (GeV)", "Leading Forward Jet #eta",
+    "Subleading Forward Jet p_{T} (GeV)", "Subleading Forward Jet #eta",
+    "Leading No-LeptonVeto Jet p_{T} (GeV)", "Leading No-LeptonVeto Jet #eta",
+    "Subleading No-LeptonVeto Jet p_{T} (GeV)", "Subleading No-LeptonVeto Jet #eta",
     //==== SumPt
-    "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]", "#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]", "m_{CT}(j_{1},j_{2}) [GeV]",
+    "#slash{E}_{T}^{miss} (GeV)", "#phi of #slash{E}_{T}^{miss}", "H_{T} (GeV)", "S_{T} (GeV)", "#slash{E}_{T}^{miss}^{2}/S_{T} (GeV)", "m_{CT}(j_{1},j_{2}) (GeV)",
     "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin",
     //==== Fatjet
     "# of Fatjet",
-    "Fatjet p_{T} [GeV]", "Fatjet #eta", "Fatjet Mass [GeV]", "Fatjet #tau_{21}", "Fatjet Pruned Mass [GeV]",
-    "m(Leading Lepton+Fatjet) [GeV]", "Sub-Leading Lepton+Fatjet [GeV]", "m(ll+Fatjet) [GeV]",
-    "m(Leading Lepton+Fatjet) [GeV]", "Sub-Leading Lepton+Fatjet [GeV]", "m(ll+Fatjet) [GeV]",
+    "Fatjet p_{T} (GeV)", "Fatjet #eta", "Fatjet Mass (GeV)", "Fatjet #tau_{21}", "Fatjet Pruned Mass (GeV)",
+    "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
+    "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
     //==== OneJet_NoFatJet
-    "m(Leading Lepton+j) [GeV]", "m(Sub-Leading Lepton+j) [GeV]", "m(llj) [GeV]",
+    "m(Leading Lepton+j) (GeV)", "m(Subleading Lepton+j) (GeV)", "m(llj) (GeV)",
   };
 
   m.units = {
@@ -283,9 +284,11 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
     m.histname_suffix = {"_DiMuon_Preselection_SS"};
     m.PrimaryDataset = {"DoubleMuon"};
+    m.LeptonChannels = {21};
+    m.RegionType = {0};
     m.UseLogy = {-1};
     m.histname = {"m_lljj_lljjWclosest"};
-    m.x_title = {"m(lljj_{W}) [GeV]"};
+    m.x_title = {"m(lljj_{W}) (GeV)"};
     m.units = {"GeV"};
 
   }
@@ -293,9 +296,39 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
 
     //==== PD
-    if(m.histname_suffix.at(i).Contains("DiMuon")) m.PrimaryDataset.push_back("DoubleMuon");
-    if(m.histname_suffix.at(i).Contains("DiElectron")) m.PrimaryDataset.push_back("DoubleEG");
-    if(m.histname_suffix.at(i).Contains("EMu")) m.PrimaryDataset.push_back("MuonEG");
+    if(m.histname_suffix.at(i).Contains("DiMuon")){
+      m.PrimaryDataset.push_back("DoubleMuon");
+      m.LeptonChannels.push_back(21);
+    }
+    else if(m.histname_suffix.at(i).Contains("DiElectron")){
+      m.PrimaryDataset.push_back("DoubleEG");
+      m.LeptonChannels.push_back(22);
+    }
+    else if(m.histname_suffix.at(i).Contains("EMu")){
+      m.PrimaryDataset.push_back("MuonEG");
+      m.LeptonChannels.push_back(23);
+    }
+    else{
+      cout << "ERROR : PD not correct" << endl;
+      return;
+    }
+
+    if(m.histname_suffix.at(i).Contains("Preselection")){
+      m.RegionType.push_back(1);
+    }
+    else if(m.histname_suffix.at(i).Contains("Low")){
+      if(m.histname_suffix.at(i).Contains("TwoJet_NoFatJet")) m.RegionType.push_back(21);
+      else if(m.histname_suffix.at(i).Contains("OneJet_NoFatJet")) m.RegionType.push_back(22);
+      else m.RegionType.push_back(20);
+    }
+    else if(m.histname_suffix.at(i).Contains("High")){
+      if(m.histname_suffix.at(i).Contains("TwoJet_NoFatJet")) m.RegionType.push_back(31);
+      else if(m.histname_suffix.at(i).Contains("OneFatJet")) m.RegionType.push_back(32);
+      else m.RegionType.push_back(30);
+    }
+    else{
+      m.RegionType.push_back(0);
+    }
 
     //==== Log plot boolean
     if(XXX==0) m.UseLogy.push_back(-1);
@@ -316,23 +349,14 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 /*
   //==== FIXME test
   m.histname = {"Nevents"};
-  m.x_title = {"#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]"};
+  m.x_title = {"#slash{E}_{T}^{miss}^{2}/S_{T} (GeV)"};
   m.units = {"GeV"};
 */
 /*
   //==== FIXME test
-  m.histname = {    "Nfatjets",
-    "WClosest_FatJet_Pt", "WClosest_FatJet_Eta", "WClosest_FatJet_Mass", "WClosest_FatJet_Tau21", "WClosest_FatJet_PrunedMass",
-    "m_Leadlfj_ptorder", "m_SubLeadlfj_ptorder", "m_llfj_ptorder",
-    "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",};
-  m.x_title = {    "# of Fatjet",
-    "Fatjet p_{T} [GeV]", "Fatjet #eta", "Fatjet Mass [GeV]", "Fatjet #tau_{21}", "Fatjet Pruned Mass [GeV]",
-    "m(Leading Lepton+Fatjet) [GeV]", "Sub-Leading Lepton+Fatjet [GeV]", "m(ll+Fatjet) [GeV]",
-    "m(Leading Lepton+Fatjet) [GeV]", "Sub-Leading Lepton+Fatjet [GeV]", "m(ll+Fatjet) [GeV]",};
-  m.units = {    "int",
-    "GeV", "", "GeV", "", "GeV",
-    "GeV", "GeV", "GeV",
-    "GeV", "GeV", "GeV",};
+  m.histname = {"m_Leadlj"};
+  m.x_title = {"m(Leading Lepton+j) (GeV)"};
+  m.units = {"GeV"};
 */
   //====================
   //==== make bkg list

@@ -55,9 +55,9 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
   m.map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
-  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"};
-  //m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
-  m.map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WGtoLNuG"};
+  m.map_sample_string_to_list["Zgamma"] = {"ZGto2LG"};
+  m.map_sample_string_to_list["Wgamma"] = {"WGtoLNuG"};
+  m.map_sample_string_to_list["tgamma"] = {"TG", "TTG"};
   m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
   m.map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
@@ -79,8 +79,9 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["ttV"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["ttH"] = make_pair("ttH", kOrange);
   m.map_sample_string_to_legendinfo["top"] = make_pair("top", kRed);
-  m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X + #gamma", kSpring-7);
-  m.map_sample_string_to_legendinfo["Xgamma_noDY"] = make_pair("X + #gamma", kSpring-7);
+  m.map_sample_string_to_legendinfo["Zgamma"] = make_pair("Z + #gamma", kViolet);
+  m.map_sample_string_to_legendinfo["Wgamma"] = make_pair("W + #gamma", kOrange);
+  m.map_sample_string_to_legendinfo["tgamma"] = make_pair("top + #gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
@@ -98,7 +99,8 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
 
   //==== Linear
   if(XXX==0){
-    m.samples_to_use = {"WZ_excl", "ZZ_excl", "fake_Dijet", "Xgamma", "VVV", "top"};
+    m.samples_to_use = {"WZ_excl", "Wgamma", "ZZ_excl", "Zgamma", "fake_Dijet", "tgamma", "VVV", "top"};
+
     m.histname_suffix = {
 
       "_DiMuon_ThreeLepton_WZ",
@@ -122,6 +124,7 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
       "_DiLepton_ThreeLepton_WGamma",
       "_DiLepton_FourLepton_ZZ",
 
+      //"_DiLepton_FourLepton_ZZ",
     };
   }
   //==== Log
@@ -157,7 +160,7 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
   //============================
   
   m.histname = {
-    "m_ll", "m_lll",
+    "m_ll", "m_lll", "m_OSSF_smallest",
     "Njets", "Njets_nolepveto", "Nfwdjets", "Nbjets", "Nbjets_nolepveto", "Nbfwdjets",
     "leadingLepton_Pt", "leadingLepton_Eta", "leadingLepton_Type",
     "secondLepton_Pt", "secondLepton_Eta", "secondLepton_Type",
@@ -176,26 +179,26 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
   };
 
   m.x_title = {
-    "m(ll) [GeV]", "m(lll) [GeV]",
+    "m(ll) (GeV)", "m(lll) (GeV)", "m(ll)_{min} (GeV)",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
-    "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta", "Leading Lepton Type",
-    "Sub-Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton #eta", "Sub-Leading Lepton Type",
-    "Trailing Lepton p_{T} [GeV]", "Trailing Lepton #eta", "Trailing Lepton Type",
-    "Fourth Lepton p_{T} [GeV]", "Fourth Lepton #eta", "Fourth Lepton Type",
-    "Leading Jet p_{T} [GeV]", "Leading Jet #eta",
-    "Sub-Leading Jet p_{T} [GeV]", "Sub-Leading Jet #eta",
-    "Leading Forward Jet p_{T} [GeV]", "Leading Forward Jet #eta",
-    "Sub-Leading Forward Jet p_{T} [GeV]", "Sub-Leading Forward Jet #eta",
-    "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
-    "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
-    "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]",
-    "#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]",
-    "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin", "M_{T}(W-tagged Lepton, #slash{E}_{T}^{miss}) [GeV]", "m(Z-candidate) [GeV]",
-    "Leading Z-tagged Lepton p_{T} [GeV]", "Sub-Leading Z-tagged Lepton p_{T} [GeV]", "W-tagged Lepton p_{T} [GeV]"
+    "Leading Lepton p_{T} (GeV)", "Leading Lepton #eta", "Leading Lepton Type",
+    "Subleading Lepton p_{T} (GeV)", "Subleading Lepton #eta", "Subleading Lepton Type",
+    "Trailing Lepton p_{T} (GeV)", "Trailing Lepton #eta", "Trailing Lepton Type",
+    "Fourth Lepton p_{T} (GeV)", "Fourth Lepton #eta", "Fourth Lepton Type",
+    "Leading Jet p_{T} (GeV)", "Leading Jet #eta",
+    "Subleading Jet p_{T} (GeV)", "Subleading Jet #eta",
+    "Leading Forward Jet p_{T} (GeV)", "Leading Forward Jet #eta",
+    "Subleading Forward Jet p_{T} (GeV)", "Subleading Forward Jet #eta",
+    "Leading No-LeptonVeto Jet p_{T} (GeV)", "Leading No-LeptonVeto Jet #eta",
+    "Subleading No-LeptonVeto Jet p_{T} (GeV)", "Subleading No-LeptonVeto Jet #eta",
+    "#slash{E}_{T}^{miss} (GeV)", "#phi of #slash{E}_{T}^{miss}", "H_{T} (GeV)", "S_{T} (GeV)",
+    "#slash{E}_{T}^{miss}^{2}/S_{T} (GeV)",
+    "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin", "M_{T}(W-tagged Lepton, #slash{E}_{T}^{miss}) (GeV)", "m(Z-candidate) (GeV)",
+    "Leading Z-tagged Lepton p_{T} (GeV)", "Subleading Z-tagged Lepton p_{T} (GeV)", "W-tagged Lepton p_{T} (GeV)"
   };
 
   m.units = {
-    "GeV", "GeV",
+    "GeV", "GeV", "GeV",
     "int", "int", "int", "int", "int", "int",
     "GeV", "", "int",
     "GeV", "", "int",
@@ -223,10 +226,47 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
 
     //==== PD
-    if(m.histname_suffix.at(i).Contains("DiMuon")) m.PrimaryDataset.push_back("DoubleMuon");
-    if(m.histname_suffix.at(i).Contains("DiElectron")) m.PrimaryDataset.push_back("DoubleEG");
-    if(m.histname_suffix.at(i).Contains("EMu")) m.PrimaryDataset.push_back("MuonEG");
-    if(m.histname_suffix.at(i).Contains("DiLepton")) m.PrimaryDataset.push_back("DiLepton");
+    if(m.histname_suffix.at(i).Contains("DiMuon")){
+      m.PrimaryDataset.push_back("DoubleMuon");
+    }
+    else if(m.histname_suffix.at(i).Contains("DiElectron")){
+      m.PrimaryDataset.push_back("DoubleEG");
+    }
+    else if(m.histname_suffix.at(i).Contains("EMu")){
+      m.PrimaryDataset.push_back("MuonEG");
+    }
+    else if(m.histname_suffix.at(i).Contains("DiLepton")){
+      m.PrimaryDataset.push_back("DiLepton");
+    }
+
+    if(m.histname_suffix.at(i).Contains("FourLepton")){
+      m.LeptonChannels.push_back(40);
+    }
+    else if(m.histname_suffix.at(i).Contains("ThreeLepton")){
+      m.LeptonChannels.push_back(30);
+    }
+    else{
+      cout << "ERROR : Lepton channel wrong" << endl;
+      return;
+    }
+
+    if(m.histname_suffix.at(i).Contains("WZ")){
+      m.RegionType.push_back(-101);
+    }
+    else if(m.histname_suffix.at(i).Contains("ZGamma")){
+      m.RegionType.push_back(-102);
+    }
+    else if(m.histname_suffix.at(i).Contains("WGamma")){
+      m.RegionType.push_back(-103);
+    }
+    else if(m.histname_suffix.at(i).Contains("ZZ")){
+      m.RegionType.push_back(-104);
+    }
+    else{
+      cout << "ERROR : Region type wrong" << endl;
+      return;
+    }
+
 
     //==== Log plot boolean
     if(XXX==0) m.UseLogy.push_back(-1);
@@ -247,19 +287,21 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
     m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
     m.histname_suffix = {"_DiElectron_0jets_SS"};
     m.PrimaryDataset = {"DoubleEG"};
+    m.LeptonChannels = {0};
+    m.RegionType = {0};
     m.drawdata = {true};
     m.UseLogy = {-1};
     m.histname = {"m_ll"};
-    m.x_title = {"m(ll) [GeV]"};
+    m.x_title = {"m(ll) (GeV)"};
     m.units = {"GeV"};
     if(ScaleMC) m.ApplyMCNormSF = {true};
     else m.ApplyMCNormSF = {false};
   }
 /*
   //==== FIXME test
-  m.histname = {"Nevents"};
-  m.x_title = {"#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]"};
-  m.units = {"GeV"};
+  m.histname = {"m_ll", "m_lll",};
+  m.x_title = {"m(ll) (GeV)", "m(lll) (GeV)",};
+  m.units = {"GeV", "GeV",};
 */
   //====================
   //==== make bkg list

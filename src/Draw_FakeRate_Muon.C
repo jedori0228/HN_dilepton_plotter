@@ -5,7 +5,7 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Muon(){
 
-  TString Sample = "Data_8TeV";
+  TString Sample = "QCD_v7_SIP3";
   TString Lepton = "Muon";
 
   gStyle->SetOptStat(0);
@@ -64,7 +64,7 @@ void Draw_FakeRate_Muon(){
       TH1D *dummy_merged = new TH1D("dummy_merged", "", N_pt_out, ptarray);
       hist_axis(dummy_merged);
       dummy_merged->Draw("hist");
-      dummy_merged->GetYaxis()->SetRangeUser(0., 0.40);
+      dummy_merged->GetYaxis()->SetRangeUser(0., 0.25);
       dummy_merged->GetYaxis()->SetTitle("Fake Rate");
       dummy_merged->GetXaxis()->SetTitle("p_{T}^{cone} [GeV]");
       dummy_merged->GetXaxis()->SetRangeUser(10., 60.);

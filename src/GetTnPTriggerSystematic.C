@@ -31,7 +31,8 @@ void GetTnPTriggerSystematic(){
   vector<TString> DataPeriods = {"BCDEF", "GH"};
   vector<double> abseta = {0., 0.9, 1.2, 2.1, 2.4};
   vector<TString> fitftns = {"vpvPlusExpo", "vpvPlusExpoPassFail", "voigtPlusExpo", "voigtPlusExpoPassFail", "vpvPlusCheb_3rd", "vpvPlusCheb_4th"};
-  vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8"};
+  //vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8", "Mu23_TrkIsoVVL"};
+  vector<TString> triggers = {"Mu23_TrkIsoVVL"};
 
   for(unsigned int it_DataPeriod=0; it_DataPeriod<DataPeriods.size(); it_DataPeriod++){
 

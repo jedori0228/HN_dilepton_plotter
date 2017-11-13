@@ -26,7 +26,8 @@ void Draw_TnP_Trigger(int period){
   TString base_plotpath = ENV_PLOT_PATH+"/TnP_Results/TriggerSF/"+DataPeriod+"/";
   
   vector<double> abseta = {0., 0.9, 1.2, 2.1, 2.4};
-  vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8"};
+  //vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8", "Mu23_TrkIsoVVL"};
+  vector<TString> triggers = {"Mu23_TrkIsoVVL"};
 
   for(unsigned int it_syst=0; it_syst<systs.size(); it_syst++){
 
@@ -49,6 +50,7 @@ void Draw_TnP_Trigger(int period){
 
       vector<double> pt = {10, 20, 25, 30, 40, 50, 60, 120};
       if(trigger=="DoubleIsoMu17Mu8_IsoMu17leg") pt = {10, 15, 16, 17, 18, 19, 20, 25, 30, 40, 50, 60, 120};
+      if(trigger=="Mu23_TrkIsoVVL") pt = {20, 21, 22, 23, 24, 25, 30, 40, 50, 60, 120};
 
       gSystem->mkdir(plotpath, kTRUE);
       gSystem->mkdir(plotpath+"fitresult/", kTRUE);

@@ -651,10 +651,10 @@ void Plotter::draw_legend(TLegend* lg, signal_class sc, bool DrawData){
   // i_data = 6 - 2 - 1 = 3
   
   if(DrawData && hist_for_legend_data){
-    lg->AddEntry(hist_for_legend_data, "data", "p");
+    lg->AddEntry(hist_for_legend_data, "data", "ple");
   }
   else{
-    lg->AddEntry(hist_for_legend_data, "Total Background", "p");
+    lg->AddEntry(hist_for_legend_data, "Total Background", "ple");
   }
   if(DoDebug) cout << "[draw_legend] printing MCsector_survive" << endl;
   for(auto it = MCsector_survive.begin(); it != MCsector_survive.end(); ++it){
@@ -745,6 +745,13 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     if( histname[i_var].Contains("lljjWclosest") ) this_sc = lowmass;
     else this_sc = highmass;
   }
+  if( histname[i_var].Contains("m_Leadlj_") || histname[i_var].Contains("m_SubLeadlj_") || histname[i_var].Contains("m_llj_") ){
+    this_sc = lowmass;
+  }
+  if( histname[i_var].Contains("fj") || histname[i_var].Contains("FatJet") ){
+    this_sc = highmass;
+  }
+
   
   //==== y=0 line
   double x_0[2], y_0[2];
@@ -962,6 +969,12 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+
+  TString str_channel = GetStringChannelRegion(LeptonChannels.at(i_cut), RegionType.at(i_cut));
+  TLatex channelname;
+  channelname.SetNDC();
+  channelname.SetTextSize(0.037);
+  channelname.DrawLatex(0.2, 0.88, str_channel);
 
   mkdir(thiscut_plotpath);
   c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".pdf");
@@ -1194,8 +1207,12 @@ TString Plotter::legend_coupling_label(int mass){
 
   mass = abs(mass);
 
-  if(log_coupling == 0) return channel+" HN"+TString::Itoa(mass, 10)+", |V_{N#mu}|^{2}=1";
-  else return channel+" HN"+TString::Itoa(mass, 10)+", |V_{N#mu}|^{2}=10^{"+TString::Itoa(log_coupling, 10)+"}";
+  TString V2 = "|V_{N#mu}|^{2}";
+  if(PrimaryDataset[i_cut]=="DoubleEG") V2 = "|V_{Ne}|^{2}";
+  if(PrimaryDataset[i_cut]=="MuonEG") V2 = "|V_{Nl}|^{2}";
+
+  if(log_coupling == 0) return channel+" HN"+TString::Itoa(mass, 10)+", "+V2+"=1";
+  else return channel+" HN"+TString::Itoa(mass, 10)+", "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
 
   //if(log_scale == 0) return "m(HN) = "+TString::Itoa(mass, 10)+" GeV/c^{2}, |V_{N#mu}|^{2}=0.01";
   //return "10^{"+TString::Itoa(log_scale, 10)+"} #times m(HN) = "+TString::Itoa(mass, 10)+" GeV/c^{2}, |V_{N#mu}|^{2}=0.01";
@@ -1254,7 +1271,7 @@ void Plotter::MakeTexFile(map< TString, TH1D * > hs){
   ofile_tex << "\\end{document}" << endl;
 
   ofstream ofile(texfilepath+"/Table.txt",ios::trunc);
-  ofile.precision(2);
+  ofile.precision(3);
   ofile.setf(ios::fixed,ios::floatfield); 
   ofile << "\\begin{table}[!tbh]" << endl;
   ofile << "  \\caption{" << endl;
@@ -1273,6 +1290,9 @@ void Plotter::MakeTexFile(map< TString, TH1D * > hs){
     TString name = it->first;
 
     if(name == "X + #gamma") name = "$X + \\gamma$";
+    if(name == "Z + #gamma") name = "Z $+ \\gamma$";
+    if(name == "W + #gamma") name = "W $+ \\gamma$";
+    if(name == "top + #gamma") name = "top $+ \\gamma$";
     if(name.Contains("data")) continue;
     if(name.Contains("HN")){
       HasSignal = true;
@@ -1308,6 +1328,26 @@ void Plotter::MakeTexFile(map< TString, TH1D * > hs){
     TString name = it->first;
     if(name.Contains("HN")){
       TH1D *h_bkgd = it->second;
+
+      //==== name = SchHNElEl500
+      TString SorT = "";
+      if(name.Contains("Sch")) SorT = "S";
+      else if(name.Contains("Tch")) SorT = "T";
+
+      TString LeptonChannel = "";
+      if(name.Contains("MuMu")) LeptonChannel = "MuMu";
+      if(name.Contains("ElEl")) LeptonChannel = "ElEl";
+      if(name.Contains("MuEl")) LeptonChannel = "MuEl";
+
+      TString MassString = name;
+      MassString.Replace(0,9,"");
+      int ThisMass = MassString.Atoi();
+      if(SorT=="T") ThisMass = -ThisMass;
+
+      double log_coupling = TMath::Log10(coupling_constant(ThisMass));
+
+      name = SorT+"-channel "+LeptonChannel+" $"+MassString+"$ GeV, $V^{2} = 10^{"+TString::Itoa(log_coupling,10)+"}$";
+
       ofile << name+" & $" << h_bkgd->GetBinContent(1) << " \\pm " << h_bkgd->GetBinError(1) << "$ \\\\" << endl;
       }
     }
@@ -1328,6 +1368,58 @@ void Plotter::MakeTexFile(map< TString, TH1D * > hs){
 
 }
 
+TString Plotter::GetStringChannelRegion(int A, int B){
 
+  //==== channel type
+
+  TString channel = "";
+  //==== A = 1 : mm
+  //==== A = 2 : ee
+  //==== A = 3 : em
+
+  if(A==20) channel = "ll";
+  if(A==21) channel = "#mu^{#pm}#mu^{#pm}";
+  if(A==22) channel = "e^{#pm}e^{#pm}";
+  if(A==23) channel = "e^{#pm}#mu^{#pm}";
+  if(A==30) channel = "3l";
+  if(A==40) channel = "4l";
+
+  TString region = "";
+  //==== B = 1 : Preselection 
+  //==== B = 20 : Low
+  //==== B = 21 : Low + two jet
+  //==== B = 22 : Low + one jet
+  //==== B = 30 : High
+  //==== B = 31 : High + two jet
+  //==== B = 32 : High + fat jet
+  if(B==1) region = "Preselection";
+
+  if(B==20) region = "Low Mass";
+  if(B==21) region = "Low Mass Two Jets";
+  if(B==22) region = "Low Mass One Jet";
+  if(B==-20) region = "Low Mass CR";
+  if(B==-21) region = "Low Mass CR Two Jets";
+  if(B==-22) region = "Low Mass CR One Jet";
+
+  if(B==30) region = "High Mass";
+  if(B==31) region = "High Mass Two Jets";
+  if(B==32) region = "High Mass Fat Jet";
+  if(B==-30) region = "High Mass CR";
+  if(B==-31) region = "High Mass CR Two Jets";
+  if(B==-32) region = "High Mass CR Fat Jet";
+
+  if(B==-4) region = "Non-prompt CR1";
+  if(B==-5) region = "Non-prompt CR2";
+
+  if(B==-101) region = "WZ CR";
+  if(B==-102) region = "Z#gamma CR";
+  if(B==-103) region = "W#gamma CR";
+  if(B==-104) region = "ZZ CR";
+
+  //return channel+" "+region;
+  return "#splitline{"+channel+"}{"+region+"}";
+
+
+}
 
 

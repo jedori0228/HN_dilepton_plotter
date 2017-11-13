@@ -3,7 +3,7 @@
 
 void Draw_FakeTriggerNorm(){
 
-  vector<TString> Leptons = {"Electron_v7"};
+  vector<TString> Leptons = {"Muon_v7_SIP3", "Electron_v7"};
 
   gStyle->SetOptStat(0);
   gErrorIgnoreLevel = kError;
@@ -80,7 +80,8 @@ void Draw_FakeTriggerNorm(){
       TString trigger = triggers.at(j);
 
       double TriggerNormSF(1.);
-      //if(trigger=="HLT_Mu8_TrkIsoVVL_v") TriggerNormSF = 1.40;
+      //if(trigger=="HLT_Mu3_PFJet40_v") TriggerNormSF = 1./0.72799;
+      //if(trigger=="HLT_Mu8_TrkIsoVVL_v") TriggerNormSF = 1./1.39876;
 
       for(unsigned int k=0; k<vars.size(); k++){
  
@@ -207,6 +208,7 @@ void Draw_FakeTriggerNorm(){
         latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
         c1->SaveAs(plotpath+Lepton+"/"+histname+".pdf");
+        c1->SaveAs(plotpath+Lepton+"/"+histname+".png");
         c1->Close();
 
       } // Variables

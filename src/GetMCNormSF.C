@@ -33,29 +33,32 @@ void GetMCNormSF(){
   vector<TString> regions = {
     "WZ",
     "ZGamma",
-    "ZZ"
+    "ZZ",
+    //"WGamma",
   };
+  const int nCR = regions.size();
 
   vector< vector<TString> > subregions  = {
 
     {"DiElectron_ThreeLepton_WZ", "DiMuon_ThreeLepton_WZ"},
     {"DiElectron_ThreeLepton_ZGamma", "DiMuon_ThreeLepton_ZGamma"},
     {"DiElectron_FourLepton_ZZ_NotAllSameFlavour", "DiElectron_FourLepton_ZZ_AllSameFlavour", "DiMuon_FourLepton_ZZ"},
+    //{"DiMuon_ThreeLepton_WGamma"},
+    //{"DiElectron_ThreeLepton_WGamma", "DiMuon_ThreeLepton_WGamma"},
 
   };
 
   vector< vector<TString> > signals = {
     {"WZTo3LNu_powheg"},
-    {"ZGto2LG"},//, "WGtoLNuG"},
-    //{"WZTo3LNu_mllmin01"},
-    //{"ZGto2LG"},
+    {"ZGto2LG"},
     {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"},
+    //{"WGtoLNuG"},
   };
 
   vector< double > SFs = {
-   0.9763,
-   0.8245,
-   0.9268,
+   0.9905 ,
+   0.779 ,
+   0.9308 ,
   };
 
   TCanvas* c1 = new TCanvas("c1", "", 800, 800);
@@ -71,7 +74,7 @@ void GetMCNormSF(){
   c1_down->Draw();
   c1_up->cd();
 
-  TH1D *hist_empty = new TH1D("hist_empty", "", 3, 0., 3.);
+  TH1D *hist_empty = new TH1D("hist_empty", "", nCR, 0., 1.*nCR);
   hist_empty->GetYaxis()->SetTitle("Entries"); //FIXME
   hist_empty->SetLineWidth(0);
   hist_empty->SetLineColor(0);
@@ -86,28 +89,28 @@ void GetMCNormSF(){
   TGraph *g1 = new TGraph(2, x_1, y_1);
 
 
-  TH1D *hist_data = new TH1D("hist_empty", "", 3, 0., 3.);
+  TH1D *hist_data = new TH1D("hist_empty", "", nCR, 0., 1.*nCR);
 
   hist_data->SetMarkerStyle(20);
   hist_data->SetMarkerSize(1.6);
 
   THStack *this_stack = new THStack("this_stack", "");
-  TH1D *MC_stacked_allerr = new TH1D("MC_stacked_allerr", "", 3, 0., 3);
+  TH1D *MC_stacked_allerr = new TH1D("MC_stacked_allerr", "", nCR, 0., 1.*nCR);
   MC_stacked_allerr->SetMarkerColorAlpha(kAzure-9, 0);
   MC_stacked_allerr->SetFillStyle(3013);
   MC_stacked_allerr->SetFillColor(kBlack);
   MC_stacked_allerr->SetLineColor(0);
 
-  TH1D *MC_stacked_staterr = new TH1D("MC_stacked_staterr", "", 3, 0., 3);
+  TH1D *MC_stacked_staterr = new TH1D("MC_stacked_staterr", "", nCR, 0., 1.*nCR);
 
   TLegend *lg = NULL;
 
-  TMatrix matrixA(3, 3);
-  TMatrix matrixA_err(3, 3);
-  TMatrix matrixD(3, 1);
-  TMatrix matrixD_nonsig(3, 1);
-  TMatrix matrixC(3, 1);
-  TMatrix matrixC_err(3, 1);
+  TMatrix matrixA(nCR, nCR);
+  TMatrix matrixA_err(nCR, nCR);
+  TMatrix matrixD(nCR, 1);
+  TMatrix matrixD_nonsig(nCR, 1);
+  TMatrix matrixC(nCR, 1);
+  TMatrix matrixC_err(nCR, 1);
 
   for(unsigned int i=0; i<regions.size(); i++){
 
@@ -118,12 +121,11 @@ void GetMCNormSF(){
 
     double y_total_data(0.), y_total_bkgd(0.);
     double e_total_data(0.), e_total_bkgd(0.);
-    vector<double> matrixA_rows = {0., 0., 0.};
-    vector<double> matrixA_err_rows = {0., 0., 0.};
+    vector<double> matrixA_rows = {0., 0., 0., 0.};
+    vector<double> matrixA_err_rows = {0., 0., 0., 0.};
     double y_non_signal(0.);
     double e_non_signal(0.);
 
-    //map<TString, TH1D *> map_hists;
     map<Color_t, TH1D *> map_hists;
 
     for(unsigned int j=0; j<subregion.size(); j++){
@@ -168,8 +170,8 @@ void GetMCNormSF(){
       original_allerr->Scale(y_bkgd);
       original_staterr->Scale(y_bkgd);
 
-      TH1D *new_allerr = new TH1D("new_allerr", "", 3, 0., 3);
-      TH1D *new_staterr = new TH1D("new_staterr", "", 3, 0., 3);
+      TH1D *new_allerr = new TH1D("new_allerr", "", nCR, 0., 1.*nCR);
+      TH1D *new_staterr = new TH1D("new_staterr", "", nCR, 0., 1.*nCR);
 
       new_allerr->SetBinContent(i+1, original_allerr->GetBinContent(1));
       new_allerr->SetBinError(i+1, original_allerr->GetBinError(1));
@@ -185,7 +187,7 @@ void GetMCNormSF(){
       TList *bkgdlist = MC_stacked->GetHists();
       for(int k=0; k<bkgdlist->Capacity(); k++){
 
-        TH1D *new_hist = new TH1D("new_hist", "", 3, 0., 3);
+        TH1D *new_hist = new TH1D("new_hist", "", nCR, 0., 1.*nCR);
         TH1D *original_hist = (TH1D*)bkgdlist->At(k);
 
         TString this_name = original_hist->GetName();
@@ -214,6 +216,7 @@ void GetMCNormSF(){
           y_non_signal -= original_hist->GetBinContent(1);
           e_non_signal += (original_hist->GetBinError(1))*(original_hist->GetBinError(1));
         }
+
 
         //cout << this_name << "\t" << sample << endl;
 
@@ -335,12 +338,14 @@ void GetMCNormSF(){
   ratio_allerr->GetXaxis()->SetBinLabel(1, "WZ");
   ratio_allerr->GetXaxis()->SetBinLabel(2, "Z#gamma");
   ratio_allerr->GetXaxis()->SetBinLabel(3, "ZZ");
+  ratio_allerr->GetXaxis()->SetBinLabel(4, "W#gamma");
+
 
   if(!DoNorm) c1->SaveAs(plotpath+"/BeforeNorm.pdf");
   else c1->SaveAs(plotpath+"/AfterNorm.pdf");
   c1->Close();
 
-  for(unsigned int i=0; i<3; i++){
+  for(unsigned int i=0; i<nCR; i++){
     matrixC_err(i,0) = sqrt(matrixC_err(i,0));
   }
 
@@ -375,15 +380,15 @@ void GetMCNormSF(){
   inverse.Print();
 
   cout << "## Calculating B ##" << endl;
-  TMatrix matrixB(3, 1);
-  TMatrix matrixB_err1(3, 1);
+  TMatrix matrixB(nCR, 1);
+  TMatrix matrixB_err1(nCR, 1);
 
-  for(unsigned int i=0; i<3; i++){
+  for(unsigned int i=0; i<nCR; i++){
     matrixB(i,0) = 0.;
     matrixB_err1(i, 0) = 0.;
   }
-  for(unsigned int i=0; i<3; i++){
-    for(unsigned int j=0; j<3; j++){
+  for(unsigned int i=0; i<nCR; i++){
+    for(unsigned int j=0; j<nCR; j++){
       matrixB(i,0) += inverse(i,j)*matrixC(j,0);
       matrixB_err1(i,0) += inverse(i,j)*matrixC_err(j,0);
     }
@@ -399,17 +404,17 @@ void GetMCNormSF(){
   matrixB_err1.Print();
 
   //==== B = invA*C + invA*dC - invA*(dA)*B
-  TMatrix matrixB_err2(3,1);
-  TMatrix matrixinvAdA(3, 3);
-  for(unsigned int i=0; i<3; i++){
-    for(unsigned int j=0; j<3; j++){
-      for(unsigned int k=0; k<3; k++){
+  TMatrix matrixB_err2(nCR,1);
+  TMatrix matrixinvAdA(nCR, nCR);
+  for(unsigned int i=0; i<nCR; i++){
+    for(unsigned int j=0; j<nCR; j++){
+      for(unsigned int k=0; k<nCR; k++){
         matrixinvAdA(i,0) += inverse(i,k)*matrixA_err(k,j);
       }
     }
   }
-  for(unsigned int i=0; i<3; i++){
-    for(unsigned int j=0; j<3; j++){
+  for(unsigned int i=0; i<nCR; i++){
+    for(unsigned int j=0; j<nCR; j++){
       matrixB_err2(i,0) += matrixinvAdA(i,j)*matrixB(j,0);
     }
   }
@@ -419,8 +424,8 @@ void GetMCNormSF(){
   cout << "###################" << endl;
   matrixB_err2.Print();
 
-  TMatrix matrixB_allerr(3,1);
-  for(unsigned int i=0; i<3; i++){
+  TMatrix matrixB_allerr(nCR,1);
+  for(unsigned int i=0; i<nCR; i++){
     double e1 = matrixB_err1(i,0);
     double e2 = matrixB_err2(i,0);
     matrixB_allerr(i,0) = sqrt(e1*e1+e2*e2);
@@ -445,9 +450,9 @@ void GetMCNormSF(){
   }
 
 
-  TMatrix Check(3,1);
-  for(unsigned int i=0; i<3; i++){
-    for(unsigned int j=0; j<3; j++){
+  TMatrix Check(nCR,1);
+  for(unsigned int i=0; i<nCR; i++){
+    for(unsigned int j=0; j<nCR; j++){
       Check(i,0) += matrixA(i,j)*matrixB(j,0);
     }
   }

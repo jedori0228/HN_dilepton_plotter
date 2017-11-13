@@ -101,6 +101,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //m.samples_to_use = {"fake_HighdXY", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
     m.histname_suffix = {
 
+
       //==== DiMuon
       "_DiMuon_0jets_SS", // SS 0jet CR
       "_DiMuon_1jets_SS", // SS 1jet CR
@@ -114,6 +115,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiMuon_HighCR_SS",
       "_DiMuon_HighCR_TwoJet_NoFatJet_SS",
       "_DiMuon_HighCR_OneFatJet_SS",
+      "_DiMuon_0jets_0nlbjets_dRllge2p5_SS",
 
 
       //=== DiElectron
@@ -122,6 +124,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiElectron_0jets_OnZ_SS", // SS 0jet+OnZ CR (CF)
       "_DiElectron_1jets_OnZ_SS", // SS 1jet+OnZ CR (CF)
       "_DiElectron_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
+      "_DiElectron_Inclusive1nlbjets_OffZ_SS",
       "_DiElectron_0jets_OffZ_SS",
       "_DiElectron_1jets_OffZ_SS",
       "_DiElectron_LowCR_SS",
@@ -133,6 +136,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiElectron_1jets_0nlbjets_OffZ_SS",
       "_DiElectron_1jets_0nlbjets_mllge110_OffZ_SS",
       "_DiElectron_0nlbjets_OffZ_SS",
+      "_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS",
 
       //==== EMu
       "_EMu_0jets_SS", // SS 0jet CR
@@ -147,29 +151,20 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_EMu_0nlbjets_SS",
       "_EMu_HighCR_TwoJet_NoFatJet_SS",
       "_EMu_HighCR_OneFatJet_SS",
+      "_EMu_0jets_0nlbjets_dRllge2p5_SS",
 
 
-      //"_DiMuon_LowCR_SS",
-      //"_DiMuon_LowCR_TwoJet_NoFatJet_SS",
-      //"_DiMuon_LowCR_OneJet_NoFatJet_SS",
-      //"_DiMuon_HighCR_SS",
-      //"_DiMuon_HighCR_TwoJet_NoFatJet_SS",
-      //"_DiMuon_HighCR_OneFatJet_SS",
+/*
+      "_DiMuon_0jets_0nlbjets_dRllge2p5_SS",
+      "_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS",
+      "_EMu_0jets_0nlbjets_dRllge2p5_SS",
 
-      //"_DiElectron_LowCR_SS",
-      //"_DiElectron_LowCR_TwoJet_NoFatJet_SS",
-      //"_DiElectron_LowCR_OneJet_NoFatJet_SS",
-      //"_DiElectron_HighCR_SS",
-      //"_DiElectron_HighCR_TwoJet_NoFatJet_SS",
-      //"_DiElectron_HighCR_OneFatJet_SS",
+      "_DiMuon_Inclusive1nlbjets_SS",
+      "_DiElectron_Inclusive1nlbjets_SS",
+      "_DiElectron_Inclusive1nlbjets_OffZ_SS",
+      "_EMu_Inclusive1nlbjets_SS",
+*/
 
-
-      //"_EMu_LowCR_SS",
-      //"_EMu_LowCR_TwoJet_NoFatJet_SS",
-      //"_EMu_LowCR_OneJet_NoFatJet_SS",
-      //"_EMu_HighCR_SS",
-      //"_EMu_HighCR_TwoJet_NoFatJet_SS",
-      //"_EMu_HighCR_OneFatJet_SS",
 
     };
   }
@@ -229,26 +224,26 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   };
 
   m.x_title = {
-    "m(ll) [GeV]",
+    "m(ll) (GeV)",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
-    "Leading Lepton p_{T} [GeV]", "Leading Lepton #eta", "Leading Lepton Type",
-    "Sub-Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton #eta", "Sub-Leading Lepton Type",
-    "Leading Jet p_{T} [GeV]", "Leading Jet #eta",
-    "Sub-Leading Jet p_{T} [GeV]", "Sub-Leading Jet #eta",
-    "Leading Forward Jet p_{T} [GeV]", "Leading Forward Jet #eta",
-    "Sub-Leading Forward Jet p_{T} [GeV]", "Sub-Leading Forward Jet #eta",
-    "Leading No-LeptonVeto Jet p_{T} [GeV]", "Leading No-LeptonVeto Jet #eta",
-    "Sub-Leading No-LeptonVeto Jet p_{T} [GeV]", "Sub-Leading No-LeptonVeto Jet #eta",
-    "#slash{E}_{T}^{miss} [GeV]", "#phi of #slash{E}_{T}^{miss}", "H_{T} [GeV]", "S_{T} [GeV]",
-    "#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]",
+    "Leading Lepton p_{T} (GeV)", "Leading Lepton #eta", "Leading Lepton Type",
+    "Subleading Lepton p_{T} (GeV)", "Subleading Lepton #eta", "Subleading Lepton Type",
+    "Leading Jet p_{T} (GeV)", "Leading Jet #eta",
+    "Subleading Jet p_{T} (GeV)", "Subleading Jet #eta",
+    "Leading Forward Jet p_{T} (GeV)", "Leading Forward Jet #eta",
+    "Subleading Forward Jet p_{T} (GeV)", "Subleading Forward Jet #eta",
+    "Leading No-LeptonVeto Jet p_{T} (GeV)", "Leading No-LeptonVeto Jet #eta",
+    "Subleading No-LeptonVeto Jet p_{T} (GeV)", "Subleading No-LeptonVeto Jet #eta",
+    "#slash{E}_{T}^{miss} (GeV)", "#phi of #slash{E}_{T}^{miss}", "H_{T} (GeV)", "S_{T} (GeV)",
+    "#slash{E}_{T}^{miss}^{2}/S_{T} (GeV)",
     "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin",
     //==== Fatjet
     "# of Fatjet",
-    "Fatjet p_{T} [GeV]", "Fatjet #eta", "Fatjet Mass [GeV]", "Fatjet #tau_{21}", "Fatjet Pruned Mass [GeV]",
-    "m(Leading Lepton+Fatjet) [GeV]", "Sub-Leading Lepton+Fatjet [GeV]", "m(ll+Fatjet) [GeV]",
-    "m(Leading Lepton+Fatjet) [GeV]", "Sub-Leading Lepton+Fatjet [GeV]", "m(ll+Fatjet) [GeV]",
+    "Fatjet p_{T} (GeV)", "Fatjet #eta", "Fatjet Mass (GeV)", "Fatjet #tau_{21}", "Fatjet Pruned Mass (GeV)",
+    "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
+    "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
     //==== OneJet_NoFatJet
-    "m(Leading Lepton+j) [GeV]", "m(Sub-Leading Lepton+j) [GeV]", "m(llj) [GeV]",
+    "m(Leading Lepton+j) (GeV)", "m(Subleading Lepton+j) (GeV)", "m(llj) (GeV)",
   };
 
   m.units = {
@@ -278,9 +273,42 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
 
     //==== PD
-    if(m.histname_suffix.at(i).Contains("DiMuon")) m.PrimaryDataset.push_back("DoubleMuon");
-    if(m.histname_suffix.at(i).Contains("DiElectron")) m.PrimaryDataset.push_back("DoubleEG");
-    if(m.histname_suffix.at(i).Contains("EMu")) m.PrimaryDataset.push_back("MuonEG");
+    if(m.histname_suffix.at(i).Contains("DiMuon")){
+      m.PrimaryDataset.push_back("DoubleMuon");
+      m.LeptonChannels.push_back(21);
+    }
+    else if(m.histname_suffix.at(i).Contains("DiElectron")){
+      m.PrimaryDataset.push_back("DoubleEG");
+      m.LeptonChannels.push_back(22);
+    }
+    else if(m.histname_suffix.at(i).Contains("EMu")){
+      m.PrimaryDataset.push_back("MuonEG");
+      m.LeptonChannels.push_back(23);
+    }
+    else{
+      cout << "ERROR : PD not correct" << endl;
+      return;
+    }
+
+    if(m.histname_suffix.at(i).Contains("Inclusive1nlbjets")){
+      m.RegionType.push_back(-4);
+    }
+    else if(m.histname_suffix.at(i).Contains("0jets_0nlbjets_dRllge2p5")){
+      m.RegionType.push_back(-5);
+    }
+    else if(m.histname_suffix.at(i).Contains("LowCR")){
+      if(m.histname_suffix.at(i).Contains("TwoJet_NoFatJet")) m.RegionType.push_back(-21);
+      else if(m.histname_suffix.at(i).Contains("OneJet_NoFatJet")) m.RegionType.push_back(-22);
+      else m.RegionType.push_back(-20);
+    }
+    else if(m.histname_suffix.at(i).Contains("HighCR")){
+      if(m.histname_suffix.at(i).Contains("TwoJet_NoFatJet")) m.RegionType.push_back(-31);
+      else if(m.histname_suffix.at(i).Contains("OneFatJet")) m.RegionType.push_back(-32);
+      else m.RegionType.push_back(-30);
+    }
+    else{
+      m.RegionType.push_back(0);
+    }
 
     //==== Log plot boolean
     if(XXX==0) m.UseLogy.push_back(-1);
@@ -301,10 +329,12 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     m.samples_to_use = {"fake_Dijet", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
     m.histname_suffix = {"_DiElectron_0jets_SS"};
     m.PrimaryDataset = {"DoubleEG"};
+    m.LeptonChannels = {22};
+    m.RegionType = {0};
     m.drawdata = {true};
     m.UseLogy = {-1};
     m.histname = {"m_ll"};
-    m.x_title = {"m(ll) [GeV]"};
+    m.x_title = {"m(ll) (GeV)"};
     m.units = {"GeV"};
     if(ScaleMC) m.ApplyMCNormSF = {true};
     else m.ApplyMCNormSF = {false};
@@ -312,7 +342,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
 /*
   //==== FIXME test
   m.histname = {"Nevents"};
-  m.x_title = {"#slash{E}_{T}^{miss}^{2}/S_{T} [GeV]"};
+  m.x_title = {"#slash{E}_{T}^{miss}^{2}/S_{T} (GeV)"};
   m.units = {"GeV"};
 */
   //====================

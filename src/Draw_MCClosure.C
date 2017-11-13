@@ -3,6 +3,8 @@
 
 void Draw_MCClosure(){
 
+  bool DrawPlot = true;
+
   gStyle->SetOptStat(0);
   gErrorIgnoreLevel = kError;
 
@@ -24,25 +26,37 @@ void Draw_MCClosure(){
   }
 
   vector<TString> channels = {
-    "DiElectron", "DiMuon", "EMu",
+    "DiElectron",
+    "DiMuon",
+    "EMu",
   };
 
   vector<TString> regions = {
     "Preselection",
-    "alljets",
-    "0jets",
-    "1jets",
+    "Low_TwoJet_NoFatJet",
+    "Low_OneJet_NoFatJet",
+    "High",
+    "High_TwoJet_NoFatJet",
+    "High_OneFatJet_NoFatJet",
   };
-  TString region = "Preselection_SS";
+  vector<TString> regionsfortex = {
+    "Preselection",
+    "Low\\_TwoJet\\_NoFatJet",
+    "Low\\_OneJet\\_NoFatJet",
+    "High",
+    "High\\_TwoJet\\_NoFatJet",
+    "High\\_OneFatJet\\_NoFatJet",
+  };
 
   vector<TString> samples = {
-    "TT_powheg", "DYJets", "DYJets_positive", "WJets", "WJets_positive",
-    //"TT_powheg", "DYJets_positive", "WJets_positive",
-    //"DYJets", "DYJets_positive",
-    //"WJets", "WJets_positive",
-    //"TT_powheg",
-    //"DYJets_MG", "DYJets", "DYJets_positive",
-    //"WJets_MG", "WJets", "WJets_positive",
+    "TT_powheg",
+    "DYJets_positive",
+    "WJets_positive",
+  };
+  vector<TString> samplesfortex = {
+    "TT\\_powheg",
+    "DYJets\\_positive",
+    "WJets\\_positive",
   };
 
   vector<TString> vars = {
@@ -76,7 +90,7 @@ void Draw_MCClosure(){
       TString ChargeSign = "SS";
       if(sample.Contains("WJets")) ChargeSign = "AllCharge";
 
-      region = regions.at(k)+"_"+ChargeSign;
+      TString region = regions.at(k)+"_"+ChargeSign;
 
       for(unsigned int j=0; j<vars.size(); j++){
 
@@ -126,6 +140,57 @@ void Draw_MCClosure(){
             }
             cout << "=> Systematic Extra = " << std::fixed<<std::setprecision(1)<<100.*SystExtra << endl;
 
+            TString texfilepath = plotpath+"/"+channel+"/"+region+"/"+sample+"/tex/";
+            gSystem->mkdir(texfilepath, kTRUE);
+
+            ofstream ofile_tex(texfilepath+"/Yields.tex",ios::trunc);
+            ofile_tex.setf(ios::fixed,ios::floatfield);
+            ofile_tex << "\\documentclass[10pt]{article}" << endl;
+            ofile_tex << "\\usepackage{epsfig,subfigure,setspace,xtab,xcolor,array,colortbl}" << endl;
+            ofile_tex << "\\usepackage{makecell}" << endl;
+            ofile_tex << "\\begin{document}" << endl;
+            ofile_tex << "\\input{"+texfilepath+"/Table.txt}" << endl;
+            ofile_tex << "\\end{document}" << endl;
+
+            ofstream ofile(texfilepath+"/Table.txt",ios::trunc);
+            ofile.precision(2);
+            ofile.setf(ios::fixed,ios::floatfield);
+            ofile << "\\begin{table}[!tbh]" << endl;
+            ofile << "  \\caption{" << endl;
+            ofile << "    MC closure test result at " << channel << " " << regionsfortex.at(k) << ", using " << samplesfortex.at(i) << endl;
+            ofile << "  }" << endl;
+            ofile << "  \\begin{center}" << endl;
+            ofile << "    \\begin{tabular}{c|cc}" << endl;
+            ofile << "\\hline" << endl;
+
+            ofile << "\\makecell{"
+                  << "\\textcolor{black}{" << channel << "} \\\\ "
+                  << "\\textcolor{blue}{" << regionsfortex.at(k) << "} \\\\ "
+                  << "\\textcolor{red}{" << samplesfortex.at(i) << "}} & Weighted Yield & Unweighted Yield \\\\" << endl;
+            ofile << "\\hline" << endl;
+            ofile << " Measured & $" << hist_Measured->GetBinContent(1) << " \\pm " << hist_Measured->GetBinError(1) << " $ & " << int(hist_Measured->GetEntries()) << "\\\\"  << endl;
+            ofile << " Predicted & $" << hist_Predicted->GetBinContent(1) << " \\pm " << hist_Predicted->GetBinError(1) << " $ & " << int(hist_Predicted->GetEntries()) << "\\\\"  << endl;
+            ofile << "\\hline" << endl;
+            ofile << "\\hline" << endl;
+            ofile << "\\multicolumn{3}{c}{(Measured-Predicted)$/$Predicted = $"
+                  << 100.*(hist_Measured->GetBinContent(1)-hist_Predicted->GetBinContent(1))/hist_Predicted->GetBinContent(1)
+                  << "$~\\\%} \\\\ "<< endl;
+            ofile << "\\hline" << endl;
+            ofile << "\\multicolumn{3}{c}{Systematic = $"
+                  << 100.*SystExtra 
+                  << "$~\\\%} \\\\ "<< endl;
+            ofile << "\\hline" << endl;
+            ofile << "    \\end{tabular}" << endl;
+            ofile << "  \\end{center}" << endl;
+            ofile << "\\end{table}" << endl;
+
+            system("latex "+texfilepath+"/Yields.tex");
+            system("dvipdf Yields.dvi");
+            system("rm *aux");
+            system("rm *log");
+            system("rm *dvi");
+            system("mv Yields.pdf "+texfilepath);
+
           }
 
           hist_Measured->Rebin(rebins.at(j));
@@ -167,8 +232,11 @@ void Draw_MCClosure(){
           hist_Predicted->GetXaxis()->SetTitle(xtitle.at(j));
           hist_Predicted->GetYaxis()->SetTitle("Events");
 
-          gSystem->mkdir(plotpath+"/"+channel+"/"+region, kTRUE);
-          c1->SaveAs(plotpath+"/"+channel+"/"+region+"/"+sample+"_"+var+".pdf");
+          if(DrawPlot){
+            gSystem->mkdir(plotpath+"/"+channel+"/"+region+"/"+sample, kTRUE);
+            c1->SaveAs(plotpath+"/"+channel+"/"+region+"/"+sample+"/"+sample+"_"+var+".pdf");
+            c1->SaveAs(plotpath+"/"+channel+"/"+region+"/"+sample+"/"+sample+"_"+var+".png");
+          }
           c1->Close();
 
         }

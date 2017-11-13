@@ -15,16 +15,20 @@ void HiggsCombindedLimit(int i=0){
   TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
   TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  TString WhichDirectoryInCutop = "OPTIMIZED_171021_ElEl_Combined";
-  if(i==1) WhichDirectoryInCutop = "OPTIMIZED_171021_MuMu";
-  if(i==2) WhichDirectoryInCutop = "OPTIMIZED_171021_MuMu_Bin2";
-  if(i==3) WhichDirectoryInCutop = "OPTIMIZED_171021_MuMu_Combined";
-  if(i==4) WhichDirectoryInCutop = "OPTIMIZED_171021_ElEl";
-  if(i==5) WhichDirectoryInCutop = "OPTIMIZED_171021_ElEl_Bin2";
-  if(i==6) WhichDirectoryInCutop = "OPTIMIZED_171021_ElEl_Combined";
+  TString WhichDirectoryInCutop = "OPTIMIZED_171107_MuEl_Combined";
+  if(i==1) WhichDirectoryInCutop = "OPTIMIZED_171107_MuMu";
+  if(i==2) WhichDirectoryInCutop = "OPTIMIZED_171107_MuMu_Bin2";
+  if(i==3) WhichDirectoryInCutop = "OPTIMIZED_171107_MuMu_Combined";
+  if(i==4) WhichDirectoryInCutop = "OPTIMIZED_171107_ElEl";
+  if(i==5) WhichDirectoryInCutop = "OPTIMIZED_171107_ElEl_Bin2";
+  if(i==6) WhichDirectoryInCutop = "OPTIMIZED_171107_ElEl_Combined";
+  if(i==7) WhichDirectoryInCutop = "OPTIMIZED_171107_MuEl";
+  if(i==8) WhichDirectoryInCutop = "OPTIMIZED_171107_MuEl_Bin2";
+  if(i==9) WhichDirectoryInCutop = "OPTIMIZED_171107_MuEl_Combined";
 
   TString channel = "MuMu";
   if(WhichDirectoryInCutop.Contains("ElEl")) channel = "ElEl";
+  if(WhichDirectoryInCutop.Contains("MuEl")) channel = "MuEl";
 
   filepath = filepath+WhichDirectoryInCutop+"/";
   plotpath = plotpath+WhichDirectoryInCutop+"/";
@@ -65,6 +69,8 @@ void HiggsCombindedLimit(int i=0){
     else if(mass[dummyint]<=300) scale *= 1.;
     else if(mass[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
+
+    if(channel=="MuEl") scale *= 0.5;
 
     obs[dummyint] *= scale;
     limit[dummyint] *= scale;
@@ -126,6 +132,8 @@ void HiggsCombindedLimit(int i=0){
     else if(mass_SandT[dummyint]<=300) scale *= 1.;
     else if(mass_SandT[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
+
+    if(channel=="MuEl") scale *= 0.5;
 
     obs_SandT[dummyint] *= scale;
     limit_SandT[dummyint] *= scale;
@@ -195,6 +203,14 @@ void HiggsCombindedLimit(int i=0){
       0.0108741, 0.0194395, 0.0400305, 0.0708397, 0.149737, 0.497138
     };
   }
+  if(channel=="MuEl"){
+    MixingValues8TeV = {
+      //==== MuEl
+      6.66795e-05, 8.00154e-05, 0.000171178, 0.00135744, 0.00288853,
+      0.00703366, 0.0034261, 0.00332376, 0.00448255, 0.00653659,
+      0.00795478, 0.0162876, 0.0247572, 0.0466464, 0.0847838, 0.285325,
+    };
+  }
 
   for(unsigned int j=0; j<MixingValues8TeV.size(); j++) exp[j] = MixingValues8TeV.at(j);
 
@@ -215,6 +231,7 @@ void HiggsCombindedLimit(int i=0){
   hist_axis(dummy);
   if(channel=="ElEl") dummy->GetYaxis()->SetTitle("|V_{eN}|^{2}");
   if(channel=="MuMu") dummy->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
+  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("|V_{eN}V_{#muN}^{*}|/(|V_{eN}|^{2}+|V_{#muN}|^{2})");
   dummy->GetXaxis()->SetTitle("m(HN) [GeV]");
   dummy->GetXaxis()->SetRangeUser(10., 2000);
   dummy->GetYaxis()->SetTitleSize(0.06); 
@@ -226,7 +243,7 @@ void HiggsCombindedLimit(int i=0){
   gr_13TeV_exp->Draw("lsame");
   gr_8TeV_exp->Draw("lsame");
   if(DrawObserved) gr_13TeV_obs->Draw("lsame");
-  //gr_13TeV_exp_SandT->Draw("lsame");
+  gr_13TeV_exp_SandT->Draw("lsame");
 
   lg->AddEntry(gr_8TeV_exp, "CMS 8 TeV Expected", "l");
   lg->SetX2NDC(0.90);
@@ -257,6 +274,7 @@ void HiggsCombindedLimit(int i=0){
   hist_axis(dummy);
   if(channel=="ElEl") dummy->GetYaxis()->SetTitle("|V_{eN}|^{2}");
   if(channel=="MuMu") dummy->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
+  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("|V_{eN}V_{#muN}^{*}|/(|V_{eN}|^{2}+|V_{#muN}|^{2})");
   dummy->GetXaxis()->SetTitle("m(HN) [GeV]");
   dummy->GetXaxis()->SetRangeUser(20., 2500);
   dummy->GetYaxis()->SetTitleSize(0.06);
@@ -267,7 +285,7 @@ void HiggsCombindedLimit(int i=0){
   gr_band_1sigma->Draw("3same");
   gr_13TeV_exp->Draw("lsame");
   gr_8TeV_exp->Draw("lsame");
-  //gr_13TeV_exp_SandT->Draw("lsame");
+  gr_13TeV_exp_SandT->Draw("lsame");
   if(DrawObserved) gr_13TeV_obs->Draw("lsame");
 
   lg_log->AddEntry(gr_8TeV_exp, "CMS 8 TeV Expected", "l");
