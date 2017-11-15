@@ -253,6 +253,7 @@ void Plotter::draw_hist(){
           else if( current_sample.Contains("chargeflip") ) ThisSyst = analysisInputs.CalculatedSysts["ChrageFlipSyst"];
           else{
             double mcnorm = analysisInputs.MCNormSF_uncert[current_sample];
+            if(!ApplyMCNormSF.at(i_cut)) mcnorm = 0.;
             double lumi = analysisInputs.CalculatedSysts["Luminosity"];
             ThisSyst = sqrt( mcnorm*mcnorm + lumi*lumi );
           }

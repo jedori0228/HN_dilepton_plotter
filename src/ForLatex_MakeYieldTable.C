@@ -166,9 +166,20 @@ void ForLatex_MakeYieldTable(int x=0){
 
         TString channel = channels.at(it_channel);
 
+        TString V2 = "|V_{N#mu}|^{2}";
+        TString V2ForTex = "|V_{N \\mu}|^{2}";
+        if(channel=="ElEl"){
+          V2 = "|V_{Ne}|^{2}";
+          V2ForTex = "|V_{N e}|^{2}";
+        }
+        if(channel=="MuEl"){
+          V2 = "|V_{Nl}|^{2}";
+          V2ForTex = "|V_{N \\ell}|^{2}";
+        }
+
         if(isSignal){
           bkglist = {"HNMoriondLL"+channel+"_"+TString::Itoa(ref_sigs.at(index_signal),10)};
-          bkgdtype = "$m_N = "+TString::Itoa(ref_sigs.at(index_signal),10)+"$~\\GeVcc, $\\left| V_{\\mu N} \\right|^2 = "+ref_scaleForTex.at(index_signal)+"$";
+          bkgdtype = "$m_N = "+TString::Itoa(ref_sigs.at(index_signal),10)+"$~\\GeVcc, $"+V2ForTex+" = "+ref_scaleForTex.at(index_signal)+"$";
           if(it_channel==0){
             if(index_signal==0) cout << "Majorana neutrino signal & & & \\\\" << endl;
             cout << bkgdtype;
@@ -197,10 +208,6 @@ void ForLatex_MakeYieldTable(int x=0){
           DataPD = "MuonEG";
           ChannelName = "EMu";
         }
-
-        TString V2 = "|V_{N#mu}|^{2}";
-        if(channel=="ElEl") V2 = "|V_{Ne}|^{2}";
-        if(channel=="MuEl") V2 = "|V_{Nl}|^{2}";
 
         double Yield = 0.;
         double StatError = 0.;

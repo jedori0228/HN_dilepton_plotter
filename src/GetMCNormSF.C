@@ -1,64 +1,102 @@
+#include "RunNtupleForBinnedYieldPlot.C"
 #include "canvas_margin.h"
 #include "AnalysisInputs.h"
+#include "mylib.h"
 
-void GetMCNormSF(){
-
-  bool DoNorm = true;
+void GetMCNormSF(bool DoNorm=false){
 
   gStyle->SetOptStat(0);
-  TH1::AddDirectory(kFALSE);
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString catversion = getenv("CATVERSION");
   TString dataset = getenv("CATANVERSION");
+
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  TString filepath = ENV_PLOT_PATH+"/"+dataset+"/Regions2/CR/use_FR_method/fake_Dijet/";
+  TString filepath = ENV_FILE_PATH+"/"+dataset+"/Regions2/";
   TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/MCNormSF/";
-
-  if( !gSystem->mkdir(plotpath, kTRUE) ){
-    cout
-    << "###################################################" << endl
-    << "Directoy " << plotpath << " is created" << endl
-    << "###################################################" << endl
-    << endl;
-  }
 
   AnalysisInputs analysisInputs;
   analysisInputs.SetCalculatedSysts(WORKING_DIR+"/data/"+dataset+"/Syst.txt");
   double FakeSyst = analysisInputs.CalculatedSysts["FakeLooseID"];
-  cout << "FakeSyst = " << FakeSyst << endl;
+  double LumiSyst = analysisInputs.CalculatedSysts["Luminosity"];
+
+  map< TString, vector<TString> > map_sample_string_to_list;
+  map< TString, pair<TString, Color_t> > map_sample_string_to_legendinfo;
+  vector<int> MCsector_first_index;
+
+  map_sample_string_to_list["WZ_excl"] = {"WZTo3LNu_powheg"};
+  map_sample_string_to_list["ZZ_excl"] = {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"};
+  map_sample_string_to_list["VVV"] = {"WWW", "WWZ", "WZZ", "ZZZ"};
+  map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
+  map_sample_string_to_list["Zgamma"] = {"ZGto2LG"};
+  map_sample_string_to_list["Wgamma"] = {"WGtoLNuG"};
+  map_sample_string_to_list["tgamma"] = {"TG", "TTG"};
+  map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
+  map_sample_string_to_list["fake_sfed_HighdXY"] = {"fake_sfed_HighdXY"};
+  map_sample_string_to_list["fake_sfed_HighdXY_UsePtCone"] = {"fake_sfed_HighdXY_UsePtCone"};
+  map_sample_string_to_list["fake_DiMuon_HighdXY"] = {"fake_HighdXY"};
+  map_sample_string_to_list["fake_Dijet"] = {"fake_Dijet"};
+  
+  map_sample_string_to_legendinfo["WZ_excl"] = make_pair("WZ", kGreen);
+  map_sample_string_to_legendinfo["ZZ_excl"] = make_pair("ZZ", kRed-7);
+  map_sample_string_to_legendinfo["VVV"] = make_pair("triboson", kSpring+10);
+  map_sample_string_to_legendinfo["top"] = make_pair("top", kRed);
+  map_sample_string_to_legendinfo["Zgamma"] = make_pair("Z + #gamma", kViolet);
+  map_sample_string_to_legendinfo["Wgamma"] = make_pair("W + #gamma", kOrange);
+  map_sample_string_to_legendinfo["tgamma"] = make_pair("top + #gamma", kSpring-7);
+  map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Non-prompt", 870);
+  map_sample_string_to_legendinfo["chargeflip"] = make_pair("Charge-flip", kYellow);
+
+  vector<TString> samples_to_use = {"WZ_excl", "Wgamma", "ZZ_excl", "Zgamma", "fake_Dijet", "tgamma", "VVV", "top"};
+
+  TLegend *lg = new TLegend(0.60, 0.60, 0.93, 0.94);
+  lg->SetBorderSize(0);
+  lg->SetFillStyle(0);
+  TH1D *histtmpdata = new TH1D("histtmpdata", "", 1, 0., 1.);
+  histtmpdata->SetMarkerStyle(20);
+  histtmpdata->SetMarkerSize(1.6);
+  histtmpdata->SetMarkerColor(kBlack);
+  histtmpdata->SetLineColor(kBlack);
+  lg->AddEntry(histtmpdata, "Total Background", "ple");
+  
+  for(int i=samples_to_use.size()-1; i>=0; i--){
+    TH1D *histtmp = new TH1D(samples_to_use.at(i), "", 1, 0., 1.);
+    histtmp->SetLineColor(map_sample_string_to_legendinfo[samples_to_use.at(i)].second);
+    histtmp->SetFillColor(map_sample_string_to_legendinfo[samples_to_use.at(i)].second);
+    lg->AddEntry(histtmp, map_sample_string_to_legendinfo[samples_to_use.at(i)].first, "f");
+  }
+
+  vector<TString> samples;
+  for(unsigned int i=0; i<samples_to_use.size(); i++){
+    MCsector_first_index.push_back( samples.size() );
+    samples.insert(samples.end(),
+                   map_sample_string_to_list[samples_to_use.at(i)].begin(),
+                   map_sample_string_to_list[samples_to_use.at(i)].end()
+                   );
+  }
+  cout << "We will use :" << endl;
+  for(unsigned int i=0; i<samples.size(); i++) cout << " " << i << "\t" << samples.at(i) << endl;
+  cout << "MCsector_first_index :" << endl;
+  for(unsigned int i=0; i<MCsector_first_index.size(); i++) cout << " " << MCsector_first_index.at(i) << endl;
+  analysisInputs.SetMCSF(WORKING_DIR+"/data/"+dataset+"/MCSF.txt", samples);
 
   vector<TString> regions = {
-    "WZ",
-    "ZGamma",
-    "ZZ",
-    //"WGamma",
+    "DiLepton_ThreeLepton_WZ",
+    "DiLepton_ThreeLepton_ZGamma",
+    "DiLepton_FourLepton_ZZ",
   };
   const int nCR = regions.size();
 
-  vector< vector<TString> > subregions  = {
-
-    {"DiElectron_ThreeLepton_WZ", "DiMuon_ThreeLepton_WZ"},
-    {"DiElectron_ThreeLepton_ZGamma", "DiMuon_ThreeLepton_ZGamma"},
-    {"DiElectron_FourLepton_ZZ_NotAllSameFlavour", "DiElectron_FourLepton_ZZ_AllSameFlavour", "DiMuon_FourLepton_ZZ"},
-    //{"DiMuon_ThreeLepton_WGamma"},
-    //{"DiElectron_ThreeLepton_WGamma", "DiMuon_ThreeLepton_WGamma"},
-
-  };
-
-  vector< vector<TString> > signals = {
+  vector< vector<TString> > vec_TargetSamples = {
     {"WZTo3LNu_powheg"},
     {"ZGto2LG"},
     {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"},
-    //{"WGtoLNuG"},
-  };
-
-  vector< double > SFs = {
-   0.9905 ,
-   0.779 ,
-   0.9308 ,
   };
 
   TCanvas* c1 = new TCanvas("c1", "", 800, 800);
@@ -88,8 +126,7 @@ void GetMCNormSF(){
   x_1[1] = -1000;  y_1[1] = 1;
   TGraph *g1 = new TGraph(2, x_1, y_1);
 
-
-  TH1D *hist_data = new TH1D("hist_empty", "", nCR, 0., 1.*nCR);
+  TH1D *hist_data = new TH1D("hist_data", "", nCR, 0., 1.*nCR);
 
   hist_data->SetMarkerStyle(20);
   hist_data->SetMarkerSize(1.6);
@@ -103,8 +140,6 @@ void GetMCNormSF(){
 
   TH1D *MC_stacked_staterr = new TH1D("MC_stacked_staterr", "", nCR, 0., 1.*nCR);
 
-  TLegend *lg = NULL;
-
   TMatrix matrixA(nCR, nCR);
   TMatrix matrixA_err(nCR, nCR);
   TMatrix matrixD(nCR, 1);
@@ -112,10 +147,11 @@ void GetMCNormSF(){
   TMatrix matrixC(nCR, 1);
   TMatrix matrixC_err(nCR, 1);
 
-  for(unsigned int i=0; i<regions.size(); i++){
+  for(unsigned int it_region=0; it_region<regions.size(); it_region++){
 
-    TString region = regions.at(i);
-    vector<TString> subregion = subregions.at(i);
+    TString region = regions.at(it_region);
+
+    vector<TString> TargetSamples = vec_TargetSamples.at(it_region);
 
     cout << "## "<<region<<" ##" << endl;
 
@@ -126,162 +162,141 @@ void GetMCNormSF(){
     double y_non_signal(0.);
     double e_non_signal(0.);
 
-    map<Color_t, TH1D *> map_hists;
+    //==== Data by hand
 
-    for(unsigned int j=0; j<subregion.size(); j++){
+    TFile *file_data = new TFile(filepath+"/DiLeptonAnalyzer_CR_data_DiLepton_cat_"+catversion+".root");
+    TString histname = region+"/Nevents_"+region;
+    TH1D *thishist_data = (TH1D *)file_data->Get(histname);
 
-      TString fullfilename = "";
-      if(DoNorm) fullfilename = filepath+"MCNormSFed_"+subregion.at(j)+"/hists.root";
-      else fullfilename = filepath+"_"+subregion.at(j)+"/hists.root";
+    y_total_data = thishist_data->GetBinContent(1);
+    e_total_data = thishist_data->GetBinError(1);
 
-      TFile *file = new TFile(fullfilename);
-      TCanvas *c1 = (TCanvas*)file->Get("Nevents");
-      TPad *pad = (TPad*)c1->GetPrimitive("c1");
-      TPad *pad_down = (TPad*)c1->GetPrimitive("c1_down");
+    y_non_signal += y_total_data;
+    e_non_signal += e_total_data*e_total_data;
 
-      //==== Get Legend
-      if(!lg){
-        lg = (TLegend *)pad->GetPrimitive("TPave");
+    hist_data->SetBinContent(it_region+1, y_total_data);
+    hist_data->SetBinError(it_region+1, e_total_data);
+
+    file_data->Close();
+
+    //==== Bkgd
+    for(unsigned int it_sample=0; it_sample<samples.size(); it_sample++){
+
+      TString sample = samples.at(it_sample);
+
+      TString current_MCsector = samples_to_use.back();
+      for(unsigned int i=0; i<MCsector_first_index.size()-1; i++){
+        if(MCsector_first_index.at(i) <= it_sample && it_sample < MCsector_first_index.at(i+1)){
+          current_MCsector = samples_to_use.at(i);
+          break;
+        }
       }
 
-      //==== Read Top Histograms
-      TH1D *data = (TH1D*)pad->GetPrimitive("Nevents_"+subregion.at(j)+"_data");
+      Color_t thiscolor = map_sample_string_to_legendinfo[current_MCsector].second;
 
-      TH1D *bkgd = (TH1D*)pad->GetPrimitive("MC_stacked_allerr");
+      TString filename = "DiLeptonAnalyzer_CR_SK"+sample+"_dilep_cat_"+catversion+".root";
+      if(sample.Contains("fake")) filename = "DiLeptonAnalyzer_CR_SKfake_Dijet_DiLepton_dilep_cat_"+catversion+".root";
+      TFile *file = new TFile(filepath+"/"+filename);
 
-      double y_data = data->GetBinContent(1);
-      double y_bkgd = bkgd->GetBinContent(1);
+      TH1D *original_hist = (TH1D *)file->Get(histname);
+      if(!original_hist) continue;
+      if(original_hist->GetBinContent(1)<0) continue;
 
-      double e_data = data->GetBinError(1);
-      double e_bkgd = bkgd->GetBinError(1);
+      //==== Scale MCSF
+      if( DoNorm && !sample.Contains("fake") ){
+        original_hist->Scale(analysisInputs.MCNormSF[sample]);
+      }
 
-      y_total_data += y_data;
-      y_total_bkgd += y_bkgd;
-      y_non_signal += y_data;
-      e_non_signal += e_data*e_data;
+      //===================================
+      //==== Set Stat Error Here (fake..)
+      //===================================
 
-      e_total_data += e_data*e_data;
-      e_total_bkgd += e_bkgd*e_bkgd;
+      //==== Stat Error Propations for Fake
+      if( sample.Contains("fake") ){
+        TH1D *original_hist_up = (TH1D *)file->Get(region+"_up/Nevents_"+region+"_up");
+        double error_propagated = original_hist_up->GetBinContent(1)-original_hist->GetBinContent(1);
+        double error_sumw2 = original_hist->GetBinError(1);
+        double error_combined = sqrt( error_propagated*error_propagated + error_sumw2*error_sumw2 );
 
-      //==== Read Bottom Histgrams
+        original_hist->SetBinError(1, error_combined);
+      }
 
-      TH1D *original_allerr = (TH1D*)pad_down->GetPrimitive("Nevents_"+subregion.at(j)+"_data_allerr");
-      TH1D *original_staterr = (TH1D*)pad_down->GetPrimitive("Nevents_"+subregion.at(j)+"_data_staterr");
-      original_allerr->Scale(y_bkgd);
-      original_staterr->Scale(y_bkgd);
+      TH1D *new_hist = new TH1D("new_hist", "", nCR, 0., 1.*nCR);
+      new_hist->SetBinContent(it_region+1, original_hist->GetBinContent(1));
+      new_hist->SetBinError(it_region+1, original_hist->GetBinError(1));
+      new_hist->SetFillColor( thiscolor );
+      new_hist->SetLineColor( thiscolor );
+      MC_stacked_staterr->Add(new_hist);
 
-      TH1D *new_allerr = new TH1D("new_allerr", "", nCR, 0., 1.*nCR);
-      TH1D *new_staterr = new TH1D("new_staterr", "", nCR, 0., 1.*nCR);
+      //======================
+      //==== Add Systematics
+      //======================
 
-      new_allerr->SetBinContent(i+1, original_allerr->GetBinContent(1));
-      new_allerr->SetBinError(i+1, original_allerr->GetBinError(1));
-      new_staterr->SetBinContent(i+1, original_staterr->GetBinContent(1));
-      new_staterr->SetBinError(i+1, original_staterr->GetBinError(1));
+      if( sample.Contains("fake") ){
+        double error_stat = original_hist->GetBinError(1);
+        double error_syst = FakeSyst*(original_hist->GetBinContent(1));
+        double error_combined = sqrt( error_stat*error_stat+error_syst*error_syst );
 
-      MC_stacked_allerr->Add( new_allerr );
-      MC_stacked_staterr->Add( new_staterr );
+        original_hist->SetBinError(1, error_combined);
+      }
+      else{
+        TH1D *thishist_systyields = (TH1D *)file->Get("Systematics/Yields_"+region);
 
-      //cout << e_bkgd << "\t" << hist_allerr->GetBinError(1) << endl;
+        double error_stat = original_hist->GetBinError(1);
+        double error_syst = GetYieldSystematics(thishist_systyields);
 
-      THStack *MC_stacked = (THStack *)pad->GetPrimitive("MC_stacked");
-      TList *bkgdlist = MC_stacked->GetHists();
-      for(int k=0; k<bkgdlist->Capacity(); k++){
+        double error_lumi = LumiSyst*(original_hist->GetBinContent(1));
 
-        TH1D *new_hist = new TH1D("new_hist", "", nCR, 0., 1.*nCR);
-        TH1D *original_hist = (TH1D*)bkgdlist->At(k);
+        double error_combined = sqrt( error_stat*error_stat + error_syst*error_syst + error_lumi*error_lumi );
 
-        TString this_name = original_hist->GetName();
-        if(this_name.Contains("fake")){
-          cout << "FAKE : " << this_name << endl;
-          for(int zzz=1; zzz<=original_hist->GetXaxis()->GetNbins(); zzz++){
-            double sumw2 = original_hist->GetBinError(zzz);
-            double fakesyst = FakeSyst*(original_hist->GetBinContent(zzz));
-            original_hist->SetBinError(zzz, sqrt(sumw2*sumw2+fakesyst*fakesyst));
-          }
-        }
-        TString sample = this_name;
-        TString suffix = "Nevents_"+subregion.at(j)+"_";
-        sample.Remove(0, suffix.Length());
+        original_hist->SetBinError(1, error_combined);
 
-        int signal_index = -1;
-        for(unsigned int l=0; l<signals.size(); l++){
-          if( std::find( signals.at(l).begin(), signals.at(l).end(), sample ) != signals.at(l).end() ) signal_index = l;
-        }
+        cout << sample << "\t" << error_stat << "\t" << error_syst << "\t" << error_lumi << endl;
 
-        if(signal_index!=-1){
-          matrixA_rows.at(signal_index) += original_hist->GetBinContent(1);
-          matrixA_err_rows.at(signal_index) += (original_hist->GetBinError(1))*(original_hist->GetBinError(1));
-        }
-        else{
-          y_non_signal -= original_hist->GetBinContent(1);
-          e_non_signal += (original_hist->GetBinError(1))*(original_hist->GetBinError(1));
-        }
+      }
 
+      new_hist->SetBinContent(it_region+1, original_hist->GetBinContent(1));
+      new_hist->SetBinError(it_region+1, original_hist->GetBinError(1));
 
-        //cout << this_name << "\t" << sample << endl;
+      this_stack->Add(new_hist);
+      MC_stacked_allerr->Add(new_hist);
 
-        new_hist->SetBinContent(i+1, original_hist->GetBinContent(1));
-        new_hist->SetBinError(i+1, original_hist->GetBinError(1));
-        new_hist->SetFillColor( original_hist->GetFillColor() );
-        new_hist->SetLineColor( original_hist->GetLineColor() );
-        new_hist->SetName(original_hist->GetName());
+      int signal_index = -1;
+      for(unsigned int l=0; l<vec_TargetSamples.size(); l++){
+        if( std::find( vec_TargetSamples.at(l).begin(), vec_TargetSamples.at(l).end(), sample ) != vec_TargetSamples.at(l).end() ) signal_index = l;
+      }
 
-/*
-        if(!map_hists[sample]){
-          map_hists[sample] = (TH1D*)new_hist->Clone();
-        }
-        else{
-          map_hists[sample]->Add(new_hist);
-        }
-*/
+      if(signal_index!=-1){
+        matrixA_rows.at(signal_index) += original_hist->GetBinContent(1);
+        matrixA_err_rows.at(signal_index) += (original_hist->GetBinError(1))*(original_hist->GetBinError(1));
+      }
+      else{
+        y_non_signal -= original_hist->GetBinContent(1);
+        e_non_signal += (original_hist->GetBinError(1))*(original_hist->GetBinError(1));
+      }
 
-        if(!map_hists[original_hist->GetFillColor()]){
-          map_hists[original_hist->GetFillColor()] = (TH1D*)new_hist->Clone();
-        }
-        else{
-          map_hists[original_hist->GetFillColor()]->Add(new_hist);
-        }
+    } // END loop samples
 
-
-      } // END Loop bkgd
-
-    } // END Loop subregions
-
-    //for(map<TString, TH1D *>::iterator it = map_hists.begin(); it != map_hists.end(); it++){
-    for(map<Color_t, TH1D *>::iterator it = map_hists.begin(); it != map_hists.end(); it++){
-      cout << it->second->GetName() << endl;
-      this_stack->Add( it->second );
+    for(unsigned int l=0; l<vec_TargetSamples.size(); l++){
+      matrixA(it_region, l) = matrixA_rows.at(l);
+      matrixA_err(it_region, l) = sqrt(matrixA_err_rows.at(l));
     }
+    matrixC(it_region, 0) = y_non_signal;
+    matrixC_err(it_region, 0) = e_non_signal;
+    matrixD(it_region, 0) = y_total_data;
 
-    e_total_data = sqrt(e_total_data);
-    e_total_bkgd = sqrt(e_total_bkgd);
-
-    double re_total_data = e_total_data/y_total_data;
-    double re_total_bkgd = e_total_bkgd/y_total_bkgd;
-    double re_total_sf = re_total_data+re_total_bkgd;
-
-    double y_total_sf = y_total_data/y_total_bkgd;
-    double e_total_sf = re_total_sf*y_total_sf;
-
-    hist_data->SetBinContent(i+1, y_total_data);
-    hist_data->SetBinError(i+1, e_total_data);
-
-    //cout << region << "\t" << std::fixed<<std::setprecision(3) << y_total_sf << "\t" << e_total_sf << endl;
-
-    for(unsigned int l=0; l<signals.size(); l++){
-      matrixA(i, l) = matrixA_rows.at(l);
-      matrixA_err(i, l) = sqrt(matrixA_err_rows.at(l));
-    }
-    matrixC(i, 0) = y_non_signal;
-    matrixC_err(i, 0) = e_non_signal;
-    matrixD(i, 0) = y_total_data;
-
-  } // END Loop regions
+  } // END loop regions
 
   c1_up->cd();
   this_stack->Draw("histsame");
   MC_stacked_allerr->Draw("sameE2");
+  cout << MC_stacked_allerr->GetBinContent(1) << endl;
+  cout << MC_stacked_allerr->GetBinContent(2) << endl;
+  cout << MC_stacked_allerr->GetBinContent(3) << endl;
   hist_data->Draw("PE1same");
+  cout << hist_data->GetBinContent(1) << endl;
+  cout << hist_data->GetBinContent(2) << endl;
+  cout << hist_data->GetBinContent(3) << endl;
   lg->Draw();
 
   c1_down->cd();
@@ -321,28 +336,14 @@ void GetMCNormSF(){
 
   ratio_point->Draw("PE1same");
 
-  TLegend *lg_ratio = new TLegend(0.2, 0.8, 0.6, 0.9);
-  lg_ratio->SetFillStyle(0);
-  lg_ratio->SetBorderSize(0);
-  lg_ratio->SetNColumns(3);
-  lg_ratio->AddEntry(ratio_staterr, "Stat.", "f");
-  lg_ratio->AddEntry(ratio_allerr, "Stat.+Syst.", "f");
-  lg_ratio->AddEntry(ratio_point, "Obs./Pred.", "p");
-  lg_ratio->Draw();
-
-  //==== y=1 line
-  g1->Draw("same");
-
-  ratio_allerr->GetXaxis()->SetLabelSize(0.3);
-  ratio_allerr->GetXaxis()->SetLabelOffset(0.01);
-  ratio_allerr->GetXaxis()->SetBinLabel(1, "WZ");
-  ratio_allerr->GetXaxis()->SetBinLabel(2, "Z#gamma");
-  ratio_allerr->GetXaxis()->SetBinLabel(3, "ZZ");
-  ratio_allerr->GetXaxis()->SetBinLabel(4, "W#gamma");
-
-
-  if(!DoNorm) c1->SaveAs(plotpath+"/BeforeNorm.pdf");
-  else c1->SaveAs(plotpath+"/AfterNorm.pdf");
+  if(!DoNorm){
+    c1->SaveAs(plotpath+"/BeforeNorm.pdf");
+    c1->SaveAs(plotpath+"/BeforeNorm.png");
+  }
+  else{
+    c1->SaveAs(plotpath+"/AfterNorm.pdf");
+    c1->SaveAs(plotpath+"/AfterNorm.png");
+  }
   c1->Close();
 
   for(unsigned int i=0; i<nCR; i++){
@@ -437,9 +438,9 @@ void GetMCNormSF(){
   matrixB_allerr.Print();
 
   //====  matrixB, matrixB_allerr
-  for(unsigned int i=0; i<signals.size(); i++){
+  for(unsigned int i=0; i<vec_TargetSamples.size(); i++){
 
-    vector<TString> signal = signals.at(i);
+    vector<TString> signal = vec_TargetSamples.at(i);
 
     for(unsigned int j=0; j<signal.size(); j++){
 
@@ -459,13 +460,8 @@ void GetMCNormSF(){
   Check.Print();
 
 
+
 }
-
-
-
-
-
-
 
 
 

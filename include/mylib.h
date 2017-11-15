@@ -157,3 +157,41 @@ double GetMaximum(TGraphAsymmErrors *a){
   return maxval;
 
 }
+
+double GetYieldSystematics(TH1D *hist){
+
+  int n_syst = hist->GetXaxis()->GetNbins();
+  int n_source = (n_syst-1)/2;
+
+  //==== Bin index
+  //==== i=1 : central
+  //==== i=2 : _MuonEn_up
+  //==== i=3 : _MuonEn_down
+  //==== -> n_syst = 3
+  //==== -> n_source = (n_syst-1)/2 = (3-1)/2 = 1
+
+  double y_central = hist->GetBinContent(1);
+
+  double sum_syst = 0.;
+  for(int i=1; i<=n_source; i++){
+    double yield_up = hist->GetBinContent(i*2);
+    double yield_down = hist->GetBinContent(i*2+1);
+
+    double syst_up = fabs(yield_up-y_central);
+    double syst_down = fabs(yield_down-y_central);
+
+    sum_syst += 0.5*(syst_up*syst_up+syst_down*syst_down);
+
+  }
+
+  return sqrt(sum_syst);
+
+}
+
+
+
+
+
+
+
+
