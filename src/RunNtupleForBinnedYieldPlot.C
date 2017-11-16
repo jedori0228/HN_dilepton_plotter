@@ -79,7 +79,7 @@ void RunNtupleForBinnedYieldPlot::Run(){
 
       if(! (m.TreeExist) ){
 
-       //cout << sample << "\t" << "No Tree : " << "Ntp_"+channel+"_"+treeskim << endl;
+        //cout << sample << "\t" << "No Tree : " << "Ntp_"+channel+"_"+treeskim << endl;
         if(sample.Contains("HN")){
           signal_unweighted_yield.push_back(0.);
           signal_weighted_yield.push_back(0.);
@@ -151,6 +151,10 @@ void RunNtupleForBinnedYieldPlot::Run(){
         hist_prompt_total_up->Fill(0., m.weighted_yield);
         hist_prompt_tau21_up->Fill(0., m.hist_for_tau21_up->GetBinContent(1) );
 
+        signal_unweighted_yield.push_back( m.unweighted_yield );
+        signal_weighted_yield.push_back( m.weighted_yield );
+        signal_weighted_yield_stat.push_back( m.hist_for_error->GetBinError(1) );
+        signal_tau21_up.push_back( m.hist_for_tau21_up->GetBinContent(1) );
       }
       else if(sample.Contains("HN")){
         signal_unweighted_yield.push_back( m.unweighted_yield );
@@ -260,7 +264,7 @@ void RunNtupleForBinnedYieldPlot::Run(){
 
     //==== Force Punzi to require
     //==== 1) Minimum Total Bkgd
-    //if( (total_bkg < 0.5) || (data_weighted_yield < 1) ){
+    //if( (total_bkg < 0.5) || (data_weighted_yield < 1) )
 
 /*
     if( (total_bkg < 0.01) ){

@@ -97,7 +97,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
     if(lepch==0) regions.push_back( "DiMuon_"+tmp_regions.at(j)+"_SS" );
     if(lepch==1){
       if(tmp_regions.at(j).Contains("Low") || tmp_regions.at(j).Contains("High")) regions.push_back( "DiElectron_"+tmp_regions.at(j)+"_SS" );
-      else regions.push_back( "DiElectron_"+tmp_regions.at(j)+"OffZ_SS" );
+      else regions.push_back( "DiElectron_"+tmp_regions.at(j)+"_OffZ_SS" );
     }
     if(lepch==2) regions.push_back( "EMu_"+tmp_regions.at(j)+"_SS" );
 
@@ -364,7 +364,11 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
     TString histname = region+"/Nevents_"+region;
 
     TH1D *hist_data = (TH1D *)file_data->Get(histname);
-    int y_data = hist_data->GetBinContent(1);
+
+    int y_data = 0;
+    if(hist_data){
+      y_data = hist_data->GetBinContent(1);
+    }
 
     cout <<" & $"<<y_data<<"$";
   }
