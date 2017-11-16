@@ -101,7 +101,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //m.samples_to_use = {"fake_HighdXY", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
     m.histname_suffix = {
 
-/*
+
       //==== DiMuon
       "_DiMuon_0jets_SS", // SS 0jet CR
       "_DiMuon_1jets_SS", // SS 1jet CR
@@ -116,6 +116,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiMuon_HighCR_TwoJet_NoFatJet_SS",
       "_DiMuon_HighCR_OneFatJet_SS",
       "_DiMuon_0jets_0nlbjets_dRllge2p5_SS",
+      "_DiMuon_WpWp_CR_SS",
 
 
       //=== DiElectron
@@ -137,6 +138,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiElectron_1jets_0nlbjets_mllge110_OffZ_SS",
       "_DiElectron_0nlbjets_OffZ_SS",
       "_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS",
+      "_DiElectron_WpWp_CR_SS",
 
       //==== EMu
       "_EMu_0jets_SS", // SS 0jet CR
@@ -152,13 +154,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_EMu_HighCR_TwoJet_NoFatJet_SS",
       "_EMu_HighCR_OneFatJet_SS",
       "_EMu_0jets_0nlbjets_dRllge2p5_SS",
-*/
-
-
-      "_DiMuon_WpWp_CR_SS",
-      "_DiElectron_WpWp_CR_SS",
       "_EMu_WpWp_CR_SS",
-
 
 
     };
