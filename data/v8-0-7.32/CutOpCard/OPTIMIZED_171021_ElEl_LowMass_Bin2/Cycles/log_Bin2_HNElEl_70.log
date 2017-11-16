@@ -22,27 +22,27 @@ Processing Bin2_HNElEl_70.C...
 [AnalysisInputs::SetMCSF] sample : top
 [AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
 [AnalysisInputs::SetMCSF] sample : WZTo3LNu_powheg
-[AnalysisInputs::SetMCSF] => MCSF = 0.990529, MCSF_err = 0.0659614
+[AnalysisInputs::SetMCSF] => MCSF = 0.9878, MCSF_err = 0.0890059
 [AnalysisInputs::SetMCSF] sample : ZGto2LG
-[AnalysisInputs::SetMCSF] => MCSF = 0.779045, MCSF_err = 0.182441
+[AnalysisInputs::SetMCSF] => MCSF = 0.771776, MCSF_err = 0.152815
 [AnalysisInputs::SetMCSF] sample : ZZTo4L_powheg
-[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
 [AnalysisInputs::SetMCSF] sample : ggZZto2e2mu
-[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
 [AnalysisInputs::SetMCSF] sample : ggZZto2e2nu
-[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
 [AnalysisInputs::SetMCSF] sample : ggZZto2e2tau
-[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
 [AnalysisInputs::SetMCSF] sample : ggZZto2mu2nu
-[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
 [AnalysisInputs::SetMCSF] sample : ggZZto2mu2tau
-[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
 [AnalysisInputs::SetMCSF] sample : ggZZto4e
-[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
 [AnalysisInputs::SetMCSF] sample : ggZZto4mu
-[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
 [AnalysisInputs::SetMCSF] sample : ggZZto4tau
-[AnalysisInputs::SetMCSF] => MCSF = 0.93079, MCSF_err = 0.110885
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
 [AnalysisInputs::SetCalculatedSysts] Get Systematics from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.32/Syst.txt
 [AnalysisInputs::SetCalculatedSysts] source : Luminosity
 [AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
@@ -53,64 +53,64 @@ Processing Bin2_HNElEl_70.C...
 [CutRangeInfo::ReadCutCard] Get Cutcard from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.32/CutOpCard/OPTIMIZED_171021_ElEl_LowMass_Bin2/HNElEl_70.txt
 prompt_tau21_syst = 0
 signal_tau21_syst = 0
-Central	21.0109	16.6292	1.51287
-_MuonEn_up	21.2052	16.6292	1.51287
-_MuonEn_down	21.2719	16.6292	1.51287
-_MuonIDSF_up	21.268	16.6292	1.51287
-_MuonIDSF_down	21.2614	16.6292	1.51287
-_ElectronEn_up	20.7756	16.6292	1.51287
-_ElectronEn_down	22.5725	16.6292	1.51287
-_ElectronIDSF_up	21.8054	16.6292	1.51287
-_ElectronIDSF_down	19.6688	16.6292	1.51287
-_TriggerSF_up	21.4201	16.6292	1.51287
-_TriggerSF_down	21.1304	16.6292	1.51287
-_PU_up	21.0049	16.6292	1.51287
-_PU_down	22.3057	16.6292	1.51287
-_JetEn_up	21.0599	16.6292	1.51287
-_JetEn_down	21.6298	16.6292	1.51287
-_JetRes_up	21.2067	16.6292	1.51287
-_JetRes_down	19.6746	16.6292	1.51287
-_Unclustered_up	21.0439	16.6292	1.51287
-_Unclustered_down	22.2437	16.6292	1.51287
-_BTagSFEff_up	21.2635	16.6292	1.51287
-_BTagSFEff_down	21.2794	16.6292	1.51287
-_BTagSFMiss_up	20.4365	16.6292	1.51287
-_BTagSFMiss_down	20.9779	16.6292	1.51287
-_JetMass_up	21.2565	16.6292	1.51287
-_JetMass_down	21.2615	16.6292	1.51287
-_JetMassRes_up	21.2085	16.6292	1.51287
-_JetMassRes_down	21.25	16.6292	1.51287
+Central	20.9751	16.6292	1.51287
+_MuonEn_up	21.1671	16.6292	1.51287
+_MuonEn_down	21.2336	16.6292	1.51287
+_MuonIDSF_up	21.2297	16.6292	1.51287
+_MuonIDSF_down	21.2231	16.6292	1.51287
+_ElectronEn_up	20.7404	16.6292	1.51287
+_ElectronEn_down	22.537	16.6292	1.51287
+_ElectronIDSF_up	21.7684	16.6292	1.51287
+_ElectronIDSF_down	19.6321	16.6292	1.51287
+_TriggerSF_up	21.3816	16.6292	1.51287
+_TriggerSF_down	21.0925	16.6292	1.51287
+_PU_up	20.9658	16.6292	1.51287
+_PU_down	22.2687	16.6292	1.51287
+_JetEn_up	21.0168	16.6292	1.51287
+_JetEn_down	21.5717	16.6292	1.51287
+_JetRes_up	21.1686	16.6292	1.51287
+_JetRes_down	19.6368	16.6292	1.51287
+_Unclustered_up	21.0028	16.6292	1.51287
+_Unclustered_down	22.1947	16.6292	1.51287
+_BTagSFEff_up	21.2252	16.6292	1.51287
+_BTagSFEff_down	21.2411	16.6292	1.51287
+_BTagSFMiss_up	20.3983	16.6292	1.51287
+_BTagSFMiss_down	20.9423	16.6292	1.51287
+_JetMass_up	21.2183	16.6292	1.51287
+_JetMass_down	21.2232	16.6292	1.51287
+_JetMassRes_up	21.1704	16.6292	1.51287
+_JetMassRes_down	21.2117	16.6292	1.51287
 
 ################ Sources ################
 Source	SystTotal	SystPrompt	SystFake	Signal
-Stat 11.64 20.69  8.20  0.86  15.16
+Stat 11.65 20.73  8.20  0.86  15.16
 Lumi 1.34  2.50 -  -  2.50
 PDF  -  -  -  -  7.58
-MuonPt  0.59 1.09  -  -  1.25
-MuonID  0.65 1.21  -  -  0.00
-ElectronE  2.85 5.31  -  -  1.56
-ElectronID  2.82 5.25  -  -  4.14
-Trigger  0.77 1.43  -  -  1.36
+MuonPt  0.58 1.09  -  -  1.25
+MuonID  0.64 1.20  -  -  0.00
+ElectronE  2.86 5.32  -  -  1.56
+ElectronID  2.82 5.26  -  -  4.14
+Trigger  0.76 1.43  -  -  1.36
 PU  2.34 4.36  -  -  7.70
-JES  1.12 2.09  -  -  4.27
-JER  2.44 4.55  -  -  5.47
-Uncl  2.23 4.15  -  -  7.65
-BEff  0.67 1.24  -  -  0.00
-BMiss  1.04 1.94  -  -  0.00
-JMS  0.63 1.18  -  -  0.00
-JMR  0.56 1.04  -  -  1.93
+JES  1.08 2.02  -  -  4.27
+JER  2.44 4.56  -  -  5.47
+Uncl  2.21 4.11  -  -  7.65
+BEff  0.66 1.23  -  -  0.00
+BMiss  1.04 1.95  -  -  0.00
+JMS  0.63 1.17  -  -  0.00
+JMR  0.55 1.03  -  -  1.93
 Tau21 0.00  0.00 -  -  0.00
-MCNorm 0.42  0.78 -  -  -
-Fake 12.74  -  30.00 - -
+MCNorm 0.26  0.48 -  -  -
+Fake 12.75  -  30.00 - -
 CF 0.81  -  -  21.00 -
-Total Systematic 14.20 11.68  30.00  21.00  16.01
+Total Systematic 14.20 11.65  30.00  21.00  16.01
 
-Total Background	39.153
-- Prompt	21.011
+Total Background	39.117
+- Prompt	20.975
 - Fake	16.629
 - CF	1.513
 
 ####### Result #######
 Signal Eff	0.000492
-39.152990 1.183765
+39.117152 1.183841
 53.473562 1.220511

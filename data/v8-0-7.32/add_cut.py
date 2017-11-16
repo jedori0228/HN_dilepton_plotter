@@ -4,9 +4,11 @@ import os
 filenames = ['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
 #filenames = ['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
 
-From = "_DiElectron_Inclusive1nlbjets_SS"
+From = "_EMu_LowCR_SS"
 Tos   = [
-      "_DiElectron_Inclusive1nlbjets_OffZ_SS",
+      "_DiMuon_WpWp_CR_SS",
+      "_DiElectron_WpWp_CR_SS",
+      "_EMu_WpWp_CR_SS",
 ]
 
 for filename in filenames:

@@ -1,0 +1,116 @@
+
+Processing HNMuMu_1400.C...
+[AnalysisInputs::SetMCSF] Get MC SF from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.32/MCSF.txt
+[AnalysisInputs::SetMCSF] sample : VVV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ZZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttH_nonbb
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : top
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 0.9878, MCSF_err = 0.0890059
+[AnalysisInputs::SetMCSF] sample : ZGto2LG
+[AnalysisInputs::SetMCSF] => MCSF = 0.771776, MCSF_err = 0.152815
+[AnalysisInputs::SetMCSF] sample : ZZTo4L_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
+[AnalysisInputs::SetMCSF] sample : ggZZto4e
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
+[AnalysisInputs::SetMCSF] sample : ggZZto4mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
+[AnalysisInputs::SetMCSF] sample : ggZZto4tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.929269, MCSF_err = 0.103637
+[AnalysisInputs::SetCalculatedSysts] Get Systematics from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.32/Syst.txt
+[AnalysisInputs::SetCalculatedSysts] source : Luminosity
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
+[AnalysisInputs::SetCalculatedSysts] source : FakeLooseID
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.3
+[AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.21
+[CutRangeInfo::ReadCutCard] Get Cutcard from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.32/CutOpCard/OPTIMIZED_171107_MuMu_HighMass/HNMuMu_1400.txt
+prompt_tau21_syst = 0
+signal_tau21_syst = 0
+Central	0.826738	0	0
+_MuonEn_up	0.970769	0	0
+_MuonEn_down	0.759564	0	0
+_MuonIDSF_up	0.873752	0	0
+_MuonIDSF_down	0.792039	0	0
+_ElectronEn_up	0.830785	0	0
+_ElectronEn_down	0.828814	0	0
+_ElectronIDSF_up	0.832891	0	0
+_ElectronIDSF_down	0.826151	0	0
+_TriggerSF_up	0.830758	0	0
+_TriggerSF_down	0.826092	0	0
+_PU_up	0.855391	0	0
+_PU_down	0.802716	0	0
+_JetEn_up	0.936442	0	0
+_JetEn_down	0.93578	0	0
+_JetRes_up	0.9106	0	0
+_JetRes_down	0.834203	0	0
+_Unclustered_up	0.83317	0	0
+_Unclustered_down	0.839597	0	0
+_BTagSFEff_up	0.832842	0	0
+_BTagSFEff_down	0.835541	0	0
+_BTagSFMiss_up	0.741204	0	0
+_BTagSFMiss_down	0.826092	0	0
+_JetMass_up	0.833798	0	0
+_JetMass_down	0.829265	0	0
+_JetMassRes_up	0.826092	0	0
+_JetMassRes_down	0.66086	0	0
+
+################ Sources ################
+Source	SystTotal	SystPrompt	SystFake	Signal
+Stat 23.52 23.52  -nan  -nan  2.34
+Lumi 2.50  2.50 -  -  2.50
+PDF  -  -  -  -  8.53
+MuonPt  13.59 13.59  -  -  3.29
+MuonID  5.00 5.00  -  -  4.20
+ElectronE  0.39 0.39  -  -  0.09
+ElectronID  0.53 0.53  -  -  0.12
+Trigger  0.35 0.35  -  -  0.27
+PU  3.20 3.20  -  -  0.53
+JES  13.23 13.23  -  -  2.45
+JER  7.20 7.20  -  -  1.00
+Uncl  1.23 1.23  -  -  0.34
+BEff  0.92 0.92  -  -  0.75
+BMiss  7.32 7.32  -  -  0.83
+JMS  0.64 0.64  -  -  0.24
+JMR  14.19 14.19  -  -  0.49
+Tau21 0.00  0.00 -  -  0.00
+MCNorm 13.07  13.07 -  -  -
+Fake 0.00  -  -nan - -
+CF 0.00  -  -  -nan -
+Total Systematic 29.70 29.70  -nan  -nan  10.79
+
+Total Background	0.827
+- Prompt	0.827
+- Fake	0.000
+- CF	0.000
+
+####### Result #######
+Signal Eff	0.052034
+0.826738 1.378835
+0.001462 1.110456
