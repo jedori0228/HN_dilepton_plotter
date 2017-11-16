@@ -15,16 +15,16 @@ void HiggsCombindedLimit(int i=0){
   TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
   TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  TString WhichDirectoryInCutop = "OPTIMIZED_171107_MuEl_Combined";
-  if(i==1) WhichDirectoryInCutop = "OPTIMIZED_171107_MuMu";
-  if(i==2) WhichDirectoryInCutop = "OPTIMIZED_171107_MuMu_Bin2";
-  if(i==3) WhichDirectoryInCutop = "OPTIMIZED_171107_MuMu_Combined";
-  if(i==4) WhichDirectoryInCutop = "OPTIMIZED_171107_ElEl";
-  if(i==5) WhichDirectoryInCutop = "OPTIMIZED_171107_ElEl_Bin2";
-  if(i==6) WhichDirectoryInCutop = "OPTIMIZED_171107_ElEl_Combined";
-  if(i==7) WhichDirectoryInCutop = "OPTIMIZED_171107_MuEl";
-  if(i==8) WhichDirectoryInCutop = "OPTIMIZED_171107_MuEl_Bin2";
-  if(i==9) WhichDirectoryInCutop = "OPTIMIZED_171107_MuEl_Combined";
+  TString WhichDirectoryInCutop = "MuEl_Combined";
+  if(i==1) WhichDirectoryInCutop = "MuMu";
+  if(i==2) WhichDirectoryInCutop = "MuMu_Bin2";
+  if(i==3) WhichDirectoryInCutop = "MuMu_Combined";
+  if(i==4) WhichDirectoryInCutop = "ElEl";
+  if(i==5) WhichDirectoryInCutop = "ElEl_Bin2";
+  if(i==6) WhichDirectoryInCutop = "ElEl_Combined";
+  if(i==7) WhichDirectoryInCutop = "MuEl";
+  if(i==8) WhichDirectoryInCutop = "MuEl_Bin2";
+  if(i==9) WhichDirectoryInCutop = "MuEl_Combined";
 
   TString channel = "MuMu";
   if(WhichDirectoryInCutop.Contains("ElEl")) channel = "ElEl";

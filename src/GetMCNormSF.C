@@ -55,15 +55,23 @@ void GetMCNormSF(bool DoNorm=false){
 
   vector<TString> samples_to_use = {"WZ_excl", "Wgamma", "ZZ_excl", "Zgamma", "fake_Dijet", "tgamma", "VVV", "top"};
 
-  TLegend *lg = new TLegend(0.60, 0.60, 0.93, 0.94);
+  TLegend *lg = new TLegend(0.69, 0.20, 0.96, 0.92);
   lg->SetBorderSize(0);
   lg->SetFillStyle(0);
+  //==== error bar
+  TH1D *histtmperr = new TH1D("histtmperr", "", 1, 0., 1.);
+  histtmperr->SetMarkerColorAlpha(kAzure-9, 0);
+  histtmperr->SetFillStyle(3013);
+  histtmperr->SetFillColor(kBlack);
+  histtmperr->SetLineColor(0);
+  lg->AddEntry(histtmperr, "Stat.+Syst. Uncert.", "f");
+  //==== Data
   TH1D *histtmpdata = new TH1D("histtmpdata", "", 1, 0., 1.);
   histtmpdata->SetMarkerStyle(20);
   histtmpdata->SetMarkerSize(1.6);
   histtmpdata->SetMarkerColor(kBlack);
   histtmpdata->SetLineColor(kBlack);
-  lg->AddEntry(histtmpdata, "Total Background", "ple");
+  lg->AddEntry(histtmpdata, "data", "ple");
   
   for(int i=samples_to_use.size()-1; i>=0; i--){
     TH1D *histtmp = new TH1D(samples_to_use.at(i), "", 1, 0., 1.);
