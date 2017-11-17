@@ -933,7 +933,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   ratio_allerr->SetMaximum(2.0);
   ratio_allerr->SetMinimum(0.0);
   ratio_allerr->GetXaxis()->SetTitle(x_title[i_var]);
-  ratio_allerr->SetYTitle("#frac{Obs.}{Pred.}");
+  ratio_allerr->GetYaxis()->SetTitle("#frac{Obs.}{Pred.}");
   ratio_allerr->SetFillColor(kOrange);
   ratio_allerr->SetMarkerSize(0);
   ratio_allerr->SetMarkerStyle(0);

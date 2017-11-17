@@ -188,7 +188,27 @@ double GetYieldSystematics(TH1D *hist){
 
 }
 
+TDirectory *MakeTemporaryDirectory(){
 
+  gROOT->cd();
+  TDirectory* tempDir = 0;
+  int counter = 0;
+  while (not tempDir) {
+    // First, let's find a directory name that doesn't exist yet:
+    std::stringstream dirname;
+    dirname << "HNCommonLeptonFakes_%i" << counter;
+    if (gROOT->GetDirectory((dirname.str()).c_str())) {
+      ++counter;
+      continue;
+    }
+    // Let's try to make this directory:
+    tempDir = gROOT->mkdir((dirname.str()).c_str());
+
+  }
+
+  return tempDir;
+
+}
 
 
 
