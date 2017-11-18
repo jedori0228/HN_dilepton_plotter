@@ -59,7 +59,7 @@ void PdfSystematics::CalculatePdfSystematic(){
     double diff = hist_Pdf_Replica->GetBinContent(i)-Yield_Central;
     Syst_Pdf_Replica += diff*diff;
   }
-  Syst_Pdf_Replica = sqrt(Syst_Pdf_Replica)/(hist_Pdf_Replica->GetXaxis()->GetNbins())/(Yield_Central);
+  Syst_Pdf_Replica = sqrt(Syst_Pdf_Replica)/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1)/(Yield_Central);
   //cout << "Pdf Replica -> " << Syst_Pdf_Replica << endl;
 
   Syst_Pdf_Alpha = 0.;

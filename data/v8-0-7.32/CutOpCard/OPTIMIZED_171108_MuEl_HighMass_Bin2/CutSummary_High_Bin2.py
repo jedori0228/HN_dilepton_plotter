@@ -73,7 +73,7 @@ for mass in masses:
         print value+'\t',
 
     if "secondLepton_Pt" in var:
-      print "40 - 150\t-\t",
+      print "40 - 130\t-\t",
     if "ljj |<" in var:
       print "15\t",
 
