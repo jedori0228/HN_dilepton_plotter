@@ -50,6 +50,36 @@ TGraphAsymmErrors* hist_to_graph(TH1D* hist, int n_skip_x_left){
 
 }
 
+TGraphAsymmErrors* hist_to_graph(TH1D* hist, int n_skip_x_left, int n_x_shift, int i_x_shift){
+
+  TH1::SetDefaultSumw2(true);
+
+  int Nbins = hist->GetXaxis()->GetNbins()-n_skip_x_left;
+  double x[Nbins], y[Nbins], xlow[Nbins], xup[Nbins], ylow[Nbins], yup[Nbins];
+  TAxis *xaxis = hist->GetXaxis();
+  for(Int_t i=1; i<=Nbins; i++){
+    x[i-1] = xaxis->GetBinCenter(i+n_skip_x_left);
+    y[i-1] = hist->GetBinContent(i+n_skip_x_left);
+    xlow[i-1] = xaxis->GetBinCenter(i+n_skip_x_left)-xaxis->GetBinLowEdge(i+n_skip_x_left);
+    xup[i-1] = xaxis->GetBinUpEdge(i+n_skip_x_left)-xaxis->GetBinCenter(i+n_skip_x_left);
+    ylow[i-1] = hist->GetBinError(i+n_skip_x_left);
+    yup[i-1] = hist->GetBinError(i+n_skip_x_left);
+
+    double dx = (xaxis->GetBinUpEdge(i+n_skip_x_left)-xaxis->GetBinLowEdge(i+n_skip_x_left))/double(n_x_shift+1);
+    x[i-1] = xaxis->GetBinLowEdge(i+n_skip_x_left) + double(i_x_shift+1) * dx;
+    xlow[i-1] = double(i_x_shift+1) * dx;
+    xup[i-1] = xaxis->GetBinUpEdge(i+n_skip_x_left)-x[i-1];
+
+    //ylow[i-1] = 0;
+    //yup[i-1] = 0;
+    //cout << "x = " << x[i-1] << ", y = " << y[i-1] << ", x_low = " << xlow[i-1] << ", xup = " << xup[i-1] << ", ylow = " << ylow[i-1] << ", yup = " << yup[i-1] << endl;
+  }
+  TGraphAsymmErrors *out = new TGraphAsymmErrors(Nbins, x, y, xlow, xup, ylow, yup);
+  out->SetTitle("");
+  return out;
+
+}
+
 
 TGraphAsymmErrors* GraphSubtract(TGraphAsymmErrors *a, TGraphAsymmErrors *b, bool Rel){
 

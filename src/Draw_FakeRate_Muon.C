@@ -5,7 +5,7 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Muon(){
 
-  TString Sample = "QCD_v7_SIP3";
+  TString Sample = "Data_v7_SIP3";
   TString Lepton = "Muon";
 
   gStyle->SetOptStat(0);
@@ -34,8 +34,12 @@ void Draw_FakeRate_Muon(){
   vector<double> ptinit = {5., 10., 20.};
   vector<Color_t> colors = {kRed, kBlack, kBlue};
 
-  const int N_pt_out = 7;
-  float ptarray[N_pt_out+1] = {5., 10., 20., 30., 40., 50., 60., 70.};
+  vector<double> vec_pt_bins = {5., 10., 15., 20., 30., 40., 50., 60., 70.};
+  if(Sample.Contains("QCD")) vec_pt_bins = {5., 10., 15., 20., 25., 30., 40., 50., 60., 70.};
+
+  const int N_pt_out = vec_pt_bins.size()-1;
+  float ptarray[N_pt_out+1];
+  for(int i=0; i<N_pt_out+1; i++) ptarray[i] = vec_pt_bins.at(i);// = {5., 10., 15., 20., 25., 30., 40., 50., 60., 70.};
   float etaarray[4] = {0., 0.8, 1.479, 2.5};
 
   TFile *outroot = new TFile(plotpath+Lepton+"_"+Sample+"_FR.root", "RECREATE");
@@ -69,7 +73,7 @@ void Draw_FakeRate_Muon(){
       dummy_merged->GetXaxis()->SetTitle("p_{T}^{cone} [GeV]");
       dummy_merged->GetXaxis()->SetRangeUser(10., 60.);
       //==== Eta Regions
-      TLegend *lg2 = new TLegend(0.5, 0.5, 0.93, 0.93);
+      TLegend *lg2 = new TLegend(0.5, 0.6, 0.93, 0.93);
       lg2->SetFillStyle(0);
       lg2->SetBorderSize(0);
 
@@ -127,11 +131,11 @@ void Draw_FakeRate_Muon(){
             }
           }
 
-          //====            1    2    3    4    5    6    7
-          //==== hist_F : 5., 10., 20., 30., 40., 50., 60., 70.
-          //==== merge :  5., 10., 20., 30., 40., 50., 60., 70.
-          //==== i=0 (mu3)  -> 5-10, 10-20
-          //==== i=1 (mu8)  -> 20-30
+          //====            1    2    3    4    5    6    7   8    9
+          //==== hist_F : 5., 10., 15., 20., 25., 30., 40., 50., 60., 70.
+          //==== merge :  5., 10., 15., 20., 25., 30., 40., 50., 60., 70.
+          //==== i=0 (mu3)  -> 5-10, 10-15
+          //==== i=1 (mu8)  -> 15-20, 20-25, 25-30
           //==== i=2 (mu17) -> 30~
 
           if(i==0){
@@ -146,8 +150,9 @@ void Draw_FakeRate_Muon(){
 
           }
           if(i==1){
-
-            for(int k=3; k<=3; k++){
+            int this_end = 4;
+            if(Sample.Contains("QCD")) this_end = 5;
+            for(int k=3; k<=this_end; k++){
               histout->SetBinContent(k, j+1, hist_F->GetBinContent(k));
               histout->SetBinError(k, j+1, hist_F->GetBinError(k));
 
@@ -157,8 +162,9 @@ void Draw_FakeRate_Muon(){
 
           }
           if(i==2){
-
-            for(int k=4; k<=N_pt_out; k++){
+            int this_start = 5;
+            if(Sample.Contains("QCD")) this_start = 6;
+            for(int k=this_start; k<=N_pt_out; k++){
               histout->SetBinContent(k, j+1, hist_F->GetBinContent(k));
               histout->SetBinError(k, j+1, hist_F->GetBinError(k));
 
@@ -171,22 +177,23 @@ void Draw_FakeRate_Muon(){
           TGraphAsymmErrors *gr = hist_to_graph(hist_F);
           gr->SetLineColor(colors.at(i));
           gr->SetLineWidth(3);
-          gr->Draw("lpsame");
+          gr->Draw("pesame");
 
           lg->AddEntry(gr, trigger, "l");
         }
 
         lg->Draw();
         c1->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_Eta_bin"+TString::Itoa(j,10)+".pdf");
+        c1->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_Eta_bin"+TString::Itoa(j,10)+".png");
         c1->Close();
         delete c1;
 
         c_alleta->cd();
         if(j==0) dummy->Draw("histsame");
-        TGraphAsymmErrors *gr_merge = hist_to_graph(merge,1);
+        TGraphAsymmErrors *gr_merge = hist_to_graph(merge,1, 3, j);
         gr_merge->SetLineColor(colors.at(j));
         gr_merge->SetLineWidth(3);
-        gr_merge->Draw("lsame");
+        gr_merge->Draw("pesame");
 
         TString alias = DoubleToString(etaarray[j])+" < |#eta| < "+DoubleToString(etaarray[j+1]);
         lg2->AddEntry(gr_merge, alias, "l");
@@ -194,13 +201,19 @@ void Draw_FakeRate_Muon(){
       } // END Eta Loop
 
       outroot->cd();
-      //histout->Write();
+
       hist_FR2D_F->SetName( histout->GetName() );
+
+      TString newname = TString(histout->GetName())+"_jskim";
+      histout->SetName( newname );
+
+      histout->Write();
       hist_FR2D_F->Write();
 
       c_alleta->cd();
       lg2->Draw();
       c_alleta->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_alleta.pdf");
+      c_alleta->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_alleta.png");
       c_alleta->Close();
 
     } // END b-jet config loop

@@ -3,12 +3,12 @@
 
 void Draw_MCClosure(){
 
-  bool DrawPlot = false;
-  bool DoLatex = false;
+  bool DrawPlot = true;
+  bool DoLatex = true;
   bool PrintSyst = false;
 
   gStyle->SetOptStat(0);
-  gErrorIgnoreLevel = kError;
+  //gErrorIgnoreLevel = kError;
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString catversion = getenv("CATVERSION");
@@ -35,19 +35,27 @@ void Draw_MCClosure(){
 
   vector<TString> regions = {
     "Preselection",
+    "Preselection_ElectronSubLead",
+    "Preselection_MuonSubLead",
+/*
     "Low_TwoJet_NoFatJet",
     "Low_OneJet_NoFatJet",
     "High",
     "High_TwoJet_NoFatJet",
     "High_OneFatJet_NoFatJet",
+*/
   };
   vector<TString> regionsfortex = {
     "Preselection",
+    "Preselection, e-trailing",
+    "Preseleciton, $\\mu$-trailing",
+/*
     "Low\\_TwoJet\\_NoFatJet",
     "Low\\_OneJet\\_NoFatJet",
     "High",
     "High\\_TwoJet\\_NoFatJet",
     "High\\_OneFatJet\\_NoFatJet",
+*/
   };
 
   vector<TString> samples = {
@@ -102,16 +110,40 @@ void Draw_MCClosure(){
   TGraph *g1 = new TGraph(2, x_1, y_1);
 
   vector<TString> vars = {
-    "leadingLepton_Pt", "secondLepton_Pt", "Nevents", "Nbjets_nolepveto", "PFMET", "Njets", "secondJet_Pt", "leadingLepton_Type", "secondLepton_Type", "secondLepton_Eta", "leadingLepton_Eta", "secondLepton_mva", "secondLepton_RelIso", "weight_fr", "NLooseNotTight_weight1", "secondLepton_Pt_cone",
+    "leadingLepton_Pt", "secondLepton_Pt",
+    "Nevents", "Nbjets_nolepveto", "PFMET", "Njets",
+    "secondJet_Pt", "leadingLepton_Type",
+    "secondLepton_Type", "secondLepton_Eta",
+    "leadingLepton_Eta", "secondLepton_mva",
+    "secondLepton_RelIso", "weight_fr",
+    "NLooseNotTight_weight1", "secondLepton_Pt_cone",
   };
   vector<TString> xtitle = {
-    "Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton p_{T} [GeV]", "onebin", "# of b-jets", "E_{T}^{miss} [GeV]", "# of jets", "Leading Jet p_{T} [GeV]", "Leading Lepton Type", "Sub-Leading Lepton Type", "Sub-Leading Lepton #eta", "Leading Lepton #eta", "Sub-Leading Lepton MVA", "Sub-Leading Lepton RelIso", "FR weight", "# of Loose no Tight", "Sub-Leading Lepton p_{T}^{cone} [GeV]",
+    "Leading Lepton p_{T} [GeV]", "Sub-Leading Lepton p_{T} [GeV]",
+    "onebin", "# of b-jets", "E_{T}^{miss} [GeV]", "# of jets",
+    "Leading Jet p_{T} [GeV]", "Leading Lepton Type",
+    "Sub-Leading Lepton Type", "Sub-Leading Lepton #eta",
+    "Leading Lepton #eta", "Sub-Leading Lepton MVA",
+    "Sub-Leading Lepton RelIso", "FR weight",
+    "# of Loose no Tight", "Sub-Leading Lepton p_{T}^{cone} [GeV]",
   };
   vector<double> ymaxs = {
-    50, 100, 400, 100, 50, 50, 50, 50, 50, 300, 300, 300, 300, 300, 300, 300,
+    50, 100,
+    400, 100, 50, 50,
+    50, 50,
+    50, 300,
+    300, 300,
+    300, 300,
+    300, 300,
   };
   vector<int> rebins = {
-    5, 10, 1, 1, 10, 1, 10, 1, 1, 5, 5, 5, 1, 1, 1, 5,
+    5, 5,
+    1, 1, 10, 1,
+    10, 1,
+    1, 5,
+    5, 5,
+    1, 1,
+    1, 5,
   };
 
   for(unsigned int k=0; k<regions.size(); k++){
@@ -121,6 +153,8 @@ void Draw_MCClosure(){
     for(unsigned int l=0; l<channels.size(); l++){
 
       TString channel = channels.at(l);
+
+      if(regions.at(k).Contains("SubLead") && channel!="EMu") continue;
 
       int n_samples = samples.size();
       TH1D *hist_allsample_measured = new TH1D("hist_allsample_measured", "", n_samples, 0., 1.*n_samples);
@@ -249,8 +283,38 @@ void Draw_MCClosure(){
 
           }
 
-          hist_Measured->Rebin(rebins.at(j));
-          hist_Predicted->Rebin(rebins.at(j));
+          if(var.Contains("Pt")){
+            const int n_pt_muon = 11;
+            double ptarray_muon[n_pt_muon+1] = {0., 5., 10., 15., 20., 25, 30., 40., 50., 60., 70., 200};
+
+            const int n_pt_electron = 10;
+            double ptarray_electron[n_pt_electron+1] = {0., 10., 15., 20., 23., 30., 35., 45., 60., 70., 200};
+
+            if(channel=="DiMuon"){
+              hist_Measured = (TH1D *)hist_Measured->Rebin(n_pt_muon,"hnew1", ptarray_muon);
+              hist_Predicted = (TH1D *)hist_Predicted->Rebin(n_pt_muon,"hnew1", ptarray_muon);
+            }
+            if(channel=="DiElectron"){
+              hist_Measured = (TH1D *)hist_Measured->Rebin(n_pt_electron,"hnew1", ptarray_electron);
+              hist_Predicted = (TH1D *)hist_Predicted->Rebin(n_pt_electron,"hnew1", ptarray_electron);
+            }
+
+            if(channel=="EMu"){
+              if(var.Contains("leading")){
+              hist_Measured = (TH1D *)hist_Measured->Rebin(n_pt_muon,"hnew1", ptarray_muon);
+              hist_Predicted = (TH1D *)hist_Predicted->Rebin(n_pt_muon,"hnew1", ptarray_muon);
+              }
+              if(var.Contains("second")){
+              hist_Measured = (TH1D *)hist_Measured->Rebin(n_pt_electron,"hnew1", ptarray_electron);
+              hist_Predicted = (TH1D *)hist_Predicted->Rebin(n_pt_electron,"hnew1", ptarray_electron);
+              }
+            }
+
+          }
+          else{
+            hist_Measured->Rebin(rebins.at(j));
+            hist_Predicted->Rebin(rebins.at(j));
+          }
 
           TCanvas *c1 = new TCanvas("c1", "", 800, 800);
           canvas_margin(c1);
@@ -268,7 +332,12 @@ void Draw_MCClosure(){
           hist_Measured->Draw("psamee1");
 
           hist_axis(hist_Predicted);
-          if(var.Contains("Pt")) hist_Predicted->GetXaxis()->SetRangeUser(0, 150);
+          if(var.Contains("leadingLepton_Pt")) hist_Predicted->GetXaxis()->SetRangeUser(0, 150);
+          if(var.Contains("secondLepton_Pt")) hist_Predicted->GetXaxis()->SetRangeUser(0, 70);
+          if(channel=="EMu"){
+            if(var.Contains("leadingLepton_Pt")) hist_Predicted->GetXaxis()->SetRangeUser(0, 70);
+            if(var.Contains("secondLepton_Pt")) hist_Predicted->GetXaxis()->SetRangeUser(0, 70);
+          }
           if(var.Contains("PFMET")) hist_Predicted->GetXaxis()->SetRangeUser(0, 200);
           if(var.Contains("weight_fr")) hist_Predicted->GetXaxis()->SetRangeUser(-0.2, 0.2);
 
@@ -368,7 +437,12 @@ void Draw_MCClosure(){
         dummy_top->GetYaxis()->SetTitle("Events");
         dummy_top->Draw("hist");
 
-        if(var.Contains("Pt")) dummy_top->GetXaxis()->SetRangeUser(0, 150);
+        if(var.Contains("leadingLepton_Pt")) dummy_top->GetXaxis()->SetRangeUser(0, 150);
+        if(var.Contains("secondLepton_Pt")) dummy_top->GetXaxis()->SetRangeUser(0, 70);
+        if(channel=="EMu"){
+          if(var.Contains("leadingLepton_Pt")) dummy_top->GetXaxis()->SetRangeUser(0, 70);
+          if(var.Contains("secondLepton_Pt")) dummy_top->GetXaxis()->SetRangeUser(0, 70);
+        }
         if(var.Contains("PFMET")) dummy_top->GetXaxis()->SetRangeUser(0, 200);
         if(var.Contains("weight_fr")) dummy_top->GetXaxis()->SetRangeUser(-0.2, 0.2);
 
@@ -422,7 +496,12 @@ void Draw_MCClosure(){
         dummy_bottom->SetMinimum(0.5);
         dummy_bottom->GetXaxis()->SetTitle(xtitle.at(j));
         dummy_bottom->SetYTitle("#frac{Meas.}{Pred.}");
-        if(var.Contains("Pt")) dummy_bottom->GetXaxis()->SetRangeUser(0, 150);
+        if(var.Contains("leadingLepton_Pt")) dummy_bottom->GetXaxis()->SetRangeUser(0, 150);
+        if(var.Contains("secondLepton_Pt")) dummy_bottom->GetXaxis()->SetRangeUser(0, 70);
+        if(channel=="EMu"){
+          if(var.Contains("leadingLepton_Pt")) dummy_bottom->GetXaxis()->SetRangeUser(0, 70);
+          if(var.Contains("secondLepton_Pt")) dummy_bottom->GetXaxis()->SetRangeUser(0, 70);
+        }
         if(var.Contains("PFMET")) dummy_bottom->GetXaxis()->SetRangeUser(0, 200);
         if(var.Contains("weight_fr")) dummy_bottom->GetXaxis()->SetRangeUser(-0.2, 0.2);
         hist_axis(dummy_top, dummy_bottom);
@@ -464,6 +543,9 @@ void Draw_MCClosure(){
 
       } // END var loop
 
+
+      delete hist_allsample_measured;
+      delete hist_allsample_predicted;
 
     } // END mm,ee,em loop
 

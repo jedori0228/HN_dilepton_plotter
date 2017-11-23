@@ -3,7 +3,12 @@
 
 void Draw_FakeTriggerNorm(){
 
-  vector<TString> Leptons = {"Muon_v7_SIP3", "Electron_v7"};
+  bool DrawPlot = true;
+
+  vector<TString> Leptons = {
+    "Muon_v7_SIP3",
+    //"Electron_v7"
+  };
 
   gStyle->SetOptStat(0);
   gErrorIgnoreLevel = kError;
@@ -27,13 +32,13 @@ void Draw_FakeTriggerNorm(){
   }
 
   vector<TString> samples = {
-    "DY", "WJets", "top", "VV", "VGamma",
+    "DY", "WJets", "top", "VV",
   };
   vector<TString> alias = {
-    "DY", "W + Jets", "top", "VV", "V#gamma",
+    "DY", "W + Jets", "top", "VV",
   };
   vector<Color_t> colors = {
-    kYellow, kGreen, kRed, kOrange, kSpring-7,
+    kYellow, kGreen, kRed, kOrange,
   };
 
   vector<TString> vars = {
@@ -44,7 +49,7 @@ void Draw_FakeTriggerNorm(){
   vector<int> rebins = {
     1, 10, 10,
     5, 10, 10,
-    5, 10, 10,
+    5, 1, 10,
   };
 
   //==== y=1 line
@@ -65,7 +70,6 @@ void Draw_FakeTriggerNorm(){
     TString PD = "DoubleEG";
     if(Lepton.Contains("Muon")) PD = "DoubleMuon";
 
-    //vector<TString> triggers = {"HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_v" ,"HLT_Ele17_CaloIdL_TrackIdL_IsoVL_v", "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_v"};
     vector<TString> triggers = {"HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30_v" ,"HLT_Ele17_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30_v"};
     if(Lepton.Contains("Muon")){
       triggers.clear();
@@ -80,8 +84,13 @@ void Draw_FakeTriggerNorm(){
       TString trigger = triggers.at(j);
 
       double TriggerNormSF(1.);
-      //if(trigger=="HLT_Mu3_PFJet40_v") TriggerNormSF = 1./0.72799;
-      //if(trigger=="HLT_Mu8_TrkIsoVVL_v") TriggerNormSF = 1./1.39876;
+      if(trigger=="HLT_Mu3_PFJet40_v") TriggerNormSF = 0.970059;
+      if(trigger=="HLT_Mu8_TrkIsoVVL_v") TriggerNormSF = 0.918045;
+      if(trigger=="HLT_Mu17_TrkIsoVVL_v") TriggerNormSF = 0.942808;
+      if(trigger=="HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30_v") TriggerNormSF = 1.10772;
+      if(trigger=="HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30_v") TriggerNormSF = 1.01992;
+      if(trigger=="HLT_Ele17_CaloIdL_TrackIdL_IsoVL_PFJet30_v") TriggerNormSF = 0.942631;
+      if(trigger=="HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30_v") TriggerNormSF = 0.940177;
 
       for(unsigned int k=0; k<vars.size(); k++){
  
@@ -154,6 +163,10 @@ void Draw_FakeTriggerNorm(){
           x_min = 0.;
           x_max = 200.;
         }
+        if(var=="W_John_MT"){
+          x_min = 50;
+          x_max = 110;
+        }
         hist_empty->GetXaxis()->SetRangeUser(x_min, x_max);
 
         double ymax = max( GetMaximum(hist_data), GetMaximum(MC_stacked_allerr) );
@@ -163,7 +176,10 @@ void Draw_FakeTriggerNorm(){
         hist_data->Draw("psame");
 
         if(var=="ZPeak_mll"){
-          cout << trigger << "\t" << hist_data->Integral(0,9999) << "\t" << MC_stacked_allerr->Integral(0,999) << " => " << hist_data->Integral(0,9999)/MC_stacked_allerr->Integral(0,999) << endl;
+          //cout << trigger << "\t" << hist_data->Integral(0,9999) << "\t" << MC_stacked_allerr->Integral(0,9999) << " => " << hist_data->Integral(0,9999)/MC_stacked_allerr->Integral(0,999) << endl;
+        }
+        if(var=="W_John_MT"){
+          cout << trigger << "\t" << hist_data->Integral(0,9999) << "\t" << MC_stacked_allerr->Integral(0,9999) << " => " << hist_data->Integral(0,9999)/MC_stacked_allerr->Integral(0,999) << endl;
         }
 
         c1_down->cd();
@@ -207,8 +223,8 @@ void Draw_FakeTriggerNorm(){
         latex_Lumi.SetTextSize(0.035);
         latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
-        c1->SaveAs(plotpath+Lepton+"/"+histname+".pdf");
-        c1->SaveAs(plotpath+Lepton+"/"+histname+".png");
+        if(DrawPlot) c1->SaveAs(plotpath+Lepton+"/"+histname+".pdf");
+        if(DrawPlot) c1->SaveAs(plotpath+Lepton+"/"+histname+".png");
         c1->Close();
 
       } // Variables

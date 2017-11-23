@@ -5,7 +5,7 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Electron(){
 
-  TString Sample = "QCD_v7";
+  TString Sample = "Data_v7";
   TString Lepton = "Electron";
 
   gStyle->SetOptStat(0);
@@ -30,13 +30,12 @@ void Draw_FakeRate_Electron(){
 
   TFile *file = new TFile(filepath+"LQOUT_"+Lepton+"_"+Sample+".root");
 
-  //vector<TString> triggers = {"HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_v" ,"HLT_Ele17_CaloIdL_TrackIdL_IsoVL_v", "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_v"};
   vector<TString> triggers = {"HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30_v" ,"HLT_Ele17_CaloIdL_TrackIdL_IsoVL_PFJet30_v", "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30_v"};
   vector<double> ptinit = {10., 15., 20., 25.};
   vector<Color_t> colors = {kRed, kBlack, kBlue, kGreen};
 
-  const int N_pt_out = 6;
-  float ptarray[N_pt_out+1] = {10., 15., 23., 35., 45., 60., 70.};
+  const int N_pt_out = 9;
+  float ptarray[N_pt_out+1] = {10., 15., 20., 23., 30., 35., 40., 50., 60., 70.};
   float etaarray[4] = {0., 0.8, 1.479, 2.5};
 
   TFile *outroot = new TFile(plotpath+Lepton+"_"+Sample+"_FR.root", "RECREATE");
@@ -121,18 +120,19 @@ void Draw_FakeRate_Electron(){
             }
           }
 
-          //====            1    2    3    4    5    6    7    8
-          //==== hist_F : 10., 15., 23., 35., 45., 60., 70.
-          //====                 1    2    3    4    5    6    7
-          //==== merge :  10., 15., 23., 35., 45., 60., 70.
-          //==== i=0 (ele8)  -> 10-15, 15-23
-          //==== i=1 (ele12) -> 23-35
-          //==== i=2 (ele17) -> 35~45
-          //==== i=3 (ele23) -> 45~
+
+          //====             1    2    3    4    5    6    7    8    9
+          //==== hist_F : 10., 15., 20., 23., 30., 35., 40., 50., 60., 70.
+          //====             1    2    3    4    5    6    7    8    9
+          //==== merge :  10., 15., 20., 23., 30., 35., 40., 50., 60., 70.
+          //==== i=0 (ele8)  -> 10-15, 15-20, 20-23
+          //==== i=1 (ele12) -> 23-30, 30-35
+          //==== i=2 (ele17) -> 35-40
+          //==== i=3 (ele23) -> 40~
 
           if(i==0){
 
-            for(int k=1; k<=2; k++){
+            for(int k=1; k<=3; k++){
               histout->SetBinContent(k, j+1, hist_F->GetBinContent(k));
               histout->SetBinError(k, j+1, hist_F->GetBinError(k));
 
@@ -143,7 +143,7 @@ void Draw_FakeRate_Electron(){
           }
           if(i==1){
 
-            for(int k=3; k<=3; k++){
+            for(int k=4; k<=5; k++){
               histout->SetBinContent(k, j+1, hist_F->GetBinContent(k));
               histout->SetBinError(k, j+1, hist_F->GetBinError(k));
 
@@ -154,7 +154,7 @@ void Draw_FakeRate_Electron(){
           }
           if(i==2){
 
-            for(int k=4; k<=4; k++){
+            for(int k=6; k<=6; k++){
               histout->SetBinContent(k, j+1, hist_F->GetBinContent(k));
               histout->SetBinError(k, j+1, hist_F->GetBinError(k));
 
@@ -165,7 +165,7 @@ void Draw_FakeRate_Electron(){
           }
           if(i==3){
 
-            for(int k=5; k<=N_pt_out; k++){
+            for(int k=7; k<=N_pt_out; k++){
               histout->SetBinContent(k, j+1, hist_F->GetBinContent(k));
               histout->SetBinError(k, j+1, hist_F->GetBinError(k));
 
@@ -178,7 +178,7 @@ void Draw_FakeRate_Electron(){
           TGraphAsymmErrors *gr = hist_to_graph(hist_F);
           gr->SetLineColor(colors.at(i));
           gr->SetLineWidth(3);
-          gr->Draw("lpsame");
+          gr->Draw("psame");
 
           if(j==0){
             lg->AddEntry(gr, trigger, "l");
@@ -192,10 +192,10 @@ void Draw_FakeRate_Electron(){
 
         c_alleta->cd();
         if(j==0) dummy->Draw("histsame");
-        TGraphAsymmErrors *gr_merge = hist_to_graph(merge);
+        TGraphAsymmErrors *gr_merge = hist_to_graph(merge, 0, 3, j);
         gr_merge->SetLineColor(colors.at(j));
         gr_merge->SetLineWidth(3);
-        gr_merge->Draw("lsame");
+        gr_merge->Draw("psame");
 
         TString alias = DoubleToString(etaarray[j])+" < |#eta| < "+DoubleToString(etaarray[j+1]);
         lg2->AddEntry(gr_merge, alias, "l");
