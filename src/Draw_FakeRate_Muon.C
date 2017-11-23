@@ -5,7 +5,7 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Muon(){
 
-  TString Sample = "Data_v7_SIP3";
+  TString Sample = "QCD_v7_SIP3";
   TString Lepton = "Muon";
 
   gStyle->SetOptStat(0);

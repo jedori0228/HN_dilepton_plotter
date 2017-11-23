@@ -17,6 +17,8 @@ void GetMCNormSF(bool DoNorm=false){
   TString filepath = ENV_FILE_PATH+"/"+dataset+"/Regions2/";
   TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/MCNormSF/";
 
+  gSystem->mkdir(plotpath,kTRUE);
+
   AnalysisInputs analysisInputs;
   analysisInputs.SetCalculatedSysts(WORKING_DIR+"/data/"+dataset+"/Syst.txt");
   double FakeSyst = analysisInputs.CalculatedSysts["FakeLooseID"];

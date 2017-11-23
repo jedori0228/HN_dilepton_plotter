@@ -7,7 +7,7 @@ void Draw_FakeTriggerNorm(){
 
   vector<TString> Leptons = {
     "Muon_v7_SIP3",
-    //"Electron_v7"
+    "Electron_v7"
   };
 
   gStyle->SetOptStat(0);

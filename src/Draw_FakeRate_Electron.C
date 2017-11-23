@@ -5,7 +5,7 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Electron(){
 
-  TString Sample = "Data_v7";
+  TString Sample = "QCD_v7_unweighted";
   TString Lepton = "Electron";
 
   gStyle->SetOptStat(0);
@@ -210,6 +210,7 @@ void Draw_FakeRate_Electron(){
       c_alleta->cd();
       lg2->Draw();
       c_alleta->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_alleta.pdf");
+      c_alleta->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_alleta.png");
       c_alleta->Close();
 
     } // END b-jet config loop

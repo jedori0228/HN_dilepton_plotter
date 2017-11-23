@@ -285,10 +285,10 @@ void Draw_MCClosure(){
 
           if(var.Contains("Pt")){
             const int n_pt_muon = 11;
-            double ptarray_muon[n_pt_muon+1] = {0., 5., 10., 15., 20., 25, 30., 40., 50., 60., 70., 200};
+            double ptarray_muon[n_pt_muon+1] = {0., 5., 10., 15., 20., 25., 30., 40., 50., 60., 70., 200};
 
-            const int n_pt_electron = 10;
-            double ptarray_electron[n_pt_electron+1] = {0., 10., 15., 20., 23., 30., 35., 45., 60., 70., 200};
+            const int n_pt_electron = 11;
+            double ptarray_electron[n_pt_electron+1] = {0., 10., 15., 20., 23., 30., 35., 40., 50., 60., 70., 200};
 
             if(channel=="DiMuon"){
               hist_Measured = (TH1D *)hist_Measured->Rebin(n_pt_muon,"hnew1", ptarray_muon);
