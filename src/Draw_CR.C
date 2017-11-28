@@ -162,7 +162,6 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   //==== Log
   //==== Use DY
   if(XXX==1){
-    //m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
     m.samples_to_use = {"VV_excl", "Xgamma_noDY", "VVV", "top", "DY", "WW_double"};
     m.histname_suffix = {
 /*
@@ -175,7 +174,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiMuon_1jets_OnZ_OS", // OS 1jet OnZ CR (DY+jet)
       "_DiMuon_Inclusive1nlbjets_OS", // OS bjet>=1 (Prompt+NonPrompt)
 */
-      "_DiMuon_0jets_OnZ_OS",
+      "_DiMuon_0jets_OS",
       "_DiElectron_0jets_OnZ_OS",
     };
   }
@@ -212,6 +211,9 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
     //==== OneJet_NoFatJet
     "m_Leadlj", "m_SubLeadlj", "m_llj",
+    //==== SF TEST
+    "InnerBarrelLepton_Pt", "OuterBarrelLepton_Pt", "EndCapLepton_Pt",
+    "InnerBarrelLepton_Eta", "OuterBarrelLepton_Eta", "EndCapLepton_Eta",
   };
 
   m.x_title = {
@@ -235,6 +237,9 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
     //==== OneJet_NoFatJet
     "m(Leading Lepton+j) (GeV)", "m(Subleading Lepton+j) (GeV)", "m(llj) (GeV)",
+    //==== SF TEST
+    "IB Lepton p_{T} [GeV]", "OB Lepton p_{T} [GeV]","EC Lepton p_{T} [GeV]",
+    "IB Lepton #eta", "OB Lepton #eta", "EC Lepton #eta",
   };
 
   m.units = {
@@ -258,6 +263,9 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "GeV", "GeV", "GeV",
     //==== OneJet_NoFatJet
     "GeV", "GeV", "GeV",
+    //==== SF TEST
+    "GeV", "GeV", "GeV",
+    "", "", "",
   };
 
 
@@ -303,7 +311,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
 
     //==== Log plot boolean
     if(XXX==0) m.UseLogy.push_back(-1);
-    else if(XXX==1) m.UseLogy.push_back(-1);
+    else if(XXX==1) m.UseLogy.push_back(10);
     else if(XXX==2) m.UseLogy.push_back(-1);
     else m.UseLogy.push_back(-1);
 

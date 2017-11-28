@@ -51,66 +51,66 @@ Processing Bin2_HNElEl_1000_VBF.C...
 [AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
 [AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.21
 [CutRangeInfo::ReadCutCard] Get Cutcard from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.36/CutOpCard/OPTIMIZED_171108_ElEl_HighMass_Bin2/HNElEl_1000.txt
-prompt_tau21_syst = 0.0263919
-signal_tau21_syst = 0.00466178
-Central	0.366188	0.0493753	0.0531171
-_MuonEn_up	0.35594	0.0493753	0.0531171
-_MuonEn_down	0.366855	0.0493753	0.0531171
-_MuonIDSF_up	0.36072	0.0493753	0.0531171
-_MuonIDSF_down	0.369187	0.0493753	0.0531171
-_ElectronEn_up	0.377078	0.0493753	0.0531171
-_ElectronEn_down	0.3637	0.0493753	0.0531171
-_ElectronIDSF_up	0.380289	0.0493753	0.0531171
-_ElectronIDSF_down	0.350656	0.0493753	0.0531171
-_TriggerSF_up	0.369169	0.0493753	0.0531171
-_TriggerSF_down	0.36831	0.0493753	0.0531171
-_PU_up	0.348572	0.0493753	0.0531171
-_PU_down	0.381557	0.0493753	0.0531171
-_JetEn_up	0.376781	0.0493753	0.0531171
-_JetEn_down	0.402773	0.0493753	0.0531171
-_JetRes_up	0.3637	0.0493753	0.0531171
-_JetRes_down	0.363066	0.0493753	0.0531171
-_Unclustered_up	0.362408	0.0493753	0.0531171
-_Unclustered_down	0.367268	0.0493753	0.0531171
-_BTagSFEff_up	0.366573	0.0493753	0.0531171
-_BTagSFEff_down	0.371829	0.0493753	0.0531171
-_BTagSFMiss_up	0.365214	0.0493753	0.0531171
-_BTagSFMiss_down	0.3637	0.0493753	0.0531171
-_JetMass_up	0.364359	0.0493753	0.0531171
-_JetMass_down	0.371406	0.0493753	0.0531171
-_JetMassRes_up	0.366908	0.0493753	0.0531171
-_JetMassRes_down	0.382063	0.0493753	0.0531171
+prompt_tau21_syst = 0.0262376
+signal_tau21_syst = 0.00465131
+Central	0.364047	0.0748338	0.0531171
+_MuonEn_up	0.3637	0.0748338	0.0531171
+_MuonEn_down	0.364708	0.0748338	0.0531171
+_MuonIDSF_up	0.366256	0.0748338	0.0531171
+_MuonIDSF_down	0.3637	0.0748338	0.0531171
+_ElectronEn_up	0.372336	0.0748338	0.0531171
+_ElectronEn_down	0.3637	0.0748338	0.0531171
+_ElectronIDSF_up	0.379313	0.0748338	0.0531171
+_ElectronIDSF_down	0.355689	0.0748338	0.0531171
+_TriggerSF_up	0.3637	0.0748338	0.0531171
+_TriggerSF_down	0.365502	0.0748338	0.0531171
+_PU_up	0.354915	0.0748338	0.0531171
+_PU_down	0.381557	0.0748338	0.0531171
+_JetEn_up	0.373239	0.0748338	0.0531171
+_JetEn_down	0.359025	0.0748338	0.0531171
+_JetRes_up	0.366212	0.0748338	0.0531171
+_JetRes_down	0.359891	0.0748338	0.0531171
+_Unclustered_up	0.3637	0.0748338	0.0531171
+_Unclustered_down	0.35736	0.0748338	0.0531171
+_BTagSFEff_up	0.366479	0.0748338	0.0531171
+_BTagSFEff_down	0.373905	0.0748338	0.0531171
+_BTagSFMiss_up	0.371713	0.0748338	0.0531171
+_BTagSFMiss_down	0.366855	0.0748338	0.0531171
+_JetMass_up	0.359079	0.0748338	0.0531171
+_JetMass_down	0.373884	0.0748338	0.0531171
+_JetMassRes_up	0.36667	0.0748338	0.0531171
+_JetMassRes_down	0.373191	0.0748338	0.0531171
 
 ################ Sources ################
 Source	SystTotal	SystPrompt	SystFake	Signal
-Stat 30.26 36.31  100.02  24.15  1.60
-Lumi 1.95  2.50 -  -  2.50
+Stat 31.01 36.51  100.00  24.15  1.60
+Lumi 1.85  2.50 -  -  2.50
 PDF  -  -  -  -  2.50
-MuonPt  1.55 1.98  -  -  0.10
-MuonID  0.94 1.20  -  -  0.13
-ElectronE  1.69 2.16  -  -  0.23
-ElectronID  3.16 4.05  -  -  4.00
-Trigger  0.55 0.71  -  -  0.01
-PU  3.53 4.51  -  -  1.53
-JES  5.75 7.35  -  -  0.05
-JER  0.60 0.77  -  -  0.19
-Uncl  0.59 0.76  -  -  0.12
-BEff  0.85 1.09  -  -  0.41
-BMiss  0.40 0.52  -  -  0.54
-JMS  0.83 1.07  -  -  0.03
-JMR  2.40 3.07  -  -  0.06
-Tau21 5.63  7.21 -  -  7.25
-MCNorm 11.74  15.03 -  -  -
-Fake 3.16  -  30.00 - -
-CF 2.38  -  -  21.00 -
-Total Systematic 15.91 19.96  30.00  21.00  5.60
+MuonPt  0.11 0.15  -  -  0.25
+MuonID  0.32 0.43  -  -  0.25
+ElectronE  1.19 1.61  -  -  0.41
+ElectronID  2.50 3.38  -  -  4.25
+Trigger  0.22 0.29  -  -  0.23
+PU  2.84 3.84  -  -  1.57
+JES  1.51 2.03  -  -  0.37
+JER  0.67 0.91  -  -  0.25
+Uncl  0.96 1.30  -  -  0.36
+BEff  1.46 1.97  -  -  0.66
+BMiss  1.17 1.59  -  -  0.62
+JMS  1.58 2.14  -  -  0.38
+JMR  1.37 1.85  -  -  0.20
+Tau21 5.33  7.21 -  -  7.25
+MCNorm 10.59  14.31 -  -  -
+Fake 4.56  -  30.00 - -
+CF 2.27  -  -  21.00 -
+Total Systematic 13.86 17.69  30.00  21.00  5.89
 
-Total Background	0.469
-- Prompt	0.366
-- Fake	0.049
+Total Background	0.492
+- Prompt	0.364
+- Fake	0.075
 - CF	0.053
 
 ####### Result #######
-Signal Eff	0.127115
-0.468680 1.343821
-0.064311 1.093011
+Signal Eff	0.127107
+0.491998 1.341397
+0.064168 1.094750

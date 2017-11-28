@@ -53,64 +53,64 @@ Processing HNMuMu_600_VBF.C...
 [CutRangeInfo::ReadCutCard] Get Cutcard from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.36/CutOpCard/OPTIMIZED_171107_MuMu_HighMass/HNMuMu_600.txt
 prompt_tau21_syst = 0
 signal_tau21_syst = 0
-Central	0.662046	0	0
-_MuonEn_up	0.842541	0	0
-_MuonEn_down	0.59817	0	0
-_MuonIDSF_up	0.648073	0	0
-_MuonIDSF_down	0.591187	0	0
-_ElectronEn_up	0.62841	0	0
-_ElectronEn_down	0.622189	0	0
-_ElectronIDSF_up	0.627456	0	0
-_ElectronIDSF_down	0.622085	0	0
-_TriggerSF_up	0.628124	0	0
-_TriggerSF_down	0.61525	0	0
-_PU_up	0.637972	0	0
-_PU_down	0.649554	0	0
-_JetEn_up	0.66344	0	0
-_JetEn_down	0.681366	0	0
-_JetRes_up	0.626373	0	0
-_JetRes_down	0.68058	0	0
-_Unclustered_up	0.540109	0	0
-_Unclustered_down	0.555703	0	0
-_BTagSFEff_up	0.621955	0	0
-_BTagSFEff_down	0.627212	0	0
-_BTagSFMiss_up	0.625361	0	0
-_BTagSFMiss_down	0.622651	0	0
-_JetMass_up	0.617925	0	0
-_JetMass_down	0.620666	0	0
-_JetMassRes_up	0.621126	0	0
-_JetMassRes_down	0.617794	0	0
+Central	0.643215	0	0
+_MuonEn_up	0.885829	0	0
+_MuonEn_down	0.622079	0	0
+_MuonIDSF_up	0.672924	0	0
+_MuonIDSF_down	0.628463	0	0
+_ElectronEn_up	0.63459	0	0
+_ElectronEn_down	0.652084	0	0
+_ElectronIDSF_up	0.645884	0	0
+_ElectronIDSF_down	0.648523	0	0
+_TriggerSF_up	0.642992	0	0
+_TriggerSF_down	0.649467	0	0
+_PU_up	0.659412	0	0
+_PU_down	0.635595	0	0
+_JetEn_up	0.680418	0	0
+_JetEn_down	0.723618	0	0
+_JetRes_up	0.654919	0	0
+_JetRes_down	0.719172	0	0
+_Unclustered_up	0.561413	0	0
+_Unclustered_down	0.587493	0	0
+_BTagSFEff_up	0.641682	0	0
+_BTagSFEff_down	0.659189	0	0
+_BTagSFMiss_up	0.652271	0	0
+_BTagSFMiss_down	0.652805	0	0
+_JetMass_up	0.642141	0	0
+_JetMass_down	0.653222	0	0
+_JetMassRes_up	0.642715	0	0
+_JetMassRes_down	0.648158	0	0
 
 ################ Sources ################
 Source	SystTotal	SystPrompt	SystFake	Signal
-Stat 22.22 22.22  -nan  -nan  1.54
+Stat 22.82 22.82  -nan  -nan  1.54
 Lumi 2.50  2.50 -  -  2.50
 PDF  -  -  -  -  2.50
-MuonPt  20.45 20.45  -  -  4.30
-MuonID  7.71 7.71  -  -  4.01
-ElectronE  5.57 5.57  -  -  0.20
-ElectronID  5.64 5.64  -  -  0.23
-Trigger  6.17 6.17  -  -  0.20
-PU  2.90 2.90  -  -  1.15
-JES  2.07 2.07  -  -  1.49
-JER  4.29 4.29  -  -  0.97
-Uncl  17.28 17.28  -  -  0.87
-BEff  5.67 5.67  -  -  0.36
-BMiss  5.75 5.75  -  -  0.59
-JMS  6.46 6.46  -  -  0.19
-JMR  6.44 6.44  -  -  0.26
+MuonPt  26.77 26.77  -  -  3.89
+MuonID  3.65 3.65  -  -  3.58
+ElectronE  1.36 1.36  -  -  0.11
+ElectronID  0.65 0.65  -  -  0.16
+Trigger  0.69 0.69  -  -  0.22
+PU  1.97 1.97  -  -  1.08
+JES  9.74 9.74  -  -  1.53
+JER  8.45 8.45  -  -  1.11
+Uncl  10.88 10.88  -  -  1.33
+BEff  1.76 1.76  -  -  0.40
+BMiss  1.45 1.45  -  -  0.57
+JMS  1.11 1.11  -  -  0.03
+JMR  0.55 0.55  -  -  0.40
 Tau21 0.00  0.00 -  -  0.00
-MCNorm 11.82  11.82 -  -  -
+MCNorm 12.86  12.86 -  -  -
 Fake 0.00  -  -nan - -
 CF 0.00  -  -  -nan -
-Total Systematic 34.68 34.68  -nan  -nan  7.29
+Total Systematic 34.64 34.64  -nan  -nan  6.90
 
-Total Background	0.662
-- Prompt	0.662
+Total Background	0.643
+- Prompt	0.643
 - Fake	0.000
 - CF	0.000
 
 ####### Result #######
-Signal Eff	0.063809
-0.662046 1.411901
-0.203485 1.074466
+Signal Eff	0.063687
+0.643215 1.414766
+0.210929 1.070738

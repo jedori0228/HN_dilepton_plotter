@@ -66,7 +66,7 @@ for mass in masses:
   bkgd = runlog[len(runlog)-2].split()[0]
  
   float_eff = float(runlog[len(runlog)-3].split()[2])
-  eff = str(float_eff*100.)
+  eff = str(float_eff*1.)
 
   print bkgd+'\t'+eff
 

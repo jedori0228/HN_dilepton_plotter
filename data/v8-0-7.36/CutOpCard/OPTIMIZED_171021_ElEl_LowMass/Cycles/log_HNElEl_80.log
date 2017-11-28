@@ -53,64 +53,64 @@ Processing HNElEl_80.C...
 [CutRangeInfo::ReadCutCard] Get Cutcard from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.36/CutOpCard/OPTIMIZED_171021_ElEl_LowMass/HNElEl_80.txt
 prompt_tau21_syst = 0
 signal_tau21_syst = 0
-Central	20.3683	19.2794	1.74969
-_MuonEn_up	20.6687	19.2794	1.74969
-_MuonEn_down	20.4026	19.2794	1.74969
-_MuonIDSF_up	20.3868	19.2794	1.74969
-_MuonIDSF_down	20.4647	19.2794	1.74969
-_ElectronEn_up	19.9486	19.2794	1.74969
-_ElectronEn_down	20.8003	19.2794	1.74969
-_ElectronIDSF_up	21.0743	19.2794	1.74969
-_ElectronIDSF_down	19.8059	19.2794	1.74969
-_TriggerSF_up	20.3132	19.2794	1.74969
-_TriggerSF_down	20.4641	19.2794	1.74969
-_PU_up	19.8818	19.2794	1.74969
-_PU_down	20.9976	19.2794	1.74969
-_JetEn_up	22.0261	19.2794	1.74969
-_JetEn_down	20.8105	19.2794	1.74969
-_JetRes_up	20.2424	19.2794	1.74969
-_JetRes_down	21.1551	19.2794	1.74969
-_Unclustered_up	21.3004	19.2794	1.74969
-_Unclustered_down	23.0017	19.2794	1.74969
-_BTagSFEff_up	20.4909	19.2794	1.74969
-_BTagSFEff_down	20.5249	19.2794	1.74969
-_BTagSFMiss_up	20.3645	19.2794	1.74969
-_BTagSFMiss_down	20.4573	19.2794	1.74969
-_JetMass_up	20.7217	19.2794	1.74969
-_JetMass_down	20.4829	19.2794	1.74969
-_JetMassRes_up	20.4076	19.2794	1.74969
-_JetMassRes_down	20.4671	19.2794	1.74969
+Central	20.4375	21.6483	1.74969
+_MuonEn_up	20.4983	21.6483	1.74969
+_MuonEn_down	20.4094	21.6483	1.74969
+_MuonIDSF_up	20.3759	21.6483	1.74969
+_MuonIDSF_down	20.3929	21.6483	1.74969
+_ElectronEn_up	20.5795	21.6483	1.74969
+_ElectronEn_down	20.8084	21.6483	1.74969
+_ElectronIDSF_up	21.0205	21.6483	1.74969
+_ElectronIDSF_down	18.8797	21.6483	1.74969
+_TriggerSF_up	20.4231	21.6483	1.74969
+_TriggerSF_down	20.0858	21.6483	1.74969
+_PU_up	20.8445	21.6483	1.74969
+_PU_down	21.2272	21.6483	1.74969
+_JetEn_up	21.6554	21.6483	1.74969
+_JetEn_down	20.6389	21.6483	1.74969
+_JetRes_up	20.1132	21.6483	1.74969
+_JetRes_down	21.4895	21.6483	1.74969
+_Unclustered_up	21.5023	21.6483	1.74969
+_Unclustered_down	22.8875	21.6483	1.74969
+_BTagSFEff_up	20.6388	21.6483	1.74969
+_BTagSFEff_down	20.5385	21.6483	1.74969
+_BTagSFMiss_up	19.9701	21.6483	1.74969
+_BTagSFMiss_down	20.692	21.6483	1.74969
+_JetMass_up	20.4245	21.6483	1.74969
+_JetMass_down	20.4307	21.6483	1.74969
+_JetMassRes_up	20.0949	21.6483	1.74969
+_JetMassRes_down	20.375	21.6483	1.74969
 
 ################ Sources ################
 Source	SystTotal	SystPrompt	SystFake	Signal
-Stat 11.45 22.00  8.03  0.98  6.03
-Lumi 1.23  2.50 -  -  2.50
+Stat 10.87 21.93  7.50  0.98  6.05
+Lumi 1.17  2.50 -  -  2.50
 PDF  -  -  -  -  8.96
-MuonPt  0.52 1.05  -  -  0.19
-MuonID  0.17 0.34  -  -  0.87
-ElectronE  1.03 2.09  -  -  0.42
-ElectronID  1.54 3.13  -  -  2.46
-Trigger  0.19 0.38  -  -  0.46
-PU  1.36 2.76  -  -  3.79
-JES  2.93 5.96  -  -  5.48
-JER  1.36 2.77  -  -  2.28
-Uncl  4.77 9.70  -  -  2.41
-BEff  0.34 0.69  -  -  0.19
-BMiss  0.15 0.31  -  -  0.93
-JMS  0.63 1.29  -  -  0.72
-JMR  0.18 0.37  -  -  0.60
+MuonPt  0.11 0.23  -  -  0.42
+MuonID  0.12 0.26  -  -  0.24
+ElectronE  0.64 1.37  -  -  1.13
+ElectronID  2.68 5.75  -  -  3.04
+Trigger  0.57 1.22  -  -  0.62
+PU  1.43 3.07  -  -  3.79
+JES  1.99 4.27  -  -  6.81
+JER  1.78 3.81  -  -  1.76
+Uncl  4.31 9.24  -  -  2.34
+BEff  0.36 0.78  -  -  0.74
+BMiss  0.86 1.84  -  -  0.58
+JMS  0.02 0.05  -  -  0.08
+JMR  0.56 1.21  -  -  0.92
 Tau21 0.00  0.00 -  -  0.00
-MCNorm 0.85  1.73 -  -  -
-Fake 13.97  -  30.00 - -
-CF 0.89  -  -  21.00 -
-Total Systematic 15.39 13.11  30.00  21.00  12.29
+MCNorm 0.82  1.76 -  -  -
+Fake 14.82  -  30.00 - -
+CF 0.84  -  -  21.00 -
+Total Systematic 16.08 13.38  30.00  21.00  12.99
 
-Total Background	41.397
-- Prompt	20.368
-- Fake	19.279
+Total Background	43.836
+- Prompt	20.438
+- Fake	21.648
 - CF	1.750
 
 ####### Result #######
-Signal Eff	0.002825
-41.397346 1.192034
-179.003871 1.136894
+Signal Eff	0.002850
+43.835542 1.194260
+179.466892 1.143269

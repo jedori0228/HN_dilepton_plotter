@@ -4,7 +4,7 @@ kmax 20  number of nuisance parameters (sources of systematical uncertainties)
 ------------
 # we have just one channel, in which we observe 0 events
 bin 1
-observation 36.04
+observation 38.114
 ------------
 # now we list the expected events for signal and all backgrounds in that bin
 # the second 'process' line must have a positive number for backgrounds, and 0 for signal
@@ -13,25 +13,25 @@ observation 36.04
 bin	1	1	1	1
 process	prompt	fake	cf	HN50
 process	1	2	3	0
-rate	19.013	17.027	0.0	23.65505865
+rate	19.145	18.969	0.0	24.11111356
 ------------
-Stat	lnN	1.1836	1.0828	-	1.0433
+Stat	lnN	1.1842	1.0797	-	1.043
 Lumi	lnN	1.025	-	-	1.025
 PDF	lnN	-	-	-	1.0853
-MuonPt	lnN	1.005	-	-	1.0054
-MuonID	lnN	1.0555	-	-	1.0551
-ElectronE	lnN	1.0953	-	-	1.0223
-ElectronID	lnN	1.0132	-	-	1.0157
-Trigger	lnN	1.0007	-	-	1.0034
-PU	lnN	1.0611	-	-	1.03
-JES	lnN	1.0846	-	-	1.0208
-JER	lnN	1.0255	-	-	1.01
-Uncl	lnN	1.0397	-	-	1.0284
-BEff	lnN	1.0005	-	-	1.0098
-BMiss	lnN	1.0031	-	-	1.0059
-JMS	lnN	1.0002	-	-	1.0039
-JMR	lnN	1.0036	-	-	1.0019
+MuonPt	lnN	1.0044	-	-	1.0128
+MuonID	lnN	1.0163	-	-	1.0153
+ElectronE	lnN	1.0963	-	-	1.0227
+ElectronID	lnN	1.0159	-	-	1.0152
+Trigger	lnN	1.0005	-	-	1.0054
+PU	lnN	1.0609	-	-	1.0293
+JES	lnN	1.0844	-	-	1.0197
+JER	lnN	1.0243	-	-	1.0157
+Uncl	lnN	1.0398	-	-	1.0265
+BEff	lnN	1.0002	-	-	1.0083
+BMiss	lnN	1.0003	-	-	1.0087
+JMS	lnN	1.0029	-	-	1.005
+JMR	lnN	1.0002	-	-	1.0062
 Tau21	lnN	1.0	-	-	1.0
-MCNorm	lnN	1.0231	-	-	-
+MCNorm	lnN	1.023	-	-	-
 Fake	lnN	-	1.3	-	-
 CF	lnN	-	-	-	-

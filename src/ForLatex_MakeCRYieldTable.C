@@ -118,7 +118,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
   cout << "  \\caption{" << endl;
   cout << "  Observed event yields and estimated backgrounds with statistical and systematic uncertainties for the "+ChannelNameForTex+" events" << endl;
   cout << "  }" << endl;
-  cout << "  \\label{table:yield_"+ChannelName+"}" << endl;
+  cout << "  \\label{table:yield_CR_"+ChannelName+"}" << endl;
   cout << "  \\begin{center}" << endl;
   cout << "    \\resizebox{\\columnwidth}{!}{" << endl;
   cout << "      \\begin{tabular}{l |";for(int i=0;i<nCR;i++) cout<<" l";cout<<"}" << endl;

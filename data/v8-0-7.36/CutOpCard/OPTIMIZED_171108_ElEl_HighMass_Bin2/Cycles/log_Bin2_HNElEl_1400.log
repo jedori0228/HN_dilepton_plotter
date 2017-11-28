@@ -51,13 +51,13 @@ Processing Bin2_HNElEl_1400.C...
 [AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
 [AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.21
 [CutRangeInfo::ReadCutCard] Get Cutcard from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.36/CutOpCard/OPTIMIZED_171108_ElEl_HighMass_Bin2/HNElEl_1400.txt
-prompt_tau21_syst = 0.00179327
-signal_tau21_syst = 0.000386149
-Central	0.0248816	0	0.0034105
+prompt_tau21_syst = 0.00160381
+signal_tau21_syst = 0.000385681
+Central	0.0222529	0	0.0034105
 _MuonEn_up	0.0222529	0	0.0034105
 _MuonEn_down	0.0222529	0	0.0034105
-_MuonIDSF_up	0.0222529	0	0.0034105
-_MuonIDSF_down	0.0248816	0	0.0034105
+_MuonIDSF_up	0.0221692	0	0.0034105
+_MuonIDSF_down	0.0222529	0	0.0034105
 _ElectronEn_up	0.0222529	0	0.0034105
 _ElectronEn_down	0.0222529	0	0.0034105
 _ElectronIDSF_up	0.0231519	0	0.0034105
@@ -74,7 +74,7 @@ _Unclustered_up	0.0222529	0	0.0034105
 _Unclustered_down	0.0222529	0	0.0034105
 _BTagSFEff_up	0.0222529	0	0.0034105
 _BTagSFEff_down	0.0222529	0	0.0034105
-_BTagSFMiss_up	0.0221692	0	0.0034105
+_BTagSFMiss_up	0.0222529	0	0.0034105
 _BTagSFMiss_down	0.0222529	0	0.0034105
 _JetMass_up	0.0222529	0	0.0034105
 _JetMass_down	0.0289985	0	0.0034105
@@ -83,34 +83,34 @@ _JetMassRes_down	0.0289985	0	0.0034105
 
 ################ Sources ################
 Source	SystTotal	SystPrompt	SystFake	Signal
-Stat 34.18 38.87  -nan  64.50  1.30
-Lumi 2.20  2.50 -  -  2.50
+Stat 36.26 41.82  -nan  64.50  1.30
+Lumi 2.17  2.50 -  -  2.50
 PDF  -  -  -  -  2.50
-MuonPt  9.29 10.56  -  -  0.09
-MuonID  6.57 7.47  -  -  0.17
-ElectronE  9.29 10.56  -  -  0.21
-ElectronID  9.78 11.12  -  -  4.26
-Trigger  9.29 10.56  -  -  0.02
-PU  10.62 12.08  -  -  1.60
-JES  9.29 10.56  -  -  0.12
-JER  9.29 10.56  -  -  0.13
-Uncl  9.29 10.56  -  -  0.16
-BEff  9.29 10.56  -  -  0.58
-BMiss  9.44 10.73  -  -  0.29
-JMS  12.21 13.88  -  -  0.09
-JMR  12.21 13.88  -  -  0.09
-Tau21 6.34  7.21 -  -  7.25
-MCNorm 13.82  15.72 -  -  -
+MuonPt  0.00 0.00  -  -  0.10
+MuonID  0.23 0.27  -  -  0.10
+ElectronE  0.00 0.00  -  -  0.41
+ElectronID  3.47 4.00  -  -  4.39
+Trigger  0.00 0.00  -  -  0.03
+PU  4.44 5.12  -  -  1.71
+JES  0.00 0.00  -  -  0.28
+JER  0.00 0.00  -  -  0.03
+Uncl  0.00 0.00  -  -  0.14
+BEff  0.00 0.00  -  -  0.57
+BMiss  0.00 0.00  -  -  0.25
+JMS  18.59 21.43  -  -  0.16
+JMR  18.59 21.43  -  -  0.12
+Tau21 6.25  7.21 -  -  7.25
+MCNorm 10.12  11.67 -  -  -
 Fake 0.00  -  -nan - -
-CF 2.53  -  -  21.00 -
-Total Systematic 38.46 43.73  -nan  21.00  5.81
+CF 2.79  -  -  21.00 -
+Total Systematic 29.48 33.99  -nan  21.00  5.95
 
-Total Background	0.028
-- Prompt	0.025
+Total Background	0.026
+- Prompt	0.022
 - Fake	0.000
 - CF	0.003
 
 ####### Result #######
-Signal Eff	0.176922
-0.028292 1.521002
-0.005324 1.093844
+Signal Eff	0.176451
+0.025663 1.475937
+0.005319 1.094669

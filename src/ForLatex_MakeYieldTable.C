@@ -1,7 +1,7 @@
 #include "RunNtupleForBinnedYieldPlot.C"
 #include "canvas_margin.h"
 
-void ForLatex_MakeYieldTable(int x=0){
+void ForLatex_MakeYieldTable(){
 
   //==== Get Envrionment Variables
 

@@ -27,11 +27,11 @@ for d in dirs:
   out.write('cd '+d+'/Cycles/\n')
   out.write('source run.sh\n')
   if "High" in d:
-    out.write('sleep 120\n')
-    out.write('source runvbf.sh\n')
-    out.write('sleep 120\n')
-  else:
     out.write('sleep 60\n')
+    out.write('source runvbf.sh\n')
+    out.write('sleep 60\n')
+  else:
+    out.write('sleep 30\n')
 
   out.write('cd -\n')
 

@@ -1,6 +1,0 @@
-secondLepton_Pt > 70.0 70.0 1
-m_lljj_jjWclosest > 840.0 840.0 1
-leadingLepton_Pt > 180.0 180.0 1
-##punzi	5291.35
-##sigeff	9216.38
-##bkgd	0.509062

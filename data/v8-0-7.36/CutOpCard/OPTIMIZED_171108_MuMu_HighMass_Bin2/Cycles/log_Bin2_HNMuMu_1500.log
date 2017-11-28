@@ -51,66 +51,66 @@ Processing Bin2_HNMuMu_1500.C...
 [AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
 [AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.21
 [CutRangeInfo::ReadCutCard] Get Cutcard from /home/jskim/Documents/trilepton_13TeV/DiLepton/data/v8-0-7.36/CutOpCard/OPTIMIZED_171108_MuMu_HighMass_Bin2/HNMuMu_1500.txt
-prompt_tau21_syst = 0.00965197
-signal_tau21_syst = 0.000549324
-Central	0.133875	0	0
-_MuonEn_up	0.133754	0	0
-_MuonEn_down	0.1287	0	0
-_MuonIDSF_up	0.139327	0	0
-_MuonIDSF_down	0.12853	0	0
-_ElectronEn_up	0.133875	0	0
-_ElectronEn_down	0.128987	0	0
-_ElectronIDSF_up	0.133875	0	0
-_ElectronIDSF_down	0.131815	0	0
-_TriggerSF_up	0.136958	0	0
-_TriggerSF_down	0.133875	0	0
-_PU_up	0.121332	0	0
-_PU_down	0.145343	0	0
-_JetEn_up	0.125774	0	0
-_JetEn_down	0.133875	0	0
-_JetRes_up	0.133875	0	0
-_JetRes_down	0.128987	0	0
-_Unclustered_up	0.133834	0	0
-_Unclustered_down	0.136956	0	0
-_BTagSFEff_up	0.136958	0	0
-_BTagSFEff_down	0.140493	0	0
-_BTagSFMiss_up	0.130567	0	0
-_BTagSFMiss_down	0.133875	0	0
-_JetMass_up	0.131354	0	0
-_JetMass_down	0.136956	0	0
-_JetMassRes_up	0.136956	0	0
-_JetMassRes_down	0.133875	0	0
+prompt_tau21_syst = 0.0100384
+signal_tau21_syst = 0.000571791
+Central	0.139235	0	0
+_MuonEn_up	0.14278	0	0
+_MuonEn_down	0.1335	0	0
+_MuonIDSF_up	0.144379	0	0
+_MuonIDSF_down	0.134192	0	0
+_ElectronEn_up	0.14572	0	0
+_ElectronEn_down	0.139235	0	0
+_ElectronIDSF_up	0.14262	0	0
+_ElectronIDSF_down	0.142428	0	0
+_TriggerSF_up	0.139237	0	0
+_TriggerSF_down	0.139235	0	0
+_PU_up	0.126178	0	0
+_PU_down	0.151174	0	0
+_JetEn_up	0.133679	0	0
+_JetEn_down	0.14262	0	0
+_JetRes_up	0.139235	0	0
+_JetRes_down	0.137572	0	0
+_Unclustered_up	0.135528	0	0
+_Unclustered_down	0.139235	0	0
+_BTagSFEff_up	0.139235	0	0
+_BTagSFEff_down	0.139235	0	0
+_BTagSFMiss_up	0.139235	0	0
+_BTagSFMiss_down	0.139235	0	0
+_JetMass_up	0.140011	0	0
+_JetMass_down	0.139235	0	0
+_JetMassRes_up	0.139235	0	0
+_JetMassRes_down	0.139235	0	0
 
 ################ Sources ################
 Source	SystTotal	SystPrompt	SystFake	Signal
-Stat 65.88 65.88  -nan  -nan  0.78
+Stat 65.78 65.78  -nan  -nan  0.78
 Lumi 2.50  2.50 -  -  2.50
 PDF  -  -  -  -  8.53
-MuonPt  2.73 2.73  -  -  1.23
-MuonID  4.03 4.03  -  -  4.04
-ElectronE  2.58 2.58  -  -  0.06
-ElectronID  1.09 1.09  -  -  0.16
-Trigger  1.63 1.63  -  -  0.07
-PU  8.98 8.98  -  -  0.82
-JES  4.28 4.28  -  -  0.29
-JER  2.58 2.58  -  -  0.27
-Uncl  1.63 1.63  -  -  0.14
-BEff  3.86 3.86  -  -  0.59
-BMiss  1.75 1.75  -  -  0.56
-JMS  2.10 2.10  -  -  0.06
-JMR  1.63 1.63  -  -  0.11
+MuonPt  3.42 3.42  -  -  1.35
+MuonID  3.66 3.66  -  -  3.55
+ElectronE  3.29 3.29  -  -  0.22
+ElectronID  2.36 2.36  -  -  0.25
+Trigger  0.00 0.00  -  -  0.19
+PU  8.99 8.99  -  -  0.76
+JES  3.30 3.30  -  -  0.29
+JER  0.84 0.84  -  -  0.25
+Uncl  1.88 1.88  -  -  0.06
+BEff  0.00 0.00  -  -  0.57
+BMiss  0.00 0.00  -  -  0.34
+JMS  0.39 0.39  -  -  0.10
+JMR  0.00 0.00  -  -  0.16
 Tau21 7.21  7.21 -  -  7.26
-MCNorm 8.05  8.05 -  -  -
+MCNorm 8.03  8.03 -  -  -
 Fake 0.00  -  -nan - -
 CF 0.00  -  -  -nan -
-Total Systematic 17.04 17.04  -nan  -nan  9.92
+Total Systematic 16.13 16.13  -nan  -nan  9.74
 
-Total Background	0.134
-- Prompt	0.134
+Total Background	0.139
+- Prompt	0.139
 - Fake	0.000
 - CF	0.000
 
 ####### Result #######
-Signal Eff	0.367471
-0.133875 1.680503
-0.007564 1.123182
+Signal Eff	0.367671
+0.139235 1.677262
+0.007873 1.121711
