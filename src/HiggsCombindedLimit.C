@@ -12,17 +12,17 @@ void HiggsCombindedLimit(int i=0){
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
-  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
+  TString filepath = ENV_FILE_PATH+dataset+"/Limit/TestFor2017/";
+  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/TestFor2017/";
 
   TString WhichDirectoryInCutop = "MuEl_Combined";
-  if(i==1) WhichDirectoryInCutop = "MuMu";
+  if(i==1) WhichDirectoryInCutop = "MuMu_Bin1";
   if(i==2) WhichDirectoryInCutop = "MuMu_Bin2";
   if(i==3) WhichDirectoryInCutop = "MuMu_Combined";
-  if(i==4) WhichDirectoryInCutop = "ElEl";
+  if(i==4) WhichDirectoryInCutop = "ElEl_Bin1";
   if(i==5) WhichDirectoryInCutop = "ElEl_Bin2";
   if(i==6) WhichDirectoryInCutop = "ElEl_Combined";
-  if(i==7) WhichDirectoryInCutop = "MuEl";
+  if(i==7) WhichDirectoryInCutop = "MuEl_Bin1";
   if(i==8) WhichDirectoryInCutop = "MuEl_Bin2";
   if(i==9) WhichDirectoryInCutop = "MuEl_Combined";
 
@@ -48,7 +48,7 @@ void HiggsCombindedLimit(int i=0){
   //=== 13 TeV S channel
 
   string elline;
-  ifstream in(filepath+"/result_"+channel+".txt");
+  ifstream in(filepath+"/result.txt");
   double mass[24], obs[24], limit[24], onesig_left[24], onesig_right[24], twosig_left[24], twosig_right[24];
 
   int dummyint=0;
@@ -110,7 +110,7 @@ void HiggsCombindedLimit(int i=0){
   //==== 13 TeV S+T channel
 
   string elline_SandT;
-  ifstream in_SandT(filepath+"/result_"+channel+"_VBF.txt");
+  ifstream in_SandT(filepath+"/result_VBF.txt");
 
   double mass_SandT[5], obs_SandT[5], limit_SandT[5], onesig_left_SandT[5], onesig_right_SandT[5], twosig_left_SandT[5], twosig_right_SandT[5];
   dummyint=0;

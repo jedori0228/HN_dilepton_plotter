@@ -194,7 +194,7 @@ void Plotter::draw_hist(){
 
             double error_combined = sqrt( error_propagated*error_propagated + error_sumw2*error_sumw2 );
 
-            hist_temp->SetBinError(i, error_combined);
+            //hist_temp->SetBinError(i, error_combined);
           }
         }
 

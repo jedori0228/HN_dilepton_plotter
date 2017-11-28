@@ -199,7 +199,7 @@ void Draw_MCClosure(){
               double err_sumw2 = hist_Predicted->GetBinError(a);
               double err_propagated = hist_Predicted_up->GetBinContent(a)-hist_Predicted->GetBinContent(a);
               double newerr = sqrt(err_sumw2*err_sumw2+err_propagated*err_propagated);
-              hist_Predicted->SetBinError(a, newerr);
+              //hist_Predicted->SetBinError(a, newerr);
             }
           }
 

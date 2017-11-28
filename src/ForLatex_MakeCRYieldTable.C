@@ -216,7 +216,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
           double error_sumw2 = original_hist->GetBinError(1);
           double error_combined = sqrt( error_propagated*error_propagated + error_sumw2*error_sumw2 );
 
-          original_hist->SetBinError(1, error_combined);
+          //original_hist->SetBinError(1, error_combined);
         }
 
         staterror += (original_hist->GetBinError(1))*(original_hist->GetBinError(1));
