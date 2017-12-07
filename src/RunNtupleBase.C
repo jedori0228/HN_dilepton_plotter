@@ -164,8 +164,8 @@ void RunNtupleBase::Run(){
         fake_weighted_yield = m.weighted_yield;
 
         fake_weighted_yield_stat = m.hist_for_error->GetBinError(1);
-        //double fr_propagation = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
-        //fake_weighted_yield_stat = sqrt( fake_weighted_yield_stat*fake_weighted_yield_stat + fr_propagation*fr_propagation );
+        double fr_propagation = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
+        fake_weighted_yield_stat = sqrt( fake_weighted_yield_stat*fake_weighted_yield_stat + fr_propagation*fr_propagation );
       }
       else if(sample=="data"){
         data_unweighted_yield = m.unweighted_yield;
@@ -245,7 +245,7 @@ void RunNtupleBase::Run(){
     //==== Force Punzi to require
     //==== 1) Minimum Total Bkgd
     //if( (total_bkg < 0.5) || (data_weighted_yield < 1) ){
-    if( (total_bkg < 0.01) ){
+    if( (total_bkg < 0.0001) ){
       cutrangeinfo.Next();
       continue;
     }
