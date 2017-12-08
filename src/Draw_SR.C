@@ -55,7 +55,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
   m.map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
   m.map_sample_string_to_list["top_tt"] = {"TT_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"};
+  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG_weighted"};
   //m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
   m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};

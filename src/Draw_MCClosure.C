@@ -7,6 +7,9 @@ void Draw_MCClosure(){
   bool DoLatex = true;
   bool PrintSyst = false;
 
+  double WJets_reweight = 0.684044;
+  double DYJets_reweight = 0.670033;
+
   gStyle->SetOptStat(0);
   //gErrorIgnoreLevel = kError;
 
@@ -193,27 +196,69 @@ void Draw_MCClosure(){
 
           if(!hist_Measured || !hist_Predicted) continue;
 
+          if(sample=="WJets_positive"){
+            hist_Measured->Scale(WJets_reweight);
+            hist_Predicted->Scale(WJets_reweight);
+            hist_Predicted_up->Scale(WJets_reweight);
+            hist_Predicted_down->Scale(WJets_reweight);
+          }
+          if(sample=="DYJets_positive"){
+            hist_Measured->Scale(DYJets_reweight);
+            hist_Predicted->Scale(DYJets_reweight);
+            hist_Predicted_up->Scale(DYJets_reweight);
+            hist_Predicted_down->Scale(DYJets_reweight);
+          }
+
 
           if(hist_Predicted_up){
             for(int a=1; a<=hist_Predicted->GetXaxis()->GetNbins(); a++){
               double err_sumw2 = hist_Predicted->GetBinError(a);
               double err_propagated = hist_Predicted_up->GetBinContent(a)-hist_Predicted->GetBinContent(a);
               double newerr = sqrt(err_sumw2*err_sumw2+err_propagated*err_propagated);
-              //hist_Predicted->SetBinError(a, newerr);
+              hist_Predicted->SetBinError(a, newerr);
             }
           }
 
           if(var=="Nevents"){
 
+            double SystExtra = 0.;
+
+            double y_m = hist_Measured->GetBinContent(1);
+            double e_m = hist_Measured->GetBinError(1);
+            double y_p = hist_Predicted->GetBinContent(1);
+            double e_p = hist_Predicted->GetBinError(1);
+
+            //==== Over Prediction
+            if( y_p >= y_m ){
+              double diff = (y_p-e_p)-(y_m+e_m);
+              if(diff<=0) SystExtra = 0.;
+              else{
+                SystExtra = sqrt( (e_p+diff)*(e_p+diff) - e_p*e_p );
+              }
+            }
+            //==== Under Prediction
+            else{
+              double diff = (y_m-e_m)-(y_p+e_p);
+              if(diff<=0) SystExtra = 0.;
+              else{
+                SystExtra = sqrt( (e_p+diff)*(e_p+diff) - e_p*e_p );
+              }
+            }
+
+            SystExtra = SystExtra/y_p;
+
+
             TH1D *temp_measured = (TH1D*)hist_Measured->Clone();
             temp_measured->Divide(hist_Predicted);
 
+/*
             double SystExtra = 0.;
             double Deviation = fabs(1.-temp_measured->GetBinContent(1));
             double StatError = temp_measured->GetBinError(1);
             if(Deviation>StatError){
               SystExtra = sqrt(Deviation*Deviation-StatError*StatError);
             }
+*/
 
             if(PrintSyst){
               cout << "["<<sample<<"]" << endl;
@@ -284,11 +329,26 @@ void Draw_MCClosure(){
           }
 
           if(var.Contains("Pt")){
+/*
             const int n_pt_muon = 11;
             double ptarray_muon[n_pt_muon+1] = {0., 5., 10., 15., 20., 25., 30., 40., 50., 60., 70., 200};
 
             const int n_pt_electron = 11;
             double ptarray_electron[n_pt_electron+1] = {0., 10., 15., 20., 23., 30., 35., 40., 50., 60., 70., 200};
+*/
+/*
+            const int n_pt_muon = 10;
+            double ptarray_muon[n_pt_muon+1] = {0., 5., 10., 20., 25., 30., 40., 50., 60., 70., 200};
+
+            const int n_pt_electron = 10;
+            double ptarray_electron[n_pt_electron+1] = {0., 10., 20., 23., 30., 35., 40., 50., 60., 70., 200};
+*/
+
+            const int n_pt_muon = 10;
+            double ptarray_muon[n_pt_muon+1] = {0., 5., 10., 20., 25., 30., 40., 50., 60., 70., 200};
+
+            const int n_pt_electron = 10;
+            double ptarray_electron[n_pt_electron+1] = {0., 5., 10., 20., 25., 30., 40., 50., 60., 70., 200};
 
             if(channel=="DiMuon"){
               hist_Measured = (TH1D *)hist_Measured->Rebin(n_pt_muon,"hnew1", ptarray_muon);
@@ -299,7 +359,9 @@ void Draw_MCClosure(){
               hist_Predicted = (TH1D *)hist_Predicted->Rebin(n_pt_electron,"hnew1", ptarray_electron);
             }
 
+
             if(channel=="EMu"){
+
               if(var.Contains("leading")){
               hist_Measured = (TH1D *)hist_Measured->Rebin(n_pt_muon,"hnew1", ptarray_muon);
               hist_Predicted = (TH1D *)hist_Predicted->Rebin(n_pt_muon,"hnew1", ptarray_muon);
@@ -308,6 +370,12 @@ void Draw_MCClosure(){
               hist_Measured = (TH1D *)hist_Measured->Rebin(n_pt_electron,"hnew1", ptarray_electron);
               hist_Predicted = (TH1D *)hist_Predicted->Rebin(n_pt_electron,"hnew1", ptarray_electron);
               }
+/*
+              if(var.Contains("Pt")){
+                hist_Measured->Rebin(5);
+                hist_Predicted->Rebin(5);
+              }
+*/
             }
 
           }

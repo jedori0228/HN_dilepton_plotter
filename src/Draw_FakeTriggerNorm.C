@@ -6,8 +6,8 @@ void Draw_FakeTriggerNorm(){
   bool DrawPlot = true;
 
   vector<TString> Leptons = {
-    "Muon_v7_SIP3",
-    "Electron_v7"
+    //"Muon_v7_SIP3",
+    "Electron_v7_3"
   };
 
   gStyle->SetOptStat(0);
@@ -84,6 +84,7 @@ void Draw_FakeTriggerNorm(){
       TString trigger = triggers.at(j);
 
       double TriggerNormSF(1.);
+/*
       if(trigger=="HLT_Mu3_PFJet40_v") TriggerNormSF = 0.970059;
       if(trigger=="HLT_Mu8_TrkIsoVVL_v") TriggerNormSF = 0.918045;
       if(trigger=="HLT_Mu17_TrkIsoVVL_v") TriggerNormSF = 0.942808;
@@ -91,6 +92,7 @@ void Draw_FakeTriggerNorm(){
       if(trigger=="HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30_v") TriggerNormSF = 1.01992;
       if(trigger=="HLT_Ele17_CaloIdL_TrackIdL_IsoVL_PFJet30_v") TriggerNormSF = 0.942631;
       if(trigger=="HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30_v") TriggerNormSF = 0.940177;
+*/
 
       for(unsigned int k=0; k<vars.size(); k++){
  

@@ -184,8 +184,8 @@ void RunNtupleForBinnedYieldPlot::Run(){
         fake_weighted_yield = m.weighted_yield;
 
         fake_weighted_yield_stat = m.hist_for_error->GetBinError(1);
-        //double fr_propagation = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
-        //fake_weighted_yield_stat = sqrt( fake_weighted_yield_stat*fake_weighted_yield_stat + fr_propagation*fr_propagation );
+        double fr_propagation = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
+        fake_weighted_yield_stat = sqrt( fake_weighted_yield_stat*fake_weighted_yield_stat + fr_propagation*fr_propagation );
       }
       else if(sample=="data"){
         data_unweighted_yield = m.unweighted_yield;

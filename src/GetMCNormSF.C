@@ -228,7 +228,7 @@ void GetMCNormSF(bool DoNorm=false){
         double error_sumw2 = original_hist->GetBinError(1);
         double error_combined = sqrt( error_propagated*error_propagated + error_sumw2*error_sumw2 );
 
-        //original_hist->SetBinError(1, error_combined);
+        original_hist->SetBinError(1, error_combined);
       }
 
       TH1D *new_hist = new TH1D("new_hist", "", nCR, 0., 1.*nCR);

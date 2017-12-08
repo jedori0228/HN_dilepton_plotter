@@ -34,7 +34,7 @@ void ForLatex_MakeCutFlowTable(){
   map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
   map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
   map_sample_string_to_list["top_tt"] = {"TT_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"};
+  map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG_weighted"};
   //map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
   map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
   map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};

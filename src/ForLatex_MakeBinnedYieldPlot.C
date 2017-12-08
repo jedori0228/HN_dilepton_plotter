@@ -31,7 +31,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
   map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
   map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
   map_sample_string_to_list["top_tt"] = {"TT_powheg", "ttW", "ttZ", "ttH_nonbb"};
-  map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"};
+  map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG_weighted"};
   //m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
   map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
   map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
@@ -146,42 +146,18 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     if(channel=="ElEl"){
       DataPD = "DoubleEG";
       ChannelName = "DiElectron";
-
-      if(WhichRegion.Contains("Low")){
-        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171021_ElEl_LowMass";
-        else CutCarDirName = "OPTIMIZED_171021_ElEl_LowMass_Bin2";
-      }
-      else if(WhichRegion.Contains("High")){
-        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171107_ElEl_HighMass";
-        else CutCarDirName = "OPTIMIZED_171108_ElEl_HighMass_Bin2";
-      }
     }
     else if(channel=="MuMu"){
       DataPD = "DoubleMuon";
       ChannelName = "DiMuon";
-
-      if(WhichRegion.Contains("Low")){
-        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171021_MuMu_LowMass";
-        else CutCarDirName = "OPTIMIZED_171021_MuMu_LowMass_Bin2";
-      }
-      else if(WhichRegion.Contains("High")){
-        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171107_MuMu_HighMass";
-        else CutCarDirName = "OPTIMIZED_171108_MuMu_HighMass_Bin2";
-      }
     }
     else if(channel=="MuEl"){
       DataPD = "MuonEG";
       ChannelName = "EMu";
-
-      if(WhichRegion.Contains("Low")){
-        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171030_MuEl";
-        else CutCarDirName = "OPTIMIZED_171030_MuEl_Bin2";
-      }
-      else if(WhichRegion.Contains("High")){
-        if(WhichRegion.Contains("Two")) CutCarDirName = "OPTIMIZED_171107_MuEl_HighMass";
-        else CutCarDirName = "OPTIMIZED_171108_MuEl_HighMass_Bin2";
-      }
     }
+
+    if(WhichRegion.Contains("TwoJet")) CutCarDirName = "Cards_"+channel+"_Bin1";
+    else CutCarDirName = "Cards_"+channel+"_Bin2";
 
     cout << "#### " << WhichRegion << " ####" << endl;
     cout << "#### " << TreeDirName << " ####" << endl;
@@ -280,7 +256,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
       //==== Set CutCard
 
       TString cutfilename = "HN"+channel+"_"+mass+".txt";
-      m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/"+CutCarDirName+"/"+cutfilename);
+      m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/RunDirectory/"+CutCarDirName+"/"+cutfilename);
 
       m.Run();
 

@@ -40,7 +40,7 @@ void ForLatex_MakeYieldTable(){
   vector<TString> allbkgs = {
     "fake_Dijet",
     "TG", "TTG",
-    "ZGto2LG", "WGtoLNuG",
+    "ZGto2LG", "WGtoLNuG_weighted",
     "WZTo3LNu_powheg",
     "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",
     "WWW", "WWZ", "WZZ", "ZZZ",
@@ -53,7 +53,7 @@ void ForLatex_MakeYieldTable(){
     {"ttW", "ttZ", "ttH_nonbb",},
     {"WWW", "WWZ", "WZZ", "ZZZ",},
     {"WZTo3LNu_powheg", "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",},
-    {"TG", "TTG", "ZGto2LG", "WGtoLNuG",},
+    {"TG", "TTG", "ZGto2LG", "WGtoLNuG_weighted",},
     {"chargeflip",},
     {"fake_Dijet",},
   };

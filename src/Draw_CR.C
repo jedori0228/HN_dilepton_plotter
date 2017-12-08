@@ -54,9 +54,9 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["ttV"] = {"ttW", "ttZ", "ttH_nonbb"}; //FIXME ttH into ttV
   m.map_sample_string_to_list["ttH"] = {"ttH_nonbb"};
   m.map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
-  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG"};
+  m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG_weighted"};
   //m.map_sample_string_to_list["Xgamma"] = {"TG", "TTG", "ZGto2LG"};
-  m.map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WGtoLNuG"};
+  m.map_sample_string_to_list["Xgamma_noDY"] = {"TG", "TTG", "WGtoLNuG_weighted"};
   m.map_sample_string_to_list["WW_double"] = {"WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
   m.map_sample_string_to_list["ttV_lep"] = {"ttWToLNu", "ttZToLL_M-1to10"};
   m.map_sample_string_to_list["fake_HighdXY"] = {"fake_HighdXY"};
@@ -101,7 +101,6 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //m.samples_to_use = {"fake_HighdXY", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
     m.histname_suffix = {
 
-
       //==== DiMuon
       "_DiMuon_0jets_SS", // SS 0jet CR
       "_DiMuon_1jets_SS", // SS 1jet CR
@@ -117,7 +116,6 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiMuon_HighCR_OneFatJet_SS",
       "_DiMuon_0jets_0nlbjets_dRllge2p5_SS",
       "_DiMuon_WpWp_CR_SS",
-
 
       //=== DiElectron
       "_DiElectron_0jets_SS", // SS 0jet CR
@@ -156,6 +154,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_EMu_0jets_0nlbjets_dRllge2p5_SS",
       "_EMu_WpWp_CR_SS",
 
+
+      //"_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS",
 
     };
   }

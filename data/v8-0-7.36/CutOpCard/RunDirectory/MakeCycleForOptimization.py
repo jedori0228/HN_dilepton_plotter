@@ -121,7 +121,7 @@ void {4}(){{
   vector<TString> bkgs = {{
     "fake_Dijet",
     {8}
-    "ZGto2LG", "WGtoLNuG",
+    "ZGto2LG", "WGtoLNuG_weighted",
     "WZTo3LNu_powheg", "ZZTo4L_powheg",
   }};
   m.AddSamplesToList( bkgs );

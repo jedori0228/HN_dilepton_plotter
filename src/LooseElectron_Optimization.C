@@ -7,7 +7,7 @@ void LooseElectron_Optimization(){
   gErrorIgnoreLevel = kError;
   TH1::AddDirectory(kFALSE);
 
-  TString sample = "WJets";
+  TString sample = "WJets_v4_3";
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString catversion = getenv("CATVERSION");
@@ -27,8 +27,8 @@ void LooseElectron_Optimization(){
   }
 
 
-  const int n_pt = 6;
-  float ptarray[n_pt+1] = {10., 15., 23., 35., 45., 60., 70.};
+  const int n_pt = 9;
+  float ptarray[n_pt+1] = {10., 15., 20., 23., 30., 35., 40., 50., 60., 70.};
 
   TString etaregion_name[3] = {"InnerBarrel", "OuterBarrel", "EndCap"};
 
@@ -44,6 +44,7 @@ void LooseElectron_Optimization(){
     TString LeastDiff="";
     double YMAX = 999999999;
     double MinMVA = -1.;
+    double MaxPTROI = 35;
 
     for(int b=0; b<200; b++){
 
@@ -57,12 +58,19 @@ void LooseElectron_Optimization(){
       double Heavy_den(0.), Heavy_num(0.);
       for(int ix=1; ix<=Heavy_F->GetXaxis()->GetNbins(); ix++){
         double den(0.), num(0.);
+
+        double x_left = Heavy_F->GetXaxis()->GetBinLowEdge(ix);
+        double x_right = Heavy_F->GetXaxis()->GetBinUpEdge(ix);
+        bool IsROI = (x_right<=MaxPTROI);
+
         for(int iy=1; iy<=Heavy_F->GetYaxis()->GetNbins(); iy++){
           den += Heavy_F0->GetBinContent(ix, iy);
           num += Heavy_F->GetBinContent(ix, iy);
         }
-        Heavy_den += den;
-        Heavy_num += num;
+        if(IsROI){
+          Heavy_den += den;
+          Heavy_num += num;
+        }
         double this_FR(0.);
         if(den!=0.){
           this_FR = num/den;
@@ -79,12 +87,19 @@ void LooseElectron_Optimization(){
       double Light_den(0.), Light_num(0.);
       for(int ix=1; ix<=Light_F->GetXaxis()->GetNbins(); ix++){
         double den(0.), num(0.);
+
+        double x_left = Heavy_F->GetXaxis()->GetBinLowEdge(ix);
+        double x_right = Heavy_F->GetXaxis()->GetBinUpEdge(ix);
+        bool IsROI = (x_right<=MaxPTROI);
+
         for(int iy=1; iy<=Light_F->GetYaxis()->GetNbins(); iy++){
           den += Light_F0->GetBinContent(ix, iy);
           num += Light_F->GetBinContent(ix, iy);
         }
-        Light_den += den;
-        Light_num += num;
+        if(IsROI){
+          Light_den += den;
+          Light_num += num;
+        }
         double this_FR(0.);
         if(den!=0.){
           this_FR = num/den;
@@ -92,6 +107,12 @@ void LooseElectron_Optimization(){
         Light_1D->SetBinContent(ix, this_FR);
         Light_1D->SetBinError(ix, 0);
       }
+
+      Heavy_den = Heavy_F0->GetEntries();
+      Heavy_num = Heavy_F->GetEntries();
+      Light_den = Light_F0->GetEntries();
+      Light_num = Light_F->GetEntries();
+
 
       double Heavy_FR = Heavy_num/Heavy_den;
       double Light_FR = Light_num/Light_den;
@@ -134,16 +155,27 @@ void LooseElectron_Optimization(){
       }
       double y_max = GetMaximum(Diff_1D);
       dummy->GetYaxis()->SetRangeUser(0., 1.2*y_max);
+/*
       if(y_max < YMAX){
         YMAX = y_max;
         LeastDiff = StringMVA;
       }
+*/
       TGraphAsymmErrors *gr_Diff = hist_to_graph(Diff_1D);
       gr_Diff->Draw("lpsame");
       Diff_1D->SetLineColor(0);
       Diff_1D->Draw("textsame");
       c2->SaveAs(plotpath+EtaRegion+"/Diff/"+TString::Itoa(100.*MinMVA,10)+"_Diff.pdf");
       c2->Close();
+
+
+      double FR_reldiff = fabs(Heavy_FR-Light_FR)/Light_FR;
+      FR_reldiff = fabs(Heavy_FR-Light_FR)/Light_FR;
+
+      if(FR_reldiff < YMAX){
+        YMAX = FR_reldiff;
+        LeastDiff = StringMVA;
+      }
 
       MinMVA += 0.01;
     } // Eta Region

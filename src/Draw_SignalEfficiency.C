@@ -10,10 +10,8 @@ void Draw_SignalEfficiency(){
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString dataset = getenv("CATANVERSION");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
-  TString ak4dataset = "v8-0-7.27";
 
   TString base_filepath = WORKING_DIR+"/rootfiles/"+dataset+"/Regions/Signal/";
-  TString base_ak4_filepath = WORKING_DIR+"/rootfiles/"+ak4dataset+"/Regions/Signal/";
   TString base_plotpath = ENV_PLOT_PATH+"/"+dataset+"/SignalEfficiency/";
 
   if( !gSystem->mkdir(base_plotpath, kTRUE) ){
@@ -35,7 +33,9 @@ void Draw_SignalEfficiency(){
 
     TString channel = channels.at(i);
 
-    double x[n_mass], y_ak4[n_mass], y_ak4_onejet[n_mass], y_SS[n_mass], y[n_mass];
+    cout << "["<<channel<<"]" << endl;
+
+    double x[n_mass], y_ak4[n_mass], y_SS[n_mass], y[n_mass];
 
     for(unsigned int j=0; j<masses.size(); j++){
 
@@ -57,7 +57,6 @@ void Draw_SignalEfficiency(){
       }
 
       TString filename = "DiLeptonAnalyzer_SKHN"+channel+"_"+mass+"_cat_v8-0-7.root";
-      TFile *file_ak4 = new TFile(base_ak4_filepath+filename);
       TFile *file = new TFile(base_filepath+filename);
 
       TString PDName = "";
@@ -65,23 +64,28 @@ void Draw_SignalEfficiency(){
       if(channel=="ElEl") PDName = "DiElectron";
       if(channel=="MuEl") PDName = "EMu";
 
+      TString histname_ak4 = PDName+"_"+"LegacyTwoJets"+"_SS/Nevents_"+PDName+"_"+"LegacyTwoJets"+"_SS";
       TString histname = PDName+"_"+region+"_SS/Nevents_"+PDName+"_"+region+"_SS";
-      TH1D *hist_ak4 = (TH1D *)file_ak4->Get(histname);
-      TH1D *hist_ak4_1jet = (TH1D *)file_ak4->Get(PDName+"_1jets_SS/Nevents_"+PDName+"_1jets_SS");
+
+      TH1D *hist_ak4 = (TH1D *)file->Get(histname_ak4);
       TH1D *hist = (TH1D *)file->Get(histname);
       TH1D *hist_SS = (TH1D *)file->Get(PDName+"_SS/Nevents_"+PDName+"_SS");
 
+
       double eff_ak4 = hist_ak4->GetEntries()/N_MC;
-      double eff_ak4_onejet = (hist_ak4->GetEntries()+hist_ak4_1jet->GetEntries())/N_MC;
       double eff = hist->GetEntries()/N_MC;
       double eff_SS = hist_SS->GetEntries()/N_MC;
 
+/*
+      double eff_ak4 = hist_ak4->GetBinContent(1)/N_MC;
+      double eff = hist->GetBinContent(1)/N_MC;
+      double eff_SS = hist_SS->GetBinContent(1)/N_MC;
+*/
       y_ak4[j] = eff_ak4;
-      y_ak4_onejet[j] = eff_ak4_onejet;
       y[j] = eff;
-
-      cout << mass << "\t" << eff_ak4_onejet/eff_ak4 << endl;
       y_SS[j] = eff_SS;
+
+      cout << mass << "\t" << hist_SS->GetEntries() << "\t" << N_MC << "\t" << y_SS[j] << endl;
 
     }
 
@@ -105,14 +109,11 @@ void Draw_SignalEfficiency(){
     c1->SetLogx();
 
     TGraph *gr_ak4 = new TGraph(n_mass, x, y_ak4);
-    TGraph *gr_ak4_onejet = new TGraph(n_mass, x, y_ak4_onejet);
     TGraph *gr = new TGraph(n_mass, x, y);
     TGraph *gr_SS = new TGraph(n_mass, x, y_SS);
 
     gr_ak4->SetLineColor(kBlue);
     gr_ak4->SetLineWidth(3);
-    gr_ak4_onejet->SetLineColor(kGreen);
-    gr_ak4_onejet->SetLineWidth(3);
     gr->SetLineColor(kRed);
     gr->SetLineWidth(3);
     gr_SS->SetLineColor(kBlack);
@@ -134,7 +135,6 @@ void Draw_SignalEfficiency(){
 
     gr_SS->Draw("lsame");
     gr_ak4->Draw("lsame");
-    //gr_ak4_onejet->Draw("lsame");
     gr->Draw("lsame");
 
     TLatex latex_CMSPriliminary, latex_Lumi;

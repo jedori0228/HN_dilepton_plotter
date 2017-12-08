@@ -12,8 +12,8 @@ void HiggsCombindedLimit(int i=0){
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  TString filepath = ENV_FILE_PATH+dataset+"/Limit/TestFor2017/";
-  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/TestFor2017/";
+  TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
+  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
   TString WhichDirectoryInCutop = "MuEl_Combined";
   if(i==1) WhichDirectoryInCutop = "MuMu_Bin1";

@@ -2,4 +2,5 @@
 for i in 1 2 3 4 5 6 7 8 9
 do
   root -l -b -q "src/HiggsCombindedLimit.C("$i") "
+  root -l -b -q "src/HiggsCombindedLimit_Xsec.C("$i") "
 done
