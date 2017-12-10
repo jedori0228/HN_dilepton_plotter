@@ -39,11 +39,11 @@ for ch in channels:
       for row in spamreader:
 
         if "Total Systematic" in row:
-          break
+          print "\\hline"
 
         if ch != "DiElectron":
           if "CF" in row[0]:
-            break
+            continue
 
         ## anem
         if counter == 0:
@@ -84,10 +84,21 @@ for ch in channels:
             if a == 0:
               print row[a]+" &",
             elif a != len(row)-1:
-              print "$"+row[a]+"~\\%$ &",
+              if row[a]=="-":
+                print "$-$ &",
+              else:
+                print "$"+row[a]+"~\\%$ &",
             else:
-              print "$"+row[a]+"~\\%$ \\\\"
+              if row[a]=="-":
+                print "$-$ \\\\"
+              else:
+                print "$"+row[a]+"~\\%$ \\\\"
         counter = counter+1
+
+        if "Total Systematic" in row:
+          break
+
+
 
       print "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
       print "    \\end{tabular}"

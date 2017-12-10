@@ -10,6 +10,10 @@ for ch in channels:
       ## Low Mass
       masses = [40, 50, 60, 70, 80]
       varorder = [
+      "Njets <",
+
+      "DeltaRl1l2 <",
+
       "leadingLepton_Pt <",
 
       "secondLepton_Pt >",
@@ -24,22 +28,16 @@ for ch in channels:
 
       "PFMET <",
       ]
-      names = [
-      "pt1 <\t",
-      "pt2\t",
-      "",
-      "m(lljj) <\t",
-      "m(l1jj) <\t",
-      "m(l2jj) <\t",
-      "m(ll)\t",
-      "",
-      "MET <\t",
-      ]
       varsinboth = []
 
       if LowORHigh == 1:
         masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
         varorder = [
+        "Njets <",
+
+        "leadingJet_lljjWclosest_pt >",
+        "DeltaRSubLeadl_jjWclosest <",
+
         "leadingLepton_Pt >",
         "secondLepton_Pt >",
 
@@ -53,30 +51,11 @@ for ch in channels:
 
         "MET2ST <",
         ]
-        names = [
-        "pt1 >\t",
-        "pt2 >\t",
-
-        "m(jj)\t",
-        "",
-
-        "m(lljj) >\t",
-
-        "m(ljj)\t",
-        "",
-
-        "MET2/ST <\t",
-        ]
         varsinboth = [
         "m_jj_jjWclosest >",
         "ljj |>",
         "m_SubLeadljj_jjWclosest >"
         ]
-
-      #print 'm(N) [GeV]\t',
-      #for name in names:
-      #  print name,
-      #print "Bkgd\tSignal Efficiency"
 
       for mass in masses:
         lines = open('Cards_'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'.txt').readlines()
@@ -85,10 +64,27 @@ for ch in channels:
         counter = 0
         for var in varorder:
 
+          ## # of jets only for Bin1
+          if Bin == "Bin2":
+            if "Njets" in var:
+              print "-\t",
+
+          ## leading jet pt
+          if mass >= 90 and Bin == "Bin2":
+            if "leadingJet_lljjWclosest_pt" in var:
+              print "-\t",
+
+          ## medium mass l2jj
           if mass >= 90 and mass <= 200:
             if "ljj " in var:
               var = var.replace("ljj","m_SubLeadljj_jjWclosest")
               var = var.replace("|","")
+
+          ## Delta R only for medium mass, Bin1
+          if mass >= 250 or Bin == "Bin2":
+            if "DeltaRSubLeadl_jjWclosest" in var:
+              print "-\t",
+              continue
 
           for line in lines:
             words = line.split()
@@ -97,6 +93,8 @@ for ch in channels:
               continue
 
             value = str(int(float(words[2])))
+            if "DeltaRSubLeadl_jjWclosest" in var or "DeltaRl1l2" in var:
+              value = str(float(words[2]))
 
             if LowORHigh == 0:
               if var=="secondLepton_Pt >" or var=="m_ll >":
@@ -112,7 +110,7 @@ for ch in channels:
           if Bin == "Bin2" and  LowORHigh == 1:
             if "secondLepton_Pt" in var:
               print "40 - 130\t-\t",
-            if "ljj |<" in var:
+            if ("ljj |<" in var) or ("m_SubLeadljj_jjWclosest <" in var):
               print "15\t",
 
 

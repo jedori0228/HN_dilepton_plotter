@@ -237,8 +237,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //==== Fatjet
     "# of Fatjet",
     "Fatjet p_{T} (GeV)", "Fatjet #eta", "Fatjet Mass (GeV)", "Fatjet #tau_{21}", "Fatjet Pruned Mass (GeV)",
-    "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
-    "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
+    "m(Leading Lepton+Fatjet) (GeV)", "m(Subleading Lepton+Fatjet) (GeV)", "m(ll+Fatjet) (GeV)",
+    "m(Leading Lepton+Fatjet) (GeV)", "m(Subleading Lepton+Fatjet) (GeV)", "m(ll+Fatjet) (GeV)",
     //==== OneJet_NoFatJet
     "m(Leading Lepton+j) (GeV)", "m(Subleading Lepton+j) (GeV)", "m(llj) (GeV)",
   };

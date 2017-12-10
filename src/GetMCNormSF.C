@@ -108,6 +108,11 @@ void GetMCNormSF(bool DoNorm=false){
     {"ZGto2LG"},
     {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"},
   };
+  vector<TString> SampleNames = {
+    "WZ",
+    "Z#gamma",
+    "ZZ",
+  };
 
   TCanvas* c1 = new TCanvas("c1", "", 800, 800);
   c1->Draw();
@@ -336,7 +341,12 @@ void GetMCNormSF(bool DoNorm=false){
   ratio_allerr->SetMarkerStyle(0);
   ratio_allerr->SetLineColor(kWhite);
   ratio_allerr->Draw("E2same");
+  for(int i=0; i<SampleNames.size(); i++){
+    ratio_allerr->GetXaxis()->SetBinLabel(i+1, SampleNames.at(i));
+  }
+
   hist_axis(hist_empty, ratio_allerr);
+  ratio_allerr->GetXaxis()->SetLabelSize(0.25);
 
   ratio_staterr->SetFillColor(kCyan);
   ratio_staterr->SetMarkerSize(0);

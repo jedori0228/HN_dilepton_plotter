@@ -36,9 +36,9 @@ for region in regions:
       #print "    \\footnotesize"
       print "    \\resizebox{\\columnwidth}{!}{"
       if "Low" in region:
-        print "      \\begin{tabular}{c|c|ccccccc|c|c}"
+        print "      \\begin{tabular}{c|c|ccccccccc|c|c}"
       elif "High in region":
-        print "      \\begin{tabular}{c|c|cccccc|c|c}"
+        print "      \\begin{tabular}{c|c|ccccccccc|c|c}"
       print "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 
       for row in spamreader:
@@ -48,8 +48,13 @@ for region in regions:
         ## First Row
         if "Signal Region" in row[0]:
           for a in range(0,MaxRowIndex-1):
-            print row[a]+" &",
-          print row[MaxRowIndex-1]+" \\\\"
+            thisword = row[a]
+            thisword = thisword.replace('$\Delta R(\ell 1 jj) <$','$\Delta R(\ell 1, jj) <$')
+            thisword = thisword.replace('$\Delta R(\ell 1 \ell 2) <$','$\Delta R(\ell 1, \ell 2) <$')
+            print thisword+" &",
+
+          thisword = row[MaxRowIndex-1]
+          print thisword+" \\\\"
 
         
         else:

@@ -35,6 +35,11 @@ void Draw_MCClosure(){
     "DiMuon",
     "EMu",
   };
+  vector<TString> channelsForLatex = {
+    "ee",
+    "#mu#mu",
+    "e#mu",
+  };
 
   vector<TString> regions = {
     "Preselection",
@@ -173,6 +178,10 @@ void Draw_MCClosure(){
         THStack *stack_summed_Predicted = new THStack("stack_summed_Predicted", "");
         TH1D *hist_summed_Measured = NULL;
 
+        const int N_sample = samplesalias.size();
+        TH1D *hist_binned_Predicted = new TH1D("hist_binned_Predicted", "", N_sample, 0., 1.*N_sample);
+        TH1D *hist_binned_Measured = new TH1D("hist_binned_Measured", "", N_sample, 0., 1.*N_sample);
+
         for(unsigned int i=0; i<samples.size(); i++){
 
           TString sample = samples.at(i);
@@ -221,12 +230,21 @@ void Draw_MCClosure(){
 
           if(var=="Nevents"){
 
+            //==== Calculate Systematics
+
             double SystExtra = 0.;
 
             double y_m = hist_Measured->GetBinContent(1);
             double e_m = hist_Measured->GetBinError(1);
             double y_p = hist_Predicted->GetBinContent(1);
             double e_p = hist_Predicted->GetBinError(1);
+
+            //==== One Binned
+
+            hist_binned_Predicted->SetBinContent(i+1, y_p);
+            hist_binned_Predicted->SetBinError(i+1, e_p);
+            hist_binned_Measured->SetBinContent(i+1, y_m);
+            hist_binned_Measured->SetBinError(i+1, e_m);
 
             //==== Over Prediction
             if( y_p >= y_m ){
@@ -606,6 +624,133 @@ void Draw_MCClosure(){
         c_summed->SaveAs(plotpath+"/"+channel+"/Stacked/"+regions.at(k)+"/"+var+".png");
         c_summed->Close();
 
+
+        //==== Binned
+
+        if(var=="Nevents"){
+
+          TCanvas *c_binned = new TCanvas("c_binned", "", 600, 600);
+
+          TPad *c1_binned_up;
+          TPad *c1_binned_down;
+          c1_binned_up = new TPad("c1_binned_up", "", 0, 0.25, 1, 1);
+          c1_binned_down = new TPad("c1_binned_down", "", 0, 0, 1, 0.25);
+
+          canvas_margin(c_binned, c1_binned_up, c1_binned_down);
+
+          c1_binned_up->Draw();
+          c1_binned_down->Draw();
+          c1_binned_up->cd();
+
+          hist_binned_Predicted->SetFillColor(kOrange);
+          hist_binned_Predicted->SetLineColor(kOrange);
+          hist_binned_Measured->SetMarkerStyle(20);
+
+          //TH1D *dummy_binned = new TH1D("dummy_binned", "", );
+
+          hist_binned_Predicted->Draw("hist");
+          hist_axis(hist_binned_Predicted);
+          hist_binned_Measured->Draw("pe1same");
+
+          double y_max = max(GetMaximum(hist_binned_Predicted), GetMaximum(hist_binned_Predicted));
+          hist_binned_Predicted->GetYaxis()->SetRangeUser(0, 1.2*y_max);
+          hist_binned_Predicted->GetYaxis()->SetTitle("Events");
+
+          for(int aaa=0;aaa<samplesalias.size();aaa++){
+            hist_binned_Predicted->GetXaxis()->SetBinLabel(aaa+1, samplesalias.at(aaa));
+          }
+          hist_binned_Predicted->GetXaxis()->SetLabelSize(0.06);
+
+          TH1D *hist_binned_Predicted_err = (TH1D *)hist_binned_Predicted->Clone();
+          hist_binned_Predicted_err->SetMarkerColorAlpha(kAzure-9, 0);
+          hist_binned_Predicted_err->SetFillStyle(3013);
+          hist_binned_Predicted_err->SetFillColor(kBlack);
+          hist_binned_Predicted_err->SetLineColor(0);
+          hist_binned_Predicted_err->Draw("sameE2");
+
+          //==== bottom
+
+          c1_binned_down->cd();
+
+          TH1D *bottom_binned_point = (TH1D *)hist_binned_Measured->Clone();
+          TH1D *bottom_binned_error = (TH1D *)hist_binned_Predicted->Clone();
+
+          for(int a=1; a<=hist_binned_Measured->GetXaxis()->GetNbins(); a++){
+
+            if(hist_binned_Predicted->GetBinContent(a)==0) continue;
+
+
+            bottom_binned_point->SetBinContent( a, hist_binned_Measured->GetBinContent(a)/hist_binned_Predicted->GetBinContent(a));
+            bottom_binned_point->SetBinError( a, hist_binned_Measured->GetBinError(a)/hist_binned_Predicted->GetBinContent(a));
+
+            bottom_binned_error->SetBinContent( a, 1. );
+            bottom_binned_error->SetBinError( a, hist_binned_Predicted->GetBinError(a)/hist_binned_Predicted->GetBinContent(a));
+
+          }
+
+          TH1D *dummy_bottom_binned = new TH1D("dummy_bottom_binned", "", n_samples, 0., 1.*n_samples);
+          dummy_bottom_binned->SetLineWidth(0);
+          dummy_bottom_binned->SetLineColor(0);
+          dummy_bottom_binned->SetFillColor(0);
+          dummy_bottom_binned->SetFillStyle(0);
+          dummy_bottom_binned->SetMarkerSize(0);
+          dummy_bottom_binned->SetMarkerColor(0);
+          dummy_bottom_binned->SetMaximum(1.5);
+          dummy_bottom_binned->SetMinimum(0.5);
+          dummy_bottom_binned->GetXaxis()->SetTitle(xtitle.at(j));
+          dummy_bottom_binned->SetYTitle("#frac{Meas.}{Pred.}");
+          hist_axis(hist_binned_Predicted, dummy_bottom_binned);
+          dummy_bottom_binned->Draw("hist");
+
+          bottom_binned_error->SetFillColor(kOrange);
+          bottom_binned_error->SetMarkerSize(0);
+          bottom_binned_error->SetMarkerStyle(0);
+          bottom_binned_error->SetLineColor(kWhite);
+          bottom_binned_error->Draw("e2same");
+
+          bottom_binned_point->Draw("PE1same");
+
+          g1->Draw("same");
+
+
+          //==== legend
+
+          c1_binned_up->cd();
+
+          TLegend *lg_binned = new TLegend(0.2, 0.5, 0.5, 0.8);
+          lg_binned->SetFillStyle(0);
+          lg_binned->SetBorderSize(0);
+          lg_binned->AddEntry(hist_binned_Measured, "Measured", "pe");
+          lg_binned->AddEntry(hist_binned_Predicted, "Predicted", "f");
+          lg_binned->Draw();
+
+          //==== latex
+
+          c_binned->cd();
+          TLatex latex_CMSPriliminary, latex_Lumi;
+          latex_CMSPriliminary.SetNDC();
+          latex_Lumi.SetNDC();
+          latex_CMSPriliminary.SetTextSize(0.035);
+          latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+          latex_Lumi.SetTextSize(0.035);
+          latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+
+          TString str_channel = channelsForLatex.at(l);
+          TLatex channelname;
+          channelname.SetNDC();
+          channelname.SetTextSize(0.037);
+          channelname.DrawLatex(0.2, 0.88, str_channel);
+
+          gSystem->mkdir(plotpath+"/"+channel+"/Binned/"+regions.at(k), kTRUE);
+          c_binned->SaveAs(plotpath+"/"+channel+"/Binned/"+regions.at(k)+"/OneBinned.pdf");
+          c_binned->SaveAs(plotpath+"/"+channel+"/Binned/"+regions.at(k)+"/OneBinned.png");
+
+        }
+
+        delete hist_binned_Predicted;
+        delete hist_binned_Measured;
+
+        
 
         //cout << "==> " << var << " END" << endl;
 

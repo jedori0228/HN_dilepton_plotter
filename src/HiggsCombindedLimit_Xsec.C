@@ -118,7 +118,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   string elline_SandT;
   ifstream in_SandT(filepath+"/result_VBF.txt");
 
-  double mass_SandT[5], obs_SandT[5], limit_SandT[5], onesig_left_SandT[5], onesig_right_SandT[5], twosig_left_SandT[5], twosig_right_SandT[5];
+  double mass_SandT[6], obs_SandT[6], limit_SandT[6], onesig_left_SandT[6], onesig_right_SandT[6], twosig_left_SandT[6], twosig_right_SandT[6];
   dummyint=0;
 
   while(getline(in_SandT,elline_SandT)){
@@ -159,11 +159,11 @@ void HiggsCombindedLimit_Xsec(int i=0){
     dummyint++;
   }
 
-  TGraph *gr_13TeV_obs_SandT = new TGraph(5,mass_SandT,obs_SandT);
+  TGraph *gr_13TeV_obs_SandT = new TGraph(6,mass_SandT,obs_SandT);
   gr_13TeV_obs_SandT->SetLineWidth(3);
   gr_13TeV_obs_SandT->SetLineColor(kBlack);
 
-  TGraph *gr_13TeV_exp_SandT = new TGraph(5,mass_SandT,limit_SandT);
+  TGraph *gr_13TeV_exp_SandT = new TGraph(6,mass_SandT,limit_SandT);
   gr_13TeV_exp_SandT->SetLineWidth(5);
   gr_13TeV_exp_SandT->SetLineStyle(1);
   gr_13TeV_exp_SandT->SetLineColor(kViolet);
@@ -337,10 +337,13 @@ double GetXsec(int mass){
   if(mass==70) return 3.917;
   if(mass==75) return 1.4315;
   if(mass==80){
+    return 0.4525;
+/*
     Wrong = 2.01340
     Correct = 0.4525
     correction = Correct/Wrong;
     return 8.29E-01*correction;
+*/
   }
   if(mass==85) return 2.26E-01;
   if(mass==90) return 1.54E-01;
