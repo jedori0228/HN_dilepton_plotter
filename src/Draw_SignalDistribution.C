@@ -57,8 +57,8 @@ void Draw_SignalDistribution(){
   vector<TString> channelsForLatex = {"#mu#mu", "ee", "#mue"};
 
   vector<TString> regions = {"Preselection"};
-  vector<TString> vars = {"leadingLepton_Pt", "secondLepton_Pt", "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest"};
-  vector<TString> xtitles = {"Leading Lepton p_{T} (GeV)", "Subleading Lepton p_{T} (GeV)", "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",};
+  vector<TString> vars = {"leadingLepton_Pt", "secondLepton_Pt", "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest", "leadingLepton_Eta", "secondLepton_Eta"};
+  vector<TString> xtitles = {"Leading Lepton p_{T} (GeV)", "Subleading Lepton p_{T} (GeV)", "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)", "Leading Lepton #eta", "Subleading Lepton #eta",};
 
   for(unsigned int i=0; i<channels.size(); i++){
 
@@ -81,8 +81,17 @@ void Draw_SignalDistribution(){
           x_max = 3000.;
           n_rebin = 10;
         }
+        if(vars.at(l).Contains("Eta")){
+          x_max = 3.;
+          n_rebin = 3;
+        }
 
-        TH1D *hist_dummy = new TH1D("hist_dummy", "", int(x_max), 0., x_max);
+        double x_min = 0.;
+        if(vars.at(l).Contains("Eta")){
+          x_min = -3.;
+        }
+
+        TH1D *hist_dummy = new TH1D("hist_dummy", "", int(x_max), x_min, x_max);
         hist_dummy->Draw("hist");
         hist_axis(hist_dummy);
         hist_dummy->GetYaxis()->SetRangeUser(0., 1.1);

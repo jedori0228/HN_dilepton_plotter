@@ -148,6 +148,7 @@ void {4}(){{
     "_BTagSFMiss_up", "_BTagSFMiss_down",
     "_JetMass_up", "_JetMass_down",
     "_JetMassRes_up", "_JetMassRes_down",
+    "_Tau21_up", "_Tau21_down",
   }};
 
 
@@ -182,9 +183,6 @@ void {4}(){{
   double signal_calculated_syst_pdf_error(0.);
   double signal_calculated_syst_pdf_alphaS(0.);
   double signal_calculated_syst_pdf_scale(0.);
-
-  double prompt_tau21_syst(0.);
-  double signal_tau21_syst(0.);
 
   for(unsigned int i=0; i<systs.size(); i++){{
 
@@ -253,13 +251,6 @@ void {4}(){{
       signal_calculated_syst_pdf_alphaS = fabs(m.pdfsyst.Syst_Pdf_Alpha)*y_signal_central;
       signal_calculated_syst_pdf_scale = fabs(m.pdfsyst.Syst_Pdf_Scale)*y_signal_central;
 
-      //==== tau21
-      prompt_tau21_syst = m.prompt_bkgs_tau21_syst-y_prompt_central;
-      signal_tau21_syst = m.signal_tau21_syst.at(0)-y_signal_central;
-
-      cout << "prompt_tau21_syst = " << prompt_tau21_syst << endl;
-      cout << "signal_tau21_syst = " << signal_tau21_syst << endl;
-
     }}
 
     double reldiff = (m.total_bkgs-y_bkg_central)/y_bkg_central;
@@ -323,6 +314,7 @@ void {4}(){{
     "B-taggin Miss",
     "Jet Mass Scale",
     "Jet Mass Resolution",
+    "Tau21"
   }};
 */
   vector<TString> sourcealias = {{
@@ -339,6 +331,7 @@ void {4}(){{
     "BMiss",
     "JMS",
     "JMR",
+    "Tau21",
   }};
 
   cout << endl;
@@ -429,17 +422,6 @@ void {4}(){{
     syst_sig += reldiff_sig_means.at(i)*reldiff_sig_means.at(i);
 
   }}
-
-  cout << "Tau21" << "\t";
-  cout << std::fixed<<std::setprecision(2) << 100.*prompt_tau21_syst/y_bkg_central << "\t";
-  cout << std::fixed<<std::setprecision(2) << 100.*prompt_tau21_syst/y_prompt_central << "\t";
-  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
-  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
-  cout << std::fixed<<std::setprecision(2) << 100.*signal_tau21_syst/y_signal_central << endl;
-  ONLYSYST_bkg += (prompt_tau21_syst/y_bkg_central)*(prompt_tau21_syst/y_bkg_central);
-  ONLYSYST_prompt += (prompt_tau21_syst/y_prompt_central)*(prompt_tau21_syst/y_prompt_central);
-  syst_total_bkg += (prompt_tau21_syst/y_bkg_central)*(prompt_tau21_syst/y_bkg_central);
-  syst_sig += (signal_tau21_syst/y_signal_central)*(signal_tau21_syst/y_signal_central);
 
   cout << "MCNorm" << "\t";
   cout << std::fixed<<std::setprecision(2) << 100.*prompt_calculated_syst/y_bkg_central << "\t";

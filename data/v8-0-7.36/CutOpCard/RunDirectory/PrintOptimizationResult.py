@@ -3,6 +3,8 @@ import os
 channels = ["MuMu", "ElEl", "MuEl"]
 Bins = ["Bin1", "Bin2"]
 
+masses_Tch = [300, 600, 800, 1000, 1200, 1500]
+
 for ch in channels:
   for LowORHigh in range(0,2):
     for Bin in Bins:
@@ -86,6 +88,11 @@ for ch in channels:
               print "-\t",
               continue
 
+          ## M>=600GeV, no second pt cut
+          if mass >=600:
+            if "secondLepton_Pt" in var:
+              print "-\t",
+
           for line in lines:
             words = line.split()
             this_var = words[0]+" "+words[1]
@@ -122,9 +129,17 @@ for ch in channels:
         bkgd = runlog[len(runlog)-2].split()[0]
        
         float_eff = float(runlog[len(runlog)-3].split()[2])
-        eff = str(float_eff*1.)
+        eff_S = str(float_eff*1.)
 
-        print bkgd+'\t'+eff
+        if (LowORHigh==1) and (mass in masses_Tch):
+          lines_T = open('Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'_VBFOnly.log').readlines()
+          float_eff_T = float(lines_T[len(lines_T)-3].split()[2])
+          eff_T = str(2*float_eff_T*1.) ## 2 is because it's OS+SS
+          print bkgd+'\t'+eff_S+"\t"+eff_T
+
+        else:
+          print bkgd+'\t'+eff_S
+
 
 
 

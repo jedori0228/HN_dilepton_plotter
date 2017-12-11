@@ -8,6 +8,9 @@ ttW	1	0.5
 ttZ	1	0.5
 ttH_nonbb	1	0.5
 top	1	0.5
+WWTo2L2Nu_DS 1 0.5
+WpWpEWK 1 0.5
+WpWpQCD 1 0.5
 WZTo3LNu_powheg 1.02408 0.0692061
 ZGto2LG 0.843191 0.12488
 ZZTo4L_powheg 0.948107 0.0896185

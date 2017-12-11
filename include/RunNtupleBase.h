@@ -56,9 +56,6 @@ public:
   double cf_bkgs_stat; // sumw2
   vector<double> signal_stat;
 
-  double prompt_bkgs_tau21_syst; // tau21 sf up yield
-  vector<double> signal_tau21_syst; //tau21 sf up yield
-
   double fake_bkgs_syst; // 31%
   double prompt_bkgs_syst; // MCSF uncert
   double cf_bkgs_syst; // 21%
@@ -125,7 +122,6 @@ void RunNtupleBase::FillSignalInfo(){
   for(unsigned int i=0; i<signals.size(); i++){
     TString filename = "DiLeptonAnalyzer_SK"+signals.at(i)+"_cat_v8-0-7.root";
     TFile *file = new TFile(filepath+filename);
-    TH1D *hist_nocut = (TH1D*)file->Get("Cutflow_"+channel+"_NoCut");
     TH1D *hist_preselection = (TH1D*)file->Get("Nevents_"+channel+"_"+preselection);
 
     string elline;
@@ -143,11 +139,6 @@ void RunNtupleBase::FillSignalInfo(){
 
     if(N_MC==-999) signal_yield_nocut.push_back( 0. );
     else           signal_yield_nocut.push_back( N_MC );
-
-/*
-    if(hist_nocut) signal_yield_nocut.push_back( hist_nocut->GetEntries() );
-    else           signal_yield_nocut.push_back( 0. );
-*/
 
     if(hist_preselection) signal_yield_preselection.push_back( hist_preselection->GetEntries() );
     else                  signal_yield_preselection.push_back( 0. );

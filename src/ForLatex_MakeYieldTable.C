@@ -83,6 +83,7 @@ void ForLatex_MakeYieldTable(){
     "_BTagSFMiss_up", "_BTagSFMiss_down",
     "_JetMass_up", "_JetMass_down",
     "_JetMassRes_up", "_JetMassRes_down",
+    "_Tau21_up", "_Tau21_down",
   };
   
   for(unsigned int it_region=0; it_region<WhichRegions.size(); it_region++){
@@ -282,10 +283,6 @@ void ForLatex_MakeYieldTable(){
               //==== MCSF
               SystError += m.prompt_bkgs_syst*m.prompt_bkgs_syst;
               //cout << "MCSF : " << m.prompt_bkgs_syst << endl;
-              //==== Tau21
-              double tau21_syst = m.prompt_bkgs_tau21_syst-Yield;
-              SystError += tau21_syst*tau21_syst;
-              //cout << "tau21 : " << tau21_syst << endl;
             }
             if(isFake){
               SystError += m.fake_bkgs_syst*m.fake_bkgs_syst;

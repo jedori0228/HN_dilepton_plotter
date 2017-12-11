@@ -656,11 +656,6 @@ void Draw_MCClosure(){
           hist_binned_Predicted->GetYaxis()->SetRangeUser(0, 1.2*y_max);
           hist_binned_Predicted->GetYaxis()->SetTitle("Events");
 
-          for(int aaa=0;aaa<samplesalias.size();aaa++){
-            hist_binned_Predicted->GetXaxis()->SetBinLabel(aaa+1, samplesalias.at(aaa));
-          }
-          hist_binned_Predicted->GetXaxis()->SetLabelSize(0.06);
-
           TH1D *hist_binned_Predicted_err = (TH1D *)hist_binned_Predicted->Clone();
           hist_binned_Predicted_err->SetMarkerColorAlpha(kAzure-9, 0);
           hist_binned_Predicted_err->SetFillStyle(3013);
@@ -701,6 +696,11 @@ void Draw_MCClosure(){
           dummy_bottom_binned->SetYTitle("#frac{Meas.}{Pred.}");
           hist_axis(hist_binned_Predicted, dummy_bottom_binned);
           dummy_bottom_binned->Draw("hist");
+          for(int aaa=0;aaa<samplesalias.size();aaa++){
+            dummy_bottom_binned->GetXaxis()->SetBinLabel(aaa+1, samplesalias.at(aaa));
+          }
+          dummy_bottom_binned->GetXaxis()->SetLabelSize(0.25);
+          dummy_bottom_binned->GetXaxis()->SetTitle(0);
 
           bottom_binned_error->SetFillColor(kOrange);
           bottom_binned_error->SetMarkerSize(0);

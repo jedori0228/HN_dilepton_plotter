@@ -36,9 +36,9 @@ for region in regions:
       #print "    \\footnotesize"
       print "    \\resizebox{\\columnwidth}{!}{"
       if "Low" in region:
-        print "      \\begin{tabular}{c|c|ccccccccc|c|c}"
+        print "      \\begin{tabular}{c|c|ccccccccc|c|cc}"
       elif "High in region":
-        print "      \\begin{tabular}{c|c|ccccccccc|c|c}"
+        print "      \\begin{tabular}{c|c|ccccccccc|c|cc}"
       print "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 
       for row in spamreader:

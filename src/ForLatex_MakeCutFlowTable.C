@@ -80,10 +80,14 @@ void ForLatex_MakeCutFlowTable(){
   };
 
   vector<int> signal_masses = {
-    50, 100, 200, 500, 1100,
+    50, 100, 500, -800, 1100, -1200,
   };
-  vector<double> ref_scale = {0.0001, 0.01, 0.01, 0.1, 1};
-  vector<TString> ref_scaleForTex = {"0.0001", "0.01", "0.01", "0.1", "1"};
+  vector<double> ref_scale = {
+    0.0001, 0.01, 0.1, 0.1, 1, 1,
+  };
+  vector<TString> ref_scaleForTex = {
+    "0.0001", "0.01", "0.1", "0.1", "1", "1",
+  };
 
   for(unsigned int it_ch=0; it_ch<channels.size(); it_ch++){
 
@@ -116,19 +120,21 @@ void ForLatex_MakeCutFlowTable(){
     cout << "  \\label{table:cutflow_presel_"<< region <<"}" << endl;
     cout << "  \\begin{center}" << endl;
     cout << "    \\resizebox{\\columnwidth}{!}{" << endl;
-    cout << "      \\begin{tabular}{c|c|c|c|c|c|c}" << endl;
+    cout << "      \\begin{tabular}{c|c|c|c|c|c|c|c}" << endl;
     cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl;
     cout << "\\hline" << endl;
     cout << "& \\multirow{2}{*}{\\bf total bkg}" ;
     for(unsigned it_sig=0; it_sig<signal_masses.size(); it_sig++){
-      cout << "& $m_{N}$ = "<<TString::Itoa(signal_masses.at(it_sig),10)<<"~$\\GeV$ ";
+      cout << "& $m_{N}$ = "<<TString::Itoa(abs(signal_masses.at(it_sig)),10)<<"~$\\GeV$ ";
     }
     cout << " \\\\" << endl;
     cout << "& " ;
     for(unsigned it_sig=0; it_sig<signal_masses.size(); it_sig++){
-      if(channel=="MuMu") cout << "& $\\left| V_{\\mu N} \\right|^2 = "<< ref_scaleForTex.at(it_sig) << "$ ";
-      if(channel=="ElEl") cout << "& $\\left| V_{e N} \\right|^2 = "<< ref_scaleForTex.at(it_sig) << "$ ";
-      if(channel=="MuEl") cout << "& $\\left| V_{\ell N} \\right|^2 = "<< ref_scaleForTex.at(it_sig) << "$ ";
+      TString fdch = "s-ch";
+      if(signal_masses.at(it_sig)<0) fdch = "t-ch";
+      if(channel=="MuMu") cout << "& "+fdch+" $\\left| V_{\\mu N} \\right|^2 = "<< ref_scaleForTex.at(it_sig) << "$ ";
+      if(channel=="ElEl") cout << "& "+fdch+" $\\left| V_{e N} \\right|^2 = "<< ref_scaleForTex.at(it_sig) << "$ ";
+      if(channel=="MuEl") cout << "& "+fdch+" $\\left| V_{\ell N} \\right|^2 = "<< ref_scaleForTex.at(it_sig) << "$ ";
     }
     cout << " \\\\" << endl;
     //cout << "& {\\bf total bkg} & $m_{N}$ = 40~$\\GeV$ &  $m_{N}$ = 100~$\\GeV$ &  $m_{N}$ = 300~$\\GeV$ & $m_{N}$ = 1000~$\\GeV$ \\\\" << endl;
@@ -168,6 +174,7 @@ void ForLatex_MakeCutFlowTable(){
       for(unsigned it_sig=0; it_sig<signal_masses.size(); it_sig++){
 
         TString filename = "DiLeptonAnalyzer_SKHNMoriondLL"+channel+"_"+TString::Itoa(signal_masses.at(it_sig),10)+"_cat_"+catversion+".root";
+        if(signal_masses.at(it_sig)<0) filename = "DiLeptonAnalyzer_SKHNDilepton_"+channel+"_Tchannel_M"+TString::Itoa(abs(signal_masses.at(it_sig)),10)+"_cat_"+catversion+".root";
         TFile *file = new TFile(filepath+"/Signal/"+filename);
         TH1D *hist = (TH1D *)file->Get("Cutflow_"+region+"_"+CutFlowName);
 

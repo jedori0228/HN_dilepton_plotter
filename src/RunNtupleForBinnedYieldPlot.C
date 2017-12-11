@@ -10,14 +10,13 @@ void RunNtupleForBinnedYieldPlot::Run(){
   double final_cf(0.), final_cf_err(0.), final_cf_syst(0.), final_cf_stat(0.);
   double final_fake(0.), final_fake_err(0.), final_fake_syst(0.), final_fake_stat(0.);
   double final_prompt(0.), final_prompt_err(0.), final_prompt_syst(0.), final_prompt_stat(0.);
-  vector<double> final_signal, final_signal_eff, final_signal_eff_preselection, final_signal_err, final_signal_stat, final_signal_tau21_up;
+  vector<double> final_signal, final_signal_eff, final_signal_eff_preselection, final_signal_err, final_signal_stat;
   for(unsigned int i=0; i<signals.size(); i++){
     final_signal.push_back(0.);
     final_signal_eff.push_back(0.);
     final_signal_eff_preselection.push_back(0.);
     final_signal_err.push_back(0.);
     final_signal_stat.push_back(0.);
-    final_signal_tau21_up.push_back(0.);
   }
 
   while( !cutrangeinfo.isEnd() ){
@@ -34,11 +33,8 @@ void RunNtupleForBinnedYieldPlot::Run(){
     TH1D *hist_prompt_total = new TH1D("hist_prompt_total", "", 1, 0., 1.); // Use TH1D::Add, to use GetBinError
     //==== MCSF up/down
     TH1D *hist_prompt_total_up = new TH1D("hist_prompt_total_up", "", 1, 0., 1.); // Just fill content, and only use GetBinContent
-    //==== Tau21 up/down
-    TH1D *hist_prompt_tau21_up = new TH1D("hist_prompt_tau21_up", "", 1, 0., 1.);
     
     vector<double> signal_unweighted_yield, signal_weighted_yield, signal_weighted_yield_stat;
-    vector<double> signal_tau21_up;
 
     bool SignalEffLow = false;
 
@@ -84,7 +80,6 @@ void RunNtupleForBinnedYieldPlot::Run(){
           signal_unweighted_yield.push_back(0.);
           signal_weighted_yield.push_back(0.);
           signal_weighted_yield_stat.push_back(0.);
-          signal_tau21_up.push_back(0.);
 
           SignalEffLow = true;
         }
@@ -136,7 +131,6 @@ void RunNtupleForBinnedYieldPlot::Run(){
           signal_unweighted_yield.push_back(0.);
           signal_weighted_yield.push_back(0.);
           signal_weighted_yield_stat.push_back(0.);
-          signal_tau21_up.push_back(0.);
           SignalEffLow = true;
         }
         continue;
@@ -149,18 +143,15 @@ void RunNtupleForBinnedYieldPlot::Run(){
 
         hist_prompt_total->Add( m.hist_for_error );
         hist_prompt_total_up->Fill(0., m.weighted_yield);
-        hist_prompt_tau21_up->Fill(0., m.hist_for_tau21_up->GetBinContent(1) );
 
         signal_unweighted_yield.push_back( m.unweighted_yield );
         signal_weighted_yield.push_back( m.weighted_yield );
         signal_weighted_yield_stat.push_back( m.hist_for_error->GetBinError(1) );
-        signal_tau21_up.push_back( m.hist_for_tau21_up->GetBinContent(1) );
       }
       else if(sample.Contains("HN")){
         signal_unweighted_yield.push_back( m.unweighted_yield );
         signal_weighted_yield.push_back( m.weighted_yield );
         signal_weighted_yield_stat.push_back( m.hist_for_error->GetBinError(1) );
-        signal_tau21_up.push_back( m.hist_for_tau21_up->GetBinContent(1) );
 
         double eff_preselection = m.weighted_yield/signal_yield_preselection.at(ii);
         if(PrintYield) cout << "SignalEff@Preselection : " << sample << "\t" << eff_preselection << "\t" << m.unweighted_yield << endl;
@@ -197,7 +188,6 @@ void RunNtupleForBinnedYieldPlot::Run(){
         prompt_weighted_yield += m.weighted_yield * analysisInputs.MCNormSF[sample];
         hist_prompt_total->Add( m.hist_for_error );
         hist_prompt_total_up->Fill(0., m.weighted_yield * (analysisInputs.MCNormSF[sample]+analysisInputs.MCNormSF_uncert[sample]));
-        hist_prompt_tau21_up->Fill(0., analysisInputs.MCNormSF[sample]*m.hist_for_tau21_up->GetBinContent(1) );
         
       }
 
@@ -219,7 +209,6 @@ void RunNtupleForBinnedYieldPlot::Run(){
       cutrangeinfo.Next();
       delete hist_prompt_total;
       delete hist_prompt_total_up;
-      delete hist_prompt_tau21_up;
       continue;
     }
 
@@ -242,7 +231,6 @@ void RunNtupleForBinnedYieldPlot::Run(){
       cout << "  => fake_weighted_yield_err = " << fake_weighted_yield_err << endl;
     }
 
-    prompt_bkgs_tau21_syst = hist_prompt_tau21_up->GetBinContent(1); // Should be added later by hand..
     double prompt_weighted_yield_stat = hist_prompt_total->GetBinError(1);
     double prompt_weighted_yield_syst_lumi = prompt_weighted_yield * uncert_lumi;
     double prompt_weighted_yield_syst_MCSF = hist_prompt_total_up->GetBinContent(1) - hist_prompt_total->GetBinContent(1);
@@ -260,7 +248,6 @@ void RunNtupleForBinnedYieldPlot::Run(){
 
     delete hist_prompt_total;
     delete hist_prompt_total_up;
-    delete hist_prompt_tau21_up;
 
     //==== Force Punzi to require
     //==== 1) Minimum Total Bkgd
@@ -297,7 +284,6 @@ void RunNtupleForBinnedYieldPlot::Run(){
       for(unsigned int iii=0; iii<signals.size(); iii++){
         final_signal.at(iii) = signal_weighted_yield.at(iii);
         final_signal_eff.at(iii) = signal_unweighted_yield.at(iii)/signal_yield_nocut.at(iii);
-        final_signal_tau21_up.at(iii) = signal_tau21_up.at(iii);
 
         double signal_lumi = signal_weighted_yield.at(iii)*uncert_lumi;
         double signal_stat = signal_weighted_yield_stat.at(iii);
@@ -359,7 +345,6 @@ void RunNtupleForBinnedYieldPlot::Run(){
     signal_err.push_back( final_signal_err.at(i) );
     signal_stat.push_back( final_signal_stat.at(i) );
     signal_eff.push_back( final_signal_eff.at(i) );
-    signal_tau21_syst.push_back( final_signal_tau21_up.at(i) );
   }
 
 }

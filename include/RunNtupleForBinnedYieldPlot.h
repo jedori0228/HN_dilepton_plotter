@@ -66,9 +66,6 @@ public:
   double cf_bkgs_stat; // sumw2
   vector<double> signal_stat;
 
-  double prompt_bkgs_tau21_syst; // tau21 sf up yield
-  vector<double> signal_tau21_syst; //tau21 sf up yield
-
   double fake_bkgs_syst; // 31%
   double prompt_bkgs_syst; // MCSF uncert
   double cf_bkgs_syst; // 21%
