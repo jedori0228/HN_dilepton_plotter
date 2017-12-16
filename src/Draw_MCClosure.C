@@ -219,6 +219,7 @@ void Draw_MCClosure(){
           }
 
 
+/*
           if(hist_Predicted_up){
             for(int a=1; a<=hist_Predicted->GetXaxis()->GetNbins(); a++){
               double err_sumw2 = hist_Predicted->GetBinError(a);
@@ -227,6 +228,7 @@ void Draw_MCClosure(){
               hist_Predicted->SetBinError(a, newerr);
             }
           }
+*/
 
           if(var=="Nevents"){
 

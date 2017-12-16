@@ -205,6 +205,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
 
         yield_central += original_hist->GetBinContent(1);
 
+/*
         //===================================
         //==== Set Stat Error Here (fake..)
         //===================================
@@ -218,6 +219,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
 
           original_hist->SetBinError(1, error_combined);
         }
+*/
 
         staterror += (original_hist->GetBinError(1))*(original_hist->GetBinError(1));
 

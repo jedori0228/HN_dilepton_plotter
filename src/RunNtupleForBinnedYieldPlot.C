@@ -167,16 +167,16 @@ void RunNtupleForBinnedYieldPlot::Run(){
         chargeflip_weighted_yield = m.weighted_yield;
 
         chargeflip_weighted_yield_stat = m.hist_for_error->GetBinError(1);
-        double cf_propagation = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
-        chargeflip_weighted_yield_stat = sqrt( chargeflip_weighted_yield_stat*chargeflip_weighted_yield_stat + cf_propagation*cf_propagation );
+        //double cf_propagation = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
+        //chargeflip_weighted_yield_stat = sqrt( chargeflip_weighted_yield_stat*chargeflip_weighted_yield_stat + cf_propagation*cf_propagation );
       }
       else if(sample.Contains("fake")){
         fake_unweighted_yield = m.unweighted_yield;
         fake_weighted_yield = m.weighted_yield;
 
         fake_weighted_yield_stat = m.hist_for_error->GetBinError(1);
-        double fr_propagation = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
-        fake_weighted_yield_stat = sqrt( fake_weighted_yield_stat*fake_weighted_yield_stat + fr_propagation*fr_propagation );
+        //double fr_propagation = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
+        //fake_weighted_yield_stat = sqrt( fake_weighted_yield_stat*fake_weighted_yield_stat + fr_propagation*fr_propagation );
       }
       else if(sample=="data"){
         data_unweighted_yield = m.unweighted_yield;
