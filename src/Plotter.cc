@@ -181,12 +181,14 @@ void Plotter::draw_hist(){
         //==== set histogram name, including sample name
         hist_temp->SetName(fullhistname+"_"+current_sample);
 
+/*
         //==== Stat Error Propations for Fake
         if( current_sample.Contains("fake") ){
           TDirectory *dir_up = (TDirectory *)file->Get(DirName+"_up");
           TDirectory *dir_down = (TDirectory *)file->Get(DirName+"_down");
           TH1D* hist_temp_up = (TH1D*)dir_up->Get(fullhistname+"_up");
           TH1D* hist_temp_down = (TH1D*)dir_down->Get(fullhistname+"_down");
+          if(!hist_temp_up || !hist_temp_down) continue;
           int n_bins = hist_temp->GetXaxis()->GetNbins();
           for(int i=1; i<=n_bins; i++){
             double error_propagated = hist_temp_up->GetBinContent(i)-hist_temp->GetBinContent(i);
@@ -197,6 +199,7 @@ void Plotter::draw_hist(){
             hist_temp->SetBinError(i, error_combined);
           }
         }
+*/
 
         //==== rebin here
         hist_temp->Rebin( n_rebin() );
@@ -1396,18 +1399,18 @@ TString Plotter::GetStringChannelRegion(int A, int B){
   if(B==1) region = "Preselection";
 
   if(B==20) region = "Low Mass";
-  if(B==21) region = "Low Mass Two Jets";
-  if(B==22) region = "Low Mass One Jet";
+  if(B==21) region = "Low Mass SR1";
+  if(B==22) region = "Low Mass SR2";
   if(B==-20) region = "Low Mass CR";
-  if(B==-21) region = "Low Mass CR Two Jets";
-  if(B==-22) region = "Low Mass CR One Jet";
+  if(B==-21) region = "Low Mass CR1";
+  if(B==-22) region = "Low Mass CR2";
 
   if(B==30) region = "High Mass";
-  if(B==31) region = "High Mass Two Jets";
-  if(B==32) region = "High Mass Fat Jet";
+  if(B==31) region = "High Mass SR1";
+  if(B==32) region = "High Mass SR2";
   if(B==-30) region = "High Mass CR";
-  if(B==-31) region = "High Mass CR Two Jets";
-  if(B==-32) region = "High Mass CR Fat Jet";
+  if(B==-31) region = "High Mass CR1";
+  if(B==-32) region = "High Mass CR2";
 
   if(B==-4) region = "Non-prompt CR1";
   if(B==-5) region = "Non-prompt CR2";

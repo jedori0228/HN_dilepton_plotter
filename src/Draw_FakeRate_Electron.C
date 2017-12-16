@@ -5,7 +5,7 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Electron(){
 
-  TString Sample = "Data_v7_4";
+  TString Sample = "Data_v7_5";
   TString Lepton = "Electron";
 
   gStyle->SetOptStat(0);

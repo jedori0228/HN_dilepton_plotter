@@ -29,7 +29,7 @@ void GetMCNormSF(bool DoNorm=false){
   vector<int> MCsector_first_index;
 
   map_sample_string_to_list["WZ_excl"] = {"WZTo3LNu_powheg"};
-  map_sample_string_to_list["ZZ_excl"] = {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"};
+  map_sample_string_to_list["ZZ_excl"] = {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ"};
   map_sample_string_to_list["VVV"] = {"WWW", "WWZ", "WZZ", "ZZZ"};
   map_sample_string_to_list["top"] = {"ttW", "ttZ", "ttH_nonbb"};
   map_sample_string_to_list["Zgamma"] = {"ZGto2LG"};
@@ -106,7 +106,7 @@ void GetMCNormSF(bool DoNorm=false){
   vector< vector<TString> > vec_TargetSamples = {
     {"WZTo3LNu_powheg"},
     {"ZGto2LG"},
-    {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau"},
+    {"ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ"},
   };
   vector<TString> SampleNames = {
     "WZ",
@@ -226,6 +226,7 @@ void GetMCNormSF(bool DoNorm=false){
       //==== Set Stat Error Here (fake..)
       //===================================
 
+/*
       //==== Stat Error Propations for Fake
       if( sample.Contains("fake") ){
         TH1D *original_hist_up = (TH1D *)file->Get(region+"_up/Nevents_"+region+"_up");
@@ -235,6 +236,7 @@ void GetMCNormSF(bool DoNorm=false){
 
         original_hist->SetBinError(1, error_combined);
       }
+*/
 
       TH1D *new_hist = new TH1D("new_hist", "", nCR, 0., 1.*nCR);
       new_hist->SetBinContent(it_region+1, original_hist->GetBinContent(1));

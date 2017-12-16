@@ -41,9 +41,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["VV_excl"] = {
     //"WZTo3LNu_mllmin01",
     "WZTo3LNu_powheg",
-    "WZto2L2Q_amcatnlo",
-    "ZZTo4L_powheg", "ZZTo2L2Nu_Powheg", "ZZTo2L2Q_Powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",
-    "WWTo2L2Nu", "ggWWto2L2Nu",
+    "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",
   };
   m.map_sample_string_to_list["VV_incl"] = {"WZ", "ZZ", "WW"};
   m.map_sample_string_to_list["WZ_excl"] = {"WZTo3LNu_powheg"};
@@ -342,8 +340,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //if(m.histname_suffix.at(i).Contains("Preselection")) m.drawdata.push_back(true);
     //else m.drawdata.push_back(false);
 
-    m.drawdata.push_back(false);
-    //m.drawdata.push_back(true);
+    //m.drawdata.push_back(false);
+    m.drawdata.push_back(true);
   }
 
 /*

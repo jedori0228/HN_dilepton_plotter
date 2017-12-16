@@ -104,12 +104,12 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
   }
 
   vector<TString> regionsForTex = {
-    "CR1",
-    "CR2",
-    "CR3",
-    "CR4",
-    "CR5",
-    "CR6",
+    "Non-prompt CR1",
+    "Non-prompt CR2",
+    "Low Mass CR1",
+    "Low Mass CR2",
+    "High Mass CR1",
+    "High Mass CR2",
   };
   const int nCR = regions.size();
 
