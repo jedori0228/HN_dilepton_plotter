@@ -57,8 +57,16 @@ void Draw_SignalDistribution(){
   vector<TString> channelsForLatex = {"#mu#mu", "ee", "#mue"};
 
   vector<TString> regions = {"Preselection"};
-  vector<TString> vars = {"leadingLepton_Pt", "secondLepton_Pt", "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest", "leadingLepton_Eta", "secondLepton_Eta"};
-  vector<TString> xtitles = {"Leading Lepton p_{T} (GeV)", "Subleading Lepton p_{T} (GeV)", "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)", "Leading Lepton #eta", "Subleading Lepton #eta",};
+  vector<TString> vars = {
+    "leadingLepton_Pt", "secondLepton_Pt",
+    "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
+    "leadingLepton_Eta", "secondLepton_Eta",
+  };
+  vector<TString> xtitles = {
+    "Leading Lepton p_{T} (GeV)", "Subleading Lepton p_{T} (GeV)",
+    "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
+    "Leading Lepton #eta", "Subleading Lepton #eta",
+  };
 
   for(unsigned int i=0; i<channels.size(); i++){
 

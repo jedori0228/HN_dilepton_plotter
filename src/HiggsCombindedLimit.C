@@ -15,7 +15,7 @@ void HiggsCombindedLimit(int i=0){
   TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
   TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  TString WhichDirectoryInCutop = "MuEl_Combined";
+  TString WhichDirectoryInCutop = "MuMu_Bin1";
   if(i==1) WhichDirectoryInCutop = "MuMu_Bin1";
   if(i==2) WhichDirectoryInCutop = "MuMu_Bin2";
   if(i==3) WhichDirectoryInCutop = "MuMu_Combined";
@@ -169,14 +169,14 @@ void HiggsCombindedLimit(int i=0){
   if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
   lg->AddEntry(gr_13TeV_exp_SOnly, "CL_{s} Expected, s-ch only", "l"); 
   lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected", "l");
-  lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 #sigma", "f");
-  lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 #sigma", "f");
+  lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
+  lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
 
   if(DrawObserved) lg_log->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
   lg_log->AddEntry(gr_13TeV_exp_SOnly, "CL_{s} Expected, s-ch only", "l");
   lg_log->AddEntry(gr_13TeV_exp,"CL_{s} Expected", "l");
-  lg_log->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 #sigma", "f");
-  lg_log->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 #sigma", "f");
+  lg_log->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
+  lg_log->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
 
   //==== 8 TeV overlay
 
@@ -232,7 +232,7 @@ void HiggsCombindedLimit(int i=0){
   if(channel=="ElEl") dummy->GetYaxis()->SetTitle("|V_{eN}|^{2}");
   if(channel=="MuMu") dummy->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
   if(channel=="MuEl") dummy->GetYaxis()->SetTitle("|V_{eN}V_{#muN}^{*}|/(|V_{eN}|^{2}+|V_{#muN}|^{2})");
-  dummy->GetXaxis()->SetTitle("m(HN) [GeV]");
+  dummy->GetXaxis()->SetTitle("m(N) (GeV)");
   dummy->GetXaxis()->SetRangeUser(10., 2000);
   dummy->GetYaxis()->SetTitleSize(0.06); 
   dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
@@ -253,7 +253,7 @@ void HiggsCombindedLimit(int i=0){
   lg->Draw();
 
   latex_CMSPriliminary.SetTextSize(0.035);
-  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} Simulation");
+  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
@@ -275,7 +275,7 @@ void HiggsCombindedLimit(int i=0){
   if(channel=="ElEl") dummy->GetYaxis()->SetTitle("|V_{eN}|^{2}");
   if(channel=="MuMu") dummy->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
   if(channel=="MuEl") dummy->GetYaxis()->SetTitle("|V_{eN}V_{#muN}^{*}|/(|V_{eN}|^{2}+|V_{#muN}|^{2})");
-  dummy->GetXaxis()->SetTitle("m(HN) [GeV]");
+  dummy->GetXaxis()->SetTitle("m(N) (GeV)");
   dummy->GetXaxis()->SetRangeUser(20., 2500);
   dummy->GetYaxis()->SetTitleSize(0.06);
   dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
@@ -297,7 +297,7 @@ void HiggsCombindedLimit(int i=0){
   lg->Draw();
 
   latex_CMSPriliminary.SetTextSize(0.035);
-  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} Simulation");
+  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
@@ -308,8 +308,107 @@ void HiggsCombindedLimit(int i=0){
   c_out_logx->Close();
 
 
+  //==== Ratio 8 TeV vs 13 TeV
+  //==== TGraph *gr_13TeV_exp = new TGraph(n_central,mass,limit);
+  //==== TGraph *gr_8TeV_exp = new TGraph(nm, mass_8TeV, exp);
+
+  vector<double> vec_mass_8and13, vec_limit_8and13ratio;
+  for(int i=0; i<n_central; i++){
+    for(int j=0; j<nm; j++){
+      if(mass[i]==mass_8TeV[j]){
+        vec_mass_8and13.push_back(mass[i]);
+        vec_limit_8and13ratio.push_back(exp[j]/limit[i]);
+        cout << i << "\t" << mass[i] << "\t" << exp[j] << "\t" << limit[i] << endl;
+      }
+    }
+  }
+
+  vector<double> additional = {350, 400, 500};
+  for(int a=0; a<additional.size(); a++){
+
+    for(int i=0; i<n_SOnly; i++){
+
+      if(additional.at(a)!=mass_SOnly[i]) continue;
+
+      for(int j=0; j<nm; j++){
+        if(mass_SOnly[i]==mass_8TeV[j]){
+          vec_mass_8and13.push_back(mass_SOnly[i]);
+          vec_limit_8and13ratio.push_back(exp[j]/limit_SOnly[i]);
+          cout << i << "\t" << mass_SOnly[i] << "\t" << exp[j] << "\t" << limit_SOnly[i] << " => " << exp[j]/limit_SOnly[i] << endl;
+        }
+      }
+    }
+
+  }
 
 
+  const int n_vec_mass_8and13 = vec_mass_8and13.size();
+  double mass_8and13[n_vec_mass_8and13];
+  double limit_8and13ratio[n_vec_mass_8and13];
+  for(int i=0; i<n_vec_mass_8and13; i++){
+    mass_8and13[i] = vec_mass_8and13.at(i);
+    limit_8and13ratio[i] = vec_limit_8and13ratio.at(i);
+  }
+
+  TGraph *gr_8and13ratio = new TGraph(n_vec_mass_8and13, mass_8and13, limit_8and13ratio);
+  TCanvas *c_8and13ratio = new TCanvas("c_8and13ratio", "", 800, 800);
+  canvas_margin(c_8and13ratio);
+  c_8and13ratio->cd();
+
+  dummy->Draw("hist");
+  hist_axis(dummy);
+  TString this_channel = "";
+  if(channel=="ElEl") this_channel = "|V_{eN}|^{2}";
+  if(channel=="MuMu") this_channel = "|V_{#muN}|^{2}";
+  if(channel=="MuEl") this_channel = "|V_{eN}V_{#muN}^{*}|/(|V_{eN}|^{2}+|V_{#muN}|^{2})";
+  TLatex latexch;
+  latexch.SetNDC();
+  latexch.SetTextSize(0.03);
+  latexch.DrawLatex(0.3, 0.85, "#splitline{Expected 8 TeV / Expected 13 TeV}{in "+this_channel+"}");
+
+  double x_1[2], y_1[2];
+  x_1[0] = 5000;  y_1[0] = 1;
+  x_1[1] = -5000;  y_1[1] = 1;
+  TGraph *g1 = new TGraph(2, x_1, y_1);
+  g1->SetLineStyle(3);
+  g1->SetLineWidth(3);
+  g1->Draw("lsame");
+
+  double x_2[2], y_2[2];
+  x_2[0] = 5000;  y_2[0] = sqrt(35900./19700.);
+  x_2[1] = -5000;  y_2[1] = sqrt(35900./19700.);
+  TGraph *g2 = new TGraph(2, x_2, y_2);
+  g2->SetLineWidth(3);
+  g2->Draw("lsame");
+
+  dummy->GetXaxis()->SetTitle("m(N) (GeV)");
+  dummy->GetXaxis()->SetRangeUser(20., 600);
+  dummy->GetYaxis()->SetTitleSize(0.06);
+  dummy->GetYaxis()->SetRangeUser(0., 20.);
+  dummy->SetTitle("");
+  dummy->GetYaxis()->SetTitle("");
+  gr_8and13ratio->SetLineColor(kRed);
+  gr_8and13ratio->SetLineWidth(3);
+  gr_8and13ratio->Draw("lsame");
+
+  TLegend *lg_8and13ratio = new TLegend(0.25, 0.4, 0.7, 0.6);
+  lg_8and13ratio->SetBorderSize(0);
+  lg_8and13ratio->SetFillStyle(0);
+  lg_8and13ratio->AddEntry(gr_8and13ratio, "Expected Limit Ratio", "l");
+  lg_8and13ratio->AddEntry(g2, "y=#sqrt{L_{13TeV}/L_{8TeV}}", "l");
+  lg_8and13ratio->AddEntry(g1, "y=1", "l");
+  lg_8and13ratio->Draw();
+
+  latex_CMSPriliminary.SetTextSize(0.035);
+  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+  latex_Lumi.SetTextSize(0.035);
+  latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+
+  c_8and13ratio->SetLogx();
+  c_8and13ratio->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_ratio.pdf");
+  c_8and13ratio->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_ratio.png");
+  c_8and13ratio->Close();
+  
 
 
 }

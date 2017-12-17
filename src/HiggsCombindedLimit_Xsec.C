@@ -186,14 +186,14 @@ void HiggsCombindedLimit_Xsec(int i=0){
   if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
   lg->AddEntry(gr_13TeV_exp_SOnly, "CL_{s} Expected, s-ch only", "l");
   lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected", "l");
-  lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 #sigma", "f");
-  lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 #sigma", "f");
+  lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
+  lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
 
   if(DrawObserved) lg_log->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
   lg_log->AddEntry(gr_13TeV_exp_SOnly, "CL_{s} Expected, s-ch only", "l");
   lg_log->AddEntry(gr_13TeV_exp,"CL_{s} Expected", "l");
-  lg_log->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 #sigma", "f");
-  lg_log->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 #sigma", "f");
+  lg_log->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
+  lg_log->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
 
   //==== 8 TeV overlay
 
@@ -246,10 +246,10 @@ void HiggsCombindedLimit_Xsec(int i=0){
   TH1D *dummy = new TH1D("hist", "", 10000, 0., 10000.);
   dummy->Draw("hist");
   hist_axis(dummy);
-  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q}] (pb)");
-  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q}] (pb)");
-  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}#mu^{#pm}N#rightarrowe^{#pm}#mu^{#pm}q#bar{q}] (pb)");
-  dummy->GetXaxis()->SetTitle("m(HN) [GeV]");
+  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q}] (pb)");
+  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q}] (pb)");
+  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrowe^{#pm}#mu^{#pm}N#rightarrowe^{#pm}#mu^{#pm}q#bar{q}] (pb)");
+  dummy->GetXaxis()->SetTitle("m(N) (GeV)");
   dummy->GetXaxis()->SetRangeUser(10., 2000);
   dummy->GetYaxis()->SetTitleSize(0.06); 
   dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
@@ -270,7 +270,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   lg->Draw();
 
   latex_CMSPriliminary.SetTextSize(0.035);
-  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} Simulation");
+  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
@@ -289,10 +289,10 @@ void HiggsCombindedLimit_Xsec(int i=0){
 
   dummy->Draw("hist");
   hist_axis(dummy);
-  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q}] (pb)");
-  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q}] (pb)");
-  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}#mu^{#pm}N#rightarrowe^{#pm}#mu^{#pm}q#bar{q}] (pb)");
-  dummy->GetXaxis()->SetTitle("m(HN) [GeV]");
+  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q}] (pb)");
+  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q}] (pb)");
+  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrowe^{#pm}#mu^{#pm}N#rightarrowe^{#pm}#mu^{#pm}q#bar{q}] (pb)");
+  dummy->GetXaxis()->SetTitle("m(N) (GeV)");
   dummy->GetXaxis()->SetRangeUser(20., 2500);
   dummy->GetYaxis()->SetTitleSize(0.06);
   dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
@@ -314,7 +314,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   lg->Draw();
 
   latex_CMSPriliminary.SetTextSize(0.035);
-  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} Simulation");
+  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 

@@ -216,6 +216,27 @@ void Draw_FakeRate_Muon(){
       c_alleta->SaveAs(plotpath+Lepton+"_"+jetpt.at(a)+bjetconfig[b]+"_"+Sample+"_alleta.png");
       c_alleta->Close();
 
+      //==== Inclusive Eta
+
+      TH2D *hist2_FR2D_F0 = (TH2D *)file->Get(histname+"_F0");
+      TH2D *hist2_FR2D_F = (TH2D *)file->Get(histname+"_F");
+
+      TH1D *FR_InclusvieEta = new TH1D("", "", N_pt_out, ptarray);
+      TString newname2 = TString(hist_FR2D_F->GetName())+"_InclusiveEta";
+      FR_InclusvieEta->SetName(newname2);
+
+      for(int ix=1; ix<=hist2_FR2D_F->GetXaxis()->GetNbins(); ix++){
+        double den = 0., num = 0.;
+        for(int iy=1; iy<=hist2_FR2D_F->GetYaxis()->GetNbins(); iy++){
+          den += hist2_FR2D_F0->GetBinContent(ix, iy);
+          num += hist2_FR2D_F->GetBinContent(ix, iy);
+        }
+        double this_fr = 0.;
+        if(den!=0) this_fr = num/den;
+        FR_InclusvieEta->SetBinContent(ix, this_fr);
+      }
+      FR_InclusvieEta->Write();
+
     } // END b-jet config loop
 
   } // END Awayjet pt loop

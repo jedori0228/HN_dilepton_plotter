@@ -355,6 +355,14 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
 
     c_bkgd->SetLogy();
 
+    TLatex latex_CMSPriliminary, latex_Lumi;
+    latex_CMSPriliminary.SetNDC();
+    latex_Lumi.SetNDC();
+    latex_CMSPriliminary.SetTextSize(0.035);
+    latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+    latex_Lumi.SetTextSize(0.035);
+    latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+
     gSystem->mkdir(plotpath+"/"+channel, kTRUE);
     c_bkgd->SaveAs(plotpath+"/"+channel+"/"+channel+"_"+WhichRegion+".pdf");
     c_bkgd->SaveAs(plotpath+"/"+channel+"/"+channel+"_"+WhichRegion+".png");
