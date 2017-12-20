@@ -188,6 +188,7 @@ void RunNtupleForBinnedYieldPlot::Run(){
         prompt_weighted_yield += m.weighted_yield * analysisInputs.MCNormSF[sample];
         hist_prompt_total->Add( m.hist_for_error );
         hist_prompt_total_up->Fill(0., m.weighted_yield * (analysisInputs.MCNormSF[sample]+analysisInputs.MCNormSF_uncert[sample]));
+        //cout << sample << "\t" << analysisInputs.MCNormSF[sample] << "\t" << analysisInputs.MCNormSF_uncert[sample] << endl;
         
       }
 

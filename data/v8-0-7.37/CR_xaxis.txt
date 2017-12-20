@@ -32,7 +32,7 @@ _DiMuon_0jets_SS	DeltaRl1l2	0	50
 _DiMuon_0jets_SS	Nevents	0	50
 _DiMuon_0jets_SS	leadingLepton_Type	0	50
 _DiMuon_0jets_SS	secondLepton_Type	0	50
-_DiMuon_0jets_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_0jets_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_0jets_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_0jets_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_0jets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -89,7 +89,7 @@ _DiMuon_1jets_SS	DeltaRl1l2	0	50
 _DiMuon_1jets_SS	Nevents	0	50
 _DiMuon_1jets_SS	leadingLepton_Type	0	50
 _DiMuon_1jets_SS	secondLepton_Type	0	50
-_DiMuon_1jets_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_1jets_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_1jets_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_1jets_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_1jets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -146,7 +146,7 @@ _DiMuon_1jets_0nlbjets_SS	DeltaRl1l2	0	50
 _DiMuon_1jets_0nlbjets_SS	Nevents	0	50
 _DiMuon_1jets_0nlbjets_SS	leadingLepton_Type	0	50
 _DiMuon_1jets_0nlbjets_SS	secondLepton_Type	0	50
-_DiMuon_1jets_0nlbjets_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_1jets_0nlbjets_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_1jets_0nlbjets_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_1jets_0nlbjets_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_1jets_0nlbjets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -203,7 +203,7 @@ _DiMuon_1jets_0nlbjets_mllge110_SS	DeltaRl1l2	0	50
 _DiMuon_1jets_0nlbjets_mllge110_SS	Nevents	0	50
 _DiMuon_1jets_0nlbjets_mllge110_SS	leadingLepton_Type	0	50
 _DiMuon_1jets_0nlbjets_mllge110_SS	secondLepton_Type	0	50
-_DiMuon_1jets_0nlbjets_mllge110_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_1jets_0nlbjets_mllge110_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_1jets_0nlbjets_mllge110_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_1jets_0nlbjets_mllge110_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_1jets_0nlbjets_mllge110_SS	WClosest_FatJet_PrunedMass	30	150
@@ -260,7 +260,7 @@ _DiMuon_0nlbjets_SS	DeltaRl1l2	0	50
 _DiMuon_0nlbjets_SS	Nevents	0	50
 _DiMuon_0nlbjets_SS	leadingLepton_Type	0	50
 _DiMuon_0nlbjets_SS	secondLepton_Type	0	50
-_DiMuon_0nlbjets_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_0nlbjets_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_0nlbjets_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_0nlbjets_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_0nlbjets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -317,7 +317,7 @@ _DiMuon_Inclusive1nlbjets_SS	DeltaRl1l2	0	50
 _DiMuon_Inclusive1nlbjets_SS	Nevents	0	50
 _DiMuon_Inclusive1nlbjets_SS	leadingLepton_Type	0	50
 _DiMuon_Inclusive1nlbjets_SS	secondLepton_Type	0	50
-_DiMuon_Inclusive1nlbjets_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_Inclusive1nlbjets_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_Inclusive1nlbjets_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_Inclusive1nlbjets_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_Inclusive1nlbjets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -374,7 +374,7 @@ _DiMuon_LowCR_SS	DeltaRl1l2	0	50
 _DiMuon_LowCR_SS	Nevents	0	50
 _DiMuon_LowCR_SS	leadingLepton_Type	0	50
 _DiMuon_LowCR_SS	secondLepton_Type	0	50
-_DiMuon_LowCR_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_LowCR_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_LowCR_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_LowCR_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_LowCR_SS	WClosest_FatJet_PrunedMass	30	150
@@ -431,7 +431,7 @@ _DiMuon_LowCR_TwoJet_NoFatJet_SS	DeltaRl1l2	0	50
 _DiMuon_LowCR_TwoJet_NoFatJet_SS	Nevents	0	50
 _DiMuon_LowCR_TwoJet_NoFatJet_SS	leadingLepton_Type	0	50
 _DiMuon_LowCR_TwoJet_NoFatJet_SS	secondLepton_Type	0	50
-_DiMuon_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -488,7 +488,7 @@ _DiMuon_LowCR_OneJet_NoFatJet_SS	DeltaRl1l2	0	50
 _DiMuon_LowCR_OneJet_NoFatJet_SS	Nevents	0	50
 _DiMuon_LowCR_OneJet_NoFatJet_SS	leadingLepton_Type	0	50
 _DiMuon_LowCR_OneJet_NoFatJet_SS	secondLepton_Type	0	50
-_DiMuon_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -545,7 +545,7 @@ _DiMuon_HighCR_SS	DeltaRl1l2	0	50
 _DiMuon_HighCR_SS	Nevents	0	50
 _DiMuon_HighCR_SS	leadingLepton_Type	0	50
 _DiMuon_HighCR_SS	secondLepton_Type	0	50
-_DiMuon_HighCR_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_HighCR_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_HighCR_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_HighCR_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_HighCR_SS	WClosest_FatJet_PrunedMass	30	150
@@ -602,7 +602,7 @@ _DiMuon_HighCR_TwoJet_NoFatJet_SS	DeltaRl1l2	0	50
 _DiMuon_HighCR_TwoJet_NoFatJet_SS	Nevents	0	50
 _DiMuon_HighCR_TwoJet_NoFatJet_SS	leadingLepton_Type	0	50
 _DiMuon_HighCR_TwoJet_NoFatJet_SS	secondLepton_Type	0	50
-_DiMuon_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -659,7 +659,7 @@ _DiMuon_HighCR_OneFatJet_SS	DeltaRl1l2	0	50
 _DiMuon_HighCR_OneFatJet_SS	Nevents	0	50
 _DiMuon_HighCR_OneFatJet_SS	leadingLepton_Type	0	50
 _DiMuon_HighCR_OneFatJet_SS	secondLepton_Type	0	50
-_DiMuon_HighCR_OneFatJet_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_HighCR_OneFatJet_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_HighCR_OneFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_HighCR_OneFatJet_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_HighCR_OneFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -716,7 +716,7 @@ _DiElectron_0jets_SS	DeltaRl1l2	0	50
 _DiElectron_0jets_SS	Nevents	0	50
 _DiElectron_0jets_SS	leadingLepton_Type	0	50
 _DiElectron_0jets_SS	secondLepton_Type	0	50
-_DiElectron_0jets_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_0jets_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_0jets_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_0jets_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_0jets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -773,7 +773,7 @@ _DiElectron_1jets_SS	DeltaRl1l2	0	50
 _DiElectron_1jets_SS	Nevents	0	50
 _DiElectron_1jets_SS	leadingLepton_Type	0	50
 _DiElectron_1jets_SS	secondLepton_Type	0	50
-_DiElectron_1jets_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_1jets_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_1jets_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_1jets_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_1jets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -830,7 +830,7 @@ _DiElectron_0jets_OnZ_SS	DeltaRl1l2	0	50
 _DiElectron_0jets_OnZ_SS	Nevents	0	50
 _DiElectron_0jets_OnZ_SS	leadingLepton_Type	0	50
 _DiElectron_0jets_OnZ_SS	secondLepton_Type	0	50
-_DiElectron_0jets_OnZ_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_0jets_OnZ_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_0jets_OnZ_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_0jets_OnZ_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_0jets_OnZ_SS	WClosest_FatJet_PrunedMass	30	150
@@ -853,7 +853,7 @@ _DiElectron_0jets_OnZ_SS	m_jjptorder	-999	400
 _DiElectron_0jets_OnZ_SS	m_lljjptorder	-999	1000
 _DiElectron_0jets_OnZ_SS	m_Leadljjptorder	-999	1000
 _DiElectron_0jets_OnZ_SS	m_SubLeadljjptorder	-999	1000
-_DiElectron_1jets_OnZ_SS	m_ll	0	200
+_DiElectron_1jets_OnZ_SS	m_ll	75	110
 _DiElectron_1jets_OnZ_SS	Njets	-999	-999
 _DiElectron_1jets_OnZ_SS	Njets_nolepveto	-999	-999
 _DiElectron_1jets_OnZ_SS	Nfwdjets	-999	-999
@@ -887,7 +887,7 @@ _DiElectron_1jets_OnZ_SS	DeltaRl1l2	0	50
 _DiElectron_1jets_OnZ_SS	Nevents	0	50
 _DiElectron_1jets_OnZ_SS	leadingLepton_Type	0	50
 _DiElectron_1jets_OnZ_SS	secondLepton_Type	0	50
-_DiElectron_1jets_OnZ_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_1jets_OnZ_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_1jets_OnZ_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_1jets_OnZ_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_1jets_OnZ_SS	WClosest_FatJet_PrunedMass	30	150
@@ -944,7 +944,7 @@ _DiElectron_Inclusive1nlbjets_SS	DeltaRl1l2	0	50
 _DiElectron_Inclusive1nlbjets_SS	Nevents	0	50
 _DiElectron_Inclusive1nlbjets_SS	leadingLepton_Type	0	50
 _DiElectron_Inclusive1nlbjets_SS	secondLepton_Type	0	50
-_DiElectron_Inclusive1nlbjets_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_Inclusive1nlbjets_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_Inclusive1nlbjets_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_Inclusive1nlbjets_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_Inclusive1nlbjets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1001,7 +1001,7 @@ _DiElectron_0jets_OffZ_SS	DeltaRl1l2	0	50
 _DiElectron_0jets_OffZ_SS	Nevents	0	50
 _DiElectron_0jets_OffZ_SS	leadingLepton_Type	0	50
 _DiElectron_0jets_OffZ_SS	secondLepton_Type	0	50
-_DiElectron_0jets_OffZ_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_0jets_OffZ_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_0jets_OffZ_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_0jets_OffZ_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_0jets_OffZ_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1058,7 +1058,7 @@ _DiElectron_1jets_OffZ_SS	DeltaRl1l2	0	50
 _DiElectron_1jets_OffZ_SS	Nevents	0	50
 _DiElectron_1jets_OffZ_SS	leadingLepton_Type	0	50
 _DiElectron_1jets_OffZ_SS	secondLepton_Type	0	50
-_DiElectron_1jets_OffZ_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_1jets_OffZ_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_1jets_OffZ_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_1jets_OffZ_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_1jets_OffZ_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1115,7 +1115,7 @@ _DiElectron_LowCR_SS	DeltaRl1l2	0	50
 _DiElectron_LowCR_SS	Nevents	0	50
 _DiElectron_LowCR_SS	leadingLepton_Type	0	50
 _DiElectron_LowCR_SS	secondLepton_Type	0	50
-_DiElectron_LowCR_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_LowCR_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_LowCR_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_LowCR_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_LowCR_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1172,7 +1172,7 @@ _DiElectron_LowCR_TwoJet_NoFatJet_SS	DeltaRl1l2	0	50
 _DiElectron_LowCR_TwoJet_NoFatJet_SS	Nevents	0	50
 _DiElectron_LowCR_TwoJet_NoFatJet_SS	leadingLepton_Type	0	50
 _DiElectron_LowCR_TwoJet_NoFatJet_SS	secondLepton_Type	0	50
-_DiElectron_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1229,7 +1229,7 @@ _DiElectron_LowCR_OneJet_NoFatJet_SS	DeltaRl1l2	0	50
 _DiElectron_LowCR_OneJet_NoFatJet_SS	Nevents	0	50
 _DiElectron_LowCR_OneJet_NoFatJet_SS	leadingLepton_Type	0	50
 _DiElectron_LowCR_OneJet_NoFatJet_SS	secondLepton_Type	0	50
-_DiElectron_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1286,7 +1286,7 @@ _DiElectron_HighCR_SS	DeltaRl1l2	0	50
 _DiElectron_HighCR_SS	Nevents	0	50
 _DiElectron_HighCR_SS	leadingLepton_Type	0	50
 _DiElectron_HighCR_SS	secondLepton_Type	0	50
-_DiElectron_HighCR_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_HighCR_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_HighCR_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_HighCR_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_HighCR_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1343,7 +1343,7 @@ _DiElectron_HighCR_TwoJet_NoFatJet_SS	DeltaRl1l2	0	50
 _DiElectron_HighCR_TwoJet_NoFatJet_SS	Nevents	0	50
 _DiElectron_HighCR_TwoJet_NoFatJet_SS	leadingLepton_Type	0	50
 _DiElectron_HighCR_TwoJet_NoFatJet_SS	secondLepton_Type	0	50
-_DiElectron_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1400,7 +1400,7 @@ _DiElectron_HighCR_OneFatJet_SS	DeltaRl1l2	0	50
 _DiElectron_HighCR_OneFatJet_SS	Nevents	0	50
 _DiElectron_HighCR_OneFatJet_SS	leadingLepton_Type	0	50
 _DiElectron_HighCR_OneFatJet_SS	secondLepton_Type	0	50
-_DiElectron_HighCR_OneFatJet_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_HighCR_OneFatJet_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_HighCR_OneFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_HighCR_OneFatJet_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_HighCR_OneFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1457,7 +1457,7 @@ _DiElectron_1jets_0nlbjets_OffZ_SS	DeltaRl1l2	0	50
 _DiElectron_1jets_0nlbjets_OffZ_SS	Nevents	0	50
 _DiElectron_1jets_0nlbjets_OffZ_SS	leadingLepton_Type	0	50
 _DiElectron_1jets_0nlbjets_OffZ_SS	secondLepton_Type	0	50
-_DiElectron_1jets_0nlbjets_OffZ_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_1jets_0nlbjets_OffZ_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_1jets_0nlbjets_OffZ_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_1jets_0nlbjets_OffZ_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_1jets_0nlbjets_OffZ_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1514,7 +1514,7 @@ _DiElectron_1jets_0nlbjets_mllge110_OffZ_SS	DeltaRl1l2	0	50
 _DiElectron_1jets_0nlbjets_mllge110_OffZ_SS	Nevents	0	50
 _DiElectron_1jets_0nlbjets_mllge110_OffZ_SS	leadingLepton_Type	0	50
 _DiElectron_1jets_0nlbjets_mllge110_OffZ_SS	secondLepton_Type	0	50
-_DiElectron_1jets_0nlbjets_mllge110_OffZ_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_1jets_0nlbjets_mllge110_OffZ_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_1jets_0nlbjets_mllge110_OffZ_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_1jets_0nlbjets_mllge110_OffZ_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_1jets_0nlbjets_mllge110_OffZ_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1571,7 +1571,7 @@ _DiElectron_0nlbjets_OffZ_SS	DeltaRl1l2	0	50
 _DiElectron_0nlbjets_OffZ_SS	Nevents	0	50
 _DiElectron_0nlbjets_OffZ_SS	leadingLepton_Type	0	50
 _DiElectron_0nlbjets_OffZ_SS	secondLepton_Type	0	50
-_DiElectron_0nlbjets_OffZ_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_0nlbjets_OffZ_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_0nlbjets_OffZ_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_0nlbjets_OffZ_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_0nlbjets_OffZ_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1628,7 +1628,7 @@ _EMu_0jets_SS	DeltaRl1l2	0	50
 _EMu_0jets_SS	Nevents	0	50
 _EMu_0jets_SS	leadingLepton_Type	0	50
 _EMu_0jets_SS	secondLepton_Type	0	50
-_EMu_0jets_SS	WClosest_FatJet_Pt	0	500
+_EMu_0jets_SS	WClosest_FatJet_Pt	150	1000
 _EMu_0jets_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_0jets_SS	WClosest_FatJet_Mass	0	250
 _EMu_0jets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1685,7 +1685,7 @@ _EMu_1jets_SS	DeltaRl1l2	0	50
 _EMu_1jets_SS	Nevents	0	50
 _EMu_1jets_SS	leadingLepton_Type	0	50
 _EMu_1jets_SS	secondLepton_Type	0	50
-_EMu_1jets_SS	WClosest_FatJet_Pt	0	500
+_EMu_1jets_SS	WClosest_FatJet_Pt	150	1000
 _EMu_1jets_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_1jets_SS	WClosest_FatJet_Mass	0	250
 _EMu_1jets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1742,7 +1742,7 @@ _EMu_Inclusive1nlbjets_SS	DeltaRl1l2	0	50
 _EMu_Inclusive1nlbjets_SS	Nevents	0	50
 _EMu_Inclusive1nlbjets_SS	leadingLepton_Type	0	50
 _EMu_Inclusive1nlbjets_SS	secondLepton_Type	0	50
-_EMu_Inclusive1nlbjets_SS	WClosest_FatJet_Pt	0	500
+_EMu_Inclusive1nlbjets_SS	WClosest_FatJet_Pt	150	1000
 _EMu_Inclusive1nlbjets_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_Inclusive1nlbjets_SS	WClosest_FatJet_Mass	0	250
 _EMu_Inclusive1nlbjets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1799,7 +1799,7 @@ _EMu_LowCR_SS	DeltaRl1l2	0	50
 _EMu_LowCR_SS	Nevents	0	50
 _EMu_LowCR_SS	leadingLepton_Type	0	50
 _EMu_LowCR_SS	secondLepton_Type	0	50
-_EMu_LowCR_SS	WClosest_FatJet_Pt	0	500
+_EMu_LowCR_SS	WClosest_FatJet_Pt	150	1000
 _EMu_LowCR_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_LowCR_SS	WClosest_FatJet_Mass	0	250
 _EMu_LowCR_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1856,7 +1856,7 @@ _EMu_LowCR_TwoJet_NoFatJet_SS	DeltaRl1l2	0	50
 _EMu_LowCR_TwoJet_NoFatJet_SS	Nevents	0	50
 _EMu_LowCR_TwoJet_NoFatJet_SS	leadingLepton_Type	0	50
 _EMu_LowCR_TwoJet_NoFatJet_SS	secondLepton_Type	0	50
-_EMu_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	0	500
+_EMu_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	150	1000
 _EMu_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Mass	0	250
 _EMu_LowCR_TwoJet_NoFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1913,7 +1913,7 @@ _EMu_LowCR_OneJet_NoFatJet_SS	DeltaRl1l2	0	50
 _EMu_LowCR_OneJet_NoFatJet_SS	Nevents	0	50
 _EMu_LowCR_OneJet_NoFatJet_SS	leadingLepton_Type	0	50
 _EMu_LowCR_OneJet_NoFatJet_SS	secondLepton_Type	0	50
-_EMu_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Pt	0	500
+_EMu_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Pt	150	1000
 _EMu_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_Mass	0	250
 _EMu_LowCR_OneJet_NoFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -1970,7 +1970,7 @@ _EMu_HighCR_SS	DeltaRl1l2	0	50
 _EMu_HighCR_SS	Nevents	0	50
 _EMu_HighCR_SS	leadingLepton_Type	0	50
 _EMu_HighCR_SS	secondLepton_Type	0	50
-_EMu_HighCR_SS	WClosest_FatJet_Pt	0	500
+_EMu_HighCR_SS	WClosest_FatJet_Pt	150	1000
 _EMu_HighCR_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_HighCR_SS	WClosest_FatJet_Mass	0	250
 _EMu_HighCR_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2027,7 +2027,7 @@ _EMu_1jets_0nlbjets_SS	DeltaRl1l2	0	50
 _EMu_1jets_0nlbjets_SS	Nevents	0	50
 _EMu_1jets_0nlbjets_SS	leadingLepton_Type	0	50
 _EMu_1jets_0nlbjets_SS	secondLepton_Type	0	50
-_EMu_1jets_0nlbjets_SS	WClosest_FatJet_Pt	0	500
+_EMu_1jets_0nlbjets_SS	WClosest_FatJet_Pt	150	1000
 _EMu_1jets_0nlbjets_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_1jets_0nlbjets_SS	WClosest_FatJet_Mass	0	250
 _EMu_1jets_0nlbjets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2084,7 +2084,7 @@ _EMu_1jets_0nlbjets_mllge110_SS	DeltaRl1l2	0	50
 _EMu_1jets_0nlbjets_mllge110_SS	Nevents	0	50
 _EMu_1jets_0nlbjets_mllge110_SS	leadingLepton_Type	0	50
 _EMu_1jets_0nlbjets_mllge110_SS	secondLepton_Type	0	50
-_EMu_1jets_0nlbjets_mllge110_SS	WClosest_FatJet_Pt	0	500
+_EMu_1jets_0nlbjets_mllge110_SS	WClosest_FatJet_Pt	150	1000
 _EMu_1jets_0nlbjets_mllge110_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_1jets_0nlbjets_mllge110_SS	WClosest_FatJet_Mass	0	250
 _EMu_1jets_0nlbjets_mllge110_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2141,7 +2141,7 @@ _EMu_0nlbjets_SS	DeltaRl1l2	0	50
 _EMu_0nlbjets_SS	Nevents	0	50
 _EMu_0nlbjets_SS	leadingLepton_Type	0	50
 _EMu_0nlbjets_SS	secondLepton_Type	0	50
-_EMu_0nlbjets_SS	WClosest_FatJet_Pt	0	500
+_EMu_0nlbjets_SS	WClosest_FatJet_Pt	150	1000
 _EMu_0nlbjets_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_0nlbjets_SS	WClosest_FatJet_Mass	0	250
 _EMu_0nlbjets_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2198,7 +2198,7 @@ _EMu_HighCR_TwoJet_NoFatJet_SS	DeltaRl1l2	0	50
 _EMu_HighCR_TwoJet_NoFatJet_SS	Nevents	0	50
 _EMu_HighCR_TwoJet_NoFatJet_SS	leadingLepton_Type	0	50
 _EMu_HighCR_TwoJet_NoFatJet_SS	secondLepton_Type	0	50
-_EMu_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	0	500
+_EMu_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Pt	150	1000
 _EMu_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_Mass	0	250
 _EMu_HighCR_TwoJet_NoFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2255,7 +2255,7 @@ _EMu_HighCR_OneFatJet_SS	DeltaRl1l2	0	50
 _EMu_HighCR_OneFatJet_SS	Nevents	0	50
 _EMu_HighCR_OneFatJet_SS	leadingLepton_Type	0	50
 _EMu_HighCR_OneFatJet_SS	secondLepton_Type	0	50
-_EMu_HighCR_OneFatJet_SS	WClosest_FatJet_Pt	0	500
+_EMu_HighCR_OneFatJet_SS	WClosest_FatJet_Pt	150	1000
 _EMu_HighCR_OneFatJet_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_HighCR_OneFatJet_SS	WClosest_FatJet_Mass	0	250
 _EMu_HighCR_OneFatJet_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2312,7 +2312,7 @@ _DiMuon_0jets_0nlbjets_dRllge2p5_SS	DeltaRl1l2	0	50
 _DiMuon_0jets_0nlbjets_dRllge2p5_SS	Nevents	0	50
 _DiMuon_0jets_0nlbjets_dRllge2p5_SS	leadingLepton_Type	0	50
 _DiMuon_0jets_0nlbjets_dRllge2p5_SS	secondLepton_Type	0	50
-_DiMuon_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2369,7 +2369,7 @@ _DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS	DeltaRl1l2	0	50
 _DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS	Nevents	0	50
 _DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS	leadingLepton_Type	0	50
 _DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS	secondLepton_Type	0	50
-_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2426,7 +2426,7 @@ _EMu_0jets_0nlbjets_dRllge2p5_SS	DeltaRl1l2	0	50
 _EMu_0jets_0nlbjets_dRllge2p5_SS	Nevents	0	50
 _EMu_0jets_0nlbjets_dRllge2p5_SS	leadingLepton_Type	0	50
 _EMu_0jets_0nlbjets_dRllge2p5_SS	secondLepton_Type	0	50
-_EMu_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Pt	0	500
+_EMu_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Pt	150	1000
 _EMu_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Mass	0	250
 _EMu_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2483,7 +2483,7 @@ _DiElectron_Inclusive1nlbjets_OffZ_SS	DeltaRl1l2	0	50
 _DiElectron_Inclusive1nlbjets_OffZ_SS	Nevents	0	50
 _DiElectron_Inclusive1nlbjets_OffZ_SS	leadingLepton_Type	0	50
 _DiElectron_Inclusive1nlbjets_OffZ_SS	secondLepton_Type	0	50
-_DiElectron_Inclusive1nlbjets_OffZ_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_Inclusive1nlbjets_OffZ_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_Inclusive1nlbjets_OffZ_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_Inclusive1nlbjets_OffZ_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_Inclusive1nlbjets_OffZ_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2540,7 +2540,7 @@ _DiMuon_WpWp_CR_SS	DeltaRl1l2	0	50
 _DiMuon_WpWp_CR_SS	Nevents	0	50
 _DiMuon_WpWp_CR_SS	leadingLepton_Type	0	50
 _DiMuon_WpWp_CR_SS	secondLepton_Type	0	50
-_DiMuon_WpWp_CR_SS	WClosest_FatJet_Pt	0	500
+_DiMuon_WpWp_CR_SS	WClosest_FatJet_Pt	150	1000
 _DiMuon_WpWp_CR_SS	WClosest_FatJet_Eta	-999	-999
 _DiMuon_WpWp_CR_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_WpWp_CR_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2597,7 +2597,7 @@ _DiElectron_WpWp_CR_SS	DeltaRl1l2	0	50
 _DiElectron_WpWp_CR_SS	Nevents	0	50
 _DiElectron_WpWp_CR_SS	leadingLepton_Type	0	50
 _DiElectron_WpWp_CR_SS	secondLepton_Type	0	50
-_DiElectron_WpWp_CR_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_WpWp_CR_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_WpWp_CR_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_WpWp_CR_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_WpWp_CR_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2654,7 +2654,7 @@ _EMu_WpWp_CR_SS	DeltaRl1l2	0	50
 _EMu_WpWp_CR_SS	Nevents	0	50
 _EMu_WpWp_CR_SS	leadingLepton_Type	0	50
 _EMu_WpWp_CR_SS	secondLepton_Type	0	50
-_EMu_WpWp_CR_SS	WClosest_FatJet_Pt	0	500
+_EMu_WpWp_CR_SS	WClosest_FatJet_Pt	150	1000
 _EMu_WpWp_CR_SS	WClosest_FatJet_Eta	-999	-999
 _EMu_WpWp_CR_SS	WClosest_FatJet_Mass	0	250
 _EMu_WpWp_CR_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2711,7 +2711,7 @@ _DiElectron_0jets_OnZ_OS	DeltaRl1l2	0	50
 _DiElectron_0jets_OnZ_OS	Nevents	0	50
 _DiElectron_0jets_OnZ_OS	leadingLepton_Type	0	50
 _DiElectron_0jets_OnZ_OS	secondLepton_Type	0	50
-_DiElectron_0jets_OnZ_OS	WClosest_FatJet_Pt	0	500
+_DiElectron_0jets_OnZ_OS	WClosest_FatJet_Pt	150	1000
 _DiElectron_0jets_OnZ_OS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_0jets_OnZ_OS	WClosest_FatJet_Mass	0	250
 _DiElectron_0jets_OnZ_OS	WClosest_FatJet_PrunedMass	30	150
@@ -2734,9 +2734,9 @@ _DiElectron_0jets_OnZ_OS	m_jjptorder	-999	400
 _DiElectron_0jets_OnZ_OS	m_lljjptorder	-999	1000
 _DiElectron_0jets_OnZ_OS	m_Leadljjptorder	-999	1000
 _DiElectron_0jets_OnZ_OS	m_SubLeadljjptorder	-999	1000
-_DiElectron_0jets_OnZ_OS  InnerBarrelLepton_Pt -999  200
-_DiElectron_0jets_OnZ_OS  OuterBarrelLepton_Pt -999  200
-_DiElectron_0jets_OnZ_OS  EndCapLepton_Pt -999  200
+_DiElectron_0jets_OnZ_OS	InnerBarrelLepton_Pt	-999	200
+_DiElectron_0jets_OnZ_OS	OuterBarrelLepton_Pt	-999	200
+_DiElectron_0jets_OnZ_OS	EndCapLepton_Pt	-999	200
 _DiElectron_0jets_0nlbjets_dRllge2p5_SS	m_ll	0	200
 _DiElectron_0jets_0nlbjets_dRllge2p5_SS	Njets	-999	-999
 _DiElectron_0jets_0nlbjets_dRllge2p5_SS	Njets_nolepveto	-999	-999
@@ -2771,7 +2771,7 @@ _DiElectron_0jets_0nlbjets_dRllge2p5_SS	DeltaRl1l2	0	50
 _DiElectron_0jets_0nlbjets_dRllge2p5_SS	Nevents	0	50
 _DiElectron_0jets_0nlbjets_dRllge2p5_SS	leadingLepton_Type	0	50
 _DiElectron_0jets_0nlbjets_dRllge2p5_SS	secondLepton_Type	0	50
-_DiElectron_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_0jets_0nlbjets_dRllge2p5_SS	WClosest_FatJet_PrunedMass	30	150
@@ -2828,7 +2828,7 @@ _DiElectron_OnZ_SS	DeltaRl1l2	0	50
 _DiElectron_OnZ_SS	Nevents	0	50
 _DiElectron_OnZ_SS	leadingLepton_Type	0	50
 _DiElectron_OnZ_SS	secondLepton_Type	0	50
-_DiElectron_OnZ_SS	WClosest_FatJet_Pt	0	500
+_DiElectron_OnZ_SS	WClosest_FatJet_Pt	150	1000
 _DiElectron_OnZ_SS	WClosest_FatJet_Eta	-999	-999
 _DiElectron_OnZ_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_OnZ_SS	WClosest_FatJet_PrunedMass	30	150

@@ -65,14 +65,14 @@ void ForLatex_MakeCutFlowTable(){
   };
 
   vector<TString> CutFlowNames = {
-    "TwoLeptons",
+    //"TwoLeptons",
     "SS",
     "NoExtraFlavourLepton",
     "LowDileptonMass",
     "JetRequirements",
   };
   vector<TString> CutFlowNames_ForLatex = {
-    "{\\bf 2 $\\ell$}",
+    //"{\\bf 2 $\\ell$}",
     "{\\bf $\\ell^{\\pm} \\ell^{\\pm}$}",
     "{\\bf 3rd $\\ell$ veto}",
     "{\\bf $m_{\\ell \\ell} < 10~\\GeV$}",

@@ -38,14 +38,14 @@ void CompareWG(){
   };
 
   vector<TString> vars = {
-    "MET2overST",
+    "MET2overST", "PFMET", 
     "m_ll",
     "leadingLepton_Pt", "leadingLepton_Eta",
     "secondLepton_Pt", "secondLepton_Eta",
     "Njets",
   };
   vector<TString> xtitles = {
-    "#slash{E}_{T}^{miss}^{2}/S_{T} (GeV)",
+    "#slash{E}_{T}^{miss}^{2}/S_{T} (GeV)", "#slash{E}_{T}^{miss} (GeV)",
     "m(ll) (GeV)",
     "Leading Lepton p_{T} (GeV)", "Leading Lepton #eta",
     "Subleading Lepton p_{T} (GeV)", "Subleading Lepton #eta",
@@ -53,21 +53,21 @@ void CompareWG(){
   };
 
   vector<int> rebins = {
-    2,
+    2, 5,
     5,
     10, 5,
     10, 5,
     1,
   };
   vector<int> xmins = {
-    0,
+    0, 0,
     0,
     0, -3,
     0, -3,
     0,
   };
   vector<int> xmaxs = {
-    40,
+    40, 80,
     100,
     150, 3,
     150, 3,
@@ -118,7 +118,7 @@ void CompareWG(){
 
         hist_All->Draw("hist");
         hist_axis(hist_All);
-        double y_max = max(GetMaximum(hist_All), GetMaximum(hist_All));
+        double y_max = max(GetMaximum(hist_All), GetMaximum(hist_SS));
         hist_All->GetXaxis()->SetRangeUser(xmins.at(k), xmaxs.at(k));
         hist_All->GetYaxis()->SetRangeUser(0, 1.2*y_max);
         hist_All->GetYaxis()->SetTitle("Events");

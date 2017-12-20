@@ -31,10 +31,10 @@ void ForLatex_MakeYieldTable(){
     "Skimmed_High_OneFatJet",
   };
   vector<TString> WhichRegionsForTex = {
-    "low-mass two-jet",
-    "low-mass one-jet",
-    "high-mass two-jet",
-    "high-mass fat-jet",
+    "low-mass SR1",
+    "low-mass SR2",
+    "high-mass SR1",
+    "high-mass SR2",
   };
 
   vector<TString> allbkgs = {

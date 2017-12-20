@@ -49,7 +49,7 @@ for region in regions:
         if "Signal Region" in row[0]:
           for a in range(0,MaxRowIndex-1):
             thisword = row[a]
-            thisword = thisword.replace('$\Delta R(\ell 1 jj) <$','$\Delta R(\ell 1, jj) <$')
+            thisword = thisword.replace('$\Delta R(\ell 2 jj) <$','$\Delta R(\ell 2, jj) <$')
             thisword = thisword.replace('$\Delta R(\ell 1 \ell 2) <$','$\Delta R(\ell 1, \ell 2) <$')
             print thisword+" &",
 

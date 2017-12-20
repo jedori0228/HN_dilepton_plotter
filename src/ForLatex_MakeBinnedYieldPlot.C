@@ -129,10 +129,10 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     "Skimmed_High_OneFatJet",
   };
   vector<TString> WhichRegionsForTex = {
-    "Low Mass Two Jets",
-    "Low Mass One Jet",
-    "High Mass Two Jets",
-    "High Mass Fat Jet",
+    "Low Mass SR1",
+    "Low Mass SR2",
+    "High Mass SR1",
+    "High Mass SR2",
   };
   
   for(unsigned int it_region=0; it_region<WhichRegions.size(); it_region++){

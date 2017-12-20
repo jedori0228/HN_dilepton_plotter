@@ -3,7 +3,7 @@
 #include "AnalysisInputs.h"
 #include "mylib.h"
 
-void ForLatex_MakeCRYieldTable(int lepch=0){
+void ForLatex_MakeCRYieldTable(int lepch=0, int CRsection=0){
 
   TString DataPD = "";
   TString ChannelName = "";
@@ -83,15 +83,35 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
     "Fake lepton background",
   };
 
-  vector<TString> regions;
-  vector<TString> tmp_regions = {
-    "Inclusive1nlbjets",
-    "0jets_0nlbjets_dRllge2p5",
-    "LowCR_TwoJet_NoFatJet",
-    "LowCR_OneJet_NoFatJet",
-    "HighCR_TwoJet_NoFatJet",
-    "HighCR_OneFatJet",
-  };
+  vector<TString> regions, regionsForTex;
+  vector<TString> tmp_regions;
+
+  if(CRsection==0){
+    tmp_regions = {
+      "Inclusive1nlbjets",
+      "0jets_0nlbjets_dRllge2p5",
+      "LowCR_TwoJet_NoFatJet",
+    };
+    regionsForTex = {
+      "Non-prompt CR1",
+      "Non-prompt CR2",
+      "Low Mass CR1",
+    };
+  }
+  else if(CRsection==1){
+    tmp_regions = {
+      "LowCR_OneJet_NoFatJet",
+      "HighCR_TwoJet_NoFatJet",
+      "HighCR_OneFatJet",
+    };
+    regionsForTex = {
+      "Low Mass CR2",
+      "High Mass CR1",
+      "High Mass CR2",
+    };
+  }
+
+
   for(unsigned int j=0; j<tmp_regions.size(); j++){
 
     if(lepch==0) regions.push_back( "DiMuon_"+tmp_regions.at(j)+"_SS" );
@@ -103,20 +123,13 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
 
   }
 
-  vector<TString> regionsForTex = {
-    "Non-prompt CR1",
-    "Non-prompt CR2",
-    "Low Mass CR1",
-    "Low Mass CR2",
-    "High Mass CR1",
-    "High Mass CR2",
-  };
   const int nCR = regions.size();
 
   cout << "\\begin{table}[!hptb]" << endl;
   cout << "  \\centering" << endl;
   cout << "  \\caption{" << endl;
-  cout << "  Observed event yields and estimated backgrounds with statistical and systematic uncertainties for the "+ChannelNameForTex+" events" << endl;
+  cout << "  Observed event yields and estimated backgrounds with statistical and systematic uncertainties for the "+ChannelNameForTex+" events in various control regions." << endl;
+  cout << "  Signal yields for several s-channel prcoesses are included." << endl;
   cout << "  }" << endl;
   cout << "  \\label{table:yield_CR_"+ChannelName+"}" << endl;
   cout << "  \\begin{center}" << endl;
@@ -199,8 +212,12 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
         if(original_hist->GetBinContent(1)<0) continue;
 
         //==== Scale MCSF
+        double MCSF_uncert = 0.;
         if( isMC ){
+          double before_scale = original_hist->GetBinContent(1);
           original_hist->Scale(analysisInputs.MCNormSF[sample]);
+          MCSF_uncert = before_scale*(analysisInputs.MCNormSF_uncert[sample]);
+          //cout << sample << "\t" << before_scale << "\t" << MCSF_uncert << endl;
         }
 
         yield_central += original_hist->GetBinContent(1);
@@ -249,7 +266,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
 
           double error_lumi = LumiSyst*(original_hist->GetBinContent(1));
 
-          double error_combined = sqrt( error_stat*error_stat + error_syst*error_syst + error_lumi*error_lumi );
+          double error_combined = sqrt( error_stat*error_stat + error_syst*error_syst + error_lumi*error_lumi +MCSF_uncert*MCSF_uncert );
 
           original_hist->SetBinError(1, error_combined);
 
@@ -257,6 +274,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
 
         systerror += (original_hist->GetBinError(1))*(original_hist->GetBinError(1));
 
+        //cout << endl << sample << "\t" << original_hist->GetBinContent(1) << "\t" << original_hist->GetBinError(1) << endl;
       } // END loop samples in each bkglists
 
       if(isMC){
@@ -278,6 +296,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
     cout << " \\\\" << endl;
 
     if(it_bkglist==index_ENDMC){
+      cout << "\\hline" << endl;
       cout << "Total Monte Carlo ";
       for(unsigned int it_region=0; it_region<regions.size(); it_region++){
         cout << "& $" << MC_yield.at(it_region) << " \\pm " << sqrt(MC_stat.at(it_region)) << "~\\stat \\pm " << sqrt(MC_syst.at(it_region)) << "~\\syst$ ";
@@ -298,7 +317,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0){
 
   //==== Signal
 
-  cout << "Majorana neutrino signal ";for(int i=0;i<nCR;i++) cout<<"& ";cout<<" \\\\" << endl;
+  cout << "{\\bf Majorana neutrino signal} ";for(int i=0;i<nCR;i++) cout<<"& ";cout<<" \\\\" << endl;
   for(unsigned int it_sig=0;it_sig<ref_sigs.size();it_sig++){
 
     TString sigmass = TString::Itoa(ref_sigs.at(it_sig),10);

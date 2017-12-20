@@ -116,6 +116,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiMuon_0jets_0nlbjets_dRllge2p5_SS",
       "_DiMuon_WpWp_CR_SS",
 
+
       //=== DiElectron
       "_DiElectron_0jets_SS", // SS 0jet CR
       "_DiElectron_1jets_SS", // SS 1jet CR
@@ -156,10 +157,14 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_EMu_WpWp_CR_SS",
 
 
-
       //"_DiElectron_OnZ_SS",
       //"_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS",
       //"_DiElectron_0jets_0nlbjets_dRllge2p5_SS",
+      //"_DiElectron_1jets_OnZ_SS",
+
+      //"_DiMuon_HighCR_OneFatJet_SS",
+      //"_DiElectron_HighCR_OneFatJet_SS",
+      //"_EMu_HighCR_OneFatJet_SS",
 
     };
   }
