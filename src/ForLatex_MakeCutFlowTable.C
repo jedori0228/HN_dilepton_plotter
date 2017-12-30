@@ -13,6 +13,7 @@ void ForLatex_MakeCutFlowTable(){
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
   TString filepath = ENV_FILE_PATH+"/"+dataset+"/Regions/";
+  TString NMCfilepath = WORKING_DIR+"/data/SignalN_MC.txt";
 
   //==== Sample list
   //==== copied from Draw_SR.C
@@ -65,14 +66,16 @@ void ForLatex_MakeCutFlowTable(){
   };
 
   vector<TString> CutFlowNames = {
-    //"TwoLeptons",
+    "MET_PV_Trig",
+    "TwoLeptons",
     "SS",
     "NoExtraFlavourLepton",
     "LowDileptonMass",
     "JetRequirements",
   };
   vector<TString> CutFlowNames_ForLatex = {
-    //"{\\bf 2 $\\ell$}",
+    "{\\bf Trigger}",
+    "{\\bf 2 $\\ell$}",
     "{\\bf $\\ell^{\\pm} \\ell^{\\pm}$}",
     "{\\bf 3rd $\\ell$ veto}",
     "{\\bf $m_{\\ell \\ell} < 10~\\GeV$}",
@@ -82,6 +85,7 @@ void ForLatex_MakeCutFlowTable(){
   vector<int> signal_masses = {
     50, 100, 500, -800, 1100, -1200,
   };
+
   vector<double> ref_scale = {
     0.0001, 0.01, 0.1, 0.1, 1, 1,
   };
@@ -180,7 +184,37 @@ void ForLatex_MakeCutFlowTable(){
 
         double scale = ref_scale.at(it_sig)/0.01;
 
-        cout << " & $" << hist->GetBinContent(1)*scale << "$";
+        //==== Get N_MC
+        TString signalname = "";
+        if(signal_masses.at(it_sig)>0){
+          signalname = "HNMoriondLL"+channel+"_"+TString::Itoa(signal_masses.at(it_sig),10);
+        }
+        else{
+          signalname = "HNDilepton_"+channel+"_Tchannel_M"+TString::Itoa(abs(signal_masses.at(it_sig)),10);
+        }
+
+        string elline;
+        ifstream in(NMCfilepath);
+        int N_MC = -999;
+        while(getline(in,elline)){
+          std::istringstream is( elline );
+          TString samplename;
+          is >> samplename;
+          is >> N_MC;
+          if(samplename==signalname){
+            break;
+          }
+        }
+
+        double eff_sig = hist->GetEntries()/N_MC;
+        if(signal_masses.at(it_sig)<0){
+          if(CutFlowName!="MET_PV_Trig" && CutFlowName!="TwoLeptons"){
+            eff_sig *= 2.;
+          }
+        }
+
+        cout << " & $" << hist->GetBinContent(1)*scale << "$ $("<<100.*eff_sig<<"~\\%)$";
+        //cout << " & $" << hist->GetBinContent(1)*scale << "$ $("<<hist->GetEntries()<<","<<N_MC<<"~\\%)$";
       }
 
       cout << " \\\\" << endl;
