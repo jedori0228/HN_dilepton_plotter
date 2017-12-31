@@ -213,7 +213,13 @@ void ForLatex_MakeCutFlowTable(){
           }
         }
 
-        cout << " & $" << hist->GetBinContent(1)*scale << "$ $("<<100.*eff_sig<<"~\\%)$";
+        //HOTFIX FIXME
+        if(channel=="MuEl" && CutFlowName=="MET_PV_Trig"){
+          cout << " & $" << hist->GetBinContent(1)*scale*35863.3 << "$ $("<<100.*eff_sig<<"~\\%)$";
+        }
+        else{
+          cout << " & $" << hist->GetBinContent(1)*scale << "$ $("<<100.*eff_sig<<"~\\%)$";
+        }
         //cout << " & $" << hist->GetBinContent(1)*scale << "$ $("<<hist->GetEntries()<<","<<N_MC<<"~\\%)$";
       }
 
