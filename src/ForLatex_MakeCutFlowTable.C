@@ -127,7 +127,7 @@ void ForLatex_MakeCutFlowTable(){
     cout << "      \\begin{tabular}{c|c|c|c|c|c|c|c}" << endl;
     cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl;
     cout << "\\hline" << endl;
-    cout << "& \\multirow{2}{*}{\\bf total bkg}" ;
+    cout << "& \\multirow{2}{*}{\\bf Total bkg.}" ;
     for(unsigned it_sig=0; it_sig<signal_masses.size(); it_sig++){
       cout << "& $m_{N}$ = "<<TString::Itoa(abs(signal_masses.at(it_sig)),10)<<"~$\\GeV$ ";
     }
@@ -141,7 +141,7 @@ void ForLatex_MakeCutFlowTable(){
       if(channel=="MuEl") cout << "& "+fdch+" $\\left| V_{\ell N} \\right|^2 = "<< ref_scaleForTex.at(it_sig) << "$ ";
     }
     cout << " \\\\" << endl;
-    //cout << "& {\\bf total bkg} & $m_{N}$ = 40~$\\GeV$ &  $m_{N}$ = 100~$\\GeV$ &  $m_{N}$ = 300~$\\GeV$ & $m_{N}$ = 1000~$\\GeV$ \\\\" << endl;
+    //cout << "& {\\bf Total bkg.} & $m_{N}$ = 40~$\\GeV$ &  $m_{N}$ = 100~$\\GeV$ &  $m_{N}$ = 300~$\\GeV$ & $m_{N}$ = 1000~$\\GeV$ \\\\" << endl;
     cout << "\\hline" << endl;
 
     for(unsigned it_CutFlowName=0; it_CutFlowName<CutFlowNames.size(); it_CutFlowName++){
@@ -213,13 +213,7 @@ void ForLatex_MakeCutFlowTable(){
           }
         }
 
-        //HOTFIX FIXME
-        if(channel=="MuEl" && CutFlowName=="MET_PV_Trig"){
-          cout << " & $" << hist->GetBinContent(1)*scale*35863.3 << "$ $("<<100.*eff_sig<<"~\\%)$";
-        }
-        else{
-          cout << " & $" << hist->GetBinContent(1)*scale << "$ $("<<100.*eff_sig<<"~\\%)$";
-        }
+        cout << " & $" << hist->GetBinContent(1)*scale << "$ $("<<100.*eff_sig<<"~\\%)$";
         //cout << " & $" << hist->GetBinContent(1)*scale << "$ $("<<hist->GetEntries()<<","<<N_MC<<"~\\%)$";
       }
 

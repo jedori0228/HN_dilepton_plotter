@@ -357,6 +357,7 @@ void ForLatex_MakeYieldTable(){
       cout << " \\\\" << endl;
 
       if(it_bkg==index_ENDMC){
+        cout << "\\hline" << endl;
         cout << "Total Monte Carlo ";
         for(int i=0; i<channels.size(); i++){
           cout << "& $" << MC_yield.at(i) << " \\pm " << sqrt(MC_stat.at(i)) << "~\\stat \\pm " << sqrt(MC_syst.at(i)) << "~\\syst$ ";

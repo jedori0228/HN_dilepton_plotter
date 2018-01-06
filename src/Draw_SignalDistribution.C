@@ -61,11 +61,13 @@ void Draw_SignalDistribution(){
     "leadingLepton_Pt", "secondLepton_Pt",
     "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
     "leadingLepton_Eta", "secondLepton_Eta",
+    "m_jj_jjWclosest",
   };
   vector<TString> xtitles = {
     "Leading Lepton p_{T} (GeV)", "Subleading Lepton p_{T} (GeV)",
     "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
     "Leading Lepton #eta", "Subleading Lepton #eta",
+    "m(jj_{W}) (GeV)",
   };
 
   for(unsigned int i=0; i<channels.size(); i++){
@@ -84,6 +86,7 @@ void Draw_SignalDistribution(){
 
         int n_rebin = 50;
         double x_max = 1000.;
+        double x_min = 0.;
         if(vars.at(l).Contains("leadingLepton_Pt")) x_max = 2000.;
         if(vars.at(l).Contains("m_")){
           x_max = 3000.;
@@ -93,8 +96,10 @@ void Draw_SignalDistribution(){
           x_max = 3.;
           n_rebin = 3;
         }
+        if(vars.at(l)=="m_jj_jjWclosest"){
+          x_max = 150.;
+        }
 
-        double x_min = 0.;
         if(vars.at(l).Contains("Eta")){
           x_min = -3.;
         }

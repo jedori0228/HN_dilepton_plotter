@@ -129,9 +129,9 @@ void ForLatex_MakeCRYieldTable(int lepch=0, int CRsection=0){
   cout << "  \\centering" << endl;
   cout << "  \\caption{" << endl;
   cout << "  Observed event yields and estimated backgrounds with statistical and systematic uncertainties for the "+ChannelNameForTex+" events in various control regions." << endl;
-  cout << "  Signal yields for several s-channel prcoesses are included." << endl;
+  cout << "  Signal yields for several s-channel processes are included." << endl;
   cout << "  }" << endl;
-  cout << "  \\label{table:yield_CR_"+ChannelName+"}" << endl;
+  cout << "  \\label{table:yield_CR_"+ChannelName+TString::Itoa(CRsection,10)+"}" << endl;
   cout << "  \\begin{center}" << endl;
   cout << "    \\resizebox{\\columnwidth}{!}{" << endl;
   cout << "      \\begin{tabular}{l |";for(int i=0;i<nCR;i++) cout<<" l";cout<<"}" << endl;

@@ -26,6 +26,13 @@ void GetFakeSyst(){
     "High_TwoJet_NoFatJet_SS",
     "High_OneFatJet_SS",
   };
+  vector<TString> WhichRegionsForLatex = {
+    "Preselection",
+    "Low-mass SR1",
+    "Low-mass SR2",
+    "High-mass SR1",
+    "High-mass SR2",
+  };
   vector<TString> TreeDirNames = {
     "",
     "Skimmed_Low_TwoJet_NoFatjet",
@@ -73,7 +80,7 @@ void GetFakeSyst(){
 
       double syst_promptup = fabs(y_promptup-y_central)/y_central;
       double syst_BJet = fabs(y_BJet-y_central)/y_central;
-      cout << channel+"_"+region << "\t" << y_central << "\t" << syst_promptup << "\t" << syst_BJet;
+      cout << WhichRegionsForLatex.at(it_region) << "\t" << y_central << "\t" << syst_promptup << "\t" << syst_BJet;
 
       double syst_promptsyst = syst_promptup*syst_promptup+syst_BJet*syst_BJet;
 
@@ -94,9 +101,10 @@ void GetFakeSyst(){
 
           //cout << endl << "DEBUG : " << syst_promptsyst << endl;
         }
-        cout << "\t" << sqrt(syst_promptsyst) << endl;
+        cout << "\t\t\t\t" << sqrt(syst_promptsyst) << endl;
       }
       else if(channel.Contains("DiElectron")){
+        cout << "\t\t\t";
         for(int i=0; i<Electron_FRsystsources.size(); i++){
           vector<TString> systs = Electron_FRsystsources.at(i);
           double syst_max = -999;
