@@ -10,7 +10,7 @@ void Draw_FakeRate_Electron(){
 //LQOUT_Electron_QCDEMEnriched.root
 //LQOUT_Electron_QCD.root
 
-  TString Sample = "QCDEMEnriched";
+  TString Sample = "Data_v7_5";
   TString Lepton = "Electron";
 
   gStyle->SetOptStat(0);
