@@ -47,6 +47,7 @@ public:
   void Run();
 
   //=== Final Results
+  double total_data;
   double total_bkgs, fake_bkgs, prompt_bkgs, cf_bkgs;
   double total_bkgs_err, fake_bkgs_err, prompt_bkgs_err, cf_bkgs_err;
   vector<double> signal_rate, signal_err, signal_eff;
