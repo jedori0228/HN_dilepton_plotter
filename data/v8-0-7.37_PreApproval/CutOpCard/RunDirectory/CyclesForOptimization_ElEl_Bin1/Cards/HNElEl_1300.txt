@@ -1,6 +1,6 @@
 m_lljj_jjWclosest > 760.0 760.0 1
-m_jj_jjWclosest > 30.0 30.0 1
-m_jj_jjWclosest < 150.0 150.0 1
+m_jj_jjWclosest > 50 50 1
+m_jj_jjWclosest < 120 120 1
 ljj |> 400.0 400.0 1
 ljj |< 1930.0 1930.0 1
 leadingLepton_Pt > 125.0 125.0 1

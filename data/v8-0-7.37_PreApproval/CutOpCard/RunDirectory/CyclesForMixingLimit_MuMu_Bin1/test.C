@@ -17,11 +17,11 @@ void test(){
 
   RunNtupleBase m;
   m.DoDebug = DoDebug;
-  m.RunSystematic = true;
+  m.RunSystematic = false;
 
   //==== Skim selection for tree (tree name : Ntp_<skim>)
 
-  m.treeskim = "Low_TwoJet_NoFatjet_SS";
+  m.treeskim = "High_TwoJet_NoFatjet_SS";
 
   //==== Dataset/channel
 
@@ -34,14 +34,14 @@ void test(){
 
   //==== Input/Output
 
-  m.filepath = WORKING_DIR+"/rootfiles/"+dataset+"/Ntuple/Skimmed_Low_TwoJet_NoFatjet/";
+  m.filepath = WORKING_DIR+"/rootfiles/"+dataset+"/Ntuple/Skimmed_High_TwoJet_NoFatjet/";
   m.plotpath = ENV_PLOT_PATH+"/"+dataset+"/cutop/";
 
   //==== Signal Info
 
   m.preselection = "Preselection_SS";
   m.signals = {
-    "HNMuMu_70",
+    "HNMuMu_200",
   };
   m.MinEffPresel = 0.;
   m.AddSamplesToList( m.signals );
@@ -52,6 +52,7 @@ void test(){
     "fake_Dijet",
     
     "TG", "TTG",
+    "ZGto2LG", "WGtoLNuG_weighted",
     "WZTo3LNu_powheg",
     "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",
     "WWW", "WWZ", "WZZ", "ZZZ",
@@ -73,7 +74,7 @@ void test(){
 
   //==== Set CutCard
 
-  TString cutfilename = "HNMuMu_70.txt";
+  TString cutfilename = "HNMuMu_200.txt";
   m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/RunDirectory/"+CutOpCardDir+"/"+cutfilename);
 
   vector<TString> systs = {
@@ -184,7 +185,7 @@ void test(){
       fake_calculated_syst = m.fake_bkgs_syst;
       cf_calculated_syst = m.cf_bkgs_syst;
       //signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
-      signal_calculated_syst = (0.0837024)*y_signal_central;
+      signal_calculated_syst = (0.0243541)*y_signal_central;
 
     }
 

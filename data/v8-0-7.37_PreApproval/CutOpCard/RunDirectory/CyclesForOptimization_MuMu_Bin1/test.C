@@ -17,7 +17,6 @@ void test(){
 
   RunNtupleBase m;
   m.DoDebug = DoDebug;
-  m.PrintYield = true;
 
   //==== Skim selection for tree (tree name : Ntp_<skim>)
 
@@ -42,7 +41,7 @@ void test(){
 
   m.preselection = "Preselection_SS";
   m.signals = {
-    "HNMuMu_40",
+    "HNMuMu_30",
   };
   m.MinEffPresel = 0.;
   m.FillSignalInfo();
@@ -52,10 +51,13 @@ void test(){
 
   vector<TString> bkgs = {
     "fake_Dijet",
-    
+        "TG", "TTG",
     "ZGto2LG", "WGtoLNuG_weighted",
-    "WZTo3LNu_powheg", "ZZTo4L_powheg",
-    "MCForFakeSubtraction",
+    "WZTo3LNu_powheg",
+    "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",
+    "WWW", "WWZ", "WZZ", "ZZZ",
+    "ttW", "ttZ", "ttH_nonbb",
+    "WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD",
   };
   m.AddSamplesToList( bkgs );
 
@@ -72,7 +74,7 @@ void test(){
 
   //==== Set CutCard
 
-  TString cutfilename = "HNMuMu_40.txt";
+  TString cutfilename = "test.txt";
   m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/RunDirectory/"+CutOpCardDir+"/"+cutfilename);
 
   m.Run();
