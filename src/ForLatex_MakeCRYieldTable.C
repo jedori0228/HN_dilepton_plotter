@@ -129,7 +129,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0, int CRsection=0){
   cout << "  \\centering" << endl;
   cout << "  \\caption{" << endl;
   cout << "  Observed event yields and estimated backgrounds with statistical and systematic uncertainties for the "+ChannelNameForTex+" events in various control regions." << endl;
-  cout << "  Signal yields for several s-channel processes are included." << endl;
+  cout << "  The uncertainties shown are the statistical and systematic components, respectively." << endl;
   cout << "  }" << endl;
   cout << "  \\label{table:yield_CR_"+ChannelName+TString::Itoa(CRsection,10)+"}" << endl;
   cout << "  \\begin{center}" << endl;
@@ -289,7 +289,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0, int CRsection=0){
       staterror = sqrt(staterror);
       systerror = sqrt(systerror);
 
-      cout << " & $" << std::fixed<<std::setprecision(2) << yield_central << " \\pm " << staterror << "~\\stat \\pm " << systerror << "~\\syst $";
+      cout << " & $" << std::fixed<<std::setprecision(2) << yield_central << " \\pm " << staterror << " \\pm " << systerror << "$";
 
     } // END loop regions
 
@@ -299,7 +299,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0, int CRsection=0){
       cout << "\\hline" << endl;
       cout << "Total Monte Carlo ";
       for(unsigned int it_region=0; it_region<regions.size(); it_region++){
-        cout << "& $" << MC_yield.at(it_region) << " \\pm " << sqrt(MC_stat.at(it_region)) << "~\\stat \\pm " << sqrt(MC_syst.at(it_region)) << "~\\syst$ ";
+        cout << "& $" << MC_yield.at(it_region) << " \\pm " << sqrt(MC_stat.at(it_region)) << " \\pm " << sqrt(MC_syst.at(it_region)) << "$ ";
       }
       cout << " \\\\" << endl;
       cout << "\\hline" << endl;
@@ -310,7 +310,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0, int CRsection=0){
   cout << "\\hline" << endl;
   cout << "Total background ";
   for(unsigned int it_region=0; it_region<regions.size(); it_region++){
-    cout << "& $" << Total_yield.at(it_region) << " \\pm " << sqrt(Total_stat.at(it_region)) << "~\\stat \\pm " << sqrt(Total_syst.at(it_region)) << "~\\syst$ ";
+    cout << "& $" << Total_yield.at(it_region) << " \\pm " << sqrt(Total_stat.at(it_region)) << " \\pm " << sqrt(Total_syst.at(it_region)) << "$ ";
   }
   cout << " \\\\" << endl;
   cout << "\\hline" << endl;
@@ -364,7 +364,7 @@ void ForLatex_MakeCRYieldTable(int lepch=0, int CRsection=0){
         
       }
 
-      cout << " & $" << std::fixed<<std::setprecision(2) << yield_sig << " \\pm " << stat_sig << "~\\stat \\pm " << syst_sig << "~\\syst $";
+      cout << " & $" << std::fixed<<std::setprecision(2) << yield_sig << " \\pm " << stat_sig << " \\pm " << syst_sig << "$";
 
     }
     cout << " \\\\" << endl;

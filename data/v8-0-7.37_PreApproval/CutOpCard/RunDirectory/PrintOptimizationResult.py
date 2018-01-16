@@ -10,7 +10,7 @@ for ch in channels:
     for Bin in Bins:
 
       ## Low Mass
-      masses = [40, 50, 60, 70, 80]
+      masses = [20, 30, 40, 50, 60, 70, 80]
       varorder = [
       "Njets <",
 

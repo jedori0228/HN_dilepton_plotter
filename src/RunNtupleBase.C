@@ -13,6 +13,7 @@ void RunNtupleBase::Run(){
   }
 
   vector<CutInfo> OptimizedCutInfo;
+  double final_data(0.);
   double final_cf(0.), final_cf_err(0.), final_cf_syst(0.), final_cf_stat(0.);
   double final_fake(0.), final_fake_err(0.), final_fake_syst(0.), final_fake_stat(0.);
   double final_prompt(0.), final_prompt_err(0.), final_prompt_syst(0.), final_prompt_stat(0.);
@@ -267,6 +268,7 @@ void RunNtupleBase::Run(){
         cout << "!!!!!!!!!!!!!!!!!" << endl;
         cout << endl;
         cutrangeinfo.PrintCurrent();
+        if(ShowData) cout << "Data" << "\t" << data_unweighted_yield << endl;
         cout << "CF" << "\t" << chargeflip_weighted_yield << " +- " << chargeflip_weighted_yield_err << endl;
         cout << "Fake" << "\t" << fake_weighted_yield << " +- " << fake_weighted_yield_err << endl;
         cout << "Prompt" << "\t" << prompt_weighted_yield << " +- " << prompt_weighted_yield_err << endl;
@@ -311,6 +313,8 @@ void RunNtupleBase::Run(){
       final_prompt_syst = prompt_weighted_yield_syst_MCSF;
       final_prompt_stat = prompt_weighted_yield_stat;
 
+      final_data = data_unweighted_yield;
+
     }
 
     cutrangeinfo.Next();
@@ -327,6 +331,7 @@ void RunNtupleBase::Run(){
     for(unsigned int i=0; i<OptimizedCutInfo.size(); i++){
       OptimizedCutInfo.at(i).Print();
     }
+    if(ShowData) cout << "Data" << "\t" << final_data << endl;
     cout << "CF" << "\t" << final_cf << " +- " << final_cf_err << endl;
     cout << "Fake" << "\t" << final_fake << " +- " << final_fake_err << endl;
     cout << "Prompt" << "\t" << final_prompt << " +- " << final_prompt_err << endl;

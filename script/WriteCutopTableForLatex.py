@@ -64,7 +64,7 @@ for region in regions:
             if a==0:
 
               if "SR" in row[0]:
-                nmassstr = "5"
+                nmassstr = "7"
                 if "High" in region:
                   nmassstr = "19"
                 print "\\hline"

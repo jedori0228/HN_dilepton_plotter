@@ -45,25 +45,23 @@ void Draw_MCClosure(){
     "Preselection",
     "Preselection_ElectronSubLead",
     "Preselection_MuonSubLead",
-/*
-    "Low_TwoJet_NoFatJet",
-    "Low_OneJet_NoFatJet",
-    "High",
-    "High_TwoJet_NoFatJet",
-    "High_OneFatJet_NoFatJet",
-*/
+
+    //"Low_TwoJet_NoFatJet",
+    //"Low_OneJet_NoFatJet",
+    //"High_TwoJet_NoFatJet",
+    //"High_OneFatJet_NoFatJet",
+
   };
   vector<TString> regionsfortex = {
     "Preselection",
     "Preselection, e-trailing",
     "Preseleciton, $\\mu$-trailing",
-/*
-    "Low\\_TwoJet\\_NoFatJet",
-    "Low\\_OneJet\\_NoFatJet",
-    "High",
-    "High\\_TwoJet\\_NoFatJet",
-    "High\\_OneFatJet\\_NoFatJet",
-*/
+
+    //"Low\\_TwoJet\\_NoFatJet",
+    //"Low\\_OneJet\\_NoFatJet",
+    //"High\\_TwoJet\\_NoFatJet",
+    //"High\\_OneFatJet\\_NoFatJet",
+
   };
 
   vector<TString> samples = {
@@ -203,7 +201,11 @@ void Draw_MCClosure(){
           TH1D *hist_Predicted_up = (TH1D*)file_Predicted->Get(dirname+"_up/"+histname+"_up");
           TH1D *hist_Predicted_down = (TH1D*)file_Predicted->Get(dirname+"_down/"+histname+"_down");
 
-          if(!hist_Measured || !hist_Predicted) continue;
+          if(!hist_Measured || !hist_Predicted){
+            file_Measured->Close();
+            file_Predicted->Close();
+            continue;
+          }
 
           if(sample=="WJets_positive"){
             hist_Measured->Scale(WJets_reweight);
@@ -500,7 +502,11 @@ void Draw_MCClosure(){
 
         } // END sample loop
 
-        if(!hist_summed_Predicted) continue;
+        if(!hist_summed_Predicted){
+          delete hist_binned_Predicted;
+          delete hist_binned_Measured;
+          continue;
+        }
 
         TCanvas *c_summed = new TCanvas("c_summed", "", 600, 600);
         c_summed->Draw();
@@ -746,6 +752,9 @@ void Draw_MCClosure(){
           gSystem->mkdir(plotpath+"/"+channel+"/Binned/"+regions.at(k), kTRUE);
           c_binned->SaveAs(plotpath+"/"+channel+"/Binned/"+regions.at(k)+"/OneBinned.pdf");
           c_binned->SaveAs(plotpath+"/"+channel+"/Binned/"+regions.at(k)+"/OneBinned.png");
+
+          c_binned->Close();
+          delete dummy_bottom_binned;
 
         }
 
