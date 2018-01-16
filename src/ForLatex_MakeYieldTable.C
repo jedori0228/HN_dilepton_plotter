@@ -112,6 +112,7 @@ void ForLatex_MakeYieldTable(){
     cout << "  \\centering" << endl;
     cout << "  \\caption{" << endl;
     cout << "  Observed event yields and estimated backgrounds with statistical and systematic uncertainties for the "+WhichRegionsForTex.at(it_region)+" bin." << endl;
+    cout << "  The uncertainties shown are the statistical and systematic components, respectively." << endl;
     cout << "  }" << endl;
     cout << "  \\label{table:yield_"+WhichRegion+"}" << endl;
     cout << "  \\begin{center}" << endl;
@@ -334,7 +335,7 @@ void ForLatex_MakeYieldTable(){
 
 
         if(!isSignal){
-          cout << " & $" << std::fixed<<std::setprecision(2) << Yield << " \\pm " << StatError << "~\\stat \\pm " << SystError << "~\\syst $";
+          cout << " & $" << std::fixed<<std::setprecision(2) << Yield << " \\pm " << StatError << " \\pm " << SystError << "$";
 
            if(isMC){
              MC_yield.at(it_channel) += Yield;
@@ -349,7 +350,7 @@ void ForLatex_MakeYieldTable(){
         else{
           double scale = ref_scale.at(index_signal)/0.01;
 
-          cout << " & $" << std::fixed<<std::setprecision(2) << Yield*scale << " \\pm " << StatError*scale << "~\\stat \\pm " << SystError*scale << "~\\syst $";
+          cout << " & $" << std::fixed<<std::setprecision(2) << Yield*scale << " \\pm " << StatError*scale << " \\pm " << SystError*scale << "$";
         }
 
       } // END Loop mm ee em
@@ -360,7 +361,7 @@ void ForLatex_MakeYieldTable(){
         cout << "\\hline" << endl;
         cout << "Total Monte Carlo ";
         for(int i=0; i<channels.size(); i++){
-          cout << "& $" << MC_yield.at(i) << " \\pm " << sqrt(MC_stat.at(i)) << "~\\stat \\pm " << sqrt(MC_syst.at(i)) << "~\\syst$ ";
+          cout << "& $" << MC_yield.at(i) << " \\pm " << sqrt(MC_stat.at(i)) << " \\pm " << sqrt(MC_syst.at(i)) << "$ ";
         }
         cout << " \\\\" << endl;
         cout << "\\hline" << endl;
@@ -370,7 +371,7 @@ void ForLatex_MakeYieldTable(){
         cout << "\\hline" << endl;
         cout << "Total background ";
         for(int i=0; i<channels.size(); i++){
-          cout << "& $" << Total_yield.at(i) << " \\pm " << sqrt(Total_stat.at(i)) << "~\\stat \\pm " << sqrt(Total_syst.at(i)) << "~\\syst$ ";
+          cout << "& $" << Total_yield.at(i) << " \\pm " << sqrt(Total_stat.at(i)) << " \\pm " << sqrt(Total_syst.at(i)) << "$ ";
         }
         cout << " \\\\" << endl;
         cout << "\\hline" << endl;

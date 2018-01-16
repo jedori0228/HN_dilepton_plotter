@@ -19,9 +19,11 @@ for region in regions:
   chcounter = 0
   filename = region+"-"+region
 
-  RowSkipIndex = 2
-  if "High" in region:
-    RowSkipIndex = 3
+  RowSkipIndex = [3,4,11,12,13]
+  if "High_SR1" in region:
+    RowSkipIndex = [2,3,4,11,12]
+  if "High_SR2" in region:
+    RowSkipIndex = [2,3,4,8,10,11,12]
 
   with open(filepath+filename+".csv", 'rb') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -36,9 +38,11 @@ for region in regions:
     #print "    \\footnotesize"
     print "    \\resizebox{\\columnwidth}{!}{"
     if "Low" in region:
-      print "      \\begin{tabular}{c|c|c|ccccccccc|c}"
-    elif "High in region":
-      print "      \\begin{tabular}{c|c|c|cccccccc|c|c}"
+      print "      \\begin{tabular}{c|c|c|cccccc|c|c|c}"
+    if "High_SR1" in region:
+      print "      \\begin{tabular}{c|c|cccccc|c|c|cc}"
+    if "High_SR2" in region:
+      print "      \\begin{tabular}{c|c|cccc|c|c}"
     print "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 
     for row in spamreader:
@@ -49,7 +53,7 @@ for region in regions:
       if "Signal Region" in row or "(\GeV)" in row:
         for a in range(0,MaxRowIndex-1):
 
-          if a==MaxRowIndex-RowSkipIndex:
+          if a in RowSkipIndex:
             continue
 
           thisword = row[a]
@@ -63,7 +67,7 @@ for region in regions:
       else:
 
         if "SR2" in row:
-          print "\\cline{2-13}"
+          print "\\cline{2-10}"
 
         for a in range(0,MaxRowIndex):
           row[a] = row[a].replace('%','~\\%')
@@ -71,7 +75,7 @@ for region in regions:
           if a==0:
 
             if "$" in row[0]:
-              nmassstr = "10"
+              nmassstr = "14"
               if "High" in region:
                 nmassstr = "19"
               print "\\hline"
@@ -81,11 +85,11 @@ for region in regions:
 
           elif a==1 and "Low" in region:
             if "SR" in row[1]:
-              nmassstr = "5"
+              nmassstr = "7"
               print "\multirow{"+nmassstr+"}{*}{"+row[1]+"} &",
             else:
               print " &",
-          elif a==MaxRowIndex-RowSkipIndex:
+          elif a in RowSkipIndex:
             continue
           else:
             toprint = row[a]

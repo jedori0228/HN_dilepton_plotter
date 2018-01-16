@@ -1,0 +1,37 @@
+imax 1  number of channels
+jmax 3  number of backgrounds
+kmax 20  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin 1
+observation 0.509
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second 'process' line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin	1	1	1	1
+process	prompt	fake	cf	HN400
+process	1	2	3	0
+rate	0.509	0.0	0.0	5.84622
+------------
+Stat	lnN	1.2884	-	-	1.0127
+Lumi	lnN	1.025	-	-	1.025
+PDF	lnN	-	-	-	1.0853
+MuonPt	lnN	1.1322	-	-	1.0535
+MuonID	lnN	1.0344	-	-	1.0185
+ElectronE	lnN	2.5224	-	-	1.0051
+ElectronID	lnN	1.0327	-	-	1.0218
+Trigger	lnN	1.0092	-	-	1.0014
+PU	lnN	1.003	-	-	1.0207
+JES	lnN	2.6259	-	-	1.0137
+JER	lnN	1.2355	-	-	1.0201
+Uncl	lnN	1.0085	-	-	1.0027
+BEff	lnN	1.0087	-	-	1.0031
+BMiss	lnN	1.0131	-	-	1.0051
+JMS	lnN	1.0198	-	-	1.0006
+JMR	lnN	1.0182	-	-	1.0005
+Tau21	lnN	1.0725	-	-	1.0725
+MCNorm	lnN	1.2151	-	-	-
+Fake	lnN	-	-	-	-
+CF	lnN	-	-	-	-

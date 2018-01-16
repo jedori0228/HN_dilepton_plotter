@@ -52,7 +52,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
 
   string elline;
   ifstream in(filepath+"/result.txt");
-  const int n_central = 17;
+  const int n_central = 19;
   double mass[n_central], obs[n_central], limit[n_central], onesig_left[n_central], onesig_right[n_central], twosig_left[n_central], twosig_right[n_central];
 
   vector<int> MassInTchSample = {300, 600, 800, 1000, 1200, 1500};
@@ -246,9 +246,9 @@ void HiggsCombindedLimit_Xsec(int i=0){
   TH1D *dummy = new TH1D("hist", "", 10000, 0., 10000.);
   dummy->Draw("hist");
   hist_axis(dummy);
-  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q}] (pb)");
-  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q}] (pb)");
-  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrowe^{#pm}#mu^{#pm}N#rightarrowe^{#pm}#mu^{#pm}q#bar{q}] (pb)");
+  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q}] (pb)");
+  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q}] (pb)");
+  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}#mu^{#pm}N#rightarrowe^{#pm}#mu^{#pm}q#bar{q}] (pb)");
   dummy->GetXaxis()->SetTitle("m(N) (GeV)");
   dummy->GetXaxis()->SetRangeUser(10., 2000);
   dummy->GetYaxis()->SetTitleSize(0.06); 
@@ -289,11 +289,11 @@ void HiggsCombindedLimit_Xsec(int i=0){
 
   dummy->Draw("hist");
   hist_axis(dummy);
-  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q}] (pb)");
-  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q}] (pb)");
-  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("s.d.#timesBR[pp#rightarrowe^{#pm}#mu^{#pm}N#rightarrowe^{#pm}#mu^{#pm}q#bar{q}] (pb)");
+  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q}] (pb)");
+  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q}] (pb)");
+  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}#mu^{#pm}N#rightarrowe^{#pm}#mu^{#pm}q#bar{q}] (pb)");
   dummy->GetXaxis()->SetTitle("m(N) (GeV)");
-  dummy->GetXaxis()->SetRangeUser(20., 2500);
+  dummy->GetXaxis()->SetRangeUser(10., 2500);
   dummy->GetYaxis()->SetTitleSize(0.06);
   dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
   dummy->SetTitle("");

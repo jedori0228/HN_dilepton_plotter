@@ -5,6 +5,11 @@ TString DoubleToString(double a);
 
 void Draw_FakeRate_Electron(){
 
+
+//LQOUT_Electron_QCDbctoe.root
+//LQOUT_Electron_QCDEMEnriched.root
+//LQOUT_Electron_QCD.root
+
   TString Sample = "Data_v7_5";
   TString Lepton = "Electron";
 
