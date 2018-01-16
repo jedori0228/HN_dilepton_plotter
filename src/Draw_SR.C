@@ -417,9 +417,9 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 60)] = 0.0001;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 70)] = 0.001;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 100)] = 0.01;
-      m.coupling_constants[make_pair(m.histname_suffix.at(i), 300)] = 0.01;
-      m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 0.1;
-      m.coupling_constants[make_pair(m.histname_suffix.at(i), 800)] = 0.1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 300)] = 0.1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 800)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 1200)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -800)] = 0.1;

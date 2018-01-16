@@ -31,12 +31,21 @@ void Draw_SignalDistribution(){
   vector<int> masses = {40, 50, 60, 70, 80};
   vector<Color_t> colors = {kRed, kOrange, kGreen, kBlue, kViolet};
   vector<TString> channels = {"MuMu", "ElEl", "MuEl"};
+  vector<TString> channelsForLatex = {"#mu#mu", "ee", "#mue"};
 
-  vector<TString> regions = {"Low_TwoJet_NoFatJet"};
-  vector<TString> vars = {"m_Leadljj_lljjWclosest", "m_SubLeadljj_lljjWclosest", "m_lljj_lljjWclosest", "leadingLepton_Pt", "PFMET", "m_ll", "secondLepton_Pt", "DeltaRl1l2"};
-
-  vector<TString> regions = {"Low_OneJet_NoFatJet"};
-  vector<TString> vars = {"m_Leadlj", "m_SubLeadlj", "m_llj", "leadingLepton_Pt", "PFMET", "m_ll", "secondLepton_Pt"};
+  vector<TString> regions = {"Preselection"};
+  vector<TString> vars = {
+    "m_jj_lljjWclosest", "m_lljj_lljjWclosest", "m_Leadljj_lljjWclosest", "m_SubLeadljj_lljjWclosest",
+    "m_Leadlj", "m_SubLeadlj", "m_llj",
+    "leadingLepton_Pt", "secondLepton_Pt",
+    "PFMET", "m_ll", "DeltaRl1l2"
+  };
+  vector<TString> xtitles = {
+    "m(jj_{W}) (GeV)",  "m(lljj_{W}) (GeV)", "m(Leading Lepton+jj_{W}) (GeV)", "m(Subleading Lepton+jj_{W}) (GeV)",
+    "m(Leading Lepton+j) (GeV)", "m(Subleading Lepton+j) (GeV)", "m(llj) (GeV)",
+    "Leading Lepton p_{T} (GeV)", "Subleading Lepton p_{T} (GeV)",
+    "#slash{E}_{T}^{miss} (GeV)", "m(ll) (GeV)", "#DeltaR(l_{1},l_{2})",
+  };
 */
 
 
@@ -44,13 +53,14 @@ void Draw_SignalDistribution(){
   //==== High Mass
   //================
 
-  vector<int> masses = {600, 1000, 1500};
-  vector<Color_t> colors = {kRed, kOrange, kBlue};
+
+  vector<int> masses = {300, 600, 800, 1000, 1500};
+  vector<Color_t> colors = {kRed, kOrange, kGreen, kBlue, kViolet};
 
   int n_masses_s = masses.size();
   for(int i=0; i<n_masses_s; i++){
-    masses.push_back( -masses.at(i) );
-    colors.push_back( colors.at(i) );
+    //masses.push_back( -masses.at(i) );
+    //colors.push_back( colors.at(i) );
   }
 
   vector<TString> channels = {"MuMu", "ElEl", "MuEl"};
@@ -61,14 +71,15 @@ void Draw_SignalDistribution(){
     "leadingLepton_Pt", "secondLepton_Pt",
     "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
     "leadingLepton_Eta", "secondLepton_Eta",
-    "m_jj_jjWclosest",
+    "m_jj_jjWclosest", "m_lljj_jjWclosest", "m_Leadljj_jjWclosest", "m_SubLeadljj_jjWclosest",
   };
   vector<TString> xtitles = {
     "Leading Lepton p_{T} (GeV)", "Subleading Lepton p_{T} (GeV)",
     "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
     "Leading Lepton #eta", "Subleading Lepton #eta",
-    "m(jj_{W}) (GeV)",
+    "m(jj_{W}) (GeV)",  "m(lljj_{W}) (GeV)", "m(Leading Lepton+jj_{W}) (GeV)", "m(Subleading Lepton+jj_{W}) (GeV)",
   };
+
 
   for(unsigned int i=0; i<channels.size(); i++){
 
@@ -89,8 +100,8 @@ void Draw_SignalDistribution(){
         double x_min = 0.;
         if(vars.at(l).Contains("leadingLepton_Pt")) x_max = 2000.;
         if(vars.at(l).Contains("m_")){
-          x_max = 3000.;
-          n_rebin = 10;
+          x_max = 2000.;
+          n_rebin = 50;
         }
         if(vars.at(l).Contains("Eta")){
           x_max = 3.;
@@ -98,6 +109,16 @@ void Draw_SignalDistribution(){
         }
         if(vars.at(l)=="m_jj_jjWclosest"){
           x_max = 150.;
+        }
+        if(vars.at(l).Contains("lljjWclosest")){
+          x_max = 500.;
+        }
+        if(vars.at(l)=="m_Leadlj" || vars.at(l)=="m_SubLeadlj" || vars.at(l)=="m_llj" ){
+          x_max = 300.;
+        }
+        if(vars.at(l) == "m_ll"){
+          x_max = 100.;
+          n_rebin = 5.;
         }
 
         if(vars.at(l).Contains("Eta")){
@@ -121,6 +142,10 @@ void Draw_SignalDistribution(){
         TLegend *lg = new TLegend(0.6, 0.5, 0.9, 0.9);
         lg->SetBorderSize(0);
         lg->SetFillStyle(0);
+
+        TLegend *lg2 = new TLegend(0.4, 0.2, 0.7, 0.6);
+        lg2->SetBorderSize(0);
+        lg2->SetFillStyle(0);
 
         for(unsigned j=0; j<masses.size(); j++){
 
@@ -152,6 +177,7 @@ void Draw_SignalDistribution(){
           if(masses.at(j)<0) alias = "Tch";
           alias = alias+" HN"+mass;
           lg->AddEntry(hist, alias, "l");
+          lg2->AddEntry(hist, alias, "l");
 
         }
 
@@ -166,10 +192,12 @@ void Draw_SignalDistribution(){
         TString str_channel = channelsForLatex.at(i);
         TLatex channelname;
         channelname.SetNDC();
-        channelname.SetTextSize(0.05);
-        channelname.DrawLatex(0.8, 0.4, str_channel);
+        channelname.SetTextSize(0.037);
+        channelname.DrawLatex(0.2, 0.88, str_channel);
 
-        lg->Draw();
+
+        if(vars.at(l).Contains("secondLepton_Eta")) lg2->Draw();
+        else lg->Draw();
 
         c1->SaveAs(base_plotpath+"/HN"+channel+"_"+region+"_"+vars.at(l)+".pdf");
         c1->Close();

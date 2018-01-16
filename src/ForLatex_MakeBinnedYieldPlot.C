@@ -173,7 +173,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     vector<double> ref_scale = {0.01, 0.1, 1, 1};
 
     if(WhichRegion.Contains("Low")){
-      masses = {40, 50, 60, 70, 80};
+      masses = {20, 30, 40, 50, 60, 70, 80};
       ref_sigs = {40, 60, 70};
       ref_scale = {0.0001, 0.0001, 0.001};
     }
