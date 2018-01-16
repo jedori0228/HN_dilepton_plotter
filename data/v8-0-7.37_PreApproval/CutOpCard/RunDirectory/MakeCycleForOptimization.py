@@ -2,8 +2,10 @@ import os
 
 channels = ["MuMu", "ElEl", "MuEl"]
 Bins = ["Bin1", "Bin2"]
+Bins = ["Bin2"]
 
 masses = [40, 50, 60, 70, 80, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
+masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
 
 lines_PDFValues = open('PDFSyst.txt').readlines()
 
@@ -121,8 +123,13 @@ void {4}(){{
   vector<TString> bkgs = {{
     "fake_Dijet",
     {8}
+    "TG", "TTG",
     "ZGto2LG", "WGtoLNuG_weighted",
-    "WZTo3LNu_powheg", "ZZTo4L_powheg",
+    "WZTo3LNu_powheg",
+    "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",
+    "WWW", "WWZ", "WZZ", "ZZZ",
+    "ttW", "ttZ", "ttH_nonbb",
+    "WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD",
   }};
   m.AddSamplesToList( bkgs );
 
@@ -147,6 +154,15 @@ void {4}(){{
 }}'''.format(TreeSkim, SkimmedTreeDir, str(mass), CutCardDirName, filename, ch, PDName, Lepch, AddCF, PDFSyst)
 ##              0            1             2            3            4       5  6         7      8       9
 
+
+      outputdir = 'Outputs_Optimization/'+ch+"_"+Bin
+      os.system('mkdir -p '+outputdir)
+      cmd = "root -l -b -q CyclesForOptimization_"+ch+"_"+Bin+"/"+filename+".C &> "+outputdir+"/"+filename+".log &"
+      print cmd
+
+      if counter!=0 and counter%30==0:
+        print "sleep 20"
+      counter = counter+1
 
 
 
