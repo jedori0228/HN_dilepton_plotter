@@ -1,0 +1,11 @@
+secondLepton_Pt > 15.0 15.0 1
+m_lljj_jjWclosest > 120.0 120.0 1
+m_jj_jjWclosest > 50 50 1
+m_jj_jjWclosest < 120 120 1
+m_SubLeadljj_jjWclosest > 50.0 50.0 1
+m_SubLeadljj_jjWclosest < 110.0 110.0 1
+leadingLepton_Pt > 25.0 25.0 1
+MET2ST < 6.0 6.0 1
+Njets < 4 4 1
+leadingJet_lljjWclosest_pt > 25 25 1
+DeltaRSubLeadl_jjWclosest < 3.1 3.1 1

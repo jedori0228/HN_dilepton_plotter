@@ -1,0 +1,7 @@
+secondLepton_Pt > 30.0 30.0 1
+ljj |> 190.0 190.0 1
+ljj |< 235.0 235.0 1
+leadingLepton_Pt > 70.0 70.0 1
+##punzi	4.40305e-06
+##sigeff	0.0106822
+##bkgd	1.20811
