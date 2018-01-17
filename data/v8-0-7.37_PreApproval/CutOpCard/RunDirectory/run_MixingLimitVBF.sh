@@ -9,6 +9,7 @@ root -l -b -q CyclesForMixingLimit_MuMu_Bin2/HNMuMu_600_VBF.C &> Outputs_MixingL
 root -l -b -q CyclesForMixingLimit_MuMu_Bin2/HNMuMu_800_VBF.C &> Outputs_MixingLimit/MuMu_Bin2/HNMuMu_800_VBF.log &
 root -l -b -q CyclesForMixingLimit_MuMu_Bin2/HNMuMu_1000_VBF.C &> Outputs_MixingLimit/MuMu_Bin2/HNMuMu_1000_VBF.log &
 root -l -b -q CyclesForMixingLimit_MuMu_Bin2/HNMuMu_1200_VBF.C &> Outputs_MixingLimit/MuMu_Bin2/HNMuMu_1200_VBF.log &
+sleep 60
 root -l -b -q CyclesForMixingLimit_MuMu_Bin2/HNMuMu_1500_VBF.C &> Outputs_MixingLimit/MuMu_Bin2/HNMuMu_1500_VBF.log &
 root -l -b -q CyclesForMixingLimit_ElEl_Bin1/HNElEl_300_VBF.C &> Outputs_MixingLimit/ElEl_Bin1/HNElEl_300_VBF.log &
 root -l -b -q CyclesForMixingLimit_ElEl_Bin1/HNElEl_600_VBF.C &> Outputs_MixingLimit/ElEl_Bin1/HNElEl_600_VBF.log &
@@ -19,7 +20,7 @@ root -l -b -q CyclesForMixingLimit_ElEl_Bin1/HNElEl_1500_VBF.C &> Outputs_Mixing
 root -l -b -q CyclesForMixingLimit_ElEl_Bin2/HNElEl_300_VBF.C &> Outputs_MixingLimit/ElEl_Bin2/HNElEl_300_VBF.log &
 root -l -b -q CyclesForMixingLimit_ElEl_Bin2/HNElEl_600_VBF.C &> Outputs_MixingLimit/ElEl_Bin2/HNElEl_600_VBF.log &
 root -l -b -q CyclesForMixingLimit_ElEl_Bin2/HNElEl_800_VBF.C &> Outputs_MixingLimit/ElEl_Bin2/HNElEl_800_VBF.log &
-sleep 10
+sleep 60
 root -l -b -q CyclesForMixingLimit_ElEl_Bin2/HNElEl_1000_VBF.C &> Outputs_MixingLimit/ElEl_Bin2/HNElEl_1000_VBF.log &
 root -l -b -q CyclesForMixingLimit_ElEl_Bin2/HNElEl_1200_VBF.C &> Outputs_MixingLimit/ElEl_Bin2/HNElEl_1200_VBF.log &
 root -l -b -q CyclesForMixingLimit_ElEl_Bin2/HNElEl_1500_VBF.C &> Outputs_MixingLimit/ElEl_Bin2/HNElEl_1500_VBF.log &
@@ -30,6 +31,7 @@ root -l -b -q CyclesForMixingLimit_MuEl_Bin1/HNMuEl_1000_VBF.C &> Outputs_Mixing
 root -l -b -q CyclesForMixingLimit_MuEl_Bin1/HNMuEl_1200_VBF.C &> Outputs_MixingLimit/MuEl_Bin1/HNMuEl_1200_VBF.log &
 root -l -b -q CyclesForMixingLimit_MuEl_Bin1/HNMuEl_1500_VBF.C &> Outputs_MixingLimit/MuEl_Bin1/HNMuEl_1500_VBF.log &
 root -l -b -q CyclesForMixingLimit_MuEl_Bin2/HNMuEl_300_VBF.C &> Outputs_MixingLimit/MuEl_Bin2/HNMuEl_300_VBF.log &
+sleep 60
 root -l -b -q CyclesForMixingLimit_MuEl_Bin2/HNMuEl_600_VBF.C &> Outputs_MixingLimit/MuEl_Bin2/HNMuEl_600_VBF.log &
 root -l -b -q CyclesForMixingLimit_MuEl_Bin2/HNMuEl_800_VBF.C &> Outputs_MixingLimit/MuEl_Bin2/HNMuEl_800_VBF.log &
 root -l -b -q CyclesForMixingLimit_MuEl_Bin2/HNMuEl_1000_VBF.C &> Outputs_MixingLimit/MuEl_Bin2/HNMuEl_1000_VBF.log &

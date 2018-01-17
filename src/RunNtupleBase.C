@@ -343,6 +343,8 @@ void RunNtupleBase::Run(){
   }
 
   if(RunSystematic){
+    y_observed = final_data;
+
     fake_bkgs = final_fake;
     fake_bkgs_err = final_fake_err;
     fake_bkgs_syst = final_fake_syst;

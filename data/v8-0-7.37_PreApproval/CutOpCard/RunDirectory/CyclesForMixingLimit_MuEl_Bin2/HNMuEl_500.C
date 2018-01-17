@@ -49,6 +49,7 @@ void HNMuEl_500(){
   //==== Backgrounds
 
   vector<TString> bkgs = {
+    "data",
     "fake_Dijet",
     
     "TG", "TTG",
@@ -96,6 +97,7 @@ void HNMuEl_500(){
   };
 
 
+  double y_observed(0.);
   vector<double> y_total_bkgs, y_fake_bkgs, y_prompt_bkgs, y_cf_bkgs, y_signals;
   vector<TString> reldiff_sources, reldiff_sig_sources;
   vector<double> reldiff_means, reldiff_prompt_means, reldiff_fake_means, reldiff_cf_means, reldiff_sig_means;
@@ -145,6 +147,7 @@ void HNMuEl_500(){
 
       this_syst = "Central";
 
+      y_observed = m.y_observed;
       y_bkg_central = m.total_bkgs;
       y_fake_central = m.fake_bkgs;
       y_prompt_central = m.prompt_bkgs;
@@ -367,6 +370,7 @@ void HNMuEl_500(){
   cout << "- Prompt" << "	" << std::fixed<<std::setprecision(3) << y_prompt_central << endl;
   cout << "- Fake" << "	" << std::fixed<<std::setprecision(3) << y_fake_central << endl;
   cout << "- CF" << "	" << std::fixed<<std::setprecision(3) << y_cf_central << endl;
+  cout << "- Obs" << "	" << y_observed << endl;
 
 
 

@@ -33,16 +33,19 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
   prompt = 0
   fake = 0
   cf = 0
+  obs = 0
 
   for a in range(0,len(lines)):
     if "Total Background" in lines[a]:
       line_prompt = lines[a+1]
       line_fake = lines[a+2]
       line_cf = lines[a+3]
+      line_obs = lines[a+4]
 
       prompt = float( line_prompt.split()[2] )
       fake = float( line_fake.split()[2] )
       cf = float( line_cf.split()[2] )
+      obs = float( lines[a+4].split()[2] )
 
       bkgd = prompt+fake+cf
       break
@@ -67,7 +70,7 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
   out.write("------------\n")
   out.write("# we have just one channel, in which we observe 0 events\n")
   out.write("bin 1\n")
-  out.write("observation "+str(bkgd)+"\n")
+  out.write("observation "+str(obs)+"\n")
   out.write("------------\n")
   out.write("# now we list the expected events for signal and all backgrounds in that bin\n")
   out.write("# the second 'process' line must have a positive number for backgrounds, and 0 for signal\n")

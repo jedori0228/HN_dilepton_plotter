@@ -113,6 +113,7 @@ void {4}(){{
   //==== Backgrounds
 
   vector<TString> bkgs = {{
+    "data",
     "fake_Dijet",
     {8}
     "TG", "TTG",
@@ -160,6 +161,7 @@ void {4}(){{
   }};
 
 
+  double y_observed(0.);
   vector<double> y_total_bkgs, y_fake_bkgs, y_prompt_bkgs, y_cf_bkgs, y_signals;
   vector<TString> reldiff_sources, reldiff_sig_sources;
   vector<double> reldiff_means, reldiff_prompt_means, reldiff_fake_means, reldiff_cf_means, reldiff_sig_means;
@@ -209,6 +211,7 @@ void {4}(){{
 
       this_syst = "Central";
 
+      y_observed = m.y_observed;
       y_bkg_central = m.total_bkgs;
       y_fake_central = m.fake_bkgs;
       y_prompt_central = m.prompt_bkgs;
@@ -431,6 +434,7 @@ void {4}(){{
   cout << "- Prompt" << "\t" << std::fixed<<std::setprecision(3) << y_prompt_central << endl;
   cout << "- Fake" << "\t" << std::fixed<<std::setprecision(3) << y_fake_central << endl;
   cout << "- CF" << "\t" << std::fixed<<std::setprecision(3) << y_cf_central << endl;
+  cout << "- Obs" << "\t" << y_observed << endl;
 
 
 
