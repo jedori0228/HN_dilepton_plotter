@@ -1,0 +1,4 @@
+secondLepton_Pt > 65.0 65.0 1
+ljj |> 375.0 575.0 20
+ljj |< 710.0 510.0 20
+leadingLepton_Pt > 140.0 140.0 1
