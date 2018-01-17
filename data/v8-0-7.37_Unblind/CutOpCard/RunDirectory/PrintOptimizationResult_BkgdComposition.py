@@ -29,15 +29,15 @@ for LowORHigh in range(0,3):
 
       if LowORHigh==0:
         if Bin=="Bin1":
-          print '\multirow{10}{*}{'+channelsForLatex[it_ch]+'} & \multirow{5}{*}{SR1}'
+          print '\multirow{14}{*}{'+channelsForLatex[it_ch]+'} & \multirow{7}{*}{SR1}'
         else:
           print '\cline{2-8}'
-          print ' & \multirow{5}{*}{SR2}'
+          print ' & \multirow{7}{*}{SR2}'
       else:
         print '\multirow{19}{*}{'+channelsForLatex[it_ch]+'}'
 
       ## Low Mass
-      masses = [40, 50, 60, 70, 80]
+      masses = [20, 30, 40, 50, 60, 70, 80]
 
       if LowORHigh != 0:
         masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
@@ -84,11 +84,13 @@ for LowORHigh in range(0,3):
         prompt = 0.
         fake = 0.
         cf = 0.
+        obs = 0
         for a in range(index_systable,len(runlog)):
           if "Total Background" in runlog[a]:
             prompt = StringToFloat( runlog[a+1].split()[2] )
             fake = StringToFloat( runlog[a+2].split()[2] )
             cf = StringToFloat( runlog[a+3].split()[2] )
+            obs = StringToFloat( runlog[a+4].split()[2] )
         total = prompt+fake+cf
 
         out = '$'+str(mass)+'$ & '
@@ -96,7 +98,7 @@ for LowORHigh in range(0,3):
         out = out + MakeYield(fake,fake*(0.01*fake_stat),fake*(0.01*fake_syst))+' & '
         out = out + MakeYield(cf,cf*(0.01*cf_stat),cf*(0.01*cf_syst))+' & '
         out = out + MakeYield(total,total*(0.01*total_stat),total*(0.01*total_syst))+' & '
-        out = out + 'BLIND \\\\'
+        out = out + '$'+str(int(obs))+'$ \\\\'
 
         if LowORHigh==0:
           if counter==0:

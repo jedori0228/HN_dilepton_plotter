@@ -127,6 +127,7 @@ for ch in channels:
 
         runlog = open(logname).readlines()
         bkgd = runlog[len(runlog)-2].split()[0]
+        obs = str(int(float(runlog[len(runlog)-6].split()[2])))
        
         float_eff = float(runlog[len(runlog)-3].split()[2])
         eff_S = str(float_eff*1.)
@@ -135,10 +136,10 @@ for ch in channels:
           lines_T = open('Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'_VBFOnly.log').readlines()
           float_eff_T = float(lines_T[len(lines_T)-3].split()[2])
           eff_T = str(2*float_eff_T*1.) ## 2 is because it's OS+SS
-          print bkgd+'\t'+eff_S+"\t"+eff_T
+          print bkgd+'\t'+obs+'\t'+eff_S+"\t"+eff_T
 
         else:
-          print bkgd+'\t'+eff_S
+          print bkgd+'\t'+obs+'\t'+eff_S
 
 
 
