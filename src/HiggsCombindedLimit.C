@@ -2,7 +2,7 @@
 
 void HiggsCombindedLimit(int i=0){
 
-  bool DrawObserved = false;
+  bool DrawObserved = true;
 
   gStyle->SetOptStat(0);
 
