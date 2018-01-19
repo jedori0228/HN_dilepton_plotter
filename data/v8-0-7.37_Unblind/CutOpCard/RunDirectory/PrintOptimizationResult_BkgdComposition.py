@@ -7,8 +7,8 @@ def StringToFloat(a):
     return 0.
   return float(a)
 
-def MakeYield(a,b,c):
-  out = '$'+str(round(a,1))+' \\pm '+str(round(b,1))+' \\pm '+str(round(c,1))+'$'
+def MakeYield(a,b,c,nround):
+  out = '$'+str(round(a,nround))+' \\pm '+str(round(b,nround))+' \\pm '+str(round(c,nround))+'$'
   return out
 
 channels = ["MuMu", "ElEl", "MuEl"]
@@ -93,11 +93,18 @@ for LowORHigh in range(0,3):
             obs = StringToFloat( runlog[a+4].split()[2] )
         total = prompt+fake+cf
 
+        nround = 1
+        if LowORHigh!=0:
+          nround = 3
+
         out = '$'+str(mass)+'$ & '
-        out = out + MakeYield(prompt,prompt*(0.01*prompt_stat),prompt*(0.01*prompt_syst))+' & '
-        out = out + MakeYield(fake,fake*(0.01*fake_stat),fake*(0.01*fake_syst))+' & '
-        out = out + MakeYield(cf,cf*(0.01*cf_stat),cf*(0.01*cf_syst))+' & '
-        out = out + MakeYield(total,total*(0.01*total_stat),total*(0.01*total_syst))+' & '
+        out = out + MakeYield(prompt,prompt*(0.01*prompt_stat),prompt*(0.01*prompt_syst),nround)+' & '
+        out = out + MakeYield(fake,fake*(0.01*fake_stat),fake*(0.01*fake_syst),nround)+' & '
+        if ch=="ElEl":
+          out = out + MakeYield(cf,cf*(0.01*cf_stat),cf*(0.01*cf_syst),nround)+' & '
+        else:
+          out = out + "-- & "
+        out = out + MakeYield(total,total*(0.01*total_stat),total*(0.01*total_syst),nround)+' & '
         out = out + '$'+str(int(obs))+'$ \\\\'
 
         if LowORHigh==0:
