@@ -66,7 +66,7 @@ for ch in channels:
             if "<" in words[1]:
               print line
               print '->'
-              line = words[0]+'\t'+str(mins[a+1])+'\t'+str(mins[a+1])+'\t1'
+              line = words[0]+'\t'+words[1]+'\t'+str(mins[a+1])+'\t'+str(mins[a+1])+'\t1'
               print line
 
           newout1.write(line+'\n')
@@ -83,7 +83,7 @@ for ch in channels:
             if ">" in words[1]:
               print line
               print '->'
-              line = words[0]+'\t'+str(maxs[a])+'\t'+str(maxs[a])+'\t1'
+              line = words[0]+'\t'+words[1]+'\t'+str(maxs[a])+'\t'+str(maxs[a])+'\t1'
               print line
 
           newout2.write(line+'\n')
