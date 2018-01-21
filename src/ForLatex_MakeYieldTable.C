@@ -56,6 +56,7 @@ void ForLatex_MakeYieldTable(){
     {"TG", "TTG", "ZGto2LG", "WGtoLNuG_weighted",},
     {"chargeflip",},
     {"fake_Dijet",},
+    {"data"},
   };
   int index_ENDMC = 4;
   vector<TString> bkgdtypes = {
@@ -131,6 +132,7 @@ void ForLatex_MakeYieldTable(){
     vector<double> MC_yield = {0., 0., 0.};
     vector<double> MC_stat = {0., 0., 0.};
     vector<double> MC_syst = {0., 0., 0.}; //SAME AS # of CHANNEL
+    vector<double> Data_yield = {0., 0., 0.};
     vector<double> Total_yield = {0., 0., 0.};
     vector<double> Total_stat = {0., 0., 0.};
     vector<double> Total_syst = {0., 0., 0.}; //SAME AS # of CHANNEL
@@ -143,6 +145,7 @@ void ForLatex_MakeYieldTable(){
       bool isCF = false;
       bool isFake = false;
       bool isSignal = false;
+      bool isData = false;
 
       if(it_bkg < n_bkglist){
         bkglist = bkglists.at(it_bkg);
@@ -150,6 +153,7 @@ void ForLatex_MakeYieldTable(){
         for(int a=0;a<bkglist.size();a++){
           if(bkglist.at(a).Contains("chargeflip")) isCF = true;
           if(bkglist.at(a).Contains("fake")) isFake = true;
+          if(bkglist.at(a).Contains("data")) isData = true;
         }
         bool isMC = !isCF && !isFake;
 
@@ -157,7 +161,9 @@ void ForLatex_MakeYieldTable(){
           cout << "{\\bf Data-driven background estimate:} & & & \\\\" << endl;
         }
 
-        cout << bkgdtypes.at(it_bkg);
+        if(!isData){
+          cout << bkgdtypes.at(it_bkg);
+        }
       }
       else{
         isSignal = true;
@@ -219,7 +225,9 @@ void ForLatex_MakeYieldTable(){
         double reldiff_up, reldiff_down;
         double reldiff_sig_up, reldiff_sig_down;
 
-        for(unsigned int i=0; i<systs.size(); i++){
+        int n_syst = systs.size();
+        if(isData) n_syst=1;
+        for(unsigned int i=0; i<n_syst; i++){
 
           TString this_syst = systs.at(i);
 
@@ -299,8 +307,11 @@ void ForLatex_MakeYieldTable(){
               SystError += m.pdfsyst.Syst_Pdf_Total*m.pdfsyst.Syst_Pdf_Total*Yield*Yield;
             }
 
+            if(isData){
+              Data_yield.at(it_channel) = m.y_observed;
+            }
 
-          }
+          } // END IF Central Syst
 
           double reldiff = (m.total_bkgs-Yield)/Yield;
 
@@ -320,10 +331,12 @@ void ForLatex_MakeYieldTable(){
 
             }
 
-          } // Not Central, add systematics
+          } // END IF Not Central, add systematics
 
 
         } // END Loop Syst sources
+
+        if(isData) continue;
 
         for(unsigned int i=0; i<reldiff_means.size(); i++){
 
@@ -355,6 +368,8 @@ void ForLatex_MakeYieldTable(){
 
       } // END Loop mm ee em
 
+      if(isData) continue;
+
       cout << " \\\\" << endl;
 
       if(it_bkg==index_ENDMC){
@@ -367,7 +382,7 @@ void ForLatex_MakeYieldTable(){
         cout << "\\hline" << endl;
       }
 
-      if(it_bkg==bkglists.size()-1){
+      if(it_bkg==bkglists.size()-2){ // -1 is Data
         cout << "\\hline" << endl;
         cout << "Total background ";
         for(int i=0; i<channels.size(); i++){
@@ -386,7 +401,7 @@ void ForLatex_MakeYieldTable(){
 
     //==== Data
     cout << "\\hline" << endl;
-    cout << "Observed in data (36.5 fb$^{-1}$) & $XX$  & $XX$ & $YY$ \\\\" << endl;
+	  cout << "Observed in data (36.5 fb$^{-1}$) & $"<< int(Data_yield.at(0)) <<"$  & $"<< int(Data_yield.at(1)) <<"$ & $"<< int(Data_yield.at(2)) <<"$ \\\\" << endl;
     cout << "\\hline" << endl;
     cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl;
     cout << "      \\end{tabular}" << endl;

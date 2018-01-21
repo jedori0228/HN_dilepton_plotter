@@ -7,6 +7,7 @@ void RunNtupleForBinnedYieldPlot::Run(){
   //========================
 
   vector<CutInfo> OptimizedCutInfo;
+  double final_data(0.);
   double final_cf(0.), final_cf_err(0.), final_cf_syst(0.), final_cf_stat(0.);
   double final_fake(0.), final_fake_err(0.), final_fake_syst(0.), final_fake_stat(0.);
   double final_prompt(0.), final_prompt_err(0.), final_prompt_syst(0.), final_prompt_stat(0.);
@@ -314,12 +315,15 @@ void RunNtupleForBinnedYieldPlot::Run(){
       final_prompt_syst = prompt_weighted_yield_syst_MCSF;
       final_prompt_stat = prompt_weighted_yield_stat;
 
+      final_data = data_unweighted_yield;
+
     }
 
     cutrangeinfo.Next();
 
   } //END CutRangeInfo loop
 
+  y_observed = final_data;
 
   fake_bkgs = final_fake;
   fake_bkgs_err = final_fake_err;

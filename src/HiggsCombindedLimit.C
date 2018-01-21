@@ -46,11 +46,11 @@ void HiggsCombindedLimit(int i=0){
   latex_Lumi.SetNDC();
   latex_title.SetNDC();
 
-  //=== 13 TeV S+T channel
+  //=== 13 TeV S-only channel
 
   string elline;
   ifstream in(filepath+"/result.txt");
-  int n_central = 19;
+  int n_central = 26; //FIXME 26
   double mass[n_central], obs[n_central], limit[n_central], onesig_left[n_central], onesig_right[n_central], twosig_left[n_central], twosig_right[n_central];
 
   int dummyint=0;
@@ -71,6 +71,10 @@ void HiggsCombindedLimit(int i=0){
     else if(mass[dummyint]<=300) scale *= 1.;
     else if(mass[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
+
+    //if(mass[dummyint]==70) continue; //FIXME
+    //if(mass[dummyint]==90) continue; //FIXME
+    //if(mass[dummyint]==80) scale /= 4.45; //FIXME
 
     if(channel=="MuEl") scale *= 0.5;
 
@@ -109,58 +113,70 @@ void HiggsCombindedLimit(int i=0){
   gr_band_2sigma->SetMarkerColor(kYellow);
 
 
-  //==== 13 TeV S channel only
+  //==== 13 TeV T added
 
-  string elline_SOnly;
-  ifstream in_SOnly(filepath+"/result_SOnly.txt");
+  string elline_SandT;
+  ifstream in_SandT(filepath+"/result_VBF.txt");
 
-  const int n_SOnly = 13;
-  double mass_SOnly[n_SOnly], obs_SOnly[n_SOnly], limit_SOnly[n_SOnly], onesig_left_SOnly[n_SOnly], onesig_right_SOnly[n_SOnly], twosig_left_SOnly[n_SOnly], twosig_right_SOnly[n_SOnly];
+  const int n_SandT = 6;
+  double mass_SandT[n_SandT], obs_SandT[n_SandT], limit_SandT[n_SandT], onesig_left_SandT[n_SandT], onesig_right_SandT[n_SandT], twosig_left_SandT[n_SandT], twosig_right_SandT[n_SandT];
   dummyint=0;
 
-  while(getline(in_SOnly,elline_SOnly)){
-    std::istringstream is( elline_SOnly );
+  while(getline(in_SandT,elline_SandT)){
+    std::istringstream is( elline_SandT );
 
-    is >> mass_SOnly[dummyint];
-    is >> obs_SOnly[dummyint];
-    is >> limit_SOnly[dummyint];
-    is >> onesig_left_SOnly[dummyint];
-    is >> onesig_right_SOnly[dummyint];
-    is >> twosig_left_SOnly[dummyint];
-    is >> twosig_right_SOnly[dummyint];
+    is >> mass_SandT[dummyint];
+    is >> obs_SandT[dummyint];
+    is >> limit_SandT[dummyint];
+    is >> onesig_left_SandT[dummyint];
+    is >> onesig_right_SandT[dummyint];
+    is >> twosig_left_SandT[dummyint];
+    is >> twosig_right_SandT[dummyint];
 
     double scale=0.01; //mixing squared is 0.01 now
-    if(mass_SOnly[dummyint]<=60) scale *= 0.01;
-    else if(mass_SOnly[dummyint]<=100) scale *= 0.1;
-    else if(mass_SOnly[dummyint]<=300) scale *= 1.;
-    else if(mass_SOnly[dummyint]<=700) scale *= 10.;
+    if(mass_SandT[dummyint]<=60) scale *= 0.01;
+    else if(mass_SandT[dummyint]<=100) scale *= 0.1;
+    else if(mass_SandT[dummyint]<=300) scale *= 1.;
+    else if(mass_SandT[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
+
+    //if(mass[dummyint]==80) scale /= 4.45; //FIXME
 
     if(channel=="MuEl") scale *= 0.5;
 
-    obs_SOnly[dummyint] *= scale;
-    limit_SOnly[dummyint] *= scale;
-    onesig_left_SOnly[dummyint] *= scale;
-    onesig_right_SOnly[dummyint] *= scale;
-    twosig_left_SOnly[dummyint] *= scale;
-    twosig_right_SOnly[dummyint] *= scale;
+    obs_SandT[dummyint] *= scale;
+    limit_SandT[dummyint] *= scale;
+    onesig_left_SandT[dummyint] *= scale;
+    onesig_right_SandT[dummyint] *= scale;
+    twosig_left_SandT[dummyint] *= scale;
+    twosig_right_SandT[dummyint] *= scale;
 
-    onesig_left_SOnly[dummyint] = limit_SOnly[dummyint]-onesig_left_SOnly[dummyint];
-    onesig_right_SOnly[dummyint] = onesig_right_SOnly[dummyint] - limit_SOnly[dummyint];
-    twosig_left_SOnly[dummyint] = limit_SOnly[dummyint]-twosig_left_SOnly[dummyint];
-    twosig_right_SOnly[dummyint] = twosig_right_SOnly[dummyint] - limit_SOnly[dummyint];
+    onesig_left_SandT[dummyint] = limit_SandT[dummyint]-onesig_left_SandT[dummyint];
+    onesig_right_SandT[dummyint] = onesig_right_SandT[dummyint] - limit_SandT[dummyint];
+    twosig_left_SandT[dummyint] = limit_SandT[dummyint]-twosig_left_SandT[dummyint];
+    twosig_right_SandT[dummyint] = twosig_right_SandT[dummyint] - limit_SandT[dummyint];
 
     dummyint++;
   }
 
-  TGraph *gr_13TeV_obs_SOnly = new TGraph(n_SOnly,mass_SOnly,obs_SOnly);
-  gr_13TeV_obs_SOnly->SetLineWidth(3);
-  gr_13TeV_obs_SOnly->SetLineColor(kBlack);
+  TGraph *gr_13TeV_obs_SandT = new TGraph(n_SandT,mass_SandT,obs_SandT);
+  gr_13TeV_obs_SandT->SetLineWidth(3);
+  gr_13TeV_obs_SandT->SetLineColor(kBlack);
 
-  TGraph *gr_13TeV_exp_SOnly = new TGraph(n_SOnly,mass_SOnly,limit_SOnly);
-  gr_13TeV_exp_SOnly->SetLineWidth(3);
-  gr_13TeV_exp_SOnly->SetLineStyle(1);
-  gr_13TeV_exp_SOnly->SetLineColor(kBlue);
+  TGraph *gr_13TeV_exp_SandT = new TGraph(n_SandT,mass_SandT,limit_SandT);
+  gr_13TeV_exp_SandT->SetLineColor(kBlack);
+  gr_13TeV_exp_SandT->SetLineWidth(3);
+  gr_13TeV_exp_SandT->SetLineStyle(2);
+
+  TGraphAsymmErrors *gr_band_1sigma_SandT = new TGraphAsymmErrors(n_SandT, mass_SandT, limit_SandT, 0, 0, onesig_left_SandT, onesig_right_SandT);
+  gr_band_1sigma_SandT->SetFillColor(kGreen);
+  gr_band_1sigma_SandT->SetLineColor(kGreen);
+  gr_band_1sigma_SandT->SetMarkerColor(kGreen);
+
+  TGraphAsymmErrors *gr_band_2sigma_SandT = new TGraphAsymmErrors(n_SandT, mass_SandT, limit_SandT, 0, 0, twosig_left_SandT, twosig_right_SandT);
+  gr_band_2sigma_SandT->SetFillColor(kYellow);
+  gr_band_2sigma_SandT->SetLineColor(kYellow);
+  gr_band_2sigma_SandT->SetMarkerColor(kYellow);
 
   //==== 8 TeV overlay
 
@@ -335,13 +351,36 @@ void HiggsCombindedLimit(int i=0){
 //=======================================
 
   const int n_mass_trilep = 27;
-  double mass_trilep[n_mass_trilep] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 20, 30, 40, 50, 60, 80, 100, 130, 150, 200, 400, 600, 800, 1000, 1200};
+  double mass_trilep[n_mass_trilep] = {
+    1, 2, 3, 4, 5,
+    6, 7, 8, 9, 10,
+    11, 12, 20, 30, 40, 50, 60,
+    80,
+    100, 130, 150, 200, 400,
+    600, 800, 1000, 1200
+  };
   vector<double> tmpvec_obs_trilep = {
-    0.0163432, 0.00188519, 0.000596955, 0.000282105, 0.000150402, 0.000104186, 6.77325E-05, 4.99932E-05, 3.53255E-05, 3.13575E-05, 2.48346E-05, 2.14113E-05, 1.48891E-05, 1.77713E-05, 1.88793E-05, 1.88341E-05, 2.7883E-05, 0.000333583, 0.00452962, 0.0074026, 0.00826272, 0.00848118, 0.0303979, 0.0835546, 0.2063, 0.440587, 0.846273
+    0.0163432, 0.00188519, 0.000596955, 0.000282105, 0.000150402,
+    0.000104186, 6.77325E-05, 4.99932E-05, 3.53255E-05, 3.13575E-05,
+    2.48346E-05, 2.14113E-05, 1.48891E-05, 1.77713E-05, 1.88793E-05, 1.88341E-05, 2.7883E-05,
+
+    0.000333583, //FIXME
+    //0.00148444, //scaled FIXME
+
+    0.00452962, 0.0074026, 0.00826272, 0.00848118, 0.0303979,
+    0.0835546, 0.2063, 0.440587, 0.846273
   };
   if(channel=="ElEl"){
     tmpvec_obs_trilep = {
-0.0135784, 0.00151879, 0.000447416, 0.000223742, 0.00011303, 7.23346E-05, 5.10346E-05, 3.77547E-05, 2.72229E-05, 2.33201E-05, 1.8688E-05, 1.75216E-05, 1.20661E-05, 1.60735E-05, 2.19737E-05, 3.32274E-05, 6.70456E-05, 0.00076608, 0.00662448, 0.010974, 0.014264, 0.0135633, 0.0523753, 0.167425, 0.428148, 0.949388, 1.83977
+      0.0135784, 0.00151879, 0.000447416, 0.000223742, 0.00011303,
+      7.23346E-05, 5.10346E-05, 3.77547E-05, 2.72229E-05, 2.33201E-05,
+      1.8688E-05, 1.75216E-05, 1.20661E-05, 1.60735E-05, 2.19737E-05, 3.32274E-05, 6.70456E-05,
+
+      0.00076608, //FIXME
+      //0.00340906, //scaled FIXME
+
+      0.00662448, 0.010974, 0.014264, 0.0135633, 0.0523753,
+      0.167425, 0.428148, 0.949388, 1.83977
     };
   }
   double obs_trilep[n_mass_trilep];
@@ -353,123 +392,56 @@ void HiggsCombindedLimit(int i=0){
 
 //=======================================
 
-  //=== Legend
-  TLegend *lg = new TLegend(0.50, 0.15, 0.95, 0.45);
-  TLegend *lg_log = new TLegend(0.20, 0.55, 0.65, 0.98);
 
-  if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
-  lg->AddEntry(gr_13TeV_exp_SOnly, "CL_{s} Expected, s-ch only", "l");
-  lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected", "l");
+
+
+  //======================
+  //==== S-ch only limit
+  //======================
+
+  //=== Legend
+  TLegend *lg = new TLegend(0.50, 0.15, 0.90, 0.45);
+  lg->SetBorderSize(0);
+  lg->SetFillStyle(0);
+
+  if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed, s-ch only", "l");
+  lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected, s-ch only", "l");
   lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
   lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
-  lg->AddEntry(gr_8TeV_exp, "CMS 8 TeV Observed", "l");
+  lg->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
   if(channel!="MuEl"){
     lg->AddEntry(gr_L3Limit, "L3", "l");
     lg->AddEntry(gr_DELPHILimit, "DELPHI", "l");
     lg->AddEntry(gr_trilepLimit, "CMS 13TeV Trilepton", "l");
   }
 
-  if(DrawObserved) lg_log->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
-  lg_log->AddEntry(gr_13TeV_exp_SOnly, "CL_{s} Expected, s-ch only", "l");
-  lg_log->AddEntry(gr_13TeV_exp,"CL_{s} Expected", "l");
-  lg_log->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
-  lg_log->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
-  lg_log->AddEntry(gr_8TeV_exp, "CMS 8 TeV Observed", "l");
-  if(channel!="MuEl"){
-    lg_log->AddEntry(gr_L3Limit, "L3", "l");
-    lg_log->AddEntry(gr_DELPHILimit, "DELPHI", "l");
-    lg_log->AddEntry(gr_trilepLimit, "CMS 13TeV Trilepton", "l");
-  }
-
-
-  //==== Linear Axis
-
-  TCanvas *c_out = new TCanvas("c_out", "", 800, 800);
-  canvas_margin(c_out);
-  c_out->cd();
-  c_out->Draw();
-  c_out->SetLogy();
+  TCanvas *c_SOnly = new TCanvas("c_SOnly", "", 800, 800);
+  canvas_margin(c_SOnly);
+  c_SOnly->cd();
+  c_SOnly->Draw();
+  c_SOnly->SetLogy();
 
   TH1D *dummy = new TH1D("hist", "", 10000, 0., 10000.);
   dummy->Draw("hist");
   hist_axis(dummy);
-  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("|V_{eN}|^{2}");
-  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
-  if(channel=="MuEl"){
-    dummy->GetYaxis()->SetTitle("#frac{|V_{eN}V_{#muN}^{*}|}{|V_{eN}|^{2}+|V_{#muN}|^{2}}");
-  }
-  dummy->GetXaxis()->SetTitle("m_{N} (GeV)");
-  dummy->GetXaxis()->SetRangeUser(10., 2000);
   dummy->GetYaxis()->SetTitleSize(0.06);
+  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("#||{V_{eN}}^{2}");
+  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("#||{V_{#muN}}^{2}");
   if(channel=="MuEl"){
+    dummy->GetYaxis()->SetTitle("#frac{#||{ V_{eN}V_{#muN}^{*}}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}");
     dummy->GetYaxis()->SetTitleOffset(2.1);
     dummy->GetYaxis()->SetTitleSize(0.03);
-  }
-  dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
-  dummy->SetTitle("");
-
-  gr_band_2sigma->Draw("3same");
-  gr_band_1sigma->Draw("3same");
-  gr_13TeV_exp->Draw("lsame");
-  gr_8TeV_exp->Draw("lsame");
-  if(DrawObserved) gr_13TeV_obs->Draw("lsame");
-  gr_13TeV_exp_SOnly->Draw("lsame");
-  if(channel!="MuEl"){
-    gr_L3Limit->Draw("lsame");
-    gr_DELPHILimit->Draw("lsame");
-    gr_trilepLimit->Draw("lsame");
-  }
-
-
-  lg->SetX2NDC(0.90);
-  lg->SetY2NDC(0.67);
-  lg->SetBorderSize(0);
-  lg->SetFillStyle(0);
-  lg->Draw();
-
-  latex_CMSPriliminary.SetTextSize(0.035);
-  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
-  latex_Lumi.SetTextSize(0.035);
-  latex_Lumi.DrawLatex(0.3, 0.96, "35.9 fb^{-1} (13 TeV)");
-  latex_title.SetTextSize(0.04);
-  latex_title.SetLineWidth(2);
-  latex_title.DrawLatex(0.20, 0.90, "#font[41]{95% CL upper limit}");
-
-  c_out->SaveAs(plotpath+"/"+channel+"_13TeV_mixing.pdf");
-  c_out->SaveAs(plotpath+"/"+channel+"_13TeV_mixing.png");
-  c_out->Close();
-
-  //==== logX
-  TCanvas *c_out_logx = new TCanvas("c_out_logx", "", 800, 800);
-  canvas_margin(c_out_logx);
-  c_out_logx->cd();
-  c_out_logx->Draw();
-  c_out_logx->SetLogy();
-  //c_out_logx->SetGridx();
-  //c_out_logx->SetGridy();
-
-  dummy->Draw("hist");
-  hist_axis(dummy);
-  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("|V_{eN}|^{2}");
-  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("|V_{#muN}|^{2}");
-  if(channel=="MuEl"){
-    dummy->GetYaxis()->SetTitle("#frac{|V_{eN}V_{#muN}^{*}|}{|V_{eN}|^{2}+|V_{#muN}|^{2}}");
   }
   dummy->GetXaxis()->SetTitle("m_{N} (GeV)");
   dummy->GetXaxis()->SetRangeUser(10., 2500);
-  dummy->GetYaxis()->SetTitleSize(0.06);
-  if(channel=="MuEl"){
-    dummy->GetYaxis()->SetTitleOffset(2.1);
-    dummy->GetYaxis()->SetTitleSize(0.03);
-  }
   dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
   dummy->SetTitle("");
+  dummy->Draw("hist");
 
   gr_band_2sigma->Draw("3same");
   gr_band_1sigma->Draw("3same");
   gr_13TeV_exp->Draw("lsame");
   gr_8TeV_exp->Draw("lsame");
-  gr_13TeV_exp_SOnly->Draw("lsame");
   if(channel!="MuEl"){
     gr_L3Limit->Draw("lsame");
     gr_DELPHILimit->Draw("lsame");
@@ -477,11 +449,6 @@ void HiggsCombindedLimit(int i=0){
   }
   if(DrawObserved) gr_13TeV_obs->Draw("lsame");
 
-  lg_log->SetX2NDC(0.90);
-  lg_log->SetY2NDC(0.67);
-  lg_log->SetBorderSize(0);
-  lg_log->SetFillStyle(0);
-  //lg_log->Draw();
   lg->Draw();
 
   latex_CMSPriliminary.SetTextSize(0.035);
@@ -492,11 +459,66 @@ void HiggsCombindedLimit(int i=0){
   latex_title.SetLineWidth(2);
   latex_title.DrawLatex(0.20, 0.90, "#font[41]{95% CL upper limit}");
 
-  c_out_logx->SetLogx();
-  c_out_logx->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.pdf");
-  c_out_logx->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.png");
+  c_SOnly->SetLogx();
+  c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.pdf");
+  c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.png");
 
-  c_out_logx->Close();
+  c_SOnly->Close();
+
+  //======================
+  //==== S+T limit
+  //======================
+
+  //=== Legend
+  TLegend * lg_SandT = new TLegend(0.50, 0.15, 0.90, 0.45);
+  lg_SandT->SetBorderSize(0);
+  lg_SandT->SetFillStyle(0);
+
+  if(DrawObserved) lg_SandT->AddEntry(gr_13TeV_obs_SandT,"CL_{s} Observed, s- and t-ch", "l");
+  lg_SandT->AddEntry(gr_13TeV_exp_SandT,"CL_{s} Expected, s- and t-ch", "l");
+  lg_SandT->AddEntry(gr_band_1sigma_SandT,"CL_{s} Expected #pm 1 s.d., s- and t-ch", "f");
+  lg_SandT->AddEntry(gr_band_2sigma_SandT,"CL_{s} Expected #pm 2 s.d., s- and t-ch", "f");
+  lg_SandT->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+  if(channel!="MuEl"){
+    lg_SandT->AddEntry(gr_L3Limit, "L3", "l");
+    lg_SandT->AddEntry(gr_DELPHILimit, "DELPHI", "l");
+    lg_SandT->AddEntry(gr_trilepLimit, "CMS 13TeV Trilepton", "l");
+  }
+
+  TCanvas *c_SandT = new TCanvas("c_SandT", "", 800, 800);
+  canvas_margin(c_SandT);
+  c_SandT->cd();
+  c_SandT->Draw();
+  c_SandT->SetLogy();
+
+  dummy->Draw("hist");
+
+  gr_band_2sigma_SandT->Draw("3same");
+  gr_band_1sigma_SandT->Draw("3same");
+  gr_13TeV_exp_SandT->Draw("lsame");
+  gr_8TeV_exp->Draw("lsame");
+  if(channel!="MuEl"){
+    gr_L3Limit->Draw("lsame");
+    gr_DELPHILimit->Draw("lsame");
+    gr_trilepLimit->Draw("lsame");
+  }
+  if(DrawObserved) gr_13TeV_obs_SandT->Draw("lsame");
+
+  lg_SandT->Draw();
+
+  latex_CMSPriliminary.SetTextSize(0.035);
+  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+  latex_Lumi.SetTextSize(0.035);
+  latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+  latex_title.SetTextSize(0.04);
+  latex_title.SetLineWidth(2);
+  latex_title.DrawLatex(0.20, 0.90, "#font[41]{95% CL upper limit}");
+
+  c_SandT->SetLogx();
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT.pdf");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT.png");
+
+  c_SandT->Close();
 
 
   //==== Ratio 8 TeV vs 13 TeV
@@ -517,15 +539,15 @@ void HiggsCombindedLimit(int i=0){
   vector<double> additional = {350, 400, 500};
   for(int a=0; a<additional.size(); a++){
 
-    for(int i=0; i<n_SOnly; i++){
+    for(int i=0; i<n_SandT; i++){
 
-      if(additional.at(a)!=mass_SOnly[i]) continue;
+      if(additional.at(a)!=mass_SandT[i]) continue;
 
       for(int j=0; j<nm; j++){
-        if(mass_SOnly[i]==mass_8TeV[j]){
-          vec_mass_8and13.push_back(mass_SOnly[i]);
-          vec_limit_8and13ratio.push_back(exp_8TeV[j]/limit_SOnly[i]);
-          cout << i << "\t" << mass_SOnly[i] << "\t" << exp_8TeV[j] << "\t" << limit_SOnly[i] << " => " << exp_8TeV[j]/limit_SOnly[i] << endl;
+        if(mass_SandT[i]==mass_8TeV[j]){
+          vec_mass_8and13.push_back(mass_SandT[i]);
+          vec_limit_8and13ratio.push_back(exp_8TeV[j]/limit_SandT[i]);
+          cout << i << "\t" << mass_SandT[i] << "\t" << exp_8TeV[j] << "\t" << limit_SandT[i] << " => " << exp_8TeV[j]/limit_SandT[i] << endl;
         }
       }
     }

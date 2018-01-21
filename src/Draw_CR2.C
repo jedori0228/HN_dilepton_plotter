@@ -84,12 +84,12 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["tgamma"] = make_pair("top + #gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
-  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Charge-flip", kYellow);
+  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. Lepton Background", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. Lepton Background", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. Lepton Background", 870);
+  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. Lepton Background", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. Lepton Background", 870);
+  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. Charge Background", kYellow);
   
   //===============================
   //==== set and make sample list

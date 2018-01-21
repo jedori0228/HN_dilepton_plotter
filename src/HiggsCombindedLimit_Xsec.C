@@ -5,7 +5,7 @@ double GetXsecST(int mass);
 
 void HiggsCombindedLimit_Xsec(int i=0){
 
-  bool DrawObserved = false;
+  bool DrawObserved = true;
 
   gStyle->SetOptStat(0);
 

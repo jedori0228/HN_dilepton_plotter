@@ -70,7 +70,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
   vector<TString> samples_to_use = {"WW_double", "top", "VVV", "VV_excl", "fake_Dijet", "Xgamma"};
   if(channel=="ElEl") samples_to_use = {"WW_double", "top", "VVV", "VV_excl", "fake_Dijet", "Xgamma", "chargeflip"};
 
-  TLegend *lg = new TLegend(0.60, 0.60, 0.93, 0.94);
+  TLegend *lg = new TLegend(0.60, 0.50, 0.96, 0.92);
   lg->SetBorderSize(0);
   lg->SetFillStyle(0);
   //==== error bar
@@ -86,7 +86,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
   histtmpdata->SetMarkerSize(1.6);
   histtmpdata->SetMarkerColor(kBlack);
   histtmpdata->SetLineColor(kBlack);
-  lg->AddEntry(histtmpdata, "Total Background", "ple");
+  lg->AddEntry(histtmpdata, "Data", "ple");
   
   for(int i=samples_to_use.size()-1; i>=0; i--){
     TH1D *histtmp = new TH1D(samples_to_use.at(i), "", 1, 0., 1.);
@@ -103,6 +103,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
                    map_sample_string_to_list[samples_to_use.at(i)].end()
                    );
   }
+  bkglist.push_back("data");
   cout << "We will use :" << endl;
   for(unsigned int i=0; i<bkglist.size(); i++) cout << " " << bkglist[i] << endl;
 
@@ -170,16 +171,17 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     vector<int> masses = {90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500};
     vector<int> ref_sigs = {100, 500, 1000, 1500};
     vector<Color_t> ref_sigs_style = {1,3,5,7};
-    vector<double> ref_scale = {0.01, 0.1, 1, 1};
+    vector<double> ref_scale = {0.001, 0.1, 1, 1};
 
     if(WhichRegion.Contains("Low")){
       masses = {20, 30, 40, 50, 60, 70, 80};
       ref_sigs = {40, 60, 70};
-      ref_scale = {0.0001, 0.0001, 0.001};
+      ref_scale = {0.00001, 0.00001, 0.001};
     }
 
     const int N_mass = masses.size();
     TH1D *hist_bkgd = new TH1D("hist_bkgd", "", N_mass, 0., 1.*N_mass);
+    TH1D *hist_obs = new TH1D("hist_obs", "", N_mass, 0., 1.*N_mass);
 
     THStack *stack_bkgd = new THStack("stack_bkgd", "");
 
@@ -280,15 +282,29 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
       hist_bkgd->SetBinContent(it_mass+1, m.total_bkgs);
       hist_bkgd->SetBinError(it_mass+1, m.total_bkgs_err);
 
+      hist_obs->SetBinContent(it_mass+1, m.y_observed);
+      hist_obs->SetBinError(it_mass+1, sqrt(m.y_observed));
+
       for(unsigned int i=0; i<ref_sigs.size(); i++){
         hist_sigs.at(i)->SetBinContent(it_mass+1, m.signal_rate.at(i));
       }
 
-    }
+    } // END mass loop
 
-    TCanvas *c_bkgd = new TCanvas("c_bkgd", "", 600, 600);
-    canvas_margin(c_bkgd);
-    c_bkgd->cd();
+    //==== Draw
+
+    TCanvas* c1 = new TCanvas("c1", "", 800, 800);
+    c1->Draw();
+    TPad *c1_up;
+    TPad *c1_down;
+    c1_up = new TPad("c1", "", 0, 0.25, 1, 1);
+    c1_down = new TPad("c1_down", "", 0, 0, 1, 0.25);
+
+    canvas_margin(c1, c1_up, c1_down);
+
+    c1_up->Draw();
+    c1_down->Draw();
+    c1_up->cd();
 
     TH1D *hist_empty = (TH1D *)hist_bkgd->Clone();
     hist_empty->SetLineWidth(0);
@@ -298,13 +314,9 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     hist_empty->Draw("hist");
     hist_axis(hist_empty);
     hist_empty->GetYaxis()->SetTitle("Yields");
-    hist_empty->GetXaxis()->SetTitle("Signal Region (m_{N} in GeV)");
-    hist_empty->GetXaxis()->SetLabelSize(0.035);
-    hist_empty->SetFillColor(kCyan);
 
     double y_max = 500;
     double y_min = 0.02;
-
     if(WhichRegion.Contains("Low")){
       y_max = 500;
       y_min = 5;
@@ -322,6 +334,10 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     hist_bkgd->SetFillColor(kBlack);
     hist_bkgd->SetLineColor(0);
     hist_bkgd->Draw("sameE2");
+
+    hist_obs->SetMarkerStyle(20);
+    hist_obs->SetMarkerSize(1.6);
+    hist_obs->Draw("PE1same");
 
     TLegend *lg_this = (TLegend *)lg->Clone();
     for(unsigned int i=0; i<ref_sigs.size(); i++){
@@ -343,7 +359,9 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     }
 
     lg_this->Draw();
+    c1_up->SetLogy();
 
+    c1->cd();
     TLatex channelname;
     channelname.SetNDC();
     channelname.SetTextSize(0.035);
@@ -353,8 +371,6 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
 
     channelname.DrawLatex(0.2, 0.88, channelForTex+" "+WhichRegionsForTex.at(it_region));
 
-    c_bkgd->SetLogy();
-
     TLatex latex_CMSPriliminary, latex_Lumi;
     latex_CMSPriliminary.SetNDC();
     latex_Lumi.SetNDC();
@@ -363,16 +379,67 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     latex_Lumi.SetTextSize(0.035);
     latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
+    c1_up->cd();
+    hist_empty->Draw("axissame");
+
+    c1_down->cd();
+
+    TH1D *ratio = (TH1D *)hist_obs->Clone();
+    TH1D *ratio_allerr = (TH1D *)hist_obs->Clone();
+    for(unsigned int i=1; i<=ratio->GetXaxis()->GetNbins(); i++){
+      ratio->SetBinContent(i, hist_obs->GetBinContent(i)/hist_bkgd->GetBinContent(i) );
+      ratio->SetBinError(i, hist_obs->GetBinError(i)/hist_bkgd->GetBinContent(i) );
+
+      ratio_allerr->SetBinContent(i, 1. );
+      ratio_allerr->SetBinError(i, hist_bkgd->GetBinError(i)/hist_bkgd->GetBinContent(i) );
+    }
+
+    if(WhichRegion.Contains("High")) ratio_allerr->SetMaximum(10.0);
+    else ratio_allerr->SetMaximum(2.0);
+    ratio_allerr->SetMinimum(0.0);
+    ratio_allerr->GetYaxis()->SetTitle("#frac{Obs.}{Pred.}");
+    ratio_allerr->SetFillColor(kOrange);
+    ratio_allerr->SetMarkerSize(0);
+    ratio_allerr->SetMarkerStyle(0);
+    ratio_allerr->SetLineColor(kWhite);
+    ratio_allerr->Draw("E2same");
+    hist_axis(hist_empty, ratio_allerr);
+
+    ratio->Draw("PE1same");
+
+    ratio_allerr->Draw("axissame");
+    ratio_allerr->GetXaxis()->SetTitle("Signal Region (m_{N} in GeV)");
+    ratio_allerr->GetXaxis()->SetLabelSize(0.1);
+    for(int i=0; i<ratio_allerr->GetXaxis()->GetNbins(); i++){
+      TString mass = TString::Itoa(masses.at(i),10);
+      ratio_allerr->GetXaxis()->SetBinLabel(i+1, mass);
+    }
+
+    TLegend *lg_ratio = new TLegend(0.2, 0.8, 0.5, 0.9);
+    lg_ratio->SetFillStyle(0);
+    lg_ratio->SetBorderSize(0);
+    lg_ratio->SetNColumns(2);
+    //lg_ratio->AddEntry(ratio_staterr, "Stat.", "f");
+    lg_ratio->AddEntry(ratio_allerr, "Stat.+Syst.", "f");
+    lg_ratio->AddEntry(ratio, "Obs./Pred.", "p");
+    lg_ratio->Draw();
+
+
+
     gSystem->mkdir(plotpath+"/"+channel, kTRUE);
-    c_bkgd->SaveAs(plotpath+"/"+channel+"/"+channel+"_"+WhichRegion+".pdf");
-    c_bkgd->SaveAs(plotpath+"/"+channel+"/"+channel+"_"+WhichRegion+".png");
-    c_bkgd->Close();
-    delete c_bkgd;
+    c1->SaveAs(plotpath+"/"+channel+"/"+channel+"_"+WhichRegion+".pdf");
+    c1->SaveAs(plotpath+"/"+channel+"/"+channel+"_"+WhichRegion+".png");
+    c1->Close();
+    delete c1;
     delete hist_bkgd;
     delete hist_empty;
+    delete hist_obs;
+    delete ratio;
+    delete ratio_allerr;
     for(unsigned int i=0; i<ref_sigs.size(); i++){
       delete hist_sigs.at(i);
     }
+
 
   } // END Loop Region
 

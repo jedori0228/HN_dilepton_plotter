@@ -819,7 +819,33 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   //==== hide X Label for top plot
   hist_empty->GetXaxis()->SetLabelSize(0);
   //==== draw data
-  hist_data->Draw("PE1same");
+  vector<float> err_up_tmp;
+  vector<float> err_down_tmp;
+  const double alpha = 1 - 0.6827;
+  TGraphAsymmErrors *gr_data = new TGraphAsymmErrors(hist_data);
+  for(int i=0; i<gr_data->GetN(); ++i){
+    int N = gr_data->GetY()[i];
+    double L =  (N==0) ? 0  : (ROOT::Math::gamma_quantile(alpha/2,N,1.));
+    double U =  (N==0) ?  ( ROOT::Math::gamma_quantile_c(alpha,N+1,1) ) :
+      ( ROOT::Math::gamma_quantile_c(alpha/2,N+1,1) );
+    if( N!=0 ){
+      gr_data->SetPointEYlow(i, N-L );
+      gr_data->SetPointEXlow(i, 0);
+      gr_data->SetPointEYhigh(i, U-N );
+      gr_data->SetPointEXhigh(i, 0);
+      err_down_tmp.push_back(N-L);
+      err_up_tmp.push_back(U-N);
+     }
+    else{
+      gr_data->SetPointEYlow(i, 0.1);
+      gr_data->SetPointEXlow(i, 0.);
+      gr_data->SetPointEYhigh(i, 1.8);
+      gr_data->SetPointEXhigh(i, 0.);
+      err_down_tmp.push_back(0.);
+      err_up_tmp.push_back(1.8);
+    }
+  }
+  gr_data->Draw("PE1same");
 
   //==== signal
   if(this_sc == class1){
@@ -903,12 +929,15 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   hist_empty->GetYaxis()->SetRangeUser( Ymin, YmaxScale*AutoYmax );
   c1_up->cd();
   draw_legend(legend, this_sc, DrawData);
+  hist_empty->Draw("axissame");
   
   //==== MC-DATA
   c1_down->cd();
   TString name_suffix = hist_data->GetName();
   TH1D *ratio_point = (TH1D *)hist_data->Clone();
-  ratio_point->SetName(name_suffix+"_central");
+  ratio_point->Divide(mc_allerror);
+  TGraphAsymmErrors *gr_ratio_point = new TGraphAsymmErrors(ratio_point);
+  gr_ratio_point->SetName(name_suffix+"_central");
   TH1D *ratio_staterr = (TH1D *)hist_data->Clone();
   ratio_staterr->SetName(name_suffix+"_staterr");
   TH1D *ratio_allerr = (TH1D *)hist_data->Clone();
@@ -916,21 +945,32 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   for(int i=1; i<=ratio_point->GetXaxis()->GetNbins(); i++){
     //==== FIXME for zero? how?
     if(mc_allerror->GetBinContent(i)!=0){
-    //==== ratio point
-    //==== BinContent = Data/Bkgd
-    //==== BinError = DataError/Bkgd
-    ratio_point->SetBinContent( i, ratio_point->GetBinContent(i) / mc_allerror->GetBinContent(i) );
-    ratio_point->SetBinError  ( i, ratio_point->GetBinError(i)   / mc_allerror->GetBinContent(i) );
-    //==== ratio staterr
-    //==== BinContent = 1
-    //==== BinError = Bkgd(Stat)Error/Bkgd
-    ratio_staterr->SetBinContent( i, 1. );
-    ratio_staterr->SetBinError( i, mc_staterror->GetBinError(i)/ mc_staterror->GetBinContent(i) );
-    //==== ratio allerr
-    //==== BinContent = 1
-    //==== BinError = Bkgd(Stat+Syst)Error/Bkgd
-    ratio_allerr->SetBinContent( i, 1. );
-    ratio_allerr->SetBinError( i, mc_allerror->GetBinError(i)/ mc_allerror->GetBinContent(i) );
+
+      //==== ratio point
+      //==== BinContent = Data/Bkgd
+      //==== BinError = DataError/Bkgd
+      if(err_down_tmp.at(i-1)  !=0.) {
+        gr_ratio_point->SetPointEYlow(i-1, err_down_tmp.at(i-1) / mc_allerror->GetBinContent(i) );
+        gr_ratio_point->SetPointEXlow(i-1, 0);
+        gr_ratio_point->SetPointEYhigh(i-1, err_up_tmp.at(i-1) /mc_allerror->GetBinContent(i));
+        gr_ratio_point->SetPointEXhigh(i-1, 0);
+      }
+      else{
+        gr_ratio_point->SetPointEYlow(i-1, 0);
+        gr_ratio_point->SetPointEXlow(i-1, 0);
+        gr_ratio_point->SetPointEYhigh(i-1, 1.8 / mc_allerror->GetBinContent(i));
+        gr_ratio_point->SetPointEXhigh(i-1, 0);
+      }
+      //==== ratio staterr
+      //==== BinContent = 1
+      //==== BinError = Bkgd(Stat)Error/Bkgd
+      ratio_staterr->SetBinContent( i, 1. );
+      ratio_staterr->SetBinError( i, mc_staterror->GetBinError(i)/ mc_staterror->GetBinContent(i) );
+      //==== ratio allerr
+      //==== BinContent = 1
+      //==== BinError = Bkgd(Stat+Syst)Error/Bkgd
+      ratio_allerr->SetBinContent( i, 1. );
+      ratio_allerr->SetBinError( i, mc_allerror->GetBinError(i)/ mc_allerror->GetBinContent(i) );
     }
   }
   ratio_allerr->SetMaximum(2.0);
@@ -960,6 +1000,8 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   lg_ratio->AddEntry(ratio_allerr, "Stat.+Syst.", "f");
   lg_ratio->AddEntry(ratio_point, "Obs./Pred.", "p");
   lg_ratio->Draw();
+
+  ratio_allerr->Draw("axissame");
 
   //==== y=1 line
   g1->Draw("same");

@@ -104,7 +104,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
     m.histname_suffix = {
 
-
+/*
       //==== DiMuon
       "_DiMuon_Preselection_SS", // nobjet, jet>=2;
       "_DiMuon_Low_SS",
@@ -136,17 +136,10 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       "_EMu_High_OneFatJet_SS",
       "_EMu_Preselection_ElectronSubLead_SS",
       "_EMu_Preselection_MuonSubLead_SS",
-
-
-
-/*
-      "_DiMuon_Low_OneJet_NoFatJet_SS",
-      "_DiElectron_Low_OneJet_NoFatJet_SS",
-      "_EMu_Low_OneJet_NoFatJet_SS",
-      "_DiMuon_High_OneFatJet_SS",
-      "_DiElectron_High_OneFatJet_SS",
-      "_EMu_High_OneFatJet_SS",
 */
+
+
+      "_DiMuon_High_OneFatJet_SS",
 
     };
   }
@@ -343,8 +336,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //if(m.histname_suffix.at(i).Contains("Preselection")) m.drawdata.push_back(true);
     //else m.drawdata.push_back(false);
 
-    m.drawdata.push_back(false);
-    //m.drawdata.push_back(true);
+    //m.drawdata.push_back(false);
+    m.drawdata.push_back(true);
   }
 
 /*
