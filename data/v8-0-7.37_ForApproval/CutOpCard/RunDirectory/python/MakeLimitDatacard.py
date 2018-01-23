@@ -66,7 +66,7 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
 
   out.write("imax 1  number of channels\n")
   out.write("jmax 3  number of backgrounds\n")
-  out.write("kmax 20  number of nuisance parameters (sources of systematical uncertainties)\n")
+  out.write("kmax 21  number of nuisance parameters (sources of systematical uncertainties)\n")
   out.write("------------\n")
   out.write("# we have just one channel, in which we observe 0 events\n")
   out.write("bin 1\n")
