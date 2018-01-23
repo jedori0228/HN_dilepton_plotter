@@ -64,7 +64,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["fake_Dijet"] = {"fake_Dijet"};
   m.map_sample_string_to_list["fake_Dijet_LooseBJet"] = {"fake_Dijet_LooseBJet"};
   m.map_sample_string_to_list["chargeflip"] = {"chargeflip"};
-  
+  m.map_sample_string_to_list["prompt"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG_weighted", "WZTo3LNu_powheg", "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ", "WWW", "WWZ", "WZZ", "ZZZ", "ttW", "ttZ", "ttH_nonbb", "WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
+
   m.map_sample_string_to_legendinfo["DY"] = make_pair("DY", kYellow);
   m.map_sample_string_to_legendinfo["WJets"] = make_pair("WJets", kGreen);
   m.map_sample_string_to_legendinfo["VV_excl"] = make_pair("diboson", kSpring-1);
@@ -82,12 +83,13 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
   m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Charge-flip", kYellow);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. Lepton Background", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. Lepton Background", 870);
+  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. Lepton Background", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. Lepton Background", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Misid. Lepton Background", 870);
+  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. Charge Background", kYellow);
+  m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt Background", kSpring-1);
   
   //===============================
   //==== set and make sample list
@@ -97,10 +99,8 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
   //==== SS
   if(XXX==0){
-    m.samples_to_use = {"chargeflip", "Xgamma", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double"};
-    //m.samples_to_use = {"chargeflip", "Xgamma", "fake_HighdXY", "VV_excl", "VVV", "top", "WW_double"};
-    //m.samples_to_use = {"chargeflip", "Xgamma", "fake_Dijet_LooseBJet", "VV_excl", "VVV", "top", "WW_double"};
-    //m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double"};
+    //m.samples_to_use = {"chargeflip", "Xgamma", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double"};
+    m.samples_to_use = {"chargeflip", "fake_Dijet", "prompt"};
 
     m.histname_suffix = {
 
@@ -139,7 +139,13 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 */
 
 
-      "_DiMuon_High_OneFatJet_SS",
+      "_DiLepton_Preselection_SS", // OffZ, nobjet, jet>=2;
+      "_DiLepton_Low_SS",
+      "_DiLepton_Low_TwoJet_NoFatJet_SS",
+      "_DiLepton_Low_OneJet_NoFatJet_SS",
+      "_DiLepton_High_SS",
+      "_DiLepton_High_TwoJet_NoFatJet_SS",
+      "_DiLepton_High_OneFatJet_SS",
 
     };
   }
@@ -301,6 +307,10 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     else if(m.histname_suffix.at(i).Contains("EMu")){
       m.PrimaryDataset.push_back("MuonEG");
       m.LeptonChannels.push_back(23);
+    }
+    else if(m.histname_suffix.at(i).Contains("DiLepton")){
+      m.PrimaryDataset.push_back("DiLepton");
+      m.LeptonChannels.push_back(20);
     }
     else{
       cout << "ERROR : PD not correct" << endl;

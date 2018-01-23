@@ -78,6 +78,8 @@ public :
   Double_t      Nfatjets;
   Double_t      leadingLepton_Eta;
   Double_t      secondLepton_Eta;
+  Double_t      N_RunNumber;
+  Double_t      N_EventNumber;
 
   //==== Function to call above varialbes
   double GetVar(TString var);
@@ -136,6 +138,8 @@ public :
   TBranch      *b_Nfatjets;
   TBranch      *b_leadingLepton_Eta;
   TBranch      *b_secondLepton_Eta;
+  TBranch      *b_N_RunNumber;
+  TBranch      *b_N_EventNumber;
 
   DileptonNtuple(TString filename, TString treename, bool pdfSyst=false);
   virtual ~DileptonNtuple();
@@ -160,6 +164,7 @@ public :
   bool PrintBool(bool b);
   bool TreeExist;
   bool ReadPdfSystematic;
+  bool IsData;
 
   //==== Variables To Save
   double unweighted_yield, weighted_yield;
@@ -182,6 +187,8 @@ unweighted_yield(0.), weighted_yield(0.)
   tree = (TTree*)f->Get(treename);
 
   ReadPdfSystematic = pdfSyst;
+  if(filename.Contains("data")) IsData = true;
+  else IsData = false;
 
   Init(tree);
   if(!TreeExist){
@@ -305,6 +312,11 @@ void DileptonNtuple::Init(TTree *tree)
    fChain->SetBranchAddress("Nfatjets", &Nfatjets, &b_Nfatjets);
    fChain->SetBranchAddress("leadingLepton_Eta", &leadingLepton_Eta, &b_leadingLepton_Eta);
    fChain->SetBranchAddress("secondLepton_Eta", &secondLepton_Eta, &b_secondLepton_Eta);
+
+   if(IsData){
+     fChain->SetBranchAddress("N_RunNumber", &N_RunNumber, &b_N_RunNumber);
+     fChain->SetBranchAddress("N_EventNumber", &N_EventNumber, &b_N_EventNumber);
+   }
 
    if(ReadPdfSystematic){
      fChain->SetBranchAddress("PdfWeights", &PdfWeights, &b_PdfWeights);

@@ -1,0 +1,11 @@
+secondLepton_Pt > 65.0 65.0 1
+ljj |> 475.0 475.0 1
+ljj |< 610.0 610.0 1
+leadingLepton_Pt > 140.0 140.0 1
+leadingLepton_Eta < 1.555 1.555 1
+leadingLepton_Eta > -1.555 -1.555 1
+secondLepton_Eta < 1.555 1.555 1
+secondLepton_Eta > -1.555 -1.555 1
+##punzi	9.64282e-06
+##sigeff	0.2274
+##bkgd	0.310029

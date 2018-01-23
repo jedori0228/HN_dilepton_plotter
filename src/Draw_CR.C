@@ -156,6 +156,29 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_EMu_0jets_0nlbjets_dRllge2p5_SS",
       "_EMu_WpWp_CR_SS",
 
+      //==== Merged
+      "_DiLepton_0jets_SS", // SS 0jet CR
+      "_DiLepton_1jets_SS", // SS 1jet CR
+      "_DiLepton_0jets_OnZ_SS", // SS 0jet+OnZ CR (CF)
+      "_DiLepton_1jets_OnZ_SS", // SS 1jet+OnZ CR (CF)
+      "_DiLepton_Inclusive1nlbjets_SS", // SS bjet>=1 (Non-prompt) : now, preselection doesn't have bjetveto.. we can't use this as CR..
+      "_DiLepton_Inclusive1nlbjets_OffZ_SS",
+      "_DiLepton_0jets_OffZ_SS",
+      "_DiLepton_1jets_OffZ_SS",
+      "_DiLepton_LowCR_SS",
+      "_DiLepton_LowCR_TwoJet_NoFatJet_SS",
+      "_DiLepton_LowCR_OneJet_NoFatJet_SS",
+      "_DiLepton_HighCR_SS",
+      "_DiLepton_HighCR_TwoJet_NoFatJet_SS",
+      "_DiLepton_HighCR_OneFatJet_SS",
+      "_DiLepton_1jets_0nlbjets_OffZ_SS",
+      "_DiLepton_1jets_0nlbjets_mllge110_OffZ_SS",
+      "_DiLepton_0nlbjets_OffZ_SS",
+      "_DiLepton_0jets_0nlbjets_dRllge2p5_OffZ_SS",
+      "_DiLepton_WpWp_CR_SS",
+      "_DiLepton_OnZ_SS",
+
+      //"_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS",
 
       //"_DiElectron_OnZ_SS",
       //"_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS",
@@ -292,6 +315,10 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     else if(m.histname_suffix.at(i).Contains("EMu")){
       m.PrimaryDataset.push_back("MuonEG");
       m.LeptonChannels.push_back(23);
+    }
+    else if(m.histname_suffix.at(i).Contains("DiLepton")){
+      m.PrimaryDataset.push_back("DiLepton");
+      m.LeptonChannels.push_back(20);
     }
     else{
       cout << "ERROR : PD not correct" << endl;

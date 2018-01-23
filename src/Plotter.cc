@@ -62,9 +62,9 @@ void Plotter::draw_hist(){
       //==== draw data
       if(drawdata.at(i_cut)){
         //==== with signal (SR)
-        if(signal_mass.size()==0) lg = new TLegend(0.69, 0.35, 0.96, 0.92);
+        if(signal_mass.size()==0) lg = new TLegend(0.60, 0.35, 0.96, 0.92);
         //==== without signal (CR)
-        else lg = new TLegend(0.69, 0.20, 0.96, 0.92);
+        else lg = new TLegend(0.60, 0.20, 0.96, 0.92);
       }
       else lg = new TLegend(0.65, 0.20, 0.93, 0.92);
       clear_legend_info();
@@ -794,7 +794,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   double dx = (hist_empty->GetXaxis()->GetXmax() - hist_empty->GetXaxis()->GetXmin())/hist_empty->GetXaxis()->GetNbins();
   TString YTitle = DoubleToString(dx);
 
-  hist_empty->GetYaxis()->SetTitle(YTitle); //FIXME
+  hist_empty->GetYaxis()->SetTitle(YTitle);
   hist_empty->SetLineWidth(0);
   hist_empty->SetLineColor(0);
   hist_empty->SetMarkerSize(0);
@@ -1292,6 +1292,8 @@ void Plotter::make_plot_directory(){
     if(samples_to_use.at(i).Contains("fake")) plotpath = plotpath+"/use_FR_method/"+samples_to_use.at(i);
   }
 
+  //plotpath = plotpath+"/NotSubtracted/"; //FIXME
+
   cout
   << endl
   << "###################################################" << endl
@@ -1423,7 +1425,7 @@ TString Plotter::GetStringChannelRegion(int A, int B){
   //==== A = 2 : ee
   //==== A = 3 : em
 
-  if(A==20) channel = "ll";
+  if(A==20) channel = "l^{#pm}l^{#pm}";
   if(A==21) channel = "#mu^{#pm}#mu^{#pm}";
   if(A==22) channel = "e^{#pm}e^{#pm}";
   if(A==23) channel = "e^{#pm}#mu^{#pm}";
