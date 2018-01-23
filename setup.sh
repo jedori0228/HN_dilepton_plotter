@@ -2,7 +2,7 @@
 export PLOTTER_WORKING_DIR=`pwd`
 export FILE_PATH=$PLOTTER_WORKING_DIR/rootfiles/
 #export PLOT_PATH=$PLOTTER_WORKING_DIR/plots/
-export PLOT_PATH=/home/jskim/Dropbox/DiLepton_13TeV/plots/
+export PLOT_PATH=/home/jskim/Dropbox/JHTnP/
 export SCRIPT_DIR=$PLOTTER_WORKING_DIR/script/
 export ROOT_INCLUDE_PATH=$ROOT_INCLUDE_PATH:$PLOTTER_WORKING_DIR/include/:$PLOTTER_WORKING_DIR/src/
 export CATVERSION="v8-0-7"

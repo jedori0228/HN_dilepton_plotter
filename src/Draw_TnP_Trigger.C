@@ -27,7 +27,8 @@ void Draw_TnP_Trigger(int period){
   
   vector<double> abseta = {0., 0.9, 1.2, 2.1, 2.4};
   //vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8", "Mu23_TrkIsoVVL", "IsoMu24_OR_IsoTkMu24"};
-  vector<TString> triggers = {"Mu8"};
+  //vector<TString> triggers = {"Mu8"};
+  vector<TString> triggers = {"DoubleIsoMu17Mu8_IsoMu17leg", "Mu8_OR_TkMu8"};
 
   for(unsigned int it_syst=0; it_syst<systs.size(); it_syst++){
 
