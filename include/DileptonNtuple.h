@@ -314,8 +314,8 @@ void DileptonNtuple::Init(TTree *tree)
    fChain->SetBranchAddress("secondLepton_Eta", &secondLepton_Eta, &b_secondLepton_Eta);
 
    if(IsData){
-     fChain->SetBranchAddress("N_RunNumber", &N_RunNumber, &b_N_RunNumber);
-     fChain->SetBranchAddress("N_EventNumber", &N_EventNumber, &b_N_EventNumber);
+     //fChain->SetBranchAddress("N_RunNumber", &N_RunNumber, &b_N_RunNumber);
+     //fChain->SetBranchAddress("N_EventNumber", &N_EventNumber, &b_N_EventNumber);
    }
 
    if(ReadPdfSystematic){
