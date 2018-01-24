@@ -82,7 +82,7 @@ for ch in channels:
               if mass <= 200 and thisvar=="ljj":
                 thisvar = "m_SubLeadljj_jjWclosest"
 
-              if thisvar != line.split()[0]:
+              if thisvar == line.split()[0]:
                 newline = "#"+line
 
             newout.write(newline)

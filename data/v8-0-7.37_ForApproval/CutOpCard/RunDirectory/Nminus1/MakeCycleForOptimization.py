@@ -119,7 +119,7 @@ void {4}(int step){{
     "fake_Dijet",
     {8}
     "TG", "TTG",
-    //"ZGto2LG", "WGtoLNuG_weighted",
+    "ZGto2LG", "WGtoLNuG_weighted",
     "WZTo3LNu_powheg",
     "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ",
     "WWW", "WWZ", "WZZ", "ZZZ",
