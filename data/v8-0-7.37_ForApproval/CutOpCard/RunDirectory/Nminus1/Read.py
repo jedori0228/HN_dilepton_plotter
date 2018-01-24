@@ -31,7 +31,7 @@ for LowORHigh in range(0,2):
     \\resizebox{{\columnwidth}}{{!}}{{
       \\begin{{tabular}}{{c|c|c|c||c|c|c|c|c|c|c|c|c||c}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Signal Region & $m_{{N}}$ (\GeV) & Source & Incl. & Number of AK4 jets $<$ & $\Delta R(\ell 1, \ell 2) <$ & $\pt_{{\ell 1}} <$ & $\pt_{{\ell 2}} <$ &  $m(\ell \ell jj) <$ &  $m(\ell_{{1}} jj) <$ &  $m(\ell_{{2}} jj) <$ & $m(\ell \ell)$ & $\MET <$ & Final Selection \\\\
+Signal Region & $m_{{N}}$ (\GeV) & Source & Incl. & Number of AK4 jets $<$ & $\Delta R(\ell 1, \ell 2) <$ & $\pt_{{\ell 1}} <$ & $\pt_{{\ell 2}} <$ &  $m(\ell \ell jj) <$ &  $m(\ell_{{1}} jj) <$ &  $m(\ell_{{2}} jj) <$ & $m(\ell \ell)$ & $\\ETslash <$ & Final Selection \\\\
 \\hline
 '''.format(chlatex,ch)
 
@@ -47,7 +47,7 @@ Signal Region & $m_{{N}}$ (\GeV) & Source & Incl. & Number of AK4 jets $<$ & $\D
     \\resizebox{{\columnwidth}}{{!}}{{
       \\begin{{tabular}}{{c|c|c|c||c|c|c|c|c|c|c|c|c||c}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Signal Region & $m_{{{{N}}}}$ (\GeV) & Source & Incl. & Number of AK4 jets $<$ & $\pt_{{j 1}} >$ & $\Delta R(\ell 2, jj) <$ & $\pt_{{\ell 1}} >$ & $\pt_{{\ell 2}} >$ & $m(jj)$ &  $m(\ell \ell jj) >$ &  $m(\ell jj)$ & $\MET^{{2}}/S_{{T}} <$ & Final Selection \\\\
+Signal Region & $m_{{{{N}}}}$ (\GeV) & Source & Incl. & Number of AK4 jets $<$ & $\pt_{{j 1}} >$ & $\Delta R(\ell 2, jj) <$ & $\pt_{{\ell 1}} >$ & $\pt_{{\ell 2}} >$ & $m(jj)$ &  $m(\ell \ell jj) >$ &  $m(\ell jj)$ & $\\ETslash^{{2}}/S_{{T}} <$ & Final Selection \\\\
 \\hline
 '''.format(chlatex,ch)
 
