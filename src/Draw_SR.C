@@ -82,14 +82,14 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X + #gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
-  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. Charge Background", kYellow);
-  m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt Background", kSpring-1);
+  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. charge background", kYellow);
+  m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt background", kSpring-1);
   
   //===============================
   //==== set and make sample list
@@ -136,8 +136,6 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       "_EMu_High_OneFatJet_SS",
       "_EMu_Preselection_ElectronSubLead_SS",
       "_EMu_Preselection_MuonSubLead_SS",
-*/
-
 
       "_DiLepton_Preselection_SS", // OffZ, nobjet, jet>=2;
       "_DiLepton_Low_SS",
@@ -146,6 +144,11 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       "_DiLepton_High_SS",
       "_DiLepton_High_TwoJet_NoFatJet_SS",
       "_DiLepton_High_OneFatJet_SS",
+*/
+
+      "_DiLepton_High_TwoJet_NoFatJet_SS",
+      //"_DiLepton_High_OneFatJet_SS",
+
 
     };
   }
@@ -209,37 +212,38 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   };
 
   m.x_title = {
-    "m(ll) (GeV)",
+    "l^{#pm}l^{#pm} invariant mass (GeV)",
     //==== Jets for High Mass
-    "m(jj_{W}) (GeV)",  "m(lljj_{W}) (GeV)", "m(Leading Lepton+jj_{W}) (GeV)", "m(Subleading Lepton+jj_{W}) (GeV)",
-    "#DeltaR(jj_{W})",
-    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Subleading Lepton,jj_{W})", 
-    "#DeltaR(Leading Lepton,Subleading Lepton+jj_{W})", "#DeltaR(Subleading Lepton,Leading Lepton+jj_{W})",
+    "jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+    "#DeltaR(jj_{W,ak4})",
+    "#DeltaR(Leading lepton,jj_{W,ak4})", "#DeltaR(Subleading lepton,jj_{W,ak4})", 
+    "#DeltaR(Leading lepton,Subleading lepton+jj_{W,ak4})", "#DeltaR(Subleading lepton,Leading lepton+jj_{W,ak4})",
     //==== Jets for Low Mass
-    "m(jj_{W}) (GeV)",  "m(lljj_{W}) (GeV)", "m(Leading Lepton+jj_{W}) (GeV)", "m(Subleading Lepton+jj_{W}) (GeV)",
+    "jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
     "#DeltaR(jj_{W})",
-    "#DeltaR(Leading Lepton,jj_{W})", "#DeltaR(Subleading Lepton,jj_{W})",
-    "#DeltaR(Leading Lepton,Subleading Lepton+jj_{W})", "#DeltaR(Subleading Lepton,Leading Lepton+jj_{W})",
+    "#DeltaR(Leading lepton,jj_{W,ak4})", "#DeltaR(Subleading lepton,jj_{W,ak4})",
+    "#DeltaR(Leading lepton,Subleading lepton+jj_{W,ak4})", "#DeltaR(Subleading lepton,Leading lepton+jj_{W,ak4})",
     //==== Laeding dijet
     "m(j_{1}j_{2}) (GeV)",  "m(llj_{1}j_{2}) (GeV)", "m(Leading Lepton+j_{1}j_{2}) (GeV)", "m(Subleading Lepton+j_{1}j_{2}) (GeV)",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
-    "Leading Lepton p_{T} (GeV)", "Leading Lepton #eta", "Leading Lepton Type",
-    "Subleading Lepton p_{T} (GeV)", "Subleading Lepton #eta", "Subleading Lepton Type",
-    "Leading Jet p_{T} (GeV)", "Leading Jet #eta",
-    "Subleading Jet p_{T} (GeV)", "Subleading Jet #eta",
-    "Leading Forward Jet p_{T} (GeV)", "Leading Forward Jet #eta",
-    "Subleading Forward Jet p_{T} (GeV)", "Subleading Forward Jet #eta",
-    "Leading No-LeptonVeto Jet p_{T} (GeV)", "Leading No-LeptonVeto Jet #eta",
-    "Subleading No-LeptonVeto Jet p_{T} (GeV)", "Subleading No-LeptonVeto Jet #eta",
+    "Leading lepton p_{T} (GeV)", "Leading lepton #eta", "Leading lepton Type",
+    "Subleading lepton p_{T} (GeV)", "Subleading lepton #eta", "Subleading lepton type",
+    "Leading j_{ak4} p_{T} (GeV)", "Leading j_{ak4} #eta",
+    "Subleading j_{ak4} p_{T} (GeV)", "Subleading j_{ak4} #eta",
+    "Leading forward j_{ak4} p_{T} (GeV)", "Leading forward j_{ak4} #eta",
+    "SubleadingfForward j_{ak4} p_{T} (GeV)", "Subleading forward j_{ak4} #eta",
+    "Leading no-leptonVeto j_{ak4} p_{T} (GeV)", "Leading no-leptonVeto j_{ak4} #eta",
+    "Subleading no-leptonVeto j_{ak4} p_{T} (GeV)", "Subleading no-leptonVeto j_{ak4} #eta",
     //==== SumPt
     "#slash{E}_{T}^{miss} (GeV)", "#phi of #slash{E}_{T}^{miss}", "H_{T} (GeV)", "S_{T} (GeV)", "#slash{E}_{T}^{miss}^{2}/S_{T} (GeV)", "m_{CT}(j_{1},j_{2}) (GeV)",
     "# of vertices", "#DeltaR(l_{1},l_{2})", "onebin",
     //==== Fatjet
-    "# of Fatjet",
-    "Fatjet p_{T} (GeV)", "Fatjet #eta", "Fatjet Mass (GeV)", "Fatjet #tau_{21}", "Fatjet Pruned Mass (GeV)",
-    "m(Leading Lepton+Fatjet) (GeV)", "m(Subleading Lepton+Fatjet) (GeV)", "m(ll+Fatjet) (GeV)",
-    "m(Leading Lepton+Fatjet) (GeV)", "m(Subleading Lepton+Fatjet) (GeV)", "m(ll+Fatjet) (GeV)",
+    "# of j_{ak8}",
+    "j_{ak8} p_{T} (GeV)", "j_{ak8} #eta", "j_{ak8} invariant mass (GeV)", "j_{ak8} #tau_{21}", "j_{ak8} pruned mass (GeV)",
+    "l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
+    "l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
     //==== OneJet_NoFatJet
+    "l^{#pm}l^{#pm}j_{ak4} invariant mass (GeV)", "l_{1}j_{ak4} invariant mass (GeV)", "l_{2}j_{ak4} invariant mass (GeV)",
     "m(Leading Lepton+j) (GeV)", "m(Subleading Lepton+j) (GeV)", "m(llj) (GeV)",
   };
 
@@ -347,14 +351,24 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //else m.drawdata.push_back(false);
 
     //m.drawdata.push_back(false);
+
     m.drawdata.push_back(true);
+
+    if(m.histname_suffix.at(i).Contains("DiLepton")) m.drawratio.push_back(false);
+    else m.drawratio.push_back(true);
   }
 
 /*
   //==== FIXME test
-  m.histname = {"Nevents"};
-  m.x_title = {"#slash{E}_{T}^{miss}^{2}/S_{T} (GeV)"};
-  m.units = {"GeV"};
+  m.histname = {
+    "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
+  };
+  m.x_title = {
+    "l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
+  };
+  m.units = {
+    "GeV", "GeV", "GeV",
+  };
 */
 /*
   //==== FIXME test
@@ -384,16 +398,17 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== set signal mass points
   //=============================
 
+/*
+  //==== general AN
   m.signal_mass  = {40,   60,      70,        100,     300,    500,     800,   1200,   -800,  -1200};
   m.signal_color = {kRed, kOrange, kYellow+2, kGreen,  kBlue,  kViolet, kGray, kBlack, kGray, kBlack};
   m.signal_draw  = {true, true,    true,      true,    true,   true,    true,  true,   true,  true};
-
-/*
-  m.signal_mass =  {40,   60,      70,        100,     300,    500,     800,   1200,   -500,  -800,     -1200};
-  m.signal_color = {kRed, kOrange, kYellow+2, kGreen,  kBlue,  kViolet, kGray, kBlack, kBlue, kViolet,  kBlack};
-  m.signal_draw = {true, true, true, true, true, true, true, true, true, true, true};
-  //m.signal_draw = {false, false, false, false, false, true, true, true, true, true, true};
 */
+
+  //==== PAS
+  m.signal_mass  = {50,   200,     400};
+  m.signal_color = {kRed, kOrange, kViolet};
+  m.signal_draw  = {true, true,   true};
 
   //====================================
   //==== set signal coupling constants
@@ -417,12 +432,16 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -1200)] = 100.;
 */
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 40)] = 0.0001;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 50)] = 0.0001;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 60)] = 0.0001;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 70)] = 0.001;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 100)] = 0.01;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 200)] = 0.1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 300)] = 0.1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 400)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 800)] = 1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 1000)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 1200)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -800)] = 0.1;
@@ -449,8 +468,11 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== set signal mass for each class
   //=====================================
 
-  m.map_class_to_signal_mass[Plotter::lowmass] = {40, 60, 70};
-  m.map_class_to_signal_mass[Plotter::highmass] = {100, 300, 500, 800, 1200, -300, -500, -1200};
+  for(unsigned int i=0; i<m.signal_mass.size(); i++){
+    int this_mass = m.signal_mass.at(i);
+    if(this_mass<=80) m.map_class_to_signal_mass[Plotter::lowmass].push_back( this_mass );
+    else m.map_class_to_signal_mass[Plotter::highmass].push_back( this_mass );
+  }
 
   //=============
   //==== rebins

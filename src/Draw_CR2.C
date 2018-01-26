@@ -84,12 +84,12 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["tgamma"] = make_pair("top + #gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
-  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. Charge Background", kYellow);
+  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. charge background", kYellow);
   
   //===============================
   //==== set and make sample list
@@ -282,6 +282,7 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
     else m.ApplyMCNormSF.push_back(false);
 
     m.drawdata.push_back(true);
+    m.drawratio.push_back(true);
 
   }
 
@@ -294,6 +295,7 @@ void Draw_CR2(bool ScaleMC=true, int XXX=0){
     m.LeptonChannels = {0};
     m.RegionType = {0};
     m.drawdata = {true};
+    m.drawratio = {true};
     m.UseLogy = {-1};
     m.histname = {"m_ll"};
     m.x_title = {"m(ll) (GeV)"};

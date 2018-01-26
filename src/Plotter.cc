@@ -7,7 +7,7 @@ Plotter::Plotter(){
   gStyle->SetOptStat(0);
   DoDebug = false;
   gErrorIgnoreLevel = kError;
-  
+
 }
 
 Plotter::~Plotter(){
@@ -43,7 +43,7 @@ void Plotter::draw_hist(){
 
     TString temp_suffix = histname_suffix[i_cut];
     TString DirName = temp_suffix.Remove(0,1);
-    
+
     for(i_var = 0; i_var < histname.size(); i_var++){
 
       if( find( CutVarSkips.begin(), CutVarSkips.end(), make_pair(histname_suffix[i_cut], histname[i_var]) ) != CutVarSkips.end() ){
@@ -59,14 +59,19 @@ void Plotter::draw_hist(){
       vector<TH1D*> hist_signal;
       
       TLegend *lg;
-      //==== draw data
-      if(drawdata.at(i_cut)){
+      if(drawratio.at(i_cut)){
         //==== with signal (SR)
         if(signal_mass.size()==0) lg = new TLegend(0.60, 0.35, 0.96, 0.92);
         //==== without signal (CR)
-        else lg = new TLegend(0.60, 0.20, 0.96, 0.92);
+        else lg = new TLegend(0.60, 0.35, 0.96, 0.92);
       }
-      else lg = new TLegend(0.65, 0.20, 0.93, 0.92);
+      else{
+        //==== with signal (SR)
+        if(signal_mass.size()==0) lg = new TLegend(0.60, 0.35, 0.95, 0.92);
+        //==== without signal (CR)
+        else lg = new TLegend(0.50, 0.40, 0.93, 0.90);
+      }
+
       clear_legend_info();
       
       signal_survive_mass.clear();
@@ -292,6 +297,11 @@ void Plotter::draw_hist(){
           //hist_final->SetName(temp_hist_name+"_signal_"+TString::Itoa(signal_mass[signal_index], 10));
           //==== scaling signal
           double this_coupling_constant = coupling_constant(signal_mass[signal_index]);
+/*
+          if( histname_suffix[i_cut].Contains("High_OneFatJet") || histname[i_var].Contains("fj") ){
+            this_coupling_constant *= 0.1;
+          }
+*/
           hist_final->Scale( k_factor*this_coupling_constant/(1.*TMath::Power(10,log_of_generation_mixing)) );
           hist_signal.push_back( (TH1D*)hist_final->Clone() );
           signal_survive_mass.push_back(signal_mass[signal_index]);
@@ -603,7 +613,12 @@ void Plotter::clear_legend_info(){
 double Plotter::coupling_constant(int mass){
 
   TString cut = histname_suffix[i_cut];
-  
+
+  double scale(1.);
+  if(histname_suffix[i_cut].Contains("OneFatJet")){
+//FIXME
+  }
+
   if( coupling_constants.find( make_pair(cut, mass) ) != coupling_constants.end() ){
     if(DoDebug) cout << "cut = " << cut << ", mass = " << mass << " => coupling constant = " << coupling_constants[make_pair(cut, mass)] << endl;
     return coupling_constants[make_pair(cut, mass)];
@@ -654,12 +669,6 @@ void Plotter::draw_legend(TLegend* lg, signal_class sc, bool DrawData){
   // hist_for_legend are {"A", "B", "D", "data", "signal1", "signal2"}
   // i_data = 6 - 2 - 1 = 3
   
-  if(DrawData && hist_for_legend_data){
-    lg->AddEntry(hist_for_legend_data, "data", "ple");
-  }
-  else{
-    lg->AddEntry(hist_for_legend_data, "Total Background", "ple");
-  }
   if(DoDebug) cout << "[draw_legend] printing MCsector_survive" << endl;
   for(auto it = MCsector_survive.begin(); it != MCsector_survive.end(); ++it){
     if(DoDebug) cout << "[draw_legend] " << it->first << " is " << it->second << endl;
@@ -771,22 +780,24 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   //==== If we draw data, prepare top/bottom pads
   TCanvas* c1 = new TCanvas(histname[i_var], "", 800, 800);
   c1->Draw();
+  c1->cd();
+
   TPad *c1_up;
   TPad *c1_down;
   c1_up = new TPad("c1", "", 0, 0.25, 1, 1);
   c1_down = new TPad("c1_down", "", 0, 0, 1, 0.25);
 
-  canvas_margin(c1, c1_up, c1_down);
-  
-  //c1_up->SetGridx();
-  //c1_up->SetGridy();
-  //c1_down->SetGridx();
-  //c1_down->SetGridy();
-  
-  c1_up->Draw();
-  c1_down->Draw();
-  c1_up->cd();
+  if(drawratio.at(i_cut)){
+    canvas_margin(c1, c1_up, c1_down);
 
+    c1_up->Draw();
+    c1_down->Draw();
+    c1_up->cd();
+  }
+  else{
+    canvas_margin(c1);
+  }
+  
   //==== empty histogram for axis
   TH1D *hist_empty = (TH1D*)mc_stack->GetHists()->At(0)->Clone();
   hist_empty->SetName("DUMMY_FOR_AXIS");
@@ -805,9 +816,13 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     Ymin = UseLogy.at(i_cut);
     YmaxScale = 10;
     hist_empty->SetMinimum(UseLogy.at(i_cut));
-    c1_up->SetLogy();
+
+    if(drawratio.at(i_cut)) c1->SetLogy();
+    else c1_up->SetLogy();
   }
   hist_empty->Draw("histsame");
+  //==== hide X Label for top plot
+  if(drawratio.at(i_cut)) hist_empty->GetXaxis()->SetLabelSize(0);
   
   //==== bkg
   if(!mc_stack->GetHists()){
@@ -815,37 +830,6 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     return;
   }
   mc_stack->Draw("histsame");
-
-  //==== hide X Label for top plot
-  hist_empty->GetXaxis()->SetLabelSize(0);
-  //==== draw data
-  vector<float> err_up_tmp;
-  vector<float> err_down_tmp;
-  const double alpha = 1 - 0.6827;
-  TGraphAsymmErrors *gr_data = new TGraphAsymmErrors(hist_data);
-  for(int i=0; i<gr_data->GetN(); ++i){
-    int N = gr_data->GetY()[i];
-    double L =  (N==0) ? 0  : (ROOT::Math::gamma_quantile(alpha/2,N,1.));
-    double U =  (N==0) ?  ( ROOT::Math::gamma_quantile_c(alpha,N+1,1) ) :
-      ( ROOT::Math::gamma_quantile_c(alpha/2,N+1,1) );
-    if( N!=0 ){
-      gr_data->SetPointEYlow(i, N-L );
-      gr_data->SetPointEXlow(i, 0);
-      gr_data->SetPointEYhigh(i, U-N );
-      gr_data->SetPointEXhigh(i, 0);
-      err_down_tmp.push_back(N-L);
-      err_up_tmp.push_back(U-N);
-     }
-    else{
-      gr_data->SetPointEYlow(i, 0.1);
-      gr_data->SetPointEXlow(i, 0.);
-      gr_data->SetPointEYhigh(i, 1.8);
-      gr_data->SetPointEXhigh(i, 0.);
-      err_down_tmp.push_back(0.);
-      err_up_tmp.push_back(1.8);
-    }
-  }
-  gr_data->Draw("PE1same");
 
   //==== signal
   if(this_sc == class1){
@@ -915,112 +899,188 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   else{
     cout << "[Warning] This should not happen!" << endl;
   }
-  //==== err
+
+  //==== background err
   mc_allerror->SetMarkerColorAlpha(kAzure-9, 0);
   mc_allerror->SetFillStyle(3013);
   mc_allerror->SetFillColor(kBlack);
   mc_allerror->SetLineColor(0);
   mc_allerror->Draw("sameE2");
-  //==== legend
-  legend->AddEntry(mc_allerror, "Stat.+Syst. Uncert.", "f");
-  //==== ymax
-  double AutoYmax = max( GetMaximum(hist_data), GetMaximum(mc_allerror) );
-  //hist_empty->GetYaxis()->SetRangeUser( default_y_min, y_max() );
-  hist_empty->GetYaxis()->SetRangeUser( Ymin, YmaxScale*AutoYmax );
-  c1_up->cd();
-  draw_legend(legend, this_sc, DrawData);
-  hist_empty->Draw("axissame");
-  
-  //==== MC-DATA
-  c1_down->cd();
-  TString name_suffix = hist_data->GetName();
-  TH1D *ratio_point = (TH1D *)hist_data->Clone();
-  ratio_point->Divide(mc_allerror);
-  TGraphAsymmErrors *gr_ratio_point = new TGraphAsymmErrors(ratio_point);
-  gr_ratio_point->SetName(name_suffix+"_central");
-  TH1D *ratio_staterr = (TH1D *)hist_data->Clone();
-  ratio_staterr->SetName(name_suffix+"_staterr");
-  TH1D *ratio_allerr = (TH1D *)hist_data->Clone();
-  ratio_allerr->SetName(name_suffix+"_allerr");
-  for(int i=1; i<=ratio_point->GetXaxis()->GetNbins(); i++){
-    //==== FIXME for zero? how?
-    if(mc_allerror->GetBinContent(i)!=0){
 
-      //==== ratio point
-      //==== BinContent = Data/Bkgd
-      //==== BinError = DataError/Bkgd
-      if(err_down_tmp.at(i-1)  !=0.) {
-        gr_ratio_point->SetPointEYlow(i-1, err_down_tmp.at(i-1) / mc_allerror->GetBinContent(i) );
-        gr_ratio_point->SetPointEXlow(i-1, 0);
-        gr_ratio_point->SetPointEYhigh(i-1, err_up_tmp.at(i-1) /mc_allerror->GetBinContent(i));
-        gr_ratio_point->SetPointEXhigh(i-1, 0);
-      }
-      else{
-        gr_ratio_point->SetPointEYlow(i-1, 0);
-        gr_ratio_point->SetPointEXlow(i-1, 0);
-        gr_ratio_point->SetPointEYhigh(i-1, 1.8 / mc_allerror->GetBinContent(i));
-        gr_ratio_point->SetPointEXhigh(i-1, 0);
-      }
-      //==== ratio staterr
-      //==== BinContent = 1
-      //==== BinError = Bkgd(Stat)Error/Bkgd
-      ratio_staterr->SetBinContent( i, 1. );
-      ratio_staterr->SetBinError( i, mc_staterror->GetBinError(i)/ mc_staterror->GetBinContent(i) );
-      //==== ratio allerr
-      //==== BinContent = 1
-      //==== BinError = Bkgd(Stat+Syst)Error/Bkgd
-      ratio_allerr->SetBinContent( i, 1. );
-      ratio_allerr->SetBinError( i, mc_allerror->GetBinError(i)/ mc_allerror->GetBinContent(i) );
+  //==== Draw Data at last
+  vector<float> err_up_tmp;
+  vector<float> err_down_tmp;
+  const double alpha = 1 - 0.6827;
+  TGraphAsymmErrors *gr_data = new TGraphAsymmErrors(hist_data);
+  for(int i=0; i<gr_data->GetN(); ++i){
+    int N = gr_data->GetY()[i];
+    double L =  (N==0) ? 0  : (ROOT::Math::gamma_quantile(alpha/2,N,1.));
+    double U =  (N==0) ?  ( ROOT::Math::gamma_quantile_c(alpha,N+1,1) ) :
+      ( ROOT::Math::gamma_quantile_c(alpha/2,N+1,1) );
+    if( N!=0 ){
+      gr_data->SetPointEYlow(i, N-L );
+      gr_data->SetPointEXlow(i, 0);
+      gr_data->SetPointEYhigh(i, U-N );
+      gr_data->SetPointEXhigh(i, 0);
+      err_down_tmp.push_back(N-L);
+      err_up_tmp.push_back(U-N);
+     }
+    else{
+      gr_data->SetPointEYlow(i, 0.1);
+      gr_data->SetPointEXlow(i, 0.);
+      gr_data->SetPointEYhigh(i, 1.8);
+      gr_data->SetPointEXhigh(i, 0.);
+      err_down_tmp.push_back(0.);
+      err_up_tmp.push_back(1.8);
     }
   }
-  ratio_allerr->SetMaximum(2.0);
-  ratio_allerr->SetMinimum(0.0);
-  ratio_allerr->GetXaxis()->SetTitle(x_title[i_var]);
-  ratio_allerr->GetYaxis()->SetTitle("#frac{Obs.}{Pred.}");
-  ratio_allerr->SetFillColor(kOrange);
-  ratio_allerr->SetMarkerSize(0);
-  ratio_allerr->SetMarkerStyle(0);
-  ratio_allerr->SetLineColor(kWhite);
-  ratio_allerr->Draw("E2same");
-  hist_axis(hist_empty, ratio_allerr);
+  gr_data->SetLineWidth(2.0);
+  gr_data->SetMarkerSize(0.);
+  gr_data->SetMarkerColor(kBlack);
+  gr_data->SetLineColor(kBlack);
+  hist_data->Draw("phistsame");
+  gr_data->Draw("p0same");
 
-  ratio_staterr->SetFillColor(kCyan);
-  ratio_staterr->SetMarkerSize(0);
-  ratio_staterr->SetMarkerStyle(0);
-  ratio_staterr->SetLineColor(kWhite);
-  ratio_staterr->Draw("E2same");
+  //==== ymax
+  double AutoYmax = max( GetMaximum(gr_data), GetMaximum(mc_allerror) );
+  //hist_empty->GetYaxis()->SetRangeUser( default_y_min, y_max() );
+  hist_empty->GetYaxis()->SetRangeUser( Ymin, YmaxScale*AutoYmax );
 
-  ratio_point->Draw("PE1same");
+  //==== legend
+  legend->AddEntry(mc_allerror, "Stat.+syst. uncert.", "f");
+  if(DrawData){
+    legend->AddEntry(hist_data, "Data", "pe");
+  }
+  else{
+    legend->AddEntry(hist_data, "Total Background", "pe");
+  }
+  if(drawratio.at(i_cut)) c1_up->cd();
+  draw_legend(legend, this_sc, DrawData);
+  hist_empty->Draw("axissame");
 
-  TLegend *lg_ratio = new TLegend(0.2, 0.8, 0.6, 0.9);
-  lg_ratio->SetFillStyle(0);
-  lg_ratio->SetBorderSize(0);
-  lg_ratio->SetNColumns(3);
-  lg_ratio->AddEntry(ratio_staterr, "Stat.", "f");
-  lg_ratio->AddEntry(ratio_allerr, "Stat.+Syst.", "f");
-  lg_ratio->AddEntry(ratio_point, "Obs./Pred.", "p");
-  lg_ratio->Draw();
+  //==== Ratio
 
-  ratio_allerr->Draw("axissame");
+  if(!drawratio.at(i_cut)){
+    hist_axis(hist_empty);
+    hist_empty->GetXaxis()->SetTitle(x_title[i_var]);
+  }
+  else{
+    //==== MC-DATA
+    c1_down->cd();
+    TString name_suffix = hist_data->GetName();
+    TH1D *ratio_point = (TH1D *)hist_data->Clone();
+    ratio_point->SetName(name_suffix+"_central");
 
-  //==== y=1 line
-  g1->Draw("same");
-  
+    TH1D *tmp_ratio_point = (TH1D *)hist_data->Clone();
+    tmp_ratio_point->Divide(mc_allerror);
+    TGraphAsymmErrors *gr_ratio_point = new TGraphAsymmErrors(tmp_ratio_point);
+    gr_ratio_point->SetName("gr_"+name_suffix+"_central");
+    gr_ratio_point->SetLineWidth(2.0);
+    gr_ratio_point->SetMarkerSize(0.);
+
+    TH1D *ratio_staterr = (TH1D *)hist_data->Clone();
+    ratio_staterr->SetName(name_suffix+"_staterr");
+    TH1D *ratio_allerr = (TH1D *)hist_data->Clone();
+    ratio_allerr->SetName(name_suffix+"_allerr");
+    for(int i=1; i<=ratio_point->GetXaxis()->GetNbins(); i++){
+      //==== FIXME for zero? how?
+      if(mc_allerror->GetBinContent(i)!=0){
+
+        //==== ratio point
+        //==== BinContent = Data/Bkgd
+        //==== BinError = DataError/Bkgd
+        ratio_point->SetBinContent( i, ratio_point->GetBinContent(i) / mc_allerror->GetBinContent(i) );
+        ratio_point->SetBinError ( i, ratio_point->GetBinError(i) / mc_allerror->GetBinContent(i) );
+
+        if(err_down_tmp.at(i-1)  !=0.) {
+          gr_ratio_point->SetPointEYlow(i-1, err_down_tmp.at(i-1) / mc_allerror->GetBinContent(i) );
+          gr_ratio_point->SetPointEXlow(i-1, 0);
+          gr_ratio_point->SetPointEYhigh(i-1, err_up_tmp.at(i-1) /mc_allerror->GetBinContent(i));
+          gr_ratio_point->SetPointEXhigh(i-1, 0);
+        }
+        else{
+          gr_ratio_point->SetPointEYlow(i-1, 0);
+          gr_ratio_point->SetPointEXlow(i-1, 0);
+          gr_ratio_point->SetPointEYhigh(i-1, 1.8 / mc_allerror->GetBinContent(i));
+          gr_ratio_point->SetPointEXhigh(i-1, 0);
+        }
+        //==== ratio staterr
+        //==== BinContent = 1
+        //==== BinError = Bkgd(Stat)Error/Bkgd
+        ratio_staterr->SetBinContent( i, 1. );
+        ratio_staterr->SetBinError( i, mc_staterror->GetBinError(i)/ mc_staterror->GetBinContent(i) );
+        //==== ratio allerr
+        //==== BinContent = 1
+        //==== BinError = Bkgd(Stat+Syst)Error/Bkgd
+        ratio_allerr->SetBinContent( i, 1. );
+        ratio_allerr->SetBinError( i, mc_allerror->GetBinError(i)/ mc_allerror->GetBinContent(i) );
+      }
+    }
+
+    ratio_allerr->SetMaximum(2.0);
+    ratio_allerr->SetMinimum(0.0);
+    ratio_allerr->GetXaxis()->SetTitle(x_title[i_var]);
+    ratio_allerr->GetYaxis()->SetTitle("#frac{Obs.}{Pred.}");
+    ratio_allerr->SetFillColor(kOrange);
+    ratio_allerr->SetMarkerSize(0);
+    ratio_allerr->SetMarkerStyle(0);
+    ratio_allerr->SetLineColor(kWhite);
+    ratio_allerr->Draw("E2same");
+    hist_axis(hist_empty, ratio_allerr);
+
+    ratio_staterr->SetFillColor(kCyan);
+    ratio_staterr->SetMarkerSize(0);
+    ratio_staterr->SetMarkerStyle(0);
+    ratio_staterr->SetLineColor(kWhite);
+    ratio_staterr->Draw("E2same");
+
+    ratio_point->Draw("p9histsame");
+    gr_ratio_point->Draw("p0same");
+
+    TLegend *lg_ratio = new TLegend(0.7, 0.8, 0.9, 0.9);
+    //lg_ratio->SetFillStyle(0);
+    //lg_ratio->SetBorderSize(0);
+    lg_ratio->SetNColumns(2);
+    lg_ratio->AddEntry(ratio_staterr, "Stat.", "f");
+    lg_ratio->AddEntry(ratio_allerr, "Stat.+Syst.", "f");
+    //lg_ratio->AddEntry(ratio_point, "Obs./Pred.", "p");
+    lg_ratio->Draw();
+
+    ratio_allerr->Draw("axissame");
+
+    //==== y=1 line
+    g1->Draw("same");
+  }
+
   //==== write lumi on the top
   c1->cd();
-  TLatex latex_CMSPriliminary, latex_Lumi;
-  latex_CMSPriliminary.SetNDC();
-  latex_Lumi.SetNDC();
-  latex_CMSPriliminary.SetTextSize(0.035);
-  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
-  latex_Lumi.SetTextSize(0.035);
-  latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
-  TString str_channel = GetStringChannelRegion(LeptonChannels.at(i_cut), RegionType.at(i_cut));
-  TLatex channelname;
-  channelname.SetNDC();
-  channelname.SetTextSize(0.037);
-  channelname.DrawLatex(0.2, 0.88, str_channel);
+  if(LeptonChannels.at(i_cut)!=20){
+    TLatex latex_CMSPriliminary, latex_Lumi;
+    latex_CMSPriliminary.SetNDC();
+    latex_Lumi.SetNDC();
+    latex_CMSPriliminary.SetTextSize(0.035);
+    latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+    latex_Lumi.SetTextSize(0.035);
+    latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+
+    TString str_channel = GetStringChannelRegion(LeptonChannels.at(i_cut), RegionType.at(i_cut));
+    TLatex channelname;
+    channelname.SetNDC();
+    channelname.SetTextSize(0.037);
+    channelname.DrawLatex(0.2, 0.88, str_channel);
+  }
+  else{
+    //==== This is for Paper
+    TLatex latex_CMSPriliminary, latex_Lumi;
+    latex_CMSPriliminary.SetNDC();
+    latex_Lumi.SetNDC();
+    latex_CMSPriliminary.SetTextSize(0.050);
+    latex_CMSPriliminary.DrawLatex(0.20, 0.90, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+    latex_Lumi.SetTextSize(0.035);
+    latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+
+  }
 
   mkdir(thiscut_plotpath);
   c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".pdf");
@@ -1253,22 +1313,16 @@ TString Plotter::legend_coupling_label(int mass){
 
   mass = abs(mass);
 
-  TString V2 = "|V_{N#mu}|^{2}";
-  if(PrimaryDataset[i_cut]=="DoubleEG") V2 = "|V_{Ne}|^{2}";
-  if(PrimaryDataset[i_cut]=="MuonEG") V2 = "|V_{Nl}|^{2}";
+  TString V2 = "#||{V_{N#mu}}^{2}";
+  if(PrimaryDataset[i_cut]=="DoubleEG") V2 = "#||{|V_{Ne}}^{2}";
+  if(PrimaryDataset[i_cut]=="MuonEG") V2 = "#||{V_{Nl}}^{2}";
 
-  if(log_coupling == 0) return channel+" HN"+TString::Itoa(mass, 10)+", "+V2+"=1";
-  else return channel+" HN"+TString::Itoa(mass, 10)+", "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
+  //if(log_coupling == 0) return channel+" HN"+TString::Itoa(mass, 10)+", "+V2+"=1";
+  //else return channel+" HN"+TString::Itoa(mass, 10)+", "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
 
-  //if(log_scale == 0) return "m(HN) = "+TString::Itoa(mass, 10)+" GeV/c^{2}, |V_{N#mu}|^{2}=0.01";
-  //return "10^{"+TString::Itoa(log_scale, 10)+"} #times m(HN) = "+TString::Itoa(mass, 10)+" GeV/c^{2}, |V_{N#mu}|^{2}=0.01";
+  if(log_coupling == 0) return "m_{N} = "+TString::Itoa(mass, 10)+" GeV, "+V2+"=1";
+  else return "m_{N} = "+TString::Itoa(mass, 10)+" GeV, "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
 
-  //if(log_scale == 0) return "m(HN) = "+TString::Itoa(mass, 10)+" GeV/c^{2}";
-  //return "10^{"+TString::Itoa(log_scale, 10)+"} #times m(HN) = "+TString::Itoa(mass, 10)+" GeV/c^{2}";
-
-  //if(log_scale == 0) return "#splitline{m(N) = "+TString::Itoa(mass, 10)+" GeV/c^{2}}{|V_{N#mu}|^{2}=0.01}";
-  //return "#splitline{10^{"+TString::Itoa(log_scale, 10)+"} #times m(N) = "+TString::Itoa(mass, 10)+" GeV}{|V_{N#mu}|^{2}=0.01}";
-  
 }
 
 void Plotter::mkdir(TString path){

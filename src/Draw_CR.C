@@ -80,12 +80,12 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["Xgamma_noDY"] = make_pair("X + #gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
-  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. Lepton Background", 870);
-  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. Charge Background", kYellow);
+  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton background", 870);
+  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. charge background", kYellow);
   
   //===============================
   //==== set and make sample list
@@ -156,6 +156,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_EMu_0jets_0nlbjets_dRllge2p5_SS",
       "_EMu_WpWp_CR_SS",
 
+
       //==== Merged
       "_DiLepton_0jets_SS", // SS 0jet CR
       "_DiLepton_1jets_SS", // SS 1jet CR
@@ -178,16 +179,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiLepton_WpWp_CR_SS",
       "_DiLepton_OnZ_SS",
 
-      //"_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS",
 
-      //"_DiElectron_OnZ_SS",
-      //"_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS",
-      //"_DiElectron_0jets_0nlbjets_dRllge2p5_SS",
-      //"_DiElectron_1jets_OnZ_SS",
-
-      //"_DiMuon_HighCR_OneFatJet_SS",
-      //"_DiElectron_HighCR_OneFatJet_SS",
-      //"_EMu_HighCR_OneFatJet_SS",
 
     };
   }
@@ -355,6 +347,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     else m.ApplyMCNormSF.push_back(false);
 
     m.drawdata.push_back(true);
+    m.drawratio.push_back(true);
 
   }
 
@@ -367,6 +360,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     m.LeptonChannels = {22};
     m.RegionType = {0};
     m.drawdata = {true};
+    m.drawratio = {true};
     m.UseLogy = {-1};
     m.histname = {"m_ll"};
     m.x_title = {"m(ll) (GeV)"};

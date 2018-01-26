@@ -167,7 +167,8 @@ public :
   bool IsData;
 
   //==== Variables To Save
-  double unweighted_yield, weighted_yield;
+  int unweighted_yield;
+  double weighted_yield;
 
 };
 
@@ -177,7 +178,7 @@ public :
 DileptonNtuple::DileptonNtuple(TString filename, TString treename, bool pdfSyst) :
 fChain(0),
 DoDebug(false),
-unweighted_yield(0.), weighted_yield(0.)
+unweighted_yield(0), weighted_yield(0.)
 {
 
   TH1::SetDefaultSumw2(true);

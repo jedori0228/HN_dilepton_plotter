@@ -311,6 +311,7 @@ void GetMCNormSF(bool DoNorm=false){
   cout << MC_stacked_allerr->GetBinContent(2) << endl;
   cout << MC_stacked_allerr->GetBinContent(3) << endl;
   hist_data->Draw("PE1same");
+  hist_data->SetLineWidth(2);
   cout << hist_data->GetBinContent(1) << endl;
   cout << hist_data->GetBinContent(2) << endl;
   cout << hist_data->GetBinContent(3) << endl;
