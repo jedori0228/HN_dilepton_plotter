@@ -26,15 +26,15 @@ public:
   ~Plotter();
 
   enum signal_class{
-    no_class = 0,
-    class1 = 1,
-    class2 = 2,
-    lowmass = 1,
-    class3 = 3,
-    class4 = 4,
-    highmass = 4,
-    mediummass = 23,
+    no_class = -1,
+    low = 0,
+    low_SR1 = 1,
+    low_SR2 = 2,
+    high = 10,
+    high_SR1 = 11,
+    high_SR2 = 12,
   };
+  vector<signal_class> AllSignalClasses;
   
   //==== functions for setting
   void make_bkglist();

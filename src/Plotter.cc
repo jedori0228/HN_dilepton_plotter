@@ -680,65 +680,39 @@ void Plotter::draw_legend(TLegend* lg, signal_class sc, bool DrawData){
       j--;
     }
   }
-  if(sc == class1){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[class1].begin(), map_class_to_signal_mass[class1].end(), this_mass) != map_class_to_signal_mass[class1].end()){
-        lg->AddEntry(hist_for_legend_signal.at(i), legend_coupling_label(this_mass), "l");
-      }
-    }
-  }
-  else if(sc == class2){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[class2].begin(), map_class_to_signal_mass[class2].end(), this_mass) != map_class_to_signal_mass[class2].end()){
-        lg->AddEntry(hist_for_legend_signal.at(i), legend_coupling_label(this_mass), "l");
-      }
-    }
-  }
-  else if(sc == lowmass){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[lowmass].begin(), map_class_to_signal_mass[lowmass].end(), this_mass) != map_class_to_signal_mass[lowmass].end()){
-        lg->AddEntry(hist_for_legend_signal.at(i), legend_coupling_label(this_mass), "l");
-      }
-    }
-  }
-  else if(sc == class3){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[class3].begin(), map_class_to_signal_mass[class3].end(), this_mass) != map_class_to_signal_mass[class3].end()){
-        lg->AddEntry(hist_for_legend_signal.at(i), legend_coupling_label(this_mass), "l");
-      }
-    }
-  }
-  else if(sc == class4){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[class4].begin(), map_class_to_signal_mass[class4].end(), this_mass) != map_class_to_signal_mass[class4].end()){
-        lg->AddEntry(hist_for_legend_signal.at(i), legend_coupling_label(this_mass), "l");
-      }
-    }
-  }
-  else if(sc == highmass){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[highmass].begin(), map_class_to_signal_mass[highmass].end(), this_mass) != map_class_to_signal_mass[highmass].end()){
-        lg->AddEntry(hist_for_legend_signal.at(i), legend_coupling_label(this_mass), "l");
-      }
-    }
-  }
-  else if(sc == no_class){
+
+  //==== Signal
+  if(sc==no_class){
+
     for(unsigned int i=0; i<signal_survive_mass.size(); i++){
       int this_mass = signal_survive_mass.at(i);
       if( find(signal_mass.begin(), signal_mass.end(), this_mass) != signal_mass.end()){
         lg->AddEntry(hist_for_legend_signal.at(i), legend_coupling_label(this_mass), "l");
       }
     }
+
   }
   else{
-    cout << "[Warning] This should not happen!" << endl;
+
+    for(int i_sigcl=0; i_sigcl<AllSignalClasses.size(); i_sigcl++){
+
+      signal_class this_cl = AllSignalClasses.at(i_sigcl);
+
+      if(sc==this_cl){
+
+        for(unsigned int i=0; i<signal_survive_mass.size(); i++){
+          int this_mass = signal_survive_mass.at(i);
+          if( find(map_class_to_signal_mass[this_cl].begin(), map_class_to_signal_mass[this_cl].end(), this_mass) != map_class_to_signal_mass[this_cl].end()){
+            lg->AddEntry(hist_for_legend_signal.at(i), legend_coupling_label(this_mass), "l");
+          }
+        }
+
+      }
+
+    }
+
   }
+
   lg->SetFillStyle(0);
   lg->SetBorderSize(0);
   lg->Draw();
@@ -751,18 +725,25 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   //==== signal_class
   signal_class this_sc = no_class;
   //==== cutdR_cutW is only applied for low mass yet
-  if( histname_suffix[i_cut].Contains("Low") ) this_sc = lowmass;
-  if( histname_suffix[i_cut].Contains("High") ) this_sc = highmass;
+  if( histname_suffix[i_cut].Contains("Low") ) this_sc = low;
+  if( histname_suffix[i_cut].Contains("Low_TwoJet") ) this_sc = low_SR1;
+  if( histname_suffix[i_cut].Contains("Low_OneJet") ) this_sc = low_SR2;
+
+  if( histname_suffix[i_cut].Contains("High") ) this_sc = high;
+  if( histname_suffix[i_cut].Contains("High_TwoJet") ) this_sc = high_SR1;
+  if( histname_suffix[i_cut].Contains("High_OneFatJet") ) this_sc = high_SR2;
+
+
   //==== Special Lines
   if( histname[i_var].Contains("jjWclosest") ){
-    if( histname[i_var].Contains("lljjWclosest") ) this_sc = lowmass;
-    else this_sc = highmass;
+    if( histname[i_var].Contains("lljjWclosest") ) this_sc = low_SR1;
+    else this_sc = high_SR1;
   }
   if( histname[i_var].Contains("m_Leadlj_") || histname[i_var].Contains("m_SubLeadlj_") || histname[i_var].Contains("m_llj_") ){
-    this_sc = lowmass;
+    this_sc = low_SR2;
   }
   if( histname[i_var].Contains("fj") || histname[i_var].Contains("FatJet") ){
-    this_sc = highmass;
+    this_sc = high_SR2;
   }
 
   
@@ -832,72 +813,35 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   mc_stack->Draw("histsame");
 
   //==== signal
-  if(this_sc == class1){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[class1].begin(), map_class_to_signal_mass[class1].end(), this_mass) != map_class_to_signal_mass[class1].end()){
-        hist_signal[i]->Draw("histsame");
-      }
-    }
-  }
-  else if(this_sc == class2){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[class2].begin(), map_class_to_signal_mass[class2].end(), this_mass) != map_class_to_signal_mass[class2].end()){
-        hist_signal[i]->Draw("histsame");
-      }
-    }
-  }
-  else if(this_sc == lowmass){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[lowmass].begin(), map_class_to_signal_mass[lowmass].end(), this_mass) != map_class_to_signal_mass[lowmass].end()){
-        hist_signal[i]->Draw("histsame");
-      }
-    }
-  }
-  else if(this_sc == class3){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[class3].begin(), map_class_to_signal_mass[class3].end(), this_mass) != map_class_to_signal_mass[class3].end()){
-        hist_signal[i]->Draw("histsame");
-      }
-    }
-  }
-  else if(this_sc == class4){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[class4].begin(), map_class_to_signal_mass[class4].end(), this_mass) != map_class_to_signal_mass[class4].end()){
-        hist_signal[i]->Draw("histsame");
-      }
-    }
-  }
-  else if(this_sc == mediummass){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[mediummass].begin(), map_class_to_signal_mass[mediummass].end(), this_mass) != map_class_to_signal_mass[mediummass].end()){
-        hist_signal[i]->Draw("histsame");
-      }
-    }
-  }
-  else if(this_sc == highmass){
-    for(unsigned int i=0; i<signal_survive_mass.size(); i++){
-      int this_mass = signal_survive_mass.at(i);
-      if( find(map_class_to_signal_mass[highmass].begin(), map_class_to_signal_mass[highmass].end(), this_mass) != map_class_to_signal_mass[highmass].end()){
-        hist_signal[i]->Draw("histsame");
-      }
-    }
-  }
-  else if(this_sc == no_class){
+  if(sc==no_class){
+
     for(unsigned int i=0; i<signal_survive_mass.size(); i++){
       int this_mass = signal_survive_mass.at(i);
       if( find(signal_mass.begin(), signal_mass.end(), this_mass) != signal_mass.end()){
         hist_signal[i]->Draw("histsame");
       }
     }
+
   }
   else{
-    cout << "[Warning] This should not happen!" << endl;
+
+    for(int i_sigcl=0; i_sigcl<AllSignalClasses.size(); i_sigcl++){
+
+      signal_class this_cl = AllSignalClasses.at(i_sigcl);
+
+      if(sc==this_cl){
+
+        for(unsigned int i=0; i<signal_survive_mass.size(); i++){
+          int this_mass = signal_survive_mass.at(i);
+          if( find(map_class_to_signal_mass[this_cl].begin(), map_class_to_signal_mass[this_cl].end(), this_mass) != map_class_to_signal_mass[this_cl].end()){
+            hist_signal[i]->Draw("histsame");
+          }
+        }
+
+      }
+
+    }
+
   }
 
   //==== background err
