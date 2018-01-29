@@ -35,6 +35,7 @@ public:
     high_SR2 = 12,
   };
   vector<signal_class> AllSignalClasses;
+  signal_class CurrentSC;
   
   //==== functions for setting
   void make_bkglist();
@@ -54,7 +55,7 @@ public:
   void clear_legend_info();
   double coupling_constant(int mass);
   void fill_legend(TLegend *lg, TH1D *hist);
-  void draw_legend(TLegend *lg, signal_class sc, bool DrawData);
+  void draw_legend(TLegend *lg, bool DrawData);
   void draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerror, TH1D *hist_data, vector<TH1D *> hist_signal, TLegend *legend, bool DrawData, TFile *outputf);
 
   int n_rebin();
@@ -109,7 +110,8 @@ public:
   double default_y_max = 1000, default_y_min = 0.;
   double k_factor;
   double log_of_generation_mixing;
-  
+
+  bool ZeroDataCheckCut(double xlow, double xhigh);
 
 
 };

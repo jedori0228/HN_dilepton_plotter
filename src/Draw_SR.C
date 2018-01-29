@@ -1,8 +1,10 @@
 #include "Plotter.cc"
 #include <fstream>
 
-void Draw_SR(bool ScaleMC=true, int XXX=0){
-  
+void Draw_SR(int XXX=0){
+
+  bool ScaleMC = true;
+
   //==============
   //==== get env
   //==============
@@ -104,7 +106,6 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
     m.histname_suffix = {
 
-/*
       //==== DiMuon
       "_DiMuon_Preselection_SS", // nobjet, jet>=2;
       "_DiMuon_Low_SS",
@@ -137,6 +138,16 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       "_EMu_Preselection_ElectronSubLead_SS",
       "_EMu_Preselection_MuonSubLead_SS",
 
+
+
+    };
+  }
+  //==== Paper
+  if(XXX==1){
+    m.samples_to_use = {"chargeflip", "fake_Dijet", "prompt"};
+    m.histname_suffix = {
+
+
       "_DiLepton_Preselection_SS", // OffZ, nobjet, jet>=2;
       "_DiLepton_Low_SS",
       "_DiLepton_Low_TwoJet_NoFatJet_SS",
@@ -144,33 +155,12 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       "_DiLepton_High_SS",
       "_DiLepton_High_TwoJet_NoFatJet_SS",
       "_DiLepton_High_OneFatJet_SS",
-*/
-
-      "_DiLepton_High_TwoJet_NoFatJet_SS",
-      //"_DiLepton_High_OneFatJet_SS",
 
 
+      //"_DiLepton_Low_TwoJet_NoFatJet_SS",
+      //"_DiLepton_Low_OneJet_NoFatJet_SS",
     };
   }
-  //==== OS
-  if(XXX==1){
-    //m.samples_to_use = {"VV_excl", "Xgamma_noDY", "fake_Dijet", "VVV", "top", "DY", "WW_double"};
-    m.samples_to_use = {"VV_excl", "Xgamma_noDY", "VVV", "top_tt", "DY", "WW_double"};
-    m.histname_suffix = {
-      //"_DiMuon_Preselection_AboveZ_AllCharge",
-      "_DiMuon_Preselection_OS",
-      //"_DiElectron_Preselection_OS",
-    };
-  }
-  if(XXX==2){
-    m.samples_to_use = {"chargeflip", "fake_Dijet", "VV_excl", "VVV", "top", "WW_double", "DY"};
-
-    m.histname_suffix = {
-      // diel
-      "_DiElectron_Preselection_OS",
-    };
-  }
-
 
   //============================
   //==== set variables to draw
@@ -189,7 +179,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "DeltaRLeadl_lljjWclosest", "DeltaRSubLeadl_lljjWclosest",
     "DeltaRLeadl_SubLeadllljjWclosest", "DeltaRSubLeadl_LeadllljjWclosest",
     //==== Laeding dijet
-    "m_jjptorder", "m_lljjptorder", "m_Leadljjptorder", "m_SubLeadljjptorder",
+    //"m_jjptorder", "m_lljjptorder", "m_Leadljjptorder", "m_SubLeadljjptorder",
     "Njets", "Njets_nolepveto", "Nfwdjets", "Nbjets", "Nbjets_nolepveto", "Nbfwdjets",
     "leadingLepton_Pt", "leadingLepton_Eta", "leadingLepton_Type",
     "secondLepton_Pt", "secondLepton_Eta", "secondLepton_Type",
@@ -205,7 +195,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //==== Fatjet
     "Nfatjets",
     "WClosest_FatJet_Pt", "WClosest_FatJet_Eta", "WClosest_FatJet_Mass", "WClosest_FatJet_Tau21", "WClosest_FatJet_PrunedMass",
-    "m_Leadlfj_ptorder", "m_SubLeadlfj_ptorder", "m_llfj_ptorder",
+    //"m_Leadlfj_ptorder", "m_SubLeadlfj_ptorder", "m_llfj_ptorder",
     "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
     //==== OneJet_NoFatJet
     "m_Leadlj", "m_SubLeadlj", "m_llj",
@@ -224,7 +214,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     "#DeltaR(Leading lepton,jj_{W,ak4})", "#DeltaR(Subleading lepton,jj_{W,ak4})",
     "#DeltaR(Leading lepton,Subleading lepton+jj_{W,ak4})", "#DeltaR(Subleading lepton,Leading lepton+jj_{W,ak4})",
     //==== Laeding dijet
-    "m(j_{1}j_{2}) (GeV)",  "m(llj_{1}j_{2}) (GeV)", "m(Leading Lepton+j_{1}j_{2}) (GeV)", "m(Subleading Lepton+j_{1}j_{2}) (GeV)",
+    //"m(j_{1}j_{2}) (GeV)",  "m(llj_{1}j_{2}) (GeV)", "m(Leading Lepton+j_{1}j_{2}) (GeV)", "m(Subleading Lepton+j_{1}j_{2}) (GeV)",
     "# of jets", "# of No-LeptonVeto jets", "# of forward jets", "# of b-jets", "# of No-LeptonVeto b-jets", "# of forward b-jets",
     "Leading lepton p_{T} (GeV)", "Leading lepton #eta", "Leading lepton Type",
     "Subleading lepton p_{T} (GeV)", "Subleading lepton #eta", "Subleading lepton type",
@@ -240,11 +230,10 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
     //==== Fatjet
     "# of j_{ak8}",
     "j_{ak8} p_{T} (GeV)", "j_{ak8} #eta", "j_{ak8} invariant mass (GeV)", "j_{ak8} #tau_{21}", "j_{ak8} pruned mass (GeV)",
-    "l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
+    //"l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
     "l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
     //==== OneJet_NoFatJet
-    "l^{#pm}l^{#pm}j_{ak4} invariant mass (GeV)", "l_{1}j_{ak4} invariant mass (GeV)", "l_{2}j_{ak4} invariant mass (GeV)",
-    "m(Leading Lepton+j) (GeV)", "m(Subleading Lepton+j) (GeV)", "m(llj) (GeV)",
+    "l_{1}j_{ak4} invariant mass (GeV)", "l_{2}j_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak4} invariant mass (GeV)",
   };
 
   m.units = {
@@ -340,8 +329,7 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
     //==== Log plot boolean
     if(XXX==0) m.UseLogy.push_back(-1);
-    else if(XXX==1) m.UseLogy.push_back(100);
-    else if(XXX==2) m.UseLogy.push_back(-1);
+    else if(XXX==1) m.UseLogy.push_back(-1);
     else m.UseLogy.push_back(-1);
 
     if(ScaleMC) m.ApplyMCNormSF.push_back(true);
@@ -398,17 +386,19 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
   //==== set signal mass points
   //=============================
 
-/*
+  if(XXX==0){
   //==== general AN
-  m.signal_mass  = {40,   60,      70,        100,     300,    500,     800,   1200,   -800,  -1200};
-  m.signal_color = {kRed, kOrange, kYellow+2, kGreen,  kBlue,  kViolet, kGray, kBlack, kGray, kBlack};
-  m.signal_draw  = {true, true,    true,      true,    true,   true,    true,  true,   true,  true};
-*/
+    m.signal_mass  = {40,   60,      70,        100,     300,    500,     800,   1200,   -800,  -1200};
+    m.signal_color = {kRed, kOrange, kYellow+2, kGreen,  kBlue,  kViolet, kGray, kBlack, kGray, kBlack};
+    m.signal_draw  = {true, true,    true,      true,    true,   true,    true,  true,   true,  true};
+  }
 
   //==== PAS
-  m.signal_mass  = {50,   200,     400};
-  m.signal_color = {kRed, kOrange, kViolet};
-  m.signal_draw  = {true, true,   true};
+  if(XXX==1){
+    m.signal_mass  = {40,   60,    200,  400,   800,  -800, 1000};
+    m.signal_color = {kRed, kBlue, kRed, kBlue, kRed, kRed, kBlue};
+    m.signal_draw  = {true, true,  true, true,  true, true, true};
+  }
 
   //====================================
   //==== set signal coupling constants
@@ -439,12 +429,12 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 200)] = 0.1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 300)] = 0.1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 400)] = 1;
-      m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), 500)] = 0.1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 800)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 1000)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), 1200)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -500)] = 1;
-      m.coupling_constants[make_pair(m.histname_suffix.at(i), -800)] = 0.1;
+      m.coupling_constants[make_pair(m.histname_suffix.at(i), -800)] = 1;
       m.coupling_constants[make_pair(m.histname_suffix.at(i), -1200)] = 1.0;
 
 
@@ -470,9 +460,20 @@ void Draw_SR(bool ScaleMC=true, int XXX=0){
 
   for(unsigned int i=0; i<m.signal_mass.size(); i++){
     int this_mass = m.signal_mass.at(i);
-    if(this_mass<=80) m.map_class_to_signal_mass[Plotter::lowmass].push_back( this_mass );
-    else m.map_class_to_signal_mass[Plotter::highmass].push_back( this_mass );
+    if(fabs(this_mass)<=80){
+      m.map_class_to_signal_mass[Plotter::low].push_back( this_mass );
+      m.map_class_to_signal_mass[Plotter::low_SR1].push_back( this_mass );
+      m.map_class_to_signal_mass[Plotter::low_SR2].push_back( this_mass );
+    }
+    else{
+      m.map_class_to_signal_mass[Plotter::high].push_back( this_mass );
+      m.map_class_to_signal_mass[Plotter::high_SR1].push_back( this_mass );
+      m.map_class_to_signal_mass[Plotter::high_SR2].push_back( this_mass );
+    }
   }
+  m.map_class_to_signal_mass[Plotter::high_SR1] = {200, 400};
+  m.map_class_to_signal_mass[Plotter::high_SR2] = {800, 1000, -800};
+  m.AllSignalClasses = {Plotter::no_class, Plotter::low_SR1, Plotter::low_SR2, Plotter::high_SR1, Plotter::high_SR2};
 
   //=============
   //==== rebins

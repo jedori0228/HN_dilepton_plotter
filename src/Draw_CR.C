@@ -231,13 +231,13 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //==== Fatjet
     "Nfatjets",
     "WClosest_FatJet_Pt", "WClosest_FatJet_Eta", "WClosest_FatJet_Mass", "WClosest_FatJet_Tau21", "WClosest_FatJet_PrunedMass",
-    "m_Leadlfj_ptorder", "m_SubLeadlfj_ptorder", "m_llfj_ptorder",
+    //"m_Leadlfj_ptorder", "m_SubLeadlfj_ptorder", "m_llfj_ptorder",
     "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
     //==== OneJet_NoFatJet
     "m_Leadlj", "m_SubLeadlj", "m_llj",
     //==== SF TEST
-    "InnerBarrelLepton_Pt", "OuterBarrelLepton_Pt", "EndCapLepton_Pt",
-    "InnerBarrelLepton_Eta", "OuterBarrelLepton_Eta", "EndCapLepton_Eta",
+    //"InnerBarrelLepton_Pt", "OuterBarrelLepton_Pt", "EndCapLepton_Pt",
+    //"InnerBarrelLepton_Eta", "OuterBarrelLepton_Eta", "EndCapLepton_Eta",
   };
 
   m.x_title = {
@@ -257,13 +257,13 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //==== Fatjet
     "# of Fatjet",
     "Fatjet p_{T} (GeV)", "Fatjet #eta", "Fatjet Mass (GeV)", "Fatjet #tau_{21}", "Fatjet Pruned Mass (GeV)",
-    "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
+    //"m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
     "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
     //==== OneJet_NoFatJet
     "m(Leading Lepton+j) (GeV)", "m(Subleading Lepton+j) (GeV)", "m(llj) (GeV)",
     //==== SF TEST
-    "IB Lepton p_{T} [GeV]", "OB Lepton p_{T} [GeV]","EC Lepton p_{T} [GeV]",
-    "IB Lepton #eta", "OB Lepton #eta", "EC Lepton #eta",
+    //"IB Lepton p_{T} [GeV]", "OB Lepton p_{T} [GeV]","EC Lepton p_{T} [GeV]",
+    //"IB Lepton #eta", "OB Lepton #eta", "EC Lepton #eta",
   };
 
   m.units = {

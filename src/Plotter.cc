@@ -19,7 +19,7 @@ Plotter::~Plotter(){
 }
 
 void Plotter::draw_hist(){
-  
+
   for(i_cut = 0; i_cut < histname_suffix.size(); i_cut++){
 
     //==== This step, 
@@ -60,16 +60,16 @@ void Plotter::draw_hist(){
       
       TLegend *lg;
       if(drawratio.at(i_cut)){
-        //==== with signal (SR)
+        //==== CR
         if(signal_mass.size()==0) lg = new TLegend(0.60, 0.35, 0.96, 0.92);
-        //==== without signal (CR)
+        //==== SR
         else lg = new TLegend(0.60, 0.35, 0.96, 0.92);
       }
       else{
-        //==== with signal (SR)
+        //==== CR
         if(signal_mass.size()==0) lg = new TLegend(0.60, 0.35, 0.95, 0.92);
-        //==== without signal (CR)
-        else lg = new TLegend(0.50, 0.40, 0.93, 0.90);
+        //==== SR
+        else lg = new TLegend(0.55, 0.50, 0.93, 0.90);
       }
 
       clear_legend_info();
@@ -360,6 +360,7 @@ void Plotter::draw_hist(){
     } // END loop over variables
 
     outputfile->Close();
+    system("rm "+thiscut_plotpath+"/hists.root");
 
 
   } // END loop over cuts
@@ -615,8 +616,7 @@ double Plotter::coupling_constant(int mass){
   TString cut = histname_suffix[i_cut];
 
   double scale(1.);
-  if(histname_suffix[i_cut].Contains("OneFatJet")){
-//FIXME
+  if(CurrentSC==high_SR2){
   }
 
   if( coupling_constants.find( make_pair(cut, mass) ) != coupling_constants.end() ){
@@ -659,7 +659,7 @@ void Plotter::fill_legend(TLegend* lg, TH1D* hist){
 
 }
 
-void Plotter::draw_legend(TLegend* lg, signal_class sc, bool DrawData){
+void Plotter::draw_legend(TLegend* lg, bool DrawData){
   // Example :
   //                      0    1    2    3
   // samples_to_use   = {"A", "B", "C", "D"}
@@ -682,7 +682,7 @@ void Plotter::draw_legend(TLegend* lg, signal_class sc, bool DrawData){
   }
 
   //==== Signal
-  if(sc==no_class){
+  if(CurrentSC==no_class){
 
     for(unsigned int i=0; i<signal_survive_mass.size(); i++){
       int this_mass = signal_survive_mass.at(i);
@@ -698,7 +698,7 @@ void Plotter::draw_legend(TLegend* lg, signal_class sc, bool DrawData){
 
       signal_class this_cl = AllSignalClasses.at(i_sigcl);
 
-      if(sc==this_cl){
+      if(CurrentSC==this_cl){
 
         for(unsigned int i=0; i<signal_survive_mass.size(); i++){
           int this_mass = signal_survive_mass.at(i);
@@ -723,27 +723,27 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   if(!hist_data) return;
 
   //==== signal_class
-  signal_class this_sc = no_class;
+  CurrentSC = no_class;
   //==== cutdR_cutW is only applied for low mass yet
-  if( histname_suffix[i_cut].Contains("Low") ) this_sc = low;
-  if( histname_suffix[i_cut].Contains("Low_TwoJet") ) this_sc = low_SR1;
-  if( histname_suffix[i_cut].Contains("Low_OneJet") ) this_sc = low_SR2;
+  if( histname_suffix[i_cut].Contains("Low") ) CurrentSC = low;
+  if( histname_suffix[i_cut].Contains("Low_TwoJet") ) CurrentSC = low_SR1;
+  if( histname_suffix[i_cut].Contains("Low_OneJet") ) CurrentSC = low_SR2;
 
-  if( histname_suffix[i_cut].Contains("High") ) this_sc = high;
-  if( histname_suffix[i_cut].Contains("High_TwoJet") ) this_sc = high_SR1;
-  if( histname_suffix[i_cut].Contains("High_OneFatJet") ) this_sc = high_SR2;
+  if( histname_suffix[i_cut].Contains("High") ) CurrentSC = high;
+  if( histname_suffix[i_cut].Contains("High_TwoJet") ) CurrentSC = high_SR1;
+  if( histname_suffix[i_cut].Contains("High_OneFatJet") ) CurrentSC = high_SR2;
 
 
   //==== Special Lines
   if( histname[i_var].Contains("jjWclosest") ){
-    if( histname[i_var].Contains("lljjWclosest") ) this_sc = low_SR1;
-    else this_sc = high_SR1;
+    if( histname[i_var].Contains("lljjWclosest") ) CurrentSC = low_SR1;
+    else CurrentSC = high_SR1;
   }
   if( histname[i_var].Contains("m_Leadlj_") || histname[i_var].Contains("m_SubLeadlj_") || histname[i_var].Contains("m_llj_") ){
-    this_sc = low_SR2;
+    CurrentSC = low_SR2;
   }
   if( histname[i_var].Contains("fj") || histname[i_var].Contains("FatJet") ){
-    this_sc = high_SR2;
+    CurrentSC = high_SR2;
   }
 
   
@@ -813,7 +813,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   mc_stack->Draw("histsame");
 
   //==== signal
-  if(sc==no_class){
+  if(CurrentSC==no_class){
 
     for(unsigned int i=0; i<signal_survive_mass.size(); i++){
       int this_mass = signal_survive_mass.at(i);
@@ -829,7 +829,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
 
       signal_class this_cl = AllSignalClasses.at(i_sigcl);
 
-      if(sc==this_cl){
+      if(CurrentSC==this_cl){
 
         for(unsigned int i=0; i<signal_survive_mass.size(); i++){
           int this_mass = signal_survive_mass.at(i);
@@ -859,8 +859,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   for(int i=0; i<gr_data->GetN(); ++i){
     int N = gr_data->GetY()[i];
     double L =  (N==0) ? 0  : (ROOT::Math::gamma_quantile(alpha/2,N,1.));
-    double U =  (N==0) ?  ( ROOT::Math::gamma_quantile_c(alpha,N+1,1) ) :
-      ( ROOT::Math::gamma_quantile_c(alpha/2,N+1,1) );
+    double U =  (N==0) ? ( ROOT::Math::gamma_quantile_c(alpha,N+1,1) ) : ( ROOT::Math::gamma_quantile_c(alpha/2,N+1,1) );
     if( N!=0 ){
       gr_data->SetPointEYlow(i, N-L );
       gr_data->SetPointEXlow(i, 0);
@@ -870,12 +869,22 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
       err_up_tmp.push_back(U-N);
      }
     else{
-      gr_data->SetPointEYlow(i, 0.1);
+      double zerodata_err_low = 0.1;
+      double zerodata_err_high = 1.8;
+
+      double xlow = gr_data->GetX()[i]-gr_data->GetEXlow()[i];
+      double xhigh = gr_data->GetX()[i]+gr_data->GetEXhigh()[i];
+      if(ZeroDataCheckCut(xlow,xhigh)){
+        zerodata_err_low = 0.;
+        zerodata_err_high = 0.;
+      }
+
+      gr_data->SetPointEYlow(i, zerodata_err_low);
       gr_data->SetPointEXlow(i, 0.);
-      gr_data->SetPointEYhigh(i, 1.8);
+      gr_data->SetPointEYhigh(i, zerodata_err_high);
       gr_data->SetPointEXhigh(i, 0.);
-      err_down_tmp.push_back(0.);
-      err_up_tmp.push_back(1.8);
+      err_down_tmp.push_back(zerodata_err_low);
+      err_up_tmp.push_back(zerodata_err_high);
     }
   }
   gr_data->SetLineWidth(2.0);
@@ -899,7 +908,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     legend->AddEntry(hist_data, "Total Background", "pe");
   }
   if(drawratio.at(i_cut)) c1_up->cd();
-  draw_legend(legend, this_sc, DrawData);
+  draw_legend(legend, DrawData);
   hist_empty->Draw("axissame");
 
   //==== Ratio
@@ -1468,4 +1477,18 @@ TString Plotter::GetStringChannelRegion(int A, int B){
 
 }
 
+bool Plotter::ZeroDataCheckCut(double xlow, double xhigh){
+
+  if(histname_suffix[i_cut].Contains("_Low_")){
+    if(histname[i_var]=="m_lljj_lljjWclosest"){
+      if(xlow>=300) return true;
+    }
+    if(histname[i_var]=="m_llj"){
+      if(xlow>=300) return true;
+    }
+  }
+
+  return false;
+
+}
 

@@ -1,7 +1,7 @@
 #include "canvas_margin.h"
 
 double GetXsec(int mass);
-double GetXsecST(int mass);
+double GetXsecTch(int mass);
 
 void HiggsCombindedLimit_Xsec(int i=0){
 
@@ -15,10 +15,13 @@ void HiggsCombindedLimit_Xsec(int i=0){
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
-  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
+  //TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
+  //TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  TString WhichDirectoryInCutop = "MuEl_Combined";
+  TString filepath = ENV_FILE_PATH+dataset+"/Limit/FullCLs/";
+  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/FullCLs/";
+
+  TString WhichDirectoryInCutop = "MuMu_Combined";
   if(i==1) WhichDirectoryInCutop = "MuMu_Bin1";
   if(i==2) WhichDirectoryInCutop = "MuMu_Bin2";
   if(i==3) WhichDirectoryInCutop = "MuMu_Combined";
@@ -44,18 +47,18 @@ void HiggsCombindedLimit_Xsec(int i=0){
     << endl;
   }
   
-  TLatex latex_CMSPriliminary, latex_Lumi;
+  TLatex latex_CMSPriliminary, latex_Lumi, latex_title, latex_processname;
   latex_CMSPriliminary.SetNDC();
   latex_Lumi.SetNDC();
+  latex_title.SetNDC();
+  latex_processname.SetNDC();
 
-  //=== 13 TeV S+T channel
+  //=== 13 TeV S-only channel
 
   string elline;
   ifstream in(filepath+"/result.txt");
-  const int n_central = 19;
+  int n_central = 26; //FIXME 26
   double mass[n_central], obs[n_central], limit[n_central], onesig_left[n_central], onesig_right[n_central], twosig_left[n_central], twosig_right[n_central];
-
-  vector<int> MassInTchSample = {300, 600, 800, 1000, 1200, 1500};
 
   int dummyint=0;
   while(getline(in,elline)){
@@ -77,10 +80,6 @@ void HiggsCombindedLimit_Xsec(int i=0){
     else scale *= 100.;
 
     double this_xsec = GetXsec(mass[dummyint]);
-
-    if(mass[dummyint] >= MassInTchSample.at(0)){
-      this_xsec += GetXsecST(mass[dummyint])/2.; // SS Only
-    }
 
     scale *= this_xsec;
 
@@ -121,79 +120,71 @@ void HiggsCombindedLimit_Xsec(int i=0){
   gr_band_2sigma->SetMarkerColor(kYellow);
 
 
-  //==== 13 TeV S channel only
+  //==== 13 TeV T added
 
-  string elline_SOnly;
-  ifstream in_SOnly(filepath+"/result_SOnly.txt");
+  string elline_SandT;
+  ifstream in_SandT(filepath+"/result_VBF.txt");
 
-  const int n_SOnly = 13;
-  double mass_SOnly[n_SOnly], obs_SOnly[n_SOnly], limit_SOnly[n_SOnly], onesig_left_SOnly[n_SOnly], onesig_right_SOnly[n_SOnly], twosig_left_SOnly[n_SOnly], twosig_right_SOnly[n_SOnly];
+  const int n_SandT = 6;
+  double mass_SandT[n_SandT], obs_SandT[n_SandT], limit_SandT[n_SandT], onesig_left_SandT[n_SandT], onesig_right_SandT[n_SandT], twosig_left_SandT[n_SandT], twosig_right_SandT[n_SandT];
   dummyint=0;
 
-  while(getline(in_SOnly,elline_SOnly)){
-    std::istringstream is( elline_SOnly );
+  while(getline(in_SandT,elline_SandT)){
+    std::istringstream is( elline_SandT );
 
-    is >> mass_SOnly[dummyint];
-    is >> obs_SOnly[dummyint];
-    is >> limit_SOnly[dummyint];
-    is >> onesig_left_SOnly[dummyint];
-    is >> onesig_right_SOnly[dummyint];
-    is >> twosig_left_SOnly[dummyint];
-    is >> twosig_right_SOnly[dummyint];
+    is >> mass_SandT[dummyint];
+    is >> obs_SandT[dummyint];
+    is >> limit_SandT[dummyint];
+    is >> onesig_left_SandT[dummyint];
+    is >> onesig_right_SandT[dummyint];
+    is >> twosig_left_SandT[dummyint];
+    is >> twosig_right_SandT[dummyint];
 
     double scale=1.; //mixing squared is 0.01 now
-    if(mass_SOnly[dummyint]<=60) scale *= 0.01;
-    else if(mass_SOnly[dummyint]<=100) scale *= 0.1;
-    else if(mass_SOnly[dummyint]<=300) scale *= 1.;
-    else if(mass_SOnly[dummyint]<=700) scale *= 10.;
+    if(mass_SandT[dummyint]<=60) scale *= 0.01;
+    else if(mass_SandT[dummyint]<=100) scale *= 0.1;
+    else if(mass_SandT[dummyint]<=300) scale *= 1.;
+    else if(mass_SandT[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
 
-    double this_xsec = GetXsec(mass_SOnly[dummyint]);
-    cout << mass_SOnly[dummyint] << "\t" << this_xsec << endl;
+    double this_xsec = GetXsec(mass_SandT[dummyint]);
+    this_xsec += GetXsecTch(mass[dummyint])/2.; // SS-only
+
     scale *= this_xsec;
 
-    obs_SOnly[dummyint] *= scale;
-    limit_SOnly[dummyint] *= scale;
-    onesig_left_SOnly[dummyint] *= scale;
-    onesig_right_SOnly[dummyint] *= scale;
-    twosig_left_SOnly[dummyint] *= scale;
-    twosig_right_SOnly[dummyint] *= scale;
+    obs_SandT[dummyint] *= scale;
+    limit_SandT[dummyint] *= scale;
+    onesig_left_SandT[dummyint] *= scale;
+    onesig_right_SandT[dummyint] *= scale;
+    twosig_left_SandT[dummyint] *= scale;
+    twosig_right_SandT[dummyint] *= scale;
 
-    onesig_left_SOnly[dummyint] = limit_SOnly[dummyint]-onesig_left_SOnly[dummyint];
-    onesig_right_SOnly[dummyint] = onesig_right_SOnly[dummyint] - limit_SOnly[dummyint];
-    twosig_left_SOnly[dummyint] = limit_SOnly[dummyint]-twosig_left_SOnly[dummyint];
-    twosig_right_SOnly[dummyint] = twosig_right_SOnly[dummyint] - limit_SOnly[dummyint];
+    onesig_left_SandT[dummyint] = limit_SandT[dummyint]-onesig_left_SandT[dummyint];
+    onesig_right_SandT[dummyint] = onesig_right_SandT[dummyint] - limit_SandT[dummyint];
+    twosig_left_SandT[dummyint] = limit_SandT[dummyint]-twosig_left_SandT[dummyint];
+    twosig_right_SandT[dummyint] = twosig_right_SandT[dummyint] - limit_SandT[dummyint];
 
     dummyint++;
   }
 
-  TGraph *gr_13TeV_obs_SOnly = new TGraph(n_SOnly,mass_SOnly,obs_SOnly);
-  gr_13TeV_obs_SOnly->SetLineWidth(3);
-  gr_13TeV_obs_SOnly->SetLineColor(kBlack);
+  TGraph *gr_13TeV_obs_SandT = new TGraph(n_SandT,mass_SandT,obs_SandT);
+  gr_13TeV_obs_SandT->SetLineWidth(3);
+  gr_13TeV_obs_SandT->SetLineColor(kBlack);
 
-  TGraph *gr_13TeV_exp_SOnly = new TGraph(n_SOnly,mass_SOnly,limit_SOnly);
-  gr_13TeV_exp_SOnly->SetLineWidth(3);
-  gr_13TeV_exp_SOnly->SetLineStyle(1);
-  gr_13TeV_exp_SOnly->SetLineColor(kBlue);
+  TGraph *gr_13TeV_exp_SandT = new TGraph(n_SandT,mass_SandT,limit_SandT);
+  gr_13TeV_exp_SandT->SetLineWidth(3);
+  gr_13TeV_exp_SandT->SetLineStyle(1);
+  gr_13TeV_exp_SandT->SetLineColor(kBlue);
 
+  TGraphAsymmErrors *gr_band_1sigma_SandT = new TGraphAsymmErrors(n_SandT, mass_SandT, limit_SandT, 0, 0, onesig_left_SandT, onesig_right_SandT);
+  gr_band_1sigma_SandT->SetFillColor(kGreen);
+  gr_band_1sigma_SandT->SetLineColor(kGreen);
+  gr_band_1sigma_SandT->SetMarkerColor(kGreen);
 
-
-
-
-  TLegend *lg = new TLegend(0.50, 0.55, 0.90, 0.90);
-  TLegend *lg_log = new TLegend(0.20, 0.55, 0.60, 0.90);
-
-  if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
-  lg->AddEntry(gr_13TeV_exp_SOnly, "CL_{s} Expected, s-ch only", "l");
-  lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected", "l");
-  lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
-  lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
-
-  if(DrawObserved) lg_log->AddEntry(gr_13TeV_obs,"CL_{s} Observed", "l");
-  lg_log->AddEntry(gr_13TeV_exp_SOnly, "CL_{s} Expected, s-ch only", "l");
-  lg_log->AddEntry(gr_13TeV_exp,"CL_{s} Expected", "l");
-  lg_log->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
-  lg_log->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
+  TGraphAsymmErrors *gr_band_2sigma_SandT = new TGraphAsymmErrors(n_SandT, mass_SandT, limit_SandT, 0, 0, twosig_left_SandT, twosig_right_SandT);
+  gr_band_2sigma_SandT->SetFillColor(kYellow);
+  gr_band_2sigma_SandT->SetLineColor(kYellow);
+  gr_band_2sigma_SandT->SetMarkerColor(kYellow);
 
   //==== 8 TeV overlay
 
@@ -203,131 +194,161 @@ void HiggsCombindedLimit_Xsec(int i=0){
     90, 100, 125, 150, 175,
     200, 250, 300, 350, 400, 500
   };
-  double exp[nm];
+  double obs_8TeV[nm], exp_8TeV[nm];
 
-  vector<double> MixingValues8TeV;
+  vector<double> tempvec_obs_8TeV, tempvec_exp_8TeV;
   if(channel=="ElEl"){
-    MixingValues8TeV = {
-      //==== ElEl
-      0.238636, 0.171337, 0.204524, 0.525581, 0.142802,
-      0.15618, 0.0365141, 0.0110612, 0.00617064, 0.004475,
-      0.00355606, 0.00283105, 0.00215555, 0.00175336, 0.00163501, 0.00168907,
+    tempvec_obs_8TeV = {
+0.310856, 0.228104, 0.268764, 0.682266, 0.187104, 0.209065, 0.0521459, 0.0113648, 0.00491012, 0.00354478, 0.00278916, 0.00285184, 0.00252027, 0.00218728, 0.00201853, 0.00208477,
+    };
+    tempvec_exp_8TeV = {
+0.238636, 0.171337, 0.204524, 0.525581, 0.142802, 0.15618, 0.0365141, 0.0110612, 0.00617064, 0.004475, 0.00355606, 0.00283105, 0.00215555, 0.00175336, 0.00163501, 0.00168907,
     };
   }
   if(channel=="MuMu"){
-    MixingValues8TeV = {
-      //==== MuMu
-      0.0574156, 0.0529912, 0.0694351, 0.175697, 0.0380223,
-      0.0555941, 0.0123044, 0.00419174, 0.00276877, 0.00225111,
-      0.00191277, 0.00132662, 0.00124522, 0.0011111, 0.0012705, 0.00143492,
+    tempvec_obs_8TeV = {
+0.0425758, 0.0370795, 0.0509001, 0.111657, 0.0262207, 0.0488669, 0.011495, 0.00263166, 0.00212999, 0.00260005, 0.00221507, 0.00140472, 0.00125629, 0.00118361, 0.00128623, 0.00152084,
+    };
+    tempvec_exp_8TeV = {
+0.0574156, 0.0529912, 0.0694351, 0.175697, 0.0380223, 0.0555941, 0.0123044, 0.00419174, 0.00276877, 0.00225111, 0.00191277, 0.00132662, 0.00124522, 0.0011111, 0.0012705, 0.00143492,
     };
   }
   if(channel=="MuEl"){
-    MixingValues8TeV = {
-      //==== MuEl
-      0.270911, 0.229688, 0.278787, 0.771095, 0.147626,
-      0.133925, 0.0327043, 0.00959089, 0.00551888, 0.00407575,
-      0.00279852, 0.00222304, 0.00154023, 0.00146327, 0.00143876, 0.0016471,
+    tempvec_obs_8TeV = {
+0.269913, 0.228505, 0.279637, 0.771711, 0.171265, 0.163916, 0.0463834, 0.0140186, 0.00644153, 0.00476088, 0.00326979, 0.0028114, 0.0022835, 0.00224634, 0.00224528, 0.00262692,
+    };
+    tempvec_exp_8TeV = {
+0.270911, 0.229688, 0.278787, 0.771095, 0.147626, 0.133925, 0.0327043, 0.00959089, 0.00551888, 0.00407575, 0.00279852, 0.00222304, 0.00154023, 0.00146327, 0.00143876, 0.0016471,
     };
   }
 
-  for(unsigned int j=0; j<MixingValues8TeV.size(); j++) exp[j] = MixingValues8TeV.at(j);
+  for(unsigned int j=0; j<tempvec_obs_8TeV.size(); j++){
+    obs_8TeV[j] = tempvec_obs_8TeV.at(j);
+    exp_8TeV[j] = tempvec_exp_8TeV.at(j);
+  }
 
-  TGraph *gr_8TeV_exp = new TGraph(nm, mass_8TeV, exp);
-  gr_8TeV_exp->SetLineColor(kRed);
+  TGraph *gr_8TeV_exp = new TGraph(nm, mass_8TeV, obs_8TeV);
+  gr_8TeV_exp->SetLineColor(kViolet);
+  gr_8TeV_exp->SetLineStyle(10);
   gr_8TeV_exp->SetLineWidth(3);
 
-  TCanvas *c_out = new TCanvas("c_out", "", 800, 800);
-  canvas_margin(c_out);
-  c_out->cd();
-  c_out->Draw();
-  c_out->SetLogy();
+  //======================
+  //==== S-ch only limit
+  //======================
+
+  //=== Legend
+  TLegend *lg = new TLegend(0.20, 0.15, 0.55, 0.40);
+  lg->SetBorderSize(0);
+  lg->SetFillStyle(0);
+
+  if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed, s-ch only", "l");
+  lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected, s-ch only", "l");
+  lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
+  lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
+  lg->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+
+  TCanvas *c_SOnly = new TCanvas("c_SOnly", "", 800, 800);
+  canvas_margin(c_SOnly);
+  c_SOnly->cd();
+  c_SOnly->Draw();
+  c_SOnly->SetLogy();
 
   TH1D *dummy = new TH1D("hist", "", 10000, 0., 10000.);
   dummy->Draw("hist");
   hist_axis(dummy);
+  dummy->GetYaxis()->SetTitleSize(0.06);
+/*
   if(channel=="ElEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q}] (pb)");
   if(channel=="MuMu") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q}] (pb)");
   if(channel=="MuEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}#mu^{#pm}N#rightarrowe^{#pm}#mu^{#pm}q#bar{q}] (pb)");
-  dummy->GetXaxis()->SetTitle("m(N) (GeV)");
-  dummy->GetXaxis()->SetRangeUser(10., 2000);
-  dummy->GetYaxis()->SetTitleSize(0.06); 
+*/
+  dummy->GetYaxis()->SetTitle("#sigma #times  #bf{#it{#Beta}} (pb)");
+  dummy->GetXaxis()->SetTitle("m_{N} (GeV)");
+  dummy->GetXaxis()->SetRangeUser(10., 2500);
   dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
   dummy->SetTitle("");
+  dummy->Draw("hist");
 
   gr_band_2sigma->Draw("3same");
   gr_band_1sigma->Draw("3same");
   gr_13TeV_exp->Draw("lsame");
   gr_8TeV_exp->Draw("lsame");
   if(DrawObserved) gr_13TeV_obs->Draw("lsame");
-  gr_13TeV_exp_SOnly->Draw("lsame");
 
-  lg->AddEntry(gr_8TeV_exp, "CMS 8 TeV Expected", "l");
-  lg->SetX2NDC(0.90);
-  lg->SetY2NDC(0.67);
-  lg->SetBorderSize(0);
-  lg->SetFillStyle(0);
   lg->Draw();
 
   latex_CMSPriliminary.SetTextSize(0.035);
   latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+  latex_title.SetTextSize(0.04);
+  latex_title.SetLineWidth(2);
+  latex_title.DrawLatex(0.20, 0.90, "#font[41]{95% CL upper limit}");
 
-  c_out->SaveAs(plotpath+"/"+channel+"_13TeV_xsec.pdf");
-  c_out->SaveAs(plotpath+"/"+channel+"_13TeV_xsec.png");
-  c_out->Close();
+  TString processname = "";
+  if(channel=="MuMu") processname = "pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}e^{#pm}q#bar{q'}";
+  if(channel=="ElEl") processname = "pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q'}";
+  if(channel=="MuEl") processname = "pp#rightarrowl^{#pm}N#rightarrowl^{#pm}l^{#pm}q#bar{q'}";
+  processname = "#font[41]{"+processname+"}";
+  latex_processname.SetTextSize(0.04);
+  latex_processname.SetLineWidth(2);
+  latex_processname.DrawLatex(0.20, 0.85, processname);
 
-  //==== logX
-  TCanvas *c_out_logx = new TCanvas("c_out_logx", "", 800, 800);
-  canvas_margin(c_out_logx);
-  c_out_logx->cd();
-  c_out_logx->Draw();
-  c_out_logx->SetLogy();
-  //c_out_logx->SetGridx();
-  //c_out_logx->SetGridy();
+  c_SOnly->SetLogx();
+  c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_xsec_logx.pdf");
+  c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_xsec_logx.png");
+
+  c_SOnly->Close();
+
+  //======================
+  //==== S+T limit
+  //======================
+
+  //=== Legend
+  TLegend * lg_SandT = new TLegend(0.20, 0.15, 0.55, 0.40);
+  lg_SandT->SetBorderSize(0);
+  lg_SandT->SetFillStyle(0);
+
+  if(DrawObserved) lg_SandT->AddEntry(gr_13TeV_obs_SandT,"CL_{s} Observed, s- and t-ch", "l");
+  lg_SandT->AddEntry(gr_13TeV_exp_SandT,"CL_{s} Expected, s- and t-ch", "l");
+  lg_SandT->AddEntry(gr_band_1sigma_SandT,"CL_{s} Expected #pm 1 s.d., s- and t-ch", "f");
+  lg_SandT->AddEntry(gr_band_2sigma_SandT,"CL_{s} Expected #pm 2 s.d., s- and t-ch", "f");
+  lg_SandT->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+
+  TCanvas *c_SandT = new TCanvas("c_SandT", "", 800, 800);
+  canvas_margin(c_SandT);
+  c_SandT->cd();
+  c_SandT->Draw();
+  c_SandT->SetLogy();
 
   dummy->Draw("hist");
-  hist_axis(dummy);
-  if(channel=="ElEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q}] (pb)");
-  if(channel=="MuMu") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q}] (pb)");
-  if(channel=="MuEl") dummy->GetYaxis()->SetTitle("#sigma#timesBR[pp#rightarrowe^{#pm}#mu^{#pm}N#rightarrowe^{#pm}#mu^{#pm}q#bar{q}] (pb)");
-  dummy->GetXaxis()->SetTitle("m(N) (GeV)");
-  dummy->GetXaxis()->SetRangeUser(10., 2500);
-  dummy->GetYaxis()->SetTitleSize(0.06);
-  dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
-  dummy->SetTitle("");
 
-  gr_band_2sigma->Draw("3same");
-  gr_band_1sigma->Draw("3same");
-  gr_13TeV_exp->Draw("lsame");
+  gr_band_2sigma_SandT->Draw("3same");
+  gr_band_1sigma_SandT->Draw("3same");
+  gr_13TeV_exp_SandT->Draw("lsame");
   gr_8TeV_exp->Draw("lsame");
-  gr_13TeV_exp_SOnly->Draw("lsame");
-  if(DrawObserved) gr_13TeV_obs->Draw("lsame");
+  if(DrawObserved) gr_13TeV_obs_SandT->Draw("lsame");
 
-  lg_log->AddEntry(gr_8TeV_exp, "CMS 8 TeV Expected", "l");
-  lg_log->SetX2NDC(0.90);
-  lg_log->SetY2NDC(0.67);
-  lg_log->SetBorderSize(0);
-  lg_log->SetFillStyle(0);
-  //lg_log->Draw();
-  lg->Draw();
+  lg_SandT->Draw();
 
   latex_CMSPriliminary.SetTextSize(0.035);
   latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+  latex_title.SetTextSize(0.04);
+  latex_title.SetLineWidth(2);
+  latex_title.DrawLatex(0.20, 0.90, "#font[41]{95% CL upper limit}");
 
-  c_out_logx->SetLogx();
-  c_out_logx->SaveAs(plotpath+"/"+channel+"_13TeV_xsec_logx.pdf");
-  c_out_logx->SaveAs(plotpath+"/"+channel+"_13TeV_xsec_logx.png");
+  processname = "#font[41]{"+processname+"}";
+  latex_processname.SetTextSize(0.04);
+  latex_processname.SetLineWidth(2);
+  latex_processname.DrawLatex(0.20, 0.85, processname);
 
-  c_out_logx->Close();
+  c_SandT->SetLogx();
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_xsec_logx_SandT.pdf");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_xsec_logx_SandT.png");
 
-
-
-
-
+  c_SandT->Close();
 
 }
 
@@ -376,10 +397,10 @@ double GetXsec(int mass){
   if(mass==2000) return 1.02E-07;
 
   cout << "[GetXsec] Mass Wrong : " << mass << endl;
-  return -999;
+  return 0.;
 }
 
-double GetXsecST(int mass){
+double GetXsecTch(int mass){
 
   if(mass==100) return 9.65E-04;
   if(mass==150) return 4.91E-04;
@@ -400,8 +421,8 @@ double GetXsecST(int mass){
   if(mass==1700) return 3.21E-06;
   if(mass==2000) return 1.69E-06;
 
-  cout << "[GetXsecST] Mass Wrong : " << mass << endl;
-  return -999;
+  cout << "[GetXsecTch] Mass Wrong : " << mass << endl;
+  return 0.;
 }
 
 

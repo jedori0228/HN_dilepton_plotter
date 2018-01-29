@@ -1,4 +1,4 @@
-import os
+import os,math
 
 def StringToFloat(a):
   if "nan" in a:
@@ -94,17 +94,33 @@ for LowORHigh in range(0,3):
         total = prompt+fake+cf
 
         nround = 1
-        if LowORHigh!=0:
-          nround = 3
+        #if LowORHigh!=0:
+        #  nround = 3
 
         out = '$'+str(mass)+'$ & '
         out = out + MakeYield(prompt,prompt*(0.01*prompt_stat),prompt*(0.01*prompt_syst),nround)+' & '
-        out = out + MakeYield(fake,fake*(0.01*fake_stat),fake*(0.01*fake_syst),nround)+' & '
+
+        if fake<=0.:
+            maxFR = 0.169201;
+            if ch=="MuMu":
+               maxFR = 0.103305;
+            fake_stat = 1.8*(maxFR)/(1.-maxFR);
+            out = out + MakeYield(fake,fake_stat,fake*(0.01*fake_syst),nround)+' & '
+        else:
+          out = out + MakeYield(fake,fake*(0.01*fake_stat),fake*(0.01*fake_syst),nround)+' & '
+
         if ch=="ElEl":
           out = out + MakeYield(cf,cf*(0.01*cf_stat),cf*(0.01*cf_syst),nround)+' & '
         else:
           out = out + "-- & "
-        out = out + MakeYield(total,total*(0.01*total_stat),total*(0.01*total_syst),nround)+' & '
+
+        if fake<=0.:
+          totalstaterr = total*(0.01*total_stat)
+          totalstaterr = math.sqrt( totalstaterr*totalstaterr + fake_stat*fake_stat )
+          out = out + MakeYield(total,totalstaterr,total*(0.01*total_syst),nround)+' & '
+        else:
+          out = out + MakeYield(total,total*(0.01*total_stat),total*(0.01*total_syst),nround)+' & '
+
         out = out + '$'+str(int(obs))+'$ \\\\'
 
         if LowORHigh==0:

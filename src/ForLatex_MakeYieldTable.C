@@ -85,6 +85,7 @@ void ForLatex_MakeYieldTable(){
     "_JetMass_up", "_JetMass_down",
     "_JetMassRes_up", "_JetMassRes_down",
     "_Tau21_up", "_Tau21_down",
+    "_Rocc_up", "_Rocc_down",
   };
   
   for(unsigned int it_region=0; it_region<WhichRegions.size(); it_region++){
