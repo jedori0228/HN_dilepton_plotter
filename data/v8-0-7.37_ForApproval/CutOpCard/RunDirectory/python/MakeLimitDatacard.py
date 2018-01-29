@@ -50,11 +50,15 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
       bkgd = prompt+fake+cf
       break
 
+  n_syst = 21
+  if fake<=0.:
+    n_syst = n_syst+1
+
   if bkgd==0:
-    bkgd = 0.003
-    prompt = 0.001
-    fake = 0.001
-    cf = 0.001
+    bkgd = 0.0003
+    prompt = 0.0001
+    fake = 0.0001
+    cf = 0.0001
 
   ## 4135.629 1.160
   #print lines[len(lines)-1]
@@ -66,7 +70,7 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
 
   out.write("imax 1  number of channels\n")
   out.write("jmax 3  number of backgrounds\n")
-  out.write("kmax 21  number of nuisance parameters (sources of systematical uncertainties)\n")
+  out.write("kmax "+str(n_syst)+"  number of nuisance parameters (sources of systematical uncertainties)\n")
   out.write("------------\n")
   out.write("# we have just one channel, in which we observe 0 events\n")
   out.write("bin 1\n")
@@ -79,7 +83,7 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
   out.write("bin\t1\t1\t1\t1\n")
   out.write("process\tprompt\tfake\tcf\tHN"+str(mass)+"\n")
   out.write("process\t1\t2\t3\t0\n")
-  out.write("rate\t"+str(prompt)+"\t"+str(fake)+"\t"+str(cf)+"\t"+str(signal_rate)+"\n")
+  out.write("rate\t"+str(prompt)+"\t"+str(fake)+"\t"+str(cf)+"\t"+str(round(signal_rate,3))+"\n")
   out.write("------------\n")
 
   firstline_index = 0
@@ -107,6 +111,13 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
         thisline = thisline+"\t"+str(syst)
     out.write(thisline+"\n")
 
+  if fake<=0.:
+    frmax = 0.169201
+    if channel=="MuMu":
+      frmax=0.103305
+    out.write('ZeroFake\tgmN 0\t-\t'+str(frmax/(1.-frmax))+'\t-\t-\n')
+
+  out.close()
 
 
 
