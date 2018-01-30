@@ -74,8 +74,7 @@ void HNElEl_500(){
 
   //==== Set CutCard
 
-  TString cutfilename = "HNElEl_500.txt";
-  m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/RunDirectory/"+CutOpCardDir+"/"+cutfilename);
+  m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/Empty.txt");
 
   vector<TString> systs = {
     "",

@@ -442,7 +442,7 @@ void {4}(){{
 ##              0            1             2            3            4       5  6      7     8
 
       os.system('mkdir -p Outputs_PDF')
-      cmd = "root -l -b -q CyclesForPDF_"+ch+"_"+Bin+"/"+filename+".C &> Outputs_PDF/CyclesForPDF_"+ch+"_"+Bin+"_"+filename+".txt"
+      cmd = "root -l -b -q CyclesForPDF_"+ch+"_"+Bin+"/"+filename+".C &> Outputs_PDF/CyclesForPDF_"+ch+"_"+Bin+"_"+filename+".txt &"
       print cmd
 
 

@@ -3,9 +3,9 @@ import os
 channels = ["MuMu", "ElEl", "MuEl"]
 Bins = ["Bin1", "Bin2"]
 
-masses = [300, 600, 800, 1000, 1200, 1500]
+masses = [300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
 
-lines_PDFValues = open('PDFSyst.txt').readlines()
+lines_PDFValues = open('PDFSyst_SandT_Combined.txt').readlines()
 
 counter = 0
 for ch in channels:
@@ -25,14 +25,6 @@ for ch in channels:
 
     CutCardDirName = 'Cards_'+ch+"_"+Bin
 
-    PDFSyst_low = ""
-    PDFSyst_high = ""
-    for line in lines_PDFValues:
-      words = line.split()
-      if ch == words[0] and Bin == words[1]:
-        PDFSyst_low = words[2]
-        PDFSyst_high = words[3]
-
     for mass in masses:
 
       filename = "HN"+ch+"_"+str(mass)+"_VBF"
@@ -43,6 +35,13 @@ for ch in channels:
       TreeSkim = ""
       SkimmedTreeDir = ""
       PDFSyst = ""
+      for line in lines_PDFValues:
+        words = line.split()
+        if ch == words[0] and Bin == words[1] and str(mass)==words[2]:
+          PDFSyst = words[3]
+      if PDFSyst=="":
+        print "ERROR : PDF SYST NOT FOUND"
+
       if mass <= 80:
         if Bin=="Bin1":
           TreeSkim = "Low_TwoJet_NoFatjet_SS"
@@ -50,7 +49,6 @@ for ch in channels:
         else:
           TreeSkim = "Low_OneJet_NoFatjet_SS"
           SkimmedTreeDir = "Skimmed_Low_OneJet_NoFatjet"
-        PDFSyst = PDFSyst_low
       else:
         if Bin=="Bin1":
           TreeSkim = "High_TwoJet_NoFatjet_SS"
@@ -58,7 +56,6 @@ for ch in channels:
         else:
           TreeSkim = "High_OneFatJet_SS"
           SkimmedTreeDir = "Skimmed_High_OneFatJet"
-        PDFSyst = PDFSyst_high
 
       SignalSampleName = "HN{5}_"+str(mass)
 
@@ -464,8 +461,8 @@ void {4}(){{
       cmd = "root -l -b -q CyclesForMixingLimit_"+ch+"_"+Bin+"/"+filename+".C &> "+outputdir+"/"+filename+".log &"
       print cmd
 
-      if counter!=0 and counter%10==0:
-        print "sleep 60"
+      if counter!=0 and counter%30==0:
+        print "sleep 10"
       counter = counter+1
 
 

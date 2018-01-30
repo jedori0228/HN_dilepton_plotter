@@ -54,48 +54,52 @@ TDirectory *PdfSystematics::MakeTempDir(){
 void PdfSystematics::CalculatePdfSystematic(){
 
   //cout << "Yield_Central = " << Yield_Central << endl;
+
+  //==== PDF Error
+
   Syst_Pdf_Replica = 0.;
   for(unsigned int i=1; i<=hist_Pdf_Replica->GetXaxis()->GetNbins(); i++){
     double diff = hist_Pdf_Replica->GetBinContent(i)-Yield_Central;
     Syst_Pdf_Replica += diff*diff;
   }
   Syst_Pdf_Replica = sqrt(Syst_Pdf_Replica)/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1)/(Yield_Central);
-  //cout << "Pdf Replica -> " << Syst_Pdf_Replica << endl;
+  cout << "Pdf Replica -> " << Syst_Pdf_Replica << endl;
+
+  //==== PDF Alpha
 
   Syst_Pdf_Alpha = 0.;
-  Syst_Pdf_Alpha = ( (hist_Pdf_Alpha->GetBinContent(1))-(hist_Pdf_Alpha->GetBinContent(2)) )/2./(Yield_Central);
-
-  //cout << "Pdf Alpha -> " << Syst_Pdf_Alpha << endl;
-
-  Syst_Pdf_Scale = -999.;
-  //==== S-ch
-  if(hist_Pdf_Scale->GetBinContent(6)<0){
-    //cout << "S-ch" << endl;
-    for(unsigned int i=1; i<=hist_Pdf_Scale->GetXaxis()->GetNbins(); i++){
-      double diff = fabs(hist_Pdf_Scale->GetBinContent(i)-Yield_Central);
-      if(diff>Syst_Pdf_Scale){
-        Syst_Pdf_Scale = diff;
-      }
-
-    }
+  if(hist_Pdf_Alpha->GetBinContent(6)<=0.000001||hist_Pdf_Alpha->GetBinContent(6)==0.){
+    cout << "S-ch" << endl;
+    Syst_Pdf_Alpha = ( (hist_Pdf_Alpha->GetBinContent(1))-(hist_Pdf_Alpha->GetBinContent(2)) )/2./(Yield_Central);
   }
   else{
-    //cout << "T-ch" << endl;
-    Syst_Pdf_Scale = 0.;
-    for(unsigned int i=1; i<=hist_Pdf_Scale->GetXaxis()->GetNbins(); i++){
-      double diff = fabs(hist_Pdf_Scale->GetBinContent(i)-Yield_Central);
-      //cout << diff << endl;
-      Syst_Pdf_Scale += diff*diff;
+    cout << "T-ch" << endl;
+    for(unsigned int i=1; i<=hist_Pdf_Alpha->GetXaxis()->GetNbins(); i++){
+      double diff = fabs(hist_Pdf_Alpha->GetBinContent(i)-Yield_Central)/Yield_Central;
+      cout << diff << endl;
+      Syst_Pdf_Alpha += diff*diff;
     }
-    Syst_Pdf_Scale = sqrt(Syst_Pdf_Scale);
+    Syst_Pdf_Alpha = sqrt(Syst_Pdf_Alpha);
+  }
+
+  cout << "Pdf Alpha -> " << Syst_Pdf_Alpha << endl;
+
+  //==== PDF SCale
+
+  Syst_Pdf_Scale = -999.;
+  for(unsigned int i=1; i<=hist_Pdf_Scale->GetXaxis()->GetNbins(); i++){
+    double diff = fabs(hist_Pdf_Scale->GetBinContent(i)-Yield_Central);
+    if(diff>Syst_Pdf_Scale){
+      Syst_Pdf_Scale = diff;
+    }
+
   }
   Syst_Pdf_Scale = Syst_Pdf_Scale/Yield_Central;
-  //cout << "Pdf Scale -> " << Syst_Pdf_Scale << endl;
+  cout << "Pdf Scale -> " << Syst_Pdf_Scale << endl;
 
   Syst_Pdf_Total = sqrt(Syst_Pdf_Replica*Syst_Pdf_Replica+Syst_Pdf_Alpha*Syst_Pdf_Alpha+Syst_Pdf_Scale*Syst_Pdf_Scale);
 
-  //cout << "==> Total = " << Syst_Pdf_Total << endl;
-
+  cout << "==> Total = " << Syst_Pdf_Total << endl;
 
 }
 

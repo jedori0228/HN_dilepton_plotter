@@ -3,7 +3,7 @@ import os
 channels = ["MuMu", "ElEl", "MuEl"]
 Bins = ["Bin1", "Bin2"]
 
-masses = [300, 600, 800, 1000, 1200, 1500]
+masses = [300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
 
 lines_PDFValues = open('PDFSyst.txt').readlines()
 
@@ -105,7 +105,7 @@ void {4}(){{
 
   m.preselection = "Preselection_SS";
   m.signals = {{
-    "HNDilepton_{5}_Tchannel_M{2}",
+    "HeavyNeutrinoTo{5}_Tchannel_M{2}",
   }};
   m.MinEffPresel = 0.;
   m.AddSamplesToList( m.signals );
@@ -242,7 +242,7 @@ void {4}(){{
       syst_sig += (m.signal_err.at(0)/m.signal_rate.at(0))*(m.signal_err.at(0)/m.signal_rate.at(0));
 
       m.pdfsyst.Yield_Central = y_signal_central;
-      //m.pdfsyst.CalculatePdfSystematic();
+      m.pdfsyst.CalculatePdfSystematic();
 
       prompt_stat = m.prompt_bkgs_stat;
       fake_stat = m.fake_bkgs_stat;
@@ -252,8 +252,8 @@ void {4}(){{
       prompt_calculated_syst = m.prompt_bkgs_syst;
       fake_calculated_syst = m.fake_bkgs_syst;
       cf_calculated_syst = m.cf_bkgs_syst;
-      //signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
-      signal_calculated_syst = ({9})*y_signal_central;
+      signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
+      //signal_calculated_syst = ({9})*y_signal_central;
 
     }}
 
@@ -464,8 +464,8 @@ void {4}(){{
       cmd = "root -l -b -q CyclesForMixingLimit_"+ch+"_"+Bin+"/"+filename+".C &> "+outputdir+"/"+filename+".log &"
       print cmd
 
-      if counter!=0 and counter%10==0:
-        print "sleep 60"
+      if counter!=0 and counter%30==0:
+        print "sleep 10"
       counter = counter+1
 
 

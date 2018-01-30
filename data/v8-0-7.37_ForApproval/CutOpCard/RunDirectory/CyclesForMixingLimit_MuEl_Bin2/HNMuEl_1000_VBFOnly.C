@@ -41,7 +41,7 @@ void HNMuEl_1000_VBFOnly(){
 
   m.preselection = "Preselection_SS";
   m.signals = {
-    "HNDilepton_MuEl_Tchannel_M1000",
+    "HeavyNeutrinoToMuEl_Tchannel_M1000",
   };
   m.MinEffPresel = 0.;
   m.AddSamplesToList( m.signals );
@@ -178,7 +178,7 @@ void HNMuEl_1000_VBFOnly(){
       syst_sig += (m.signal_err.at(0)/m.signal_rate.at(0))*(m.signal_err.at(0)/m.signal_rate.at(0));
 
       m.pdfsyst.Yield_Central = y_signal_central;
-      //m.pdfsyst.CalculatePdfSystematic();
+      m.pdfsyst.CalculatePdfSystematic();
 
       prompt_stat = m.prompt_bkgs_stat;
       fake_stat = m.fake_bkgs_stat;
@@ -188,8 +188,8 @@ void HNMuEl_1000_VBFOnly(){
       prompt_calculated_syst = m.prompt_bkgs_syst;
       fake_calculated_syst = m.fake_bkgs_syst;
       cf_calculated_syst = m.cf_bkgs_syst;
-      //signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
-      signal_calculated_syst = (0.0236399)*y_signal_central;
+      signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
+      //signal_calculated_syst = (0.0236399)*y_signal_central;
 
     }
 
