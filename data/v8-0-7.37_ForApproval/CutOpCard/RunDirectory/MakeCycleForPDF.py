@@ -125,8 +125,7 @@ void {4}(){{
 
   //==== Set CutCard
 
-  TString cutfilename = "HN{5}_{2}.txt";
-  m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/RunDirectory/"+CutOpCardDir+"/"+cutfilename);
+  m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/Empty.txt");
 
   vector<TString> systs = {{
     "",
