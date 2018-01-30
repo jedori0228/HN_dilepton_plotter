@@ -68,12 +68,26 @@ void PdfSystematics::CalculatePdfSystematic(){
   //cout << "Pdf Alpha -> " << Syst_Pdf_Alpha << endl;
 
   Syst_Pdf_Scale = -999.;
-  for(unsigned int i=1; i<=hist_Pdf_Scale->GetXaxis()->GetNbins(); i++){
-    double diff = fabs(hist_Pdf_Scale->GetBinContent(i)-Yield_Central);
-    if(diff>Syst_Pdf_Scale){
-      Syst_Pdf_Scale = diff;
-    }
+  //==== S-ch
+  if(hist_Pdf_Scale->GetBinContent(6)<0){
+    //cout << "S-ch" << endl;
+    for(unsigned int i=1; i<=hist_Pdf_Scale->GetXaxis()->GetNbins(); i++){
+      double diff = fabs(hist_Pdf_Scale->GetBinContent(i)-Yield_Central);
+      if(diff>Syst_Pdf_Scale){
+        Syst_Pdf_Scale = diff;
+      }
 
+    }
+  }
+  else{
+    //cout << "T-ch" << endl;
+    Syst_Pdf_Scale = 0.;
+    for(unsigned int i=1; i<=hist_Pdf_Scale->GetXaxis()->GetNbins(); i++){
+      double diff = fabs(hist_Pdf_Scale->GetBinContent(i)-Yield_Central);
+      //cout << diff << endl;
+      Syst_Pdf_Scale += diff*diff;
+    }
+    Syst_Pdf_Scale = sqrt(Syst_Pdf_Scale);
   }
   Syst_Pdf_Scale = Syst_Pdf_Scale/Yield_Central;
   //cout << "Pdf Scale -> " << Syst_Pdf_Scale << endl;

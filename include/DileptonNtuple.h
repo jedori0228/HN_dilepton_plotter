@@ -209,7 +209,7 @@ unweighted_yield(0), weighted_yield(0.)
   //cout << "-> ReadPdfSystematic = " << ReadPdfSystematic << endl;
   if(ReadPdfSystematic){
     hist_Pdf_Replica = new TH1D("hist_Pdf_Replica", "", 100, 0., 100.);
-    hist_Pdf_Alpha = new TH1D("hist_Pdf_Alpha", "", 2, 0., 2.);
+    hist_Pdf_Alpha = new TH1D("hist_Pdf_Alpha", "", 7, 0., 7.);
     hist_Pdf_Scale = new TH1D("hist_Pdf_Scale", "", 6, 0., 6.);
   }
 

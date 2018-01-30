@@ -64,7 +64,7 @@ void RunNtupleBase::Run(){
       if(sample=="data")          filename = filename_prefix+"_data_"+DataPD+"_"              +filename_suffix;
       else if(sample=="chargeflip")    filename = filename_prefix+"_SKchargeflip_"+DataPD+"_dilep_"+filename_suffix;
       else if(sample.Contains("fake")) filename = filename_prefix+"_SK"+sample+"_"+DataPD+"_dilep_"+filename_suffix;
-      else if(sample.Contains("HN"))   filename = filename_prefix+"_SK"      +sample           +"_"+filename_suffix;
+      else if(IsSignal(sample))   filename = filename_prefix+"_SK"      +sample           +"_"+filename_suffix;
       else ImRunningMCBkgd = true;
 
       TString this_treename = "Ntp_"+channel+"_"+treeskim;
@@ -77,7 +77,7 @@ void RunNtupleBase::Run(){
         }
 
         //==== If Signal, read PdfWeights
-        if(sample.Contains("HN") && sample.Contains("Moriond")){
+        if( (sample.Contains("HN") && sample.Contains("Moriond")) || (sample.Contains("HeavyNeutrino")) ){
           DoPdfSystematic = true;
         }
       }
@@ -86,7 +86,7 @@ void RunNtupleBase::Run(){
       if(! (m.TreeExist) ){
 
         //cout << sample << "\t" << "No Tree : " << "Ntp_"+channel+"_"+treeskim << endl;
-        if(sample.Contains("HN")){
+        if(IsSignal(sample)){
           signal_unweighted_yield.push_back(0.);
           signal_weighted_yield.push_back(0.);
           signal_weighted_yield_stat.push_back(0.);
@@ -121,7 +121,7 @@ void RunNtupleBase::Run(){
 
       //==== If negative weighted yield, return.. Cut Too Tight
       if( m.weighted_yield < 0 ){
-        if(sample.Contains("HN")){
+        if(IsSignal(sample)){
           signal_unweighted_yield.push_back(0.);
           signal_weighted_yield.push_back(0.);
           signal_weighted_yield_stat.push_back(0.);
@@ -131,7 +131,7 @@ void RunNtupleBase::Run(){
       }
 
       //==== Sum yield
-      if(sample.Contains("HN")){
+      if(IsSignal(sample)){
         signal_unweighted_yield.push_back( m.unweighted_yield );
         signal_weighted_yield.push_back( m.weighted_yield );
         signal_weighted_yield_stat.push_back( m.hist_for_error->GetBinError(1) );
@@ -375,7 +375,16 @@ void RunNtupleBase::Run(){
 
 }
 
+bool RunNtupleBase::IsSignal(TString filename){
 
+  if(DoDebug) cout << "[RunNtupleBase::IsSignal] filename = " << filename << endl;
+
+  if(filename.Contains("HN")) return true;
+  if(filename.Contains("HeavyNeutrino")) return true;
+
+  return false;
+
+}
 
 
 

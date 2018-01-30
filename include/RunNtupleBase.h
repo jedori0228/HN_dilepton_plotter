@@ -45,6 +45,7 @@ public:
   void PrintSampleList();
   void SetCutCard(TString path);
   void Run();
+  bool IsSignal(TString filename);
 
   //=== Final Results
   double y_observed;
