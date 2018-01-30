@@ -154,7 +154,7 @@ process 1 0
 rate  {2} {3}
 ------------
 err  lnN {4}  {5}
-'''.format('HN'+str(mass), str(obs), str(exp), str(sigrate), str(bkgerr), str(sigerr))
+'''.format('HN'+str(mass), str(obs), str(exp), str(round(sigrate,3)), str(round(bkgerr,3)), str(round(sigerr,3)))
 
     out.close()
 

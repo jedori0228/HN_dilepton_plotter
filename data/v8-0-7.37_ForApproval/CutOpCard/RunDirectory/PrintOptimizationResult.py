@@ -3,7 +3,7 @@ import os
 channels = ["MuMu", "ElEl", "MuEl"]
 Bins = ["Bin1", "Bin2"]
 
-masses_Tch = [300, 600, 800, 1000, 1200, 1500]
+masses_Tch = [300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
 
 for ch in channels:
   for LowORHigh in range(0,2):
@@ -33,7 +33,7 @@ for ch in channels:
       varsinboth = []
 
       if LowORHigh == 1:
-        masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
+        masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
         varorder = [
         "Njets <",
 
@@ -125,6 +125,10 @@ for ch in channels:
 
         logname = 'Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'.log'
 
+        ## FIXME TEMP, no s-ch for 1700 and 2000
+        if mass>=1700:
+          logname = 'Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'_VBFOnly.log'
+
         runlog = open(logname).readlines()
         bkgd = runlog[len(runlog)-2].split()[0]
         obs = str(int(float(runlog[len(runlog)-6].split()[2])))
@@ -135,7 +139,7 @@ for ch in channels:
         if (LowORHigh==1) and (mass in masses_Tch):
           lines_T = open('Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'_VBFOnly.log').readlines()
           float_eff_T = float(lines_T[len(lines_T)-3].split()[2])
-          eff_T = str(2*float_eff_T*1.) ## 2 is because it's OS+SS
+          eff_T = str(float_eff_T*1.)
           print bkgd+'\t'+obs+'\t'+eff_S+"\t"+eff_T
 
         else:
