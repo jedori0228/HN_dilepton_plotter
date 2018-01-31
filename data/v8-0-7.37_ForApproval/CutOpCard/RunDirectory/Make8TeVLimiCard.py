@@ -54,17 +54,9 @@ ElEl_efferrs = [
 ElEl_bkgs = [
 8.56157, 8.56157, 8.56157, 8.56157, 8.56157, 17.8148, 15.3239, 11.017, 9.85018, 4.038, 4.26222, 3.77545, 2.59382, 2.42003, 2.42003, 2.42003
 ]
-ElEl_bkgstaterrs = [
-1.96974, 1.96974, 1.96974, 1.96974, 1.96974, 2.19768, 2.06295, 1.32191, 1.21153, 0.608173, 1.32487, 1.38731, 1.30762, 1.3053, 1.3053, 1.3053
+ElEl_bkgerrs = [
+3.60522, 3.60522, 3.60522, 3.60522, 3.60522, 5.81128, 4.93185, 2.83889, 2.31493, 0.814223, 1.56005, 1.57871, 1.39912, 1.39658, 1.39658, 1.39658, 0, 0, 0, 0,
 ]
-ElEl_bkgsysterrs = [
-3.60522, 3.60522, 3.60522, 3.60522, 3.60522, 5.81128, 4.93185, 2.83889, 2.31493, 0.814223, 1.56005, 1.57871, 1.39912, 1.39658, 1.39658, 1.39658
-]
-ElEl_bkgerrs = []
-for a in range(0,len(ElEl_bkgstaterrs)):
-  stat = ElEl_bkgstaterrs[a]
-  syst = ElEl_bkgsysterrs[a]
-  ElEl_bkgerrs.append( math.sqrt(stat*stat+syst*syst) )
 ElEl_obss = [
 11, 11, 11, 11, 11, 23, 23, 11, 7, 3, 3, 4, 4, 4, 4, 4
 ]
@@ -83,17 +75,9 @@ MuEl_efferrs = [
 MuEl_bkgs = [
 33.7, 33.7, 33.7, 33.7, 25.27, 20.05, 14.82, 12.302, 13.846, 9.28, 6.21, 4.74, 2.17, 1.63, 1.56, 1.56
 ]
-MuEl_bkgstaterrs = [
-2.99496, 2.99496, 2.99496, 2.99496, 1.91, 1.565, 1.18328, 1.12164, 1.13594, 0.855191, 0.703202, 0.605436, 0.425683, 0.382889, 0.390432, 0.394941
+MuEl_bkgerrs = [
+11.1429, 11.1429, 11.1429, 11.1429, 6.56557, 5.09143, 3.30348, 2.48637, 2.72097, 1.84735, 1.3054, 0.997194, 0.557465, 0.48232, 0.483967, 0.488177, 0, 0, 0, 0,
 ]
-MuEl_bkgsysterrs = [
-1.1429, 11.1429, 11.1429, 11.1429, 6.56557, 5.09143, 3.30348, 2.48637, 2.72097, 1.84735, 1.3054, 0.997194, 0.557465, 0.48232, 0.483967, 0.488177
-]
-MuEl_bkgerrs = []
-for a in range(0,len(MuEl_bkgstaterrs)):
-  stat = MuEl_bkgstaterrs[a]
-  syst = MuEl_bkgsysterrs[a]
-  MuEl_bkgerrs.append( math.sqrt(stat*stat+syst*syst) )
 MuEl_obss = [
 33, 33, 33, 33, 29, 25, 20, 17, 16, 11, 7, 7, 4, 4, 4, 4
 ]
@@ -130,8 +114,8 @@ for a in range(0,len(channels)):
 
     sigrate *= 1.34
 
-    if ch=="MuEl":
-      sigrate *= 2.
+    #if ch=="MuEl":
+    #  sigrate *= 2.
 
     bkgerr = 1.+(bkgerrs[a])[b]/(bkgs[a])[b]
     sigerr = 1.+(efferrs[a])[b]/(effs[a])[b]
@@ -154,9 +138,12 @@ process 1 0
 rate  {2} {3}
 ------------
 err  lnN {4}  {5}
-'''.format('HN'+str(mass), str(obs), str(exp), str(round(sigrate,3)), str(round(bkgerr,3)), str(round(sigerr,3)))
+'''.format('HN'+str(mass), str(obs), str(exp), str(round(sigrate,4)), str(round(bkgerr,4)), str(round(sigerr,4)))
 
     out.close()
+
+    #print 'combine -M HybridNew --frequentist --testStat LHC '+ch+'/HN'+ch+'_'+str(mass)+'.txt -n HN'+ch+'_'+str(mass)+' &> Outputs_Tool/'+ch+'/log_HN'+ch+'_'+str(mass)+'.log &'
+    #print 'combine -M HybridNew --frequentist --testStat LHC '+ch+'_Combined/HN'+ch+'_'+str(mass)+'.txt -n HN'+ch+'_'+str(mass)+' &> Outputs_Tool/'+ch+'_Combined/log_HN'+ch+'_'+str(mass)+'.log &'
 
     #print 'combine -M Asymptotic '+ch+'/HN'+ch+'_'+str(mass)+'.txt -n HN'+ch+'_'+str(mass)+' &> Outputs_Tool/'+ch+'/log_HN'+ch+'_'+str(mass)+'.log &'
     print 'combine -M Asymptotic '+ch+'_Combined/HN'+ch+'_'+str(mass)+'.txt -n HN'+ch+'_'+str(mass)+' &> Outputs_Tool/'+ch+'_Combined/log_HN'+ch+'_'+str(mass)+'.log &'

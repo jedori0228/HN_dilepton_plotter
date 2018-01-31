@@ -24,13 +24,33 @@ for ch in channels:
 
         words = line.split()
         value = float(words[2])
+        shifted = value+(mass-1500)
 
-        if  "ljj" in line:
-          
-          if ">" in line and Bin=="Bin2":
-            line = 'ljj |> '+str(value+(mass-1500))+' '+str(value+(mass-1500))+' 1'
-          if "<" in line:
-            line = 'ljj |< '+str(value+(mass-1500))+' '+str(value+(mass-1500))+' 1'
+        if ch=="MuEl" and Bin=="Bin2":
+          if mass==1700:
+            if  "ljj" in line:
+              
+              if ">" in line and Bin=="Bin2":
+                line = 'ljj |> 1400 1400 1'
+              if "<" in line:
+                line = 'ljj |< 1800 1800 1'
+          if mass==2000:
+            if  "ljj" in line:
+           
+              if ">" in line and Bin=="Bin2":
+                line = 'ljj |> 1800 1800 1'
+              if "<" in line:
+                line = 'ljj |< 2300 2300 1'
+
+
+        else:
+
+          if  "ljj" in line:
+            
+            if ">" in line and Bin=="Bin2":
+              line = 'ljj |> '+str(shifted)+' '+str(shifted)+' 1'
+            if "<" in line:
+              line = 'ljj |< '+str(shifted)+' '+str(shifted)+' 1'
 
         line = line.strip('\n')
         out.write(line+'\n')
