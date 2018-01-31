@@ -12,7 +12,7 @@ def MakeYield(a,b,c,nround):
   return out
 
 channels = ["MuMu", "ElEl", "MuEl"]
-channelsForLatex = ["$\mu \mu$", "$ee$", "$e \mu$"]
+channelsForLatex = ["$\mu \mu$", "ee", "e$\mu$"]
 
 for LowORHigh in range(0,3):
 
@@ -40,12 +40,15 @@ for LowORHigh in range(0,3):
       masses = [20, 30, 40, 50, 60, 70, 80]
 
       if LowORHigh != 0:
-        masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
+        masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
 
       counter = 0
       for mass in masses:
 
         logname = 'Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'.log'
+        ## FIXME TEMP no s-ch for 1700 and 2000
+        if mass>=1700:
+          logname = 'Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'_VBFOnly.log'
 
         runlog = open(logname).readlines()
 

@@ -15,11 +15,11 @@ void HiggsCombindedLimit_Xsec(int i=0){
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  //TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
-  //TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
+  TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
+  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  TString filepath = ENV_FILE_PATH+dataset+"/Limit/FullCLs/";
-  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/FullCLs/";
+  //TString filepath = ENV_FILE_PATH+dataset+"/Limit/FullCLs/";
+  //TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/FullCLs/";
 
   TString WhichDirectoryInCutop = "MuMu_Combined";
   if(i==1) WhichDirectoryInCutop = "MuMu_Bin1";
@@ -125,7 +125,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   string elline_SandT;
   ifstream in_SandT(filepath+"/result_VBF.txt");
 
-  const int n_SandT = 6;
+  const int n_SandT = 28;
   double mass_SandT[n_SandT], obs_SandT[n_SandT], limit_SandT[n_SandT], onesig_left_SandT[n_SandT], onesig_right_SandT[n_SandT], twosig_left_SandT[n_SandT], twosig_right_SandT[n_SandT];
   dummyint=0;
 

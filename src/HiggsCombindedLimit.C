@@ -12,13 +12,13 @@ void HiggsCombindedLimit(int i=0){
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  //TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
-  //TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
+  TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
+  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  TString filepath = ENV_FILE_PATH+dataset+"/Limit/FullCLs/";
-  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/FullCLs/";
+  //TString filepath = ENV_FILE_PATH+dataset+"/Limit/FullCLs/";
+  //TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/FullCLs/";
 
-  TString WhichDirectoryInCutop = "MuEl_Combined";
+  TString WhichDirectoryInCutop = "MuMu_Combined";
   if(i==1) WhichDirectoryInCutop = "MuMu_Bin1";
   if(i==2) WhichDirectoryInCutop = "MuMu_Bin2";
   if(i==3) WhichDirectoryInCutop = "MuMu_Combined";
@@ -135,7 +135,7 @@ void HiggsCombindedLimit(int i=0){
   string elline_SandT;
   ifstream in_SandT(filepath+"/result_VBF.txt");
 
-  const int n_SandT = 6;
+  const int n_SandT = 28;
   double mass_SandT[n_SandT], obs_SandT[n_SandT], limit_SandT[n_SandT], onesig_left_SandT[n_SandT], onesig_right_SandT[n_SandT], twosig_left_SandT[n_SandT], twosig_right_SandT[n_SandT];
   dummyint=0;
 
@@ -175,7 +175,7 @@ void HiggsCombindedLimit(int i=0){
     twosig_left_SandT[dummyint] = limit_SandT[dummyint]-twosig_left_SandT[dummyint];
     twosig_right_SandT[dummyint] = twosig_right_SandT[dummyint] - limit_SandT[dummyint];
 
-    if(max_obs_SandT<obs_SandT[dummyint]){
+    if(max_obs_SandT<obs_SandT[dummyint] && obs_SandT[dummyint]<1.){
       max_obs_SandT = obs_SandT[dummyint];
       max_obs_mass_SandT = mass_SandT[dummyint];
     }
@@ -267,7 +267,51 @@ void HiggsCombindedLimit(int i=0){
   gr_8TeV_exp->SetLineWidth(3);
 
   //==== 8 and 13 TeV Combined
+  //==== 8 TeV overlay
 
+  const int nm8and13 = 28;
+  double mass_8and13TeV[nm8and13] = {
+20, 30, 40, 50, 60, 70, 80, 
+90, 100, 125, 150, 200, 
+250, 300, 400, 500,
+600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000,
+  };
+  double obs_8and13TeV[nm8and13], exp_8and13TeV[nm8and13];
+
+  vector<double> tempvec_obs_8and13TeV, tempvec_exp_8and13TeV;
+  if(channel=="ElEl"){
+    tempvec_obs_8and13TeV = {
+0.00010476, 8.244e-05, 8.16e-05, 0.00010183, 0.000225, 0.0016379, 0.0043771, 0.0083341, 0.0039405, 0.004687, 0.004088, 0.008342, 0.019262, 0.02271, 0.03513, 0.09235, 0.08728, 0.16916, 0.1243, 0.177, 0.4212, 0.6272, 0.8493, 1.1492, 0.8259, 1.0344, 2.169, 4.3526, 
+    };
+    tempvec_exp_8and13TeV = {
+
+    };
+  }
+  if(channel=="MuMu"){
+    tempvec_obs_8and13TeV = {
+3.783e-05, 2.8e-05, 1.553e-05, 1.775e-05, 4.376e-05, 0.0003474, 0.0008412, 0.0023292, 0.0015521, 0.001285, 0.002622, 0.004085, 0.005141, 0.007158, 0.03503, 0.03572, 0.06339, 0.11797, 0.0802, 0.204, 0.2644, 0.3766, 0.4724, 0.6004, 0.878, 1.0681, 1.0893, 2.1158, 
+    };
+    tempvec_exp_8and13TeV = {
+
+    };
+  }
+  if(channel=="MuEl"){
+    tempvec_obs_8and13TeV = {
+4.2565e-05, 3.68e-05, 2.524e-05, 3.843e-05, 0.000102995, 0.0007555, 0.0019562, 0.00260295, 0.00159395, 0.001789, 0.002613, 0.0071055, 0.0083965, 0.0129065, 0.02225, 0.022415, 0.06913, 0.0654, 0.1086, 0.0763, 0.10995, 0.13505, 0.1744, 0.2324, 0.31395, 0.4463, 1.1073, 1.77645,
+    };
+    tempvec_exp_8and13TeV = {
+
+    };
+  }
+
+  for(unsigned int j=0; j<tempvec_obs_8and13TeV.size(); j++){
+    obs_8and13TeV[j] = tempvec_obs_8and13TeV.at(j);
+    //exp_8and13TeV[j] = tempvec_exp_8and13TeV.at(j);
+  }
+
+  TGraph *gr_8and13TeV_obs = new TGraph(nm8and13, mass_8and13TeV, obs_8and13TeV);
+  gr_8and13TeV_obs->SetLineColor(kRed);
+  gr_8and13TeV_obs->SetLineWidth(2);
 
 //======================================
   //==== LEP (L3)
@@ -628,8 +672,8 @@ void HiggsCombindedLimit(int i=0){
     0.000104186, 6.77325E-05, 4.99932E-05, 3.53255E-05, 3.13575E-05,
     2.48346E-05, 2.14113E-05, 1.48891E-05, 1.77713E-05, 1.88793E-05, 1.88341E-05, 2.7883E-05,
 
-    0.000333583, //FIXME
-    //0.00148444, //scaled FIXME
+    //0.000333583, //FIXME
+    0.00148444, //scaled FIXME
 
     0.00452962, 0.0074026, 0.00826272, 0.00848118, 0.0303979,
     0.0835546, 0.2063, 0.440587, 0.846273
@@ -640,8 +684,8 @@ void HiggsCombindedLimit(int i=0){
       7.23346E-05, 5.10346E-05, 3.77547E-05, 2.72229E-05, 2.33201E-05,
       1.8688E-05, 1.75216E-05, 1.20661E-05, 1.60735E-05, 2.19737E-05, 3.32274E-05, 6.70456E-05,
 
-      0.00076608, //FIXME
-      //0.00340906, //scaled FIXME
+      //0.00076608, //FIXME
+      0.00340906, //scaled FIXME
 
       0.00662448, 0.010974, 0.014264, 0.0135633, 0.0523753,
       0.167425, 0.428148, 0.949388, 1.83977
@@ -670,9 +714,10 @@ void HiggsCombindedLimit(int i=0){
 
   if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed, s-ch only", "l");
   lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected, s-ch only", "l");
-  lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
-  lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
+  lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 #sigma", "f");
+  lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 #sigma", "f");
   lg->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+  //lg->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
   if(channel=="MuMu"){
     lg->AddEntry(gr_L3Limit, "L3", "l");
     lg->AddEntry(gr_DELPHILimit, "DELPHI", "l");
@@ -711,6 +756,7 @@ void HiggsCombindedLimit(int i=0){
   gr_band_1sigma->Draw("3same");
   gr_13TeV_exp->Draw("lsame");
   gr_8TeV_exp->Draw("lsame");
+  //gr_8and13TeV_obs->Draw("lsame");
   if(channel=="MuMu"){
     gr_L3Limit->Draw("lsame");
     gr_DELPHILimit->Draw("lsame");
@@ -749,11 +795,12 @@ void HiggsCombindedLimit(int i=0){
   lg_SandT->SetBorderSize(0);
   lg_SandT->SetFillStyle(0);
 
-  if(DrawObserved) lg_SandT->AddEntry(gr_13TeV_obs_SandT,"CL_{s} Observed, s- and t-ch", "l");
-  lg_SandT->AddEntry(gr_13TeV_exp_SandT,"CL_{s} Expected, s- and t-ch", "l");
-  lg_SandT->AddEntry(gr_band_1sigma_SandT,"CL_{s} Expected #pm 1 s.d., s- and t-ch", "f");
-  lg_SandT->AddEntry(gr_band_2sigma_SandT,"CL_{s} Expected #pm 2 s.d., s- and t-ch", "f");
+  if(DrawObserved) lg_SandT->AddEntry(gr_13TeV_obs_SandT,"CL_{s} Observed", "l");
+  lg_SandT->AddEntry(gr_13TeV_exp_SandT,"CL_{s} Expected", "l");
+  lg_SandT->AddEntry(gr_band_1sigma_SandT,"CL_{s} Expected #pm 1 #sigma", "f");
+  lg_SandT->AddEntry(gr_band_2sigma_SandT,"CL_{s} Expected #pm 2 #sigma", "f");
   lg_SandT->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+  //lg_SandT->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
   if(channel=="MuMu"){
     lg_SandT->AddEntry(gr_L3Limit, "L3", "l");
     lg_SandT->AddEntry(gr_DELPHILimit, "DELPHI", "l");
@@ -777,6 +824,7 @@ void HiggsCombindedLimit(int i=0){
   gr_band_1sigma_SandT->Draw("3same");
   gr_13TeV_exp_SandT->Draw("lsame");
   gr_8TeV_exp->Draw("lsame");
+  //gr_8and13TeV_obs->Draw("lsame");
   if(channel=="MuMu"){
     gr_L3Limit->Draw("lsame");
     gr_DELPHILimit->Draw("lsame");

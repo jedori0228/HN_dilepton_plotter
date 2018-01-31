@@ -21,9 +21,9 @@ for region in regions:
 
   RowSkipIndex = [3,4,11,12,13]
   if "High_SR1" in region:
-    RowSkipIndex = [2,3,4,11,12]
+    RowSkipIndex = [2,3,4,7,11,12]
   if "High_SR2" in region:
-    RowSkipIndex = [2,3,4,8,10,11,12]
+    RowSkipIndex = [2,3,4,7,8,10,11,12]
 
   with open(filepath+filename+".csv", 'rb') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -71,6 +71,7 @@ for region in regions:
 
         for a in range(0,MaxRowIndex):
           row[a] = row[a].replace('%','~\\%')
+          row[a] = row[a].replace(' - ','$-$')
 
           if a==0:
 
