@@ -83,7 +83,7 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
   out.write("bin\t1\t1\t1\t1\n")
   out.write("process\tprompt\tfake\tcf\tHN"+str(mass)+"\n")
   out.write("process\t1\t2\t3\t0\n")
-  out.write("rate\t"+str(prompt)+"\t"+str(fake)+"\t"+str(cf)+"\t"+str(round(signal_rate,3))+"\n")
+  out.write("rate\t"+str(prompt)+"\t"+str(fake)+"\t"+str(cf)+"\t"+str(round(signal_rate,4))+"\n")
   out.write("------------\n")
 
   firstline_index = 0
@@ -115,7 +115,8 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
     frmax = 0.169201
     if channel=="MuMu":
       frmax=0.103305
-    out.write('ZeroFake\tgmN 0\t-\t'+str(frmax/(1.-frmax))+'\t-\t-\n')
+    thisweight = round(frmax/(1.-frmax),4)
+    out.write('ZeroFake\tgmN 0\t-\t'+str(thisweight)+'\t-\t-\n')
 
   out.close()
 
