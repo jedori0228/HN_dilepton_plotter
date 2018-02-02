@@ -389,9 +389,9 @@ void {4}(){{
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
-  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_error_eff/y_signal_central << endl;
-  ONLYSYST_sig += (signal_calculated_syst_pdf_error_eff/y_signal_central)*(signal_calculated_syst_pdf_error_eff/y_signal_central);
-  syst_sig += (signal_calculated_syst_pdf_error_eff/y_signal_central)*(signal_calculated_syst_pdf_error_eff/y_signal_central);
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_error_den/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_error_den/y_signal_central)*(signal_calculated_syst_pdf_error_den/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_error_den/y_signal_central)*(signal_calculated_syst_pdf_error_den/y_signal_central);
 
   cout << "PDF AlphaS" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
