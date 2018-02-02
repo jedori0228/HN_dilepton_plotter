@@ -83,11 +83,14 @@ void PdfSystematics::CalculatePdfSystematic(){
   //==== PDF Error (eff)
 
   Syst_Pdf_Replica_Eff = 0.;
-  int pdferror_start_bin = 1;
-  if(istch) pdferror_start_bin = 2; //==== for t-ch, first bin is same as central
-  for(unsigned int i=pdferror_start_bin; i<=hist_Pdf_Replica->GetXaxis()->GetNbins(); i++){
+  int pdferror_start_bin = 0;
+  if(istch) pdferror_start_bin = 1; //==== for t-ch, first bin is same as central
+
+  //==== hist_Pdf_Replica : bin1~bin100 are filled
+  //==== hist_Replica_Den : for t-ch, bin2~bin101 should be used
+  for(unsigned int i=1; i<=hist_Pdf_Replica->GetXaxis()->GetNbins(); i++){
     double num = hist_Pdf_Replica->GetBinContent(i);
-    double den = hist_Replica_Den->GetBinContent(i);
+    double den = hist_Replica_Den->GetBinContent(i+pdferror_start_bin);
     double this_eff = num/den;
 
     double diff = (this_eff-eff_central)/eff_central;
@@ -101,8 +104,8 @@ void PdfSystematics::CalculatePdfSystematic(){
 
   //==== PDF Error (den)
   Syst_Pdf_Replica_Den = 0.;
-  for(unsigned int i=pdferror_start_bin; i<=hist_Replica_Den->GetXaxis()->GetNbins(); i++){
-    double this_den = hist_Replica_Den->GetBinContent(i);
+  for(unsigned int i=1; i<=hist_Replica_Den->GetXaxis()->GetNbins(); i++){
+    double this_den = hist_Replica_Den->GetBinContent(i+pdferror_start_bin);
 
     double diff = (this_den-den_central)/den_central;
     Syst_Pdf_Replica_Den += diff*diff;
