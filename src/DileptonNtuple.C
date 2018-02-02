@@ -57,8 +57,8 @@ void DileptonNtuple::Loop(){
 
       else if(PdfWeights->size()==108){
         //==== Replica
-        for(unsigned int i=1; i<=100; i++){
-          hist_Pdf_Replica->Fill(i, weight*(fabs(PdfWeights->at(i))));
+        for(unsigned int i=0; i<100; i++){
+          hist_Pdf_Replica->Fill(i, weight*(fabs(PdfWeights->at(i+1)))); // For LUX pdf, pdfweight.at(0) is same as central
         }
 
         //==== AlphaS
