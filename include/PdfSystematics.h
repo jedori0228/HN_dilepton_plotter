@@ -86,7 +86,9 @@ void PdfSystematics::CalculatePdfSystematic(){
   int pdferror_start_bin = 1;
   if(istch) pdferror_start_bin = 2; //==== for t-ch, first bin is same as central
   for(unsigned int i=pdferror_start_bin; i<=hist_Pdf_Replica->GetXaxis()->GetNbins(); i++){
-    double this_eff = hist_Pdf_Replica->GetBinContent(i)/den_central;
+    double num = hist_Pdf_Replica->GetBinContent(i);
+    double den = hist_Replica_Den->GetBinContent(i);
+    double this_eff = num/den;
 
     double diff = (this_eff-eff_central)/eff_central;
     Syst_Pdf_Replica_Eff += diff*diff;
