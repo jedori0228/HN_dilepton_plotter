@@ -11,12 +11,17 @@ public :
   TH1D *hist_Pdf_Alpha;
   TH1D *hist_Pdf_Scale;
 
+  TString SampleName;
+  bool IsTch();
+
   double Yield_Central;
-  double Syst_Pdf_Replica;
+  double Syst_Pdf_Replica_Eff;
+  double Syst_Pdf_Replica_Den;
   double Syst_Pdf_Alpha;
   double Syst_Pdf_Scale;
   double Syst_Pdf_Total;
 
+  bool ForXsecLimitOnly;
 
   void CalculatePdfSystematic();
 
@@ -26,6 +31,7 @@ public :
 PdfSystematics::PdfSystematics(){
 
   Yield_Central = 0.;
+  ForXsecLimitOnly = false;
 
 }
 
@@ -53,26 +59,59 @@ TDirectory *PdfSystematics::MakeTempDir(){
 
 void PdfSystematics::CalculatePdfSystematic(){
 
-  //cout << "Yield_Central = " << Yield_Central << endl;
+  TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
+  TString catversion = getenv("CATVERSION");
+  TString dataset = getenv("CATANVERSION");
+  TString ENV_FILE_PATH = getenv("FILE_PATH");
+  TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  //==== PDF Error
+  TString filepath = ENV_FILE_PATH+"/"+dataset+"/SignalPDF/";
 
-  Syst_Pdf_Replica = 0.;
-  for(unsigned int i=1; i<=hist_Pdf_Replica->GetXaxis()->GetNbins(); i++){
-    double diff = hist_Pdf_Replica->GetBinContent(i)-Yield_Central;
-    Syst_Pdf_Replica += diff*diff;
+  TFile *file_Den = new TFile(filepath+"DiLeptonAnalyzer_"+SampleName+"_cat_v8-0-7.root");
+  TH1D *hist_Replica_Den = (TH1D *)file_Den->Get("ForTree_PdfWeights");
+  TH1D *hist_Scale_Den = (TH1D *)file_Den->Get("ForTree_ScaleWeights");
+  TH1D *hist_central_Den = (TH1D *)file_Den->Get("ForTree_Central");
+
+  double den_central = hist_central_Den->GetBinContent(1);
+  double eff_central = Yield_Central/den_central;
+
+  bool istch = IsTch();
+
+  cout << "Yield_Central = " << Yield_Central << endl;
+  cout << "Pseudo Efficiency = " << eff_central << endl;
+
+  //==== PDF Error (eff)
+
+  Syst_Pdf_Replica_Eff = 0.;
+  int pdferror_start_bin = 1;
+  if(istch) pdferror_start_bin = 2; //==== for t-ch, first bin is same as central
+  for(unsigned int i=pdferror_start_bin; i<=hist_Pdf_Replica->GetXaxis()->GetNbins(); i++){
+    double this_eff = hist_Pdf_Replica->GetBinContent(i)/den_central;
+
+    double diff = (this_eff-eff_central)/eff_central;
+    Syst_Pdf_Replica_Eff += diff*diff;
+
+    //cout << "  this_eff = " << this_eff << " --> diff = " << diff;
+    //cout << " --> this_rms = " << sqrt(Syst_Pdf_Replica_Eff/i) << " with i = " << i << endl;
   }
-  Syst_Pdf_Replica = sqrt(Syst_Pdf_Replica)/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1)/(Yield_Central);
-  cout << "Pdf Replica -> " << Syst_Pdf_Replica << endl;
+  Syst_Pdf_Replica_Eff = sqrt(Syst_Pdf_Replica_Eff/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
+  cout << "Pdf Replica Eff -> " << Syst_Pdf_Replica_Eff << endl;
+
+  //==== PDF Error (den)
+  Syst_Pdf_Replica_Den = 0.;
+  for(unsigned int i=pdferror_start_bin; i<=hist_Replica_Den->GetXaxis()->GetNbins(); i++){
+    double this_den = hist_Replica_Den->GetBinContent(i);
+
+    double diff = (this_den-den_central)/den_central;
+    Syst_Pdf_Replica_Den += diff*diff;
+  }
+  Syst_Pdf_Replica_Den = sqrt(Syst_Pdf_Replica_Den/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
+  cout << "Pdf Replica Den -> " << Syst_Pdf_Replica_Den << endl;
 
   //==== PDF Alpha
 
   Syst_Pdf_Alpha = 0.;
-  if(hist_Pdf_Alpha->GetBinContent(6)<=0.000001||hist_Pdf_Alpha->GetBinContent(6)==0.){
-    cout << "S-ch" << endl;
-    Syst_Pdf_Alpha = ( (hist_Pdf_Alpha->GetBinContent(1))-(hist_Pdf_Alpha->GetBinContent(2)) )/2./(Yield_Central);
-  }
-  else{
+  if(istch){
     cout << "T-ch" << endl;
     for(unsigned int i=1; i<=hist_Pdf_Alpha->GetXaxis()->GetNbins(); i++){
       double diff = fabs(hist_Pdf_Alpha->GetBinContent(i)-Yield_Central)/Yield_Central;
@@ -81,7 +120,10 @@ void PdfSystematics::CalculatePdfSystematic(){
     }
     Syst_Pdf_Alpha = sqrt(Syst_Pdf_Alpha);
   }
-
+  else{
+    cout << "S-ch" << endl;
+    Syst_Pdf_Alpha = ( (hist_Pdf_Alpha->GetBinContent(1))-(hist_Pdf_Alpha->GetBinContent(2)) )/2./(Yield_Central);
+  }
   cout << "Pdf Alpha -> " << Syst_Pdf_Alpha << endl;
 
   //==== PDF SCale
@@ -97,11 +139,25 @@ void PdfSystematics::CalculatePdfSystematic(){
   Syst_Pdf_Scale = Syst_Pdf_Scale/Yield_Central;
   cout << "Pdf Scale -> " << Syst_Pdf_Scale << endl;
 
-  Syst_Pdf_Total = sqrt(Syst_Pdf_Replica*Syst_Pdf_Replica+Syst_Pdf_Alpha*Syst_Pdf_Alpha+Syst_Pdf_Scale*Syst_Pdf_Scale);
+  if(ForXsecLimitOnly){
+    Syst_Pdf_Total = sqrt(Syst_Pdf_Replica_Eff*Syst_Pdf_Replica_Eff+Syst_Pdf_Alpha*Syst_Pdf_Alpha+Syst_Pdf_Scale*Syst_Pdf_Scale);
+  }
+  else{
+    Syst_Pdf_Total = sqrt(Syst_Pdf_Replica_Eff*Syst_Pdf_Replica_Eff+Syst_Pdf_Replica_Den*Syst_Pdf_Replica_Den+Syst_Pdf_Alpha*Syst_Pdf_Alpha+Syst_Pdf_Scale*Syst_Pdf_Scale);
+  }
 
   cout << "==> Total = " << Syst_Pdf_Total << endl;
 
+  file_Den->Close();
+  delete file_Den;
+
 }
 
+bool PdfSystematics::IsTch(){
+
+  if(SampleName.Contains("Tchannel")) return true;
+  else return false;
+
+}
 
 #endif

@@ -181,7 +181,8 @@ void {4}(){{
   double cf_calculated_syst(0.); // CF Syst
   double signal_calculated_syst(0.); // Pdf Syst
 
-  double signal_calculated_syst_pdf_error(0.);
+  double signal_calculated_syst_pdf_error_eff(0.);
+  double signal_calculated_syst_pdf_error_den(0.);
   double signal_calculated_syst_pdf_alphaS(0.);
   double signal_calculated_syst_pdf_scale(0.);
 
@@ -235,6 +236,7 @@ void {4}(){{
       syst_sig += (m.signal_err.at(0)/m.signal_rate.at(0))*(m.signal_err.at(0)/m.signal_rate.at(0));
 
       m.pdfsyst.Yield_Central = y_signal_central;
+      m.pdfsyst.SampleName = m.signals.at(0);
       m.pdfsyst.CalculatePdfSystematic();
 
       prompt_stat = m.prompt_bkgs_stat;
@@ -248,7 +250,8 @@ void {4}(){{
       signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
       //signal_calculated_syst = (8.53*0.01)*y_signal_central;
 
-      signal_calculated_syst_pdf_error = fabs(m.pdfsyst.Syst_Pdf_Replica)*y_signal_central;
+      signal_calculated_syst_pdf_error_eff = fabs(m.pdfsyst.Syst_Pdf_Replica_Eff)*y_signal_central;
+      signal_calculated_syst_pdf_error_den = fabs(m.pdfsyst.Syst_Pdf_Replica_Den)*y_signal_central;
       signal_calculated_syst_pdf_alphaS = fabs(m.pdfsyst.Syst_Pdf_Alpha)*y_signal_central;
       signal_calculated_syst_pdf_scale = fabs(m.pdfsyst.Syst_Pdf_Scale)*y_signal_central;
 
@@ -372,14 +375,23 @@ void {4}(){{
   syst_sig += (signal_calculated_syst/y_signal_central)*(signal_calculated_syst/y_signal_central);
 */
 
-  cout << "PDF Error" << "\t";
+  cout << "PDF Error Eff" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
-  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_error/y_signal_central << endl;
-  ONLYSYST_sig += (signal_calculated_syst_pdf_error/y_signal_central)*(signal_calculated_syst_pdf_error/y_signal_central);
-  syst_sig += (signal_calculated_syst_pdf_error/y_signal_central)*(signal_calculated_syst_pdf_error/y_signal_central);
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_error_eff/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_error_eff/y_signal_central)*(signal_calculated_syst_pdf_error_eff/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_error_eff/y_signal_central)*(signal_calculated_syst_pdf_error_eff/y_signal_central);
+
+  cout << "PDF Error Den" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << "-" << "\t";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_error_eff/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_error_eff/y_signal_central)*(signal_calculated_syst_pdf_error_eff/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_error_eff/y_signal_central)*(signal_calculated_syst_pdf_error_eff/y_signal_central);
 
   cout << "PDF AlphaS" << "\t";
   cout << std::fixed<<std::setprecision(2) << "-" << "\t";
