@@ -79,6 +79,7 @@ void PdfSystematics::CalculatePdfSystematic(){
 
   cout << "Yield_Central = " << Yield_Central << endl;
   cout << "Pseudo Efficiency = " << eff_central << endl;
+  cout << "Den = " << den_central << endl;
 
   //==== PDF Error (eff)
 
@@ -104,10 +105,11 @@ void PdfSystematics::CalculatePdfSystematic(){
 
   //==== PDF Error (den)
   Syst_Pdf_Replica_Den = 0.;
-  for(unsigned int i=1; i<=hist_Replica_Den->GetXaxis()->GetNbins(); i++){
+  for(unsigned int i=1; i<=hist_Pdf_Replica->GetXaxis()->GetNbins(); i++){
     double this_den = hist_Replica_Den->GetBinContent(i+pdferror_start_bin);
 
     double diff = (this_den-den_central)/den_central;
+    cout << i << "\t" << this_den << "\t" << diff << endl;
     Syst_Pdf_Replica_Den += diff*diff;
   }
   Syst_Pdf_Replica_Den = sqrt(Syst_Pdf_Replica_Den/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
