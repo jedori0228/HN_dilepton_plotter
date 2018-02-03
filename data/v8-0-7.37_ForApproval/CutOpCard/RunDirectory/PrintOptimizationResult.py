@@ -10,7 +10,7 @@ for ch in channels:
     for Bin in Bins:
 
       ## Low Mass
-      masses = [20, 30, 40, 50, 60, 70, 80]
+      masses = [20, 30, 40, 50, 60, 70, 75, 80]
       varorder = [
       "Njets <",
 
@@ -33,7 +33,7 @@ for ch in channels:
       varsinboth = []
 
       if LowORHigh == 1:
-        masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
+        masses = [85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
         varorder = [
         "Njets <",
 
@@ -72,12 +72,12 @@ for ch in channels:
               print "-\t",
 
           ## leading jet pt
-          if mass >= 90 and Bin == "Bin2":
+          if mass >= 85 and Bin == "Bin2":
             if "leadingJet_lljjWclosest_pt" in var:
               print "-\t",
 
           ## medium mass l2jj
-          if mass >= 90 and mass <= 200:
+          if mass >= 85 and mass <= 200:
             if "ljj " in var:
               var = var.replace("ljj","m_SubLeadljj_jjWclosest")
               var = var.replace("|","")
@@ -117,6 +117,8 @@ for ch in channels:
           if Bin == "Bin2" and  LowORHigh == 1:
             if "secondLepton_Pt" in var:
               print "40 - 130\t-\t",
+              if mass==85:
+                print "-\t",
             if ("ljj |<" in var) or ("m_SubLeadljj_jjWclosest <" in var):
               print "15\t",
 
@@ -135,15 +137,26 @@ for ch in channels:
        
         float_eff = float(runlog[len(runlog)-3].split()[2])
         eff_S = str(float_eff*1.)
+        eff_S_staterr = 0.
+
+        for linelog in runlog:
+          if "Stat" in linelog:
+            eff_S_staterr = 0.01*float(linelog.split()[5])*float_eff
+
 
         if (LowORHigh==1) and (mass in masses_Tch):
           lines_T = open('Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'_VBFOnly.log').readlines()
           float_eff_T = float(lines_T[len(lines_T)-3].split()[2])
           eff_T = str(float_eff_T*1.)
-          print bkgd+'\t'+obs+'\t'+eff_S+"\t"+eff_T
+          eff_T_staterr = 0.
+          for linelog in lines_T:
+            if "Stat" in linelog:
+              eff_T_staterr = 0.01*float(linelog.split()[5])*float_eff_T
+
+          print bkgd+'\t'+obs+'\t'+eff_S+"\t"+str(eff_S_staterr)+"\t"+eff_T+"\t"+str(eff_T_staterr)
 
         else:
-          print bkgd+'\t'+obs+'\t'+eff_S
+          print bkgd+'\t'+obs+'\t'+eff_S+"\t"+str(eff_S_staterr)
 
 
 

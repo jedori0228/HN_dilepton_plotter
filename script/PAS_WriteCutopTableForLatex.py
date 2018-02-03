@@ -66,12 +66,14 @@ for region in regions:
 
       else:
 
-        if "SR2" in row:
-          print "\\cline{2-10}"
+        start_index = 2
+        if "High" in region :
+          start_index = 1
 
-        for a in range(0,MaxRowIndex):
-          row[a] = row[a].replace('%','~\\%')
-          row[a] = row[a].replace(' - ','$-$')
+        mass = int(float(row[start_index]))
+
+        for a in range(start_index,MaxRowIndex):
+          row[a] = row[a].replace('%','')
 
           if a==0:
 
@@ -95,7 +97,63 @@ for region in regions:
           else:
             toprint = row[a]
             if toprint != "":
-              toprint = "$"+toprint+"$"
+              toprint = toprint
+
+            ## HOTFIX 1 ##
+            if region=="Low":
+              if a==5:
+                if row[a]=="80":
+                  toprint = "20 - 80"
+                if row[a]=="70":
+                  toprint = "25 - 70"
+                if row[a]=="60":
+                  toprint = "25 - 60"
+
+              if a==7 or a==8 or a==9:
+                toprint = "$< "+toprint+"$"
+
+              if a==14:
+                toprint = "$"+row[a]+"\\pm"
+                print toprint,
+                continue
+              if a==15:
+                toprint =  row[a]+"$"
+
+            ## HOTFIX 2 ##
+            if "High" in region:
+
+              if a==5 or a==6 or a==8:
+                toprint = "$> "+toprint+"$"
+
+              if a==6 and mass>=600:
+                print "$ - $ &",
+                continue
+
+              if a==10:
+                toprint = "$< "+toprint+"$"
+
+
+              if a==13:
+                toprint = "$"+row[a]+"\\pm"
+                print toprint,
+                continue
+              if a==14:
+                toprint =  row[a]+"$"
+                print toprint,
+                continue
+
+              if a==15:
+                if toprint!= "":
+                  toprint = "[$"+row[a]+"\\pm"
+                  print toprint,
+                  continue
+                else:
+                  continue
+              if a==16:
+                if toprint!= "":
+                  toprint =  row[a]+"$]"
+                else:
+                  toprint = toprint
 
             if a != MaxRowIndex-1:
               print toprint+" &",

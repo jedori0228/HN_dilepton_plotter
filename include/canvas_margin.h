@@ -1,3 +1,6 @@
+#ifndef canvas_margin_h
+#define canvas_margin_h
+
 void canvas_margin(TCanvas *c1){
   c1->SetTopMargin( 0.05 );
   c1->SetBottomMargin( 0.13 );
@@ -169,3 +172,5 @@ void hist_axis(TGraph *hist, TGraph *hist_compare){
   hist_compare->SetFillColorAlpha(45,0.35);
 
 }
+
+#endif

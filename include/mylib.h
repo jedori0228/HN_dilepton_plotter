@@ -1,3 +1,6 @@
+#ifndef mylib_h
+#define mylib_h
+
 TGraphAsymmErrors* hist_to_graph(TH1D* hist, bool YErrorZero=false){
 
   TH1::SetDefaultSumw2(true);
@@ -240,8 +243,41 @@ TDirectory *MakeTemporaryDirectory(){
 
 }
 
+void AddPhantomZero(double a, TString align, int digit_int, int digit_frac){
+
+  if(align=="r"){
+    int number_maxdigit = 0;
+    for(int i=10; i>=0; i--){
+      if(a/pow(10,i)>=1.){
+        number_maxdigit = i;
+        break;
+      }
+    }
+    //cout << "number_maxdigit = " << number_maxdigit << endl;
+    for(int i=0; i<digit_int-(number_maxdigit+1); i++) cout << "\\phantom{0}";
+    cout << std::fixed<<std::setprecision(digit_frac) << a;
+  }
+
+  else if(align=="l"){
+    int target_total_digit = digit_int+digit_frac;
+    int number_maxdigit = 0;
+    for(int i=10; i>=0; i--){
+      if(a/pow(10,i)>=1.){
+        number_maxdigit = i;
+        break;
+      }
+    }
+    //cout << "target_total_digit = " << target_total_digit << endl;
+    //cout << "number_maxdigit = " << number_maxdigit << endl;
+    //cout << "--> # of \\phantom{0} = " << target_total_digit-digit_int-(number_maxdigit+1) << endl;
+
+    cout << std::fixed<<std::setprecision(digit_frac) << a;
+    for(int i=0; i<target_total_digit-(number_maxdigit+1)-digit_frac; i++) cout << "\\phantom{0}";
+  }
+
+}
 
 
 
 
-
+#endif

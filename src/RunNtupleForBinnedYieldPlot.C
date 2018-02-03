@@ -28,6 +28,7 @@ void RunNtupleForBinnedYieldPlot::Run(){
 
     double data_unweighted_yield(0.), data_weighted_yield(0.);
     double chargeflip_unweighted_yield(0.), chargeflip_weighted_yield(0.), chargeflip_weighted_yield_stat(0.);
+    double chargeflip_lowstaterr(0.);
     double fake_unweighted_yield(0.), fake_weighted_yield(0.), fake_weighted_yield_stat(0.);
     double prompt_unweighted_yield(0.), prompt_weighted_yield(0.);
 
@@ -168,6 +169,7 @@ void RunNtupleForBinnedYieldPlot::Run(){
         chargeflip_weighted_yield = m.weighted_yield;
 
         chargeflip_weighted_yield_stat = m.hist_for_error->GetBinError(1);
+        chargeflip_lowstaterr = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
         //double cf_propagation = m.hist_for_error_up->GetBinContent(1) - m.hist_for_error->GetBinContent(1);
         //chargeflip_weighted_yield_stat = sqrt( chargeflip_weighted_yield_stat*chargeflip_weighted_yield_stat + cf_propagation*cf_propagation );
       }
@@ -216,6 +218,7 @@ void RunNtupleForBinnedYieldPlot::Run(){
 
     //==== Stat. + Syst.
     double chargeflip_weighted_yield_syst = chargeflip_weighted_yield * uncert_cf;
+    chargeflip_weighted_yield_syst = sqrt(chargeflip_weighted_yield_syst*chargeflip_weighted_yield_syst+chargeflip_lowstaterr*chargeflip_lowstaterr);
     double chargeflip_weighted_yield_err = sqrt( chargeflip_weighted_yield_stat*chargeflip_weighted_yield_stat + chargeflip_weighted_yield_syst*chargeflip_weighted_yield_syst );
     if(PrintYield){
       cout << "chargeflip_weighted_yield = " << chargeflip_weighted_yield << endl;
