@@ -173,6 +173,8 @@ void HNMuMu_100(){
       syst_sig += (m.signal_err.at(0)/m.signal_rate.at(0))*(m.signal_err.at(0)/m.signal_rate.at(0));
 
       m.pdfsyst.Yield_Central = y_signal_central;
+      cout << "Signal Eff = " << eff_signal_central << endl;
+      m.pdfsyst.SampleName = m.signals.at(0);
       m.pdfsyst.CalculatePdfSystematic();
 
       prompt_stat = m.prompt_bkgs_stat;
