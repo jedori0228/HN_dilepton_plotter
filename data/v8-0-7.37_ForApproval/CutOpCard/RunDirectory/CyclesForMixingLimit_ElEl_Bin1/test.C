@@ -1,6 +1,6 @@
 #include "RunNtupleBase.C"
 
-void HNElEl_400(){
+void test(){
 
   bool DoDebug = false;
 
@@ -17,11 +17,11 @@ void HNElEl_400(){
 
   RunNtupleBase m;
   m.DoDebug = DoDebug;
-  m.RunSystematic = true;
+  m.RunSystematic = false;
 
   //==== Skim selection for tree (tree name : Ntp_<skim>)
 
-  m.treeskim = "High_TwoJet_NoFatjet_SS";
+  m.treeskim = "Low_TwoJet_NoFatjet_SS";
 
   //==== Dataset/channel
 
@@ -34,14 +34,14 @@ void HNElEl_400(){
 
   //==== Input/Output
 
-  m.filepath = WORKING_DIR+"/rootfiles/"+dataset+"/Ntuple/Skimmed_High_TwoJet_NoFatjet/";
+  m.filepath = WORKING_DIR+"/rootfiles/"+dataset+"/Ntuple/Skimmed_Low_TwoJet_NoFatjet/";
   m.plotpath = ENV_PLOT_PATH+"/"+dataset+"/cutop/";
 
   //==== Signal Info
 
   m.preselection = "Preselection_SS";
   m.signals = {
-    "HNElEl_400",
+    "HNElEl_75",
   };
   m.MinEffPresel = 0.;
   m.AddSamplesToList( m.signals );
@@ -75,13 +75,14 @@ void HNElEl_400(){
 
   //==== Set CutCard
 
-  TString cutfilename = "HNElEl_400.txt";
+  TString cutfilename = "HNElEl_80.txt";
   m.SetCutCard(WORKING_DIR+"/data/"+dataset+"/CutOpCard/RunDirectory/"+CutOpCardDir+"/"+cutfilename);
 
   vector<TString> systs = {
     "",
     "_MuonEn_up", "_MuonEn_down",
     "_MuonIDSF_up", "_MuonIDSF_down",
+    "_Rocc_up", "_Rocc_down",
     "_ElectronEn_up", "_ElectronEn_down",
     "_ElectronIDSF_up", "_ElectronIDSF_down",
     "_TriggerSF_up", "_TriggerSF_down",
@@ -188,7 +189,7 @@ void HNElEl_400(){
       fake_calculated_syst = m.fake_bkgs_syst;
       cf_calculated_syst = m.cf_bkgs_syst;
       //signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
-      signal_calculated_syst = (0.0266741)*y_signal_central;
+      signal_calculated_syst = (0.0815591)*y_signal_central;
 
     }
 
@@ -259,6 +260,7 @@ void HNElEl_400(){
   vector<TString> sourcealias = {
     "MuonPt",
     "MuonID",
+    "MuonRocc",
     "ElectronE",
     "ElectronID",
     "Trigger",

@@ -10,4 +10,5 @@ cd Outputs_Optimization
 python makecard.py
 cd ../
 python TEMP_MiddleMass_RelaxSubLeadPt.py
+python TEMP_NewMass_7585.py
 #python TEMP_HighMass_SR2_MakeThemOverlap.py
