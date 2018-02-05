@@ -66,6 +66,7 @@ void DileptonNtuple::Loop(){
         }
 
         //==== AlphaS
+        //==== at(101)~at(107)
         for(unsigned int i=0; i<7; i++){
           hist_Pdf_Alpha->Fill(i, weight*(fabs(PdfWeights->at(101+i))));
         }

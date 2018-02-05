@@ -126,8 +126,13 @@ void ElEl_Bin2_Low(){
 
   double signal_calculated_syst_pdf_error_eff(0.);
   double signal_calculated_syst_pdf_error_den(0.);
-  double signal_calculated_syst_pdf_alphaS(0.);
-  double signal_calculated_syst_pdf_scale(0.);
+  double signal_calculated_syst_pdf_error_num(0.);
+  double signal_calculated_syst_pdf_alphaS_eff(0.);
+  double signal_calculated_syst_pdf_alphaS_den(0.);
+  double signal_calculated_syst_pdf_alphaS_num(0.);
+  double signal_calculated_syst_pdf_scale_eff(0.);
+  double signal_calculated_syst_pdf_scale_den(0.);
+  double signal_calculated_syst_pdf_scale_num(0.);
 
   for(unsigned int i=0; i<systs.size(); i++){
 
@@ -195,8 +200,15 @@ void ElEl_Bin2_Low(){
 
       signal_calculated_syst_pdf_error_eff = fabs(m.pdfsyst.Syst_Pdf_Replica_Eff)*y_signal_central;
       signal_calculated_syst_pdf_error_den = fabs(m.pdfsyst.Syst_Pdf_Replica_Den)*y_signal_central;
-      signal_calculated_syst_pdf_alphaS = fabs(m.pdfsyst.Syst_Pdf_Alpha)*y_signal_central;
-      signal_calculated_syst_pdf_scale = fabs(m.pdfsyst.Syst_Pdf_Scale)*y_signal_central;
+      signal_calculated_syst_pdf_error_num = fabs(m.pdfsyst.Syst_Pdf_Replica_Num)*y_signal_central;
+
+      signal_calculated_syst_pdf_alphaS_eff = fabs(m.pdfsyst.Syst_Pdf_Alpha_Eff)*y_signal_central;
+      signal_calculated_syst_pdf_alphaS_den = fabs(m.pdfsyst.Syst_Pdf_Alpha_Den)*y_signal_central;
+      signal_calculated_syst_pdf_alphaS_num = fabs(m.pdfsyst.Syst_Pdf_Alpha_Num)*y_signal_central;
+
+      signal_calculated_syst_pdf_scale_eff = fabs(m.pdfsyst.Syst_Pdf_Scale_Eff)*y_signal_central;
+      signal_calculated_syst_pdf_scale_den = fabs(m.pdfsyst.Syst_Pdf_Scale_Den)*y_signal_central;
+      signal_calculated_syst_pdf_scale_num = fabs(m.pdfsyst.Syst_Pdf_Scale_Num)*y_signal_central;
 
     }
 
@@ -317,7 +329,7 @@ void ElEl_Bin2_Low(){
   ONLYSYST_sig += (signal_calculated_syst/y_signal_central)*(signal_calculated_syst/y_signal_central);
   syst_sig += (signal_calculated_syst/y_signal_central)*(signal_calculated_syst/y_signal_central);
 */
-
+/*
   cout << "PDF Error Eff" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
@@ -327,7 +339,25 @@ void ElEl_Bin2_Low(){
   ONLYSYST_sig += (signal_calculated_syst_pdf_error_eff/y_signal_central)*(signal_calculated_syst_pdf_error_eff/y_signal_central);
   syst_sig += (signal_calculated_syst_pdf_error_eff/y_signal_central)*(signal_calculated_syst_pdf_error_eff/y_signal_central);
 
-  cout << "PDF Error Den" << "	";
+  cout << "PDF AlphaS Eff" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_alphaS_eff/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_alphaS_eff/y_signal_central)*(signal_calculated_syst_pdf_alphaS_eff/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_alphaS_eff/y_signal_central)*(signal_calculated_syst_pdf_alphaS_eff/y_signal_central);
+
+  cout << "PDF Scale Eff" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_scale_eff/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_scale_eff/y_signal_central)*(signal_calculated_syst_pdf_scale_eff/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_scale_eff/y_signal_central)*(signal_calculated_syst_pdf_scale_eff/y_signal_central);
+
+  cout << "PDF Error den" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
@@ -336,25 +366,51 @@ void ElEl_Bin2_Low(){
   ONLYSYST_sig += (signal_calculated_syst_pdf_error_den/y_signal_central)*(signal_calculated_syst_pdf_error_den/y_signal_central);
   syst_sig += (signal_calculated_syst_pdf_error_den/y_signal_central)*(signal_calculated_syst_pdf_error_den/y_signal_central);
 
+  cout << "PDF AlphaS den" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_alphaS_den/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_alphaS_den/y_signal_central)*(signal_calculated_syst_pdf_alphaS_den/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_alphaS_den/y_signal_central)*(signal_calculated_syst_pdf_alphaS_den/y_signal_central);
+
+  cout << "PDF Scale den" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_scale_den/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_scale_den/y_signal_central)*(signal_calculated_syst_pdf_scale_den/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_scale_den/y_signal_central)*(signal_calculated_syst_pdf_scale_den/y_signal_central);
+*/
+
+  cout << "PDF Error" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << "-" << "	";
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_error_num/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_error_num/y_signal_central)*(signal_calculated_syst_pdf_error_num/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_error_num/y_signal_central)*(signal_calculated_syst_pdf_error_num/y_signal_central);
+
   cout << "PDF AlphaS" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
-  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_alphaS/y_signal_central << endl;
-  ONLYSYST_sig += (signal_calculated_syst_pdf_alphaS/y_signal_central)*(signal_calculated_syst_pdf_alphaS/y_signal_central);
-  syst_sig += (signal_calculated_syst_pdf_alphaS/y_signal_central)*(signal_calculated_syst_pdf_alphaS/y_signal_central);
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_alphaS_num/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_alphaS_num/y_signal_central)*(signal_calculated_syst_pdf_alphaS_num/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_alphaS_num/y_signal_central)*(signal_calculated_syst_pdf_alphaS_num/y_signal_central);
 
   cout << "PDF Scale" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
   cout << std::fixed<<std::setprecision(2) << "-" << "	";
-  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_scale/y_signal_central << endl;
-  ONLYSYST_sig += (signal_calculated_syst_pdf_scale/y_signal_central)*(signal_calculated_syst_pdf_scale/y_signal_central);
-  syst_sig += (signal_calculated_syst_pdf_scale/y_signal_central)*(signal_calculated_syst_pdf_scale/y_signal_central);
-
-
+  cout << std::fixed<<std::setprecision(2) << 100.*signal_calculated_syst_pdf_scale_num/y_signal_central << endl;
+  ONLYSYST_sig += (signal_calculated_syst_pdf_scale_num/y_signal_central)*(signal_calculated_syst_pdf_scale_num/y_signal_central);
+  syst_sig += (signal_calculated_syst_pdf_scale_num/y_signal_central)*(signal_calculated_syst_pdf_scale_num/y_signal_central);
 
   for(unsigned int i=0; i<reldiff_means.size(); i++){
 

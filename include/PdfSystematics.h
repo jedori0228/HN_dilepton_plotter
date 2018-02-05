@@ -17,10 +17,19 @@ public :
   double Yield_Central;
   double Syst_Pdf_Replica_Eff;
   double Syst_Pdf_Replica_Den;
-  double Syst_Pdf_Alpha;
-  double Syst_Pdf_Scale;
+  double Syst_Pdf_Replica_Num;
+
+  double Syst_Pdf_Alpha_Eff;
+  double Syst_Pdf_Alpha_Den;
+  double Syst_Pdf_Alpha_Num;
+
+  double Syst_Pdf_Scale_Eff;
+  double Syst_Pdf_Scale_Den;
+  double Syst_Pdf_Scale_Num;
+
   double Syst_Pdf_Total;
 
+  bool SeparateEffDen;
   bool ForXsecLimitOnly;
   bool Debug;
 
@@ -32,6 +41,7 @@ public :
 PdfSystematics::PdfSystematics(){
 
   Yield_Central = 0.;
+  SeparateEffDen = false;
   ForXsecLimitOnly = false;
   Debug = false;
 
@@ -81,19 +91,23 @@ void PdfSystematics::CalculatePdfSystematic(){
   if(!hist_Replica_Den) return;
 
   double den_central = hist_central_Den->GetBinContent(1);
+  double num_central = Yield_Central;
   double eff_central = Yield_Central/den_central;
 
   bool istch = IsTch();
 
   if(Debug){
+    cout << "istch = " << istch << endl; 
     cout << "Yield_Central = " << Yield_Central << endl;
     cout << "Pseudo Efficiency = " << eff_central << endl;
     cout << "Den = " << den_central << endl;
   }
 
-  //==== PDF Error (eff)
+  //==== PDF Error
 
   Syst_Pdf_Replica_Eff = 0.;
+  Syst_Pdf_Replica_Den = 0.;
+  Syst_Pdf_Replica_Num = 0.;
   int pdferror_start_bin = 0;
   if(istch) pdferror_start_bin = 1; //==== for t-ch, first bin is same as central
 
@@ -104,70 +118,123 @@ void PdfSystematics::CalculatePdfSystematic(){
     double den = hist_Replica_Den->GetBinContent(i+pdferror_start_bin);
     double this_eff = num/den;
 
-    double diff = (this_eff-eff_central)/eff_central;
-    Syst_Pdf_Replica_Eff += diff*diff;
+    double reldiff_eff = (this_eff-eff_central)/eff_central;
+    double reldiff_den = (den-den_central)/den_central;
+    double reldiff_num = (num-num_central)/num_central;
 
-    //cout << "  this_eff = " << this_eff << " --> diff = " << diff;
-    //cout << " --> this_rms = " << sqrt(Syst_Pdf_Replica_Eff/i) << " with i = " << i << endl;
+    Syst_Pdf_Replica_Eff += reldiff_eff*reldiff_eff;
+    Syst_Pdf_Replica_Den += reldiff_den*reldiff_den;
+    Syst_Pdf_Replica_Num += reldiff_num*reldiff_num;
+
   }
+
   Syst_Pdf_Replica_Eff = sqrt(Syst_Pdf_Replica_Eff/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
-  if(Debug) cout << "Pdf Replica Eff -> " << Syst_Pdf_Replica_Eff << endl;
-
-  //==== PDF Error (den)
-  Syst_Pdf_Replica_Den = 0.;
-  for(unsigned int i=1; i<=hist_Pdf_Replica->GetXaxis()->GetNbins(); i++){
-    double this_den = hist_Replica_Den->GetBinContent(i+pdferror_start_bin);
-
-    double diff = (this_den-den_central)/den_central;
-    //cout << i << "\t" << this_den << "\t" << diff << endl;
-    Syst_Pdf_Replica_Den += diff*diff;
-  }
   Syst_Pdf_Replica_Den = sqrt(Syst_Pdf_Replica_Den/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
-  if(Debug) cout << "Pdf Replica Den -> " << Syst_Pdf_Replica_Den << endl;
+  Syst_Pdf_Replica_Num = sqrt(Syst_Pdf_Replica_Num/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
+
+  if(Debug){
+    cout << "Pdf Replica Eff -> " << Syst_Pdf_Replica_Eff << endl;
+    cout << "Pdf Replica Den -> " << Syst_Pdf_Replica_Den << endl;
+    cout << "Pdf Replica Num -> " << Syst_Pdf_Replica_Num << endl;
+  }
 
   //==== PDF Alpha
 
-  Syst_Pdf_Alpha = 0.;
+  Syst_Pdf_Alpha_Eff = 0.;
+  Syst_Pdf_Alpha_Den = 0.;
+  Syst_Pdf_Alpha_Num = 0.;
   if(istch){
-    if(Debug) cout << "T-ch" << endl;
     for(unsigned int i=1; i<=hist_Pdf_Alpha->GetXaxis()->GetNbins(); i++){
-      double diff = fabs(hist_Pdf_Alpha->GetBinContent(i)-Yield_Central)/Yield_Central;
-      //cout << diff << endl;
-      Syst_Pdf_Alpha += diff*diff;
+      double num = hist_Pdf_Alpha->GetBinContent(i);
+      double den = hist_Replica_Den->GetBinContent(i+100); // For LUX pdf, PdfWeights at(101)~at(107) are extra sources
+      double this_eff = num/den;
+
+      double reldiff_eff = (this_eff-eff_central)/eff_central;
+      double reldiff_den = (den-den_central)/den_central;
+      double reldiff_num = (num-num_central)/num_central;
+
+      Syst_Pdf_Alpha_Eff += reldiff_eff*reldiff_eff;
+      Syst_Pdf_Alpha_Den += reldiff_den*reldiff_den;
+      Syst_Pdf_Alpha_Num += reldiff_num*reldiff_num;
+
     }
-    Syst_Pdf_Alpha = sqrt(Syst_Pdf_Alpha);
+    Syst_Pdf_Alpha_Eff = sqrt(Syst_Pdf_Alpha_Eff);
+    Syst_Pdf_Alpha_Den = sqrt(Syst_Pdf_Alpha_Den);
+    Syst_Pdf_Alpha_Num = sqrt(Syst_Pdf_Alpha_Num);
   }
   else{
-    if(Debug) cout << "S-ch" << endl;
-    Syst_Pdf_Alpha = ( (hist_Pdf_Alpha->GetBinContent(1))-(hist_Pdf_Alpha->GetBinContent(2)) )/2./(Yield_Central);
+
+    double num_alphaS_1 = hist_Pdf_Alpha->GetBinContent(1);
+    double num_alphaS_2 = hist_Pdf_Alpha->GetBinContent(2);
+    double den_alphaS_1 = hist_Replica_Den->GetBinContent(100);
+    double den_alphaS_2 = hist_Replica_Den->GetBinContent(101);
+    double eff_alphaS_1 = num_alphaS_1/den_alphaS_1;
+    double eff_alphaS_2 = num_alphaS_2/den_alphaS_2;
+
+    Syst_Pdf_Alpha_Eff = (eff_alphaS_2-eff_alphaS_1)/2./eff_central;
+    Syst_Pdf_Alpha_Den = (den_alphaS_2-den_alphaS_1)/2./den_central;
+    Syst_Pdf_Alpha_Num = (num_alphaS_2-num_alphaS_1)/2./num_central;
+
   }
-  if(Debug) cout << "Pdf Alpha -> " << Syst_Pdf_Alpha << endl;
+  if(Debug){
+    cout << "Pdf Alpha Eff -> " << Syst_Pdf_Alpha_Eff << endl;
+    cout << "Pdf Alpha Den -> " << Syst_Pdf_Alpha_Den << endl;
+    cout << "Pdf Alpha Num -> " << Syst_Pdf_Alpha_Num << endl;
+  }
 
-  //==== PDF SCale
+  //==== PDF Scale
 
-  Syst_Pdf_Scale = -999.;
+  Syst_Pdf_Scale_Eff = -999.;
+  Syst_Pdf_Scale_Den = -999.;
+  Syst_Pdf_Scale_Num = -999.;
   for(unsigned int i=1; i<=hist_Pdf_Scale->GetXaxis()->GetNbins(); i++){
-    double diff = fabs(hist_Pdf_Scale->GetBinContent(i)-Yield_Central);
-    //cout << "Scale yield = " << hist_Pdf_Scale->GetBinContent(i) << endl;
-    //cout << "Scale diff = " << diff << endl;
-    if(diff>Syst_Pdf_Scale){
-      Syst_Pdf_Scale = diff;
+    double num = hist_Pdf_Scale->GetBinContent(i);
+    double den = hist_Scale_Den->GetBinContent(i);
+    double this_eff = num/den;
+
+    double reldiff_eff = (this_eff-eff_central)/eff_central;
+    double reldiff_den = (den-den_central)/den_central;
+    double reldiff_num = (num-num_central)/num_central;
+
+    if(reldiff_eff>Syst_Pdf_Scale_Eff){
+      Syst_Pdf_Scale_Eff = reldiff_eff;
+    }
+    if(reldiff_den>Syst_Pdf_Scale_Den){
+      Syst_Pdf_Scale_Den = reldiff_den;
+    }
+    if(reldiff_num>Syst_Pdf_Scale_Num){
+      Syst_Pdf_Scale_Num = reldiff_num;
     }
 
   }
-  Syst_Pdf_Scale = Syst_Pdf_Scale/Yield_Central;
-  if(Debug) cout << "Pdf Scale -> " << Syst_Pdf_Scale << endl;
+  if(Debug){
+    cout << "Pdf Scale Eff -> " << Syst_Pdf_Scale_Eff << endl;
+    cout << "Pdf Scale Den -> " << Syst_Pdf_Scale_Den << endl;
+    cout << "Pdf Scale Num -> " << Syst_Pdf_Scale_Num << endl;
+  }
 
 
 
   //==== Sum-up
+  Syst_Pdf_Total = 0;
 
-  if(ForXsecLimitOnly){
-    Syst_Pdf_Total = sqrt(Syst_Pdf_Replica_Eff*Syst_Pdf_Replica_Eff+Syst_Pdf_Alpha*Syst_Pdf_Alpha+Syst_Pdf_Scale*Syst_Pdf_Scale);
+  if(SeparateEffDen){
+    if(!ForXsecLimitOnly){
+      Syst_Pdf_Total += Syst_Pdf_Replica_Eff*Syst_Pdf_Replica_Eff;
+      Syst_Pdf_Total += Syst_Pdf_Alpha_Eff*Syst_Pdf_Alpha_Eff;
+      Syst_Pdf_Total += Syst_Pdf_Scale_Eff*Syst_Pdf_Scale_Eff;
+    }
+    Syst_Pdf_Total += Syst_Pdf_Replica_Den*Syst_Pdf_Replica_Den;
+    Syst_Pdf_Total += Syst_Pdf_Alpha_Den*Syst_Pdf_Alpha_Den;
+    Syst_Pdf_Total += Syst_Pdf_Scale_Den*Syst_Pdf_Scale_Den;
   }
   else{
-    Syst_Pdf_Total = sqrt(Syst_Pdf_Replica_Eff*Syst_Pdf_Replica_Eff+Syst_Pdf_Replica_Den*Syst_Pdf_Replica_Den+Syst_Pdf_Alpha*Syst_Pdf_Alpha+Syst_Pdf_Scale*Syst_Pdf_Scale);
+    Syst_Pdf_Total += Syst_Pdf_Replica_Num*Syst_Pdf_Replica_Num;
+    Syst_Pdf_Total += Syst_Pdf_Alpha_Num*Syst_Pdf_Alpha_Num;
+    Syst_Pdf_Total += Syst_Pdf_Scale_Num*Syst_Pdf_Scale_Num;
   }
+
+  Syst_Pdf_Total = sqrt(Syst_Pdf_Total);
 
   if(Debug) cout << "==> Total = " << Syst_Pdf_Total << endl;
 
