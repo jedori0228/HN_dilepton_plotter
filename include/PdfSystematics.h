@@ -158,6 +158,10 @@ void PdfSystematics::CalculatePdfSystematic(){
   Syst_Pdf_Scale = Syst_Pdf_Scale/Yield_Central;
   if(Debug) cout << "Pdf Scale -> " << Syst_Pdf_Scale << endl;
 
+
+
+  //==== Sum-up
+
   if(ForXsecLimitOnly){
     Syst_Pdf_Total = sqrt(Syst_Pdf_Replica_Eff*Syst_Pdf_Replica_Eff+Syst_Pdf_Alpha*Syst_Pdf_Alpha+Syst_Pdf_Scale*Syst_Pdf_Scale);
   }

@@ -39,11 +39,13 @@ void DileptonNtuple::Loop(){
 
       if(PdfWeights->size()==102){
         //==== Replica
+        //==== at(0)~at(99)
         for(unsigned int i=0; i<100; i++){
           hist_Pdf_Replica->Fill(i, weight*(fabs(PdfWeights->at(i))));
         }
 
         //==== AlphaS
+        //==== at(100), at(101)
         for(unsigned int i=0; i<2; i++){
           hist_Pdf_Alpha->Fill(i, weight*(fabs(PdfWeights->at(100+i))));
         }
@@ -57,8 +59,10 @@ void DileptonNtuple::Loop(){
 
       else if(PdfWeights->size()==108){
         //==== Replica
+        //==== at(0) : central
+        //==== at(1)~at(100)
         for(unsigned int i=0; i<100; i++){
-          hist_Pdf_Replica->Fill(i, weight*(fabs(PdfWeights->at(i+1)))); // For LUX pdf, pdfweight.at(0) is same as central
+          hist_Pdf_Replica->Fill(i, weight*(fabs(PdfWeights->at(i+1))));
         }
 
         //==== AlphaS
@@ -75,11 +79,14 @@ void DileptonNtuple::Loop(){
       else if(PdfWeights->size()==101){
 
         //==== Replica
+        //==== at(0) : central
+        //==== at(1)~at(100)
         for(unsigned int i=0; i<100; i++){
-          hist_Pdf_Replica->Fill(i, weight*(fabs(PdfWeights->at(i))));
+          hist_Pdf_Replica->Fill(i, weight*(fabs(PdfWeights->at(i+1))));
         }
 
         //==== AlphaS
+        //==== no alphaS saved...
         int n_PdfWeights = PdfWeights->size();
         //==== n_PdfWeights-2
         //==== n_PdfWeights-1

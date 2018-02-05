@@ -72,7 +72,7 @@ public:
 };
 
 RunNtupleBase::RunNtupleBase() : 
-DoDebug(false), PrintYield(false), ShowData(false), RunSystematic(false), LogEvery(100),
+DoDebug(false), PrintYield(false), ShowData(false), RunSystematic(false), DoBkgdPdfSyst(false), LogEvery(100),
 plotpath("")
 {
 
