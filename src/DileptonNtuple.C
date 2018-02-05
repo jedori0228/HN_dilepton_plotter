@@ -35,7 +35,7 @@ void DileptonNtuple::Loop(){
       //cout << "PdfWeights->size() = " << PdfWeights->size() << endl;
       //cout << "ScaleWeights->size() = " << ScaleWeights->size() << endl;
 
-      //if(PdfWeights->size()==0 || ScaleWeights->size()==0) continue;
+      if(PdfWeights->size()==0 || ScaleWeights->size()==0) continue;
 
       if(PdfWeights->size()==102){
         //==== Replica
@@ -72,6 +72,46 @@ void DileptonNtuple::Loop(){
         }
       }
 
+      else if(PdfWeights->size()==101){
+
+        //==== Replica
+        for(unsigned int i=0; i<100; i++){
+          hist_Pdf_Replica->Fill(i, weight*(fabs(PdfWeights->at(i))));
+        }
+
+        //==== AlphaS
+        int n_PdfWeights = PdfWeights->size();
+        //==== n_PdfWeights-2
+        //==== n_PdfWeights-1
+        for(unsigned int i=0; i<2; i++){
+          hist_Pdf_Alpha->Fill(i, weight*(fabs(PdfWeights->at(n_PdfWeights-2+i))));
+        }
+
+        //==== Scale
+        for(unsigned int i=0; i<6; i++){
+          hist_Pdf_Scale->Fill(i, weight*(fabs(ScaleWeights->at(i))));
+        }
+
+      }
+      else{
+        //==== Replica
+        for(unsigned int i=0; i<100; i++){
+          hist_Pdf_Replica->Fill(i, weight*(fabs(PdfWeights->at(i))));
+        }
+
+        //==== AlphaS
+        int n_PdfWeights = PdfWeights->size();
+        //==== n_PdfWeights-2
+        //==== n_PdfWeights-1
+        for(unsigned int i=0; i<2; i++){
+          hist_Pdf_Alpha->Fill(i, weight*(fabs(PdfWeights->at(n_PdfWeights-2+i))));
+        }
+
+        //==== Scale
+        for(unsigned int i=0; i<6; i++){
+          hist_Pdf_Scale->Fill(i, weight*(fabs(ScaleWeights->at(i))));
+        }
+      }
 
     }
 

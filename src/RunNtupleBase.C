@@ -82,7 +82,7 @@ void RunNtupleBase::Run(){
           DoPdfSystematic = true;
         }
       }
-      DileptonNtuple m(filepath+filename, this_treename, DoPdfSystematic);
+      DileptonNtuple m(filepath+filename, this_treename, DoPdfSystematic||DoBkgdPdfSyst);
 
       if(! (m.TreeExist) ){
 
@@ -116,6 +116,23 @@ void RunNtupleBase::Run(){
         pdfsyst.hist_Pdf_Alpha = (TH1D *)m.hist_Pdf_Alpha->Clone();
         pdfsyst.hist_Pdf_Scale = (TH1D *)m.hist_Pdf_Scale->Clone();
 
+        origDir->cd();
+
+      }
+
+      if(DoBkgdPdfSyst){
+        TDirectory *origDir = gDirectory;
+
+        TDirectory *tempDir1 = pdfsyst.MakeTempDir();
+        tempDir1->cd();
+
+        //cout << "[RunNtupleBase::Run] Bkgd PDF sample = " << sample << endl;
+
+        pdfsyst_for_bkgd[sample].hist_Pdf_Replica = (TH1D *)m.hist_Pdf_Replica->Clone();
+        pdfsyst_for_bkgd[sample].hist_Pdf_Alpha = (TH1D *)m.hist_Pdf_Alpha->Clone();
+        pdfsyst_for_bkgd[sample].hist_Pdf_Scale = (TH1D *)m.hist_Pdf_Scale->Clone();
+
+        pdfsyst_for_bkgd[sample].Yield_Central = m.weighted_yield;
         origDir->cd();
 
       }

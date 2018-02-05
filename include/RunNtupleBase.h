@@ -12,6 +12,11 @@ public:
   bool DoDebug, PrintYield, ShowData;
   bool RunSystematic;
   PdfSystematics pdfsyst;
+
+  //==== For Test
+  bool DoBkgdPdfSyst;
+  map< TString, PdfSystematics > pdfsyst_for_bkgd;
+
   Long64_t LogEvery;
 
   TString treeskim;
