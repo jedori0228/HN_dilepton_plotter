@@ -1,5 +1,36 @@
 import os,math
 
+def AddPhantomZero(a, align, digit_int, digit_frac):
+
+  if align=="r":
+    number_maxdigit = 0
+    for j in range(0,11):
+      i = 10-j
+      if a/math.pow(10,i)>=1.:
+        number_maxdigit = i
+        break
+    for i in range(0,digit_int-(number_maxdigit+1)):
+      sys.stdout.write('\\phantom{0}')
+      sys.stdout.flush()
+    sys.stdout.write(str(round(a,digit_frac)))
+    sys.stdout.flush()
+
+  elif align=="l":
+    target_total_digit = digit_int+digit_frac
+    number_maxdigit = 0
+    for j in range(0,11):
+      i = 10-j
+      if a/math.pow(10,i)>=1.:
+        number_maxdigit = i
+        break
+    sys.stdout.write(str(round(a,digit_frac)))
+    sys.stdout.flush()
+    for i in range(0,target_total_digit-(number_maxdigit+1)-digit_frac):
+      sys.stdout.write('\\phantom{0}')
+      sys.stdout.flush()
+
+
+
 def StringToFloat(a):
   if "nan" in a:
     return 0.
@@ -8,7 +39,22 @@ def StringToFloat(a):
   return float(a)
 
 def MakeYield(a,b,c,nround):
-  out = '$'+str(round(a,nround))+' \\pm '+str(round(b,nround))+' \\pm '+str(round(c,nround))+'$'
+
+  central_yield = str(round(a,nround))
+  '''if central_yield=="0.0":
+    nround = nround+1
+    central_yield = str(round(a,nround))
+  if central_yield=="0.0":
+    nround = nround+1
+    central_yield = str(round(a,nround))
+  if central_yield=="0.0":
+    nround = nround+1
+    central_yield = str(round(a,nround))
+  if central_yield=="0.0":
+    nround = nround+1
+    central_yield = str(round(a,nround))'''
+
+  out = '$'+central_yield+' \\pm '+str(round(b,nround))+' \\pm '+str(round(c,nround))+'$'
   return out
 
 channels = ["MuMu", "ElEl", "MuEl"]
@@ -27,20 +73,11 @@ for LowORHigh in range(0,3):
 
     for Bin in Bins:
 
-      if LowORHigh==0:
-        if Bin=="Bin1":
-          print '\multirow{14}{*}{'+channelsForLatex[it_ch]+'} & \multirow{7}{*}{SR1}'
-        else:
-          print '\cline{2-8}'
-          print ' & \multirow{7}{*}{SR2}'
-      else:
-        print '\multirow{19}{*}{'+channelsForLatex[it_ch]+'}'
-
       ## Low Mass
-      masses = [20, 30, 40, 50, 60, 70, 80]
+      masses = [20, 30, 40, 50, 60, 70, 75, 80]
 
       if LowORHigh != 0:
-        masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
+        masses = [85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
 
       counter = 0
       for mass in masses:
@@ -126,14 +163,7 @@ for LowORHigh in range(0,3):
 
         out = out + '$'+str(int(obs))+'$ \\\\'
 
-        if LowORHigh==0:
-          if counter==0:
-            print '    & '+out
-          else:
-            print ' &  & '+out
-
-        else:
-          print ' & '+out
+        print out
 
         counter = counter+1
 

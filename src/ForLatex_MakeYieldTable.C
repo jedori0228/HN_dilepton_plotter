@@ -303,6 +303,7 @@ void ForLatex_MakeYieldTable(){
 
             if(isSignal){
               m.pdfsyst.Yield_Central = Yield;
+              m.pdfsyst.SampleName = bkglist.at(0);
               m.pdfsyst.CalculatePdfSystematic();
 
               SystError += m.pdfsyst.Syst_Pdf_Total*m.pdfsyst.Syst_Pdf_Total*Yield*Yield;

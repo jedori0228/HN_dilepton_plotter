@@ -254,6 +254,11 @@ void ForLatex_MakeCRYieldTable(int lepch=0, int CRsection=0){
         else if( sample.Contains("chargeflip") ){
           double error_stat = 0;;
           double error_syst = FlipSyst*(original_hist->GetBinContent(1));
+
+          TH1D *original_hist_up = (TH1D *)file->Get(region+"_up/Nevents_"+region+"_up");
+          double error_propagated = original_hist_up->GetBinContent(1)-original_hist->GetBinContent(1);
+          error_syst = sqrt(error_syst*error_syst+error_propagated*error_propagated);
+
           double error_combined = sqrt( error_stat*error_stat+error_syst*error_syst );
 
           original_hist->SetBinError(1, error_combined);

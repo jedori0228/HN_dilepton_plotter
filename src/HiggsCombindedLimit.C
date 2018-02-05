@@ -1,6 +1,6 @@
 #include "canvas_margin.h"
 
-void HiggsCombindedLimit(int i=0){
+TGraph* HiggsCombindedLimit(int i=0){
 
   bool DrawObserved = true;
 
@@ -53,7 +53,7 @@ void HiggsCombindedLimit(int i=0){
 
   string elline;
   ifstream in(filepath+"/result.txt");
-  int n_central = 26; //FIXME 26
+  int n_central = 27; //28, but now removing 80 Gev
   double mass[n_central], obs[n_central], limit[n_central], onesig_left[n_central], onesig_right[n_central], twosig_left[n_central], twosig_right[n_central];
 
   int dummyint=0;
@@ -76,10 +76,6 @@ void HiggsCombindedLimit(int i=0){
     else if(mass[dummyint]<=300) scale *= 1.;
     else if(mass[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
-
-    //if(mass[dummyint]==70) continue; //FIXME
-    //if(mass[dummyint]==90) continue; //FIXME
-    //if(mass[dummyint]==80) scale /= 4.45; //FIXME
 
     if(channel=="MuEl") scale *= 0.5;
 
@@ -135,7 +131,7 @@ void HiggsCombindedLimit(int i=0){
   string elline_SandT;
   ifstream in_SandT(filepath+"/result_VBF.txt");
 
-  const int n_SandT = 28;
+  const int n_SandT = 29; //30, but now removing 80 GeV
   double mass_SandT[n_SandT], obs_SandT[n_SandT], limit_SandT[n_SandT], onesig_left_SandT[n_SandT], onesig_right_SandT[n_SandT], twosig_left_SandT[n_SandT], twosig_right_SandT[n_SandT];
   dummyint=0;
 
@@ -158,8 +154,6 @@ void HiggsCombindedLimit(int i=0){
     else if(mass_SandT[dummyint]<=300) scale *= 1.;
     else if(mass_SandT[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
-
-    //if(mass[dummyint]==80) scale /= 4.45; //FIXME
 
     if(channel=="MuEl") scale *= 0.5;
 
@@ -281,7 +275,7 @@ void HiggsCombindedLimit(int i=0){
   vector<double> tempvec_obs_8and13TeV, tempvec_exp_8and13TeV;
   if(channel=="ElEl"){
     tempvec_obs_8and13TeV = {
-0.00010476, 8.244e-05, 8.16e-05, 0.00010183, 0.000225, 0.0016379, 0.0043771, 0.0083341, 0.0039405, 0.004687, 0.004088, 0.008342, 0.019262, 0.02271, 0.03513, 0.09235, 0.08728, 0.16916, 0.1243, 0.177, 0.4212, 0.6272, 0.8493, 1.1492, 0.8259, 1.0344, 2.169, 4.3526, 
+0.00010476, 8.244e-05, 8.16e-05, 0.00010183, 0.000225, 0.0016379, 0.0043771, 0.0083341, 0.0039405, 0.004687, 0.004088, 0.008342, 0.019262, 0.022621, 0.03489, 0.0912, 0.08728, 0.16916, 0.1243, 0.177, 0.4212, 0.6272, 0.8493, 1.1492, 0.8259, 1.0344, 2.169, 4.3526, 
     };
     tempvec_exp_8and13TeV = {
 
@@ -289,7 +283,7 @@ void HiggsCombindedLimit(int i=0){
   }
   if(channel=="MuMu"){
     tempvec_obs_8and13TeV = {
-3.783e-05, 2.8e-05, 1.553e-05, 1.775e-05, 4.376e-05, 0.0003474, 0.0008412, 0.0023292, 0.0015521, 0.001285, 0.002622, 0.004085, 0.005141, 0.007158, 0.03503, 0.03572, 0.06339, 0.11797, 0.0802, 0.204, 0.2644, 0.3766, 0.4724, 0.6004, 0.878, 1.0681, 1.0893, 2.1158, 
+3.783e-05, 2.8e-05, 1.553e-05, 1.775e-05, 4.376e-05, 0.0003474, 0.0008412, 0.0023593, 0.0015521, 0.001285, 0.002622, 0.004085, 0.005141, 0.00714, 0.03481, 0.03547, 0.06339, 0.11797, 0.0802, 0.204, 0.2644, 0.3766, 0.4724, 0.6004, 0.878, 1.0681, 1.0893, 2.1158,
     };
     tempvec_exp_8and13TeV = {
 
@@ -297,7 +291,7 @@ void HiggsCombindedLimit(int i=0){
   }
   if(channel=="MuEl"){
     tempvec_obs_8and13TeV = {
-4.2565e-05, 3.68e-05, 2.524e-05, 3.843e-05, 0.000102995, 0.0007555, 0.0019562, 0.00260295, 0.00159395, 0.001789, 0.002613, 0.0071055, 0.0083965, 0.0129065, 0.02225, 0.022415, 0.06913, 0.0654, 0.1086, 0.0763, 0.10995, 0.13505, 0.1744, 0.2324, 0.31395, 0.4463, 1.1073, 1.77645,
+4.2565e-05, 3.68e-05, 2.524e-05, 3.843e-05, 0.000102995, 0.0007555, 0.0019562, 0.00209275, 0.00159395, 0.001789, 0.002613, 0.0071055, 0.0083965, 0.0128815, 0.02217, 0.022245, 0.06913, 0.0654, 0.1086, 0.0763, 0.10995, 0.13505, 0.1744, 0.2324, 0.31395, 0.4463, 1.1073, 1.77645, 
     };
     tempvec_exp_8and13TeV = {
 
@@ -658,41 +652,32 @@ void HiggsCombindedLimit(int i=0){
 
 //=======================================
 
-  const int n_mass_trilep = 27;
-  double mass_trilep[n_mass_trilep] = {
-    1, 2, 3, 4, 5,
-    6, 7, 8, 9, 10,
-    11, 12, 20, 30, 40, 50, 60,
-    80,
-    100, 130, 150, 200, 400,
-    600, 800, 1000, 1200
+  int temp_n_mass_trilep = 31;
+  vector<double> temp_mass_trilep = {
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 20, 30, 40, 50, 60, 70, 75, 85, 90, 95, 100, 130, 150, 200, 400, 600, 800, 1000, 1200,
   };
   vector<double> tmpvec_obs_trilep = {
-    0.0163432, 0.00188519, 0.000596955, 0.000282105, 0.000150402,
-    0.000104186, 6.77325E-05, 4.99932E-05, 3.53255E-05, 3.13575E-05,
-    2.48346E-05, 2.14113E-05, 1.48891E-05, 1.77713E-05, 1.88793E-05, 1.88341E-05, 2.7883E-05,
-
-    //0.000333583, //FIXME
-    0.00148444, //scaled FIXME
-
-    0.00452962, 0.0074026, 0.00826272, 0.00848118, 0.0303979,
-    0.0835546, 0.2063, 0.440587, 0.846273
+0.0163199, 0.00182936, 0.00059415, 0.000280499, 0.000149561, 0.000103852, 6.81653E-05, 4.97358E-05, 3.52154E-05, 3.12335E-05, 2.46796E-05, 2.13769E-05, 1.48506E-05, 1.76593E-05, 1.87597E-05, 1.80473E-05, 2.77739E-05, 0.000156184, 0.000742155, 0.00241651, 0.00289491, 0.00345643, 0.00431929, 0.00716543, 0.00796569, 0.00888232, 0.0301448, 0.0835229, 0.20645, 0.441043, 0.847844,
   };
+
   if(channel=="ElEl"){
+    temp_n_mass_trilep = 30;
+    temp_mass_trilep = {
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 20, 30, 40, 50, 60, 70, 75, 85, 90, 100, 130, 150, 200, 400, 600, 800, 1000, 1200,
+    };
     tmpvec_obs_trilep = {
-      0.0135784, 0.00151879, 0.000447416, 0.000223742, 0.00011303,
-      7.23346E-05, 5.10346E-05, 3.77547E-05, 2.72229E-05, 2.33201E-05,
-      1.8688E-05, 1.75216E-05, 1.20661E-05, 1.60735E-05, 2.19737E-05, 3.32274E-05, 6.70456E-05,
-
-      //0.00076608, //FIXME
-      0.00340906, //scaled FIXME
-
-      0.00662448, 0.010974, 0.014264, 0.0135633, 0.0523753,
-      0.167425, 0.428148, 0.949388, 1.83977
+0.0135784, 0.00151879, 0.000447416, 0.000223742, 0.00011303, 7.23346E-05, 5.10346E-05, 3.77547E-05, 2.72229E-05, 2.33201E-05, 1.8688E-05, 1.75216E-05, 1.20661E-05, 1.60735E-05, 2.19737E-05, 3.32274E-05, 6.70456E-05, 0.000564676, 0.00186338, 0.00629086, 0.00622036, 0.00652451, 0.010974, 0.014264, 0.0135633, 0.0523753, 0.167425, 0.428148, 0.949388, 1.83977,
     };
   }
+
+  const int n_mass_trilep = temp_n_mass_trilep;
+  double mass_trilep[n_mass_trilep];
   double obs_trilep[n_mass_trilep];
-  for(unsigned int i=0; i<tmpvec_obs_trilep.size(); i++) obs_trilep[i] = tmpvec_obs_trilep.at(i);
+  for(unsigned int i=0; i<tmpvec_obs_trilep.size(); i++){
+    mass_trilep[i] = temp_mass_trilep.at(i);
+    obs_trilep[i] = tmpvec_obs_trilep.at(i);
+    //cout << i << "\t" << temp_mass_trilep[i] << "\t" << obs_trilep[i] << endl;
+  }
   TGraph *gr_trilepLimit = new TGraph(n_mass_trilep, mass_trilep, obs_trilep);
   gr_trilepLimit->SetLineWidth(3);
   gr_trilepLimit->SetLineStyle(5);
@@ -772,17 +757,29 @@ void HiggsCombindedLimit(int i=0){
 
   lg->Draw();
 
-  latex_CMSPriliminary.SetTextSize(0.035);
-  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
   latex_title.SetTextSize(0.04);
   latex_title.SetLineWidth(2);
-  latex_title.DrawLatex(0.20, 0.90, "#font[41]{95% CL upper limit}");
+  latex_title.DrawLatex(0.20, 0.85, "#font[41]{95% CL upper limit}");
+  latex_title.DrawLatex(0.20, 0.90, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
 
   c_SOnly->SetLogx();
   c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.pdf");
   c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.png");
+
+  //==== HighMass
+  dummy->GetXaxis()->SetRangeUser(90,2500);
+  dummy->GetYaxis()->SetRangeUser(1E-4,20);
+  TLegend *lg_HighMass = (TLegend *)lg->Clone();
+  lg_HighMass->SetX1NDC(0.15);
+  lg_HighMass->SetY1NDC(0.50);
+  lg_HighMass->SetX2NDC(0.65);
+  lg_HighMass->SetY2NDC(0.80);
+  //lg->Delete();
+  //lg_HighMass->Draw();
+  c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_HighMass.pdf");
+  c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_HighMass.png");
 
   c_SOnly->Close();
 
@@ -818,6 +815,8 @@ void HiggsCombindedLimit(int i=0){
   c_SandT->Draw();
   c_SandT->SetLogy();
 
+  dummy->GetXaxis()->SetRangeUser(10., 2500);
+  dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
   dummy->Draw("hist");
 
   gr_band_2sigma_SandT->Draw("3same");
@@ -839,17 +838,22 @@ void HiggsCombindedLimit(int i=0){
 
   lg_SandT->Draw();
 
-  latex_CMSPriliminary.SetTextSize(0.035);
-  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
   latex_title.SetTextSize(0.04);
   latex_title.SetLineWidth(2);
-  latex_title.DrawLatex(0.20, 0.90, "#font[41]{95% CL upper limit}");
+  latex_title.DrawLatex(0.20, 0.85, "#font[41]{95% CL upper limit}");
+  latex_title.DrawLatex(0.20, 0.90, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
 
   c_SandT->SetLogx();
   c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT.pdf");
   c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT.png");
+
+  //==== HighMass
+  dummy->GetXaxis()->SetRangeUser(90,2500);
+  dummy->GetYaxis()->SetRangeUser(1E-4,20);
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT_HighMass.pdf");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT_HighMass.png");
 
   c_SandT->Close();
 
@@ -954,5 +958,6 @@ void HiggsCombindedLimit(int i=0){
   c_8and13ratio->Close();
   
 
+  return gr_13TeV_obs_SandT;
 
 }

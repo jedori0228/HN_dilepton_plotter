@@ -57,7 +57,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
 
   string elline;
   ifstream in(filepath+"/result.txt");
-  int n_central = 26; //FIXME 26
+  int n_central = 27;  //28, but now removing 80 GeV
   double mass[n_central], obs[n_central], limit[n_central], onesig_left[n_central], onesig_right[n_central], twosig_left[n_central], twosig_right[n_central];
 
   int dummyint=0;
@@ -125,7 +125,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   string elline_SandT;
   ifstream in_SandT(filepath+"/result_VBF.txt");
 
-  const int n_SandT = 28;
+  const int n_SandT = 29; //30, but now removing 80 GeV
   double mass_SandT[n_SandT], obs_SandT[n_SandT], limit_SandT[n_SandT], onesig_left_SandT[n_SandT], onesig_right_SandT[n_SandT], twosig_left_SandT[n_SandT], twosig_right_SandT[n_SandT];
   dummyint=0;
 
@@ -286,7 +286,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   latex_title.DrawLatex(0.20, 0.90, "#font[41]{95% CL upper limit}");
 
   TString processname = "";
-  if(channel=="MuMu") processname = "pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}e^{#pm}q#bar{q'}";
+  if(channel=="MuMu") processname = "pp#rightarrow#mu^{#pm}N#rightarrow#mu^{#pm}#mu^{#pm}q#bar{q'}";
   if(channel=="ElEl") processname = "pp#rightarrowe^{#pm}N#rightarrowe^{#pm}e^{#pm}q#bar{q'}";
   if(channel=="MuEl") processname = "pp#rightarrowl^{#pm}N#rightarrowl^{#pm}l^{#pm}q#bar{q'}";
   processname = "#font[41]{"+processname+"}";

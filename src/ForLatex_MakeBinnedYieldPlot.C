@@ -168,13 +168,13 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
 
     TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/BinnedYieldPlot/";
 
-    vector<int> masses = {90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500};
+    vector<int> masses = {85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500};
     vector<int> ref_sigs = {100, 500, 1000, 1500};
     vector<Color_t> ref_sigs_style = {1,3,5,7};
     vector<double> ref_scale = {0.001, 0.1, 1, 1};
 
     if(WhichRegion.Contains("Low")){
-      masses = {20, 30, 40, 50, 60, 70, 80};
+      masses = {20, 30, 40, 50, 60, 70, 75};
       ref_sigs = {40, 60, 70};
       ref_scale = {0.00001, 0.00001, 0.001};
     }

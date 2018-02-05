@@ -186,9 +186,9 @@ void Plotter::draw_hist(){
         //==== set histogram name, including sample name
         hist_temp->SetName(fullhistname+"_"+current_sample);
 
-/*
+
         //==== Stat Error Propations for Fake
-        if( current_sample.Contains("fake") ){
+        if( current_sample.Contains("chargeflip") ){
           TDirectory *dir_up = (TDirectory *)file->Get(DirName+"_up");
           TDirectory *dir_down = (TDirectory *)file->Get(DirName+"_down");
           TH1D* hist_temp_up = (TH1D*)dir_up->Get(fullhistname+"_up");
@@ -204,7 +204,6 @@ void Plotter::draw_hist(){
             hist_temp->SetBinError(i, error_combined);
           }
         }
-*/
 
         //==== rebin here
         hist_temp->Rebin( n_rebin() );
