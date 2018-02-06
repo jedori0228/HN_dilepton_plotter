@@ -1,0 +1,245 @@
+
+Processing CyclesForInclusiveSR/MuMu_Bin1_High.C...
+[AnalysisInputs::SetMCSF] Get MC SF from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/MCSF.txt
+[AnalysisInputs::SetMCSF] sample : VVV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ZZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttH_nonbb
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : top
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWTo2L2Nu_DS
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpEWK
+[AnalysisInputs::SetMCSF] => MCSF = 1.3062, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpQCD
+[AnalysisInputs::SetMCSF] => MCSF = 1.70026, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_mllmin01
+[AnalysisInputs::SetMCSF] => MCSF = 0.65, MCSF_err = 0.06
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 1.05212, MCSF_err = 0.066085
+[AnalysisInputs::SetMCSF] sample : ZGto2LG
+[AnalysisInputs::SetMCSF] => MCSF = 1.09608, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG_weighted
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : ZZTo4L_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4e
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggHtoZZ
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetCalculatedSysts] Get Systematics from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/Syst.txt
+[AnalysisInputs::SetCalculatedSysts] source : Luminosity
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
+[AnalysisInputs::SetCalculatedSysts] source : FakeLooseID
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.3
+[AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.16
+[CutRangeInfo::ReadCutCard] Get Cutcard from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/CutOpCard/Empty.txt
+Yield_Central = 0.687768
+Pseudo Efficiency = 0.19472
+Den = 3.53208
+Pdf Replica Eff -> 0.00252549
+1	3.39549	-0.0386725
+2	3.48733	-0.0126685
+3	3.58932	0.0162055
+4	3.61522	0.0235391
+5	3.57817	0.0130487
+6	3.40597	-0.0357036
+7	3.56783	0.0101216
+8	3.49017	-0.0118665
+9	3.58077	0.0137854
+10	3.59807	0.0186821
+11	3.47237	-0.016904
+12	3.52683	-0.00148677
+13	3.62081	0.0251201
+14	3.56523	0.00938447
+15	3.49616	-0.0101686
+16	3.54118	0.00257664
+17	3.48378	-0.0136747
+18	3.43974	-0.0261431
+19	3.48533	-0.0132364
+20	3.5997	0.0191449
+21	3.6424	0.0312324
+22	3.52707	-0.00141744
+23	3.65638	0.0351923
+24	3.68733	0.0439535
+25	3.52746	-0.00130718
+26	3.5721	0.0113301
+27	3.52672	-0.00151646
+28	3.52935	-0.000773587
+29	3.47464	-0.0162625
+30	3.55021	0.00513355
+31	3.63802	0.0299948
+32	3.60075	0.0194428
+33	3.55874	0.00754768
+34	3.57363	0.0117623
+35	3.6656	0.0378018
+36	3.48628	-0.0129667
+37	3.49186	-0.0113864
+38	3.48827	-0.0124026
+39	3.48375	-0.0136829
+40	3.54541	0.00377507
+41	3.50716	-0.00705567
+42	3.48653	-0.0128951
+43	3.54857	0.00466742
+44	3.51047	-0.00611806
+45	3.53932	0.00204898
+46	3.4396	-0.0261823
+47	3.42987	-0.0289386
+48	3.52358	-0.00240547
+49	3.53783	0.00162775
+50	3.51948	-0.0035668
+51	3.501	-0.00880028
+52	3.5478	0.00445
+53	3.59137	0.0167865
+54	3.59689	0.0183487
+55	3.58416	0.0147435
+56	3.43623	-0.027138
+57	3.46446	-0.0191444
+58	3.492	-0.011347
+59	3.51183	-0.00573356
+60	3.53268	0.000168908
+61	3.50802	-0.006811
+62	3.50256	-0.00835821
+63	3.58826	0.0159045
+64	3.33779	-0.0550062
+65	3.63346	0.0287035
+66	3.56279	0.00869444
+67	3.57708	0.0127394
+68	3.54433	0.00346903
+69	3.5994	0.0190596
+70	3.56823	0.010234
+71	3.53181	-7.54201e-05
+72	3.49104	-0.0116192
+73	3.50253	-0.00836597
+74	3.61712	0.0240773
+75	3.48603	-0.0130382
+76	3.56486	0.00927991
+77	3.56963	0.0106322
+78	3.56727	0.00996414
+79	3.52447	-0.00215421
+80	3.5922	0.0170214
+81	3.57021	0.010796
+82	3.60468	0.0205551
+83	3.3862	-0.0413001
+84	3.57506	0.0121694
+85	3.50724	-0.00703343
+86	3.48504	-0.0133174
+87	3.49815	-0.00960512
+88	3.48086	-0.0145026
+89	3.47693	-0.0156153
+90	3.59663	0.0182758
+91	3.53836	0.00177798
+92	3.61645	0.0238856
+93	3.50477	-0.00773078
+94	3.52841	-0.00103912
+95	3.36314	-0.0478292
+96	3.51669	-0.00435585
+97	3.62537	0.0264135
+98	3.56427	0.00911284
+99	3.5103	-0.00616529
+100	3.33557	-0.0556363
+Pdf Replica Den -> 0.0191266
+S-ch
+Pdf Alpha -> -3.37542e-05
+Pdf Scale -> 0.0143143
+==> Total = 0.024023
+Central	166.048	244.113	0
+_MuonEn_up	167.96	244.113	0
+_MuonEn_down	166.604	244.113	0
+_MuonIDSF_up	172.571	244.113	0
+_MuonIDSF_down	161.754	244.113	0
+_Rocc_up	168.401	244.113	0
+_Rocc_down	166.891	244.113	0
+_ElectronEn_up	167.321	244.113	0
+_ElectronEn_down	167.822	244.113	0
+_ElectronIDSF_up	167.909	244.113	0
+_ElectronIDSF_down	166.985	244.113	0
+_TriggerSF_up	168.144	244.113	0
+_TriggerSF_down	166.562	244.113	0
+_PU_up	164.959	244.113	0
+_PU_down	168.443	244.113	0
+_JetEn_up	173.268	244.113	0
+_JetEn_down	162.254	244.113	0
+_JetRes_up	165.004	244.113	0
+_JetRes_down	167.75	244.113	0
+_Unclustered_up	167.333	244.113	0
+_Unclustered_down	173.411	244.113	0
+_BTagSFEff_up	166.602	244.113	0
+_BTagSFEff_down	166.95	244.113	0
+_BTagSFMiss_up	166.136	244.113	0
+_BTagSFMiss_down	167.735	244.113	0
+_JetMass_up	167.206	244.113	0
+_JetMass_down	165.957	244.113	0
+_JetMassRes_up	166.542	244.113	0
+_JetMassRes_down	167.17	244.113	0
+_Tau21_up	167.257	244.113	0
+_Tau21_down	166.738	244.113	0
+
+################ Sources ################
+Source	SystTotal	SystPrompt	SystFake	Signal
+Stat	2.20	3.77	2.66	-nan	0.84
+Lumi	1.01	2.50	-	-	2.50
+PDF Error Eff	-	-	-	-	0.25
+PDF Error Den	-	-	-	-	1.91
+PDF AlphaS	-	-	-	-	0.00
+PDF Scale	-	-	-	-	1.43
+MuonPt	0.34	0.85	-	-	0.31
+MuonID	1.35	3.33	-	-	3.37
+MuonRocc	0.43	1.06	-	-	0.05
+ElectronE	0.38	0.93	-	-	0.10
+ElectronID	0.36	0.89	-	-	0.14
+Trigger	0.37	0.92	-	-	0.50
+PU	0.45	1.12	-	-	0.09
+JES	1.41	3.47	-	-	0.35
+JER	0.34	0.85	-	-	0.28
+Uncl	1.29	3.18	-	-	0.22
+BEff	0.18	0.45	-	-	0.41
+BMiss	0.29	0.72	-	-	0.46
+JMS	0.20	0.49	-	-	0.14
+JMR	0.21	0.52	-	-	0.20
+Tau21	0.24	0.59	-	-	0.13
+MCNorm	8.41	20.78	-	-	-
+Fake	17.85	-	30.00	-	-
+CF	0.00	-	-	-nan	-
+Total Systematic	19.93	21.89	30.00	-nan	4.95
+
+Total Background	410.161
+- Prompt	166.048
+- Fake	244.113
+- CF	0.000
+
+####### Result #######
+Signal Eff	0.203190
+410.160645	1.200541
+0.687768	1.050158

@@ -1,0 +1,141 @@
+
+Processing CyclesForOptimization_ElEl_Bin1/HNElEl_125.C(5)...
+[AnalysisInputs::SetMCSF] Get MC SF from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/MCSF.txt
+[AnalysisInputs::SetMCSF] sample : VVV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ZZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttH_nonbb
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : top
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWTo2L2Nu_DS
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpEWK
+[AnalysisInputs::SetMCSF] => MCSF = 1.3062, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpQCD
+[AnalysisInputs::SetMCSF] => MCSF = 1.70026, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_mllmin01
+[AnalysisInputs::SetMCSF] => MCSF = 0.65, MCSF_err = 0.06
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 1.05212, MCSF_err = 0.066085
+[AnalysisInputs::SetMCSF] sample : ZGto2LG
+[AnalysisInputs::SetMCSF] => MCSF = 1.09608, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG_weighted
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : ZZTo4L_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4e
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggHtoZZ
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetCalculatedSysts] Get Systematics from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/Syst.txt
+[AnalysisInputs::SetCalculatedSysts] source : Luminosity
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
+[AnalysisInputs::SetCalculatedSysts] source : FakeLooseID
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.3
+[AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.16
+[CutRangeInfo::ReadCutCard] Get Cutcard from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/CutOpCard/RunDirectory/Nminus1/Cards_ElEl_Bin1/step5_HNElEl_125.txt
+
+##################################################
+#### TOTAL # of Loop = 1
+##################################################
+
+[CutRangeInfo::PrintCutRangeInfo] DeltaRSubLeadl_jjWclosest_<
+[CutInfo::PrintCutInfo] DeltaRSubLeadl_jjWclosest	<	3.1
+[CutRangeInfo::PrintCutRangeInfo] MET2ST_<
+[CutInfo::PrintCutInfo] MET2ST	<	6
+[CutRangeInfo::PrintCutRangeInfo] Njets_<
+[CutInfo::PrintCutInfo] Njets	<	4
+[CutRangeInfo::PrintCutRangeInfo] leadingJet_lljjWclosest_pt_>
+[CutInfo::PrintCutInfo] leadingJet_lljjWclosest_pt	>	25
+[CutRangeInfo::PrintCutRangeInfo] leadingLepton_Pt_>
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	30
+[CutRangeInfo::PrintCutRangeInfo] m_SubLeadljj_jjWclosest_<
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	<	140
+[CutRangeInfo::PrintCutRangeInfo] m_SubLeadljj_jjWclosest_>
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	>	90
+[CutRangeInfo::PrintCutRangeInfo] m_jj_jjWclosest_<
+[CutInfo::PrintCutInfo] m_jj_jjWclosest	<	120
+[CutRangeInfo::PrintCutRangeInfo] m_jj_jjWclosest_>
+[CutInfo::PrintCutInfo] m_jj_jjWclosest	>	50
+[CutRangeInfo::PrintCutRangeInfo] m_lljj_jjWclosest_>
+[CutInfo::PrintCutInfo] m_lljj_jjWclosest	>	120
+
+##############################
+#### OPTIMIZATION STARTED ####
+##############################
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] DeltaRSubLeadl_jjWclosest	<	3.1
+[CutInfo::PrintCutInfo] MET2ST	<	6
+[CutInfo::PrintCutInfo] Njets	<	4
+[CutInfo::PrintCutInfo] leadingJet_lljjWclosest_pt	>	25
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	30
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	<	140
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	>	90
+[CutInfo::PrintCutInfo] m_jj_jjWclosest	<	120
+[CutInfo::PrintCutInfo] m_jj_jjWclosest	>	50
+[CutInfo::PrintCutInfo] m_lljj_jjWclosest	>	120
+CF	5.17545 +- 0.830994
+Fake	15.3117 +- 4.98382
+Prompt	15.6163 +- 3.78247
+=> total bkg = 36.1035
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_125	25.7869	0.0338	0.00358101	4.42419e-05
+=====================================================================
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] DeltaRSubLeadl_jjWclosest	<	3.1
+[CutInfo::PrintCutInfo] MET2ST	<	6
+[CutInfo::PrintCutInfo] Njets	<	4
+[CutInfo::PrintCutInfo] leadingJet_lljjWclosest_pt	>	25
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	30
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	<	140
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	>	90
+[CutInfo::PrintCutInfo] m_jj_jjWclosest	<	120
+[CutInfo::PrintCutInfo] m_jj_jjWclosest	>	50
+[CutInfo::PrintCutInfo] m_lljj_jjWclosest	>	120
+CF	5.17545 +- 0.830994
+Fake	15.3117 +- 4.98382
+Prompt	15.6163 +- 3.78247
+=> total bkg = 36.1035
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_125	25.7869	0.0338	0.00358101	4.42419e-05

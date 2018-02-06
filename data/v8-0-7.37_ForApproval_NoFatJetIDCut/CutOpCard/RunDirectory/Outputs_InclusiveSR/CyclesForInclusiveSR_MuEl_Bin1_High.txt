@@ -1,0 +1,245 @@
+
+Processing CyclesForInclusiveSR/MuEl_Bin1_High.C...
+[AnalysisInputs::SetMCSF] Get MC SF from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/MCSF.txt
+[AnalysisInputs::SetMCSF] sample : VVV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ZZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttH_nonbb
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : top
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWTo2L2Nu_DS
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpEWK
+[AnalysisInputs::SetMCSF] => MCSF = 1.3062, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpQCD
+[AnalysisInputs::SetMCSF] => MCSF = 1.70026, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_mllmin01
+[AnalysisInputs::SetMCSF] => MCSF = 0.65, MCSF_err = 0.06
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 1.05212, MCSF_err = 0.066085
+[AnalysisInputs::SetMCSF] sample : ZGto2LG
+[AnalysisInputs::SetMCSF] => MCSF = 1.09608, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG_weighted
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : ZZTo4L_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4e
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggHtoZZ
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetCalculatedSysts] Get Systematics from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/Syst.txt
+[AnalysisInputs::SetCalculatedSysts] source : Luminosity
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
+[AnalysisInputs::SetCalculatedSysts] source : FakeLooseID
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.3
+[AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.16
+[CutRangeInfo::ReadCutCard] Get Cutcard from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/CutOpCard/Empty.txt
+Yield_Central = 0.502555
+Pseudo Efficiency = 0.142212
+Den = 3.53385
+Pdf Replica Eff -> 0.00226229
+1	3.3941	-0.0395467
+2	3.49015	-0.0123663
+3	3.58828	0.0154016
+4	3.61541	0.0230794
+5	3.58128	0.0134224
+6	3.40583	-0.0362277
+7	3.56873	0.00987133
+8	3.48897	-0.0127012
+9	3.59053	0.0160383
+10	3.60127	0.0190777
+11	3.4725	-0.0173596
+12	3.53079	-0.000866679
+13	3.61466	0.0228685
+14	3.56684	0.00933487
+15	3.49657	-0.0105509
+16	3.55458	0.00586677
+17	3.48128	-0.0148753
+18	3.44266	-0.0258034
+19	3.48311	-0.0143582
+20	3.61021	0.0216079
+21	3.64401	0.031174
+22	3.54499	0.00315305
+23	3.65805	0.0351451
+24	3.68623	0.04312
+25	3.53788	0.00114168
+26	3.57613	0.0119635
+27	3.51624	-0.00498286
+28	3.53244	-0.000397944
+29	3.47445	-0.0168101
+30	3.55247	0.00526925
+31	3.64107	0.0303398
+32	3.60252	0.0194317
+33	3.56376	0.00846242
+34	3.57238	0.0109021
+35	3.66883	0.0381959
+36	3.4893	-0.0126079
+37	3.49006	-0.0123903
+38	3.48488	-0.0138574
+39	3.48404	-0.0140942
+40	3.54376	0.00280281
+41	3.50466	-0.00826086
+42	3.48606	-0.0135226
+43	3.55344	0.0055428
+44	3.51024	-0.00667996
+45	3.54183	0.00225939
+46	3.44586	-0.0248995
+47	3.43254	-0.028668
+48	3.52405	-0.00277361
+49	3.53905	0.00147272
+50	3.52851	-0.001512
+51	3.50161	-0.00912353
+52	3.55372	0.00562389
+53	3.59172	0.0163745
+54	3.5971	0.017897
+55	3.5882	0.015379
+56	3.43791	-0.0271499
+57	3.4668	-0.0189728
+58	3.48788	-0.0130093
+59	3.51308	-0.00587666
+60	3.54634	0.00353301
+61	3.50861	-0.0071416
+62	3.50176	-0.00908041
+63	3.59296	0.0167265
+64	3.33544	-0.0561454
+65	3.63342	0.0281755
+66	3.56393	0.0085124
+67	3.58103	0.0133505
+68	3.54709	0.00374787
+69	3.60054	0.0188709
+70	3.57235	0.0108947
+71	3.53448	0.0001774
+72	3.49794	-0.0101606
+73	3.50292	-0.00875309
+74	3.61823	0.0238788
+75	3.48665	-0.0133562
+76	3.56782	0.00961359
+77	3.56957	0.0101074
+78	3.55821	0.00689398
+79	3.52513	-0.00246675
+80	3.59687	0.0178327
+81	3.57238	0.0109033
+82	3.60664	0.0205974
+83	3.3866	-0.0416695
+84	3.58088	0.0133091
+85	3.50559	-0.00799823
+86	3.48652	-0.0133945
+87	3.50654	-0.00772862
+88	3.48103	-0.0149458
+89	3.48572	-0.0136211
+90	3.5983	0.0182388
+91	3.54027	0.00181563
+92	3.61797	0.0238039
+93	3.50566	-0.00797794
+94	3.52361	-0.00289835
+95	3.35732	-0.0499532
+96	3.51612	-0.00501688
+97	3.62747	0.0264909
+98	3.56708	0.0094026
+99	3.50996	-0.00676033
+100	3.33477	-0.0563352
+Pdf Replica Den -> 0.0193316
+S-ch
+Pdf Alpha -> -0.000161064
+Pdf Scale -> 0.0142764
+==> Total = 0.0241386
+Central	463.101	408.559	0
+_MuonEn_up	465.321	408.559	0
+_MuonEn_down	464.066	408.559	0
+_MuonIDSF_up	469.776	408.559	0
+_MuonIDSF_down	457.17	408.559	0
+_Rocc_up	466.239	408.559	0
+_Rocc_down	463.865	408.559	0
+_ElectronEn_up	464.604	408.559	0
+_ElectronEn_down	461.927	408.559	0
+_ElectronIDSF_up	469.196	408.559	0
+_ElectronIDSF_down	459.814	408.559	0
+_TriggerSF_up	475.655	408.559	0
+_TriggerSF_down	463.728	408.559	0
+_PU_up	453.849	408.559	0
+_PU_down	472.319	408.559	0
+_JetEn_up	476.338	408.559	0
+_JetEn_down	450.004	408.559	0
+_JetRes_up	462.568	408.559	0
+_JetRes_down	462.795	408.559	0
+_Unclustered_up	466.448	408.559	0
+_Unclustered_down	471.479	408.559	0
+_BTagSFEff_up	460.335	408.559	0
+_BTagSFEff_down	466.994	408.559	0
+_BTagSFMiss_up	459.652	408.559	0
+_BTagSFMiss_down	465.248	408.559	0
+_JetMass_up	465.765	408.559	0
+_JetMass_down	464.431	408.559	0
+_JetMassRes_up	463.133	408.559	0
+_JetMassRes_down	462.763	408.559	0
+_Tau21_up	463.208	408.559	0
+_Tau21_down	461.786	408.559	0
+
+################ Sources ################
+Source	SystTotal	SystPrompt	SystFake	Signal
+Stat	1.94	2.95	2.43	-nan	0.68
+Lumi	1.33	2.50	-	-	2.50
+PDF Error Eff	-	-	-	-	0.23
+PDF Error Den	-	-	-	-	1.93
+PDF AlphaS	-	-	-	-	0.02
+PDF Scale	-	-	-	-	1.43
+MuonPt	0.20	0.37	-	-	0.22
+MuonID	0.72	1.36	-	-	1.75
+MuonRocc	0.26	0.49	-	-	0.21
+ElectronE	0.15	0.29	-	-	0.03
+ElectronID	0.56	1.06	-	-	1.84
+Trigger	1.02	1.92	-	-	0.08
+PU	1.06	1.99	-	-	0.82
+JES	1.51	2.84	-	-	0.47
+JER	0.05	0.09	-	-	0.27
+Uncl	0.73	1.38	-	-	0.07
+BEff	0.39	0.73	-	-	0.39
+BMiss	0.33	0.62	-	-	0.56
+JMS	0.24	0.45	-	-	0.12
+JMR	0.03	0.05	-	-	0.06
+Tau21	0.11	0.20	-	-	0.05
+MCNorm	8.25	15.52	-	-	-
+Fake	14.06	-	30.00	-	-
+CF	0.00	-	-	-nan	-
+Total Systematic	16.55	16.42	30.00	-nan	4.48
+
+Total Background	871.660
+- Prompt	463.101
+- Fake	408.559
+- CF	0.000
+
+####### Result #######
+Signal Eff	0.153237
+871.660033	1.166599
+0.502555	1.045329

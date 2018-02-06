@@ -1,0 +1,245 @@
+
+Processing CyclesForInclusiveSR/MuEl_Bin1_Low.C...
+[AnalysisInputs::SetMCSF] Get MC SF from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/MCSF.txt
+[AnalysisInputs::SetMCSF] sample : VVV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ZZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttH_nonbb
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : top
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWTo2L2Nu_DS
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpEWK
+[AnalysisInputs::SetMCSF] => MCSF = 1.3062, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpQCD
+[AnalysisInputs::SetMCSF] => MCSF = 1.70026, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_mllmin01
+[AnalysisInputs::SetMCSF] => MCSF = 0.65, MCSF_err = 0.06
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 1.05212, MCSF_err = 0.066085
+[AnalysisInputs::SetMCSF] sample : ZGto2LG
+[AnalysisInputs::SetMCSF] => MCSF = 1.09608, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG_weighted
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : ZZTo4L_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4e
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggHtoZZ
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetCalculatedSysts] Get Systematics from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/Syst.txt
+[AnalysisInputs::SetCalculatedSysts] source : Luminosity
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
+[AnalysisInputs::SetCalculatedSysts] source : FakeLooseID
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.3
+[AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.16
+[CutRangeInfo::ReadCutCard] Get Cutcard from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/CutOpCard/Empty.txt
+Yield_Central = 5288.68
+Pseudo Efficiency = 0.00722229
+Den = 732271
+Pdf Replica Eff -> 0.00917015
+1	684858	-0.0647484
+2	726772	-0.00750901
+3	742989	0.0146359
+4	739841	0.010338
+5	663648	-0.0937125
+6	717777	-0.0197939
+7	732754	0.000659893
+8	727228	-0.00688723
+9	732205	-9.02853e-05
+10	753228	0.0286197
+11	715723	-0.0225989
+12	725694	-0.00898205
+13	739747	0.0102087
+14	741496	0.0125982
+15	735068	0.00381939
+16	718501	-0.0188053
+17	727404	-0.00664685
+18	710202	-0.0301382
+19	734708	0.00332801
+20	724454	-0.0106752
+21	752887	0.0281538
+22	732401	0.000176957
+23	758961	0.0364479
+24	742210	0.0135728
+25	731059	-0.00165493
+26	742349	0.013762
+27	717600	-0.0200348
+28	739063	0.00927482
+29	724658	-0.0103964
+30	732555	0.000387059
+31	750119	0.0243727
+32	742654	0.0141797
+33	743990	0.0160036
+34	742015	0.0133061
+35	749783	0.0239141
+36	727138	-0.00701022
+37	727896	-0.00597475
+38	713489	-0.0256497
+39	720870	-0.0155688
+40	737217	0.00675472
+41	741125	0.0120909
+42	737186	0.00671202
+43	738214	0.00811605
+44	737179	0.00670222
+45	751954	0.0268786
+46	730273	-0.00272808
+47	727255	-0.00684976
+48	728814	-0.00472115
+49	716341	-0.0217545
+50	738649	0.00870984
+51	741037	0.0119704
+52	729345	-0.00399584
+53	740389	0.011086
+54	736634	0.00595752
+55	738780	0.0088885
+56	722800	-0.0129333
+57	729171	-0.00423388
+58	738111	0.00797497
+59	739114	0.00934531
+60	736821	0.00621334
+61	728944	-0.00454315
+62	731397	-0.00119415
+63	731720	-0.000752805
+64	719197	-0.0178536
+65	744517	0.0167228
+66	734414	0.00292635
+67	773938	0.0569015
+68	740649	0.0114407
+69	732464	0.000262875
+70	730447	-0.0024904
+71	736393	0.00562872
+72	724760	-0.0102567
+73	705883	-0.0360361
+74	749463	0.0234771
+75	726524	-0.00784855
+76	731119	-0.00157355
+77	736429	0.00567753
+78	738611	0.00865835
+79	727609	-0.00636639
+80	733046	0.00105848
+81	747275	0.0204897
+82	732939	0.000911957
+83	724506	-0.0106045
+84	733040	0.0010506
+85	728909	-0.00459169
+86	733488	0.00166231
+87	740366	0.0110552
+88	730599	-0.00228295
+89	722391	-0.0134926
+90	740281	0.0109391
+91	736924	0.00635353
+92	727451	-0.0065822
+93	724423	-0.0107173
+94	733526	0.0017135
+95	716773	-0.0211647
+96	736262	0.0054505
+97	730875	-0.00190582
+98	744078	0.0161243
+99	734358	0.00285059
+100	707954	-0.0332083
+Pdf Replica Den -> 0.0186681
+S-ch
+Pdf Alpha -> -0.00844132
+Pdf Scale -> 0.0845628
+==> Total = 0.0874913
+Central	419.449	431.739	0
+_MuonEn_up	416.708	431.739	0
+_MuonEn_down	421.169	431.739	0
+_MuonIDSF_up	424.787	431.739	0
+_MuonIDSF_down	413.675	431.739	0
+_Rocc_up	419.962	431.739	0
+_Rocc_down	418.821	431.739	0
+_ElectronEn_up	416.001	431.739	0
+_ElectronEn_down	416.494	431.739	0
+_ElectronIDSF_up	422.561	431.739	0
+_ElectronIDSF_down	415.268	431.739	0
+_TriggerSF_up	433.418	431.739	0
+_TriggerSF_down	418.488	431.739	0
+_PU_up	410.702	431.739	0
+_PU_down	426.476	431.739	0
+_JetEn_up	435.363	431.739	0
+_JetEn_down	401.193	431.739	0
+_JetRes_up	417.817	431.739	0
+_JetRes_down	421.063	431.739	0
+_Unclustered_up	419.546	431.739	0
+_Unclustered_down	425.177	431.739	0
+_BTagSFEff_up	417.097	431.739	0
+_BTagSFEff_down	421.453	431.739	0
+_BTagSFMiss_up	415.942	431.739	0
+_BTagSFMiss_down	420.343	431.739	0
+_JetMass_up	420.987	431.739	0
+_JetMass_down	420.298	431.739	0
+_JetMassRes_up	417.459	431.739	0
+_JetMassRes_down	419.79	431.739	0
+_Tau21_up	417.488	431.739	0
+_Tau21_down	417.809	431.739	0
+
+################ Sources ################
+Source	SystTotal	SystPrompt	SystFake	Signal
+Stat	2.00	3.20	2.41	-nan	2.84
+Lumi	1.23	2.50	-	-	2.50
+PDF Error Eff	-	-	-	-	0.92
+PDF Error Den	-	-	-	-	1.87
+PDF AlphaS	-	-	-	-	0.84
+PDF Scale	-	-	-	-	8.46
+MuonPt	0.27	0.55	-	-	0.41
+MuonID	0.65	1.33	-	-	1.44
+MuonRocc	0.07	0.14	-	-	0.86
+ElectronE	0.38	0.77	-	-	1.44
+ElectronID	0.43	0.88	-	-	0.63
+Trigger	1.16	2.36	-	-	2.32
+PU	0.93	1.89	-	-	0.48
+JES	2.01	4.08	-	-	6.34
+JER	0.19	0.39	-	-	0.83
+Uncl	0.48	0.97	-	-	0.09
+BEff	0.26	0.52	-	-	0.40
+BMiss	0.30	0.61	-	-	0.42
+JMS	0.15	0.30	-	-	0.13
+JMR	0.17	0.34	-	-	0.40
+Tau21	0.21	0.43	-	-	0.28
+MCNorm	6.60	13.40	-	-	-
+Fake	15.22	-	30.00	-	-
+CF	0.00	-	-	-nan	-
+Total Systematic	16.86	14.73	30.00	-nan	11.63
+
+Total Background	851.188
+- Prompt	419.449
+- Fake	431.739
+- CF	0.000
+
+####### Result #######
+Signal Eff	0.008135
+851.188306	1.169780
+5288.675889	1.119727

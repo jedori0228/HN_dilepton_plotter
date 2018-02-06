@@ -1,0 +1,117 @@
+
+Processing CyclesForOptimization_ElEl_Bin2/HNElEl_125.C(1)...
+[AnalysisInputs::SetMCSF] Get MC SF from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/MCSF.txt
+[AnalysisInputs::SetMCSF] sample : VVV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ZZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttH_nonbb
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : top
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWTo2L2Nu_DS
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpEWK
+[AnalysisInputs::SetMCSF] => MCSF = 1.3062, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpQCD
+[AnalysisInputs::SetMCSF] => MCSF = 1.70026, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_mllmin01
+[AnalysisInputs::SetMCSF] => MCSF = 0.65, MCSF_err = 0.06
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 1.05212, MCSF_err = 0.066085
+[AnalysisInputs::SetMCSF] sample : ZGto2LG
+[AnalysisInputs::SetMCSF] => MCSF = 1.09608, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG_weighted
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0747672
+[AnalysisInputs::SetMCSF] sample : ZZTo4L_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4e
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggZZto4tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetMCSF] sample : ggHtoZZ
+[AnalysisInputs::SetMCSF] => MCSF = 0.978495, MCSF_err = 0.0795031
+[AnalysisInputs::SetCalculatedSysts] Get Systematics from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/Syst.txt
+[AnalysisInputs::SetCalculatedSysts] source : Luminosity
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
+[AnalysisInputs::SetCalculatedSysts] source : FakeLooseID
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.3
+[AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.16
+[CutRangeInfo::ReadCutCard] Get Cutcard from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/CutOpCard/RunDirectory/Nminus1/Cards_ElEl_Bin2/step1_HNElEl_125.txt
+
+##################################################
+#### TOTAL # of Loop = 1
+##################################################
+
+[CutRangeInfo::PrintCutRangeInfo] leadingLepton_Pt_>
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	60
+[CutRangeInfo::PrintCutRangeInfo] m_SubLeadljj_jjWclosest_<
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	<	145
+[CutRangeInfo::PrintCutRangeInfo] m_SubLeadljj_jjWclosest_>
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	>	123.333
+[CutRangeInfo::PrintCutRangeInfo] secondLepton_Pt_>
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	15
+
+##############################
+#### OPTIMIZATION STARTED ####
+##############################
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	60
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	<	145
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	>	123.333
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	15
+CF	0.027925 +- 0.00966742
+Fake	0 +- 0
+Prompt	0.131657 +- 0.0898556
+=> total bkg = 0.159582
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_125	0.344319	0.0004	4.78155e-05	4.0712e-06
+=====================================================================
+
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	60
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	<	145
+[CutInfo::PrintCutInfo] m_SubLeadljj_jjWclosest	>	123.333
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	15
+CF	0.027925 +- 0.00966742
+Fake	0 +- 0
+Prompt	0.131657 +- 0.0898556
+=> total bkg = 0.159582
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNElEl_125	0.344319	0.0004	4.78155e-05	4.0712e-06
