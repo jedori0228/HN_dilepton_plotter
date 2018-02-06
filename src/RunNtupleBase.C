@@ -133,6 +133,7 @@ void RunNtupleBase::Run(){
         pdfsyst_for_bkgd[sample].hist_Pdf_Scale = (TH1D *)m.hist_Pdf_Scale->Clone();
 
         pdfsyst_for_bkgd[sample].Yield_Central = m.weighted_yield;
+        pdfsyst_for_bkgd[sample].SampleName = sample;
         origDir->cd();
 
       }
