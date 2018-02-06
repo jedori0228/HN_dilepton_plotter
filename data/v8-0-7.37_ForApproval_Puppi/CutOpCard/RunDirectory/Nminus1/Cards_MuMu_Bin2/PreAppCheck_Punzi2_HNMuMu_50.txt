@@ -1,0 +1,10 @@
+secondLepton_Pt > 15.0 15.0 1
+secondLepton_Pt < 50.0 50.0 1
+m_lljj_lljjWclosest < 80.0 120.0 1
+m_ll > 10.0 20.0 2
+m_ll < 70.0 50.0 2
+m_SubLeadljj_lljjWclosest < 70.0 70.0 1
+m_Leadljj_lljjWclosest < 70.0 70.0 1
+leadingLepton_Pt < 80.0 80.0 1
+PFMET < 40.0 40.0 1
+DeltaRl1l2 < 3.2 3.2 1

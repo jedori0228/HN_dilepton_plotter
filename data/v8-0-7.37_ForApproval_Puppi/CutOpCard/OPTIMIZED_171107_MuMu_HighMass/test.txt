@@ -1,0 +1,19 @@
+secondLepton_Pt > 15.0 15.0 1
+m_lljj_jjWclosest > 110.0 110.0 1
+m_jj_jjWclosest > 30.0 30.0 1
+m_jj_jjWclosest < 150.0 150.0 1
+#ljj |> 55.0 55.0 1
+#ljj |< 115.0 115.0 1
+#m_Leadljj_jjWclosest > 55.0 55.0 1
+#m_Leadljj_jjWclosest < 115.0 115.0 1
+m_SubLeadljj_jjWclosest > 55.0 55.0 1
+m_SubLeadljj_jjWclosest < 115.0 115.0 1
+leadingLepton_Pt > 25.0 25.0 1
+MET2ST < 9.0 9.0 1
+Njets < 4 4 1
+DeltaRl1l2 < 3.3 3.3 1
+leadingJet_Pt > 25 25 1
+#DeltaRSubLeadl_jjWclosest < 3.4 3.4 1
+##punzi	0.000131134
+##sigeff	0.0340455
+##bkgd	37.6722

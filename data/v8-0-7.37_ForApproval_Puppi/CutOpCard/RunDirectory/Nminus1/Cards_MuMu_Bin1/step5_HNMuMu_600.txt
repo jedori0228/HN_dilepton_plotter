@@ -1,0 +1,9 @@
+m_lljj_jjWclosest > 680.0 680.0 1
+m_jj_jjWclosest > 50 50 1
+m_jj_jjWclosest < 120 120 1
+ljj |> 370.0 370.0 1
+ljj |< 630.0 630.0 1
+leadingLepton_Pt > 110.0 110.0 1
+MET2ST < 7.0 7.0 1
+Njets < 4 4 1
+leadingJet_lljjWclosest_pt > 25 25 1

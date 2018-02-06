@@ -1,0 +1,11 @@
+secondLepton_Pt > 45.0 45.0 1
+m_lljj_jjWclosest > 310.0 310.0 1
+m_jj_jjWclosest > 30.0 30.0 1
+m_jj_jjWclosest < 150.0 150.0 1
+ljj |> 215.0 215.0 1
+ljj |< 270.0 270.0 1
+leadingLepton_Pt > 85.0 85.0 1
+MET2ST < 7.0 7.0 1
+##punzi	3.85608e-05
+##sigeff	0.13595
+##bkgd	2.9143
