@@ -178,7 +178,7 @@ void ForLatex_MakeCutFlowTable(){
       for(unsigned it_sig=0; it_sig<signal_masses.size(); it_sig++){
 
         TString filename = "DiLeptonAnalyzer_SKHNMoriondLL"+channel+"_"+TString::Itoa(signal_masses.at(it_sig),10)+"_cat_"+catversion+".root";
-        if(signal_masses.at(it_sig)<0) filename = "DiLeptonAnalyzer_SKHNDilepton_"+channel+"_Tchannel_M"+TString::Itoa(abs(signal_masses.at(it_sig)),10)+"_cat_"+catversion+".root";
+        if(signal_masses.at(it_sig)<0) filename = "DiLeptonAnalyzer_SKHeavyNeutrinoTo"+channel+"_Tchannel_M"+TString::Itoa(abs(signal_masses.at(it_sig)),10)+"_cat_"+catversion+".root";
         TFile *file = new TFile(filepath+"/Signal/"+filename);
         TH1D *hist = (TH1D *)file->Get("Cutflow_"+region+"_"+CutFlowName);
 
@@ -190,7 +190,7 @@ void ForLatex_MakeCutFlowTable(){
           signalname = "HNMoriondLL"+channel+"_"+TString::Itoa(signal_masses.at(it_sig),10);
         }
         else{
-          signalname = "HNDilepton_"+channel+"_Tchannel_M"+TString::Itoa(abs(signal_masses.at(it_sig)),10);
+          signalname = "HeavyNeutrinoTo"+channel+"_Tchannel_M"+TString::Itoa(abs(signal_masses.at(it_sig)),10);
         }
 
         string elline;
@@ -207,11 +207,6 @@ void ForLatex_MakeCutFlowTable(){
         }
 
         double eff_sig = hist->GetEntries()/N_MC;
-        if(signal_masses.at(it_sig)<0){
-          if(CutFlowName!="MET_PV_Trig" && CutFlowName!="TwoLeptons"){
-            eff_sig *= 2.;
-          }
-        }
 
         cout << " & $" << hist->GetBinContent(1)*scale << "$ $("<<100.*eff_sig<<"~\\%)$";
         //cout << " & $" << hist->GetBinContent(1)*scale << "$ $("<<hist->GetEntries()<<","<<N_MC<<"~\\%)$";

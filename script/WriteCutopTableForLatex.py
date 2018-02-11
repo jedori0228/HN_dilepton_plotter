@@ -32,7 +32,7 @@ for region in regions:
       print "  Cut optimization results at "+channels_for_tex[chcounter]+" "+regions_for_tex[regioncounter]+" selection."
       print "  }"
       print "  \\label{table:cutop_"+ch+"_"+region+"}"
-      print "  \\begin{center}"
+      #print "  \\begin{center}"
       #print "    \\footnotesize"
       print "    \\resizebox{\\columnwidth}{!}{"
       if "Low" in region:
@@ -85,7 +85,7 @@ for region in regions:
       print "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
       print "      \\end{tabular}"
       print "    }"
-      print "  \\end{center}"
+      #print "  \\end{center}"
       print "\\end{table}"
 
     chcounter = chcounter+1
