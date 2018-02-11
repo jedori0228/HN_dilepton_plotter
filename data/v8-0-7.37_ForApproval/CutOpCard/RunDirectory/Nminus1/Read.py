@@ -13,11 +13,11 @@ for LowORHigh in range(0,2):
 
   for ch in channels:
 
-    chlatex = "$\\mu\\mu$"
+    chlatex = "$\\mu \\mu$"
     if ch=="ElEl":
-      chlatex = "$ee$"
+      chlatex = "$\Pe \Pe$"
     if ch=="MuEl":
-      chlatex = "$e\mu$"
+      chlatex = "$\Pe \mu$"
 
     if LowORHigh==0:
 

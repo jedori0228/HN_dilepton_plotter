@@ -55,10 +55,11 @@ def MakeYield(a,b,c,nround):
     central_yield = str(round(a,nround))'''
 
   out = '$'+central_yield+' \\pm '+str(round(b,nround))+' \\pm '+str(round(c,nround))+'$'
+
   return out
 
 channels = ["MuMu", "ElEl", "MuEl"]
-channelsForLatex = ["$\mu \mu$", "ee", "e$\mu$"]
+channelsForLatex = ["$\mu \mu$", "$\Pe \Pe$", "$\Pe \mu$"]
 
 for LowORHigh in range(0,3):
 
@@ -75,9 +76,11 @@ for LowORHigh in range(0,3):
 
       ## Low Mass
       masses = [20, 30, 40, 50, 60, 70, 75, 80]
+      n_multirow = len(masses)-1 ## no 80 GeV for now
 
       if LowORHigh != 0:
         masses = [85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
+        n_multirow = len(masses)
 
       counter = 0
       for mass in masses:
@@ -134,8 +137,8 @@ for LowORHigh in range(0,3):
         total = prompt+fake+cf
 
         nround = 1
-        #if LowORHigh!=0:
-        #  nround = 3
+        if LowORHigh!=0:
+          nround = 3
 
         out = '$'+str(mass)+'$ & '
         out = out + MakeYield(prompt,prompt*(0.01*prompt_stat),prompt*(0.01*prompt_syst),nround)+' & '
@@ -162,6 +165,25 @@ for LowORHigh in range(0,3):
           out = out + MakeYield(total,total*(0.01*total_stat),total*(0.01*total_syst),nround)+' & '
 
         out = out + '$'+str(int(obs))+'$ \\\\'
+
+        if LowORHigh==0:
+          if counter==0:
+            if Bin=="Bin1":
+              print '\\multirow{'+str(2*n_multirow)+'}{*}{'+channelsForLatex[it_ch]+'} & \\multirow{'+str(n_multirow)+'}{*}{SR1}'
+            if Bin=="Bin2":
+              print '\cline{2-8}'
+              print '& \multirow{'+str(n_multirow)+'}{*}{SR2}'
+
+            out = '   & '+out
+
+          else:
+            out = ' &  & '+out
+
+
+        else:
+          if counter==0:
+            print '\multirow{'+str(n_multirow)+'}{*}{'+channelsForLatex[it_ch]+'}'
+          out = ' & '+out
 
         print out
 
