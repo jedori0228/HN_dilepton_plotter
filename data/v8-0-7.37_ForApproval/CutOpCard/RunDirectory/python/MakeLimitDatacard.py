@@ -20,10 +20,12 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
   else:
     signal_rate *= 100
 
+  signal_rate *= 0.01 ## decrease signal rate, to make r = o(1)~o(100)
+
   #### HOT FIX ####
   if mass == 80:
     Wrong = 2.01340
-    Correct = 0.4525
+    Correct = 0.401242
     signal_rate *= Correct/Wrong
 
   lines = open(logfilename).readlines()
@@ -50,7 +52,7 @@ def MakeLimitDatacard(logfilename, channel, mass, outputdir, outputfilename):
       bkgd = prompt+fake+cf
       break
 
-  n_syst = 21
+  n_syst = 20
   if fake<=0.:
     n_syst = n_syst+1
 

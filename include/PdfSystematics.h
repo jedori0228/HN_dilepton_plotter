@@ -113,6 +113,9 @@ void PdfSystematics::CalculatePdfSystematic(){
 
   //==== hist_Pdf_Replica : bin1~bin100 are filled
   //==== hist_Replica_Den : for t-ch, bin2~bin101 should be used
+  TH1D *for_Syst_Pdf_Replica_Eff = new TH1D("for_Syst_Pdf_Replica_Eff", "", 100, 0., 100.);
+  TH1D *for_Syst_Pdf_Replica_Den = new TH1D("for_Syst_Pdf_Replica_Den", "", 100, 0., 100.);
+  TH1D *for_Syst_Pdf_Replica_Num = new TH1D("for_Syst_Pdf_Replica_Num", "", 100, 0., 100.);
   for(unsigned int i=1; i<=hist_Pdf_Replica->GetXaxis()->GetNbins(); i++){
     double num = hist_Pdf_Replica->GetBinContent(i);
     double den = hist_Replica_Den->GetBinContent(i+pdferror_start_bin);
@@ -122,21 +125,37 @@ void PdfSystematics::CalculatePdfSystematic(){
     double reldiff_den = (den-den_central)/den_central;
     double reldiff_num = (num-num_central)/num_central;
 
+    for_Syst_Pdf_Replica_Eff->Fill(reldiff_eff);
+    for_Syst_Pdf_Replica_Den->Fill(reldiff_den);
+    for_Syst_Pdf_Replica_Num->Fill(reldiff_num);
+
     Syst_Pdf_Replica_Eff += reldiff_eff*reldiff_eff;
     Syst_Pdf_Replica_Den += reldiff_den*reldiff_den;
     Syst_Pdf_Replica_Num += reldiff_num*reldiff_num;
 
   }
 
-  Syst_Pdf_Replica_Eff = sqrt(Syst_Pdf_Replica_Eff/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
-  Syst_Pdf_Replica_Den = sqrt(Syst_Pdf_Replica_Den/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
-  Syst_Pdf_Replica_Num = sqrt(Syst_Pdf_Replica_Num/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
+  //Syst_Pdf_Replica_Eff = sqrt(Syst_Pdf_Replica_Eff/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
+  //Syst_Pdf_Replica_Den = sqrt(Syst_Pdf_Replica_Den/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
+  //Syst_Pdf_Replica_Num = sqrt(Syst_Pdf_Replica_Num/(hist_Pdf_Replica->GetXaxis()->GetNbins()-1));
+
+  Syst_Pdf_Replica_Eff = for_Syst_Pdf_Replica_Eff->GetRMS();
+  Syst_Pdf_Replica_Den = for_Syst_Pdf_Replica_Den->GetRMS();
+  Syst_Pdf_Replica_Num = for_Syst_Pdf_Replica_Num->GetRMS();
 
   if(Debug){
     cout << "Pdf Replica Eff -> " << Syst_Pdf_Replica_Eff << endl;
     cout << "Pdf Replica Den -> " << Syst_Pdf_Replica_Den << endl;
     cout << "Pdf Replica Num -> " << Syst_Pdf_Replica_Num << endl;
+
+    cout << "RMS of for_Syst_Pdf_Replica_Eff -> " << for_Syst_Pdf_Replica_Eff->GetRMS() << endl;
+    cout << "RMS of for_Syst_Pdf_Replica_Den -> " << for_Syst_Pdf_Replica_Den->GetRMS() << endl;
+    cout << "RMS of for_Syst_Pdf_Replica_Num -> " << for_Syst_Pdf_Replica_Num->GetRMS() << endl;
+
   }
+  delete for_Syst_Pdf_Replica_Eff;
+  delete for_Syst_Pdf_Replica_Den;
+  delete for_Syst_Pdf_Replica_Num;
 
   //==== PDF Alpha
 

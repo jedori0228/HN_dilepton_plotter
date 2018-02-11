@@ -82,7 +82,6 @@ void HNElEl_80(){
     "",
     "_MuonEn_up", "_MuonEn_down",
     "_MuonIDSF_up", "_MuonIDSF_down",
-    "_Rocc_up", "_Rocc_down",
     "_ElectronEn_up", "_ElectronEn_down",
     "_ElectronIDSF_up", "_ElectronIDSF_down",
     "_TriggerSF_up", "_TriggerSF_down",
@@ -189,7 +188,7 @@ void HNElEl_80(){
       fake_calculated_syst = m.fake_bkgs_syst;
       cf_calculated_syst = m.cf_bkgs_syst;
       //signal_calculated_syst = (m.pdfsyst.Syst_Pdf_Total)*y_signal_central;
-      signal_calculated_syst = (0.0802626)*y_signal_central;
+      signal_calculated_syst = (0.09)*y_signal_central;
 
     }
 
@@ -260,7 +259,6 @@ void HNElEl_80(){
   vector<TString> sourcealias = {
     "MuonPt",
     "MuonID",
-    "MuonRocc",
     "ElectronE",
     "ElectronID",
     "Trigger",

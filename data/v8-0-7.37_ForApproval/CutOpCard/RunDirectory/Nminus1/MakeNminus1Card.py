@@ -14,7 +14,7 @@ for ch in channels:
       ## Bin1
       ## Low Mass
 
-      masses = [20, 30, 40, 50, 60, 70, 80]
+      masses = [20, 30, 40, 50, 60, 70, 75, 80]
       varorder = [
       "Njets",
       "DeltaRl1l2",
@@ -31,7 +31,7 @@ for ch in channels:
       ## Low Mass
 
       if LowORHigh == 0 and Bin == "Bin1":
-        masses = [20, 30, 40, 50, 60, 70, 80]
+        masses = [20, 30, 40, 50, 60, 70, 75, 80]
         varorder = [
         "Njets",
         "DeltaRl1l2",
@@ -45,7 +45,7 @@ for ch in channels:
         ]
 
       if LowORHigh == 1:
-        masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
+        masses = [85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
         varorder = [
         "Njets",
         "leadingJet_lljjWclosest_pt",

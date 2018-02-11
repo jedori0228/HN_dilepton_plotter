@@ -58,7 +58,7 @@ Signal Region & $m_{{{{N}}}}$ (\GeV) & Source & Incl. & Number of AK4 jets $<$ &
         SR = "SR2"
 
       ## Low Mass
-      masses = [20, 30, 40, 50, 60, 70, 80]
+      masses = [20, 30, 40, 50, 60, 70, 75]
       varorder = [
       "Njets",
       "DeltaRl1l2",
@@ -72,7 +72,7 @@ Signal Region & $m_{{{{N}}}}$ (\GeV) & Source & Incl. & Number of AK4 jets $<$ &
       ]
 
       if LowORHigh == 1:
-        masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
+        masses = [85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
         varorder = [
         "Njets",
         "leadingJet_lljjWclosest_pt",
@@ -102,7 +102,7 @@ Signal Region & $m_{{{{N}}}}$ (\GeV) & Source & Incl. & Number of AK4 jets $<$ &
         ## Bkgd
 
         if masscounter==0:
-          print '\\multirow{'+str(2*len(masses))+'}{*}{'+SR+'}'+' & \\multirow{3}{*}{'+str(mass)+'} & Bkgd.',
+          print '\\multirow{'+str(3*len(masses))+'}{*}{'+SR+'}'+' & \\multirow{3}{*}{'+str(mass)+'} & Bkgd.',
         else:
           print ' & \\multirow{3}{*}{'+str(mass)+'} & Bkgd.',
 

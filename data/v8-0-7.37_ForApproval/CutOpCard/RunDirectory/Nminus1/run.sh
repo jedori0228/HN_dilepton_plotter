@@ -66,6 +66,17 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_70.C(7)" > Outputs_step7/l
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_70.C(8)" > Outputs_step8/log_Bin1_HNMuMu_70.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_70.C(9)" > Outputs_step9/log_Bin1_HNMuMu_70.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_70.C(10)" > Outputs_step10/log_Bin1_HNMuMu_70.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(0)" > Outputs_step0/log_Bin1_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(1)" > Outputs_step1/log_Bin1_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(2)" > Outputs_step2/log_Bin1_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(3)" > Outputs_step3/log_Bin1_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(4)" > Outputs_step4/log_Bin1_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(5)" > Outputs_step5/log_Bin1_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(6)" > Outputs_step6/log_Bin1_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(7)" > Outputs_step7/log_Bin1_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(8)" > Outputs_step8/log_Bin1_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(9)" > Outputs_step9/log_Bin1_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_75.C(10)" > Outputs_step10/log_Bin1_HNMuMu_75.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_80.C(0)" > Outputs_step0/log_Bin1_HNMuMu_80.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_80.C(1)" > Outputs_step1/log_Bin1_HNMuMu_80.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_80.C(2)" > Outputs_step2/log_Bin1_HNMuMu_80.log &
@@ -80,6 +91,7 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_80.C(10)" > Outputs_step10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_20.C(0)" > Outputs_step0/log_Bin2_HNMuMu_20.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_20.C(1)" > Outputs_step1/log_Bin2_HNMuMu_20.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_20.C(2)" > Outputs_step2/log_Bin2_HNMuMu_20.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_20.C(3)" > Outputs_step3/log_Bin2_HNMuMu_20.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_20.C(4)" > Outputs_step4/log_Bin2_HNMuMu_20.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_20.C(5)" > Outputs_step5/log_Bin2_HNMuMu_20.log &
@@ -91,7 +103,6 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_20.C(10)" > Outputs_step10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_30.C(0)" > Outputs_step0/log_Bin2_HNMuMu_30.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_30.C(1)" > Outputs_step1/log_Bin2_HNMuMu_30.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_30.C(2)" > Outputs_step2/log_Bin2_HNMuMu_30.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_30.C(3)" > Outputs_step3/log_Bin2_HNMuMu_30.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_30.C(4)" > Outputs_step4/log_Bin2_HNMuMu_30.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_30.C(5)" > Outputs_step5/log_Bin2_HNMuMu_30.log &
@@ -111,6 +122,7 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_40.C(7)" > Outputs_step7/l
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_40.C(8)" > Outputs_step8/log_Bin2_HNMuMu_40.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_40.C(9)" > Outputs_step9/log_Bin2_HNMuMu_40.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_40.C(10)" > Outputs_step10/log_Bin2_HNMuMu_40.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_50.C(0)" > Outputs_step0/log_Bin2_HNMuMu_50.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_50.C(1)" > Outputs_step1/log_Bin2_HNMuMu_50.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_50.C(2)" > Outputs_step2/log_Bin2_HNMuMu_50.log &
@@ -122,7 +134,6 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_50.C(7)" > Outputs_step7/l
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_50.C(8)" > Outputs_step8/log_Bin2_HNMuMu_50.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_50.C(9)" > Outputs_step9/log_Bin2_HNMuMu_50.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_50.C(10)" > Outputs_step10/log_Bin2_HNMuMu_50.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_60.C(0)" > Outputs_step0/log_Bin2_HNMuMu_60.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_60.C(1)" > Outputs_step1/log_Bin2_HNMuMu_60.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_60.C(2)" > Outputs_step2/log_Bin2_HNMuMu_60.log &
@@ -142,9 +153,21 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_70.C(4)" > Outputs_step4/l
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_70.C(5)" > Outputs_step5/log_Bin2_HNMuMu_70.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_70.C(6)" > Outputs_step6/log_Bin2_HNMuMu_70.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_70.C(7)" > Outputs_step7/log_Bin2_HNMuMu_70.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_70.C(8)" > Outputs_step8/log_Bin2_HNMuMu_70.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_70.C(9)" > Outputs_step9/log_Bin2_HNMuMu_70.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_70.C(10)" > Outputs_step10/log_Bin2_HNMuMu_70.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(0)" > Outputs_step0/log_Bin2_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(1)" > Outputs_step1/log_Bin2_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(2)" > Outputs_step2/log_Bin2_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(3)" > Outputs_step3/log_Bin2_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(4)" > Outputs_step4/log_Bin2_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(5)" > Outputs_step5/log_Bin2_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(6)" > Outputs_step6/log_Bin2_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(7)" > Outputs_step7/log_Bin2_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(8)" > Outputs_step8/log_Bin2_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(9)" > Outputs_step9/log_Bin2_HNMuMu_75.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_75.C(10)" > Outputs_step10/log_Bin2_HNMuMu_75.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_80.C(0)" > Outputs_step0/log_Bin2_HNMuMu_80.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_80.C(1)" > Outputs_step1/log_Bin2_HNMuMu_80.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_80.C(2)" > Outputs_step2/log_Bin2_HNMuMu_80.log &
@@ -153,10 +176,21 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_80.C(4)" > Outputs_step4/l
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_80.C(5)" > Outputs_step5/log_Bin2_HNMuMu_80.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_80.C(6)" > Outputs_step6/log_Bin2_HNMuMu_80.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_80.C(7)" > Outputs_step7/log_Bin2_HNMuMu_80.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_80.C(8)" > Outputs_step8/log_Bin2_HNMuMu_80.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_80.C(9)" > Outputs_step9/log_Bin2_HNMuMu_80.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_80.C(10)" > Outputs_step10/log_Bin2_HNMuMu_80.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(0)" > Outputs_step0/log_Bin1_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(1)" > Outputs_step1/log_Bin1_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(2)" > Outputs_step2/log_Bin1_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(3)" > Outputs_step3/log_Bin1_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(4)" > Outputs_step4/log_Bin1_HNMuMu_85.log &
+sleep 10
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(5)" > Outputs_step5/log_Bin1_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(6)" > Outputs_step6/log_Bin1_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(7)" > Outputs_step7/log_Bin1_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(8)" > Outputs_step8/log_Bin1_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(9)" > Outputs_step9/log_Bin1_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_85.C(10)" > Outputs_step10/log_Bin1_HNMuMu_85.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_90.C(0)" > Outputs_step0/log_Bin1_HNMuMu_90.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_90.C(1)" > Outputs_step1/log_Bin1_HNMuMu_90.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_90.C(2)" > Outputs_step2/log_Bin1_HNMuMu_90.log &
@@ -181,10 +215,10 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_100.C(9)" > Outputs_step9/
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_100.C(10)" > Outputs_step10/log_Bin1_HNMuMu_100.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_125.C(0)" > Outputs_step0/log_Bin1_HNMuMu_125.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_125.C(1)" > Outputs_step1/log_Bin1_HNMuMu_125.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_125.C(2)" > Outputs_step2/log_Bin1_HNMuMu_125.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_125.C(3)" > Outputs_step3/log_Bin1_HNMuMu_125.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_125.C(4)" > Outputs_step4/log_Bin1_HNMuMu_125.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_125.C(5)" > Outputs_step5/log_Bin1_HNMuMu_125.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_125.C(6)" > Outputs_step6/log_Bin1_HNMuMu_125.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_125.C(7)" > Outputs_step7/log_Bin1_HNMuMu_125.log &
@@ -212,10 +246,10 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_200.C(6)" > Outputs_step6/
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_200.C(7)" > Outputs_step7/log_Bin1_HNMuMu_200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_200.C(8)" > Outputs_step8/log_Bin1_HNMuMu_200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_200.C(9)" > Outputs_step9/log_Bin1_HNMuMu_200.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_200.C(10)" > Outputs_step10/log_Bin1_HNMuMu_200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_250.C(0)" > Outputs_step0/log_Bin1_HNMuMu_250.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_250.C(1)" > Outputs_step1/log_Bin1_HNMuMu_250.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_250.C(2)" > Outputs_step2/log_Bin1_HNMuMu_250.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_250.C(3)" > Outputs_step3/log_Bin1_HNMuMu_250.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_250.C(4)" > Outputs_step4/log_Bin1_HNMuMu_250.log &
@@ -243,10 +277,10 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_400.C(3)" > Outputs_step3/
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_400.C(4)" > Outputs_step4/log_Bin1_HNMuMu_400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_400.C(5)" > Outputs_step5/log_Bin1_HNMuMu_400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_400.C(6)" > Outputs_step6/log_Bin1_HNMuMu_400.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_400.C(7)" > Outputs_step7/log_Bin1_HNMuMu_400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_400.C(8)" > Outputs_step8/log_Bin1_HNMuMu_400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_400.C(9)" > Outputs_step9/log_Bin1_HNMuMu_400.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_400.C(10)" > Outputs_step10/log_Bin1_HNMuMu_400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_500.C(0)" > Outputs_step0/log_Bin1_HNMuMu_500.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_500.C(1)" > Outputs_step1/log_Bin1_HNMuMu_500.log &
@@ -274,10 +308,10 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_700.C(0)" > Outputs_step0/
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_700.C(1)" > Outputs_step1/log_Bin1_HNMuMu_700.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_700.C(2)" > Outputs_step2/log_Bin1_HNMuMu_700.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_700.C(3)" > Outputs_step3/log_Bin1_HNMuMu_700.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_700.C(4)" > Outputs_step4/log_Bin1_HNMuMu_700.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_700.C(5)" > Outputs_step5/log_Bin1_HNMuMu_700.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_700.C(6)" > Outputs_step6/log_Bin1_HNMuMu_700.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_700.C(7)" > Outputs_step7/log_Bin1_HNMuMu_700.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_700.C(8)" > Outputs_step8/log_Bin1_HNMuMu_700.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_700.C(9)" > Outputs_step9/log_Bin1_HNMuMu_700.log &
@@ -305,10 +339,10 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_900.C(8)" > Outputs_step8/
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_900.C(9)" > Outputs_step9/log_Bin1_HNMuMu_900.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_900.C(10)" > Outputs_step10/log_Bin1_HNMuMu_900.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1000.C(0)" > Outputs_step0/log_Bin1_HNMuMu_1000.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1000.C(1)" > Outputs_step1/log_Bin1_HNMuMu_1000.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1000.C(2)" > Outputs_step2/log_Bin1_HNMuMu_1000.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1000.C(3)" > Outputs_step3/log_Bin1_HNMuMu_1000.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1000.C(4)" > Outputs_step4/log_Bin1_HNMuMu_1000.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1000.C(5)" > Outputs_step5/log_Bin1_HNMuMu_1000.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1000.C(6)" > Outputs_step6/log_Bin1_HNMuMu_1000.log &
@@ -336,10 +370,10 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1200.C(5)" > Outputs_step5
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1200.C(6)" > Outputs_step6/log_Bin1_HNMuMu_1200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1200.C(7)" > Outputs_step7/log_Bin1_HNMuMu_1200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1200.C(8)" > Outputs_step8/log_Bin1_HNMuMu_1200.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1200.C(9)" > Outputs_step9/log_Bin1_HNMuMu_1200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1200.C(10)" > Outputs_step10/log_Bin1_HNMuMu_1200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1300.C(0)" > Outputs_step0/log_Bin1_HNMuMu_1300.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1300.C(1)" > Outputs_step1/log_Bin1_HNMuMu_1300.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1300.C(2)" > Outputs_step2/log_Bin1_HNMuMu_1300.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1300.C(3)" > Outputs_step3/log_Bin1_HNMuMu_1300.log &
@@ -367,12 +401,23 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1500.C(2)" > Outputs_step2
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1500.C(3)" > Outputs_step3/log_Bin1_HNMuMu_1500.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1500.C(4)" > Outputs_step4/log_Bin1_HNMuMu_1500.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1500.C(5)" > Outputs_step5/log_Bin1_HNMuMu_1500.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1500.C(6)" > Outputs_step6/log_Bin1_HNMuMu_1500.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1500.C(7)" > Outputs_step7/log_Bin1_HNMuMu_1500.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1500.C(8)" > Outputs_step8/log_Bin1_HNMuMu_1500.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1500.C(9)" > Outputs_step9/log_Bin1_HNMuMu_1500.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin1/HNMuMu_1500.C(10)" > Outputs_step10/log_Bin1_HNMuMu_1500.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(0)" > Outputs_step0/log_Bin2_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(1)" > Outputs_step1/log_Bin2_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(2)" > Outputs_step2/log_Bin2_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(3)" > Outputs_step3/log_Bin2_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(4)" > Outputs_step4/log_Bin2_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(5)" > Outputs_step5/log_Bin2_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(6)" > Outputs_step6/log_Bin2_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(7)" > Outputs_step7/log_Bin2_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(8)" > Outputs_step8/log_Bin2_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(9)" > Outputs_step9/log_Bin2_HNMuMu_85.log &
+root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_85.C(10)" > Outputs_step10/log_Bin2_HNMuMu_85.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_90.C(0)" > Outputs_step0/log_Bin2_HNMuMu_90.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_90.C(1)" > Outputs_step1/log_Bin2_HNMuMu_90.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_90.C(2)" > Outputs_step2/log_Bin2_HNMuMu_90.log &
@@ -387,6 +432,7 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_90.C(10)" > Outputs_step10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_100.C(0)" > Outputs_step0/log_Bin2_HNMuMu_100.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_100.C(1)" > Outputs_step1/log_Bin2_HNMuMu_100.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_100.C(2)" > Outputs_step2/log_Bin2_HNMuMu_100.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_100.C(3)" > Outputs_step3/log_Bin2_HNMuMu_100.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_100.C(4)" > Outputs_step4/log_Bin2_HNMuMu_100.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_100.C(5)" > Outputs_step5/log_Bin2_HNMuMu_100.log &
@@ -401,7 +447,6 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_125.C(2)" > Outputs_step2/
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_125.C(3)" > Outputs_step3/log_Bin2_HNMuMu_125.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_125.C(4)" > Outputs_step4/log_Bin2_HNMuMu_125.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_125.C(5)" > Outputs_step5/log_Bin2_HNMuMu_125.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_125.C(6)" > Outputs_step6/log_Bin2_HNMuMu_125.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_125.C(7)" > Outputs_step7/log_Bin2_HNMuMu_125.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_125.C(8)" > Outputs_step8/log_Bin2_HNMuMu_125.log &
@@ -418,6 +463,7 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_150.C(7)" > Outputs_step7/
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_150.C(8)" > Outputs_step8/log_Bin2_HNMuMu_150.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_150.C(9)" > Outputs_step9/log_Bin2_HNMuMu_150.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_150.C(10)" > Outputs_step10/log_Bin2_HNMuMu_150.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_200.C(0)" > Outputs_step0/log_Bin2_HNMuMu_200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_200.C(1)" > Outputs_step1/log_Bin2_HNMuMu_200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_200.C(2)" > Outputs_step2/log_Bin2_HNMuMu_200.log &
@@ -432,7 +478,6 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_200.C(10)" > Outputs_step1
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_250.C(0)" > Outputs_step0/log_Bin2_HNMuMu_250.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_250.C(1)" > Outputs_step1/log_Bin2_HNMuMu_250.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_250.C(2)" > Outputs_step2/log_Bin2_HNMuMu_250.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_250.C(3)" > Outputs_step3/log_Bin2_HNMuMu_250.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_250.C(4)" > Outputs_step4/log_Bin2_HNMuMu_250.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_250.C(5)" > Outputs_step5/log_Bin2_HNMuMu_250.log &
@@ -449,6 +494,7 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_300.C(4)" > Outputs_step4/
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_300.C(5)" > Outputs_step5/log_Bin2_HNMuMu_300.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_300.C(6)" > Outputs_step6/log_Bin2_HNMuMu_300.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_300.C(7)" > Outputs_step7/log_Bin2_HNMuMu_300.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_300.C(8)" > Outputs_step8/log_Bin2_HNMuMu_300.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_300.C(9)" > Outputs_step9/log_Bin2_HNMuMu_300.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_300.C(10)" > Outputs_step10/log_Bin2_HNMuMu_300.log &
@@ -463,7 +509,6 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_400.C(7)" > Outputs_step7/
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_400.C(8)" > Outputs_step8/log_Bin2_HNMuMu_400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_400.C(9)" > Outputs_step9/log_Bin2_HNMuMu_400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_400.C(10)" > Outputs_step10/log_Bin2_HNMuMu_400.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_500.C(0)" > Outputs_step0/log_Bin2_HNMuMu_500.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_500.C(1)" > Outputs_step1/log_Bin2_HNMuMu_500.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_500.C(2)" > Outputs_step2/log_Bin2_HNMuMu_500.log &
@@ -480,6 +525,7 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_600.C(1)" > Outputs_step1/
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_600.C(2)" > Outputs_step2/log_Bin2_HNMuMu_600.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_600.C(3)" > Outputs_step3/log_Bin2_HNMuMu_600.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_600.C(4)" > Outputs_step4/log_Bin2_HNMuMu_600.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_600.C(5)" > Outputs_step5/log_Bin2_HNMuMu_600.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_600.C(6)" > Outputs_step6/log_Bin2_HNMuMu_600.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_600.C(7)" > Outputs_step7/log_Bin2_HNMuMu_600.log &
@@ -494,7 +540,6 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_700.C(4)" > Outputs_step4/
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_700.C(5)" > Outputs_step5/log_Bin2_HNMuMu_700.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_700.C(6)" > Outputs_step6/log_Bin2_HNMuMu_700.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_700.C(7)" > Outputs_step7/log_Bin2_HNMuMu_700.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_700.C(8)" > Outputs_step8/log_Bin2_HNMuMu_700.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_700.C(9)" > Outputs_step9/log_Bin2_HNMuMu_700.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_700.C(10)" > Outputs_step10/log_Bin2_HNMuMu_700.log &
@@ -511,6 +556,7 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_800.C(9)" > Outputs_step9/
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_800.C(10)" > Outputs_step10/log_Bin2_HNMuMu_800.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_900.C(0)" > Outputs_step0/log_Bin2_HNMuMu_900.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_900.C(1)" > Outputs_step1/log_Bin2_HNMuMu_900.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_900.C(2)" > Outputs_step2/log_Bin2_HNMuMu_900.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_900.C(3)" > Outputs_step3/log_Bin2_HNMuMu_900.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_900.C(4)" > Outputs_step4/log_Bin2_HNMuMu_900.log &
@@ -525,7 +571,6 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1000.C(1)" > Outputs_step1
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1000.C(2)" > Outputs_step2/log_Bin2_HNMuMu_1000.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1000.C(3)" > Outputs_step3/log_Bin2_HNMuMu_1000.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1000.C(4)" > Outputs_step4/log_Bin2_HNMuMu_1000.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1000.C(5)" > Outputs_step5/log_Bin2_HNMuMu_1000.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1000.C(6)" > Outputs_step6/log_Bin2_HNMuMu_1000.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1000.C(7)" > Outputs_step7/log_Bin2_HNMuMu_1000.log &
@@ -542,6 +587,7 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1100.C(6)" > Outputs_step6
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1100.C(7)" > Outputs_step7/log_Bin2_HNMuMu_1100.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1100.C(8)" > Outputs_step8/log_Bin2_HNMuMu_1100.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1100.C(9)" > Outputs_step9/log_Bin2_HNMuMu_1100.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1100.C(10)" > Outputs_step10/log_Bin2_HNMuMu_1100.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1200.C(0)" > Outputs_step0/log_Bin2_HNMuMu_1200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1200.C(1)" > Outputs_step1/log_Bin2_HNMuMu_1200.log &
@@ -556,7 +602,6 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1200.C(9)" > Outputs_step9
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1200.C(10)" > Outputs_step10/log_Bin2_HNMuMu_1200.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1300.C(0)" > Outputs_step0/log_Bin2_HNMuMu_1300.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1300.C(1)" > Outputs_step1/log_Bin2_HNMuMu_1300.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1300.C(2)" > Outputs_step2/log_Bin2_HNMuMu_1300.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1300.C(3)" > Outputs_step3/log_Bin2_HNMuMu_1300.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1300.C(4)" > Outputs_step4/log_Bin2_HNMuMu_1300.log &
@@ -573,6 +618,7 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1400.C(3)" > Outputs_step3
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1400.C(4)" > Outputs_step4/log_Bin2_HNMuMu_1400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1400.C(5)" > Outputs_step5/log_Bin2_HNMuMu_1400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1400.C(6)" > Outputs_step6/log_Bin2_HNMuMu_1400.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1400.C(7)" > Outputs_step7/log_Bin2_HNMuMu_1400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1400.C(8)" > Outputs_step8/log_Bin2_HNMuMu_1400.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1400.C(9)" > Outputs_step9/log_Bin2_HNMuMu_1400.log &
@@ -587,7 +633,6 @@ root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1500.C(6)" > Outputs_step6
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1500.C(7)" > Outputs_step7/log_Bin2_HNMuMu_1500.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1500.C(8)" > Outputs_step8/log_Bin2_HNMuMu_1500.log &
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1500.C(9)" > Outputs_step9/log_Bin2_HNMuMu_1500.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuMu_Bin2/HNMuMu_1500.C(10)" > Outputs_step10/log_Bin2_HNMuMu_1500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_20.C(0)" > Outputs_step0/log_Bin1_HNElEl_20.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_20.C(1)" > Outputs_step1/log_Bin1_HNElEl_20.log &
@@ -604,6 +649,7 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_30.C(0)" > Outputs_step0/l
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_30.C(1)" > Outputs_step1/log_Bin1_HNElEl_30.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_30.C(2)" > Outputs_step2/log_Bin1_HNElEl_30.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_30.C(3)" > Outputs_step3/log_Bin1_HNElEl_30.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_30.C(4)" > Outputs_step4/log_Bin1_HNElEl_30.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_30.C(5)" > Outputs_step5/log_Bin1_HNElEl_30.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_30.C(6)" > Outputs_step6/log_Bin1_HNElEl_30.log &
@@ -618,7 +664,6 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_40.C(3)" > Outputs_step3/l
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_40.C(4)" > Outputs_step4/log_Bin1_HNElEl_40.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_40.C(5)" > Outputs_step5/log_Bin1_HNElEl_40.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_40.C(6)" > Outputs_step6/log_Bin1_HNElEl_40.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_40.C(7)" > Outputs_step7/log_Bin1_HNElEl_40.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_40.C(8)" > Outputs_step8/log_Bin1_HNElEl_40.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_40.C(9)" > Outputs_step9/log_Bin1_HNElEl_40.log &
@@ -635,6 +680,7 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_50.C(8)" > Outputs_step8/l
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_50.C(9)" > Outputs_step9/log_Bin1_HNElEl_50.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_50.C(10)" > Outputs_step10/log_Bin1_HNElEl_50.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_60.C(0)" > Outputs_step0/log_Bin1_HNElEl_60.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_60.C(1)" > Outputs_step1/log_Bin1_HNElEl_60.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_60.C(2)" > Outputs_step2/log_Bin1_HNElEl_60.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_60.C(3)" > Outputs_step3/log_Bin1_HNElEl_60.log &
@@ -649,7 +695,6 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(0)" > Outputs_step0/l
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(1)" > Outputs_step1/log_Bin1_HNElEl_70.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(2)" > Outputs_step2/log_Bin1_HNElEl_70.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(3)" > Outputs_step3/log_Bin1_HNElEl_70.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(4)" > Outputs_step4/log_Bin1_HNElEl_70.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(5)" > Outputs_step5/log_Bin1_HNElEl_70.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(6)" > Outputs_step6/log_Bin1_HNElEl_70.log &
@@ -657,6 +702,18 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(7)" > Outputs_step7/l
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(8)" > Outputs_step8/log_Bin1_HNElEl_70.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(9)" > Outputs_step9/log_Bin1_HNElEl_70.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_70.C(10)" > Outputs_step10/log_Bin1_HNElEl_70.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(0)" > Outputs_step0/log_Bin1_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(1)" > Outputs_step1/log_Bin1_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(2)" > Outputs_step2/log_Bin1_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(3)" > Outputs_step3/log_Bin1_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(4)" > Outputs_step4/log_Bin1_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(5)" > Outputs_step5/log_Bin1_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(6)" > Outputs_step6/log_Bin1_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(7)" > Outputs_step7/log_Bin1_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(8)" > Outputs_step8/log_Bin1_HNElEl_75.log &
+sleep 10
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(9)" > Outputs_step9/log_Bin1_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_75.C(10)" > Outputs_step10/log_Bin1_HNElEl_75.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_80.C(0)" > Outputs_step0/log_Bin1_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_80.C(1)" > Outputs_step1/log_Bin1_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_80.C(2)" > Outputs_step2/log_Bin1_HNElEl_80.log &
@@ -680,12 +737,12 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_20.C(8)" > Outputs_step8/l
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_20.C(9)" > Outputs_step9/log_Bin2_HNElEl_20.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_20.C(10)" > Outputs_step10/log_Bin2_HNElEl_20.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_30.C(0)" > Outputs_step0/log_Bin2_HNElEl_30.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_30.C(1)" > Outputs_step1/log_Bin2_HNElEl_30.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_30.C(2)" > Outputs_step2/log_Bin2_HNElEl_30.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_30.C(3)" > Outputs_step3/log_Bin2_HNElEl_30.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_30.C(4)" > Outputs_step4/log_Bin2_HNElEl_30.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_30.C(5)" > Outputs_step5/log_Bin2_HNElEl_30.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_30.C(6)" > Outputs_step6/log_Bin2_HNElEl_30.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_30.C(7)" > Outputs_step7/log_Bin2_HNElEl_30.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_30.C(8)" > Outputs_step8/log_Bin2_HNElEl_30.log &
@@ -711,12 +768,12 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_50.C(5)" > Outputs_step5/l
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_50.C(6)" > Outputs_step6/log_Bin2_HNElEl_50.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_50.C(7)" > Outputs_step7/log_Bin2_HNElEl_50.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_50.C(8)" > Outputs_step8/log_Bin2_HNElEl_50.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_50.C(9)" > Outputs_step9/log_Bin2_HNElEl_50.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_50.C(10)" > Outputs_step10/log_Bin2_HNElEl_50.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_60.C(0)" > Outputs_step0/log_Bin2_HNElEl_60.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_60.C(1)" > Outputs_step1/log_Bin2_HNElEl_60.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_60.C(2)" > Outputs_step2/log_Bin2_HNElEl_60.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_60.C(3)" > Outputs_step3/log_Bin2_HNElEl_60.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_60.C(4)" > Outputs_step4/log_Bin2_HNElEl_60.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_60.C(5)" > Outputs_step5/log_Bin2_HNElEl_60.log &
@@ -736,18 +793,40 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_70.C(7)" > Outputs_step7/l
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_70.C(8)" > Outputs_step8/log_Bin2_HNElEl_70.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_70.C(9)" > Outputs_step9/log_Bin2_HNElEl_70.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_70.C(10)" > Outputs_step10/log_Bin2_HNElEl_70.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(0)" > Outputs_step0/log_Bin2_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(1)" > Outputs_step1/log_Bin2_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(2)" > Outputs_step2/log_Bin2_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(3)" > Outputs_step3/log_Bin2_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(4)" > Outputs_step4/log_Bin2_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(5)" > Outputs_step5/log_Bin2_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(6)" > Outputs_step6/log_Bin2_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(7)" > Outputs_step7/log_Bin2_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(8)" > Outputs_step8/log_Bin2_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(9)" > Outputs_step9/log_Bin2_HNElEl_75.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_75.C(10)" > Outputs_step10/log_Bin2_HNElEl_75.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(0)" > Outputs_step0/log_Bin2_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(1)" > Outputs_step1/log_Bin2_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(2)" > Outputs_step2/log_Bin2_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(3)" > Outputs_step3/log_Bin2_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(4)" > Outputs_step4/log_Bin2_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(5)" > Outputs_step5/log_Bin2_HNElEl_80.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(6)" > Outputs_step6/log_Bin2_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(7)" > Outputs_step7/log_Bin2_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(8)" > Outputs_step8/log_Bin2_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(9)" > Outputs_step9/log_Bin2_HNElEl_80.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_80.C(10)" > Outputs_step10/log_Bin2_HNElEl_80.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(0)" > Outputs_step0/log_Bin1_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(1)" > Outputs_step1/log_Bin1_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(2)" > Outputs_step2/log_Bin1_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(3)" > Outputs_step3/log_Bin1_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(4)" > Outputs_step4/log_Bin1_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(5)" > Outputs_step5/log_Bin1_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(6)" > Outputs_step6/log_Bin1_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(7)" > Outputs_step7/log_Bin1_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(8)" > Outputs_step8/log_Bin1_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(9)" > Outputs_step9/log_Bin1_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_85.C(10)" > Outputs_step10/log_Bin1_HNElEl_85.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_90.C(0)" > Outputs_step0/log_Bin1_HNElEl_90.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_90.C(1)" > Outputs_step1/log_Bin1_HNElEl_90.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_90.C(2)" > Outputs_step2/log_Bin1_HNElEl_90.log &
@@ -756,6 +835,7 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_90.C(4)" > Outputs_step4/l
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_90.C(5)" > Outputs_step5/log_Bin1_HNElEl_90.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_90.C(6)" > Outputs_step6/log_Bin1_HNElEl_90.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_90.C(7)" > Outputs_step7/log_Bin1_HNElEl_90.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_90.C(8)" > Outputs_step8/log_Bin1_HNElEl_90.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_90.C(9)" > Outputs_step9/log_Bin1_HNElEl_90.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_90.C(10)" > Outputs_step10/log_Bin1_HNElEl_90.log &
@@ -773,7 +853,6 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_100.C(10)" > Outputs_step1
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_125.C(0)" > Outputs_step0/log_Bin1_HNElEl_125.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_125.C(1)" > Outputs_step1/log_Bin1_HNElEl_125.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_125.C(2)" > Outputs_step2/log_Bin1_HNElEl_125.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_125.C(3)" > Outputs_step3/log_Bin1_HNElEl_125.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_125.C(4)" > Outputs_step4/log_Bin1_HNElEl_125.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_125.C(5)" > Outputs_step5/log_Bin1_HNElEl_125.log &
@@ -787,6 +866,7 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_150.C(1)" > Outputs_step1/
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_150.C(2)" > Outputs_step2/log_Bin1_HNElEl_150.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_150.C(3)" > Outputs_step3/log_Bin1_HNElEl_150.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_150.C(4)" > Outputs_step4/log_Bin1_HNElEl_150.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_150.C(5)" > Outputs_step5/log_Bin1_HNElEl_150.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_150.C(6)" > Outputs_step6/log_Bin1_HNElEl_150.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_150.C(7)" > Outputs_step7/log_Bin1_HNElEl_150.log &
@@ -804,7 +884,6 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_200.C(7)" > Outputs_step7/
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_200.C(8)" > Outputs_step8/log_Bin1_HNElEl_200.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_200.C(9)" > Outputs_step9/log_Bin1_HNElEl_200.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_200.C(10)" > Outputs_step10/log_Bin1_HNElEl_200.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_250.C(0)" > Outputs_step0/log_Bin1_HNElEl_250.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_250.C(1)" > Outputs_step1/log_Bin1_HNElEl_250.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_250.C(2)" > Outputs_step2/log_Bin1_HNElEl_250.log &
@@ -818,6 +897,7 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_250.C(9)" > Outputs_step9/
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_250.C(10)" > Outputs_step10/log_Bin1_HNElEl_250.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_300.C(0)" > Outputs_step0/log_Bin1_HNElEl_300.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_300.C(1)" > Outputs_step1/log_Bin1_HNElEl_300.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_300.C(2)" > Outputs_step2/log_Bin1_HNElEl_300.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_300.C(3)" > Outputs_step3/log_Bin1_HNElEl_300.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_300.C(4)" > Outputs_step4/log_Bin1_HNElEl_300.log &
@@ -835,7 +915,6 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_400.C(4)" > Outputs_step4/
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_400.C(5)" > Outputs_step5/log_Bin1_HNElEl_400.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_400.C(6)" > Outputs_step6/log_Bin1_HNElEl_400.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_400.C(7)" > Outputs_step7/log_Bin1_HNElEl_400.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_400.C(8)" > Outputs_step8/log_Bin1_HNElEl_400.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_400.C(9)" > Outputs_step9/log_Bin1_HNElEl_400.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_400.C(10)" > Outputs_step10/log_Bin1_HNElEl_400.log &
@@ -849,6 +928,7 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_500.C(6)" > Outputs_step6/
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_500.C(7)" > Outputs_step7/log_Bin1_HNElEl_500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_500.C(8)" > Outputs_step8/log_Bin1_HNElEl_500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_500.C(9)" > Outputs_step9/log_Bin1_HNElEl_500.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_500.C(10)" > Outputs_step10/log_Bin1_HNElEl_500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_600.C(0)" > Outputs_step0/log_Bin1_HNElEl_600.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_600.C(1)" > Outputs_step1/log_Bin1_HNElEl_600.log &
@@ -866,7 +946,6 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_700.C(1)" > Outputs_step1/
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_700.C(2)" > Outputs_step2/log_Bin1_HNElEl_700.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_700.C(3)" > Outputs_step3/log_Bin1_HNElEl_700.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_700.C(4)" > Outputs_step4/log_Bin1_HNElEl_700.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_700.C(5)" > Outputs_step5/log_Bin1_HNElEl_700.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_700.C(6)" > Outputs_step6/log_Bin1_HNElEl_700.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_700.C(7)" > Outputs_step7/log_Bin1_HNElEl_700.log &
@@ -880,6 +959,7 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_800.C(3)" > Outputs_step3/
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_800.C(4)" > Outputs_step4/log_Bin1_HNElEl_800.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_800.C(5)" > Outputs_step5/log_Bin1_HNElEl_800.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_800.C(6)" > Outputs_step6/log_Bin1_HNElEl_800.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_800.C(7)" > Outputs_step7/log_Bin1_HNElEl_800.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_800.C(8)" > Outputs_step8/log_Bin1_HNElEl_800.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_800.C(9)" > Outputs_step9/log_Bin1_HNElEl_800.log &
@@ -897,7 +977,6 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_900.C(9)" > Outputs_step9/
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_900.C(10)" > Outputs_step10/log_Bin1_HNElEl_900.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1000.C(0)" > Outputs_step0/log_Bin1_HNElEl_1000.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1000.C(1)" > Outputs_step1/log_Bin1_HNElEl_1000.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1000.C(2)" > Outputs_step2/log_Bin1_HNElEl_1000.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1000.C(3)" > Outputs_step3/log_Bin1_HNElEl_1000.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1000.C(4)" > Outputs_step4/log_Bin1_HNElEl_1000.log &
@@ -911,6 +990,7 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1100.C(0)" > Outputs_step0
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1100.C(1)" > Outputs_step1/log_Bin1_HNElEl_1100.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1100.C(2)" > Outputs_step2/log_Bin1_HNElEl_1100.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1100.C(3)" > Outputs_step3/log_Bin1_HNElEl_1100.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1100.C(4)" > Outputs_step4/log_Bin1_HNElEl_1100.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1100.C(5)" > Outputs_step5/log_Bin1_HNElEl_1100.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1100.C(6)" > Outputs_step6/log_Bin1_HNElEl_1100.log &
@@ -928,7 +1008,6 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1200.C(6)" > Outputs_step6
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1200.C(7)" > Outputs_step7/log_Bin1_HNElEl_1200.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1200.C(8)" > Outputs_step8/log_Bin1_HNElEl_1200.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1200.C(9)" > Outputs_step9/log_Bin1_HNElEl_1200.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1200.C(10)" > Outputs_step10/log_Bin1_HNElEl_1200.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1300.C(0)" > Outputs_step0/log_Bin1_HNElEl_1300.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1300.C(1)" > Outputs_step1/log_Bin1_HNElEl_1300.log &
@@ -942,6 +1021,7 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1300.C(8)" > Outputs_step8
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1300.C(9)" > Outputs_step9/log_Bin1_HNElEl_1300.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1300.C(10)" > Outputs_step10/log_Bin1_HNElEl_1300.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1400.C(0)" > Outputs_step0/log_Bin1_HNElEl_1400.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1400.C(1)" > Outputs_step1/log_Bin1_HNElEl_1400.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1400.C(2)" > Outputs_step2/log_Bin1_HNElEl_1400.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1400.C(3)" > Outputs_step3/log_Bin1_HNElEl_1400.log &
@@ -959,11 +1039,22 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1500.C(3)" > Outputs_step3
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1500.C(4)" > Outputs_step4/log_Bin1_HNElEl_1500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1500.C(5)" > Outputs_step5/log_Bin1_HNElEl_1500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1500.C(6)" > Outputs_step6/log_Bin1_HNElEl_1500.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1500.C(7)" > Outputs_step7/log_Bin1_HNElEl_1500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1500.C(8)" > Outputs_step8/log_Bin1_HNElEl_1500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1500.C(9)" > Outputs_step9/log_Bin1_HNElEl_1500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin1/HNElEl_1500.C(10)" > Outputs_step10/log_Bin1_HNElEl_1500.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(0)" > Outputs_step0/log_Bin2_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(1)" > Outputs_step1/log_Bin2_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(2)" > Outputs_step2/log_Bin2_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(3)" > Outputs_step3/log_Bin2_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(4)" > Outputs_step4/log_Bin2_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(5)" > Outputs_step5/log_Bin2_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(6)" > Outputs_step6/log_Bin2_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(7)" > Outputs_step7/log_Bin2_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(8)" > Outputs_step8/log_Bin2_HNElEl_85.log &
+sleep 10
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(9)" > Outputs_step9/log_Bin2_HNElEl_85.log &
+root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_85.C(10)" > Outputs_step10/log_Bin2_HNElEl_85.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_90.C(0)" > Outputs_step0/log_Bin2_HNElEl_90.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_90.C(1)" > Outputs_step1/log_Bin2_HNElEl_90.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_90.C(2)" > Outputs_step2/log_Bin2_HNElEl_90.log &
@@ -990,9 +1081,9 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_125.C(0)" > Outputs_step0/
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_125.C(1)" > Outputs_step1/log_Bin2_HNElEl_125.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_125.C(2)" > Outputs_step2/log_Bin2_HNElEl_125.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_125.C(3)" > Outputs_step3/log_Bin2_HNElEl_125.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_125.C(4)" > Outputs_step4/log_Bin2_HNElEl_125.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_125.C(5)" > Outputs_step5/log_Bin2_HNElEl_125.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_125.C(6)" > Outputs_step6/log_Bin2_HNElEl_125.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_125.C(7)" > Outputs_step7/log_Bin2_HNElEl_125.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_125.C(8)" > Outputs_step8/log_Bin2_HNElEl_125.log &
@@ -1021,9 +1112,9 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_200.C(8)" > Outputs_step8/
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_200.C(9)" > Outputs_step9/log_Bin2_HNElEl_200.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_200.C(10)" > Outputs_step10/log_Bin2_HNElEl_200.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_250.C(0)" > Outputs_step0/log_Bin2_HNElEl_250.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_250.C(1)" > Outputs_step1/log_Bin2_HNElEl_250.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_250.C(2)" > Outputs_step2/log_Bin2_HNElEl_250.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_250.C(3)" > Outputs_step3/log_Bin2_HNElEl_250.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_250.C(4)" > Outputs_step4/log_Bin2_HNElEl_250.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_250.C(5)" > Outputs_step5/log_Bin2_HNElEl_250.log &
@@ -1052,9 +1143,9 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_400.C(5)" > Outputs_step5/
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_400.C(6)" > Outputs_step6/log_Bin2_HNElEl_400.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_400.C(7)" > Outputs_step7/log_Bin2_HNElEl_400.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_400.C(8)" > Outputs_step8/log_Bin2_HNElEl_400.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_400.C(9)" > Outputs_step9/log_Bin2_HNElEl_400.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_400.C(10)" > Outputs_step10/log_Bin2_HNElEl_400.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_500.C(0)" > Outputs_step0/log_Bin2_HNElEl_500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_500.C(1)" > Outputs_step1/log_Bin2_HNElEl_500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_500.C(2)" > Outputs_step2/log_Bin2_HNElEl_500.log &
@@ -1083,9 +1174,9 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_700.C(2)" > Outputs_step2/
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_700.C(3)" > Outputs_step3/log_Bin2_HNElEl_700.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_700.C(4)" > Outputs_step4/log_Bin2_HNElEl_700.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_700.C(5)" > Outputs_step5/log_Bin2_HNElEl_700.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_700.C(6)" > Outputs_step6/log_Bin2_HNElEl_700.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_700.C(7)" > Outputs_step7/log_Bin2_HNElEl_700.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_700.C(8)" > Outputs_step8/log_Bin2_HNElEl_700.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_700.C(9)" > Outputs_step9/log_Bin2_HNElEl_700.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_700.C(10)" > Outputs_step10/log_Bin2_HNElEl_700.log &
@@ -1114,9 +1205,9 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_900.C(10)" > Outputs_step1
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1000.C(0)" > Outputs_step0/log_Bin2_HNElEl_1000.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1000.C(1)" > Outputs_step1/log_Bin2_HNElEl_1000.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1000.C(2)" > Outputs_step2/log_Bin2_HNElEl_1000.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1000.C(3)" > Outputs_step3/log_Bin2_HNElEl_1000.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1000.C(4)" > Outputs_step4/log_Bin2_HNElEl_1000.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1000.C(5)" > Outputs_step5/log_Bin2_HNElEl_1000.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1000.C(6)" > Outputs_step6/log_Bin2_HNElEl_1000.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1000.C(7)" > Outputs_step7/log_Bin2_HNElEl_1000.log &
@@ -1145,9 +1236,9 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1200.C(7)" > Outputs_step7
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1200.C(8)" > Outputs_step8/log_Bin2_HNElEl_1200.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1200.C(9)" > Outputs_step9/log_Bin2_HNElEl_1200.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1200.C(10)" > Outputs_step10/log_Bin2_HNElEl_1200.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1300.C(0)" > Outputs_step0/log_Bin2_HNElEl_1300.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1300.C(1)" > Outputs_step1/log_Bin2_HNElEl_1300.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1300.C(2)" > Outputs_step2/log_Bin2_HNElEl_1300.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1300.C(3)" > Outputs_step3/log_Bin2_HNElEl_1300.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1300.C(4)" > Outputs_step4/log_Bin2_HNElEl_1300.log &
@@ -1176,9 +1267,9 @@ root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1500.C(4)" > Outputs_step4
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1500.C(5)" > Outputs_step5/log_Bin2_HNElEl_1500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1500.C(6)" > Outputs_step6/log_Bin2_HNElEl_1500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1500.C(7)" > Outputs_step7/log_Bin2_HNElEl_1500.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1500.C(8)" > Outputs_step8/log_Bin2_HNElEl_1500.log &
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1500.C(9)" > Outputs_step9/log_Bin2_HNElEl_1500.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_ElEl_Bin2/HNElEl_1500.C(10)" > Outputs_step10/log_Bin2_HNElEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_20.C(0)" > Outputs_step0/log_Bin1_HNMuEl_20.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_20.C(1)" > Outputs_step1/log_Bin1_HNMuEl_20.log &
@@ -1207,9 +1298,9 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_40.C(1)" > Outputs_step1/l
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_40.C(2)" > Outputs_step2/log_Bin1_HNMuEl_40.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_40.C(3)" > Outputs_step3/log_Bin1_HNMuEl_40.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_40.C(4)" > Outputs_step4/log_Bin1_HNMuEl_40.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_40.C(5)" > Outputs_step5/log_Bin1_HNMuEl_40.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_40.C(6)" > Outputs_step6/log_Bin1_HNMuEl_40.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_40.C(7)" > Outputs_step7/log_Bin1_HNMuEl_40.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_40.C(8)" > Outputs_step8/log_Bin1_HNMuEl_40.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_40.C(9)" > Outputs_step9/log_Bin1_HNMuEl_40.log &
@@ -1238,9 +1329,9 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_60.C(9)" > Outputs_step9/l
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_60.C(10)" > Outputs_step10/log_Bin1_HNMuEl_60.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(0)" > Outputs_step0/log_Bin1_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(1)" > Outputs_step1/log_Bin1_HNMuEl_70.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(2)" > Outputs_step2/log_Bin1_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(3)" > Outputs_step3/log_Bin1_HNMuEl_70.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(4)" > Outputs_step4/log_Bin1_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(5)" > Outputs_step5/log_Bin1_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(6)" > Outputs_step6/log_Bin1_HNMuEl_70.log &
@@ -1248,6 +1339,17 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(7)" > Outputs_step7/l
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(8)" > Outputs_step8/log_Bin1_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(9)" > Outputs_step9/log_Bin1_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_70.C(10)" > Outputs_step10/log_Bin1_HNMuEl_70.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(0)" > Outputs_step0/log_Bin1_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(1)" > Outputs_step1/log_Bin1_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(2)" > Outputs_step2/log_Bin1_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(3)" > Outputs_step3/log_Bin1_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(4)" > Outputs_step4/log_Bin1_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(5)" > Outputs_step5/log_Bin1_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(6)" > Outputs_step6/log_Bin1_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(7)" > Outputs_step7/log_Bin1_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(8)" > Outputs_step8/log_Bin1_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(9)" > Outputs_step9/log_Bin1_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_75.C(10)" > Outputs_step10/log_Bin1_HNMuEl_75.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_80.C(0)" > Outputs_step0/log_Bin1_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_80.C(1)" > Outputs_step1/log_Bin1_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_80.C(2)" > Outputs_step2/log_Bin1_HNMuEl_80.log &
@@ -1260,6 +1362,7 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_80.C(8)" > Outputs_step8/l
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_80.C(9)" > Outputs_step9/log_Bin1_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_80.C(10)" > Outputs_step10/log_Bin1_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_20.C(0)" > Outputs_step0/log_Bin2_HNMuEl_20.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_20.C(1)" > Outputs_step1/log_Bin2_HNMuEl_20.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_20.C(2)" > Outputs_step2/log_Bin2_HNMuEl_20.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_20.C(3)" > Outputs_step3/log_Bin2_HNMuEl_20.log &
@@ -1269,7 +1372,6 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_20.C(6)" > Outputs_step6/l
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_20.C(7)" > Outputs_step7/log_Bin2_HNMuEl_20.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_20.C(8)" > Outputs_step8/log_Bin2_HNMuEl_20.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_20.C(9)" > Outputs_step9/log_Bin2_HNMuEl_20.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_20.C(10)" > Outputs_step10/log_Bin2_HNMuEl_20.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_30.C(0)" > Outputs_step0/log_Bin2_HNMuEl_30.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_30.C(1)" > Outputs_step1/log_Bin2_HNMuEl_30.log &
@@ -1291,6 +1393,7 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_40.C(5)" > Outputs_step5/l
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_40.C(6)" > Outputs_step6/log_Bin2_HNMuEl_40.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_40.C(7)" > Outputs_step7/log_Bin2_HNMuEl_40.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_40.C(8)" > Outputs_step8/log_Bin2_HNMuEl_40.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_40.C(9)" > Outputs_step9/log_Bin2_HNMuEl_40.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_40.C(10)" > Outputs_step10/log_Bin2_HNMuEl_40.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_50.C(0)" > Outputs_step0/log_Bin2_HNMuEl_50.log &
@@ -1300,7 +1403,6 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_50.C(3)" > Outputs_step3/l
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_50.C(4)" > Outputs_step4/log_Bin2_HNMuEl_50.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_50.C(5)" > Outputs_step5/log_Bin2_HNMuEl_50.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_50.C(6)" > Outputs_step6/log_Bin2_HNMuEl_50.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_50.C(7)" > Outputs_step7/log_Bin2_HNMuEl_50.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_50.C(8)" > Outputs_step8/log_Bin2_HNMuEl_50.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_50.C(9)" > Outputs_step9/log_Bin2_HNMuEl_50.log &
@@ -1322,16 +1424,27 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_70.C(2)" > Outputs_step2/l
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_70.C(3)" > Outputs_step3/log_Bin2_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_70.C(4)" > Outputs_step4/log_Bin2_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_70.C(5)" > Outputs_step5/log_Bin2_HNMuEl_70.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_70.C(6)" > Outputs_step6/log_Bin2_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_70.C(7)" > Outputs_step7/log_Bin2_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_70.C(8)" > Outputs_step8/log_Bin2_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_70.C(9)" > Outputs_step9/log_Bin2_HNMuEl_70.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_70.C(10)" > Outputs_step10/log_Bin2_HNMuEl_70.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(0)" > Outputs_step0/log_Bin2_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(1)" > Outputs_step1/log_Bin2_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(2)" > Outputs_step2/log_Bin2_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(3)" > Outputs_step3/log_Bin2_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(4)" > Outputs_step4/log_Bin2_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(5)" > Outputs_step5/log_Bin2_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(6)" > Outputs_step6/log_Bin2_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(7)" > Outputs_step7/log_Bin2_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(8)" > Outputs_step8/log_Bin2_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(9)" > Outputs_step9/log_Bin2_HNMuEl_75.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_75.C(10)" > Outputs_step10/log_Bin2_HNMuEl_75.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(0)" > Outputs_step0/log_Bin2_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(1)" > Outputs_step1/log_Bin2_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(2)" > Outputs_step2/log_Bin2_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(3)" > Outputs_step3/log_Bin2_HNMuEl_80.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(4)" > Outputs_step4/log_Bin2_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(5)" > Outputs_step5/log_Bin2_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(6)" > Outputs_step6/log_Bin2_HNMuEl_80.log &
@@ -1339,6 +1452,18 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(7)" > Outputs_step7/l
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(8)" > Outputs_step8/log_Bin2_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(9)" > Outputs_step9/log_Bin2_HNMuEl_80.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_80.C(10)" > Outputs_step10/log_Bin2_HNMuEl_80.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(0)" > Outputs_step0/log_Bin1_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(1)" > Outputs_step1/log_Bin1_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(2)" > Outputs_step2/log_Bin1_HNMuEl_85.log &
+sleep 10
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(3)" > Outputs_step3/log_Bin1_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(4)" > Outputs_step4/log_Bin1_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(5)" > Outputs_step5/log_Bin1_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(6)" > Outputs_step6/log_Bin1_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(7)" > Outputs_step7/log_Bin1_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(8)" > Outputs_step8/log_Bin1_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(9)" > Outputs_step9/log_Bin1_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_85.C(10)" > Outputs_step10/log_Bin1_HNMuEl_85.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_90.C(0)" > Outputs_step0/log_Bin1_HNMuEl_90.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_90.C(1)" > Outputs_step1/log_Bin1_HNMuEl_90.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_90.C(2)" > Outputs_step2/log_Bin1_HNMuEl_90.log &
@@ -1361,8 +1486,8 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_100.C(7)" > Outputs_step7/
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_100.C(8)" > Outputs_step8/log_Bin1_HNMuEl_100.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_100.C(9)" > Outputs_step9/log_Bin1_HNMuEl_100.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_100.C(10)" > Outputs_step10/log_Bin1_HNMuEl_100.log &
-root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_125.C(0)" > Outputs_step0/log_Bin1_HNMuEl_125.log &
 sleep 10
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_125.C(0)" > Outputs_step0/log_Bin1_HNMuEl_125.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_125.C(1)" > Outputs_step1/log_Bin1_HNMuEl_125.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_125.C(2)" > Outputs_step2/log_Bin1_HNMuEl_125.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_125.C(3)" > Outputs_step3/log_Bin1_HNMuEl_125.log &
@@ -1392,8 +1517,8 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_200.C(4)" > Outputs_step4/
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_200.C(5)" > Outputs_step5/log_Bin1_HNMuEl_200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_200.C(6)" > Outputs_step6/log_Bin1_HNMuEl_200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_200.C(7)" > Outputs_step7/log_Bin1_HNMuEl_200.log &
-root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_200.C(8)" > Outputs_step8/log_Bin1_HNMuEl_200.log &
 sleep 10
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_200.C(8)" > Outputs_step8/log_Bin1_HNMuEl_200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_200.C(9)" > Outputs_step9/log_Bin1_HNMuEl_200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_200.C(10)" > Outputs_step10/log_Bin1_HNMuEl_200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_250.C(0)" > Outputs_step0/log_Bin1_HNMuEl_250.log &
@@ -1423,8 +1548,8 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_400.C(1)" > Outputs_step1/
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_400.C(2)" > Outputs_step2/log_Bin1_HNMuEl_400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_400.C(3)" > Outputs_step3/log_Bin1_HNMuEl_400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_400.C(4)" > Outputs_step4/log_Bin1_HNMuEl_400.log &
-root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_400.C(5)" > Outputs_step5/log_Bin1_HNMuEl_400.log &
 sleep 10
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_400.C(5)" > Outputs_step5/log_Bin1_HNMuEl_400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_400.C(6)" > Outputs_step6/log_Bin1_HNMuEl_400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_400.C(7)" > Outputs_step7/log_Bin1_HNMuEl_400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_400.C(8)" > Outputs_step8/log_Bin1_HNMuEl_400.log &
@@ -1454,8 +1579,8 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_600.C(9)" > Outputs_step9/
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_600.C(10)" > Outputs_step10/log_Bin1_HNMuEl_600.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_700.C(0)" > Outputs_step0/log_Bin1_HNMuEl_700.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_700.C(1)" > Outputs_step1/log_Bin1_HNMuEl_700.log &
-root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_700.C(2)" > Outputs_step2/log_Bin1_HNMuEl_700.log &
 sleep 10
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_700.C(2)" > Outputs_step2/log_Bin1_HNMuEl_700.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_700.C(3)" > Outputs_step3/log_Bin1_HNMuEl_700.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_700.C(4)" > Outputs_step4/log_Bin1_HNMuEl_700.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_700.C(5)" > Outputs_step5/log_Bin1_HNMuEl_700.log &
@@ -1485,8 +1610,8 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_900.C(6)" > Outputs_step6/
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_900.C(7)" > Outputs_step7/log_Bin1_HNMuEl_900.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_900.C(8)" > Outputs_step8/log_Bin1_HNMuEl_900.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_900.C(9)" > Outputs_step9/log_Bin1_HNMuEl_900.log &
-root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_900.C(10)" > Outputs_step10/log_Bin1_HNMuEl_900.log &
 sleep 10
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_900.C(10)" > Outputs_step10/log_Bin1_HNMuEl_900.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1000.C(0)" > Outputs_step0/log_Bin1_HNMuEl_1000.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1000.C(1)" > Outputs_step1/log_Bin1_HNMuEl_1000.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1000.C(2)" > Outputs_step2/log_Bin1_HNMuEl_1000.log &
@@ -1516,8 +1641,8 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1200.C(3)" > Outputs_step3
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1200.C(4)" > Outputs_step4/log_Bin1_HNMuEl_1200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1200.C(5)" > Outputs_step5/log_Bin1_HNMuEl_1200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1200.C(6)" > Outputs_step6/log_Bin1_HNMuEl_1200.log &
-root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1200.C(7)" > Outputs_step7/log_Bin1_HNMuEl_1200.log &
 sleep 10
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1200.C(7)" > Outputs_step7/log_Bin1_HNMuEl_1200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1200.C(8)" > Outputs_step8/log_Bin1_HNMuEl_1200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1200.C(9)" > Outputs_step9/log_Bin1_HNMuEl_1200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1200.C(10)" > Outputs_step10/log_Bin1_HNMuEl_1200.log &
@@ -1547,14 +1672,25 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(0)" > Outputs_step0
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(1)" > Outputs_step1/log_Bin1_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(2)" > Outputs_step2/log_Bin1_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(3)" > Outputs_step3/log_Bin1_HNMuEl_1500.log &
-root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(4)" > Outputs_step4/log_Bin1_HNMuEl_1500.log &
 sleep 10
+root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(4)" > Outputs_step4/log_Bin1_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(5)" > Outputs_step5/log_Bin1_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(6)" > Outputs_step6/log_Bin1_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(7)" > Outputs_step7/log_Bin1_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(8)" > Outputs_step8/log_Bin1_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(9)" > Outputs_step9/log_Bin1_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin1/HNMuEl_1500.C(10)" > Outputs_step10/log_Bin1_HNMuEl_1500.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(0)" > Outputs_step0/log_Bin2_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(1)" > Outputs_step1/log_Bin2_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(2)" > Outputs_step2/log_Bin2_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(3)" > Outputs_step3/log_Bin2_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(4)" > Outputs_step4/log_Bin2_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(5)" > Outputs_step5/log_Bin2_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(6)" > Outputs_step6/log_Bin2_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(7)" > Outputs_step7/log_Bin2_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(8)" > Outputs_step8/log_Bin2_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(9)" > Outputs_step9/log_Bin2_HNMuEl_85.log &
+root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_85.C(10)" > Outputs_step10/log_Bin2_HNMuEl_85.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_90.C(0)" > Outputs_step0/log_Bin2_HNMuEl_90.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_90.C(1)" > Outputs_step1/log_Bin2_HNMuEl_90.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_90.C(2)" > Outputs_step2/log_Bin2_HNMuEl_90.log &
@@ -1567,6 +1703,7 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_90.C(8)" > Outputs_step8/l
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_90.C(9)" > Outputs_step9/log_Bin2_HNMuEl_90.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_90.C(10)" > Outputs_step10/log_Bin2_HNMuEl_90.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_100.C(0)" > Outputs_step0/log_Bin2_HNMuEl_100.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_100.C(1)" > Outputs_step1/log_Bin2_HNMuEl_100.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_100.C(2)" > Outputs_step2/log_Bin2_HNMuEl_100.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_100.C(3)" > Outputs_step3/log_Bin2_HNMuEl_100.log &
@@ -1579,7 +1716,6 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_100.C(9)" > Outputs_step9/
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_100.C(10)" > Outputs_step10/log_Bin2_HNMuEl_100.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_125.C(0)" > Outputs_step0/log_Bin2_HNMuEl_125.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_125.C(1)" > Outputs_step1/log_Bin2_HNMuEl_125.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_125.C(2)" > Outputs_step2/log_Bin2_HNMuEl_125.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_125.C(3)" > Outputs_step3/log_Bin2_HNMuEl_125.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_125.C(4)" > Outputs_step4/log_Bin2_HNMuEl_125.log &
@@ -1598,6 +1734,7 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_150.C(5)" > Outputs_step5/
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_150.C(6)" > Outputs_step6/log_Bin2_HNMuEl_150.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_150.C(7)" > Outputs_step7/log_Bin2_HNMuEl_150.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_150.C(8)" > Outputs_step8/log_Bin2_HNMuEl_150.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_150.C(9)" > Outputs_step9/log_Bin2_HNMuEl_150.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_150.C(10)" > Outputs_step10/log_Bin2_HNMuEl_150.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_200.C(0)" > Outputs_step0/log_Bin2_HNMuEl_200.log &
@@ -1610,7 +1747,6 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_200.C(6)" > Outputs_step6/
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_200.C(7)" > Outputs_step7/log_Bin2_HNMuEl_200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_200.C(8)" > Outputs_step8/log_Bin2_HNMuEl_200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_200.C(9)" > Outputs_step9/log_Bin2_HNMuEl_200.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_200.C(10)" > Outputs_step10/log_Bin2_HNMuEl_200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_250.C(0)" > Outputs_step0/log_Bin2_HNMuEl_250.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_250.C(1)" > Outputs_step1/log_Bin2_HNMuEl_250.log &
@@ -1629,6 +1765,7 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_300.C(2)" > Outputs_step2/
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_300.C(3)" > Outputs_step3/log_Bin2_HNMuEl_300.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_300.C(4)" > Outputs_step4/log_Bin2_HNMuEl_300.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_300.C(5)" > Outputs_step5/log_Bin2_HNMuEl_300.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_300.C(6)" > Outputs_step6/log_Bin2_HNMuEl_300.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_300.C(7)" > Outputs_step7/log_Bin2_HNMuEl_300.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_300.C(8)" > Outputs_step8/log_Bin2_HNMuEl_300.log &
@@ -1641,7 +1778,6 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_400.C(3)" > Outputs_step3/
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_400.C(4)" > Outputs_step4/log_Bin2_HNMuEl_400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_400.C(5)" > Outputs_step5/log_Bin2_HNMuEl_400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_400.C(6)" > Outputs_step6/log_Bin2_HNMuEl_400.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_400.C(7)" > Outputs_step7/log_Bin2_HNMuEl_400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_400.C(8)" > Outputs_step8/log_Bin2_HNMuEl_400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_400.C(9)" > Outputs_step9/log_Bin2_HNMuEl_400.log &
@@ -1660,6 +1796,7 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_500.C(10)" > Outputs_step1
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_600.C(0)" > Outputs_step0/log_Bin2_HNMuEl_600.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_600.C(1)" > Outputs_step1/log_Bin2_HNMuEl_600.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_600.C(2)" > Outputs_step2/log_Bin2_HNMuEl_600.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_600.C(3)" > Outputs_step3/log_Bin2_HNMuEl_600.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_600.C(4)" > Outputs_step4/log_Bin2_HNMuEl_600.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_600.C(5)" > Outputs_step5/log_Bin2_HNMuEl_600.log &
@@ -1672,7 +1809,6 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_700.C(0)" > Outputs_step0/
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_700.C(1)" > Outputs_step1/log_Bin2_HNMuEl_700.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_700.C(2)" > Outputs_step2/log_Bin2_HNMuEl_700.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_700.C(3)" > Outputs_step3/log_Bin2_HNMuEl_700.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_700.C(4)" > Outputs_step4/log_Bin2_HNMuEl_700.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_700.C(5)" > Outputs_step5/log_Bin2_HNMuEl_700.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_700.C(6)" > Outputs_step6/log_Bin2_HNMuEl_700.log &
@@ -1691,6 +1827,7 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_800.C(7)" > Outputs_step7/
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_800.C(8)" > Outputs_step8/log_Bin2_HNMuEl_800.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_800.C(9)" > Outputs_step9/log_Bin2_HNMuEl_800.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_800.C(10)" > Outputs_step10/log_Bin2_HNMuEl_800.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_900.C(0)" > Outputs_step0/log_Bin2_HNMuEl_900.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_900.C(1)" > Outputs_step1/log_Bin2_HNMuEl_900.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_900.C(2)" > Outputs_step2/log_Bin2_HNMuEl_900.log &
@@ -1703,7 +1840,6 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_900.C(8)" > Outputs_step8/
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_900.C(9)" > Outputs_step9/log_Bin2_HNMuEl_900.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_900.C(10)" > Outputs_step10/log_Bin2_HNMuEl_900.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1000.C(0)" > Outputs_step0/log_Bin2_HNMuEl_1000.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1000.C(1)" > Outputs_step1/log_Bin2_HNMuEl_1000.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1000.C(2)" > Outputs_step2/log_Bin2_HNMuEl_1000.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1000.C(3)" > Outputs_step3/log_Bin2_HNMuEl_1000.log &
@@ -1722,6 +1858,7 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1100.C(4)" > Outputs_step4
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1100.C(5)" > Outputs_step5/log_Bin2_HNMuEl_1100.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1100.C(6)" > Outputs_step6/log_Bin2_HNMuEl_1100.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1100.C(7)" > Outputs_step7/log_Bin2_HNMuEl_1100.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1100.C(8)" > Outputs_step8/log_Bin2_HNMuEl_1100.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1100.C(9)" > Outputs_step9/log_Bin2_HNMuEl_1100.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1100.C(10)" > Outputs_step10/log_Bin2_HNMuEl_1100.log &
@@ -1734,7 +1871,6 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1200.C(5)" > Outputs_step5
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1200.C(6)" > Outputs_step6/log_Bin2_HNMuEl_1200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1200.C(7)" > Outputs_step7/log_Bin2_HNMuEl_1200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1200.C(8)" > Outputs_step8/log_Bin2_HNMuEl_1200.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1200.C(9)" > Outputs_step9/log_Bin2_HNMuEl_1200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1200.C(10)" > Outputs_step10/log_Bin2_HNMuEl_1200.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1300.C(0)" > Outputs_step0/log_Bin2_HNMuEl_1300.log &
@@ -1753,6 +1889,7 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1400.C(1)" > Outputs_step1
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1400.C(2)" > Outputs_step2/log_Bin2_HNMuEl_1400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1400.C(3)" > Outputs_step3/log_Bin2_HNMuEl_1400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1400.C(4)" > Outputs_step4/log_Bin2_HNMuEl_1400.log &
+sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1400.C(5)" > Outputs_step5/log_Bin2_HNMuEl_1400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1400.C(6)" > Outputs_step6/log_Bin2_HNMuEl_1400.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1400.C(7)" > Outputs_step7/log_Bin2_HNMuEl_1400.log &
@@ -1765,7 +1902,6 @@ root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1500.C(2)" > Outputs_step2
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1500.C(3)" > Outputs_step3/log_Bin2_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1500.C(4)" > Outputs_step4/log_Bin2_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1500.C(5)" > Outputs_step5/log_Bin2_HNMuEl_1500.log &
-sleep 10
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1500.C(6)" > Outputs_step6/log_Bin2_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1500.C(7)" > Outputs_step7/log_Bin2_HNMuEl_1500.log &
 root -l -b -q "CyclesForOptimization_MuEl_Bin2/HNMuEl_1500.C(8)" > Outputs_step8/log_Bin2_HNMuEl_1500.log &

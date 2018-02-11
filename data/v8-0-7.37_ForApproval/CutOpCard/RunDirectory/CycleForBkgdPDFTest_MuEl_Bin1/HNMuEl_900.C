@@ -82,7 +82,6 @@ void HNMuEl_900(){
     "",
     "_MuonEn_up", "_MuonEn_down",
     "_MuonIDSF_up", "_MuonIDSF_down",
-    "_Rocc_up", "_Rocc_down",
     "_ElectronEn_up", "_ElectronEn_down",
     "_ElectronIDSF_up", "_ElectronIDSF_down",
     "_TriggerSF_up", "_TriggerSF_down",
@@ -279,7 +278,6 @@ void HNMuEl_900(){
   vector<TString> sourcealias = {
     "MuonPt",
     "MuonID",
-    "MuonRocc",
     "ElectronE",
     "ElectronID",
     "Trigger",
