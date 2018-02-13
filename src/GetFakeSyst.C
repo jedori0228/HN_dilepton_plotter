@@ -71,11 +71,11 @@ void GetFakeSyst(){
 
       //==== Prompt up/down
 
-      TH1D *hist_central = (TH1D *)file->Get(channel+"_"+region+"_FRsyst_Central");
+      TH1D *hist_central = (TH1D *)file->Get(region+"_FRsyst_Central");
       double y_central = hist_central->GetBinContent(1);
-      TH1D *hist_promptup = (TH1D *)file->Get(channel+"_"+region+"_FRsyst_PromptUp");
+      TH1D *hist_promptup = (TH1D *)file->Get(region+"_FRsyst_PromptUp");
       double y_promptup = hist_promptup->GetBinContent(1);
-      TH1D *hist_BJet = (TH1D *)file->Get(channel+"_"+region+"_FRsyst_BJet");
+      TH1D *hist_BJet = (TH1D *)file->Get(region+"_FRsyst_BJet");
       double y_BJet = hist_BJet->GetBinContent(1);
 
       double syst_promptup = fabs(y_promptup-y_central)/y_central;
@@ -91,7 +91,7 @@ void GetFakeSyst(){
           vector<TString> systs = Muon_FRsystsources.at(i);
           double syst_max = -999;
           for(int j=0; j<systs.size(); j++){
-            TH1D *hist_this = (TH1D *)file->Get(channel+"_"+region+"_FRsyst_Muon_"+systs.at(j));
+            TH1D *hist_this = (TH1D *)file->Get(region+"_FRsyst_Muon_"+systs.at(j));
             double this_yield = hist_this->GetBinContent(1);
             double this_syst = fabs(y_central-this_yield)/this_yield;
             if(this_syst>syst_max) syst_max = this_syst;
@@ -109,7 +109,7 @@ void GetFakeSyst(){
           vector<TString> systs = Electron_FRsystsources.at(i);
           double syst_max = -999;
           for(int j=0; j<systs.size(); j++){
-            TH1D *hist_this = (TH1D *)file->Get(channel+"_"+region+"_FRsyst_Electron_"+systs.at(j));
+            TH1D *hist_this = (TH1D *)file->Get(region+"_FRsyst_Electron_"+systs.at(j));
             double this_yield = hist_this->GetBinContent(1);
             double this_syst = fabs(y_central-this_yield)/this_yield;
             if(this_syst>syst_max) syst_max = this_syst;
@@ -124,7 +124,7 @@ void GetFakeSyst(){
           vector<TString> systs = Muon_FRsystsources.at(i);
           double syst_max = -999;
           for(int j=0; j<systs.size(); j++){
-            TH1D *hist_this = (TH1D *)file->Get(channel+"_"+region+"_FRsyst_Muon_"+systs.at(j));
+            TH1D *hist_this = (TH1D *)file->Get(region+"_FRsyst_Muon_"+systs.at(j));
             double this_yield = hist_this->GetBinContent(1);
             double this_syst = fabs(y_central-this_yield)/this_yield;
             if(this_syst>syst_max) syst_max = this_syst;
@@ -136,7 +136,7 @@ void GetFakeSyst(){
           vector<TString> systs = Electron_FRsystsources.at(i);
           double syst_max = -999;
           for(int j=0; j<systs.size(); j++){
-            TH1D *hist_this = (TH1D *)file->Get(channel+"_"+region+"_FRsyst_Electron_"+systs.at(j));
+            TH1D *hist_this = (TH1D *)file->Get(region+"_FRsyst_Electron_"+systs.at(j));
             double this_yield = hist_this->GetBinContent(1);
             double this_syst = fabs(y_central-this_yield)/this_yield;
             if(this_syst>syst_max) syst_max = this_syst;
