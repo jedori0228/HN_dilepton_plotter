@@ -160,3 +160,9 @@ HeavyNeutrinoToElEl_Schannel_M75	83500
 HeavyNeutrinoToElEl_Schannel_M85	76000
 HeavyNeutrinoToMuEl_Schannel_M75	99500
 HeavyNeutrinoToMuEl_Schannel_M85	104500
+HNMuMu_75  79500
+HNMuMu_85  78500
+HNElEl_75  83500
+HNElEl_85  76000
+HNMuEl_75  99500
+HNMuEl_85  104500
