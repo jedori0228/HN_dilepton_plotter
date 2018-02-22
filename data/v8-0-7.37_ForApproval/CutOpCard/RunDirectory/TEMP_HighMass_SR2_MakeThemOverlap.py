@@ -50,8 +50,15 @@ for ch in channels:
         print str(masses[a])+'\t'+str(mins[a])+'\t'+str(maxs[a])
         print str(masses[a+1])+'\t'+str(mins[a+1])+'\t'+str(maxs[a+1])
         print 'Changing it to'
-        print str(masses[a])+'\t'+str(mins[a])+'\t'+str(mins[a+1])
+
+        #print str(masses[a])+'\t'+str(mins[a])+'\t'+str(mins[a+1])
+        print str(masses[a])+'\t'+str(mins[a])+'\t'+str(maxs[a]) ## same as before
+        #print str(masses[a])+'\t'+str(mins[a])+'\t'+str( (mins[a+1]+maxs[a])/2. ) ## Medium
+
         print str(masses[a+1])+'\t'+str(maxs[a])+'\t'+str(maxs[a+1])
+        #print str(masses[a+1])+'\t'+str(mins[a+1])+'\t'+str(maxs[a+1]) ## same as before
+        #print str(masses[a+1])+'\t'+str( (mins[a+1]+maxs[a])/2. )+'\t'+str(maxs[a+1])
+
         print ''
 
 
@@ -66,7 +73,9 @@ for ch in channels:
             if "<" in words[1]:
               print line
               print '->'
-              line = words[0]+'\t'+words[1]+'\t'+str(mins[a+1])+'\t'+str(mins[a+1])+'\t1'
+              #line = words[0]+'\t'+words[1]+'\t'+str(mins[a+1])+'\t'+str(mins[a+1])+'\t1'
+              line = words[0]+'\t'+words[1]+'\t'+str(maxs[a])+'\t'+str(maxs[a])+'\t1' ## same as before
+              #line = words[0]+'\t'+words[1]+'\t'+str( (mins[a+1]+maxs[a])/2. )+'\t'+str( (mins[a+1]+maxs[a])/2. )+'\t1' ## Medium
               print line
 
           newout1.write(line+'\n')
@@ -84,6 +93,8 @@ for ch in channels:
               print line
               print '->'
               line = words[0]+'\t'+words[1]+'\t'+str(maxs[a])+'\t'+str(maxs[a])+'\t1'
+              #line = words[0]+'\t'+words[1]+'\t'+str(mins[a+1])+'\t'+str(mins[a+1])+'\t1' ## same as before
+              #line = words[0]+'\t'+words[1]+'\t'+str( (mins[a+1]+maxs[a])/2. )+'\t'+str( (mins[a+1]+maxs[a])/2. )+'\t1' ## Medium
               print line
 
           newout2.write(line+'\n')
