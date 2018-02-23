@@ -7,7 +7,7 @@ def GetMassVarString(mass):
     return 'ljj'
 
 channels = ["MuMu", "ElEl", "MuEl"]
-Bins = ["Bin2"]
+Bins = ["Bin1", "Bin2"]
 masses = [90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
 
 for ch in channels:
