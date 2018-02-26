@@ -134,8 +134,8 @@ for LowORHigh in range(0,3):
         total = prompt+fake+cf
 
         nround = 1
-        #if LowORHigh!=0:
-        #  nround = 3
+        if LowORHigh!=0:
+          nround = 3
 
         out = '$'+str(mass)+'$ & '
         out = out + MakeYield(prompt,prompt*(0.01*prompt_stat),prompt*(0.01*prompt_syst),nround)+' & '
