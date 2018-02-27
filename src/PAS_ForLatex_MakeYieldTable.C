@@ -379,7 +379,7 @@ void PAS_ForLatex_MakeYieldTable(int lepch=0){
 
       if(it_bkg==bkglists.size()-2){
         for(int i=0; i<channels.size(); i++){
-          cout << "& $"; AddPhantomZero(Total_yield.at(i),"r",3,1);cout << " \\pm "; AddPhantomZero(sqrt(Total_stat.at(i)),"r",2,1);cout << " \\pm "; AddPhantomZero(sqrt(Total_syst.at(i)),"l",3,1);
+          cout << "& $"; AddPhantomZero(Total_yield.at(i),"r",4,1);cout << " \\pm "; AddPhantomZero(sqrt(Total_stat.at(i)),"r",2,1);cout << " \\pm "; AddPhantomZero(sqrt(Total_syst.at(i)),"l",3,1);
           cout << "$ ";
         }
       }

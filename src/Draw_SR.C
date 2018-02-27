@@ -116,7 +116,6 @@ void Draw_SR(int XXX=0){
       "_DiMuon_High_OneFatJet_SS",
       "_DiMuon_Preselection_secondptge20_SS",
 
-
       //==== DiElectron
       "_DiElectron_Preselection_SS", // OffZ, nobjet, jet>=2;
       "_DiElectron_Low_SS",
@@ -125,7 +124,6 @@ void Draw_SR(int XXX=0){
       "_DiElectron_High_SS",
       "_DiElectron_High_TwoJet_NoFatJet_SS",
       "_DiElectron_High_OneFatJet_SS",
-
 
       //==== EMu
       "_EMu_Preselection_SS", // nobjet, jet>=2;
@@ -157,8 +155,8 @@ void Draw_SR(int XXX=0){
       "_DiLepton_High_OneFatJet_SS",
 
 
-      //"_DiLepton_Low_TwoJet_NoFatJet_SS",
-      //"_DiLepton_Low_OneJet_NoFatJet_SS",
+      //"_DiLepton_High_OneFatJet_SS",
+
     };
   }
 
@@ -249,7 +247,7 @@ void Draw_SR(int XXX=0){
     "", "",
     "", "",
     //==== Laeding dijet
-    "GeV", "GeV", "GeV", "GeV",
+    //"GeV", "GeV", "GeV", "GeV",
     "int", "int", "int", "int", "int", "int",
     "GeV", "", "int",
     "GeV", "", "int",
@@ -265,7 +263,7 @@ void Draw_SR(int XXX=0){
     //==== Fatjet
     "int",
     "GeV", "", "GeV", "", "GeV",
-    "GeV", "GeV", "GeV",
+    //"GeV", "GeV", "GeV",
     "GeV", "GeV", "GeV",
     //==== OneJet_NoFatJet
     "GeV", "GeV", "GeV",
@@ -342,20 +340,26 @@ void Draw_SR(int XXX=0){
 
     m.drawdata.push_back(true);
 
-    if(m.histname_suffix.at(i).Contains("DiLepton")) m.drawratio.push_back(false);
-    else m.drawratio.push_back(true);
+    //if(m.histname_suffix.at(i).Contains("DiLepton")) m.drawratio.push_back(false);
+    //else m.drawratio.push_back(true);
+
+    m.drawratio.push_back(true);
+
   }
 
 /*
   //==== FIXME test
   m.histname = {
-    "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
+    "m_Leadlfj_fjWclosest", 
+//"m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
   };
   m.x_title = {
-    "l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
+    "l_{1}j_{ak8} invariant mass (GeV)", 
+//"l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
   };
   m.units = {
-    "GeV", "GeV", "GeV",
+    "GeV", 
+//"GeV", "GeV",
   };
 */
 /*
@@ -364,6 +368,22 @@ void Draw_SR(int XXX=0){
   m.x_title = {"m(Leading Lepton+j) (GeV)"};
   m.units = {"GeV"};
 */
+
+  cout << "m.histname.size() = " <<  m.histname.size() << endl;
+  cout << "m.x_title.size() = " << m.x_title.size() << endl;
+  cout << "m.units.size() = " << m.units.size() << endl;
+  if(m.histname.size()==m.x_title.size() && m.x_title.size()==m.units.size()){
+    cout << "--> OKAY" << endl;
+  }
+  else{
+    cout << "--> WRONG" << endl;
+    return;
+  }
+  cout << "Histname\tXTitle\tUnit" << endl;
+  for(unsigned int i=0; i<m.histname.size(); i++){
+    cout << m.histname.at(i) << "\t" << m.x_title.at(i) << "\t" << m.units.at(i) << endl;
+  }
+
   //====================
   //==== make bkg list
   //====================
@@ -472,7 +492,8 @@ void Draw_SR(int XXX=0){
     }
   }
   m.map_class_to_signal_mass[Plotter::high_SR1] = {200, 400};
-  m.map_class_to_signal_mass[Plotter::high_SR2] = {800, 1000, -800};
+  //m.map_class_to_signal_mass[Plotter::high_SR2] = {800, 1000, -800}; //FIXME
+  m.map_class_to_signal_mass[Plotter::high_SR2] = {800, 1000};
   m.AllSignalClasses = {Plotter::no_class, Plotter::low_SR1, Plotter::low_SR2, Plotter::high_SR1, Plotter::high_SR2};
 
   //=============
@@ -490,14 +511,12 @@ void Draw_SR(int XXX=0){
   }
   skeleton_rebins.close();
 
-
   m.SetRebins(WORKING_DIR+"/data/"+dataset+"/SR_rebins.txt");
 
   //=============
   //==== y_maxs
   //=============
   
-
   //==== script to generate rebins
   ofstream skeleton_y_maxs("./data/SR_yaxis.txt", ios::trunc);
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){

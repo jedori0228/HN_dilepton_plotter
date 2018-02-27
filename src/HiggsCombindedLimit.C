@@ -1,6 +1,11 @@
 #include "canvas_margin.h"
 
-TGraph* HiggsCombindedLimit(int i=0){
+//==== ReturnWhat = 0 : Obs
+//==== ReturnWhat = 1 : Exp
+//==== ReturnWhat = 2 : +- 1sd
+//==== ReturnWhat = 3 : +- 2sd
+
+TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWhat=0, bool RunFullCLs=false){
 
   bool DrawObserved = true;
 
@@ -15,8 +20,17 @@ TGraph* HiggsCombindedLimit(int i=0){
   TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
   TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  //TString filepath = ENV_FILE_PATH+dataset+"/Limit/FullCLs/";
-  //TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/FullCLs/";
+  if(dirname!=""){
+    //filepath = ENV_FILE_PATH+"/"+dirname+"/Limit/";
+
+    filepath = ENV_FILE_PATH+dataset+"/Limit/"+dirname+"/";
+    plotpath = ENV_PLOT_PATH+dataset+"/Limit/"+dirname+"/";
+  }
+
+  if(RunFullCLs){
+    filepath = ENV_FILE_PATH+dataset+"/Limit/FullCLs/";
+    plotpath = ENV_PLOT_PATH+dataset+"/Limit/FullCLs/";
+  }
 
   TString WhichDirectoryInCutop = "MuMu_Combined";
   if(i==1) WhichDirectoryInCutop = "MuMu_Bin1";
@@ -70,12 +84,20 @@ TGraph* HiggsCombindedLimit(int i=0){
     is >> twosig_left[dummyint];
     is >> twosig_right[dummyint];
 
+    //==== skip points
+    if(obs[dummyint]<=0 || limit[dummyint]<=0 || onesig_left[dummyint]<=0 || onesig_right[dummyint]<=0 || twosig_left[dummyint]<=0 || twosig_right[dummyint]<=0){
+      n_central--;
+      continue;
+    }
+
     double scale=0.01; //mixing squared is 0.01 now
     if(mass[dummyint]<=60) scale *= 0.01;
     else if(mass[dummyint]<=100) scale *= 0.1;
     else if(mass[dummyint]<=300) scale *= 1.;
     else if(mass[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
+
+    scale *= 0.01; //FIXME
 
     if(channel=="MuEl") scale *= 0.5;
 
@@ -85,6 +107,12 @@ TGraph* HiggsCombindedLimit(int i=0){
     onesig_right[dummyint] *= scale;
     twosig_left[dummyint] *= scale;
     twosig_right[dummyint] *= scale;
+
+    //==== skip points
+    if(obs[dummyint]>1.0 || limit[dummyint]>1.0){
+      //n_central--;
+      //continue;
+    }
 
     onesig_left[dummyint] = limit[dummyint]-onesig_left[dummyint];
     onesig_right[dummyint] = onesig_right[dummyint] - limit[dummyint];
@@ -106,11 +134,13 @@ TGraph* HiggsCombindedLimit(int i=0){
   cout << "Max : " << max_obs_mass << "\t" << max_obs << endl;
   cout << "Min : " << min_obs_mass << "\t" << min_obs << endl;
 
-  TGraph *gr_13TeV_obs = new TGraph(n_central,mass,obs);
+  //TGraph *gr_13TeV_obs = new TGraph(n_central,mass,obs);
+  TGraphAsymmErrors *gr_13TeV_obs = new TGraphAsymmErrors(n_central,mass,obs,0,0,0,0);
   gr_13TeV_obs->SetLineWidth(3);
   gr_13TeV_obs->SetLineColor(kBlack);
 
-  TGraph *gr_13TeV_exp = new TGraph(n_central,mass,limit);
+  //TGraph *gr_13TeV_exp = new TGraph(n_central,mass,limit);
+  TGraphAsymmErrors *gr_13TeV_exp = new TGraphAsymmErrors(n_central,mass,limit,0,0,0,0);
   gr_13TeV_exp->SetLineWidth(3);
   gr_13TeV_exp->SetLineStyle(2);
   gr_13TeV_exp->SetFillColor(kWhite);
@@ -131,7 +161,8 @@ TGraph* HiggsCombindedLimit(int i=0){
   string elline_SandT;
   ifstream in_SandT(filepath+"/result_VBF.txt");
 
-  const int n_SandT = 29; //30, but now removing 80 GeV
+  int n_SandT = 29; //30, but now removing 80 GeV
+  //if(WhichDirectoryInCutop.Contains("Bin1")) n_SandT = n_SandT-1;
   double mass_SandT[n_SandT], obs_SandT[n_SandT], limit_SandT[n_SandT], onesig_left_SandT[n_SandT], onesig_right_SandT[n_SandT], twosig_left_SandT[n_SandT], twosig_right_SandT[n_SandT];
   dummyint=0;
 
@@ -148,12 +179,20 @@ TGraph* HiggsCombindedLimit(int i=0){
     is >> twosig_left_SandT[dummyint];
     is >> twosig_right_SandT[dummyint];
 
+    //==== skip points
+    if(obs_SandT[dummyint]<=0 || limit_SandT[dummyint]<=0 || onesig_left_SandT[dummyint]<=0 || onesig_right_SandT[dummyint]<=0 || twosig_left_SandT[dummyint]<=0 || twosig_right_SandT[dummyint]<=0){
+      n_SandT--;
+      continue;
+    }
+
     double scale=0.01; //mixing squared is 0.01 now
     if(mass_SandT[dummyint]<=60) scale *= 0.01;
     else if(mass_SandT[dummyint]<=100) scale *= 0.1;
     else if(mass_SandT[dummyint]<=300) scale *= 1.;
     else if(mass_SandT[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
+
+    scale *= 0.01; //FIXME`
 
     if(channel=="MuEl") scale *= 0.5;
 
@@ -163,6 +202,12 @@ TGraph* HiggsCombindedLimit(int i=0){
     onesig_right_SandT[dummyint] *= scale;
     twosig_left_SandT[dummyint] *= scale;
     twosig_right_SandT[dummyint] *= scale;
+
+    //==== skip points
+    if(obs_SandT[dummyint]>1.0 || limit_SandT[dummyint]>1.0){
+      //n_SandT--;
+      //continue;
+    }
 
     onesig_left_SandT[dummyint] = limit_SandT[dummyint]-onesig_left_SandT[dummyint];
     onesig_right_SandT[dummyint] = onesig_right_SandT[dummyint] - limit_SandT[dummyint];
@@ -183,11 +228,13 @@ TGraph* HiggsCombindedLimit(int i=0){
   cout << "Max : " << max_obs_mass_SandT << "\t" << max_obs_SandT << endl;
   cout << "Min : " << min_obs_mass_SandT << "\t" << min_obs_SandT << endl;
 
-  TGraph *gr_13TeV_obs_SandT = new TGraph(n_SandT,mass_SandT,obs_SandT);
+  //TGraph *gr_13TeV_obs_SandT = new TGraph(n_SandT,mass_SandT,obs_SandT);
+  TGraphAsymmErrors *gr_13TeV_obs_SandT = new TGraphAsymmErrors(n_SandT,mass_SandT,obs_SandT,0,0,0,0);
   gr_13TeV_obs_SandT->SetLineWidth(3);
   gr_13TeV_obs_SandT->SetLineColor(kBlack);
 
-  TGraph *gr_13TeV_exp_SandT = new TGraph(n_SandT,mass_SandT,limit_SandT);
+  //TGraph *gr_13TeV_exp_SandT = new TGraph(n_SandT,mass_SandT,limit_SandT);
+  TGraphAsymmErrors *gr_13TeV_exp_SandT = new TGraphAsymmErrors(n_SandT,mass_SandT,limit_SandT,0,0,0,0);
   gr_13TeV_exp_SandT->SetLineColor(kBlack);
   gr_13TeV_exp_SandT->SetLineWidth(3);
   gr_13TeV_exp_SandT->SetLineStyle(2);
@@ -201,6 +248,14 @@ TGraph* HiggsCombindedLimit(int i=0){
   gr_band_2sigma_SandT->SetFillColor(kYellow);
   gr_band_2sigma_SandT->SetLineColor(kYellow);
   gr_band_2sigma_SandT->SetMarkerColor(kYellow);
+
+  //==== 80 GeV as a point
+  double mass_80Gev[1] = {80};
+  double limit_obs_80GeV[1] = {169.245};
+  limit_obs_80GeV[0] *= 0.01*0.1*0.01;
+  TGraphAsymmErrors *gr_80GeV = new TGraphAsymmErrors(1,mass_80Gev,limit_obs_80GeV,0, 0, 0, 0);
+  gr_80GeV->SetMarkerStyle(8);
+  gr_80GeV->SetMarkerColor(kRed);
 
   //==== 8 TeV overlay
 
@@ -256,8 +311,8 @@ TGraph* HiggsCombindedLimit(int i=0){
   }
 
   TGraph *gr_8TeV_exp = new TGraph(nm, mass_8TeV, obs_8TeV);
-  gr_8TeV_exp->SetLineColor(kViolet);
-  gr_8TeV_exp->SetLineStyle(10);
+  gr_8TeV_exp->SetLineColor(kRed);
+  //gr_8TeV_exp->SetLineStyle(10);
   gr_8TeV_exp->SetLineWidth(3);
 
   //==== 8 and 13 TeV Combined
@@ -313,7 +368,6 @@ TGraph* HiggsCombindedLimit(int i=0){
   float L3[2][38];
   float L3_2[2][224];
   float DEL[2][39];
-  float ATLAS[2][12];
   float CMS[2][8];
  
   L3[0][0]  = 20.75; L3[1][0]  = 1.53e-4;
@@ -619,34 +673,38 @@ TGraph* HiggsCombindedLimit(int i=0){
   DEL[0][36] = 78.2; DEL[1][36] = 1.33e-3;
   DEL[0][37] = 79.1; DEL[1][37] = 1.66e-3;
   DEL[0][38] = 79.9; DEL[1][38] = 2.03e-3;
-  
-  ATLAS[0][0] = 100; ATLAS[1][0]   = 3.5e-3;
-  ATLAS[0][1] = 110; ATLAS[1][1]   = 2.8e-3;
-  ATLAS[0][2] = 120; ATLAS[1][2]   = 3.0e-3;
-  ATLAS[0][3] = 140; ATLAS[1][3]   = 5.1e-3;
-  ATLAS[0][4] = 160; ATLAS[1][4]   = 6.9e-3;
-  ATLAS[0][5] = 180; ATLAS[1][5]   = 1.0e-2;
-  ATLAS[0][6] = 200; ATLAS[1][6]   = 1.7e-2;
-  ATLAS[0][7] = 240; ATLAS[1][7]   = 2.6e-2;
-  ATLAS[0][8] = 280; ATLAS[1][8]   = 4.2e-2;
-  ATLAS[0][9] = 300; ATLAS[1][9]   = 5.1e-2;
-  ATLAS[0][10] = 400; ATLAS[1][10]   = 1.7e-1;
-  ATLAS[0][11] = 500; ATLAS[1][11] = 4.0e-1;
+
+
+  double massPointsAtlas_MuMu[25] = {100.237932 ,110.246164 ,119.409396 ,140.781448 ,160.210482 ,179.085100 ,199.904443 ,221.280479 ,239.880451 ,257.926575 ,282.358730 ,298.739614 ,324.006808 ,345.941813 ,365.100470 ,386.202713 ,409.248828 ,427.297514 ,442.847060 ,457.563558 ,471.447010 ,483.942430 ,491.994837 ,499.769752 ,499.769752};
+  double limitsAtlas_MuMu[25] = {0.003474 ,0.002831 ,0.003084 ,0.004687 ,0.006876 ,0.009806 ,0.013886 ,0.019115 ,0.025217 ,0.031881 ,0.043279 ,0.052810 ,0.068711 ,0.086890 ,0.106042 ,0.132205 ,0.167192 ,0.198336 ,0.230308 ,0.265536 ,0.303980 ,0.340654 ,0.368393 ,0.395574 ,0.395574};
+
+  double massPointsAtlas_ElEl[20] = {1.00455861406709e+002, 1.09809766214851e+002, 1.38752503310975e+002, 1.78574156906282e+002, 1.98797339797022e+002, 2.20886448743258e+002, 2.38308779169597e+002, 2.57287535385483e+002, 2.79378072245287e+002, 3.02092250356086e+002, 3.21384433600234e+002, 3.43787683531516e+002, 3.63702080113091e+002, 3.82682978199330e+002, 3.99174308979077e+002, 4.19400704675346e+002, 4.35581821232361e+002, 4.49584298662402e+002, 4.64520988544563e+002, 4.80079534785759e+002};
+  double limitsAtlas_ElEl[20] = {4.04226688202133e-002, 2.87321017020558e-002, 3.33225809095133e-002, 5.51508368004247e-002, 6.92830498039127e-002, 9.05397993095326e-002, 1.11977313431971e-001, 1.38473609575320e-001, 1.75314576403352e-001, 2.16733719311297e-001, 2.55570350392377e-001, 3.13465143657095e-001, 3.72556547861380e-001, 4.39325988221587e-001, 5.10019175442642e-001, 5.96620239359251e-001, 6.76374403247621e-001, 7.60870825023857e-001, 8.49106552700366e-001, 9.62659703648251e-001};
 
   TGraph *gr_L3Limit = new TGraph(38, L3[0], L3[1]);
-  gr_L3Limit->SetLineWidth(3);
-  gr_L3Limit->SetLineStyle(3);
-  gr_L3Limit->SetLineColor(kBlue);
+  gr_L3Limit->SetLineWidth(2);
+  //gr_L3Limit->SetLineStyle(3);
+  gr_L3Limit->SetLineColor(kViolet+1);
 
   TGraph *gr_L3_2Limit = new TGraph(224, L3_2[0], L3_2[1]);
-  gr_L3_2Limit->SetLineWidth(3);
-  gr_L3_2Limit->SetLineStyle(3);
-  gr_L3_2Limit->SetLineColor(kBlue);
+  gr_L3_2Limit->SetLineWidth(2);
+  //gr_L3_2Limit->SetLineStyle(3);
+  gr_L3_2Limit->SetLineColor(kViolet);
 
   TGraph *gr_DELPHILimit = new TGraph(39, DEL[0], DEL[1]);
-  gr_DELPHILimit->SetLineWidth(3);
-  gr_DELPHILimit->SetLineStyle(3);
-  gr_DELPHILimit->SetLineColor(kRed);
+  gr_DELPHILimit->SetLineWidth(2);
+  //gr_DELPHILimit->SetLineStyle(3);
+  gr_DELPHILimit->SetLineColor(kMagenta);
+
+  TGraph *gr_ATLAS_MuMu = new TGraph(25, massPointsAtlas_MuMu, limitsAtlas_MuMu);
+  gr_ATLAS_MuMu->SetLineWidth(3);
+  //gr_ATLAS_MuMu->SetLineStyle(3);
+  gr_ATLAS_MuMu->SetLineColor(kBlue);
+
+  TGraph *gr_ATLAS_ElEl = new TGraph(20, massPointsAtlas_ElEl, limitsAtlas_ElEl);
+  gr_ATLAS_ElEl->SetLineWidth(3);
+  //gr_ATLAS_ElEl->SetLineStyle(3);
+  gr_ATLAS_ElEl->SetLineColor(kBlue);
 
 //=======================================
 
@@ -680,12 +738,34 @@ TGraph* HiggsCombindedLimit(int i=0){
   }
   TGraph *gr_trilepLimit = new TGraph(n_mass_trilep, mass_trilep, obs_trilep);
   gr_trilepLimit->SetLineWidth(3);
-  gr_trilepLimit->SetLineStyle(5);
-  gr_trilepLimit->SetLineColor(kRed-5);
+  gr_trilepLimit->SetLineStyle(4);
+  gr_trilepLimit->SetLineColor(kRed);
 
 //=======================================
 
+  //==== Double beta decay
+  double allxrange[2]= {-9999,9999};
+  double dbeta_ee[2];
+  for(int i=0; i<2; i++){
+    dbeta_ee[i] = 5e-8*allxrange[i];
+  }
+  TGraph *gr_dbeta = new TGraph(2, allxrange, dbeta_ee);
+  gr_dbeta->SetLineColor(kViolet);
 
+  //==== EWPD
+  double EWPD_ee[2], EWPD_mm[2];
+  for(int i=0; i<2; i++){
+    EWPD_ee[i] = 0.003;
+    EWPD_mm[i] = 0.003;
+  }
+  TGraph *gr_EWPD_ee = new TGraph(2, allxrange, EWPD_ee);
+  TGraph *gr_EWPD_mm = new TGraph(2, allxrange, EWPD_mm);
+  gr_EWPD_ee->SetLineColor(kRed-5);
+  gr_EWPD_mm->SetLineColor(kRed-5);
+  gr_EWPD_ee->SetLineStyle(6);
+  gr_EWPD_mm->SetLineStyle(6);
+  gr_EWPD_ee->SetLineWidth(2);
+  gr_EWPD_mm->SetLineWidth(2);
 
 
   //======================
@@ -693,26 +773,47 @@ TGraph* HiggsCombindedLimit(int i=0){
   //======================
 
   //=== Legend
-  TLegend *lg = new TLegend(0.50, 0.15, 0.90, 0.45);
+  TLegend *lg = new TLegend(0.40, 0.15, 0.65, 0.45);
   lg->SetBorderSize(0);
   lg->SetFillStyle(0);
+  TH1D *hist_emptylegend = new TH1D("hist_emptylegend","",1,0.,1.);
+  hist_emptylegend->SetLineColor(0);
 
   if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed, s-ch only", "l");
   lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected, s-ch only", "l");
   lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 #sigma", "f");
   lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 #sigma", "f");
-  lg->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+  lg->AddEntry(hist_emptylegend,"","l");
   //lg->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
+
+  TLegend *lg_Alt = new TLegend(0.68, 0.15, 0.95, 0.45);
+  lg_Alt->SetBorderSize(0);
+  lg_Alt->SetFillStyle(0);
   if(channel=="MuMu"){
-    lg->AddEntry(gr_L3Limit, "L3", "l");
-    lg->AddEntry(gr_DELPHILimit, "DELPHI", "l");
-    lg->AddEntry(gr_trilepLimit, "CMS 13TeV Trilepton", "l");
+    lg_Alt->AddEntry(gr_DELPHILimit, "DELPHI Prompt", "l");
+    lg_Alt->AddEntry(gr_L3Limit, "L3", "l");
+    lg_Alt->AddEntry(gr_EWPD_mm, "EWPD (90% CL)", "l");
+    lg_Alt->AddEntry(gr_ATLAS_MuMu, "ATLAS 8 TeV", "l");
+    lg_Alt->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+    lg_Alt->AddEntry(gr_trilepLimit, "CMS 13 TeV Trilepton", "l");
   }
   if(channel=="ElEl"){
-    lg->AddEntry(gr_L3_2Limit, "L3", "l");
-    lg->AddEntry(gr_DELPHILimit, "DELPHI", "l");
-    lg->AddEntry(gr_trilepLimit, "CMS 13TeV Trilepton", "l");
+    lg_Alt->AddEntry(gr_DELPHILimit, "DELPHI Prompt", "l");
+    lg_Alt->AddEntry(gr_L3_2Limit, "L3", "l");
+    lg_Alt->AddEntry(gr_EWPD_mm, "EWPD (90% CL)", "l");
+    lg_Alt->AddEntry(gr_ATLAS_ElEl, "ATLAS 8 TeV", "l");
+    lg_Alt->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+    lg_Alt->AddEntry(gr_trilepLimit, "CMS 13 TeV Trilepton", "l");
+    //lg_Alt->AddEntry(gr_dbeta, "Neutrino-less double beta dacay", "l");
   }
+  if(channel=="MuEl"){
+    lg_Alt->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+    lg_Alt->AddEntry(hist_emptylegend,"","l");
+    lg_Alt->AddEntry(hist_emptylegend,"","l");
+    lg_Alt->AddEntry(hist_emptylegend,"","l");
+    lg_Alt->AddEntry(hist_emptylegend,"","l");
+  }
+  TLegend *lg_Alt_SandT = (TLegend *)lg_Alt->Clone();
 
   TCanvas *c_SOnly = new TCanvas("c_SOnly", "", 800, 800);
   canvas_margin(c_SOnly);
@@ -732,8 +833,8 @@ TGraph* HiggsCombindedLimit(int i=0){
     dummy->GetYaxis()->SetTitleSize(0.03);
   }
   dummy->GetXaxis()->SetTitle("m_{N} (GeV)");
-  dummy->GetXaxis()->SetRangeUser(10., 2500);
-  dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
+  dummy->GetXaxis()->SetRangeUser(20., 2000);
+  dummy->GetYaxis()->SetRangeUser(0.000005, 1.);
   dummy->SetTitle("");
   dummy->Draw("hist");
 
@@ -746,16 +847,22 @@ TGraph* HiggsCombindedLimit(int i=0){
     gr_L3Limit->Draw("lsame");
     gr_DELPHILimit->Draw("lsame");
     gr_trilepLimit->Draw("lsame");
+    gr_EWPD_mm->Draw("lsame");
+    gr_ATLAS_MuMu->Draw("lsame");
   }
   if(channel=="ElEl"){
     gr_L3_2Limit->Draw("lsame");
     gr_DELPHILimit->Draw("lsame");
     gr_trilepLimit->Draw("lsame");
+    //gr_dbeta->Draw("lsame");
+    gr_EWPD_ee->Draw("lsame");
+    gr_ATLAS_ElEl->Draw("lsame");
   }
 
   if(DrawObserved) gr_13TeV_obs->Draw("lsame");
 
   lg->Draw();
+  lg_Alt->Draw();
 
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
@@ -765,21 +872,31 @@ TGraph* HiggsCombindedLimit(int i=0){
   latex_title.DrawLatex(0.20, 0.90, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
 
   c_SOnly->SetLogx();
+  dummy->Draw("axissame");
   c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.pdf");
   c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx.png");
 
   //==== HighMass
-  dummy->GetXaxis()->SetRangeUser(90,2500);
-  dummy->GetYaxis()->SetRangeUser(1E-4,20);
-  TLegend *lg_HighMass = (TLegend *)lg->Clone();
-  lg_HighMass->SetX1NDC(0.15);
-  lg_HighMass->SetY1NDC(0.50);
-  lg_HighMass->SetX2NDC(0.65);
-  lg_HighMass->SetY2NDC(0.80);
-  //lg->Delete();
-  //lg_HighMass->Draw();
+  dummy->GetXaxis()->SetRangeUser(90,2000);
+  dummy->GetYaxis()->SetRangeUser(1E-4,3);
+  dummy->Draw("axissame");
   c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_HighMass.pdf");
   c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_HighMass.png");
+
+  //==== HighMass - Linear Y
+  dummy->GetXaxis()->SetRangeUser(200,2000);
+  dummy->GetYaxis()->SetRangeUser(0.,3);
+  c_SOnly->SetLogy(false);
+  TLegend *lg_HighMass = (TLegend *)lg->Clone();
+  lg_HighMass->SetX1NDC(0.20);
+  lg_HighMass->SetY1NDC(0.50);
+  lg_HighMass->SetX2NDC(0.70);
+  lg_HighMass->SetY2NDC(0.80);
+  lg->Delete();
+  lg_HighMass->Draw();
+  dummy->Draw("axissame");
+  c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_HighMass.pdf");
+  c_SOnly->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_HighMass.png");
 
   c_SOnly->Close();
 
@@ -788,7 +905,7 @@ TGraph* HiggsCombindedLimit(int i=0){
   //======================
 
   //=== Legend
-  TLegend * lg_SandT = new TLegend(0.50, 0.15, 0.90, 0.45);
+  TLegend * lg_SandT = new TLegend(0.40, 0.15, 0.65, 0.45);
   lg_SandT->SetBorderSize(0);
   lg_SandT->SetFillStyle(0);
 
@@ -796,18 +913,8 @@ TGraph* HiggsCombindedLimit(int i=0){
   lg_SandT->AddEntry(gr_13TeV_exp_SandT,"CL_{s} Expected", "l");
   lg_SandT->AddEntry(gr_band_1sigma_SandT,"CL_{s} Expected #pm 1 #sigma", "f");
   lg_SandT->AddEntry(gr_band_2sigma_SandT,"CL_{s} Expected #pm 2 #sigma", "f");
-  lg_SandT->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
   //lg_SandT->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
-  if(channel=="MuMu"){
-    lg_SandT->AddEntry(gr_L3Limit, "L3", "l");
-    lg_SandT->AddEntry(gr_DELPHILimit, "DELPHI", "l");
-    lg_SandT->AddEntry(gr_trilepLimit, "CMS 13TeV Trilepton", "l");
-  }
-  if(channel=="ElEl"){
-    lg_SandT->AddEntry(gr_L3_2Limit, "L3", "l");
-    lg_SandT->AddEntry(gr_DELPHILimit, "DELPHI", "l");
-    lg_SandT->AddEntry(gr_trilepLimit, "CMS 13TeV Trilepton", "l");
-  }
+  lg_SandT->AddEntry(hist_emptylegend,"","l");
 
   TCanvas *c_SandT = new TCanvas("c_SandT", "", 800, 800);
   canvas_margin(c_SandT);
@@ -815,8 +922,8 @@ TGraph* HiggsCombindedLimit(int i=0){
   c_SandT->Draw();
   c_SandT->SetLogy();
 
-  dummy->GetXaxis()->SetRangeUser(10., 2500);
-  dummy->GetYaxis()->SetRangeUser(0.000005, 20.);
+  dummy->GetXaxis()->SetRangeUser(20., 2000);
+  dummy->GetYaxis()->SetRangeUser(0.000005, 1.);
   dummy->Draw("hist");
 
   gr_band_2sigma_SandT->Draw("3same");
@@ -828,15 +935,21 @@ TGraph* HiggsCombindedLimit(int i=0){
     gr_L3Limit->Draw("lsame");
     gr_DELPHILimit->Draw("lsame");
     gr_trilepLimit->Draw("lsame");
+    gr_EWPD_mm->Draw("lsame");
+    gr_ATLAS_MuMu->Draw("lsame");
   }
   if(channel=="ElEl"){
     gr_L3_2Limit->Draw("lsame");
     gr_DELPHILimit->Draw("lsame");
     gr_trilepLimit->Draw("lsame");
+    //gr_dbeta->Draw("lsame");
+    gr_EWPD_ee->Draw("lsame");
+    gr_ATLAS_ElEl->Draw("lsame");
   }
   if(DrawObserved) gr_13TeV_obs_SandT->Draw("lsame");
 
   lg_SandT->Draw();
+  lg_Alt->Draw();
 
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
@@ -846,14 +959,49 @@ TGraph* HiggsCombindedLimit(int i=0){
   latex_title.DrawLatex(0.20, 0.90, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
 
   c_SandT->SetLogx();
+  dummy->Draw("axissame");
   c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT.pdf");
   c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT.png");
 
   //==== HighMass
-  dummy->GetXaxis()->SetRangeUser(90,2500);
-  dummy->GetYaxis()->SetRangeUser(1E-4,20);
+  dummy->GetXaxis()->SetRangeUser(90,2000);
+  dummy->GetYaxis()->SetRangeUser(1E-4,3);
+  dummy->Draw("axissame");
   c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT_HighMass.pdf");
   c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT_HighMass.png");
+
+  //==== HighMass - Linear Y
+  dummy->GetXaxis()->SetRangeUser(200,2000);
+  dummy->GetYaxis()->SetRangeUser(0,3);
+  c_SandT->SetLogy(false);
+  TLegend *lg_SandT_HighMass = (TLegend *)lg_SandT->Clone();
+  lg_SandT_HighMass->SetX1NDC(0.20);
+  lg_SandT_HighMass->SetY1NDC(0.50);
+  lg_SandT_HighMass->SetX2NDC(0.70);
+  lg_SandT_HighMass->SetY2NDC(0.80);
+  lg_SandT->Delete();
+  lg_SandT_HighMass->Draw();
+  dummy->Draw("axissame");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_SandT_HighMass.pdf");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_SandT_HighMass.png");
+
+  //==== 70-90 GeV
+  dummy->GetXaxis()->SetRangeUser(70,90);
+  dummy->GetYaxis()->SetRangeUser(0,1E-2);
+  c_SandT->SetLogx(false);
+  gr_80GeV->Draw("psame");
+  dummy->Draw("axissame");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_SandT_7090.pdf");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_SandT_7090.png");
+
+  //==== To Check V2=1
+  dummy->GetXaxis()->SetRangeUser(1200,1700);
+  dummy->GetYaxis()->SetRangeUser(0.90, 1.);
+  c_SandT->SetLogx(false);
+  gr_80GeV->Draw("psame");
+  dummy->Draw("axissame");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_SandT_V2_1.pdf");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_SandT_V2_1.png");
 
   c_SandT->Close();
 
@@ -872,31 +1020,14 @@ TGraph* HiggsCombindedLimit(int i=0){
       }
     }
   }
-
-  vector<double> additional = {350, 400, 500};
-  for(int a=0; a<additional.size(); a++){
-
-    for(int i=0; i<n_SandT; i++){
-
-      if(additional.at(a)!=mass_SandT[i]) continue;
-
-      for(int j=0; j<nm; j++){
-        if(mass_SandT[i]==mass_8TeV[j]){
-          vec_mass_8and13.push_back(mass_SandT[i]);
-          vec_limit_8and13ratio.push_back(exp_8TeV[j]/limit_SandT[i]);
-          cout << i << "\t" << mass_SandT[i] << "\t" << exp_8TeV[j] << "\t" << limit_SandT[i] << " => " << exp_8TeV[j]/limit_SandT[i] << endl;
-        }
-      }
-    }
-
-  }
-
   const int n_vec_mass_8and13 = vec_mass_8and13.size();
   double mass_8and13[n_vec_mass_8and13];
   double limit_8and13ratio[n_vec_mass_8and13];
+  cout << "n_vec_mass_8and13 = " << n_vec_mass_8and13 << endl;
   for(int i=0; i<n_vec_mass_8and13; i++){
     mass_8and13[i] = vec_mass_8and13.at(i);
     limit_8and13ratio[i] = vec_limit_8and13ratio.at(i);
+    cout << mass_8and13[i] << "\t" << limit_8and13ratio[i] << endl;
   }
 
   TGraph *gr_8and13ratio = new TGraph(n_vec_mass_8and13, mass_8and13, limit_8and13ratio);
@@ -958,6 +1089,14 @@ TGraph* HiggsCombindedLimit(int i=0){
   c_8and13ratio->Close();
   
 
-  return gr_13TeV_obs_SandT;
+  //==== S+T
+  if(ReturnWhat==0) return gr_13TeV_obs_SandT;
+  else if(ReturnWhat==1)  return gr_13TeV_exp_SandT;
+  else if(ReturnWhat==2) return gr_band_1sigma_SandT;
+  else if(ReturnWhat==3) return gr_band_2sigma_SandT;
+  //==== S Only
+  else if (ReturnWhat==4) return gr_13TeV_obs;
+  else if (ReturnWhat==5) return gr_13TeV_exp;
+  else return gr_13TeV_obs_SandT;
 
 }

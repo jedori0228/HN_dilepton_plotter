@@ -1,8 +1,8 @@
 import os
 
 #filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
-#filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt']
-filenames=['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
+filenames=['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt']
+#filenames=['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
 
 cust_rebin = 1
 cust_xaxis_min = -999
@@ -14,7 +14,7 @@ cust_xaxis_max = 50
     #"m_Leadlj", "m_SubLeadlj", "m_llj",
 
 var_last = "m_ll"
-NewVars = ["m_OSSF_smallest"]
+NewVars = ["m_jj_jjWclosest", "m_lljj_jjWclosest", "m_Leadljj_jjWclosest", "m_SubLeadljj_jjWclosest",]
 
 for filename in filenames:
 
