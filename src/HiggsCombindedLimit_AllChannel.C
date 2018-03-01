@@ -118,7 +118,7 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   latex_title.SetTextSize(0.05);
   latex_title.SetLineWidth(2);
   latex_title.DrawLatex(0.15, 0.85, "#font[41]{95% CL upper limit}");
-  latex_title.DrawLatex(0.15, 0.90, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+  latex_title.DrawLatex(0.15, 0.90, "#font[62]{CMS}");
 
   c_SandT->SetLogx();
   c_SandT->SaveAs(plotpath+"/AllChannel_13TeV_mixing_logx_SandT.pdf");

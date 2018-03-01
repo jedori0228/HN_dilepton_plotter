@@ -300,7 +300,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   lg->Draw();
 
   latex_CMSPriliminary.SetTextSize(0.035);
-  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
   latex_title.SetTextSize(0.04);
@@ -354,7 +354,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   lg_SandT->Draw();
 
   latex_CMSPriliminary.SetTextSize(0.035);
-  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+  latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS}");
   latex_Lumi.SetTextSize(0.035);
   latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
   latex_title.SetTextSize(0.04);
