@@ -773,7 +773,7 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   //======================
 
   //=== Legend
-  TLegend *lg = new TLegend(0.40, 0.15, 0.65, 0.45);
+  TLegend *lg = new TLegend(0.43, 0.15, 0.69, 0.45);
   lg->SetBorderSize(0);
   lg->SetFillStyle(0);
   TH1D *hist_emptylegend = new TH1D("hist_emptylegend","",1,0.,1.);
@@ -786,7 +786,7 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   lg->AddEntry(hist_emptylegend,"","l");
   //lg->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
 
-  TLegend *lg_Alt = new TLegend(0.68, 0.15, 0.95, 0.45);
+  TLegend *lg_Alt = new TLegend(0.70, 0.15, 0.95, 0.45);
   lg_Alt->SetBorderSize(0);
   lg_Alt->SetFillStyle(0);
   if(channel=="MuMu"){
@@ -815,22 +815,23 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   }
   TLegend *lg_Alt_SandT = (TLegend *)lg_Alt->Clone();
 
-  TCanvas *c_SOnly = new TCanvas("c_SOnly", "", 800, 800);
-  canvas_margin(c_SOnly);
+  TCanvas *c_SOnly = new TCanvas("c_SOnly", "", 900, 800);
+  canvas_margin_limit(c_SOnly);
   c_SOnly->cd();
   c_SOnly->Draw();
   c_SOnly->SetLogy();
 
   TH1D *dummy = new TH1D("hist", "", 10000, 0., 10000.);
   dummy->Draw("hist");
-  hist_axis(dummy);
+  hist_axis_limit(dummy);
   dummy->GetYaxis()->SetTitleSize(0.06);
   if(channel=="ElEl") dummy->GetYaxis()->SetTitle("#||{V_{eN}}^{2}");
   if(channel=="MuMu") dummy->GetYaxis()->SetTitle("#||{V_{#muN}}^{2}");
   if(channel=="MuEl"){
-    dummy->GetYaxis()->SetTitle("#frac{#||{ V_{eN}V_{#muN}^{*}}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}");
-    dummy->GetYaxis()->SetTitleOffset(2.1);
-    dummy->GetYaxis()->SetTitleSize(0.03);
+    dummy->GetYaxis()->SetTitle("#frac{#||{ V_{eN}V_{#muN}^{*}}^{2}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}");
+    //dummy->GetYaxis()->SetTitle("#||{ V_{eN}V_{#muN}^{*}}^{2}#/#(){#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}");
+    dummy->GetYaxis()->SetTitleOffset(1.95);
+    dummy->GetYaxis()->SetTitleSize(0.04);
   }
   dummy->GetXaxis()->SetTitle("m_{N} (GeV)");
   dummy->GetXaxis()->SetRangeUser(20., 2000);
@@ -865,11 +866,12 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   lg_Alt->Draw();
 
   latex_Lumi.SetTextSize(0.035);
-  latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+  latex_Lumi.SetTextFont(42);
+  latex_Lumi.DrawLatex(0.735, 0.96, "35.9 fb^{-1} (13 TeV)");
   latex_title.SetTextSize(0.04);
   latex_title.SetLineWidth(2);
-  latex_title.DrawLatex(0.20, 0.85, "#font[41]{95% CL upper limit}");
-  latex_title.DrawLatex(0.20, 0.90, "#font[62]{CMS}");
+  latex_title.DrawLatex(0.25, 0.85, "#font[41]{95% CL upper limit}");
+  latex_title.DrawLatex(0.25, 0.90, "#font[62]{CMS}");
 
   c_SOnly->SetLogx();
   dummy->Draw("axissame");
@@ -905,7 +907,7 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   //======================
 
   //=== Legend
-  TLegend * lg_SandT = new TLegend(0.40, 0.15, 0.65, 0.45);
+  TLegend * lg_SandT = new TLegend(0.43, 0.15, 0.69, 0.45);
   lg_SandT->SetBorderSize(0);
   lg_SandT->SetFillStyle(0);
 
@@ -916,8 +918,8 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   //lg_SandT->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
   lg_SandT->AddEntry(hist_emptylegend,"","l");
 
-  TCanvas *c_SandT = new TCanvas("c_SandT", "", 800, 800);
-  canvas_margin(c_SandT);
+  TCanvas *c_SandT = new TCanvas("c_SandT", "", 900, 800);
+  canvas_margin_limit(c_SandT);
   c_SandT->cd();
   c_SandT->Draw();
   c_SandT->SetLogy();
@@ -952,11 +954,12 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   lg_Alt->Draw();
 
   latex_Lumi.SetTextSize(0.035);
-  latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+  latex_Lumi.SetTextFont(42);
+  latex_Lumi.DrawLatex(0.735, 0.96, "35.9 fb^{-1} (13 TeV)");
   latex_title.SetTextSize(0.04);
   latex_title.SetLineWidth(2);
-  latex_title.DrawLatex(0.20, 0.85, "#font[41]{95% CL upper limit}");
-  latex_title.DrawLatex(0.20, 0.90, "#font[62]{CMS}");
+  latex_title.DrawLatex(0.25, 0.85, "#font[41]{95% CL upper limit}");
+  latex_title.DrawLatex(0.25, 0.90, "#font[62]{CMS}");
 
   c_SandT->SetLogx();
   dummy->Draw("axissame");
@@ -1040,7 +1043,10 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   TString this_channel = "";
   if(channel=="ElEl") this_channel = "|V_{eN}|^{2}";
   if(channel=="MuMu") this_channel = "|V_{#muN}|^{2}";
-  if(channel=="MuEl") this_channel = "|V_{eN}V_{#muN}^{*}|/(|V_{eN}|^{2}+|V_{#muN}|^{2})";
+  if(channel=="MuEl"){
+    this_channel = "|V_{eN}V_{#muN}^{*}|^{2}/(|V_{eN}|^{2}+|V_{#muN}|^{2})";
+    //this_channel = "#||{ V_{eN}V_{#muN}^{*}}^{2}/#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}";
+  }
   TLatex latexch;
   latexch.SetNDC();
   latexch.SetTextSize(0.03);
@@ -1081,7 +1087,8 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   latex_CMSPriliminary.SetTextSize(0.035);
   latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS}");
   latex_Lumi.SetTextSize(0.035);
-  latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+  latex_Lumi.SetTextFont(42);
+  latex_Lumi.DrawLatex(0.70, 0.96, "35.9 fb^{-1} (13 TeV)");
 
   c_8and13ratio->SetLogx();
   c_8and13ratio->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_ratio.pdf");

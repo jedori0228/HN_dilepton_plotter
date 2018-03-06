@@ -348,18 +348,39 @@ void Draw_SR(int XXX=0){
   }
 
 /*
-  //==== FIXME test
+  //==== For paper plot
   m.histname = {
-    "m_Leadlfj_fjWclosest", 
-//"m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
+    "m_ll",
+    // low-SR1
+    "m_lljj_lljjWclosest", "m_SubLeadljj_lljjWclosest",
+    // low-SR2
+    "m_SubLeadlj", "m_llj",
+    // high-SR1
+    "m_lljj_jjWclosest", "m_Leadljj_jjWclosest", "m_SubLeadljj_jjWclosest",
+    // high-SR2
+    "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
   };
   m.x_title = {
-    "l_{1}j_{ak8} invariant mass (GeV)", 
-//"l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
+    "l^{#pm}l^{#pm} invariant mass (GeV)",
+    // low-SR1
+    "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+    // low-SR2
+    "l_{2}j_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak4} invariant mass (GeV)",
+    // high-SR1
+    "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+    // high-SR2
+    "l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
   };
   m.units = {
-    "GeV", 
-//"GeV", "GeV",
+    "GeV",
+    // low-SR1
+    "GeV", "GeV",
+    // low-SR2
+    "GeV", "GeV",
+    // high-SR1
+    "GeV", "GeV", "GeV",
+    // high-SR2
+    "GeV", "GeV", "GeV",
   };
 */
 /*

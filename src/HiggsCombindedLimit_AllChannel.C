@@ -63,7 +63,7 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   TH1D *dummy = new TH1D("hist", "", 10000, 0., 10000.);
   dummy->Draw("hist");
   hist_axis(dummy);
-  dummy->GetYaxis()->SetTitleOffset(0.6);
+  dummy->GetYaxis()->SetTitleOffset(0.7);
   dummy->GetYaxis()->SetTitleSize(0.06);
   dummy->GetYaxis()->SetTitle("Mixing");
   dummy->GetXaxis()->SetTitle("m_{N} (GeV)");
@@ -99,12 +99,12 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   if(ObsOrExp==0){
     lg_SandT->AddEntry(gr_MuMu, "Observed #||{V_{#muN}}^{2}", "l");
     lg_SandT->AddEntry(gr_ElEl, "Observed #||{V_{eN}}^{2}", "l");
-    lg_SandT->AddEntry(gr_MuEl, "Observed #frac{#||{ V_{eN}V_{#muN}^{*}}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
+    lg_SandT->AddEntry(gr_MuEl, "Observed #frac{#||{ V_{eN}V_{#muN}^{*}}^{2}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
   }
   else{
     lg_SandT->AddEntry(gr_MuMu, "Expected #||{V_{#muN}}^{2}", "l");
     lg_SandT->AddEntry(gr_ElEl, "Expected #||{V_{eN}}^{2}", "l");
-    lg_SandT->AddEntry(gr_MuEl, "Expected #frac{#||{ V_{eN}V_{#muN}^{*}}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
+    lg_SandT->AddEntry(gr_MuEl, "Expected #frac{#||{ V_{eN}V_{#muN}^{*}}^{2}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
   }
 
   gr_MuMu->Draw("lsame");
@@ -114,7 +114,8 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   lg_SandT->Draw();
 
   latex_Lumi.SetTextSize(0.035);
-  latex_Lumi.DrawLatex(0.77, 0.96, "35.9 fb^{-1} (13 TeV)");
+  latex_Lumi.SetTextFont(42);
+  latex_Lumi.DrawLatex(0.79, 0.96, "35.9 fb^{-1} (13 TeV)");
   latex_title.SetTextSize(0.05);
   latex_title.SetLineWidth(2);
   latex_title.DrawLatex(0.15, 0.85, "#font[41]{95% CL upper limit}");
@@ -259,12 +260,12 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   if(ObsOrExp==0){
     lg_ratio->AddEntry(gr_ratio_MuMu, "Observed #||{V_{#muN}}^{2}", "l");
     lg_ratio->AddEntry(gr_ratio_ElEl, "Observed #||{V_{eN}}^{2}", "l");
-    lg_ratio->AddEntry(gr_ratio_MuEl, "Observed #frac{#||{ V_{eN}V_{#muN}^{*}}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
+    lg_ratio->AddEntry(gr_ratio_MuEl, "Observed #frac{#||{ V_{eN}V_{#muN}^{*}}^{2}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
   }
   else{
     lg_ratio->AddEntry(gr_ratio_MuMu, "Expected #||{V_{#muN}}^{2}", "l");
     lg_ratio->AddEntry(gr_ratio_ElEl, "Expected #||{V_{eN}}^{2}", "l");
-    lg_ratio->AddEntry(gr_ratio_MuEl, "Expected #frac{#||{ V_{eN}V_{#muN}^{*}}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
+    lg_ratio->AddEntry(gr_ratio_MuEl, "Expected #frac{#||{ V_{eN}V_{#muN}^{*}}^{2}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
   }
 
   lg_ratio->Draw();
@@ -405,12 +406,12 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   if(ObsOrExp==0){
     lg_ratio_SRs->AddEntry(gr_ratio_MuMu_SRs, "Observed #||{V_{#muN}}^{2}", "l");
     lg_ratio_SRs->AddEntry(gr_ratio_ElEl_SRs, "Observed #||{V_{eN}}^{2}", "l");
-    lg_ratio_SRs->AddEntry(gr_ratio_MuEl_SRs, "Observed #frac{#||{ V_{eN}V_{#muN}^{*}}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
+    lg_ratio_SRs->AddEntry(gr_ratio_MuEl_SRs, "Observed #frac{#||{ V_{eN}V_{#muN}^{*}}^{2}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
   }
   else{
     lg_ratio_SRs->AddEntry(gr_ratio_MuMu_SRs, "Expected #||{V_{#muN}}^{2}", "l");
     lg_ratio_SRs->AddEntry(gr_ratio_ElEl_SRs, "Expected #||{V_{eN}}^{2}", "l");
-    lg_ratio_SRs->AddEntry(gr_ratio_MuEl_SRs, "Expected #frac{#||{ V_{eN}V_{#muN}^{*}}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
+    lg_ratio_SRs->AddEntry(gr_ratio_MuEl_SRs, "Expected #frac{#||{ V_{eN}V_{#muN}^{*}}^{2}}{#||{ V_{eN} }^{2} + #||{ V_{#muN} }^{2}}", "l");
   }
 
   lg_ratio_SRs->Draw();

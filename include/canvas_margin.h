@@ -9,6 +9,14 @@ void canvas_margin(TCanvas *c1){
 
 }
 
+void canvas_margin_limit(TCanvas *c1){
+  c1->SetTopMargin( 0.05 );
+  c1->SetBottomMargin( 0.13 );
+  c1->SetRightMargin( 0.05 );
+  c1->SetLeftMargin( 0.20 );
+
+}
+
 void canvas_margin(TCanvas *c1, TPad *c1_up, TPad *c1_down){
   c1_up->SetTopMargin( 0.07 );
   c1_up->SetBottomMargin( 0.02 );
@@ -36,6 +44,19 @@ void hist_axis(TH1D *hist){
   hist->GetYaxis()->SetLabelSize(0.04);
   hist->GetYaxis()->SetTitleSize(0.06);
   hist->GetYaxis()->SetTitleOffset(1.10);
+
+  hist->GetXaxis()->SetLabelSize(0.03);
+  hist->GetXaxis()->SetTitleSize(0.05);
+
+}
+
+void hist_axis_limit(TH1D *hist){
+
+  hist->SetTitle("");
+
+  hist->GetYaxis()->SetLabelSize(0.04);
+  hist->GetYaxis()->SetTitleSize(0.06);
+  hist->GetYaxis()->SetTitleOffset(1.30);
 
   hist->GetXaxis()->SetLabelSize(0.03);
   hist->GetXaxis()->SetTitleSize(0.05);
