@@ -1043,7 +1043,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     latex_Lumi.SetNDC();
     latex_CMSPriliminary.SetTextSize(0.035);
 
-    latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS}");
+    latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
 
     latex_Lumi.SetTextSize(0.035);
     latex_Lumi.SetTextFont(42);
@@ -1060,9 +1060,9 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     TLatex latex_CMSPriliminary, latex_Lumi;
     latex_CMSPriliminary.SetNDC();
     latex_Lumi.SetNDC();
-    latex_CMSPriliminary.SetTextSize(0.050);
+    latex_CMSPriliminary.SetTextSize(0.040);
 
-    latex_CMSPriliminary.DrawLatex(0.20, 0.90, "#font[62]{CMS}");
+    latex_CMSPriliminary.DrawLatex(0.20, 0.90, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
 
     latex_Lumi.SetTextSize(0.035);
     latex_Lumi.SetTextFont(42);

@@ -445,8 +445,8 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     latex_CMSPriliminary.SetNDC();
     latex_Lumi.SetNDC();
 
-    latex_CMSPriliminary.SetTextSize(0.050);
-    latex_CMSPriliminary.DrawLatex(0.20, 0.90, "#font[62]{CMS}");
+    latex_CMSPriliminary.SetTextSize(0.040);
+    latex_CMSPriliminary.DrawLatex(0.20, 0.90, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
 
     latex_Lumi.SetTextSize(0.035);
     latex_Lumi.SetTextFont(42);
