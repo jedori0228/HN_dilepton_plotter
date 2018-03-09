@@ -209,6 +209,8 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
       //continue;
     }
 
+    cout << mass_SandT[dummyint] << "\t" << obs_SandT[dummyint] << endl;
+
     onesig_left_SandT[dummyint] = limit_SandT[dummyint]-onesig_left_SandT[dummyint];
     onesig_right_SandT[dummyint] = onesig_right_SandT[dummyint] - limit_SandT[dummyint];
     twosig_left_SandT[dummyint] = limit_SandT[dummyint]-twosig_left_SandT[dummyint];
@@ -973,6 +975,13 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT_HighMass.pdf");
   c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT_HighMass.png");
 
+  //==== To See Overlap
+  dummy->GetXaxis()->SetRangeUser(300,600);
+  dummy->GetYaxis()->SetRangeUser(1E-2,1E1);
+  dummy->Draw("axissame");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT_CheckOverlap.pdf");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_SandT_CheckOverlap.png");
+
   //==== HighMass - Linear Y
   dummy->GetXaxis()->SetRangeUser(200,2000);
   dummy->GetYaxis()->SetRangeUser(0,3);
@@ -1005,6 +1014,14 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   dummy->Draw("axissame");
   c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_SandT_V2_1.pdf");
   c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_SandT_V2_1.png");
+
+  dummy->GetXaxis()->SetRangeUser(300,600);
+  dummy->GetYaxis()->SetRangeUser(0.01, 0.2);
+  c_SandT->SetLogx(false);
+  gr_80GeV->Draw("psame");
+  dummy->Draw("axissame");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_SandT_CheckOverlap.pdf");
+  c_SandT->SaveAs(plotpath+"/"+channel+"_13TeV_mixing_logx_lineary_SandT_CheckOverlap.png");
 
   c_SandT->Close();
 

@@ -151,7 +151,8 @@ void CompareWG(){
         latex_CMSPriliminary.SetTextSize(0.035);
         latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
         latex_Lumi.SetTextSize(0.035);
-        latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
+        latex_Lumi.SetTextFont(42);
+        latex_Lumi.DrawLatex(0.72, 0.96, "35.9 fb^{-1} (13 TeV)");
 
         TString str_channel = "#mu#mu";
         if(channel=="DiElectron") str_channel = "ee";

@@ -41,10 +41,10 @@ void PAS_ForLatex_MakeYieldTable(int lepch=0){
     "Skimmed_High_OneFatJet",
   };
   vector<TString> WhichRegionsForTex = {
-    "Low-Mass SR1",
-    "Low-Mass SR2",
-    "High-Mass SR1",
-    "High-Mass SR2",
+    "Low-mass SR1",
+    "Low-mass SR2",
+    "High-mass SR1",
+    "High-mass SR2",
   };
 
   vector<TString> allbkgs = {

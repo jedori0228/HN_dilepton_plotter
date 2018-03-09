@@ -1,6 +1,19 @@
 import os
 import csv
 
+def AddPhantomZero(a,left,right):
+  vals = a.split('.')
+  val_int = vals[0]
+  val_fra = vals[1]
+
+  for a in range(0, left-len(val_int)):
+    val_int = "\\phantom{0}"+val_int
+
+  for a in range(0, right-len(val_fra)):
+    val_fra = val_fra+"\\phantom{0}"
+
+  return val_int+"."+val_fra
+
 WORKING_DIR = os.environ['PLOTTER_WORKING_DIR']
 dataset = os.environ['CATANVERSION']
 ENV_PLOT_PATH = os.environ['PLOT_PATH']
@@ -112,6 +125,10 @@ for region in regions:
               if a==7 or a==8 or a==9:
                 toprint = "$< "+toprint+"$"
 
+              #if a==10:
+                #if not "100" in row[a]:
+                  #toprint = toprint+"\\phantom{0}"
+
               if a==14:
                 toprint = "$"+row[a]+"\\pm"
                 print toprint,
@@ -121,6 +138,16 @@ for region in regions:
 
             ## HOTFIX 2 ##
             if "High" in region:
+
+              n_sch_int = 2
+              n_sch_fra = 2
+              n_tch_int = 1
+              n_tch_fra = 2
+              if regioncounter==2:
+                n_sch_int = 2
+                n_sch_fra = 2
+                n_tch_int = 2
+                n_tch_fra = 2
 
               if a==5 or a==6 or a==8:
                 toprint = "$> "+toprint+"$"
@@ -134,24 +161,31 @@ for region in regions:
 
 
               if a==13:
-                toprint = "$"+row[a]+"\\pm"
+                toprint = "$"+AddPhantomZero(row[a],n_sch_int,n_sch_fra)+"\\pm"
                 print toprint,
                 continue
               if a==14:
-                toprint =  row[a]+"$"
+                toprint =  AddPhantomZero(row[a],1,n_sch_fra)+"$"
                 print toprint,
                 continue
 
               if a==15:
                 if toprint!= "":
-                  toprint = "[$"+row[a]+"\\pm"
+                  toprint = "& $"+AddPhantomZero(row[a],n_tch_int,n_tch_fra)+"\\pm"
                   print toprint,
                   continue
                 else:
+                  #dummy = '& $\\phantom{1.34\\pm1.34}$'
+                  #if regioncounter==2:
+                  #  dummy = '& $\\phantom{12.34\\pm12.34}$'
+                  #print dummy,
+
+                  print "& --",
+
                   continue
               if a==16:
                 if toprint!= "":
-                  toprint =  row[a]+"$]"
+                  toprint =  AddPhantomZero(row[a],1,n_tch_fra)+"$"
                 else:
                   toprint = toprint
 

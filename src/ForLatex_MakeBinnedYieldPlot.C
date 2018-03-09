@@ -72,7 +72,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
   vector<TString> samples_to_use = {"fake_Dijet", "prompt"};
   if(channel=="ElEl") samples_to_use = {"chargeflip", "fake_Dijet", "prompt"};
 
-  TLegend *lg = new TLegend(0.60, 0.60, 0.96, 0.92);
+  TLegend *lg = new TLegend(0.47, 0.60, 0.985, 0.92);
   lg->SetBorderSize(0);
   lg->SetFillStyle(0);
   //==== error bar
@@ -95,6 +95,12 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     histtmp->SetLineColor(map_sample_string_to_legendinfo[samples_to_use.at(i)].second);
     histtmp->SetFillColor(map_sample_string_to_legendinfo[samples_to_use.at(i)].second);
     lg->AddEntry(histtmp, map_sample_string_to_legendinfo[samples_to_use.at(i)].first, "f");
+  }
+  if(channel!="ElEl"){
+    TH1D *histtmp = new TH1D("empty", "", 1, 0., 1.);
+    histtmp->SetLineColor(0);
+    histtmp->SetFillColor(0);
+    lg->AddEntry(histtmp, "#color[0]{Mismeas. charge background}", "f");
   }
 
   vector<TString> bkglist;
@@ -433,7 +439,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     if(channel=="ElEl") channelForTex = "ee";
     if(channel=="MuEl") channelForTex = "e#mu";
 
-    channelname.DrawLatex(0.2, 0.80, channelForTex+" "+WhichRegionsForTex.at(it_region));
+    channelname.DrawLatex(0.2, 0.85, channelForTex+" "+WhichRegionsForTex.at(it_region));
 
     TLatex latex_CMSPriliminary, latex_Lumi;
     latex_CMSPriliminary.SetNDC();

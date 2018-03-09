@@ -63,7 +63,7 @@ void Plotter::draw_hist(){
         //==== CR
         if(signal_mass.size()==0) lg = new TLegend(0.60, 0.35, 0.96, 0.92);
         //==== SR
-        else lg = new TLegend(0.60, 0.35, 0.96, 0.92);
+        else lg = new TLegend(0.50, 0.35, 0.96, 0.92);
       }
       else{
         //==== CR
@@ -116,6 +116,7 @@ void Plotter::draw_hist(){
           TString WhichChannel = "MuMu";
           if(histname_suffix[i_cut].Contains("DiElectron")) WhichChannel = "ElEl";
           if(histname_suffix[i_cut].Contains("EMu")) WhichChannel = "MuEl";
+          if(histname_suffix[i_cut].Contains("DiLepton")) WhichChannel = "LL";
 
           TString WhichChannel_for_tex = WhichChannel;
 
@@ -1313,9 +1314,10 @@ TString Plotter::legend_coupling_label(int mass){
 
   mass = abs(mass);
 
-  TString V2 = "#||{V_{N#mu}}^{2}";
-  if(PrimaryDataset[i_cut]=="DoubleEG") V2 = "#||{|V_{Ne}}^{2}";
-  if(PrimaryDataset[i_cut]=="MuonEG") V2 = "#||{V_{Nl}}^{2}";
+  TString V2 = "#||{V_{#muN}}^{2}";
+  if(PrimaryDataset[i_cut]=="DoubleEG") V2 = "#||{|V_{eN}}^{2}";
+  if(PrimaryDataset[i_cut]=="MuonEG") V2 = "#||{V_{lN}}^{2}";
+  if(PrimaryDataset[i_cut]=="DiLepton") V2 = "#||{V_{lN}}^{2}";
 
   //if(log_coupling == 0) return channel+" HN"+TString::Itoa(mass, 10)+", "+V2+"=1";
   //else return channel+" HN"+TString::Itoa(mass, 10)+", "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
@@ -1444,6 +1446,7 @@ void Plotter::MakeTexFile(map< TString, TH1D * > hs){
       if(name.Contains("MuMu")) LeptonChannel = "MuMu";
       if(name.Contains("ElEl")) LeptonChannel = "ElEl";
       if(name.Contains("MuEl")) LeptonChannel = "MuEl";
+      if(name.Contains("LL")) LeptonChannel = "LL";
 
       TString MassString = name;
       MassString.Replace(0,9,"");
