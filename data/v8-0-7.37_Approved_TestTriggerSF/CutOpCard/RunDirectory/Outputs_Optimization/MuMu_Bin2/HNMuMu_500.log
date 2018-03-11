@@ -1,0 +1,1890 @@
+
+Processing CyclesForOptimization_MuMu_Bin2/HNMuMu_500.C...
+[AnalysisInputs::SetMCSF] Get MC SF from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_PreApproval/MCSF.txt
+[AnalysisInputs::SetMCSF] sample : VVV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ZZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttH_nonbb
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : top
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWTo2L2Nu_DS
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpEWK
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpQCD
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_mllmin01
+[AnalysisInputs::SetMCSF] => MCSF = 0.65, MCSF_err = 0.06
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 1.05044, MCSF_err = 0.0648798
+[AnalysisInputs::SetMCSF] sample : ZGto2LG
+[AnalysisInputs::SetMCSF] => MCSF = 1.09954, MCSF_err = 0.076377
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.076377
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG_weighted
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.076377
+[AnalysisInputs::SetMCSF] sample : ZZTo4L_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 0.978852, MCSF_err = 0.0792882
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978852, MCSF_err = 0.0792882
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978852, MCSF_err = 0.0792882
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978852, MCSF_err = 0.0792882
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978852, MCSF_err = 0.0792882
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978852, MCSF_err = 0.0792882
+[AnalysisInputs::SetMCSF] sample : ggZZto4e
+[AnalysisInputs::SetMCSF] => MCSF = 0.978852, MCSF_err = 0.0792882
+[AnalysisInputs::SetMCSF] sample : ggZZto4mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.978852, MCSF_err = 0.0792882
+[AnalysisInputs::SetMCSF] sample : ggZZto4tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.978852, MCSF_err = 0.0792882
+[AnalysisInputs::SetMCSF] sample : ggHtoZZ
+[AnalysisInputs::SetMCSF] => MCSF = 0.978852, MCSF_err = 0.0792882
+[AnalysisInputs::SetCalculatedSysts] Get Systematics from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_PreApproval/Syst.txt
+[AnalysisInputs::SetCalculatedSysts] source : Luminosity
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
+[AnalysisInputs::SetCalculatedSysts] source : FakeLooseID
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.3
+[AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.16
+[CutRangeInfo::ReadCutCard] Get Cutcard from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_PreApproval/CutOpCard/RunDirectory/CyclesForOptimization_MuMu_Bin2/Cards//HNMuMu_500.txt
+
+##################################################
+#### TOTAL # of Loop = 3721
+##################################################
+
+[CutRangeInfo::PrintCutRangeInfo] leadingLepton_Pt_>
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutRangeInfo::PrintCutRangeInfo] ljj_|<
+[CutInfo::PrintCutInfo] ljj	|<	800
+[CutInfo::PrintCutInfo] ljj	|<	795
+[CutInfo::PrintCutInfo] ljj	|<	790
+[CutInfo::PrintCutInfo] ljj	|<	785
+[CutInfo::PrintCutInfo] ljj	|<	780
+[CutInfo::PrintCutInfo] ljj	|<	775
+[CutInfo::PrintCutInfo] ljj	|<	770
+[CutInfo::PrintCutInfo] ljj	|<	765
+[CutInfo::PrintCutInfo] ljj	|<	760
+[CutInfo::PrintCutInfo] ljj	|<	755
+[CutInfo::PrintCutInfo] ljj	|<	750
+[CutInfo::PrintCutInfo] ljj	|<	745
+[CutInfo::PrintCutInfo] ljj	|<	740
+[CutInfo::PrintCutInfo] ljj	|<	735
+[CutInfo::PrintCutInfo] ljj	|<	730
+[CutInfo::PrintCutInfo] ljj	|<	725
+[CutInfo::PrintCutInfo] ljj	|<	720
+[CutInfo::PrintCutInfo] ljj	|<	715
+[CutInfo::PrintCutInfo] ljj	|<	710
+[CutInfo::PrintCutInfo] ljj	|<	705
+[CutInfo::PrintCutInfo] ljj	|<	700
+[CutInfo::PrintCutInfo] ljj	|<	695
+[CutInfo::PrintCutInfo] ljj	|<	690
+[CutInfo::PrintCutInfo] ljj	|<	685
+[CutInfo::PrintCutInfo] ljj	|<	680
+[CutInfo::PrintCutInfo] ljj	|<	675
+[CutInfo::PrintCutInfo] ljj	|<	670
+[CutInfo::PrintCutInfo] ljj	|<	665
+[CutInfo::PrintCutInfo] ljj	|<	660
+[CutInfo::PrintCutInfo] ljj	|<	655
+[CutInfo::PrintCutInfo] ljj	|<	650
+[CutInfo::PrintCutInfo] ljj	|<	645
+[CutInfo::PrintCutInfo] ljj	|<	640
+[CutInfo::PrintCutInfo] ljj	|<	635
+[CutInfo::PrintCutInfo] ljj	|<	630
+[CutInfo::PrintCutInfo] ljj	|<	625
+[CutInfo::PrintCutInfo] ljj	|<	620
+[CutInfo::PrintCutInfo] ljj	|<	615
+[CutInfo::PrintCutInfo] ljj	|<	610
+[CutInfo::PrintCutInfo] ljj	|<	605
+[CutInfo::PrintCutInfo] ljj	|<	600
+[CutInfo::PrintCutInfo] ljj	|<	595
+[CutInfo::PrintCutInfo] ljj	|<	590
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|<	580
+[CutInfo::PrintCutInfo] ljj	|<	575
+[CutInfo::PrintCutInfo] ljj	|<	570
+[CutInfo::PrintCutInfo] ljj	|<	565
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|<	555
+[CutInfo::PrintCutInfo] ljj	|<	550
+[CutInfo::PrintCutInfo] ljj	|<	545
+[CutInfo::PrintCutInfo] ljj	|<	540
+[CutInfo::PrintCutInfo] ljj	|<	535
+[CutInfo::PrintCutInfo] ljj	|<	530
+[CutInfo::PrintCutInfo] ljj	|<	525
+[CutInfo::PrintCutInfo] ljj	|<	520
+[CutInfo::PrintCutInfo] ljj	|<	515
+[CutInfo::PrintCutInfo] ljj	|<	510
+[CutInfo::PrintCutInfo] ljj	|<	505
+[CutInfo::PrintCutInfo] ljj	|<	500
+[CutRangeInfo::PrintCutRangeInfo] ljj_|>
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] ljj	|>	205
+[CutInfo::PrintCutInfo] ljj	|>	210
+[CutInfo::PrintCutInfo] ljj	|>	215
+[CutInfo::PrintCutInfo] ljj	|>	220
+[CutInfo::PrintCutInfo] ljj	|>	225
+[CutInfo::PrintCutInfo] ljj	|>	230
+[CutInfo::PrintCutInfo] ljj	|>	235
+[CutInfo::PrintCutInfo] ljj	|>	240
+[CutInfo::PrintCutInfo] ljj	|>	245
+[CutInfo::PrintCutInfo] ljj	|>	250
+[CutInfo::PrintCutInfo] ljj	|>	255
+[CutInfo::PrintCutInfo] ljj	|>	260
+[CutInfo::PrintCutInfo] ljj	|>	265
+[CutInfo::PrintCutInfo] ljj	|>	270
+[CutInfo::PrintCutInfo] ljj	|>	275
+[CutInfo::PrintCutInfo] ljj	|>	280
+[CutInfo::PrintCutInfo] ljj	|>	285
+[CutInfo::PrintCutInfo] ljj	|>	290
+[CutInfo::PrintCutInfo] ljj	|>	295
+[CutInfo::PrintCutInfo] ljj	|>	300
+[CutInfo::PrintCutInfo] ljj	|>	305
+[CutInfo::PrintCutInfo] ljj	|>	310
+[CutInfo::PrintCutInfo] ljj	|>	315
+[CutInfo::PrintCutInfo] ljj	|>	320
+[CutInfo::PrintCutInfo] ljj	|>	325
+[CutInfo::PrintCutInfo] ljj	|>	330
+[CutInfo::PrintCutInfo] ljj	|>	335
+[CutInfo::PrintCutInfo] ljj	|>	340
+[CutInfo::PrintCutInfo] ljj	|>	345
+[CutInfo::PrintCutInfo] ljj	|>	350
+[CutInfo::PrintCutInfo] ljj	|>	355
+[CutInfo::PrintCutInfo] ljj	|>	360
+[CutInfo::PrintCutInfo] ljj	|>	365
+[CutInfo::PrintCutInfo] ljj	|>	370
+[CutInfo::PrintCutInfo] ljj	|>	375
+[CutInfo::PrintCutInfo] ljj	|>	380
+[CutInfo::PrintCutInfo] ljj	|>	385
+[CutInfo::PrintCutInfo] ljj	|>	390
+[CutInfo::PrintCutInfo] ljj	|>	395
+[CutInfo::PrintCutInfo] ljj	|>	400
+[CutInfo::PrintCutInfo] ljj	|>	405
+[CutInfo::PrintCutInfo] ljj	|>	410
+[CutInfo::PrintCutInfo] ljj	|>	415
+[CutInfo::PrintCutInfo] ljj	|>	420
+[CutInfo::PrintCutInfo] ljj	|>	425
+[CutInfo::PrintCutInfo] ljj	|>	430
+[CutInfo::PrintCutInfo] ljj	|>	435
+[CutInfo::PrintCutInfo] ljj	|>	440
+[CutInfo::PrintCutInfo] ljj	|>	445
+[CutInfo::PrintCutInfo] ljj	|>	450
+[CutInfo::PrintCutInfo] ljj	|>	455
+[CutInfo::PrintCutInfo] ljj	|>	460
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] ljj	|>	470
+[CutInfo::PrintCutInfo] ljj	|>	475
+[CutInfo::PrintCutInfo] ljj	|>	480
+[CutInfo::PrintCutInfo] ljj	|>	485
+[CutInfo::PrintCutInfo] ljj	|>	490
+[CutInfo::PrintCutInfo] ljj	|>	495
+[CutInfo::PrintCutInfo] ljj	|>	500
+[CutRangeInfo::PrintCutRangeInfo] secondLepton_Pt_>
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+##############################
+#### OPTIMIZATION STARTED ####
+##############################
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	800
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.31913 +- 0.505251
+=> total bkg = 1.34228
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.910204	0.23602	3.24482e-05	8.03912e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	795
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.31913 +- 0.505251
+=> total bkg = 1.34228
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.910204	0.23602	3.24482e-05	8.03912e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	790
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.31913 +- 0.505251
+=> total bkg = 1.34228
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.910204	0.23602	3.24482e-05	8.03912e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	785
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.31452 +- 0.50319
+=> total bkg = 1.33767
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.910204	0.23602	3.24482e-05	8.04853e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	725
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.30908 +- 0.500761
+=> total bkg = 1.33223
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.909709	0.23592	3.24305e-05	8.05528e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	720
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.30908 +- 0.500761
+=> total bkg = 1.33223
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.909709	0.23592	3.24305e-05	8.05528e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	715
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.30908 +- 0.500761
+=> total bkg = 1.33223
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.909709	0.23592	3.24305e-05	8.05528e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	710
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.30566 +- 0.499239
+=> total bkg = 1.32881
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.909524	0.23586	3.24239e-05	8.06066e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	705
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.30219 +- 0.497698
+=> total bkg = 1.32534
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.909333	0.23582	3.24171e-05	8.06609e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	700
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.30219 +- 0.497698
+=> total bkg = 1.32534
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.909333	0.23582	3.24171e-05	8.06609e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	695
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231499 +- 0.0352474
+Prompt	1.30219 +- 0.497698
+=> total bkg = 1.32534
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.909333	0.23582	3.24171e-05	8.06609e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	690
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0231043 +- 0.0352447
+Prompt	1.29975 +- 0.496615
+=> total bkg = 1.32285
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.909334	0.23578	3.24172e-05	8.0712e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	620
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0232735 +- 0.0352543
+Prompt	1.28158 +- 0.488551
+=> total bkg = 1.30485
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.906003	0.23494	3.22984e-05	8.07889e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0235388 +- 0.0352692
+Prompt	1.2591 +- 0.478615
+=> total bkg = 1.28264
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.901709	0.2338	3.21454e-05	8.087e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:4:18] 100 / 3721 (2.68745 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	200
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	205
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0235388 +- 0.0352692
+Prompt	1.25484 +- 0.476742
+=> total bkg = 1.27838
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.901591	0.23378	3.21411e-05	8.09487e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:4:29] 200 / 3721 (5.3749 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	205
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:4:40] 300 / 3721 (8.06235 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	205
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	225
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0235388 +- 0.0352692
+Prompt	1.25117 +- 0.475131
+=> total bkg = 1.2747
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.901419	0.23374	3.2135e-05	8.10105e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:4:50] 400 / 3721 (10.7498 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	225
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:5:1] 500 / 3721 (13.4372 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	225
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	245
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0237285 +- 0.0352801
+Prompt	1.24867 +- 0.474041
+=> total bkg = 1.2724
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.90136	0.23372	3.21329e-05	8.10548e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:5:12] 600 / 3721 (16.1247 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	245
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	620
+[CutInfo::PrintCutInfo] ljj	|>	250
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0234631 +- 0.0352651
+Prompt	1.26529 +- 0.481369
+=> total bkg = 1.28875
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.905334	0.23482	3.22746e-05	8.10659e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	250
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0237285 +- 0.0352801
+Prompt	1.24281 +- 0.471477
+=> total bkg = 1.26653
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.900981	0.23366	3.21194e-05	8.11445e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:5:29] 700 / 3721 (18.8121 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	250
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	600
+[CutInfo::PrintCutInfo] ljj	|>	255
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0237285 +- 0.0352801
+Prompt	1.16952 +- 0.46274
+=> total bkg = 1.19325
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.903509	0.23432	3.22095e-05	8.26309e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	595
+[CutInfo::PrintCutInfo] ljj	|>	255
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0237285 +- 0.0352801
+Prompt	1.16593 +- 0.461143
+=> total bkg = 1.18966
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.903156	0.23422	3.21969e-05	8.26794e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	255
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0237285 +- 0.0352801
+Prompt	1.14999 +- 0.454038
+=> total bkg = 1.17372
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.900867	0.23364	3.21153e-05	8.28304e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	260
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0237285 +- 0.0352801
+Prompt	1.14443 +- 0.451607
+=> total bkg = 1.16816
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.900802	0.23362	3.2113e-05	8.29506e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	260
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0237285 +- 0.0352801
+Prompt	1.09011 +- 0.426992
+=> total bkg = 1.11384
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.889292	0.23036	3.17027e-05	8.31488e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:5:47] 800 / 3721 (21.4996 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	260
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:6:5] 900 / 3721 (24.187 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	260
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	275
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0237285 +- 0.0352801
+Prompt	1.0865 +- 0.425423
+=> total bkg = 1.11023
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.888987	0.23024	3.16918e-05	8.32048e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:6:22] 1000 / 3721 (26.8745 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	275
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:6:40] 1100 / 3721 (29.5619 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	275
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:6:58] 1200 / 3721 (32.2494 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	275
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	295
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0303506 +- 0.0351651
+Prompt	1.07733 +- 0.421444
+=> total bkg = 1.10768
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.888009	0.22992	3.1657e-05	8.32149e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:7:16] 1300 / 3721 (34.9368 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	295
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	305
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0304835 +- 0.0351752
+Prompt	1.07383 +- 0.419927
+=> total bkg = 1.10432
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.887319	0.2297	3.16324e-05	8.32301e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	310
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.07029 +- 0.418393
+=> total bkg = 1.10085
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.886969	0.22962	3.16199e-05	8.32794e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:7:33] 1400 / 3721 (37.6243 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	310
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	315
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.06613 +- 0.416592
+=> total bkg = 1.09669
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.886633	0.22954	3.16079e-05	8.3346e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:7:51] 1500 / 3721 (40.3117 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	315
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	320
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.11276 +- 0.43767
+=> total bkg = 1.14331
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.898613	0.23302	3.2035e-05	8.33631e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	320
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.05844 +- 0.413267
+=> total bkg = 1.08899
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.886075	0.22944	3.1588e-05	8.34758e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	325
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.10732 +- 0.435276
+=> total bkg = 1.13787
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.898557	0.233	3.2033e-05	8.34843e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	325
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.05299 +- 0.410912
+=> total bkg = 1.08355
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.885707	0.22936	3.15749e-05	8.35707e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:8:9] 1600 / 3721 (42.9992 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	325
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	330
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.10055 +- 0.432323
+=> total bkg = 1.13111
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.898493	0.23298	3.20307e-05	8.36358e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	330
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.04623 +- 0.408008
+=> total bkg = 1.07679
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.885642	0.22934	3.15726e-05	8.37261e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	335
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.03641 +- 0.403786
+=> total bkg = 1.06697
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.885231	0.22924	3.15579e-05	8.39234e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:8:27] 1700 / 3721 (45.6866 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	335
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	340
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.03353 +- 0.40256
+=> total bkg = 1.06408
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.884997	0.22918	3.15496e-05	8.39707e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:8:44] 1800 / 3721 (48.3741 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	340
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	600
+[CutInfo::PrintCutInfo] ljj	|>	345
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.00935 +- 0.416348
+=> total bkg = 1.03991
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.900848	0.23354	3.21147e-05	8.57118e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	595
+[CutInfo::PrintCutInfo] ljj	|>	345
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	1.00576 +- 0.414744
+=> total bkg = 1.03632
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.900495	0.23344	3.21021e-05	8.57694e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	345
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	0.989825 +- 0.407606
+=> total bkg = 1.02038
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.89774	0.23276	3.20038e-05	8.59145e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	345
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305558 +- 0.0351808
+Prompt	0.929584 +- 0.380176
+=> total bkg = 0.96014
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.884351	0.22902	3.15266e-05	8.62099e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	350
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0305508 +- 0.0351804
+Prompt	0.926518 +- 0.37884
+=> total bkg = 0.957069
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.883903	0.22894	3.15106e-05	8.62479e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:9:0] 1900 / 3721 (51.0615 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	350
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	355
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.030702 +- 0.0351919
+Prompt	0.922747 +- 0.377194
+=> total bkg = 0.953449
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.883377	0.2288	3.14918e-05	8.62943e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:9:11] 2000 / 3721 (53.749 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	355
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	365
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0308028 +- 0.0351997
+Prompt	0.915359 +- 0.373978
+=> total bkg = 0.946161
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.882433	0.22852	3.14582e-05	8.63979e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:9:22] 2100 / 3721 (56.4364 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	365
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	370
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0308028 +- 0.0351997
+Prompt	0.911709 +- 0.372393
+=> total bkg = 0.942512
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.881932	0.22838	3.14403e-05	8.64471e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	375
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0308028 +- 0.0351997
+Prompt	0.899942 +- 0.367262
+=> total bkg = 0.930744
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.881485	0.22822	3.14244e-05	8.67223e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:9:32] 2200 / 3721 (59.1239 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	375
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	380
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0312496 +- 0.0352341
+Prompt	0.890915 +- 0.363355
+=> total bkg = 0.922164
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.880424	0.22798	3.13865e-05	8.6855e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:9:43] 2300 / 3721 (61.8113 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	380
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	385
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0312496 +- 0.0352341
+Prompt	0.881218 +- 0.359172
+=> total bkg = 0.912468
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.879578	0.22776	3.13564e-05	8.70381e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	390
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0312432 +- 0.0352336
+Prompt	0.87303 +- 0.355663
+=> total bkg = 0.904273
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.878427	0.2275	3.13154e-05	8.71508e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:9:54] 2400 / 3721 (64.4988 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	390
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	400
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0312432 +- 0.0352336
+Prompt	0.858184 +- 0.34933
+=> total bkg = 0.889427
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.87751	0.22722	3.12827e-05	8.74741e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:10:4] 2500 / 3721 (67.1862 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	400
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	600
+[CutInfo::PrintCutInfo] ljj	|>	405
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0312469 +- 0.0352339
+Prompt	0.908658 +- 0.370913
+=> total bkg = 0.939905
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.896173	0.23234	3.1948e-05	8.79198e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	595
+[CutInfo::PrintCutInfo] ljj	|>	405
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0312469 +- 0.0352339
+Prompt	0.899393 +- 0.366887
+=> total bkg = 0.93064
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.895287	0.2321	3.19164e-05	8.80881e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	405
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0312469 +- 0.0352339
+Prompt	0.883456 +- 0.359981
+=> total bkg = 0.914703
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.892135	0.23134	3.1804e-05	8.82205e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	575
+[CutInfo::PrintCutInfo] ljj	|>	405
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0314245 +- 0.0352476
+Prompt	0.867537 +- 0.353128
+=> total bkg = 0.898961
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.888253	0.23024	3.16656e-05	8.82791e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	405
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0314245 +- 0.0352476
+Prompt	0.812904 +- 0.329125
+=> total bkg = 0.844328
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.876231	0.22692	3.12371e-05	8.8657e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:10:14] 2600 / 3721 (69.8737 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	405
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	410
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0320698 +- 0.0352978
+Prompt	0.804697 +- 0.325713
+=> total bkg = 0.836766
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.875819	0.2268	3.12224e-05	8.88413e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:10:24] 2700 / 3721 (72.5611 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	410
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	425
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0320698 +- 0.0352978
+Prompt	0.78598 +- 0.317975
+=> total bkg = 0.81805
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.872363	0.2259	3.10992e-05	8.90449e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:10:34] 2800 / 3721 (75.2486 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	425
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:10:44] 2900 / 3721 (77.936 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	425
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	435
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0.0300479 +- 0.0350791
+Prompt	0.777916 +- 0.314693
+=> total bkg = 0.807964
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.869727	0.22516	3.10052e-05	8.90654e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	595
+[CutInfo::PrintCutInfo] ljj	|>	440
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.860949 +- 0.350383
+=> total bkg = 0.860949
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.888325	0.23012	3.16682e-05	8.91971e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	590
+[CutInfo::PrintCutInfo] ljj	|>	440
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.855025 +- 0.347849
+=> total bkg = 0.855025
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.887285	0.22982	3.16311e-05	8.92668e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	440
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.839087 +- 0.341077
+=> total bkg = 0.839087
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.88482	0.2293	3.15433e-05	8.94907e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	575
+[CutInfo::PrintCutInfo] ljj	|>	440
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.823168 +- 0.334365
+=> total bkg = 0.823168
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.880506	0.2281	3.13895e-05	8.95307e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	565
+[CutInfo::PrintCutInfo] ljj	|>	440
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.801235 +- 0.32521
+=> total bkg = 0.801235
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.874195	0.2265	3.11645e-05	8.95524e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	440
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.762812 +- 0.308536
+=> total bkg = 0.762812
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.86776	0.22458	3.09351e-05	9.00967e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:10:53] 3000 / 3721 (80.6235 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	440
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	590
+[CutInfo::PrintCutInfo] ljj	|>	445
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.816644 +- 0.330219
+=> total bkg = 0.816644
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.884331	0.22914	3.15258e-05	9.014e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	445
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.800707 +- 0.323552
+=> total bkg = 0.800707
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.881866	0.22862	3.1438e-05	9.03773e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	575
+[CutInfo::PrintCutInfo] ljj	|>	445
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.784788 +- 0.316952
+=> total bkg = 0.784788
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.877356	0.22738	3.12772e-05	9.04083e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	565
+[CutInfo::PrintCutInfo] ljj	|>	445
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.762854 +- 0.307964
+=> total bkg = 0.762854
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.870915	0.22576	3.10476e-05	9.04322e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	445
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.724431 +- 0.291572
+=> total bkg = 0.724431
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.864481	0.22384	3.08182e-05	9.10128e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	600
+[CutInfo::PrintCutInfo] ljj	|>	450
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.774917 +- 0.309988
+=> total bkg = 0.774917
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.883646	0.22904	3.15014e-05	9.14142e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	595
+[CutInfo::PrintCutInfo] ljj	|>	450
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.765652 +- 0.306175
+=> total bkg = 0.765652
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.882704	0.22878	3.14678e-05	9.16126e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	590
+[CutInfo::PrintCutInfo] ljj	|>	450
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.759728 +- 0.303739
+=> total bkg = 0.759728
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.881486	0.22842	3.14244e-05	9.16768e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	450
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.743791 +- 0.297242
+=> total bkg = 0.743791
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.878967	0.22788	3.13346e-05	9.19317e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	575
+[CutInfo::PrintCutInfo] ljj	|>	450
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.727872 +- 0.290826
+=> total bkg = 0.727872
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.874457	0.22664	3.11738e-05	9.19822e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	565
+[CutInfo::PrintCutInfo] ljj	|>	450
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.705938 +- 0.282115
+=> total bkg = 0.705938
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.867839	0.22498	3.09379e-05	9.2015e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	450
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.667515 +- 0.266191
+=> total bkg = 0.667515
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.861405	0.22306	3.07085e-05	9.26597e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:11:3] 3100 / 3721 (83.3109 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	450
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:11:13] 3200 / 3721 (85.9984 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	450
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	600
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.659869 +- 0.279084
+=> total bkg = 0.659869
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.864713	0.22422	3.08265e-05	9.30335e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	595
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.650604 +- 0.275213
+=> total bkg = 0.650604
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.863771	0.22396	3.07929e-05	9.32667e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	590
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.64468 +- 0.272739
+=> total bkg = 0.64468
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.862124	0.2235	3.07342e-05	9.33046e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	585
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.628742 +- 0.266142
+=> total bkg = 0.628742
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.859238	0.22288	3.06313e-05	9.35783e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	575
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.612823 +- 0.25963
+=> total bkg = 0.612823
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.854286	0.2215	3.04547e-05	9.36326e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	565
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.59089 +- 0.250796
+=> total bkg = 0.59089
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.846859	0.21964	3.019e-05	9.36495e-06
+=====================================================================
+
+
+!!!!!!!!!!!!!!!!!
+!!!! UPDATED !!!!
+!!!!!!!!!!!!!!!!!
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.552467 +- 0.234544
+=> total bkg = 0.552467
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.840082	0.21762	2.99484e-05	9.44226e-06
+=====================================================================
+
+####################################################
+TIME STAMP : [2018/1/16 21:11:23] 3300 / 3721 (88.6858 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:11:33] 3400 / 3721 (91.3733 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:11:43] 3500 / 3721 (94.0607 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:11:52] 3600 / 3721 (96.7482 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+####################################################
+TIME STAMP : [2018/1/16 21:12:2] 3700 / 3721 (99.4356 %)
+####################################################
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+
+##################
+#### FINISHED ####
+##################
+
+[CutInfo::PrintCutInfo] leadingLepton_Pt	>	140
+[CutInfo::PrintCutInfo] ljj	|<	560
+[CutInfo::PrintCutInfo] ljj	|>	465
+[CutInfo::PrintCutInfo] secondLepton_Pt	>	65
+CF	0 +- 0
+Fake	0 +- 0
+Prompt	0.552467 +- 0.234544
+=> total bkg = 0.552467
+Signal	Yield	Efficiency	Efficiency@Presel	Punzi
+HNMuMu_500	0.840082	0.21762	2.99484e-05	9.44226e-06

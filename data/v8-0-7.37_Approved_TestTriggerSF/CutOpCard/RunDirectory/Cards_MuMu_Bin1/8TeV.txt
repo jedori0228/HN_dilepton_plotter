@@ -1,0 +1,8 @@
+Nbjets == 0 0 1
+Njets >= 2 2 1
+PFMET < 30 30 1
+m_lljj_lljjWclosest < 200 200 1
+m_jj_lljjWclosest < 120 120 1
+m_lljj_lljjWclosest > 80 80 1
+leadingLepton_Pt > 20 20 1
+secondLepton_Pt > 15 15 1

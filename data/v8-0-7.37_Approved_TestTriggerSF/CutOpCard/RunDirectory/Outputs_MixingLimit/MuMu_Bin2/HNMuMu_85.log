@@ -1,0 +1,131 @@
+
+Processing CyclesForMixingLimit_MuMu_Bin2/HNMuMu_85.C...
+[AnalysisInputs::SetMCSF] Get MC SF from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/MCSF.txt
+[AnalysisInputs::SetMCSF] sample : VVV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ZZZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttV
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttW
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttZ
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : ttH_nonbb
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : top
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WWTo2L2Nu_DS
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpEWK
+[AnalysisInputs::SetMCSF] => MCSF = 1.3062, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WpWpQCD
+[AnalysisInputs::SetMCSF] => MCSF = 1.70026, MCSF_err = 0.5
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_mllmin01
+[AnalysisInputs::SetMCSF] => MCSF = 0.65, MCSF_err = 0.06
+[AnalysisInputs::SetMCSF] sample : WZTo3LNu_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 1.05149, MCSF_err = 0.064601
+[AnalysisInputs::SetMCSF] sample : ZGto2LG
+[AnalysisInputs::SetMCSF] => MCSF = 1.09319, MCSF_err = 0.0752381
+[AnalysisInputs::SetMCSF] sample : ZZTo4L_powheg
+[AnalysisInputs::SetMCSF] => MCSF = 0.97851, MCSF_err = 0.25
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.97851, MCSF_err = 0.25
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.97851, MCSF_err = 0.25
+[AnalysisInputs::SetMCSF] sample : ggZZto2e2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.97851, MCSF_err = 0.25
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2nu
+[AnalysisInputs::SetMCSF] => MCSF = 0.97851, MCSF_err = 0.25
+[AnalysisInputs::SetMCSF] sample : ggZZto2mu2tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.97851, MCSF_err = 0.25
+[AnalysisInputs::SetMCSF] sample : ggZZto4e
+[AnalysisInputs::SetMCSF] => MCSF = 0.97851, MCSF_err = 0.25
+[AnalysisInputs::SetMCSF] sample : ggZZto4mu
+[AnalysisInputs::SetMCSF] => MCSF = 0.97851, MCSF_err = 0.25
+[AnalysisInputs::SetMCSF] sample : ggZZto4tau
+[AnalysisInputs::SetMCSF] => MCSF = 0.97851, MCSF_err = 0.25
+[AnalysisInputs::SetMCSF] sample : ggHtoZZ
+[AnalysisInputs::SetMCSF] => MCSF = 0.97851, MCSF_err = 0.25
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0752381
+[AnalysisInputs::SetMCSF] sample : WGtoLNuG_weighted
+[AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0752381
+[AnalysisInputs::SetCalculatedSysts] Get Systematics from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/Syst.txt
+[AnalysisInputs::SetCalculatedSysts] source : Luminosity
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
+[AnalysisInputs::SetCalculatedSysts] source : FakeLooseID
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.3
+[AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
+[AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.16
+[CutRangeInfo::ReadCutCard] Get Cutcard from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/CutOpCard/RunDirectory/Cards_MuMu_Bin2/HNMuMu_85.txt
+Central	7.08936	4.3273	0
+_MuonEn_up	7.4117	4.3273	0
+_MuonEn_down	7.0111	4.3273	0
+_MuonIDSF_up	7.29217	4.3273	0
+_MuonIDSF_down	6.90318	4.3273	0
+_ElectronEn_up	7.15657	4.3273	0
+_ElectronEn_down	7.1583	4.3273	0
+_ElectronIDSF_up	7.10391	4.3273	0
+_ElectronIDSF_down	7.18403	4.3273	0
+_TriggerSF_up	7.1721	4.3273	0
+_TriggerSF_down	7.09154	4.3273	0
+_PU_up	6.95153	4.3273	0
+_PU_down	7.36398	4.3273	0
+_JetEn_up	6.68885	4.3273	0
+_JetEn_down	7.62753	4.3273	0
+_JetRes_up	7.38202	4.3273	0
+_JetRes_down	7.16797	4.3273	0
+_Unclustered_up	7.2469	4.3273	0
+_Unclustered_down	7.46652	4.3273	0
+_BTagSFEff_up	7.09715	4.3273	0
+_BTagSFEff_down	7.30718	4.3273	0
+_BTagSFMiss_up	6.98616	4.3273	0
+_BTagSFMiss_down	7.21845	4.3273	0
+_JetMass_up	7.20182	4.3273	0
+_JetMass_down	7.02766	4.3273	0
+_JetMassRes_up	7.10858	4.3273	0
+_JetMassRes_down	7.13629	4.3273	0
+_Tau21_up	7.72507	4.3273	0
+_Tau21_down	6.56466	4.3273	0
+
+################ Sources ################
+Source	SystTotal	SystPrompt	SystFake	Signal
+Stat 9.56 10.88  17.84  -nan  100.00
+Lumi 1.55  2.50 -  -  2.50
+PDF  -  -  -  -  5.00
+MuonPt  2.05 3.31  -  -  0.00
+MuonID  1.71 2.75  -  -  2.29
+ElectronE  0.60 0.96  -  -  0.00
+ElectronID  0.59 0.96  -  -  0.00
+Trigger  0.51 0.83  -  -  0.69
+PU  1.90 3.06  -  -  10.10
+JES  4.15 6.69  -  -  0.00
+JER  1.88 3.02  -  -  0.00
+Uncl  2.53 4.08  -  -  0.00
+BEff  1.35 2.17  -  -  0.00
+BMiss  1.02 1.65  -  -  0.00
+JMS  0.79 1.28  -  -  0.00
+JMR  0.31 0.51  -  -  0.00
+Tau21  5.11 8.22  -  -  7.21
+MCNorm 25.65  41.31 -  -  -
+Fake 11.37  -  30.00 - -
+CF 0.00  -  -  -nan -
+Total Systematic 29.30 43.48  30.00  -nan  13.81
+
+Total Background	11.417
+- Prompt	7.089
+- Fake	4.327
+- CF	0.000
+- Obs	13.000
+
+####### Result #######
+Signal Eff	0.000013
+11.416660 1.308155
+0.185865 2.009496
