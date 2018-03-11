@@ -73,16 +73,19 @@ void GetFakeSyst(){
 
       TH1D *hist_central = (TH1D *)file->Get(region+"_FRsyst_Central");
       double y_central = hist_central->GetBinContent(1);
+      TH1D *hist_statup = (TH1D *)file->Get(region+"_FRsyst_StatUp");
+      double y_statup = hist_statup->GetBinContent(1);
       TH1D *hist_promptup = (TH1D *)file->Get(region+"_FRsyst_PromptUp");
       double y_promptup = hist_promptup->GetBinContent(1);
       TH1D *hist_BJet = (TH1D *)file->Get(region+"_FRsyst_BJet");
       double y_BJet = hist_BJet->GetBinContent(1);
 
+      double syst_statup = fabs(y_statup-y_central)/y_central;
       double syst_promptup = fabs(y_promptup-y_central)/y_central;
       double syst_BJet = fabs(y_BJet-y_central)/y_central;
-      cout << WhichRegionsForLatex.at(it_region) << "\t" << y_central << "\t" << syst_promptup << "\t" << syst_BJet;
+      cout << WhichRegionsForLatex.at(it_region) << "\t" << y_central << "\t" << syst_statup << "\t" << syst_promptup << "\t" << syst_BJet;
 
-      double syst_promptsyst = syst_promptup*syst_promptup+syst_BJet*syst_BJet;
+      double syst_promptsyst = syst_statup*syst_statup+syst_promptup*syst_promptup+syst_BJet*syst_BJet;
 
       //==== Other FR
 

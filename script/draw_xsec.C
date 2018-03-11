@@ -4,6 +4,9 @@ void draw_xsec(){
 
   TString dataset = getenv("CATANVERSION");
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
+  TString ENV_PLOT_PATH = getenv("PLOT_PATH");
+
+  TString plotpath = ENV_PLOT_PATH+"/"+dataset;
 
   gStyle->SetOptStat(0);
   
@@ -33,7 +36,7 @@ void draw_xsec(){
   };
   double xsec_dimu_13TeV_NLO[] = {
 4362.0, 4172.5, 3651.5, 2926.5, 2067.0, 1163.5, 747.5, 391.7, 143.15,
-41.5, // error
+40.12, // error
 22.65, 15.4, 10.9, 7.75, 2.445, 1.1, 0.34, 0.143, 0.0715, 0.02365, 0.00985, 0.00472, 0.00247, 0.001385, 0.00081, 0.000496, 0.000312, 0.0002015, 0.000133, 8.9e-05, 6.05e-05, 2.9e-05, 1.025e-05
   };
   const int n_13TeV = 33;
@@ -66,7 +69,7 @@ void draw_xsec(){
   gr_dimu_13TeV_NLO->SetMarkerStyle(20);
   gr_dimu_13TeV_NLO_tch->SetMarkerStyle(20);
 
-  TLegend *lg = new TLegend(0.3, 0.7, 0.95, 0.9);
+  TLegend *lg = new TLegend(0.2, 0.2, 0.80, 0.4);
   lg->SetBorderSize(0);
   lg->SetFillStyle(0);
   lg->AddEntry(gr_dimu_13TeV_NLO, "SS #mu#mu + jj (s-ch), aMC@NLO (13 TeV)", "lp");
@@ -87,8 +90,8 @@ void draw_xsec(){
   
   c1->SetLogy();
   hist_dummy->GetYaxis()->SetRangeUser(0.000001, 10000);
-  hist_dummy->GetXaxis()->SetRangeUser(1., 2100.);
-  //c1->SetLogx();
+  hist_dummy->GetXaxis()->SetRangeUser(10., 2100.);
+  c1->SetLogx();
   
   gr_dimu_8TeV->Draw("plsame");
   gr_dimu_13TeV_NLO->Draw("plsame");
@@ -98,9 +101,9 @@ void draw_xsec(){
   TLatex latex_mixing;
   latex_mixing.SetNDC();
   latex_mixing.SetTextSize(0.05);
-  latex_mixing.DrawLatex(0.65, 0.5, "#splitline{|V_{#muN}|^{2} = 1.0}{|V_{eN}|^{2} = 0}");
+  latex_mixing.DrawLatex(0.65, 0.8, "#splitline{|V_{#muN}|^{2} = 1.0}{|V_{eN}|^{2} = 0}");
 
-  c1->SaveAs(WORKING_DIR+"/13_8_xsec.pdf");
+  c1->SaveAs(plotpath+"/13_8_xsec.pdf");
 
 /*
   //==== ratio

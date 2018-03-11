@@ -42,6 +42,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
   map_sample_string_to_list["fake_Dijet"] = {"fake_Dijet"};
   map_sample_string_to_list["fake_Dijet_LooseBJet"] = {"fake_Dijet_LooseBJet"};
   map_sample_string_to_list["chargeflip"] = {"chargeflip"};
+  map_sample_string_to_list["prompt"] = {"TG", "TTG", "ZGto2LG", "WGtoLNuG_weighted", "WZTo3LNu_powheg", "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ", "WWW", "WWZ", "WZZ", "ZZZ", "ttW", "ttZ", "ttH_nonbb", "WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
 
   map_sample_string_to_legendinfo["DY"] = make_pair("DY", kYellow);
   map_sample_string_to_legendinfo["WJets"] = make_pair("WJets", kGreen);
@@ -59,18 +60,19 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
   map_sample_string_to_legendinfo["Xgamma"] = make_pair("X + #gamma", kSpring-7);
   map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
-  map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Non-prompt", 870);
-  map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Non-prompt", 870);
-  map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Non-prompt", 870);
-  map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Non-prompt", 870);
-  map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Non-prompt", 870);
-  map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Non-prompt", 870);
-  map_sample_string_to_legendinfo["chargeflip"] = make_pair("Charge-flip", kYellow);
+  map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. lepton background", 870);
+  map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. lepton background", 870);
+  map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. lepton background", 870);
+  map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton background", 870);
+  map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton background", 870);
+  map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Misid. lepton background", 870);
+  map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. charge background", kYellow);
+  map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt background", kSpring-1);
 
-  vector<TString> samples_to_use = {"WW_double", "top", "VVV", "VV_excl", "fake_Dijet", "Xgamma"};
-  if(channel=="ElEl") samples_to_use = {"WW_double", "top", "VVV", "VV_excl", "fake_Dijet", "Xgamma", "chargeflip"};
+  vector<TString> samples_to_use = {"fake_Dijet", "prompt"};
+  if(channel=="ElEl") samples_to_use = {"chargeflip", "fake_Dijet", "prompt"};
 
-  TLegend *lg = new TLegend(0.60, 0.50, 0.96, 0.92);
+  TLegend *lg = new TLegend(0.60, 0.60, 0.96, 0.92);
   lg->SetBorderSize(0);
   lg->SetFillStyle(0);
   //==== error bar
@@ -168,7 +170,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
 
     TString plotpath = ENV_PLOT_PATH+"/"+dataset+"/BinnedYieldPlot/";
 
-    vector<int> masses = {85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500};
+    vector<int> masses = {85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700};
     vector<int> ref_sigs = {100, 500, 1000, 1500};
     vector<Color_t> ref_sigs_style = {1,3,5,7};
     vector<double> ref_scale = {0.001, 0.1, 1, 1};
@@ -270,17 +272,42 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
 
         TString this_name = original_hist->GetName();
 
-        new_hist->SetBinContent(it_mass+1, original_hist->GetBinContent(1));
-        new_hist->SetBinError(it_mass+1, original_hist->GetBinError(1));
+        double this_yield = original_hist->GetBinContent(1);
+        double this_err = original_hist->GetBinError(1);
+        if(this_name.Contains("fake")){
+          //cout << "This fake yield = " << original_hist->GetBinContent(1) << "\t" << endl;
+
+          if(original_hist->GetBinContent(1)<=0.){
+            double frmax = 0.169201;
+            if(channel=="MuMu"){
+              frmax=0.103305;
+            }
+            double thisweight = frmax/(1.-frmax);
+            double ZeroFakeStatError = 1.8*thisweight;
+            //cout << "--> additional error = " << ZeroFakeStatError << endl;
+            this_yield = 0.;
+            this_err = ZeroFakeStatError;
+          }
+        }
+        if(original_hist->GetBinContent(1)<=0.) this_yield = 0.;
+
+        new_hist->SetBinContent(it_mass+1, this_yield);
+        new_hist->SetBinError(it_mass+1, this_err);
+
+        if(this_name.Contains("fake")){
+          //cout << new_hist->GetBinContent(it_mass+1) << "\t" << new_hist->GetBinError(it_mass+1) << endl;
+        }
+
         new_hist->SetFillColor( original_hist->GetFillColor() );
         new_hist->SetLineColor( original_hist->GetLineColor() );
         new_hist->SetName(original_hist->GetName());
         stack_bkgd->Add(new_hist);
+        hist_bkgd->Add(new_hist);
 
       }
 
-      hist_bkgd->SetBinContent(it_mass+1, m.total_bkgs);
-      hist_bkgd->SetBinError(it_mass+1, m.total_bkgs_err);
+      //hist_bkgd->SetBinContent(it_mass+1, m.total_bkgs);
+      //hist_bkgd->SetBinError(it_mass+1, m.total_bkgs_err);
 
       hist_obs->SetBinContent(it_mass+1, m.y_observed);
       hist_obs->SetBinError(it_mass+1, sqrt(m.y_observed));
@@ -313,7 +340,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     hist_empty->SetMarkerColor(0);
     hist_empty->Draw("hist");
     hist_axis(hist_empty);
-    hist_empty->GetYaxis()->SetTitle("Yields");
+    hist_empty->GetYaxis()->SetTitle("Events / Signal Region");
 
     double y_max = 500;
     double y_min = 0.02;
@@ -335,13 +362,50 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     hist_bkgd->SetLineColor(0);
     hist_bkgd->Draw("sameE2");
 
+    vector<float> err_up_tmp;
+    vector<float> err_down_tmp;
+    const double alpha = 1 - 0.6827;
+    TGraphAsymmErrors *gr_obs = new TGraphAsymmErrors(hist_obs);
+    for(int i=0; i<gr_obs->GetN(); ++i){
+      int N = gr_obs->GetY()[i];
+      double L =  (N==0) ? 0  : (ROOT::Math::gamma_quantile(alpha/2,N,1.));
+      double U =  (N==0) ? ( ROOT::Math::gamma_quantile_c(alpha,N+1,1) ) : ( ROOT::Math::gamma_quantile_c(alpha/2,N+1,1) );
+      if( N!=0 ){
+        gr_obs->SetPointEYlow(i, N-L );
+        gr_obs->SetPointEXlow(i, 0);
+        gr_obs->SetPointEYhigh(i, U-N );
+        gr_obs->SetPointEXhigh(i, 0);
+        err_down_tmp.push_back(N-L);
+        err_up_tmp.push_back(U-N);
+       }
+      else{
+        double zerodata_err_low = 0.1;
+        double zerodata_err_high = 1.8;
+
+        double xlow = gr_obs->GetX()[i]-gr_obs->GetEXlow()[i];
+        double xhigh = gr_obs->GetX()[i]+gr_obs->GetEXhigh()[i];
+
+        gr_obs->SetPointEYlow(i, zerodata_err_low);
+        gr_obs->SetPointEXlow(i, 0.);
+        gr_obs->SetPointEYhigh(i, zerodata_err_high);
+        gr_obs->SetPointEXhigh(i, 0.);
+        err_down_tmp.push_back(zerodata_err_low);
+        err_up_tmp.push_back(zerodata_err_high);
+      }
+    }
+    gr_obs->SetLineWidth(2.0);
+    gr_obs->SetMarkerSize(0.);
+    gr_obs->SetMarkerColor(kBlack);
+    gr_obs->SetLineColor(kBlack);
     hist_obs->SetMarkerStyle(20);
     hist_obs->SetMarkerSize(1.6);
-    hist_obs->Draw("PE1same");
+    hist_obs->Draw("phistsame");
+    gr_obs->Draw("p0same");
+
 
     TLegend *lg_this = (TLegend *)lg->Clone();
     for(unsigned int i=0; i<ref_sigs.size(); i++){
-      hist_sigs.at(i)->Draw("histsame");
+      //hist_sigs.at(i)->Draw("histsame");
       hist_sigs.at(i)->SetLineColor(kBlack);
       hist_sigs.at(i)->SetLineStyle(ref_sigs_style.at(i));
       hist_sigs.at(i)->SetLineWidth(3);
@@ -355,7 +419,7 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
       if(log_coupling == 0) signalname = FDchannel+" HN"+TString::Itoa(ref_sigs.at(i), 10)+", "+V2+"=1";
       else signalname = FDchannel+" HN"+TString::Itoa(ref_sigs.at(i), 10)+", "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
 
-      lg_this->AddEntry(hist_sigs.at(i), signalname, "l");
+      //lg_this->AddEntry(hist_sigs.at(i), signalname, "l");
     }
 
     lg_this->Draw();
@@ -369,13 +433,15 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     if(channel=="ElEl") channelForTex = "ee";
     if(channel=="MuEl") channelForTex = "e#mu";
 
-    channelname.DrawLatex(0.2, 0.88, channelForTex+" "+WhichRegionsForTex.at(it_region));
+    channelname.DrawLatex(0.2, 0.80, channelForTex+" "+WhichRegionsForTex.at(it_region));
 
     TLatex latex_CMSPriliminary, latex_Lumi;
     latex_CMSPriliminary.SetNDC();
     latex_Lumi.SetNDC();
-    latex_CMSPriliminary.SetTextSize(0.035);
-    latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+
+    latex_CMSPriliminary.SetTextSize(0.050);
+    latex_CMSPriliminary.DrawLatex(0.20, 0.90, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+
     latex_Lumi.SetTextSize(0.035);
     latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
@@ -384,14 +450,49 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
 
     c1_down->cd();
 
+    TString name_suffix = hist_obs->GetName();
     TH1D *ratio = (TH1D *)hist_obs->Clone();
-    TH1D *ratio_allerr = (TH1D *)hist_obs->Clone();
-    for(unsigned int i=1; i<=ratio->GetXaxis()->GetNbins(); i++){
-      ratio->SetBinContent(i, hist_obs->GetBinContent(i)/hist_bkgd->GetBinContent(i) );
-      ratio->SetBinError(i, hist_obs->GetBinError(i)/hist_bkgd->GetBinContent(i) );
+    ratio->SetName(name_suffix+"_central");
 
-      ratio_allerr->SetBinContent(i, 1. );
-      ratio_allerr->SetBinError(i, hist_bkgd->GetBinError(i)/hist_bkgd->GetBinContent(i) );
+    TH1D *tmp_ratio = (TH1D *)hist_obs->Clone();
+    tmp_ratio->Divide(hist_bkgd);
+    TGraphAsymmErrors *gr_ratio = new TGraphAsymmErrors(tmp_ratio);
+    gr_ratio->SetName("gr_"+name_suffix+"_central");
+    gr_ratio->SetLineWidth(2.0);
+    gr_ratio->SetMarkerSize(0.);
+    gr_ratio->SetLineColor(kBlack);
+
+    TH1D *ratio_allerr = (TH1D *)hist_obs->Clone();
+    ratio_allerr->SetName(name_suffix+"_allerr");
+    for(int i=1; i<=ratio->GetXaxis()->GetNbins(); i++){
+      //==== FIXME for zero? how?
+      if(hist_bkgd->GetBinContent(i)!=0){
+
+        //==== ratio point
+        //==== BinContent = Data/Bkgd
+        //==== BinError = DataError/Bkgd
+        ratio->SetBinContent( i, ratio->GetBinContent(i) / hist_bkgd->GetBinContent(i) );
+        ratio->SetBinError ( i, ratio->GetBinError(i) / hist_bkgd->GetBinContent(i) );
+
+        if(err_down_tmp.at(i-1)  !=0.) {
+          gr_ratio->SetPointEYlow(i-1, err_down_tmp.at(i-1) / hist_bkgd->GetBinContent(i) );
+          gr_ratio->SetPointEXlow(i-1, 0);
+          gr_ratio->SetPointEYhigh(i-1, err_up_tmp.at(i-1) /hist_bkgd->GetBinContent(i));
+          gr_ratio->SetPointEXhigh(i-1, 0);
+        }
+        else{
+          gr_ratio->SetPointEYlow(i-1, 0);
+          gr_ratio->SetPointEXlow(i-1, 0);
+          gr_ratio->SetPointEYhigh(i-1, 1.8 / hist_bkgd->GetBinContent(i));
+          gr_ratio->SetPointEXhigh(i-1, 0);
+        }
+
+        //==== ratio allerr
+        //==== BinContent = 1
+        //==== BinError = Bkgd(Stat+Syst)Error/Bkgd
+        ratio_allerr->SetBinContent( i, 1. );
+        ratio_allerr->SetBinError( i, hist_bkgd->GetBinError(i)/ hist_bkgd->GetBinContent(i) );
+      }
     }
 
     if(WhichRegion.Contains("High")) ratio_allerr->SetMaximum(10.0);
@@ -405,7 +506,8 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     ratio_allerr->Draw("E2same");
     hist_axis(hist_empty, ratio_allerr);
 
-    ratio->Draw("PE1same");
+    ratio->Draw("p9histsame");
+    gr_ratio->Draw("p0same");
 
     ratio_allerr->Draw("axissame");
     ratio_allerr->GetXaxis()->SetTitle("Signal Region (m_{N} in GeV)");
@@ -424,6 +526,11 @@ void ForLatex_MakeBinnedYieldPlot(int x=0){
     lg_ratio->AddEntry(ratio, "Obs./Pred.", "p");
     lg_ratio->Draw();
 
+    double x_1[2], y_1[2];
+    x_1[0] = 5000;  y_1[0] = 1;
+    x_1[1] = -5000;  y_1[1] = 1;
+    TGraph *g1 = new TGraph(2, x_1, y_1);
+    g1->Draw("same");
 
 
     gSystem->mkdir(plotpath+"/"+channel, kTRUE);

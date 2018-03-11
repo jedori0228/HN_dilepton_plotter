@@ -121,17 +121,18 @@ void Plotter::draw_hist(){
 
           //==== TChannel
           if( signal_mass[signal_index] < 0 ){
-            WhichChannel = "Dilepton_"+WhichChannel+"_Tchannel_M";
+            WhichChannel = "HeavyNeutrinoTo"+WhichChannel+"_Tchannel_M";
           }
           else{
-            WhichChannel = WhichChannel+"_";
+            WhichChannel = "HN"+WhichChannel+"_";
           }
-          TString string_signal_mass = "HN"+WhichChannel+TString::Itoa(abs(signal_mass[signal_index]),10);
+          TString string_signal_mass = WhichChannel+TString::Itoa(abs(signal_mass[signal_index]),10);
 
           signal_name_for_tex = "SchHN"+WhichChannel_for_tex+TString::Itoa(abs(signal_mass[signal_index]),10);
           if(signal_mass[signal_index] < 0 ) signal_name_for_tex = "TchHN"+WhichChannel_for_tex+TString::Itoa(abs(signal_mass[signal_index]),10);
 
           filepath = "./rootfiles/"+data_class+"/Signal/"+filename_prefix+"_SK"+string_signal_mass+filename_suffix;
+          //cout << filepath << endl;
           current_sample = string_signal_mass;
         }
 
@@ -186,33 +187,64 @@ void Plotter::draw_hist(){
         //==== set histogram name, including sample name
         hist_temp->SetName(fullhistname+"_"+current_sample);
 
-
-        //==== Stat Error Propations for Fake
-        if( current_sample.Contains("chargeflip") ){
-          TDirectory *dir_up = (TDirectory *)file->Get(DirName+"_up");
-          TDirectory *dir_down = (TDirectory *)file->Get(DirName+"_down");
-          TH1D* hist_temp_up = (TH1D*)dir_up->Get(fullhistname+"_up");
-          TH1D* hist_temp_down = (TH1D*)dir_down->Get(fullhistname+"_down");
-          if(!hist_temp_up || !hist_temp_down) continue;
-          int n_bins = hist_temp->GetXaxis()->GetNbins();
-          for(int i=1; i<=n_bins; i++){
-            double error_propagated = hist_temp_up->GetBinContent(i)-hist_temp->GetBinContent(i);
-            double error_sumw2 = hist_temp->GetBinError(i);
-
-            double error_combined = sqrt( error_propagated*error_propagated + error_sumw2*error_sumw2 );
-
-            hist_temp->SetBinError(i, error_combined);
+        //==== rebin here
+        if(histname[i_var].Contains("secondLepton_Pt")){
+          if(histname_suffix[i_cut].Contains("DiElectron")){
+            double pt2array[8+1] = {0, 10, 15, 20, 30, 40, 50, 60, 120};
+            hist_temp = (TH1D *)hist_temp->Rebin(8, "hnew1", pt2array);
+          }
+          else{
+            double pt2array[7+1] = {0, 10, 20, 30, 40, 50, 60, 120};
+            hist_temp = (TH1D *)hist_temp->Rebin(7, "hnew1", pt2array);
           }
         }
-
-        //==== rebin here
-        hist_temp->Rebin( n_rebin() );
+        else{
+          hist_temp->Rebin( n_rebin() );
+        }
         
         //==== set X-axis range
         SetXaxisRange(hist_temp);
         
         //==== make overflows bins
         TH1D *hist_final = MakeOverflowBin(hist_temp);
+
+        //==== Stat Error Propations for Fake
+        if( current_sample.Contains("chargeflip") ){
+          TDirectory *dir_up = (TDirectory *)file->Get(DirName+"_up");
+          TH1D* hist_temp_up = (TH1D*)dir_up->Get(fullhistname+"_up");
+          if(!hist_temp_up ) continue;
+
+          //==== rebin here
+          if(histname[i_var].Contains("secondLepton_Pt")){
+            if(histname_suffix[i_cut].Contains("DiElectron")){
+              double pt2array[8+1] = {0, 10, 15, 20, 30, 40, 50, 60, 120};
+              hist_temp_up = (TH1D *)hist_temp_up->Rebin(8, "hnew1", pt2array);
+            }
+            else{
+              double pt2array[7+1] = {0, 10, 20, 30, 40, 50, 60, 120};
+              hist_temp_up = (TH1D *)hist_temp_up->Rebin(7, "hnew1", pt2array);
+            }
+          }
+          else{
+            hist_temp_up->Rebin( n_rebin() );
+          }
+          //==== set X-axis range
+          SetXaxisRange(hist_temp_up);
+          //==== make overflows bins
+          TH1D *hist_final_up = MakeOverflowBin(hist_temp_up);
+
+          int n_bins = hist_final->GetXaxis()->GetNbins();
+          for(int i=1; i<=n_bins; i++){
+            double error_propagated = hist_final_up->GetBinContent(i)-hist_final->GetBinContent(i);
+            double error_sumw2 = hist_final->GetBinError(i);
+
+            double error_combined = sqrt( error_propagated*error_propagated + error_sumw2*error_sumw2 );
+
+            //cout << hist_final->GetXaxis()->GetBinLowEdge(i) << "\t" << hist_final->GetBinContent(i) << "\t" << error_propagated << endl;
+
+            hist_final->SetBinError(i, error_combined);
+          }
+        }
 
         //==== Remove Negative bins
         TAxis *xaxis = hist_final->GetXaxis();
@@ -232,15 +264,11 @@ void Plotter::draw_hist(){
           current_MCsector = find_MCsector();
           int n_bins = hist_final->GetXaxis()->GetNbins();
           if(!MC_stacked_allerr){
-            MC_stacked_allerr = new TH1D("MC_stacked_allerr", "",
-                                      n_bins,
-                                      hist_final->GetXaxis()->GetBinLowEdge(1),
-                                      hist_final->GetXaxis()->GetBinUpEdge(n_bins));
 
-            MC_stacked_staterr = new TH1D("MC_stacked_staterr", "",
-                                      n_bins,
-                                      hist_final->GetXaxis()->GetBinLowEdge(1),
-                                      hist_final->GetXaxis()->GetBinUpEdge(n_bins));
+            const Double_t *xcopy=hist_final->GetXaxis()->GetXbins()->GetArray();
+            MC_stacked_allerr = new TH1D("MC_stacked_allerr", "", n_bins, xcopy);
+            MC_stacked_staterr = new TH1D("MC_stacked_staterr", "", n_bins, xcopy);
+
           }
           hist_final->SetFillColor(map_sample_string_to_legendinfo[current_MCsector].second);
           hist_final->SetLineColor(map_sample_string_to_legendinfo[current_MCsector].second);
@@ -929,6 +957,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     gr_ratio_point->SetName("gr_"+name_suffix+"_central");
     gr_ratio_point->SetLineWidth(2.0);
     gr_ratio_point->SetMarkerSize(0.);
+    gr_ratio_point->SetLineColor(kBlack);
 
     TH1D *ratio_staterr = (TH1D *)hist_data->Clone();
     ratio_staterr->SetName(name_suffix+"_staterr");
@@ -1012,7 +1041,10 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     latex_CMSPriliminary.SetNDC();
     latex_Lumi.SetNDC();
     latex_CMSPriliminary.SetTextSize(0.035);
+
     latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+    //latex_CMSPriliminary.DrawLatex(0.15, 0.96, "#font[62]{CMS}");
+
     latex_Lumi.SetTextSize(0.035);
     latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
@@ -1028,7 +1060,10 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     latex_CMSPriliminary.SetNDC();
     latex_Lumi.SetNDC();
     latex_CMSPriliminary.SetTextSize(0.050);
+
     latex_CMSPriliminary.DrawLatex(0.20, 0.90, "#font[62]{CMS} #font[42]{#it{#scale[0.8]{Preliminary}}}");
+    //latex_CMSPriliminary.DrawLatex(0.20, 0.90, "#font[62]{CMS}");
+
     latex_Lumi.SetTextSize(0.035);
     latex_Lumi.DrawLatex(0.7, 0.96, "35.9 fb^{-1} (13 TeV)");
 
@@ -1187,7 +1222,17 @@ TH1D* Plotter::MakeOverflowBin(TH1D* hist){
   }
   Alloverflows_error = sqrt(Alloverflows_error);
 
-  TH1D *hist_out = new TH1D(hist->GetName(), hist->GetTitle(), n_bin_inrange, x_first_lowedge, x_last_upedge);
+  //==== Make X-bin array
+  Double_t temp_xbins[n_bin_inrange+1];
+  int counter=0;
+  for(int i=bin_first;i<=bin_last;i++){
+    temp_xbins[counter] = hist->GetXaxis()->GetBinLowEdge(i);
+    counter++;
+  }
+  temp_xbins[n_bin_inrange+1-1] = hist->GetXaxis()->GetBinUpEdge(bin_last);
+  const Double_t *xcopy=temp_xbins;
+
+  TH1D *hist_out = new TH1D(hist->GetName(), hist->GetTitle(), n_bin_inrange, xcopy);
   for(unsigned int i=1; i<=n_bin_inrange; i++){
     double this_content = hist->GetBinContent(bin_first-1+i);
     double this_error = hist->GetBinError(bin_first-1+i);
@@ -1223,6 +1268,9 @@ TString Plotter::DoubleToString(double dx){
   //==== onebin
   if(units[i_var]=="int"){
     return "Events";
+  }
+  else if(histname[i_var].Contains("secondLepton_Pt")){
+    return "Events / bin";
   }
   else{
 
@@ -1260,8 +1308,8 @@ TString Plotter::legend_coupling_label(int mass){
   double log_coupling = TMath::Log10(coupling_constant(mass));
   //cout << " log coupling = " << log_scale << endl;
 
-  TString channel = "Sch";
-  if(mass<0) channel = "Tch";
+  TString channel = "s-ch.";
+  if(mass<0) channel = "t-ch.";
 
   mass = abs(mass);
 
@@ -1274,6 +1322,10 @@ TString Plotter::legend_coupling_label(int mass){
 
   if(log_coupling == 0) return "m_{N} = "+TString::Itoa(mass, 10)+" GeV, "+V2+"=1";
   else return "m_{N} = "+TString::Itoa(mass, 10)+" GeV, "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
+
+  //==== FIXME FOR NEXT UPDATE
+  //if(log_coupling == 0) return "m_{N} = "+TString::Itoa(mass, 10)+" GeV ("+channel+"), "+V2+"=1";
+  //else return "m_{N} = "+TString::Itoa(mass, 10)+" GeV ("+channel+"), "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
 
 }
 

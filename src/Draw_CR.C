@@ -99,7 +99,6 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //m.samples_to_use = {"fake_HighdXY", "chargeflip", "VV_excl", "Xgamma", "VVV", "top", "WW_double"};
     m.histname_suffix = {
 
-
       //==== DiMuon
       "_DiMuon_0jets_SS", // SS 0jet CR
       "_DiMuon_1jets_SS", // SS 1jet CR
@@ -115,7 +114,6 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiMuon_HighCR_OneFatJet_SS",
       "_DiMuon_0jets_0nlbjets_dRllge2p5_SS",
       "_DiMuon_WpWp_CR_SS",
-
 
       //=== DiElectron
       "_DiElectron_0jets_SS", // SS 0jet CR
@@ -180,6 +178,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       "_DiLepton_OnZ_SS",
 
 
+      //"_DiElectron_1jets_OnZ_SS",
 
     };
   }
@@ -238,6 +237,8 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //==== SF TEST
     //"InnerBarrelLepton_Pt", "OuterBarrelLepton_Pt", "EndCapLepton_Pt",
     //"InnerBarrelLepton_Eta", "OuterBarrelLepton_Eta", "EndCapLepton_Eta",
+    "m_jj_jjWclosest", "m_lljj_jjWclosest", "m_Leadljj_jjWclosest", "m_SubLeadljj_jjWclosest",
+    "m_jj_lljjWclosest", "m_lljj_lljjWclosest", "m_Leadljj_lljjWclosest", "m_SubLeadljj_lljjWclosest",
   };
 
   m.x_title = {
@@ -260,10 +261,12 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //"m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
     "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
     //==== OneJet_NoFatJet
-    "m(Leading Lepton+j) (GeV)", "m(Subleading Lepton+j) (GeV)", "m(llj) (GeV)",
+    "l_{1}j_{ak4} invariant mass (GeV)", "l_{2}j_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak4} invariant mass (GeV)",
     //==== SF TEST
     //"IB Lepton p_{T} [GeV]", "OB Lepton p_{T} [GeV]","EC Lepton p_{T} [GeV]",
     //"IB Lepton #eta", "OB Lepton #eta", "EC Lepton #eta",
+    "jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+    "jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
   };
 
   m.units = {
@@ -283,15 +286,16 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //==== Fatjet
     "int",
     "GeV", "", "GeV", "", "GeV",
-    "GeV", "GeV", "GeV",
+    //"GeV", "GeV", "GeV",
     "GeV", "GeV", "GeV",
     //==== OneJet_NoFatJet
     "GeV", "GeV", "GeV",
     //==== SF TEST
-    "GeV", "GeV", "GeV",
-    "", "", "",
+    //"GeV", "GeV", "GeV",
+    //"", "", "",
+    "GeV", "GeV", "GeV", "GeV",
+    "GeV", "GeV", "GeV", "GeV",
   };
-
 
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
 
@@ -368,12 +372,43 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     if(ScaleMC) m.ApplyMCNormSF = {true};
     else m.ApplyMCNormSF = {false};
   }
+
 /*
   //==== FIXME test
-  m.histname = {"Nevents"};
-  m.x_title = {"#slash{E}_{T}^{miss}^{2}/S_{T} (GeV)"};
-  m.units = {"GeV"};
+  m.histname = {
+    //"m_jj_jjWclosest", "m_lljj_jjWclosest", "m_Leadljj_jjWclosest", "m_SubLeadljj_jjWclosest",
+    //"m_SubLeadljj_jjWclosest",
+"secondLepton_Pt",
+//"WClosest_FatJet_Tau21"
+"leadingLepton_Pt",
+  };
+  m.x_title = {
+    //"jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+    //"l_{2}jj_{ak4} invariant mass (GeV)",
+    "Subleading Lepton p_{T} (GeV)",
+"Leading Lepton p_{T} (GeV)",
+  };	
+  m.units = {
+    //"GeV", "GeV", "GeV", "GeV",
+"GeV", "GeV",
+  };
 */
+
+  cout << "m.histname.size() = " <<  m.histname.size() << endl;
+  cout << "m.x_title.size() = " << m.x_title.size() << endl;
+  cout << "m.units.size() = " << m.units.size() << endl;
+  if(m.histname.size()==m.x_title.size() && m.x_title.size()==m.units.size()){
+    cout << "--> OKAY" << endl;
+  }
+  else{
+    cout << "--> WRONG" << endl;
+    return;
+  }
+  cout << "Histname\tXTitle\tUnit" << endl;
+  for(unsigned int i=0; i<m.histname.size(); i++){
+    cout << m.histname.at(i) << "\t" << m.x_title.at(i) << "\t" << m.units.at(i) << endl;
+  }
+
   //====================
   //==== make bkg list
   //====================

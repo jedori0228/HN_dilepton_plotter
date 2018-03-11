@@ -15,11 +15,11 @@ void HiggsCombindedLimit_Xsec(int i=0){
   TString ENV_FILE_PATH = getenv("FILE_PATH");
   TString ENV_PLOT_PATH = getenv("PLOT_PATH");
 
-  TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
-  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
+  //TString filepath = ENV_FILE_PATH+dataset+"/Limit/";
+  //TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/";
 
-  //TString filepath = ENV_FILE_PATH+dataset+"/Limit/FullCLs/";
-  //TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/FullCLs/";
+  TString filepath = ENV_FILE_PATH+dataset+"/Limit/FullCLs/";
+  TString plotpath = ENV_PLOT_PATH+dataset+"/Limit/FullCLs/";
 
   TString WhichDirectoryInCutop = "MuMu_Combined";
   if(i==1) WhichDirectoryInCutop = "MuMu_Bin1";
@@ -72,12 +72,23 @@ void HiggsCombindedLimit_Xsec(int i=0){
     is >> twosig_left[dummyint];
     is >> twosig_right[dummyint];
 
+    if(obs[dummyint]<=0 || limit[dummyint]<=0 || onesig_left[dummyint]<=0 || onesig_right[dummyint]<=0 || twosig_left[dummyint]<=0 || twosig_right[dummyint]<=0){
+      n_central--;
+      continue;
+    }
+    if(mass[dummyint]>=1700){
+      n_central--;
+      continue;
+    }
+
     double scale=1.; //mixing squared is 0.01 now
     if(mass[dummyint]<=60) scale *= 0.01;
     else if(mass[dummyint]<=100) scale *= 0.1;
     else if(mass[dummyint]<=300) scale *= 1.;
     else if(mass[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
+
+    scale *= 0.01;
 
     double this_xsec = GetXsec(mass[dummyint]);
 
@@ -125,7 +136,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   string elline_SandT;
   ifstream in_SandT(filepath+"/result_VBF.txt");
 
-  const int n_SandT = 29; //30, but now removing 80 GeV
+  int n_SandT = 29; //30, but now removing 80 GeV
   double mass_SandT[n_SandT], obs_SandT[n_SandT], limit_SandT[n_SandT], onesig_left_SandT[n_SandT], onesig_right_SandT[n_SandT], twosig_left_SandT[n_SandT], twosig_right_SandT[n_SandT];
   dummyint=0;
 
@@ -140,12 +151,23 @@ void HiggsCombindedLimit_Xsec(int i=0){
     is >> twosig_left_SandT[dummyint];
     is >> twosig_right_SandT[dummyint];
 
+    if(obs_SandT[dummyint]<=0 || limit_SandT[dummyint]<=0 || onesig_left_SandT[dummyint]<=0 || onesig_right_SandT[dummyint]<=0 || twosig_left_SandT[dummyint]<=0 || twosig_right_SandT[dummyint]<=0){
+      n_SandT--;
+      continue;
+    }
+    if(mass_SandT[dummyint]>=1700){
+      n_SandT--;
+      continue;
+    }
+
     double scale=1.; //mixing squared is 0.01 now
     if(mass_SandT[dummyint]<=60) scale *= 0.01;
     else if(mass_SandT[dummyint]<=100) scale *= 0.1;
     else if(mass_SandT[dummyint]<=300) scale *= 1.;
     else if(mass_SandT[dummyint]<=700) scale *= 10.;
     else scale *= 100.;
+
+    scale *= 0.01;
 
     double this_xsec = GetXsec(mass_SandT[dummyint]);
     this_xsec += GetXsecTch(mass[dummyint])/2.; // SS-only
@@ -173,8 +195,8 @@ void HiggsCombindedLimit_Xsec(int i=0){
 
   TGraph *gr_13TeV_exp_SandT = new TGraph(n_SandT,mass_SandT,limit_SandT);
   gr_13TeV_exp_SandT->SetLineWidth(3);
-  gr_13TeV_exp_SandT->SetLineStyle(1);
-  gr_13TeV_exp_SandT->SetLineColor(kBlue);
+  gr_13TeV_exp_SandT->SetLineStyle(2);
+  gr_13TeV_exp_SandT->SetFillColor(kWhite);
 
   TGraphAsymmErrors *gr_band_1sigma_SandT = new TGraphAsymmErrors(n_SandT, mass_SandT, limit_SandT, 0, 0, onesig_left_SandT, onesig_right_SandT);
   gr_band_1sigma_SandT->SetFillColor(kGreen);
@@ -245,7 +267,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected, s-ch only", "l");
   lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 s.d.", "f");
   lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 s.d.", "f");
-  lg->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+  //lg->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
 
   TCanvas *c_SOnly = new TCanvas("c_SOnly", "", 800, 800);
   canvas_margin(c_SOnly);
@@ -272,7 +294,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   gr_band_2sigma->Draw("3same");
   gr_band_1sigma->Draw("3same");
   gr_13TeV_exp->Draw("lsame");
-  gr_8TeV_exp->Draw("lsame");
+  //gr_8TeV_exp->Draw("lsame");
   if(DrawObserved) gr_13TeV_obs->Draw("lsame");
 
   lg->Draw();
@@ -313,7 +335,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   lg_SandT->AddEntry(gr_13TeV_exp_SandT,"CL_{s} Expected, s- and t-ch", "l");
   lg_SandT->AddEntry(gr_band_1sigma_SandT,"CL_{s} Expected #pm 1 s.d., s- and t-ch", "f");
   lg_SandT->AddEntry(gr_band_2sigma_SandT,"CL_{s} Expected #pm 2 s.d., s- and t-ch", "f");
-  lg_SandT->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+  //lg_SandT->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
 
   TCanvas *c_SandT = new TCanvas("c_SandT", "", 800, 800);
   canvas_margin(c_SandT);
@@ -326,7 +348,7 @@ void HiggsCombindedLimit_Xsec(int i=0){
   gr_band_2sigma_SandT->Draw("3same");
   gr_band_1sigma_SandT->Draw("3same");
   gr_13TeV_exp_SandT->Draw("lsame");
-  gr_8TeV_exp->Draw("lsame");
+  //gr_8TeV_exp->Draw("lsame");
   if(DrawObserved) gr_13TeV_obs_SandT->Draw("lsame");
 
   lg_SandT->Draw();
@@ -364,7 +386,7 @@ double GetXsec(int mass){
   if(mass==70) return 3.917;
   if(mass==75) return 1.4315;
   if(mass==80){
-    return 0.4525;
+    return 0.401242;
 /*
     Wrong = 2.01340
     Correct = 0.4525
