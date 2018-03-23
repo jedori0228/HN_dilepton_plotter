@@ -781,10 +781,10 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   TH1D *hist_emptylegend = new TH1D("hist_emptylegend","",1,0.,1.);
   hist_emptylegend->SetLineColor(0);
 
-  if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"CL_{s} Observed, s-ch only", "l");
-  lg->AddEntry(gr_13TeV_exp,"CL_{s} Expected, s-ch only", "l");
-  lg->AddEntry(gr_band_1sigma,"CL_{s} Expected #pm 1 #sigma", "f");
-  lg->AddEntry(gr_band_2sigma,"CL_{s} Expected #pm 2 #sigma", "f");
+  if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"Observed, s-ch only", "l");
+  lg->AddEntry(gr_13TeV_exp,"Expected, s-ch only", "l");
+  lg->AddEntry(gr_band_1sigma,"68% Expected", "f");
+  lg->AddEntry(gr_band_2sigma,"95% Expected", "f");
   lg->AddEntry(hist_emptylegend,"","l");
   //lg->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
 
@@ -913,10 +913,10 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   lg_SandT->SetBorderSize(0);
   lg_SandT->SetFillStyle(0);
 
-  if(DrawObserved) lg_SandT->AddEntry(gr_13TeV_obs_SandT,"CL_{s} Observed", "l");
-  lg_SandT->AddEntry(gr_13TeV_exp_SandT,"CL_{s} Expected", "l");
-  lg_SandT->AddEntry(gr_band_1sigma_SandT,"CL_{s} Expected #pm 1 #sigma", "f");
-  lg_SandT->AddEntry(gr_band_2sigma_SandT,"CL_{s} Expected #pm 2 #sigma", "f");
+  if(DrawObserved) lg_SandT->AddEntry(gr_13TeV_obs_SandT,"Observed", "l");
+  lg_SandT->AddEntry(gr_13TeV_exp_SandT,"Expected", "l");
+  lg_SandT->AddEntry(gr_band_1sigma_SandT,"68% Expected", "f");
+  lg_SandT->AddEntry(gr_band_2sigma_SandT,"95% Expected", "f");
   //lg_SandT->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
   lg_SandT->AddEntry(hist_emptylegend,"","l");
 

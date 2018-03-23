@@ -32,11 +32,11 @@ for region in regions:
   chcounter = 0
   filename = region+"-"+region
 
-  RowSkipIndex = [3,4,11,12,13]
+  RowSkipIndex = [3,4,11]
   if "High_SR1" in region:
-    RowSkipIndex = [2,3,4,7,11,12]
+    RowSkipIndex = [2,3,4,7]
   if "High_SR2" in region:
-    RowSkipIndex = [2,3,4,7,8,10,11,12]
+    RowSkipIndex = [2,3,4,7,8,10]
 
   with open(filepath+filename+".csv", 'rb') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -129,6 +129,9 @@ for region in regions:
                 #if not "100" in row[a]:
                   #toprint = toprint+"\\phantom{0}"
 
+              if a==12:
+                toprint = '$'+toprint+'$'
+
               if a==14:
                 toprint = "$"+row[a]+"\\pm"
                 print toprint,
@@ -159,6 +162,8 @@ for region in regions:
               if a==10:
                 toprint = "$< "+toprint+"$"
 
+              if a==11:
+                toprint = '$'+toprint+'$'
 
               if a==13:
                 toprint = "$"+AddPhantomZero(row[a],n_sch_int,n_sch_fra)+"\\pm"
@@ -188,6 +193,8 @@ for region in regions:
                   toprint =  AddPhantomZero(row[a],1,n_tch_fra)+"$"
                 else:
                   toprint = toprint
+
+            toprint = toprint.replace(' - ','--')
 
             if a != MaxRowIndex-1:
               print toprint+" &",

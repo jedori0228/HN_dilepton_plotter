@@ -8,8 +8,8 @@ do
   #root -l -b -q "src/HiggsCombindedLimit_Xsec.C("$i") "
 
   ## Full CLs
-  root -l -b -q "src/HiggsCombindedLimit.C("$i",\"\",0,true) "
-  root -l -b -q "src/HiggsCombindedLimit_Xsec.C("$i") "
+  #root -l -b -q "src/HiggsCombindedLimit.C("$i",\"\",0,true) "
+  #root -l -b -q "src/HiggsCombindedLimit_Xsec.C("$i") "
 
   ## TEMP
   #root -l -b -q "src/HiggsCombindedLimit.C("$i",\"180223_BeforeOverlap\") "

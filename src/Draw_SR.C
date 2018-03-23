@@ -145,7 +145,7 @@ void Draw_SR(int XXX=0){
     m.samples_to_use = {"chargeflip", "fake_Dijet", "prompt"};
     m.histname_suffix = {
 
-
+/*
       "_DiLepton_Preselection_SS", // OffZ, nobjet, jet>=2;
       "_DiLepton_Low_SS",
       "_DiLepton_Low_TwoJet_NoFatJet_SS",
@@ -153,9 +153,12 @@ void Draw_SR(int XXX=0){
       "_DiLepton_High_SS",
       "_DiLepton_High_TwoJet_NoFatJet_SS",
       "_DiLepton_High_OneFatJet_SS",
+*/
 
-
-      //"_DiLepton_High_OneFatJet_SS",
+      "_DiLepton_Low_TwoJet_NoFatJet_SS",
+      "_DiLepton_Low_OneJet_NoFatJet_SS",
+      "_DiLepton_High_TwoJet_NoFatJet_SS",
+      "_DiLepton_High_OneFatJet_SS",
 
     };
   }
@@ -347,7 +350,7 @@ void Draw_SR(int XXX=0){
 
   }
 
-/*
+
   //==== For paper plot
   m.histname = {
     "m_ll",
@@ -382,12 +385,12 @@ void Draw_SR(int XXX=0){
     // high-SR2
     "GeV", "GeV", "GeV",
   };
-*/
+
 /*
   //==== FIXME test
-  m.histname = {"m_Leadlj"};
-  m.x_title = {"m(Leading Lepton+j) (GeV)"};
-  m.units = {"GeV"};
+  m.histname = {"m_lljj_lljjWclosest", "m_llj"};
+  m.x_title = {"l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak4} invariant mass (GeV)"};
+  m.units = {"GeV", "GeV"};
 */
 
   cout << "m.histname.size() = " <<  m.histname.size() << endl;

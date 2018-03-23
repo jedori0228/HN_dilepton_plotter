@@ -1,6 +1,6 @@
-import os
+import os,math
 
-channels = ["MuMu", "ElEl", "MuEl"]
+channels = ["ElEl", "MuMu", "MuEl"]
 Bins = ["Bin1", "Bin2"]
 
 masses_Tch = [300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
@@ -138,10 +138,14 @@ for ch in channels:
         float_eff = float(runlog[len(runlog)-3].split()[2])
         eff_S = str(float_eff*1.)
         eff_S_staterr = 0.
-
         for linelog in runlog:
           if "Stat" in linelog:
             eff_S_staterr = 0.01*float(linelog.split()[5])*float_eff
+        eff_S_systerr = 0.
+        for linelog in runlog:
+          if "Total Systematic" in linelog:
+            eff_S_systerr = 0.01*float(linelog.split()[6])*float_eff
+        eff_S_staterr = math.sqrt(eff_S_staterr*eff_S_staterr+eff_S_systerr*eff_S_systerr)
 
 
         if (LowORHigh==1) and (mass in masses_Tch):
@@ -152,6 +156,12 @@ for ch in channels:
           for linelog in lines_T:
             if "Stat" in linelog:
               eff_T_staterr = 0.01*float(linelog.split()[5])*float_eff_T
+          eff_T_systerr = 0.
+          for linelog in lines_T:
+            if "Total Systematic" in linelog:
+              eff_T_systerr = 0.01*float(linelog.split()[6])*float_eff_T
+          eff_T_staterr = math.sqrt(eff_T_staterr*eff_T_staterr+eff_T_systerr*eff_T_systerr)
+
 
           print bkgd+'\t'+obs+'\t'+eff_S+"\t"+str(eff_S_staterr)+"\t"+eff_T+"\t"+str(eff_T_staterr)
 

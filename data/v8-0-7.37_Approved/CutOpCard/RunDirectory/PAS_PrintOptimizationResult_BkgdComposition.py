@@ -86,8 +86,8 @@ def MakeYield(a,b,c,nround):
 
   return out
 
-channels = ["MuMu", "ElEl", "MuEl"]
-channelsForLatex = ["$\mu \mu$", "ee", "e$\mu$"]
+channels = ["ElEl", "MuMu", "MuEl"]
+channelsForLatex = ["$\Pe\Pe$", "$\mu\mu$", "$\Pe\mu$"]
 
 for LowORHigh in range(0,3):
 
@@ -102,11 +102,16 @@ for LowORHigh in range(0,3):
 
     for Bin in Bins:
 
+      if LowORHigh == 0:
+        print '\underline{'+channelsForLatex[it_ch]+' channel SR'+Bin.replace('Bin','')+':} &&&&& \\\\'
+      else:
+        print '\underline{'+channelsForLatex[it_ch]+' channel:} &&&&&\\\\'
+
       ## Low Mass
-      masses = [20, 30, 40, 50, 60, 70, 75, 80]
+      masses = [20, 30, 40, 50, 60, 70, 75]
 
       if LowORHigh != 0:
-        masses = [85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700, 2000]
+        masses = [85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1700]
 
       counter = 0
       for mass in masses:
@@ -196,7 +201,7 @@ for LowORHigh in range(0,3):
 
         counter = counter+1
 
-    print '\\hline'
+    #print '\\hline'
 
   print ""
   print "#################"
