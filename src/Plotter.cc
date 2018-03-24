@@ -1084,11 +1084,11 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
       channelname.SetTextSize(0.025);
       channelname.DrawLatex(0.65, 0.42, "except m(llW_{jet})<300 GeV");
     }
-    if(histname_suffix[i_cut]=="_DiLepton_Low_OneJet_NoFatJet_NolljjCut_SS" && histname[i_var]=="m_lljj_lljjWclosest"){
+    if(histname_suffix[i_cut]=="_DiLepton_Low_OneJet_NoFatJet_NolljjCut_SS" && histname[i_var]=="m_llj"){
       channelname.SetTextSize(0.025);
       channelname.DrawLatex(0.65, 0.42, "except m(llW_{jet})<300 GeV");
     }
-    if(histname_suffix[i_cut]=="_DiLepton_Low_OneJet_NoFatJet_NollCut_SS" && histname[i_var]=="m_lljj_lljjWclosest"){
+    if(histname_suffix[i_cut]=="_DiLepton_Low_OneJet_NoFatJet_NollCut_SS" && histname[i_var]=="m_ll"){
       channelname.SetTextSize(0.025);
       channelname.DrawLatex(0.65, 0.42, "except m(ll)<80 GeV");
     }
