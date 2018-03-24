@@ -783,8 +783,8 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
 
   if(DrawObserved) lg->AddEntry(gr_13TeV_obs,"Observed, s-ch only", "l");
   lg->AddEntry(gr_13TeV_exp,"Expected, s-ch only", "l");
-  lg->AddEntry(gr_band_1sigma,"68% Expected", "f");
-  lg->AddEntry(gr_band_2sigma,"95% Expected", "f");
+  lg->AddEntry(gr_band_1sigma,"68% expected", "f");
+  lg->AddEntry(gr_band_2sigma,"95% expected", "f");
   lg->AddEntry(hist_emptylegend,"","l");
   //lg->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
 
@@ -792,20 +792,20 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   lg_Alt->SetBorderSize(0);
   lg_Alt->SetFillStyle(0);
   if(channel=="MuMu"){
-    lg_Alt->AddEntry(gr_DELPHILimit, "DELPHI Prompt", "l");
+    lg_Alt->AddEntry(gr_DELPHILimit, "DELPHI prompt", "l");
     lg_Alt->AddEntry(gr_L3Limit, "L3", "l");
     lg_Alt->AddEntry(gr_EWPD_mm, "EWPD (90% CL)", "l");
     lg_Alt->AddEntry(gr_ATLAS_MuMu, "ATLAS 8 TeV", "l");
     lg_Alt->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
-    lg_Alt->AddEntry(gr_trilepLimit, "CMS 13 TeV Trilepton", "l");
+    lg_Alt->AddEntry(gr_trilepLimit, "CMS 13 TeV trilepton", "l");
   }
   if(channel=="ElEl"){
-    lg_Alt->AddEntry(gr_DELPHILimit, "DELPHI Prompt", "l");
+    lg_Alt->AddEntry(gr_DELPHILimit, "DELPHI prompt", "l");
     lg_Alt->AddEntry(gr_L3_2Limit, "L3", "l");
     lg_Alt->AddEntry(gr_EWPD_mm, "EWPD (90% CL)", "l");
     lg_Alt->AddEntry(gr_ATLAS_ElEl, "ATLAS 8 TeV", "l");
     lg_Alt->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
-    lg_Alt->AddEntry(gr_trilepLimit, "CMS 13 TeV Trilepton", "l");
+    lg_Alt->AddEntry(gr_trilepLimit, "CMS 13 TeV trilepton", "l");
     //lg_Alt->AddEntry(gr_dbeta, "Neutrino-less double beta dacay", "l");
   }
   if(channel=="MuEl"){
@@ -915,8 +915,8 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
 
   if(DrawObserved) lg_SandT->AddEntry(gr_13TeV_obs_SandT,"Observed", "l");
   lg_SandT->AddEntry(gr_13TeV_exp_SandT,"Expected", "l");
-  lg_SandT->AddEntry(gr_band_1sigma_SandT,"68% Expected", "f");
-  lg_SandT->AddEntry(gr_band_2sigma_SandT,"95% Expected", "f");
+  lg_SandT->AddEntry(gr_band_1sigma_SandT,"68% expected", "f");
+  lg_SandT->AddEntry(gr_band_2sigma_SandT,"95% expected", "f");
   //lg_SandT->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
   lg_SandT->AddEntry(hist_emptylegend,"","l");
 
