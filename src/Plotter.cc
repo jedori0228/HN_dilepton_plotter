@@ -933,7 +933,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     legend->AddEntry(hist_data, "Data", "pe");
   }
   else{
-    legend->AddEntry(hist_data, "Total Background", "pe");
+    legend->AddEntry(hist_data, "Total background", "pe");
   }
   if(drawratio.at(i_cut)) c1_up->cd();
   draw_legend(legend, DrawData);
@@ -1024,7 +1024,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     //lg_ratio->SetBorderSize(0);
     lg_ratio->SetNColumns(2);
     lg_ratio->AddEntry(ratio_staterr, "Stat.", "f");
-    lg_ratio->AddEntry(ratio_allerr, "Stat.+Syst.", "f");
+    lg_ratio->AddEntry(ratio_allerr, "Stat.+syst.", "f");
     //lg_ratio->AddEntry(ratio_point, "Obs./Pred.", "p");
     lg_ratio->Draw();
 
@@ -1067,6 +1067,35 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     latex_Lumi.SetTextSize(0.035);
     latex_Lumi.SetTextFont(42);
     latex_Lumi.DrawLatex(0.72, 0.96, "35.9 fb^{-1} (13 TeV)");
+
+    TLatex latex_eemmem;
+    latex_eemmem.SetNDC();
+    latex_eemmem.SetTextSize(0.037);
+    latex_eemmem.DrawLatex(0.2, 0.86, "ee+#mu#mu+e#mu");
+
+    TString str_channel = GetStringChannelRegion(LeptonChannels.at(i_cut), RegionType.at(i_cut));
+    TLatex channelname;
+    channelname.SetNDC();
+    channelname.SetTextSize(0.037);
+    channelname.DrawLatex(0.65, 0.45, str_channel);
+
+    //==== HOT FIX
+    if(histname_suffix[i_cut]=="_DiLepton_Low_TwoJet_NoFatJet_NolljjCut_SS" && histname[i_var]=="m_lljj_lljjWclosest"){
+      channelname.SetTextSize(0.025);
+      channelname.DrawLatex(0.65, 0.42, "except m(llW_{jet})<300 GeV");
+    }
+    if(histname_suffix[i_cut]=="_DiLepton_Low_OneJet_NoFatJet_NolljjCut_SS" && histname[i_var]=="m_lljj_lljjWclosest"){
+      channelname.SetTextSize(0.025);
+      channelname.DrawLatex(0.65, 0.42, "except m(llW_{jet})<300 GeV");
+    }
+    if(histname_suffix[i_cut]=="_DiLepton_Low_OneJet_NoFatJet_NollCut_SS" && histname[i_var]=="m_lljj_lljjWclosest"){
+      channelname.SetTextSize(0.025);
+      channelname.DrawLatex(0.65, 0.42, "except m(ll)<80 GeV");
+    }
+
+
+
+
 
   }
 
@@ -1486,7 +1515,7 @@ TString Plotter::GetStringChannelRegion(int A, int B){
   //==== A = 2 : ee
   //==== A = 3 : em
 
-  if(A==20) channel = "l^{#pm}l^{#pm}";
+  if(A==20) channel = "ee,#mu#mu,e#mu";
   if(A==21) channel = "#mu^{#pm}#mu^{#pm}";
   if(A==22) channel = "e^{#pm}e^{#pm}";
   if(A==23) channel = "e^{#pm}#mu^{#pm}";
@@ -1503,19 +1532,19 @@ TString Plotter::GetStringChannelRegion(int A, int B){
   //==== B = 32 : High + fat jet
   if(B==1) region = "Preselection";
 
-  if(B==20) region = "Low Mass";
-  if(B==21) region = "Low Mass SR1";
-  if(B==22) region = "Low Mass SR2";
-  if(B==-20) region = "Low Mass CR";
-  if(B==-21) region = "Low Mass CR1";
-  if(B==-22) region = "Low Mass CR2";
+  if(B==20) region = "Low-mass";
+  if(B==21) region = "Low-mass SR1";
+  if(B==22) region = "Low-mass SR2";
+  if(B==-20) region = "Low-mass CR";
+  if(B==-21) region = "Low-mass CR1";
+  if(B==-22) region = "Low-mass CR2";
 
-  if(B==30) region = "High Mass";
-  if(B==31) region = "High Mass SR1";
-  if(B==32) region = "High Mass SR2";
-  if(B==-30) region = "High Mass CR";
-  if(B==-31) region = "High Mass CR1";
-  if(B==-32) region = "High Mass CR2";
+  if(B==30) region = "High-mass";
+  if(B==31) region = "High-mass SR1";
+  if(B==32) region = "High-mass SR2";
+  if(B==-30) region = "High-mass CR";
+  if(B==-31) region = "High-mass CR1";
+  if(B==-32) region = "High-mass CR2";
 
   if(B==-4) region = "Non-prompt CR1";
   if(B==-5) region = "Non-prompt CR2";
@@ -1525,8 +1554,9 @@ TString Plotter::GetStringChannelRegion(int A, int B){
   if(B==-103) region = "W#gamma CR";
   if(B==-104) region = "ZZ CR";
 
-  //return channel+" "+region;
-  return "#splitline{"+channel+"}{"+region+"}";
+  if(A==20) return region;
+
+  else return "#splitline{"+channel+"}{"+region+"}";
 
 
 }
