@@ -4,6 +4,9 @@ Plotter::Plotter(){
   
   TH1::SetDefaultSumw2(true);
   TH1::AddDirectory(kFALSE);
+
+  setTDRStyle();
+
   gStyle->SetOptStat(0);
   DoDebug = false;
   gErrorIgnoreLevel = kError;
@@ -63,7 +66,7 @@ void Plotter::draw_hist(){
         //==== CR
         if(signal_mass.size()==0) lg = new TLegend(0.60, 0.35, 0.96, 0.92);
         //==== SR
-        else lg = new TLegend(0.50, 0.35, 0.96, 0.92);
+        else lg = new TLegend(0.50, 0.35, 0.95, 0.91);
       }
       else{
         //==== CR
@@ -999,8 +1002,9 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
       }
     }
 
-    ratio_allerr->SetMaximum(2.0);
-    ratio_allerr->SetMinimum(0.0);
+    ratio_allerr->GetYaxis()->SetRangeUser(0,2.0);
+    ratio_allerr->SetNdivisions(504,"Y");
+    ratio_allerr->GetYaxis()->SetRangeUser(0,1.9);
     ratio_allerr->GetXaxis()->SetTitle(x_title[i_var]);
     ratio_allerr->GetYaxis()->SetTitle("#frac{Obs.}{Pred.}");
     ratio_allerr->SetFillColor(kOrange);
@@ -1062,7 +1066,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     latex_Lumi.SetNDC();
     latex_CMSPriliminary.SetTextSize(0.050);
 
-    latex_CMSPriliminary.DrawLatex(0.20, 0.90, "#font[62]{CMS}");
+    latex_CMSPriliminary.DrawLatex(0.20, 0.89, "#font[62]{CMS}");
 
     latex_Lumi.SetTextSize(0.035);
     latex_Lumi.SetTextFont(42);
@@ -1071,7 +1075,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     TLatex latex_eemmem;
     latex_eemmem.SetNDC();
     latex_eemmem.SetTextSize(0.037);
-    latex_eemmem.DrawLatex(0.2, 0.86, "ee+#mu#mu+e#mu");
+    latex_eemmem.DrawLatex(0.2, 0.85, "ee+#mu#mu+e#mu");
 
     TString str_channel = GetStringChannelRegion(LeptonChannels.at(i_cut), RegionType.at(i_cut));
     TLatex channelname;
@@ -1101,7 +1105,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
 
   mkdir(thiscut_plotpath);
   c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".pdf");
-  c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".png");
+  //c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".png");
   outputf->cd();
   c1->Write();
   

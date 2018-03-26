@@ -9,7 +9,9 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
 
   bool DrawObserved = true;
 
-  gStyle->SetOptStat(0);
+  setTDRStyle();
+
+  //gStyle->SetOptStat(0);
 
   TString WORKING_DIR = getenv("PLOTTER_WORKING_DIR");
   TString catversion = getenv("CATVERSION");
@@ -146,14 +148,14 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   gr_13TeV_exp->SetFillColor(kWhite);
 
   TGraphAsymmErrors *gr_band_1sigma = new TGraphAsymmErrors(n_central, mass, limit, 0, 0, onesig_left, onesig_right);
-  gr_band_1sigma->SetFillColor(kGreen);
-  gr_band_1sigma->SetLineColor(kGreen);
-  gr_band_1sigma->SetMarkerColor(kGreen);
+  gr_band_1sigma->SetFillColor(kGreen+1);
+  gr_band_1sigma->SetLineColor(kGreen+1);
+  gr_band_1sigma->SetMarkerColor(kGreen+1);
 
   TGraphAsymmErrors *gr_band_2sigma = new TGraphAsymmErrors(n_central, mass, limit, 0, 0, twosig_left, twosig_right);
-  gr_band_2sigma->SetFillColor(kYellow);
-  gr_band_2sigma->SetLineColor(kYellow);
-  gr_band_2sigma->SetMarkerColor(kYellow);
+  gr_band_2sigma->SetFillColor(kOrange);
+  gr_band_2sigma->SetLineColor(kOrange);
+  gr_band_2sigma->SetMarkerColor(kOrange);
 
 
   //==== 13 TeV T added
@@ -242,14 +244,14 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   gr_13TeV_exp_SandT->SetLineStyle(2);
 
   TGraphAsymmErrors *gr_band_1sigma_SandT = new TGraphAsymmErrors(n_SandT, mass_SandT, limit_SandT, 0, 0, onesig_left_SandT, onesig_right_SandT);
-  gr_band_1sigma_SandT->SetFillColor(kGreen);
-  gr_band_1sigma_SandT->SetLineColor(kGreen);
-  gr_band_1sigma_SandT->SetMarkerColor(kGreen);
+  gr_band_1sigma_SandT->SetFillColor(kGreen+1);
+  gr_band_1sigma_SandT->SetLineColor(kGreen+1);
+  gr_band_1sigma_SandT->SetMarkerColor(kGreen+1);
 
   TGraphAsymmErrors *gr_band_2sigma_SandT = new TGraphAsymmErrors(n_SandT, mass_SandT, limit_SandT, 0, 0, twosig_left_SandT, twosig_right_SandT);
-  gr_band_2sigma_SandT->SetFillColor(kYellow);
-  gr_band_2sigma_SandT->SetLineColor(kYellow);
-  gr_band_2sigma_SandT->SetMarkerColor(kYellow);
+  gr_band_2sigma_SandT->SetFillColor(kOrange);
+  gr_band_2sigma_SandT->SetLineColor(kOrange);
+  gr_band_2sigma_SandT->SetMarkerColor(kOrange);
 
   //==== 80 GeV as a point
   double mass_80Gev[1] = {80};
@@ -766,8 +768,8 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   gr_EWPD_mm->SetLineColor(kRed-5);
   gr_EWPD_ee->SetLineStyle(6);
   gr_EWPD_mm->SetLineStyle(6);
-  gr_EWPD_ee->SetLineWidth(2);
-  gr_EWPD_mm->SetLineWidth(2);
+  gr_EWPD_ee->SetLineWidth(3);
+  gr_EWPD_mm->SetLineWidth(3);
 
 
   //======================
