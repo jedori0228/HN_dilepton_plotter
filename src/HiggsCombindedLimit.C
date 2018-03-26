@@ -777,7 +777,7 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   //======================
 
   //=== Legend
-  TLegend *lg = new TLegend(0.43, 0.15, 0.69, 0.45);
+  TLegend *lg = new TLegend(0.48, 0.15, 0.66, 0.45);
   lg->SetBorderSize(0);
   lg->SetFillStyle(0);
   TH1D *hist_emptylegend = new TH1D("hist_emptylegend","",1,0.,1.);
@@ -790,7 +790,7 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   lg->AddEntry(hist_emptylegend,"","l");
   //lg->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
 
-  TLegend *lg_Alt = new TLegend(0.70, 0.15, 0.95, 0.45);
+  TLegend *lg_Alt = new TLegend(0.67, 0.15, 0.93, 0.45);
   lg_Alt->SetBorderSize(0);
   lg_Alt->SetFillStyle(0);
   if(channel=="MuMu"){
@@ -812,6 +812,7 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   }
   if(channel=="MuEl"){
     lg_Alt->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
+    lg_Alt->AddEntry(hist_emptylegend,"","l");
     lg_Alt->AddEntry(hist_emptylegend,"","l");
     lg_Alt->AddEntry(hist_emptylegend,"","l");
     lg_Alt->AddEntry(hist_emptylegend,"","l");
@@ -911,7 +912,7 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   //======================
 
   //=== Legend
-  TLegend * lg_SandT = new TLegend(0.43, 0.15, 0.69, 0.45);
+  TLegend * lg_SandT = new TLegend(0.48, 0.15, 0.66, 0.45);
   lg_SandT->SetBorderSize(0);
   lg_SandT->SetFillStyle(0);
 
@@ -921,6 +922,8 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   lg_SandT->AddEntry(gr_band_2sigma_SandT,"95% expected", "f");
   //lg_SandT->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
   lg_SandT->AddEntry(hist_emptylegend,"","l");
+  lg_SandT->AddEntry(hist_emptylegend,"","l");
+
 
   TCanvas *c_SandT = new TCanvas("c_SandT", "", 900, 800);
   canvas_margin_limit(c_SandT);

@@ -63,11 +63,16 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   TH1D *dummy = new TH1D("hist", "", 10000, 0., 10000.);
   dummy->Draw("hist");
   hist_axis(dummy);
-  dummy->GetYaxis()->SetTitleOffset(0.7);
+  dummy->GetYaxis()->SetTitleOffset(0.75);
+  dummy->GetYaxis()->SetLabelSize(0.045);
   dummy->GetYaxis()->SetTitleSize(0.06);
   dummy->GetYaxis()->SetTitle("Mixing");
+
+  dummy->GetXaxis()->SetLabelSize(0.045);
+  dummy->GetXaxis()->SetTitleSize(0.055);
+  dummy->GetXaxis()->SetTitleOffset(1.00);
+
   dummy->GetXaxis()->SetTitle("m_{N} (GeV)");
-  dummy->GetXaxis()->SetTitleSize(0.05);
   dummy->GetXaxis()->SetRangeUser(20., 2000);
   dummy->GetYaxis()->SetRangeUser(0.000005, 1.);
   dummy->SetTitle("");
@@ -92,7 +97,7 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   dummy->Draw("hist");
 
   //=== Legend
-  TLegend * lg_SandT = new TLegend(0.60, 0.20, 0.92, 0.55);
+  TLegend * lg_SandT = new TLegend(0.50, 0.20, 0.90, 0.55);
   lg_SandT->SetBorderSize(0);
   lg_SandT->SetFillStyle(0);
 

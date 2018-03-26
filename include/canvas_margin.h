@@ -212,8 +212,9 @@ void hist_axis_limit(TH1D *hist){
   hist->GetYaxis()->SetTitleSize(0.06);
   hist->GetYaxis()->SetTitleOffset(1.30);
 
-  hist->GetXaxis()->SetLabelSize(0.03);
-  hist->GetXaxis()->SetTitleSize(0.05);
+  hist->GetXaxis()->SetLabelSize(0.04);
+  hist->GetXaxis()->SetTitleSize(0.055);
+  hist->GetXaxis()->SetTitleOffset(1.00);
 
 }
 
