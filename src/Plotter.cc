@@ -66,7 +66,7 @@ void Plotter::draw_hist(){
         //==== CR
         if(signal_mass.size()==0) lg = new TLegend(0.60, 0.35, 0.96, 0.92);
         //==== SR
-        else lg = new TLegend(0.50, 0.35, 0.95, 0.91);
+        else lg = new TLegend(0.51, 0.36, 0.94, 0.91);
       }
       else{
         //==== CR
