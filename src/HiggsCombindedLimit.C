@@ -875,8 +875,9 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   latex_Lumi.DrawLatex(0.735, 0.96, "35.9 fb^{-1} (13 TeV)");
   latex_title.SetTextSize(0.04);
   latex_title.SetLineWidth(2);
-  latex_title.DrawLatex(0.25, 0.85, "#font[41]{95% CL upper limit}");
-  latex_title.DrawLatex(0.25, 0.90, "#font[62]{CMS}");
+  latex_title.DrawLatex(0.25, 0.84, "#font[41]{95% CL upper limit}");
+  latex_title.SetTextSize(0.05);
+  latex_title.DrawLatex(0.25, 0.88, "#font[62]{CMS}");
 
   c_SOnly->SetLogx();
   dummy->Draw("axissame");
@@ -965,8 +966,9 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   latex_Lumi.DrawLatex(0.735, 0.96, "35.9 fb^{-1} (13 TeV)");
   latex_title.SetTextSize(0.04);
   latex_title.SetLineWidth(2);
-  latex_title.DrawLatex(0.25, 0.85, "#font[41]{95% CL upper limit}");
-  latex_title.DrawLatex(0.25, 0.90, "#font[62]{CMS}");
+  latex_title.DrawLatex(0.25, 0.84, "#font[41]{95% CL upper limit}");
+  latex_title.SetTextSize(0.05);
+  latex_title.DrawLatex(0.25, 0.88, "#font[62]{CMS}");
 
   c_SandT->SetLogx();
   dummy->Draw("axissame");
