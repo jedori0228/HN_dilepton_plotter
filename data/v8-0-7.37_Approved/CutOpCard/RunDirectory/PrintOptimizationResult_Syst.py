@@ -1,7 +1,7 @@
 import os
 
-channels = ["MuMu", "ElEl", "MuEl"]
-channelsForLatex = ["$\mu \mu$", "ee", "e$\mu$"]
+channels = ["ElEl", "MuMu", "MuEl"]
+channelsForLatex = ["$\Pe\Pe$", "$\mu \mu$", "$\Pe\mu$"]
 
 masses = [50, 500]
 
@@ -16,9 +16,14 @@ for it_ch in range(0,len(channels)):
       if "Total Systematic" in line_Bin1[it_line]:
         index_totsyst = it_line
         break
-
     words_systs_Bin1 = line_Bin1[index_totsyst].split()
-    words_systs_Bin2 = words_systs_Bin1
+
+    index_totsyst = 0
+    for it_line in range(0,len(line_Bin2)):
+      if "Total Systematic" in line_Bin2[it_line]:
+        index_totsyst = it_line
+        break
+    words_systs_Bin2 = line_Bin2[index_totsyst].split()
 
     ##########
     ## Bin1 ##

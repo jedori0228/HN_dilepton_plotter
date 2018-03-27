@@ -25,7 +25,7 @@ for ch in channels:
 
       pdf = 0.
       rate = 0.
-      if mass<1500:
+      if mass<=1700:
         lines = open('Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'.log').readlines()
         rate = float(lines[len(lines)-1].split()[0])
         pdf = 0.

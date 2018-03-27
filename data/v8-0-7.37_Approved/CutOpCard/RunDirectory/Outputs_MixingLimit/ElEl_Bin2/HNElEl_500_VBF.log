@@ -1,6 +1,6 @@
 
 Processing CyclesForMixingLimit_ElEl_Bin2/HNElEl_500_VBF.C...
-[AnalysisInputs::SetMCSF] Get MC SF from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/MCSF.txt
+[AnalysisInputs::SetMCSF] Get MC SF from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_Approved/MCSF.txt
 [AnalysisInputs::SetMCSF] sample : VVV
 [AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.5
 [AnalysisInputs::SetMCSF] sample : WWW
@@ -57,14 +57,14 @@ Processing CyclesForMixingLimit_ElEl_Bin2/HNElEl_500_VBF.C...
 [AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0752381
 [AnalysisInputs::SetMCSF] sample : WGtoLNuG_weighted
 [AnalysisInputs::SetMCSF] => MCSF = 1, MCSF_err = 0.0752381
-[AnalysisInputs::SetCalculatedSysts] Get Systematics from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/Syst.txt
+[AnalysisInputs::SetCalculatedSysts] Get Systematics from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_Approved/Syst.txt
 [AnalysisInputs::SetCalculatedSysts] source : Luminosity
 [AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.025
 [AnalysisInputs::SetCalculatedSysts] source : FakeLooseID
 [AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.3
 [AnalysisInputs::SetCalculatedSysts] source : ChrageFlipSyst
 [AnalysisInputs::SetCalculatedSysts] => % sysematic = 0.16
-[CutRangeInfo::ReadCutCard] Get Cutcard from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_ForApproval/CutOpCard/RunDirectory/Cards_ElEl_Bin2/HNElEl_500.txt
+[CutRangeInfo::ReadCutCard] Get Cutcard from /data8/Users/jskim/HN_dilepton_plotter/data/v8-0-7.37_Approved/CutOpCard/RunDirectory/Cards_ElEl_Bin2/HNElEl_500.txt
 Central	2.50463	0.12036	0.174486
 _MuonEn_up	2.50582	0.12036	0.174486
 _MuonEn_down	2.51818	0.12036	0.174486
@@ -126,6 +126,6 @@ Total Background	2.799
 - Obs	1.000
 
 ####### Result #######
-Signal Eff	0.130287
+Signal Eff	0.200221
 2.799480 1.345909
 0.613299 1.101644

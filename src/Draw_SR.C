@@ -209,12 +209,12 @@ void Draw_SR(int XXX=0){
   m.x_title = {
     "l^{#pm}l^{#pm} invariant mass (GeV)",
     //==== Jets for High Mass
-    "jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+    "jj_{ak4} invariant mass (GeV)", "m(l^{#pm}l^{#pm}W_{jet}) (GeV)", "m(l_{1}W_{jet}) (GeV)", "m(l_{2}W_{jet}) (GeV)",
     "#DeltaR(jj_{W,ak4})",
     "#DeltaR(Leading lepton,jj_{W,ak4})", "#DeltaR(Subleading lepton,jj_{W,ak4})", 
     "#DeltaR(Leading lepton,Subleading lepton+jj_{W,ak4})", "#DeltaR(Subleading lepton,Leading lepton+jj_{W,ak4})",
     //==== Jets for Low Mass
-    "jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+    "jj_{ak4} invariant mass (GeV)", "m(l^{#pm}l^{#pm}W_{jet}) (GeV)", "m(l_{1}W_{jet}) (GeV)", "m(l_{2}W_{jet}) (GeV)",
     "#DeltaR(jj_{W})",
     "#DeltaR(Leading lepton,jj_{W,ak4})", "#DeltaR(Subleading lepton,jj_{W,ak4})",
     "#DeltaR(Leading lepton,Subleading lepton+jj_{W,ak4})", "#DeltaR(Subleading lepton,Leading lepton+jj_{W,ak4})",
@@ -238,7 +238,7 @@ void Draw_SR(int XXX=0){
     //"l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
     "l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
     //==== OneJet_NoFatJet
-    "l_{1}j_{ak4} invariant mass (GeV)", "l_{2}j_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak4} invariant mass (GeV)",
+    "l_{1}j_{ak4} invariant mass (GeV)", "m(l_{2}W_{jet}) (GeV)", "m(l^{#pm}l^{#pm}W_{jet}) (GeV)",
   };
 
   m.units = {
@@ -370,13 +370,13 @@ void Draw_SR(int XXX=0){
   m.x_title = {
     "l^{#pm}l^{#pm} invariant mass (GeV)",
     // low-SR1
-    "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+    "m(l^{#pm}l^{#pm}W_{jet}) (GeV)", "m(l_{2}W_{jet}) (GeV)",
     // low-SR2
-    "l_{2}j_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak4} invariant mass (GeV)",
+    "m(l_{2}W_{jet}) (GeV)", "m(l^{#pm}l^{#pm}W_{jet}) (GeV)",
     // high-SR1
-    "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+    "m(l^{#pm}l^{#pm}W_{jet}) (GeV)", "m(l_{1}W_{jet}) (GeV)", "m(l_{2}W_{jet}) (GeV)",
     // high-SR2
-    "l_{1}j_{ak8} invariant mass (GeV)", "l_{2}j_{ak8} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak8} invariant mass (GeV)",
+    "m(l_{1}W_{jet}) (GeV)", "m(l_{2}W_{jet}) (GeV)", "m(l^{#pm}l^{#pm}W_{jet}) (GeV)",
   };
   m.units = {
     "GeV",
@@ -393,7 +393,7 @@ void Draw_SR(int XXX=0){
 /*
   //==== FIXME test
   m.histname = {"m_lljj_lljjWclosest", "m_llj"};
-  m.x_title = {"l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak4} invariant mass (GeV)"};
+  m.x_title = {"m(l^{#pm}l^{#pm}W_{jet}) (GeV)", "m(l^{#pm}l^{#pm}W_{jet}) (GeV)"};
   m.units = {"GeV", "GeV"};
 */
 

@@ -128,7 +128,7 @@ for ch in channels:
         logname = 'Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'.log'
 
         ## FIXME TEMP, no s-ch for 1700 and 2000
-        if mass>=1700:
+        if mass>=2000:
           logname = 'Outputs_MixingLimit/'+ch+'_'+Bin+'/HN'+ch+'_'+str(mass)+'_VBFOnly.log'
 
         runlog = open(logname).readlines()
