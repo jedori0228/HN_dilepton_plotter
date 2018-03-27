@@ -306,8 +306,14 @@ void PAS_ForLatex_MakeCRYieldTable(int lepch=0, int CRsection=0){
 
     double total_err = sqrt(staterr*staterr+systerr*systerr);
 
-    cout << regionsForTex.at(it_region) << " "; AddPhantomZero(central_yield,"r",4,1);
-    cout << " $\\pm$ "; AddPhantomZero(total_err,"l",3,1);
+    int int_central_yield = round(central_yield);
+    int int_total_err = round(total_err);
+
+    //double int_central_yield = central_yield;
+    //double int_total_err = total_err;
+
+    cout << regionsForTex.at(it_region) << " "; AddPhantomZero(int_central_yield,"r",4,0);
+    cout << " $\\pm$ "; AddPhantomZero(int_total_err,"r",3,0);
 
     TString filename = "DiLeptonAnalyzer_data_"+DataPD+"_cat_"+catversion+".root";
     TFile *file_data = new TFile(filepath+"/"+filename);

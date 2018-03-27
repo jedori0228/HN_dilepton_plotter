@@ -812,11 +812,11 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   }
   if(channel=="MuEl"){
     lg_Alt->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
-    lg_Alt->AddEntry(hist_emptylegend,"","l");
-    lg_Alt->AddEntry(hist_emptylegend,"","l");
-    lg_Alt->AddEntry(hist_emptylegend,"","l");
-    lg_Alt->AddEntry(hist_emptylegend,"","l");
-    lg_Alt->AddEntry(hist_emptylegend,"","l");
+    lg_Alt->AddEntry(hist_emptylegend,"#color[0]{CMS 13 TeV trilepton}","l");
+    lg_Alt->AddEntry(hist_emptylegend,"#color[0]{CMS 13 TeV trilepton}","l");
+    lg_Alt->AddEntry(hist_emptylegend,"#color[0]{CMS 13 TeV trilepton}","l");
+    lg_Alt->AddEntry(hist_emptylegend,"#color[0]{CMS 13 TeV trilepton}","l");
+    lg_Alt->AddEntry(hist_emptylegend,"#color[0]{CMS 13 TeV trilepton}","l");
   }
   TLegend *lg_Alt_SandT = (TLegend *)lg_Alt->Clone();
 

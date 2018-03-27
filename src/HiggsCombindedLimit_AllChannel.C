@@ -134,6 +134,7 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
 */
 
   c_SandT->SetLogx();
+  dummy->Draw("axissame");
   c_SandT->SaveAs(plotpath+"/AllChannel_13TeV_mixing_logx_SandT.pdf");
   c_SandT->SaveAs(plotpath+"/AllChannel_13TeV_mixing_logx_SandT.png");
 
@@ -141,6 +142,7 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   gr_ElEl_SOnly->Draw("lsame");
   gr_MuEl_SOnly->Draw("lsame");
 
+  dummy->Draw("axissame");
   c_SandT->SaveAs(plotpath+"/AllChannel_13TeV_mixing_logx.pdf");
   c_SandT->SaveAs(plotpath+"/AllChannel_13TeV_mixing_logx.png");
 
