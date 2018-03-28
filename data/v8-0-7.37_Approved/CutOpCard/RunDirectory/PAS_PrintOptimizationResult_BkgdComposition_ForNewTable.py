@@ -1,18 +1,26 @@
 import os,math
 
-def AddPhantomZero(a,left,right):
+def AddPhantomZero(a,left,right,align):
   vals = a.split('.')
   val_int = vals[0]
   val_fra = vals[1]
 
+  phantoms = "\phantom{"
+
   for a in range(0, left-len(val_int)):
-    val_int = "\\phantom{0}"+val_int
+    phantoms = phantoms+"0"
+    #val_int = "\\phantom{0}"+val_int
+  #phantoms = phantoms+"."
 
   for a in range(0, right-len(val_fra)):
-    val_fra = val_fra+"\\phantom{0}"
+    phantoms = phantoms+"0"
+    #val_fra = val_fra+"\\phantom{0}"
+  phantoms = phantoms+"}"
 
-  return val_int+"."+val_fra
-
+  if align == "r":
+    return phantoms+val_int+"."+val_fra
+  else:
+    return val_int+"."+val_fra+phantoms
 
 def StringToFloat(a):
   if "nan" in a:
@@ -64,9 +72,9 @@ def MakeYield(a,b,c,nround):
 
 
   if a < tot:
-    out = AddPhantomZero(central_yield,2,1)+'^{+ '+AddPhantomZero(str_tot,2,1)+'}_{-'+AddPhantomZero(central_yield,2,1)+'}'
+    out = AddPhantomZero(central_yield,2,1,"r")+'^{\phantom{0}+\phantom{0}'+AddPhantomZero(str_tot,2,1,"l")+'\phantom{0}}_{\phantom{0}-\phantom{0}'+AddPhantomZero(central_yield,2,1,"l")+'\phantom{0}}'
   else:
-    out = AddPhantomZero(central_yield,2,1)+' \\pm '+AddPhantomZero(str_tot,2,1)
+    out = AddPhantomZero(central_yield,2,1,"r")+' \\pm '+AddPhantomZero(str_tot,2,1,"l")
 
   #out = central_yield+'\t'+str_tot
 
