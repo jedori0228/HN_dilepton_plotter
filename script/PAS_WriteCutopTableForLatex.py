@@ -1,18 +1,27 @@
 import os
 import csv
 
-def AddPhantomZero(a,left,right):
+def AddPhantomZero(a,left,right,align):
   vals = a.split('.')
   val_int = vals[0]
   val_fra = vals[1]
 
+  phantoms = "\phantom{"
+
   for a in range(0, left-len(val_int)):
-    val_int = "\\phantom{0}"+val_int
+    phantoms = phantoms+"0"
+    #val_int = "\\phantom{0}"+val_int
+  phantoms = phantoms+"."
 
   for a in range(0, right-len(val_fra)):
-    val_fra = val_fra+"\\phantom{0}"
+    phantoms = phantoms+"0"
+    #val_fra = val_fra+"\\phantom{0}"
+  phantoms = phantoms+"}"
 
-  return val_int+"."+val_fra
+  if align == "r":
+    return phantoms+val_int+"."+val_fra
+  else:
+    return val_int+"."+val_fra+phantoms
 
 WORKING_DIR = os.environ['PLOTTER_WORKING_DIR']
 dataset = os.environ['CATANVERSION']
@@ -166,17 +175,17 @@ for region in regions:
                 toprint = '$'+toprint+'$'
 
               if a==13:
-                toprint = "$"+AddPhantomZero(row[a],n_sch_int,n_sch_fra)+"\\pm"
+                toprint = "$"+AddPhantomZero(row[a],n_sch_int,n_sch_fra,"r")+"\\pm"
                 print toprint,
                 continue
               if a==14:
-                toprint =  AddPhantomZero(row[a],1,n_sch_fra)+"$"
+                toprint =  AddPhantomZero(row[a],1,n_sch_fra,"l")+"$"
                 print toprint,
                 continue
 
               if a==15:
                 if toprint!= "":
-                  toprint = "& $"+AddPhantomZero(row[a],n_tch_int,n_tch_fra)+"\\pm"
+                  toprint = "& $"+AddPhantomZero(row[a],n_tch_int,n_tch_fra,"r")+"\\pm"
                   print toprint,
                   continue
                 else:
@@ -190,7 +199,7 @@ for region in regions:
                   continue
               if a==16:
                 if toprint!= "":
-                  toprint =  AddPhantomZero(row[a],1,n_tch_fra)+"$"
+                  toprint =  AddPhantomZero(row[a],1,n_tch_fra,"l")+"$"
                 else:
                   toprint = toprint
 

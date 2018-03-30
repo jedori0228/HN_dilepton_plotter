@@ -876,9 +876,12 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   }
 
   //==== background err
-  mc_allerror->SetMarkerColorAlpha(kAzure-9, 0);
-  mc_allerror->SetFillStyle(3013);
-  mc_allerror->SetFillColor(kBlack);
+  gStyle->SetHatchesSpacing(1);
+  gStyle->SetHatchesLineWidth(1);
+  mc_allerror->SetMarkerColor(0);
+  mc_allerror->SetMarkerSize(0);
+  mc_allerror->SetFillStyle(3444);
+  mc_allerror->SetFillColor(kGray+2);
   mc_allerror->SetLineColor(0);
   mc_allerror->Draw("sameE2");
 
@@ -1105,7 +1108,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
 
   mkdir(thiscut_plotpath);
   c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".pdf");
-  //c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".png");
+  c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".png");
   outputf->cd();
   c1->Write();
   
