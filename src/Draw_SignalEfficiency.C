@@ -1,6 +1,6 @@
 #include "canvas_margin.h"
 
-void Draw_SignalEfficiency(){
+void Draw_SignalEfficiency(int xxx=0){
 
   gStyle->SetOptStat(0);
 
@@ -13,6 +13,35 @@ void Draw_SignalEfficiency(){
 
   TString base_filepath = WORKING_DIR+"/rootfiles/"+dataset+"/Regions/Signal/";
   TString base_plotpath = ENV_PLOT_PATH+"/"+dataset+"/SignalEfficiency/";
+  TString region = "Preselection";
+
+  double yield_mumu = 0;
+  if(xxx==1){
+    region = "Inclusive1nlbjets";
+    yield_mumu = 883.8;
+  }
+  if(xxx==2){
+    region = "0jets_0nlbjets_dRllge2p5";
+    yield_mumu = 885.5;
+  }
+  if(xxx==3){
+    region = "LowCR_TwoJet_NoFatJet";
+    yield_mumu = 422.5;
+  }
+  if(xxx==4){
+    region = "LowCR_OneJet_NoFatJet";
+    yield_mumu = 156.2;
+  }
+  if(xxx==5){
+    region = "HighCR_TwoJet_NoFatJet";
+    yield_mumu = 556.9;
+  }
+  if(xxx==6){
+    region = "HighCR_OneFatJet";
+    yield_mumu = 35.1;
+  }
+
+  base_plotpath = base_plotpath+"/"+region+"/";
 
   if( !gSystem->mkdir(base_plotpath, kTRUE) ){
     cout
@@ -22,12 +51,12 @@ void Draw_SignalEfficiency(){
     << endl;
   }
 
-  vector<int> masses = {40, 50, 60, 70, 80, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500};
+  vector<int> masses = {40, 50, 60, 70, 75, 85, 90, 100, 125, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500};
   const int n_mass = masses.size();
   TString NMCfilepath = WORKING_DIR+"/data/SignalN_MC.txt";
 
   vector<TString> channels = {"MuMu", "ElEl", "MuEl"};
-  TString region = "Preselection";
+  if(xxx!=0) channels = {"MuMu"};
 
   for(unsigned int i=0; i<channels.size(); i++){
 
@@ -63,6 +92,7 @@ void Draw_SignalEfficiency(){
       if(channel=="MuMu") PDName = "DiMuon";
       if(channel=="ElEl") PDName = "DiElectron";
       if(channel=="MuEl") PDName = "EMu";
+      if(channel=="LL") PDName = "DiLepton";
 
       TString histname_ak4 = PDName+"_"+"LegacyTwoJets"+"_SS/Nevents_"+PDName+"_"+"LegacyTwoJets"+"_SS";
       TString histname = PDName+"_"+region+"_SS/Nevents_"+PDName+"_"+region+"_SS";
@@ -72,9 +102,13 @@ void Draw_SignalEfficiency(){
       TH1D *hist_SS = (TH1D *)file->Get(PDName+"_SS/Nevents_"+PDName+"_SS");
 
 
-      double eff_ak4 = hist_ak4->GetEntries()/N_MC;
-      double eff = hist->GetEntries()/N_MC;
-      double eff_SS = hist_SS->GetEntries()/N_MC;
+      double eff_ak4 = 0;
+      double eff = 0;
+      double eff_SS = 0;
+
+      if(hist_ak4) eff_ak4 = hist_ak4->GetEntries()/N_MC;
+      if(hist) eff = hist->GetEntries()/N_MC;
+      if(hist_SS) eff_SS = hist_SS->GetEntries()/N_MC;
 
 /*
       double eff_ak4 = hist_ak4->GetBinContent(1)/N_MC;
@@ -85,7 +119,18 @@ void Draw_SignalEfficiency(){
       y[j] = eff;
       y_SS[j] = eff_SS;
 
-      cout << mass << "\t" << hist_SS->GetEntries() << "\t" << N_MC << "\t" << y_SS[j] << endl;
+      if(xxx==0) cout << mass << "\t" << hist_SS->GetEntries() << "\t" << N_MC << "\t" << y_SS[j] << endl;
+      else{
+        double scale(1.);
+        if(x[j]<=60) scale = 1E-5/1E-2;
+        else if(x[j]<=200) scale = 1E-3/1E-2;
+        else scale = 1;
+
+        double this_sig_yield(0.);
+        if(hist) this_sig_yield = hist->GetBinContent(1)*scale/yield_mumu;
+        cout << mass << "\t" << scale*0.01 << "\t" << this_sig_yield << endl;
+   
+      }
 
     }
 
