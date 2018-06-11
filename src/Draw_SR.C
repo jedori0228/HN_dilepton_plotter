@@ -84,14 +84,14 @@ void Draw_SR(int XXX=0){
   m.map_sample_string_to_legendinfo["Xgamma"] = make_pair("X + #gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
-  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. charge background", kYellow);
-  m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt background", kSpring-1);
+  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. charge bkgd.", kYellow);
+  m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt bkgd.", kSpring-1);
   
   //===============================
   //==== set and make sample list
