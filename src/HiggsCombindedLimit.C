@@ -796,7 +796,7 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   lg->AddEntry(hist_emptylegend,"","l");
   //lg->AddEntry(gr_8and13TeV_obs, "CMS 8/13 TeV Combined", "l");
 
-  TLegend *lg_Alt = new TLegend(0.67, 0.15, 0.93, 0.45);
+  TLegend *lg_Alt = new TLegend(0.65, 0.15, 0.93, 0.48);
   lg_Alt->SetBorderSize(0);
   lg_Alt->SetFillStyle(0);
   if(channel=="MuMu"){
@@ -925,7 +925,7 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   //======================
 
   //=== Legend
-  TLegend * lg_SandT = new TLegend(0.48, 0.15, 0.66, 0.45);
+  TLegend * lg_SandT = new TLegend(0.43, 0.15, 0.66, 0.48);
   lg_SandT->SetBorderSize(0);
   lg_SandT->SetFillStyle(0);
 
