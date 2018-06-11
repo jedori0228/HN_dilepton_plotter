@@ -759,8 +759,14 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   //==== EWPD
   double EWPD_ee[2], EWPD_mm[2];
   for(int i=0; i<2; i++){
+    //==== https://journals.aps.org/prd/pdf/10.1103/PhysRevD.78.013010
+    //==== 90% CL
     EWPD_ee[i] = 0.003;
     EWPD_mm[i] = 0.003;
+    //==== https://www.epj-conferences.org/articles/epjconf/pdf/2013/21/epjconf_lhcp2013_19008.pdf
+    //==== 95% CL
+    EWPD_ee[i] = 0.041*0.041;
+    EWPD_mm[i] = 0.030*0.030;
   }
   TGraph *gr_EWPD_ee = new TGraph(2, allxrange, EWPD_ee);
   TGraph *gr_EWPD_mm = new TGraph(2, allxrange, EWPD_mm);
@@ -796,7 +802,10 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   if(channel=="MuMu"){
     lg_Alt->AddEntry(gr_DELPHILimit, "DELPHI prompt", "l");
     lg_Alt->AddEntry(gr_L3Limit, "L3", "l");
-    lg_Alt->AddEntry(gr_EWPD_mm, "EWPD (90% CL)", "l");
+
+    //lg_Alt->AddEntry(gr_EWPD_mm, "EWPD (90% CL)", "l");
+    lg_Alt->AddEntry(gr_EWPD_mm, "EWPD", "l");
+
     lg_Alt->AddEntry(gr_ATLAS_MuMu, "ATLAS 8 TeV", "l");
     lg_Alt->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
     lg_Alt->AddEntry(gr_trilepLimit, "CMS 13 TeV trilepton", "l");
@@ -804,7 +813,10 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   if(channel=="ElEl"){
     lg_Alt->AddEntry(gr_DELPHILimit, "DELPHI prompt", "l");
     lg_Alt->AddEntry(gr_L3_2Limit, "L3", "l");
-    lg_Alt->AddEntry(gr_EWPD_mm, "EWPD (90% CL)", "l");
+
+    //lg_Alt->AddEntry(gr_EWPD_ee, "EWPD (90% CL)", "l");
+    lg_Alt->AddEntry(gr_EWPD_ee, "EWPD", "l");
+
     lg_Alt->AddEntry(gr_ATLAS_ElEl, "ATLAS 8 TeV", "l");
     lg_Alt->AddEntry(gr_8TeV_exp, "CMS 8 TeV", "l");
     lg_Alt->AddEntry(gr_trilepLimit, "CMS 13 TeV trilepton", "l");

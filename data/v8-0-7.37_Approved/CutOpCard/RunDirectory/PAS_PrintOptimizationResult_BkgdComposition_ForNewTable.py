@@ -156,7 +156,7 @@ for LowORHigh in range(0,3):
             obs = StringToFloat( runlog[a+4].split()[2] )
         total = prompt+fake+cf
 
-        nround = 1
+        nround = 2
         #if LowORHigh!=0:
         #  nround = 2
 
