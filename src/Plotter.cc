@@ -1026,7 +1026,8 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     ratio_point->Draw("p9histsame");
     gr_ratio_point->Draw("p0same");
 
-    TLegend *lg_ratio = new TLegend(0.7, 0.8, 0.9, 0.9);
+    //TLegend *lg_ratio = new TLegend(0.7, 0.8, 0.9, 0.9);
+    TLegend *lg_ratio = new TLegend(0.2, 0.47, 0.4, 0.57);
     //lg_ratio->SetFillStyle(0);
     //lg_ratio->SetBorderSize(0);
     lg_ratio->SetNColumns(2);
