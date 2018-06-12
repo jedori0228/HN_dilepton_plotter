@@ -45,15 +45,21 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   TGraph *gr_MuMu = HiggsCombindedLimit(0+WhichSR,"",0+ObsOrExp,true);
   TGraph *gr_ElEl = HiggsCombindedLimit(3+WhichSR,"",0+ObsOrExp,true);
   TGraph *gr_MuEl = HiggsCombindedLimit(6+WhichSR,"",0+ObsOrExp,true);
+
+  gr_MuMu->SetLineStyle(3);
+  gr_ElEl->SetLineStyle(1);
+  gr_MuEl->SetLineStyle(5);
+
   TGraph *gr_MuMu_SOnly = HiggsCombindedLimit(0+WhichSR,"",4+ObsOrExp,true);
   TGraph *gr_ElEl_SOnly = HiggsCombindedLimit(3+WhichSR,"",4+ObsOrExp,true);
   TGraph *gr_MuEl_SOnly = HiggsCombindedLimit(6+WhichSR,"",4+ObsOrExp,true);
 
-  gr_ElEl->SetLineColor(kRed);
+  gr_MuMu->SetLineColor(kRed);
+  gr_ElEl->SetLineColor(kBlack);
   gr_MuEl->SetLineColor(kBlue);
 
-  gr_MuMu_SOnly->SetLineColor(kCyan);
-  gr_ElEl_SOnly->SetLineColor(kRed);
+  gr_MuMu_SOnly->SetLineColor(kRed);
+  gr_ElEl_SOnly->SetLineColor(kBlack);
   gr_MuEl_SOnly->SetLineColor(kBlue);
   gr_MuMu_SOnly->SetLineStyle(3);
   gr_ElEl_SOnly->SetLineStyle(3);
@@ -66,7 +72,7 @@ void HiggsCombindedLimit_AllChannel(int WhichSR=1, int ObsOrExp=0){
   dummy->GetYaxis()->SetTitleOffset(0.75);
   dummy->GetYaxis()->SetLabelSize(0.045);
   dummy->GetYaxis()->SetTitleSize(0.06);
-  dummy->GetYaxis()->SetTitle("Mixing");
+  dummy->GetYaxis()->SetTitle("Mixing matrix element");
 
   dummy->GetXaxis()->SetLabelSize(0.045);
   dummy->GetXaxis()->SetTitleSize(0.055);
