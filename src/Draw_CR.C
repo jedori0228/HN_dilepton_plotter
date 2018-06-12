@@ -1,7 +1,9 @@
 #include "Plotter.cc"
 #include <fstream>
 
-void Draw_CR(bool ScaleMC=true, int XXX=0){
+void Draw_CR(int XXX=0){
+
+  bool ScaleMC=true;
 
   //==============
   //==== get env
@@ -62,8 +64,11 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_list["fake_sfed_HighdXY_UsePtCone"] = {"fake_sfed_HighdXY_UsePtCone"};
   m.map_sample_string_to_list["fake_DiMuon_HighdXY"] = {"fake_HighdXY"};
   m.map_sample_string_to_list["fake_Dijet"] = {"fake_Dijet"};
+  m.map_sample_string_to_list["fake_Dijet_LooseBJet"] = {"fake_Dijet_LooseBJet"};
   m.map_sample_string_to_list["chargeflip"] = {"chargeflip"};
-  
+  m.map_sample_string_to_list["prompt"] = {"prompt"};
+//"TG", "TTG", "ZGto2LG", "WGtoLNuG_weighted", "WZTo3LNu_powheg", "ZZTo4L_powheg", "ggZZto2e2mu", "ggZZto2e2nu", "ggZZto2e2tau", "ggZZto2mu2nu", "ggZZto2mu2tau", "ggZZto4e", "ggZZto4mu", "ggZZto4tau", "ggHtoZZ", "WWW", "WWZ", "WZZ", "ZZZ", "ttW", "ttZ", "ttH_nonbb", "WWTo2L2Nu_DS", "WpWpEWK", "WpWpQCD"};
+
   m.map_sample_string_to_legendinfo["DY"] = make_pair("DY", kYellow);
   m.map_sample_string_to_legendinfo["WJets"] = make_pair("WJets", kGreen);
   m.map_sample_string_to_legendinfo["VV_excl"] = make_pair("diboson", kSpring-1);
@@ -80,13 +85,15 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   m.map_sample_string_to_legendinfo["Xgamma_noDY"] = make_pair("X + #gamma", kSpring-7);
   m.map_sample_string_to_legendinfo["WW_double"] = make_pair("DoubleWW", 74);
   m.map_sample_string_to_legendinfo["ttV_lep"] = make_pair("ttV", kOrange);
-  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton background", 870);
-  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. charge background", kYellow);
-  
+  m.map_sample_string_to_legendinfo["fake_HighdXY"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. charge bkgd.", kYellow);
+  m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt bkgd.", kSpring-1);
+
   //===============================
   //==== set and make sample list
   //===============================
@@ -185,20 +192,16 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
   //==== Log
   //==== Use DY
   if(XXX==1){
-    m.samples_to_use = {"VV_excl", "Xgamma_noDY", "VVV", "top", "DY", "WW_double"};
+    m.samples_to_use = {"chargeflip", "fake_Dijet", "prompt"};
     m.histname_suffix = {
-/*
-      "_DiElectron_OnZ_OS", // OS OnZ CR (DY Prompt)
-      "_DiElectron_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
-      "_DiElectron_1jets_OnZ_OS", // OS 1jet OnZ CR (DY+jet)
-      "_DiElectron_Inclusive1nlbjets_OS", // OS bjet>=1 (Prompt+NonPrompt)
-      "_DiMuon_OnZ_OS", // OS OnZ CR (DY Prompt)
-      "_DiMuon_0jets_OnZ_OS", // OS 0jet OnZ CR (DY Prompt)
-      "_DiMuon_1jets_OnZ_OS", // OS 1jet OnZ CR (DY+jet)
-      "_DiMuon_Inclusive1nlbjets_OS", // OS bjet>=1 (Prompt+NonPrompt)
-*/
-      "_DiMuon_0jets_OS",
-      "_DiElectron_0jets_OnZ_OS",
+      //"_DiLepton_Inclusive1nlbjets_SS", // CR1
+      //"_DiLepton_0jets_0nlbjets_dRllge2p5_SS", //CR2
+      "_DiLepton_CR1",
+      "_DiLepton_CR2",
+      "_DiLepton_LowCR_TwoJet_NoFatJet_SS",
+      "_DiLepton_LowCR_OneJet_NoFatJet_SS",
+      "_DiLepton_HighCR_TwoJet_NoFatJet_SS",
+      "_DiLepton_HighCR_OneFatJet_SS",
     };
   }
   if(XXX==2){
@@ -297,6 +300,38 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     "GeV", "GeV", "GeV", "GeV",
   };
 
+  if(XXX==1){
+    m.histname = {
+      "Nevents",
+      "leadingLepton_Pt",
+      "secondLepton_Pt",
+      "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
+      "m_Leadlj", "m_SubLeadlj", "m_llj",
+      "m_jj_jjWclosest", "m_lljj_jjWclosest", "m_Leadljj_jjWclosest", "m_SubLeadljj_jjWclosest",
+      "m_jj_lljjWclosest", "m_lljj_lljjWclosest", "m_Leadljj_lljjWclosest", "m_SubLeadljj_lljjWclosest",
+    };
+
+    m.x_title = {
+      "onebin",
+      "Leading Lepton p_{T} (GeV)",
+      "Subleading Lepton p_{T} (GeV)",
+      "m(Leading Lepton+Fatjet) (GeV)", "Subleading Lepton+Fatjet (GeV)", "m(ll+Fatjet) (GeV)",
+      "l_{1}j_{ak4} invariant mass (GeV)", "l_{2}j_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}j_{ak4} invariant mass (GeV)",
+      "jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+      "jj_{ak4} invariant mass (GeV)", "l^{#pm}l^{#pm}jj_{ak4} invariant mass (GeV)", "l_{1}jj_{ak4} invariant mass (GeV)", "l_{2}jj_{ak4} invariant mass (GeV)",
+    };
+
+    m.units = {
+      "int",
+      "GeV",
+      "GeV",
+      "GeV", "GeV", "GeV",
+      "GeV", "GeV", "GeV",
+      "GeV", "GeV", "GeV", "GeV",
+      "GeV", "GeV", "GeV", "GeV",
+    };
+  }
+
   for(unsigned int i=0; i<m.histname_suffix.size(); i++){
 
     //==== PD
@@ -321,10 +356,10 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
       return;
     }
 
-    if(m.histname_suffix.at(i).Contains("Inclusive1nlbjets")){
+    if(m.histname_suffix.at(i).Contains("Inclusive1nlbjets") || m.histname_suffix.at(i).Contains("CR1")){
       m.RegionType.push_back(-4);
     }
-    else if(m.histname_suffix.at(i).Contains("0jets_0nlbjets_dRllge2p5")){
+    else if(m.histname_suffix.at(i).Contains("0jets_0nlbjets_dRllge2p5") || m.histname_suffix.at(i).Contains("CR2")){
       m.RegionType.push_back(-5);
     }
     else if(m.histname_suffix.at(i).Contains("LowCR")){
@@ -343,7 +378,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
 
     //==== Log plot boolean
     if(XXX==0) m.UseLogy.push_back(-1);
-    else if(XXX==1) m.UseLogy.push_back(10);
+    else if(XXX==1) m.UseLogy.push_back(-1);
     else if(XXX==2) m.UseLogy.push_back(-1);
     else m.UseLogy.push_back(-1);
 
@@ -387,7 +422,7 @@ void Draw_CR(bool ScaleMC=true, int XXX=0){
     //"l_{2}jj_{ak4} invariant mass (GeV)",
     "Subleading Lepton p_{T} (GeV)",
 "Leading Lepton p_{T} (GeV)",
-  };	
+  };  
   m.units = {
     //"GeV", "GeV", "GeV", "GeV",
 "GeV", "GeV",

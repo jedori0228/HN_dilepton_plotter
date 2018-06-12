@@ -1544,18 +1544,18 @@ TString Plotter::GetStringChannelRegion(int A, int B){
   if(B==21) region = "Low-mass SR1";
   if(B==22) region = "Low-mass SR2";
   if(B==-20) region = "Low-mass CR";
-  if(B==-21) region = "Low-mass CR1";
-  if(B==-22) region = "Low-mass CR2";
+  if(B==-21) region = "CR3";
+  if(B==-22) region = "CR4";
 
   if(B==30) region = "High-mass";
   if(B==31) region = "High-mass SR1";
   if(B==32) region = "High-mass SR2";
   if(B==-30) region = "High-mass CR";
-  if(B==-31) region = "High-mass CR1";
-  if(B==-32) region = "High-mass CR2";
+  if(B==-31) region = "CR5";
+  if(B==-32) region = "CR6";
 
-  if(B==-4) region = "Non-prompt CR1";
-  if(B==-5) region = "Non-prompt CR2";
+  if(B==-4) region = "CR1";
+  if(B==-5) region = "CR2";
 
   if(B==-101) region = "WZ CR";
   if(B==-102) region = "Z#gamma CR";
