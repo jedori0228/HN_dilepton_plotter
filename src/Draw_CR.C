@@ -25,7 +25,7 @@ void Draw_CR(int XXX=0){
   //==== set data class
   //=====================
   
-  m.data_class = dataset+"/Regions/";
+  m.data_class = dataset+"/CR_Regions/";
   
   //================================
   //==== set prefixes and suffixes
@@ -192,16 +192,35 @@ void Draw_CR(int XXX=0){
   //==== Log
   //==== Use DY
   if(XXX==1){
+    m.MakePaperPlot = true;
     m.samples_to_use = {"chargeflip", "fake_Dijet", "prompt"};
     m.histname_suffix = {
-      //"_DiLepton_Inclusive1nlbjets_SS", // CR1
-      //"_DiLepton_0jets_0nlbjets_dRllge2p5_SS", //CR2
+
       "_DiLepton_CR1",
       "_DiLepton_CR2",
       "_DiLepton_LowCR_TwoJet_NoFatJet_SS",
       "_DiLepton_LowCR_OneJet_NoFatJet_SS",
       "_DiLepton_HighCR_TwoJet_NoFatJet_SS",
       "_DiLepton_HighCR_OneFatJet_SS",
+      "_DiMuon_Inclusive1nlbjets_SS",
+      "_DiMuon_0jets_0nlbjets_dRllge2p5_SS",
+      "_DiMuon_LowCR_TwoJet_NoFatJet_SS",
+      "_DiMuon_LowCR_OneJet_NoFatJet_SS",
+      "_DiMuon_HighCR_TwoJet_NoFatJet_SS",
+      "_DiMuon_HighCR_OneFatJet_SS",
+      "_DiElectron_Inclusive1nlbjets_OffZ_SS",
+      "_DiElectron_0jets_0nlbjets_dRllge2p5_OffZ_SS",
+      "_DiElectron_LowCR_TwoJet_NoFatJet_SS",
+      "_DiElectron_LowCR_OneJet_NoFatJet_SS",
+      "_DiElectron_HighCR_TwoJet_NoFatJet_SS",
+      "_DiElectron_HighCR_OneFatJet_SS",
+      "_EMu_Inclusive1nlbjets_SS",
+      "_EMu_0jets_0nlbjets_dRllge2p5_SS",
+      "_EMu_LowCR_TwoJet_NoFatJet_SS",
+      "_EMu_LowCR_OneJet_NoFatJet_SS",
+      "_EMu_HighCR_TwoJet_NoFatJet_SS",
+      "_EMu_HighCR_OneFatJet_SS",
+
     };
   }
   if(XXX==2){

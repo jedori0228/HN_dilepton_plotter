@@ -665,7 +665,7 @@ _DiMuon_HighCR_OneFatJet_SS	WClosest_FatJet_Mass	0	250
 _DiMuon_HighCR_OneFatJet_SS	WClosest_FatJet_PrunedMass	30	150
 _DiMuon_HighCR_OneFatJet_SS	WClosest_FatJet_Tau21	0	1
 _DiMuon_HighCR_OneFatJet_SS	m_Leadlfj_fjWclosest	-999	-999
-_DiMuon_HighCR_OneFatJet_SS	m_SubLeadlfj_fjWclosest	-999	-999
+_DiMuon_HighCR_OneFatJet_SS	m_SubLeadlfj_fjWclosest	-999	2000
 _DiMuon_HighCR_OneFatJet_SS	m_llfj_fjWclosest	0	2000
 _DiMuon_HighCR_OneFatJet_SS	m_Leadlj	0	300
 _DiMuon_HighCR_OneFatJet_SS	m_SubLeadlj	0	300
@@ -1406,7 +1406,7 @@ _DiElectron_HighCR_OneFatJet_SS	WClosest_FatJet_Mass	0	250
 _DiElectron_HighCR_OneFatJet_SS	WClosest_FatJet_PrunedMass	30	150
 _DiElectron_HighCR_OneFatJet_SS	WClosest_FatJet_Tau21	0	1
 _DiElectron_HighCR_OneFatJet_SS	m_Leadlfj_fjWclosest	-999	-999
-_DiElectron_HighCR_OneFatJet_SS	m_SubLeadlfj_fjWclosest	-999	-999
+_DiElectron_HighCR_OneFatJet_SS	m_SubLeadlfj_fjWclosest	-999	2000
 _DiElectron_HighCR_OneFatJet_SS	m_llfj_fjWclosest	0	2000
 _DiElectron_HighCR_OneFatJet_SS	m_Leadlj	0	300
 _DiElectron_HighCR_OneFatJet_SS	m_SubLeadlj	0	300
@@ -2261,7 +2261,7 @@ _EMu_HighCR_OneFatJet_SS	WClosest_FatJet_Mass	0	250
 _EMu_HighCR_OneFatJet_SS	WClosest_FatJet_PrunedMass	30	150
 _EMu_HighCR_OneFatJet_SS	WClosest_FatJet_Tau21	0	1
 _EMu_HighCR_OneFatJet_SS	m_Leadlfj_fjWclosest	-999	-999
-_EMu_HighCR_OneFatJet_SS	m_SubLeadlfj_fjWclosest	-999	-999
+_EMu_HighCR_OneFatJet_SS	m_SubLeadlfj_fjWclosest	-999	2000
 _EMu_HighCR_OneFatJet_SS	m_llfj_fjWclosest	0	2000
 _EMu_HighCR_OneFatJet_SS	m_Leadlj	0	300
 _EMu_HighCR_OneFatJet_SS	m_SubLeadlj	0	300
