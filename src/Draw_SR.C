@@ -142,6 +142,7 @@ void Draw_SR(int XXX=0){
   }
   //==== Paper
   if(XXX==1){
+    m.MakePaperPlot = true;
     m.samples_to_use = {"chargeflip", "fake_Dijet", "prompt"};
     m.histname_suffix = {
 
@@ -159,6 +160,21 @@ void Draw_SR(int XXX=0){
       "_DiLepton_Low_OneJet_NoFatJet_SS",
       "_DiLepton_High_TwoJet_NoFatJet_SS",
       "_DiLepton_High_OneFatJet_SS",
+
+      "_DiMuon_Low_TwoJet_NoFatJet_SS",
+      "_DiMuon_Low_OneJet_NoFatJet_SS",
+      "_DiMuon_High_TwoJet_NoFatJet_SS",
+      "_DiMuon_High_OneFatJet_SS",
+
+      "_DiElectron_Low_TwoJet_NoFatJet_SS",
+      "_DiElectron_Low_OneJet_NoFatJet_SS",
+      "_DiElectron_High_TwoJet_NoFatJet_SS",
+      "_DiElectron_High_OneFatJet_SS",
+
+      "_EMu_Low_TwoJet_NoFatJet_SS",
+      "_EMu_Low_OneJet_NoFatJet_SS",
+      "_EMu_High_TwoJet_NoFatJet_SS",
+      "_EMu_High_OneFatJet_SS",
 
     };
   }

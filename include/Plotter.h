@@ -80,6 +80,7 @@ public:
   vector<bool> drawdata, ApplyMCNormSF, drawratio;
 
   //==== channel type
+  bool MakePaperPlot;
   vector<int> LeptonChannels, RegionType;
   TString GetStringChannel(int A);
   TString GetStringRegion(int B);

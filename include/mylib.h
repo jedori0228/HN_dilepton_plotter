@@ -153,14 +153,14 @@ void ScaleGraph(TGraphAsymmErrors *a, double c){
 
 
 
-double GetMaximum(TH1D* hist){
+double GetMaximum(TH1D* hist, double ErrorScale=1.){
 
   TAxis *xaxis = hist->GetXaxis();
 
   double maxval(-1.);
   for(int i=1; i<=xaxis->GetNbins(); i++){
-    if( hist->GetBinContent(i) + hist->GetBinError(i) > maxval ){
-      maxval = hist->GetBinContent(i) + hist->GetBinError(i);
+    if( hist->GetBinContent(i) + ErrorScale*hist->GetBinError(i) > maxval ){
+      maxval = hist->GetBinContent(i) + ErrorScale*hist->GetBinError(i);
     }
   }
 
@@ -168,7 +168,7 @@ double GetMaximum(TH1D* hist){
 
 }
 
-double GetMaximum(TGraphAsymmErrors *a){
+double GetMaximum(TGraphAsymmErrors *a, double ErrorScale=1.){
 
   int NX = a->GetN();
 
@@ -181,8 +181,8 @@ double GetMaximum(TGraphAsymmErrors *a){
     yerr_low  = a->GetErrorYlow(i);
     yerr_high = a->GetErrorYhigh(i);
 
-    if( y+yerr_high > maxval ){
-      maxval = y+yerr_high;
+    if( y+ErrorScale*yerr_high > maxval ){
+      maxval = y+ErrorScale*yerr_high;
     }
 
   }
