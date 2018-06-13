@@ -1034,7 +1034,7 @@ _DiMuon_High_OneFatJet_SS	WClosest_FatJet_PrunedMass	10
 _DiMuon_High_OneFatJet_SS	WClosest_FatJet_Tau21	1
 _DiMuon_High_OneFatJet_SS	m_Leadlfj_fjWclosest	100
 _DiMuon_High_OneFatJet_SS	m_SubLeadlfj_fjWclosest	100
-_DiMuon_High_OneFatJet_SS	m_llfj_fjWclosest	50
+_DiMuon_High_OneFatJet_SS	m_llfj_fjWclosest	100
 _DiMuon_High_OneFatJet_SS	m_Leadlj	20
 _DiMuon_High_OneFatJet_SS	m_SubLeadlj	20
 _DiMuon_High_OneFatJet_SS	m_llj	20

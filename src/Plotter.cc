@@ -11,6 +11,8 @@ Plotter::Plotter(){
   DoDebug = false;
   gErrorIgnoreLevel = kError;
 
+  MakePaperPlot = false;
+
 }
 
 Plotter::~Plotter(){
@@ -844,6 +846,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   mc_stack->Draw("histsame");
 
   //==== signal
+  double y_signal_max = -999.;
   if(CurrentSC==no_class){
 
     for(unsigned int i=0; i<signal_survive_mass.size(); i++){
@@ -866,6 +869,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
           int this_mass = signal_survive_mass.at(i);
           if( find(map_class_to_signal_mass[this_cl].begin(), map_class_to_signal_mass[this_cl].end(), this_mass) != map_class_to_signal_mass[this_cl].end()){
             hist_signal[i]->Draw("histsame");
+            y_signal_max = max(y_signal_max, GetMaximum(hist_signal[i]));
           }
         }
 
@@ -929,7 +933,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   gr_data->Draw("p0same");
 
   //==== ymax
-  double AutoYmax = max( GetMaximum(gr_data), GetMaximum(mc_allerror) );
+  double AutoYmax = max(y_signal_max, max( GetMaximum(gr_data), GetMaximum(mc_allerror) ));
   //hist_empty->GetYaxis()->SetRangeUser( default_y_min, y_max() );
   hist_empty->GetYaxis()->SetRangeUser( Ymin, YmaxScale*AutoYmax );
 
@@ -1005,17 +1009,25 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
       }
     }
 
-    ratio_allerr->GetYaxis()->SetRangeUser(0,2.0);
-    ratio_allerr->SetNdivisions(504,"Y");
-    ratio_allerr->GetYaxis()->SetRangeUser(0,1.9);
-    ratio_allerr->GetXaxis()->SetTitle(x_title[i_var]);
-    ratio_allerr->GetYaxis()->SetTitle("#frac{Obs.}{Pred.}");
+    TH1D *hist_empty_bottom = (TH1D *)ratio_allerr->Clone();
+    hist_empty_bottom->GetYaxis()->SetRangeUser(0,2.0);
+    hist_empty_bottom->SetNdivisions(504,"Y");
+    //hist_empty_bottom->GetYaxis()->SetRangeUser(0,1.1*GetMaximum(ratio_point,0.));
+    hist_empty_bottom->GetYaxis()->SetRangeUser(0,1.9);
+    hist_empty_bottom->GetXaxis()->SetTitle(x_title[i_var]);
+    hist_empty_bottom->GetYaxis()->SetTitle("#frac{Obs.}{Pred.}");
+    hist_empty_bottom->SetFillColor(0);
+    hist_empty_bottom->SetMarkerSize(0);
+    hist_empty_bottom->SetMarkerStyle(0);
+    hist_empty_bottom->SetLineColor(kWhite);
+    hist_empty_bottom->Draw("axis");
+    hist_axis(hist_empty, hist_empty_bottom);
+
     ratio_allerr->SetFillColor(kOrange);
     ratio_allerr->SetMarkerSize(0);
     ratio_allerr->SetMarkerStyle(0);
     ratio_allerr->SetLineColor(kWhite);
     ratio_allerr->Draw("E2same");
-    hist_axis(hist_empty, ratio_allerr);
 
     ratio_staterr->SetFillColor(kCyan);
     ratio_staterr->SetMarkerSize(0);
@@ -1036,7 +1048,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     //lg_ratio->AddEntry(ratio_point, "Obs./Pred.", "p");
     lg_ratio->Draw();
 
-    ratio_allerr->Draw("axissame");
+    hist_empty_bottom->Draw("axissame");
 
     //==== y=1 line
     g1->Draw("same");
@@ -1045,7 +1057,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   //==== write lumi on the top
   c1->cd();
 
-  if(LeptonChannels.at(i_cut)!=20){
+  if(!MakePaperPlot){
     TLatex latex_CMSPriliminary, latex_Lumi;
     latex_CMSPriliminary.SetNDC();
     latex_Lumi.SetNDC();
