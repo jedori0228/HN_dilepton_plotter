@@ -160,25 +160,17 @@ void Draw_SR(int XXX=0){
       "_DiLepton_Low_OneJet_NoFatJet_NolljjCut_SS",
       "_DiLepton_Low_OneJet_NoFatJet_NollCut_SS",
 
-      "_DiLepton_Low_TwoJet_NoFatJet_SS",
-      "_DiLepton_Low_OneJet_NoFatJet_SS",
-      "_DiLepton_High_TwoJet_NoFatJet_SS",
-      "_DiLepton_High_OneFatJet_SS",
+      "_DiMuon_Low_TwoJet_NoFatJet_NolljjCut_SS",
+      "_DiMuon_Low_OneJet_NoFatJet_NolljjCut_SS",
+      "_DiMuon_Low_OneJet_NoFatJet_NollCut_SS",
 
-      "_DiMuon_Low_TwoJet_NoFatJet_SS",
-      "_DiMuon_Low_OneJet_NoFatJet_SS",
-      "_DiMuon_High_TwoJet_NoFatJet_SS",
-      "_DiMuon_High_OneFatJet_SS",
+      "_DiElectron_Low_TwoJet_NoFatJet_NolljjCut_SS",
+      "_DiElectron_Low_OneJet_NoFatJet_NolljjCut_SS",
+      "_DiElectron_Low_OneJet_NoFatJet_NollCut_SS",
 
-      "_DiElectron_Low_TwoJet_NoFatJet_SS",
-      "_DiElectron_Low_OneJet_NoFatJet_SS",
-      "_DiElectron_High_TwoJet_NoFatJet_SS",
-      "_DiElectron_High_OneFatJet_SS",
-
-      "_EMu_Low_TwoJet_NoFatJet_SS",
-      "_EMu_Low_OneJet_NoFatJet_SS",
-      "_EMu_High_TwoJet_NoFatJet_SS",
-      "_EMu_High_OneFatJet_SS",
+      "_EMu_Low_TwoJet_NoFatJet_NolljjCut_SS",
+      "_EMu_Low_OneJet_NoFatJet_NolljjCut_SS",
+      "_EMu_Low_OneJet_NoFatJet_NollCut_SS",
 
     };
   }

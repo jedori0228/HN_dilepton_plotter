@@ -1,18 +1,14 @@
 import os
 
-#filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
-filenames = ['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
+filenames=['SR_rebins.txt', 'SR_xaxis.txt', 'SR_yaxis.txt'] 
+#filenames = ['CR_rebins.txt', 'CR_xaxis.txt', 'CR_yaxis.txt'] 
 #filenames = ['CR2_rebins.txt', 'CR2_xaxis.txt', 'CR2_yaxis.txt']
 
-      #//"_DiLepton_Inclusive1nlbjets_SS", // CR1
-      #//"_DiLepton_0jets_0nlbjets_dRllge2p5_SS", //CR2
-      #"_DiLepton_CR1",
-      #"_DiLepton_CR2",
-
-
-From = "_DiLepton_0jets_0nlbjets_dRllge2p5_SS"
+From = "_DiLepton_Low_OneJet_NoFatJet_NollCut_SS"
 Tos   = [
-      "_DiLepton_CR2",
+      "_DiMuon_Low_OneJet_NoFatJet_NollCut_SS",
+      "_DiElectron_Low_OneJet_NoFatJet_NollCut_SS",
+      "_EMu_Low_OneJet_NoFatJet_NollCut_SS",
 ]
 
 for filename in filenames:
