@@ -1443,8 +1443,8 @@ TString Plotter::legend_coupling_label(int mass){
   }
 
   if(MakePaperPlot){
-    if(log_coupling == 0) return "\\mathrm{m}_{\\mathrm{N}} = "+TString::Itoa(mass, 10)+" \\mathrm{GeV,}"+V2+"=1}";
-    else                  return "\\mathrm{m}_{\\mathrm{N}} = "+TString::Itoa(mass, 10)+" \\mathrm{GeV,}"+V2+"\\mathrm{=10^{"+TString::Itoa(log_coupling, 10)+"}}";
+    if(log_coupling == 0) return "\\mathrm{m}_{\\mathrm{N}} = "+TString::Itoa(mass, 10)+"\\:\\mathrm{GeV,}\\:"+V2+"=1}";
+    else                  return "\\mathrm{m}_{\\mathrm{N}} = "+TString::Itoa(mass, 10)+"\\:\\mathrm{GeV,}\\:"+V2+"\\mathrm{=10^{"+TString::Itoa(log_coupling, 10)+"}}";
   }
   else{
     if(log_coupling == 0) return "m_{N} = "+TString::Itoa(mass, 10)+" GeV, "+V2+"=1";
