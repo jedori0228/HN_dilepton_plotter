@@ -766,7 +766,6 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   if( histname_suffix[i_cut].Contains("High_TwoJet") ) CurrentSC = high_SR1;
   if( histname_suffix[i_cut].Contains("High_OneFatJet") ) CurrentSC = high_SR2;
 
-
   //==== Special Lines
   if( histname[i_var].Contains("jjWclosest") ){
     if( histname[i_var].Contains("lljjWclosest") ) CurrentSC = low_SR1;
@@ -779,7 +778,6 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     CurrentSC = high_SR2;
   }
 
-  
   //==== y=0 line
   double x_0[2], y_0[2];
   x_0[0] = -5000;  y_0[0] = 0;
@@ -811,13 +809,44 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   else{
     canvas_margin(c1);
   }
-  
+
+  //==== HOTFIX Rebin zero-bkgd
+  bool IsMergeZeroBackground = false;
+  if(MakePaperPlot){
+    vector<double> new_binval = GetRebinZeroBackground(mc_stack, mc_staterror, mc_allerror, hist_data, hist_signal);
+    if(new_binval.size()>0){
+      IsMergeZeroBackground = true;
+
+      const int new_nbins = new_binval.size()-1;
+      double new_binvals[new_nbins+1];
+      for(int i=0;i<new_nbins+1;i++) new_binvals[i] = new_binval.at(i);
+
+      THStack *new_mc_stack = new THStack("new_mc_stack", "");
+      TList *list_stack = mc_stack->GetHists();
+      for(int i=0; i<list_stack->Capacity(); i++){
+        TH1D *this_hist = (TH1D *)list_stack->At(i);
+        this_hist = (TH1D *)this_hist->Rebin(new_nbins, "hnew1", new_binvals);
+        new_mc_stack->Add(this_hist);
+      }
+      mc_stack = new_mc_stack;
+
+      mc_staterror = (TH1D *)mc_staterror->Rebin(new_nbins, "hnew1", new_binvals);
+      mc_allerror = (TH1D *)mc_allerror->Rebin(new_nbins, "hnew1", new_binvals);
+      hist_data = (TH1D *)hist_data->Rebin(new_nbins, "hnew1", new_binvals);
+
+      for(unsigned int i=0; i<hist_signal.size(); i++){
+        hist_signal.at(i) = (TH1D *)hist_signal.at(i)->Rebin(new_nbins, "hnew1", new_binvals);
+      }
+    }
+  }
+
   //==== empty histogram for axis
   TH1D *hist_empty = (TH1D*)mc_stack->GetHists()->At(0)->Clone();
   hist_empty->SetName("DUMMY_FOR_AXIS");
   //=== get dX
   double dx = (hist_empty->GetXaxis()->GetXmax() - hist_empty->GetXaxis()->GetXmin())/hist_empty->GetXaxis()->GetNbins();
   TString YTitle = DoubleToString(dx);
+  if(IsMergeZeroBackground) YTitle = "Events / bin";
 
   hist_empty->GetYaxis()->SetTitle(YTitle);
   hist_empty->SetLineWidth(0);
@@ -962,6 +991,20 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     TH1D *ratio_point = (TH1D *)hist_data->Clone();
     ratio_point->SetName(name_suffix+"_central");
 
+    TH1D *hist_empty_bottom = (TH1D *)ratio_point->Clone();
+    hist_empty_bottom->GetYaxis()->SetRangeUser(0.,2.0);
+    hist_empty_bottom->SetNdivisions(504,"Y");
+    //hist_empty_bottom->GetYaxis()->SetRangeUser(0,1.1*GetMaximum(ratio_point,0.));
+    hist_empty_bottom->GetYaxis()->SetRangeUser(0,1.9);
+    hist_empty_bottom->GetXaxis()->SetTitle(x_title[i_var]);
+    hist_empty_bottom->GetYaxis()->SetTitle("#frac{Obs.}{Pred.}");
+    hist_empty_bottom->SetFillColor(0);
+    hist_empty_bottom->SetMarkerSize(0);
+    hist_empty_bottom->SetMarkerStyle(0);
+    hist_empty_bottom->SetLineColor(kWhite);
+    hist_empty_bottom->Draw("axis");
+    hist_axis(hist_empty, hist_empty_bottom);
+
     TH1D *tmp_ratio_point = (TH1D *)hist_data->Clone();
     tmp_ratio_point->Divide(mc_allerror);
     TGraphAsymmErrors *gr_ratio_point = new TGraphAsymmErrors(tmp_ratio_point);
@@ -976,7 +1019,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     ratio_allerr->SetName(name_suffix+"_allerr");
     for(int i=1; i<=ratio_point->GetXaxis()->GetNbins(); i++){
       //==== FIXME for zero? how?
-      if(mc_allerror->GetBinContent(i)!=0){
+      if(mc_allerror->GetBinContent(i)>0){
 
         //==== ratio point
         //==== BinContent = Data/Bkgd
@@ -1007,21 +1050,41 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
         ratio_allerr->SetBinContent( i, 1. );
         ratio_allerr->SetBinError( i, mc_allerror->GetBinError(i)/ mc_allerror->GetBinContent(i) );
       }
-    }
+      else if(mc_allerror->GetBinContent(i)==0 && ratio_point->GetBinContent(i)==0){
+        ratio_point->SetBinContent( i, 0 );
+        ratio_point->SetBinError ( i, 0 );
+        gr_ratio_point->SetPoint(i-1, 0, 0);
+        gr_ratio_point->SetPointEYlow(i-1, 0);
+        gr_ratio_point->SetPointEXlow(i-1, 0);
+        gr_ratio_point->SetPointEYhigh(i-1, 0);
+        gr_ratio_point->SetPointEXhigh(i-1, 0);
+        ratio_staterr->SetBinContent( i, 1. );
+        ratio_staterr->SetBinError( i, 0);
+        ratio_allerr->SetBinContent( i, 1.);
+        ratio_allerr->SetBinError( i, 0.);
+      }
+      //==== If bkgd <= 0
+      else{
+        double this_max_ratio = 5.0;
+        double this_data = ratio_point->GetBinContent(i);
+        double this_data_err = ratio_point->GetBinError(i);
 
-    TH1D *hist_empty_bottom = (TH1D *)ratio_allerr->Clone();
-    hist_empty_bottom->GetYaxis()->SetRangeUser(0,2.0);
-    hist_empty_bottom->SetNdivisions(504,"Y");
-    //hist_empty_bottom->GetYaxis()->SetRangeUser(0,1.1*GetMaximum(ratio_point,0.));
-    hist_empty_bottom->GetYaxis()->SetRangeUser(0,1.9);
-    hist_empty_bottom->GetXaxis()->SetTitle(x_title[i_var]);
-    hist_empty_bottom->GetYaxis()->SetTitle("#frac{Obs.}{Pred.}");
-    hist_empty_bottom->SetFillColor(0);
-    hist_empty_bottom->SetMarkerSize(0);
-    hist_empty_bottom->SetMarkerStyle(0);
-    hist_empty_bottom->SetLineColor(kWhite);
-    hist_empty_bottom->Draw("axis");
-    hist_axis(hist_empty, hist_empty_bottom);
+        ratio_point->SetBinContent( i, this_max_ratio );
+        ratio_point->SetBinError ( i, this_data_err*this_max_ratio/this_data );
+
+        double tmp_x, tmp_y;
+        gr_ratio_point->GetPoint(i-1, tmp_x, tmp_y);
+        gr_ratio_point->SetPoint(i-1, tmp_x, this_max_ratio);
+        gr_ratio_point->SetPointEYlow(i-1, err_down_tmp.at(i-1)*this_max_ratio/this_data);
+        gr_ratio_point->SetPointEXlow(i-1, 0);
+        gr_ratio_point->SetPointEYhigh(i-1, err_up_tmp.at(i-1)*this_max_ratio/this_data);
+        gr_ratio_point->SetPointEXhigh(i-1, 0);
+        ratio_staterr->SetBinContent( i, 1. );
+        ratio_staterr->SetBinError( i, 0);
+        ratio_allerr->SetBinContent( i, 1.);
+        ratio_allerr->SetBinError( i, 0.);
+      }
+    }
 
     ratio_allerr->SetFillColor(kOrange);
     ratio_allerr->SetMarkerSize(0);
@@ -1039,14 +1102,15 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     gr_ratio_point->Draw("p0same");
 
     //TLegend *lg_ratio = new TLegend(0.7, 0.8, 0.9, 0.9);
-    TLegend *lg_ratio = new TLegend(0.2, 0.47, 0.4, 0.57);
+    TLegend *lg_ratio = new TLegend(0.30, 0.43, 0.55, 0.58);
     //lg_ratio->SetFillStyle(0);
-    //lg_ratio->SetBorderSize(0);
+    lg_ratio->SetBorderSize(0);
+    lg_ratio->SetShadowColor(0);
     lg_ratio->SetNColumns(2);
     lg_ratio->AddEntry(ratio_staterr, "Stat.", "f");
     lg_ratio->AddEntry(ratio_allerr, "Stat.+syst.", "f");
     //lg_ratio->AddEntry(ratio_point, "Obs./Pred.", "p");
-    lg_ratio->Draw();
+    //lg_ratio->Draw();
 
     hist_empty_bottom->Draw("axissame");
 
@@ -1091,7 +1155,10 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     TLatex latex_eemmem;
     latex_eemmem.SetNDC();
     latex_eemmem.SetTextSize(0.037);
-    latex_eemmem.DrawLatex(0.2, 0.85, "ee+#mu#mu+e#mu");
+    if(LeptonChannels.at(i_cut)==20) latex_eemmem.DrawLatex(0.2, 0.85, "ee+#mu#mu+e#mu");
+    if(LeptonChannels.at(i_cut)==21) latex_eemmem.DrawLatex(0.2, 0.85, "#mu#mu");
+    if(LeptonChannels.at(i_cut)==22) latex_eemmem.DrawLatex(0.2, 0.85, "ee");
+    if(LeptonChannels.at(i_cut)==23) latex_eemmem.DrawLatex(0.2, 0.85, "e#mu");
 
     TString str_channel = GetStringChannelRegion(LeptonChannels.at(i_cut), RegionType.at(i_cut));
     TLatex channelname;
@@ -1596,3 +1663,72 @@ bool Plotter::ZeroDataCheckCut(double xlow, double xhigh){
 
 }
 
+vector<double> Plotter::GetRebinZeroBackground(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerror, TH1D *hist_data, vector<TH1D *> &hist_signal){
+
+  int original_nbins = mc_allerror->GetXaxis()->GetNbins();
+  vector<double> original_binval;
+  vector<double> new_binval;
+
+  for(int i=1; i<=original_nbins; i++){
+    original_binval.push_back(mc_allerror->GetXaxis()->GetBinLowEdge(i));
+  }
+  original_binval.push_back(mc_allerror->GetXaxis()->GetBinUpEdge(original_nbins));
+
+  int next_nonzero_bin = 2;
+  //==== PUSH1) first bin low-edge
+	new_binval.push_back(original_binval.at(0));
+	for(int i=2; i<=original_nbins; i++){
+		if(mc_allerror->GetBinContent(i)>0){
+			next_nonzero_bin = i;
+			break;
+		}
+  }
+
+  int next_zero_bin = -999;
+  //cout << "[Plotter::GetRebinZeroBackground] mc_allerror->GetBinContent(original_nbins) = " << mc_allerror->GetBinContent(original_nbins) << endl;
+  for(int i=next_nonzero_bin+1; i<=original_nbins; i++){
+
+    //==== HOTFIX ee mll has empty bins at Z-peak
+    if(histname_suffix[i_cut].Contains("DiElectron") && histname[i_var]=="m_ll"){
+      if(original_binval.at(i)<150) continue;
+    }
+
+    if(mc_allerror->GetBinContent(i)<=0){
+      next_zero_bin = i;
+      break;
+    }
+  }
+
+  //cout << "[Plotter::GetRebinZeroBackground] next_zero_bin = " << next_zero_bin << endl;
+  //==== PUSH Rest
+  if(next_zero_bin<0){
+    for(int j=next_nonzero_bin; j<original_binval.size(); j++){
+      new_binval.push_back(original_binval.at(j));
+    }
+  }
+  else{
+
+    if(next_nonzero_bin+1==next_zero_bin){
+      new_binval.push_back(original_binval.at( original_binval.size()-1 ));
+    }
+    else{
+
+    for(int j=next_nonzero_bin; j<next_zero_bin-2; j++){
+      new_binval.push_back(original_binval.at(j));
+    }
+    new_binval.push_back(original_binval.at( original_binval.size()-1 ));
+
+    }
+
+  }
+
+/*
+  cout << "[Plotter::GetRebinZeroBackground] Printing new bin vals" << endl;
+  for(int i=0;i<new_binval.size(); i++){
+    cout << new_binval.at(i) << endl;
+  }
+*/
+
+  return new_binval;
+
+}

@@ -114,6 +114,7 @@ public:
 
   bool ZeroDataCheckCut(double xlow, double xhigh);
 
+  vector<double> GetRebinZeroBackground(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerror, TH1D *hist_data, vector<TH1D *> &hist_signal);
 
 };
 #endif
