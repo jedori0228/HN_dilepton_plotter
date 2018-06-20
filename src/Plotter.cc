@@ -68,7 +68,7 @@ void Plotter::draw_hist(){
         //==== CR
         if(signal_mass.size()==0) lg = new TLegend(0.60, 0.35, 0.96, 0.92);
         //==== SR
-        else lg = new TLegend(0.51, 0.36, 0.94, 0.91);
+        else lg = new TLegend(0.51, 0.36, 0.88, 0.91);
       }
       else{
         //==== CR
@@ -1188,6 +1188,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   mkdir(thiscut_plotpath);
   c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".pdf");
   c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".png");
+  c1->SaveAs(thiscut_plotpath+"/"+histname[i_var]+histname_suffix[i_cut]+".eps");
   outputf->cd();
   c1->Write();
   
@@ -1430,19 +1431,26 @@ TString Plotter::legend_coupling_label(int mass){
   mass = abs(mass);
 
   TString V2 = "#||{V_{#muN}}^{2}";
-  if(PrimaryDataset[i_cut]=="DoubleEG") V2 = "#||{|V_{eN}}^{2}";
+  if(PrimaryDataset[i_cut]=="DoubleEG") V2 = "#||{V_{eN}}^{2}";
   if(PrimaryDataset[i_cut]=="MuonEG") V2 = "#||{V_{lN}}^{2}";
-  if(PrimaryDataset[i_cut]=="DiLepton") V2 = "#||{V_{lN}}^{2}";
+  if(PrimaryDataset[i_cut]=="DiLepton") V2 = "#||{V_{\\ellN}}^{2}";
 
-  //if(log_coupling == 0) return channel+" HN"+TString::Itoa(mass, 10)+", "+V2+"=1";
-  //else return channel+" HN"+TString::Itoa(mass, 10)+", "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
+  if(MakePaperPlot){
+    V2 = "\\left| \\mathrm{V}_{\\mu\\mathrm{N}} \\right|^{2}";
+    if(PrimaryDataset[i_cut]=="DoubleEG") V2 = "\\left| \\mathrm{V}_{\\mathrm{eN}} \\right|^{2}";
+    if(PrimaryDataset[i_cut]=="MuonEG") V2 = "\\left| \\mathrm{V}_{\\ell\\mathrm{N}} \\right|^{2}";
+    if(PrimaryDataset[i_cut]=="DiLepton") V2 = "\\left| \\mathrm{V}_{\\ell\\mathrm{N}} \\right|^{2}";
+  }
 
-  if(log_coupling == 0) return "m_{N} = "+TString::Itoa(mass, 10)+" GeV, "+V2+"=1";
-  else return "m_{N} = "+TString::Itoa(mass, 10)+" GeV, "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
+  if(MakePaperPlot){
+    if(log_coupling == 0) return "\\mathrm{m}_{\\mathrm{N}} = "+TString::Itoa(mass, 10)+" \\mathrm{GeV,}"+V2+"=1}";
+    else                  return "\\mathrm{m}_{\\mathrm{N}} = "+TString::Itoa(mass, 10)+" \\mathrm{GeV,}"+V2+"\\mathrm{=10^{"+TString::Itoa(log_coupling, 10)+"}}";
+  }
+  else{
+    if(log_coupling == 0) return "m_{N} = "+TString::Itoa(mass, 10)+" GeV, "+V2+"=1";
+    else return "m_{N} = "+TString::Itoa(mass, 10)+" GeV, "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
+  }
 
-  //==== FIXME FOR NEXT UPDATE
-  //if(log_coupling == 0) return "m_{N} = "+TString::Itoa(mass, 10)+" GeV ("+channel+"), "+V2+"=1";
-  //else return "m_{N} = "+TString::Itoa(mass, 10)+" GeV ("+channel+"), "+V2+"=10^{"+TString::Itoa(log_coupling, 10)+"}";
 
 }
 
@@ -1675,12 +1683,12 @@ vector<double> Plotter::GetRebinZeroBackground(THStack *mc_stack, TH1D *mc_state
 
   int next_nonzero_bin = 2;
   //==== PUSH1) first bin low-edge
-	new_binval.push_back(original_binval.at(0));
-	for(int i=2; i<=original_nbins; i++){
-		if(mc_allerror->GetBinContent(i)>0){
-			next_nonzero_bin = i;
-			break;
-		}
+  new_binval.push_back(original_binval.at(0));
+  for(int i=2; i<=original_nbins; i++){
+    if(mc_allerror->GetBinContent(i)>0){
+      next_nonzero_bin = i;
+      break;
+    }
   }
 
   int next_zero_bin = -999;
