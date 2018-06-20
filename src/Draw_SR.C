@@ -90,8 +90,8 @@ void Draw_SR(int XXX=0){
   m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton bkgd.", 870);
   m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton bkgd.", 870);
   m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Misid. lepton bkgd.", 870);
-  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. charge bkgd.", kYellow);
-  m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt bkgd.", kSpring-1);
+  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. sign bkgd.", kYellow);
+  m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt lepton bkgd.", kSpring-1);
   
   //===============================
   //==== set and make sample list
@@ -219,7 +219,7 @@ void Draw_SR(int XXX=0){
   };
 
   m.x_title = {
-    "l^{#pm}l^{#pm} invariant mass (GeV)",
+    "m(l^{#pm}l^{#pm}) (GeV)",
     //==== Jets for High Mass
     "jj_{ak4} invariant mass (GeV)", "m(l^{#pm}l^{#pm}W_{jet}) (GeV)", "m(l_{1}W_{jet}) (GeV)", "m(l_{2}W_{jet}) (GeV)",
     "#DeltaR(jj_{W,ak4})",
@@ -380,7 +380,7 @@ void Draw_SR(int XXX=0){
     "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
   };
   m.x_title = {
-    "l^{#pm}l^{#pm} invariant mass (GeV)",
+    "m(l^{#pm}l^{#pm}) (GeV)",
     // low-SR1
     "m(l^{#pm}l^{#pm}W_{jet}) (GeV)", "m(l_{2}W_{jet}) (GeV)",
     // low-SR2
