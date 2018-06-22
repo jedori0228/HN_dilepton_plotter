@@ -1168,16 +1168,19 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
 
     //==== HOT FIX
     if(histname_suffix[i_cut]=="_DiLepton_Low_TwoJet_NoFatJet_NolljjCut_SS" && histname[i_var]=="m_lljj_lljjWclosest"){
-      channelname.SetTextSize(0.03);
-      channelname.DrawLatex(0.60, 0.44, "no m(l^{#pm}l^{#pm}W_{jet}) requirement");
+      channelname.SetTextSize(0.037);
+      channelname.DrawLatex(0.69, 0.42, "no m(l^{#pm}l^{#pm}W_{jet})");
+      channelname.DrawLatex(0.69, 0.38, "requirement");
     }
     if(histname_suffix[i_cut]=="_DiLepton_Low_OneJet_NoFatJet_NolljjCut_SS" && histname[i_var]=="m_llj"){
-      channelname.SetTextSize(0.03);
-      channelname.DrawLatex(0.60, 0.44, "no m(l^{#pm}l^{#pm}W_{jet}) requirement");
+      channelname.SetTextSize(0.037);
+      channelname.DrawLatex(0.69, 0.42, "no m(l^{#pm}l^{#pm}W_{jet})");
+      channelname.DrawLatex(0.69, 0.38, "requirement");
     }
     if(histname_suffix[i_cut]=="_DiLepton_Low_OneJet_NoFatJet_NollCut_SS" && histname[i_var]=="m_ll"){
-      channelname.SetTextSize(0.03);
-      channelname.DrawLatex(0.60, 0.44, "no m(l^{#pm}l^{#pm}) requirement");
+      channelname.SetTextSize(0.037);
+      channelname.DrawLatex(0.69, 0.42, "no m(l^{#pm}l^{#pm})");
+      channelname.DrawLatex(0.69, 0.38, "requirement");
     }
 
 
