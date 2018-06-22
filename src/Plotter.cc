@@ -1164,7 +1164,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     TLatex channelname;
     channelname.SetNDC();
     channelname.SetTextSize(0.037);
-    channelname.DrawLatex(0.60, 0.47, str_channel);
+    channelname.DrawLatex(0.65, 0.47, str_channel);
 
     //==== HOT FIX
     if(histname_suffix[i_cut]=="_DiLepton_Low_TwoJet_NoFatJet_NolljjCut_SS" && histname[i_var]=="m_lljj_lljjWclosest"){
