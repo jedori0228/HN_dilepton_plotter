@@ -59,21 +59,21 @@ for a in range(0,len(low_mins)):
       low = '--'
     elif JSRound(low_words_min[b],True,IsThisLumi) == JSRound(low_words_max[b],True,IsThisLumi):
       if float(low_words_max[b]) < 1.:
-        low = '$0$--$'+JSRound(low_words_max[b],False,IsThisLumi)+'$'
+        low = '0--'+JSRound(low_words_max[b],False,IsThisLumi)+''
       else:
-        low = '$'+JSRound(low_words_min[b],False,IsThisLumi)+'$'
+        low = ''+JSRound(low_words_min[b],False,IsThisLumi)+''
     else:
-      low = '$'+JSRound(low_words_min[b],True,IsThisLumi)+'$--$'+JSRound(low_words_max[b],True,IsThisLumi)+'$'
+      low = ''+JSRound(low_words_min[b],True,IsThisLumi)+'--'+JSRound(low_words_max[b],True,IsThisLumi)+''
 
     if high_words_min[b]=='-' or high_words_max[b]=='-':
       high = '--'
     elif JSRound(high_words_min[b],True,IsThisLumi) == JSRound(high_words_max[b],True,IsThisLumi):
       if float(high_words_max[b]) < 1.:
-        high = '$0$--$'+JSRound(high_words_max[b],False,IsThisLumi)+'$'
+        high = '0--'+JSRound(high_words_max[b],False,IsThisLumi)+''
       else:
-        high = '$'+JSRound(high_words_min[b],False,IsThisLumi)+'$'
+        high = ''+JSRound(high_words_min[b],False,IsThisLumi)+''
     else:
-      high = '$'+JSRound(high_words_min[b],True,IsThisLumi)+'$--$'+JSRound(high_words_max[b],True,IsThisLumi)+'$'
+      high = ''+JSRound(high_words_min[b],True,IsThisLumi)+'--'+JSRound(high_words_max[b],True,IsThisLumi)+''
 
 
     thisval = low+' ('+high+')'
