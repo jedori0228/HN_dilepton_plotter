@@ -380,7 +380,7 @@ void Draw_SR(int XXX=0){
     // low-SR1
     "\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell_{2}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}",
     // low-SR2
-    "\\mathrm{m}(\\ell_{2}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell^{\\pm}l^{\\pm}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}",
+    "\\mathrm{m}(\\ell_{2}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell^{\\pm}ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}",
     // high-SR1
     "\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell_{1}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell_{2}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}",
     // high-SR2
