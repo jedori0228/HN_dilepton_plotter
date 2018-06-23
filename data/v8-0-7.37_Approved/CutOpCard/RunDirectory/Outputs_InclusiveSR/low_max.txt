@@ -10,9 +10,9 @@ IntegratedSPACEluminosity	2.500	2.500	2.500	2.500	2.500	2.500
 LeptonSPACEselection	3.656	3.785	3.490	3.088	2.200	1.954
 TriggerSPACEselection	3.550	2.710	0.860	1.060	3.120	3.040
 bSPACEtagging	0.804	1.432	0.491	0.963	0.722	0.582
-PDFSPACE	0.960	-	1.020	-	1.020	-
-$\alpha_{S}$	0.870	-	0.900	-	0.880	-
-RenormalizationSPACE/SPACEfactorizationSPACEscales	7.830	-	6.790	-	7.850	-
+PDFSPACE	0.690	-	0.720	-	0.650	-
+$\alpha_{S}$	0.390	-	0.290	-	0.390	-
+RenormalizationSPACE/SPACEfactorizationSPACEscales	5.040	-	4.000	-	4.980	-
 SignalSPACEMCSPACEstatisticalSPACEuncertainty	4.890	-	2.950	-	2.840	-
 MisidentifiedSPACEleptons	-	30.000	-	30.000	-	30.000
 MismeasuredSPACEcharge	-	41.440	-	-	-	-
