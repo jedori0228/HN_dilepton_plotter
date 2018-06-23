@@ -1160,7 +1160,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     if(LeptonChannels.at(i_cut)==22) latex_eemmem.DrawLatex(0.2, 0.85, "ee");
     if(LeptonChannels.at(i_cut)==23) latex_eemmem.DrawLatex(0.2, 0.85, "e#mu");
 
-    TString str_channel = GetStringChannelRegion(LeptonChannels.at(i_cut), RegionType.at(i_cut));
+    TString str_channel = GetStringChannelRegion(20, RegionType.at(i_cut));
     TLatex channelname;
     channelname.SetNDC();
     channelname.SetTextSize(0.037);
