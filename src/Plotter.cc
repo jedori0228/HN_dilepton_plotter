@@ -1164,21 +1164,24 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     TLatex channelname;
     channelname.SetNDC();
     channelname.SetTextSize(0.037);
-    channelname.DrawLatex(0.60, 0.47, str_channel);
+    channelname.DrawLatex(0.65, 0.47, str_channel);
 
     TMathText nocut;
     //==== HOT FIX
     if(histname_suffix[i_cut]=="_DiLepton_Low_TwoJet_NoFatJet_NolljjCut_SS" && histname[i_var]=="m_lljj_lljjWclosest"){
-      nocut.SetTextSize(0.029);
-      nocut.DrawMathText(0.60, 0.44, "\\mathrm{no}\\:\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})\\:\\mathrm{requirement}");
+      nocut.SetTextSize(0.037);
+      nocut.DrawMathText(0.69, 0.42, "\\mathrm{no}\\:\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})");
+      nocut.DrawMathText(0.69, 0.38, "\\mathrm{requirement}");
     }
     if(histname_suffix[i_cut]=="_DiLepton_Low_OneJet_NoFatJet_NolljjCut_SS" && histname[i_var]=="m_llj"){
-      nocut.SetTextSize(0.029);
-      nocut.DrawMathText(0.60, 0.44, "\\mathrm{no}\\:\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})\\:\\mathrm{requirement}");
+      nocut.SetTextSize(0.037);
+      nocut.DrawMathText(0.69, 0.42, "\\mathrm{no}\\:\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})");
+      nocut.DrawMathText(0.69, 0.38, "\\mathrm{requirement}");
     }
     if(histname_suffix[i_cut]=="_DiLepton_Low_OneJet_NoFatJet_NollCut_SS" && histname[i_var]=="m_ll"){
-      nocut.SetTextSize(0.029);
-      nocut.DrawMathText(0.60, 0.44, "\\mathrm{no}\\:\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm})\\:\\mathrm{requirement}");
+      nocut.SetTextSize(0.037);
+      nocut.DrawMathText(0.69, 0.42, "\\mathrm{no}\\:\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm})");
+      nocut.DrawMathText(0.69, 0.38, "\\mathrm{requirement}");
     }
 
 
