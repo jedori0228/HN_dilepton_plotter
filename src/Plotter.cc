@@ -994,8 +994,8 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     TH1D *hist_empty_bottom = (TH1D *)ratio_point->Clone();
     hist_empty_bottom->GetYaxis()->SetRangeUser(0.,2.0);
     hist_empty_bottom->SetNdivisions(504,"Y");
-    //hist_empty_bottom->GetYaxis()->SetRangeUser(0,1.1*GetMaximum(ratio_point,0.));
-    hist_empty_bottom->GetYaxis()->SetRangeUser(0,1.9);
+    //hist_empty_bottom->GetYaxis()->SetRangeUser(0,YmaxScale*GetMaximum(ratio_point,0.));
+    //hist_empty_bottom->GetYaxis()->SetRangeUser(0,1.9);
     hist_empty_bottom->GetXaxis()->SetTitle(x_title[i_var]);
     hist_empty_bottom->GetYaxis()->SetTitle("#frac{Obs.}{Pred.}");
     hist_empty_bottom->SetFillColor(0);
@@ -1085,6 +1085,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
         ratio_allerr->SetBinError( i, 0.);
       }
     }
+    hist_empty_bottom->GetYaxis()->SetRangeUser(0,YmaxScale*GetMaximum(ratio_point,0.));
 
     ratio_allerr->SetFillColor(kOrange);
     ratio_allerr->SetMarkerSize(0);
