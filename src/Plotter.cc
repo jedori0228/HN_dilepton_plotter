@@ -323,6 +323,9 @@ void Plotter::draw_hist(){
           int signal_index = i_file-bkglist.size()-1;
           if(DoDebug) cout << "signal index = " << signal_index << ", mass = " << signal_mass[signal_index] << endl;
           hist_final->SetLineColor(signal_color[signal_index]);
+          if(signal_style.size()>0){
+            hist_final->SetLineStyle(signal_style[signal_index]);
+          }
           hist_final->SetLineWidth(3);
           if( signal_mass[signal_index] < 0 ) hist_final->SetLineStyle(3);
           TString temp_hist_name(hist_final->GetName());
@@ -1161,7 +1164,7 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     if(LeptonChannels.at(i_cut)==22) latex_eemmem.DrawLatex(0.2, 0.85, "ee");
     if(LeptonChannels.at(i_cut)==23) latex_eemmem.DrawLatex(0.2, 0.85, "e#mu");
 
-    TString str_channel = GetStringChannelRegion(LeptonChannels.at(i_cut), RegionType.at(i_cut));
+    TString str_channel = GetStringChannelRegion(20, RegionType.at(i_cut));
     TLatex channelname;
     channelname.SetNDC();
     channelname.SetTextSize(0.037);
