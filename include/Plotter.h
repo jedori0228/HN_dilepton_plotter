@@ -97,6 +97,7 @@ public:
   vector<bool > signal_draw;
   map< signal_class, vector<int> > map_class_to_signal_mass;
   vector<Color_t> signal_color;
+  vector<Style_t> signal_style;
   map< pair<TString, int>, double > coupling_constants;
   map<TString, bool> MCsector_survive;
   TH1D *hist_for_legend_data;

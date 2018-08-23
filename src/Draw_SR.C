@@ -90,7 +90,7 @@ void Draw_SR(int XXX=0){
   m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton bkgd.", 870);
   m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton bkgd.", 870);
   m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Misid. lepton bkgd.", 870);
-  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. sign bkgd.", kYellow);
+  m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. sign bkgd.", kRed);
   m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt lepton bkgd.", kSpring-1);
   
   //===============================
@@ -452,8 +452,9 @@ void Draw_SR(int XXX=0){
   //==== PAS
   if(XXX==1){
     m.signal_mass  = {40,   60,    200,  400,   800,  -800, 1000};
-    m.signal_color = {kRed, kBlue, kRed, kBlue, kRed, kRed, kBlue};
+    m.signal_color = {kBlack, kBlack, kBlack, kBlack, kBlack, kBlack, kBlack};
     m.signal_draw  = {true, true,  true, true,  true, true, true};
+    m.signal_style = {1,    2,     1,    2,     1,    1,    2};
   }
 
   //====================================
