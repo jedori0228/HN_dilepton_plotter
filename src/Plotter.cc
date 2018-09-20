@@ -1090,13 +1090,13 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     }
     hist_empty_bottom->GetYaxis()->SetRangeUser(0,max(1.9,YmaxScale*GetMaximum(ratio_point,0.)));
 
-    ratio_allerr->SetFillColor(kOrange);
+    ratio_allerr->SetFillColor(kGray);
     ratio_allerr->SetMarkerSize(0);
     ratio_allerr->SetMarkerStyle(0);
     ratio_allerr->SetLineColor(kWhite);
     ratio_allerr->Draw("E2same");
 
-    ratio_staterr->SetFillColor(kCyan);
+    ratio_staterr->SetFillColor(kOrange+2);
     ratio_staterr->SetMarkerSize(0);
     ratio_staterr->SetMarkerStyle(0);
     ratio_staterr->SetLineColor(kWhite);
@@ -1686,6 +1686,7 @@ vector<double> Plotter::GetRebinZeroBackground(THStack *mc_stack, TH1D *mc_state
 			break;
 		}
   }
+  if(histname[i_var]=="m_ll") next_nonzero_bin = 1;
 
   int next_zero_bin = -999;
   //cout << "[Plotter::GetRebinZeroBackground] mc_allerror->GetBinContent(original_nbins) = " << mc_allerror->GetBinContent(original_nbins) << endl;
