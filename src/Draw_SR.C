@@ -376,15 +376,15 @@ void Draw_SR(int XXX=0){
     "m_Leadlfj_fjWclosest", "m_SubLeadlfj_fjWclosest", "m_llfj_fjWclosest",
   };
   m.x_title = {
-    "m(l^{#pm}l^{#pm}) (GeV)",
+    "\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm})\\: \\mathrm{(GeV)}",
     // low-SR1
-    "m(l^{#pm}l^{#pm}W_{jet}) (GeV)", "m(l_{2}W_{jet}) (GeV)",
+    "\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell_{2}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}",
     // low-SR2
-    "m(l_{2}W_{jet}) (GeV)", "m(l^{#pm}l^{#pm}W_{jet}) (GeV)",
+    "\\mathrm{m}(\\ell_{2}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}",
     // high-SR1
-    "m(l^{#pm}l^{#pm}W_{jet}) (GeV)", "m(l_{1}W_{jet}) (GeV)", "m(l_{2}W_{jet}) (GeV)",
+    "\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell_{1}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell_{2}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}",
     // high-SR2
-    "m(l_{1}W_{jet}) (GeV)", "m(l_{2}W_{jet}) (GeV)", "m(l^{#pm}l^{#pm}W_{jet}) (GeV)",
+    "\\mathrm{m}(\\ell_{1}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell_{2}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}", "\\mathrm{m}(\\ell^{\\pm}\\ell^{\\pm}\\mathrm{W}_{\\mathrm{jet}})\\: \\mathrm{(GeV)}",
   };
   m.units = {
     "GeV",
