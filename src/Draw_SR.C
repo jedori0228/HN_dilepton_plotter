@@ -88,10 +88,10 @@ void Draw_SR(int XXX=0){
   m.map_sample_string_to_legendinfo["fake_sfed_HighdXY"] = make_pair("Misid. lepton bkgd.", 870);
   m.map_sample_string_to_legendinfo["fake_sfed_HighdXY_UsePtCone"] = make_pair("Misid. lepton bkgd.", 870);
   m.map_sample_string_to_legendinfo["fake_DiMuon_HighdXY"] = make_pair("Misid. lepton bkgd.", 870);
-  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton bkgd.", 870);
+  m.map_sample_string_to_legendinfo["fake_Dijet"] = make_pair("Misid. lepton bkgd.", 4);
   m.map_sample_string_to_legendinfo["fake_Dijet_LooseBJet"] = make_pair("Misid. lepton bkgd.", 870);
   m.map_sample_string_to_legendinfo["chargeflip"] = make_pair("Mismeas. sign bkgd.", kRed);
-  m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt lepton bkgd.", kSpring-1);
+  m.map_sample_string_to_legendinfo["prompt"] = make_pair("Prompt lepton bkgd.", 3);
   
   //===============================
   //==== set and make sample list
