@@ -930,6 +930,21 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
     int N = gr_data->GetY()[i];
     double L =  (N==0) ? 0  : (ROOT::Math::gamma_quantile(alpha/2,N,1.));
     double U =  (N==0) ? ( ROOT::Math::gamma_quantile_c(alpha,N+1,1) ) : ( ROOT::Math::gamma_quantile_c(alpha/2,N+1,1) );
+
+    if(histname[i_var]=="m_ll"){
+      if(i==0){
+
+        gr_data->SetPointEYlow(i, 0.);
+        gr_data->SetPointEXlow(i, 0.);
+        gr_data->SetPointEYhigh(i, 0.);
+        gr_data->SetPointEXhigh(i, 0.);
+        err_down_tmp.push_back(0.);
+        err_up_tmp.push_back(0.);
+        continue;
+
+      }
+    }
+
     if( N!=0 ){
       gr_data->SetPointEYlow(i, N-L );
       gr_data->SetPointEXlow(i, 0);
@@ -1686,12 +1701,12 @@ vector<double> Plotter::GetRebinZeroBackground(THStack *mc_stack, TH1D *mc_state
 
   int next_nonzero_bin = 2;
   //==== PUSH1) first bin low-edge
-	new_binval.push_back(original_binval.at(0));
-	for(int i=2; i<=original_nbins; i++){
-		if(mc_allerror->GetBinContent(i)>0){
-			next_nonzero_bin = i;
-			break;
-		}
+  new_binval.push_back(original_binval.at(0));
+  for(int i=2; i<=original_nbins; i++){
+    if(mc_allerror->GetBinContent(i)>0){
+      next_nonzero_bin = i;
+      break;
+    }
   }
   if(histname[i_var]=="m_ll"){
     next_nonzero_bin = 1;
