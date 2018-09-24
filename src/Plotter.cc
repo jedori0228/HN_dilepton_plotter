@@ -967,6 +967,12 @@ void Plotter::draw_canvas(THStack *mc_stack, TH1D *mc_staterror, TH1D *mc_allerr
   //==== ymax
   double AutoYmax = max(y_signal_max, max( GetMaximum(gr_data), GetMaximum(mc_allerror) ));
   //hist_empty->GetYaxis()->SetRangeUser( default_y_min, y_max() );
+  if( histname_suffix[i_cut].Contains("DiMuon_High_OneFatJet_SS") && histname[i_var]=="m_SubLeadlfj_fjWclosest"){
+    AutoYmax = 15./YmaxScale;
+  }
+  if( histname_suffix[i_cut].Contains("DiMuon_High_OneFatJet_SS") && histname[i_var]=="m_llfj_fjWclosest"){
+    AutoYmax = 12./YmaxScale;
+  }
   hist_empty->GetYaxis()->SetRangeUser( Ymin, YmaxScale*AutoYmax );
 
   //==== legend
@@ -1687,7 +1693,9 @@ vector<double> Plotter::GetRebinZeroBackground(THStack *mc_stack, TH1D *mc_state
 			break;
 		}
   }
-  if(histname[i_var]=="m_ll") next_nonzero_bin = 1;
+  if(histname[i_var]=="m_ll"){
+    next_nonzero_bin = 1;
+  }
 
   int next_zero_bin = -999;
   //cout << "[Plotter::GetRebinZeroBackground] mc_allerror->GetBinContent(original_nbins) = " << mc_allerror->GetBinContent(original_nbins) << endl;
