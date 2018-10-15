@@ -770,8 +770,8 @@ TGraphAsymmErrors* HiggsCombindedLimit(int i=0, TString dirname="", int ReturnWh
   }
   TGraph *gr_EWPD_ee = new TGraph(2, allxrange, EWPD_ee);
   TGraph *gr_EWPD_mm = new TGraph(2, allxrange, EWPD_mm);
-  gr_EWPD_ee->SetLineColor(kMagenta);
-  gr_EWPD_mm->SetLineColor(kMagenta);
+  gr_EWPD_ee->SetLineColor(kCyan);
+  gr_EWPD_mm->SetLineColor(kCyan);
   gr_EWPD_ee->SetLineStyle(2);
   gr_EWPD_mm->SetLineStyle(2);
   gr_EWPD_ee->SetLineWidth(3);
